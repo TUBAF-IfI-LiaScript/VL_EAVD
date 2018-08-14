@@ -35,11 +35,14 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 @end
 -->
 
-# CCourse
+# C-Kurs
 
-![C logo](img/The_C_Programming_Language_logo.svg)
+![C logo](img/logo.png)
 
-## JavaScript
+See the interactive version at
+[https://LiaScript.github.io](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/README.md)
+
+## Beispiel
 
 Ausführbarer C++ Code sieht wie folgt aus, der Titel kann weggelassen werden.
 
