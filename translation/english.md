@@ -3,13 +3,8 @@
 author:   Sebastian Zug & André Dietrich
 email:    zug@ovgu.de   & andre.dietrich@ovgu.de
 version:  0.0.1
-language: de
-narrator: Deutsch Female
-
-comment:  This is a very simple comment.
-          Multiline is also okay.
-
-translation: English   translation/english.md
+language: en
+narrator: US English Female
 
 script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
@@ -37,12 +32,7 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
 # CCourse
 
-![C logo](img/The_C_Programming_Language_logo.svg)
-
-## JavaScript
-
-Ausführbarer C++ Code sieht wie folgt aus, der Titel kann weggelassen werden.
-
+to appear
 
 ```cpp                     Sample.cpp
 #include <iostream>
