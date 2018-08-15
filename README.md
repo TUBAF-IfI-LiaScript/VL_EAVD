@@ -68,6 +68,7 @@ int main() {
 
 ### Einführung
 Frage an die Veranstaltung: Was passiert überhaupt bei der Abarbeitung eines Programmes und auf welchem Wege kann ich es erzeugen.
+
           + Hello World Beispiel (C99, C11)
           + Entwicklungumgebungen (Linux, MinGW, cygwin)
           + Compiler, Fehlermeldungen, 
