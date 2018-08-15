@@ -63,3 +63,49 @@ int main() {
 }
 ```
 @JSCPP
+
+## Vorlesungsinhalte
+
+### Einführung
+Frage an die Veranstaltung: Was passiert überhaupt bei der Abarbeitung eines Programmes und auf welchem Wege kann ich es erzeugen.
+          + Hello World Beispiel (C99, C11)
+          + Entwicklungumgebungen (Linux, MinGW, cygwin)
+          + Compiler, Fehlermeldungen, 
+          + Rechnerarchitektur, Assembler
+          + Vor/ Nachteile, Abstraktionsgedanke bei Programmiersprachen
+          + Geschichtlicher Abriss (von C)
+          + Eigenschaften von C (imperativ, Zahl der Schlüsselwörter, ...) 
+          + Abgrenzung zu anderen Sprachen und Konzepten (Entwicklung der "Popularität")
+          + heutige Verwendung
+
+### Variablen und Datentypen
+          + Idee der Variablen, Bezug auf Architektur
+          + /Exkurs/ Zahlendarstellung
+          + Definition, Deklaration (fehlende Initialisierung unter c)
+          + Kompilieren eines Programms mit unterschiedlichen Variablentypen -> Einfluss auf Programmgröße
+          + Kennzeichen einer Variablen: Name (Adresse), Datentyp, Wert, Wertebereich, Sichtbarkeit
+          + Typconvertierung, implizite Konvertierung, Beispiel
+          + 
+          
+### Operatoren und Ausdrücke
+### Kontrollstrukturen
+### Funktionen
+          + Procedurale Programmierung
+          + Definition, Deklaration, Aufruf
+
+### Arrays
+          + Beispiel: Argumentenübergabe mittels argv
+          
+### Zeiger
+### Structs, Unions, Bitfelder
+### Speicher, Speicherverwaltung
+### Präprozessor
+### Standardbibliothek
+### Modulare Programmierung
+### Algorithmen und Datenstrukturen
+
+## Variable Inhalte
+### Debuggingtechniken, häufige Fehler
+### 
+
+
