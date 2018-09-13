@@ -17,7 +17,7 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 <script>
   try {
     var output = "";
-    JSCPP.run(`@code`, "", {stdio: {write: s => { output += s.replace(/\n/g, "<br>");}}});
+    JSCPP.run(`@input`, "", {stdio: {write: s => { output += s.replace(/\n/g, "<br>");}}});
     output;
   } catch (msg) {
     var error = new LiaError(msg, 1);
