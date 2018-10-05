@@ -17,7 +17,7 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 <script>
   try {
     var output = "";
-    JSCPP.run(`@input`, "", {stdio: {write: s => { output += s.replace(/\n/g, "<br>");}}});
+    JSCPP.run(`@0`, `@1`, {stdio: {write: s => { output += s.replace(/\n/g, "<br>");}}});
     output;
   } catch (msg) {
     var error = new LiaError(msg, 1);
@@ -33,6 +33,8 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
   }
 </script>
 @end
+
+
 -->
 
 # C-Kurs
@@ -45,7 +47,6 @@ See the interactive version at
 ## Beispiel
 
 Ausführbarer C++ Code sieht wie folgt aus, der Titel kann weggelassen werden.
-
 
 ```cpp                     Sample.cpp
 #include <iostream>
@@ -62,7 +63,32 @@ int main() {
     return 0;
 }
 ```
-@JSCPP
+@JSCPP(@input, )
+
+
+```cpp                     Sample.cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a;
+    int b;
+    cin >> a;
+    cin >> b;
+    int rslt = b;
+    for(int i=1; i<a; ++i) {
+        rslt += i;
+        cout << "rslt: " << rslt << endl;
+    }
+    cout << "final result = " << rslt << endl;
+    return 0;
+}
+```
+``` text                  stdin
+5
+12
+```
+@JSCPP(@input,`@input(1)`)
 
 ## Vorlesungsinhalte
 
