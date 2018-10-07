@@ -48,62 +48,42 @@ See the interactive version at
 
 Ausführbarer C++ Code sieht wie folgt aus, der Titel kann weggelassen werden.
 
-```cpp                     Sample.cpp
-#include <iostream>
-using namespace std;
+```cpp                     HelloWorld.cpp
+#include<stdio.h>
 
 int main() {
-    int a = 120;
-    int rslt = 0;
-    for(int i=1; i<a; ++i) {
-        rslt += i;
-        cout << "rslt: " << rslt << endl;
-    }
-    cout << "final result = " << rslt << endl;
-    return 0;
+	printf("Hello World\\n");
+	return 0;
 }
 ```
 @JSCPP(@input, )
 
 
-```cpp                     Sample.cpp
-#include <iostream>
-using namespace std;
+```cpp                     HelloWorld.cpp
+#include<stdio.h>
 
-int main() {
-    int a;
-    int b;
-    cin >> a;
-    cin >> b;
-    int rslt = b;
-    for(int i=1; i<a; ++i) {
-        rslt += i;
-        cout << "rslt: " << rslt << endl;
-    }
-    cout << "final result = " << rslt << endl;
-    return 0;
+int main( int argc, char *argv[]){
+  if( argc == 2 ) {
+     printf("The argument supplied is %s\n", argv[1]);
+  }
+  else if( argc > 2 ) {
+     printf("Too many arguments supplied.\n");
+  }
+  else {
+     printf("One argument expected.\n");
+  }
 }
 ```
 ``` text                  stdin
-5
-12
+TestInput
 ```
 @JSCPP(@input,`@input(1)`)
 
 ## Vorlesungsinhalte
 
-### Einführung
-Frage an die Veranstaltung: Was passiert überhaupt bei der Abarbeitung eines Programmes und auf welchem Wege kann ich es erzeugen.
 
-+ Hello World Beispiel (C99, C11)
-+ Entwicklungumgebungen (Linux, MinGW, cygwin)
-+ Compiler, Fehlermeldungen,
-+ Rechnerarchitektur, Assembler
-+ Vor/ Nachteile, Abstraktionsgedanke bei Programmiersprachen
-+ Geschichtlicher Abriss (von C)
-+ Eigenschaften von C (imperativ, Zahl der Schlüsselwörter, ...)
-+ Abgrenzung zu anderen Sprachen und Konzepten (Entwicklung der "Popularität")
-+ heutige Verwendung
+[1. Einführung](https://github.com/liaScript/CCourse/lectures/Einfuehrung.md)
+
 
 ### Variablen und Datentypen
 
