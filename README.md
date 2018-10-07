@@ -59,7 +59,7 @@ int main() {
 @JSCPP(@input, )
 
 
-```cpp                     HelloWorld.cpp
+```cpp                     ExtendedHelloWorld.cpp
 #include<stdio.h>
 
 int main( int argc, char *argv[]){
@@ -82,8 +82,7 @@ TestInput
 ## Vorlesungsinhalte
 
 
-[1. Einführung](https://github.com/liaScript/CCourse/lectures/Einfuehrung.md)
-
+[1. Einführung](https://github.com/liaScript/CCourse/blob/master/lectures/Einfuehrung.md)
 
 ### Variablen und Datentypen
 
