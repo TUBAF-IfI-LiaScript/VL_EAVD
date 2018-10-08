@@ -35,15 +35,33 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 @end
 -->
 
-# Einführung
-Frage an die Veranstaltung: Was passiert überhaupt bei der Abarbeitung eines Programmes und auf welchem Wege kann ich es erzeugen.
+# Vorlesung I - Einführung
 
-+ Hello World Beispiel (C99, C11)
-+ Entwicklungumgebungen (Linux, MinGW, cygwin)
-+ Compiler, Fehlermeldungen,
-+ Rechnerarchitektur, Assembler
-+ Vor/ Nachteile, Abstraktionsgedanke bei Programmiersprachen
-+ Geschichtlicher Abriss (von C)
-+ Eigenschaften von C (imperativ, Zahl der Schlüsselwörter, ...)
-+ Abgrenzung zu anderen Sprachen und Konzepten (Entwicklung der "Popularität")
-+ heutige Verwendung
+## Fragen an die Veranstaltung ...
+
+* Wie wird ein textuelles Programm in einen ausführbaren Code transformiert?
+* Was bedeutet der Begriff Hochsprache, was verbirgt ist ein Assembler?
+* Woraus ergibt sich die Aktualität der Sprache C?
+* Welche Eigenschaften grenzt C von anderen Programmiersprachen ab?
+* Welche Aufgabe hat ein Compiler?
+* Wordurch definieren sich verschiedene "Geschmacksrichtungen" im Entwicklungsprozess
+
+## 1. Grundlegendes
+
+### Wie arbeitet ein Rechner eigentlich?
+
+Beispiel: Intel 4004 Architektur (1971)
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png" alt="drawing" width="500"/>
+
+<span style="font-family:Papyrus; font-size:0.5em;">Source:
+<a href="https://commons.wikimedia.org/wiki/File:4004_arch.svg">https://commons.wikimedia.org/wiki/File:4004_arch.svg</a> (Author Appaloosa)</span>
+
+### Was heißt das "Maschinensprache"?
+
+* Jeder Rechner hat einen spezifischen Satz von Befehlen, die er überhaupt abarbeiten kann.
+
+   Befehl für den Intel 4004:
+
+    ldm $5 // "1101 0101"
+    iac    // "1111 0010"
