@@ -46,9 +46,9 @@ See the interactive version at
 
 ## Beispiel
 
-Ausführbarer C++ Code sieht wie folgt aus, der Titel kann weggelassen werden.
+Ausführbarer C Code sieht wie folgt aus, der Titel kann weggelassen werden.
 
-```cpp                     HelloWorld.cpp
+```cpp                     HelloWorld.c
 #include<stdio.h>
 
 int main() {
@@ -58,8 +58,9 @@ int main() {
 ```
 @JSCPP(@input, )
 
+Das folgende Beispiel illustriert die Übergabe von Argumenten über die "Commandozeile".
 
-```cpp                     ExtendedHelloWorld.cpp
+```cpp                     ExtendedHelloWorld.c
 #include<stdio.h>
 
 int main( int argc, char *argv[]){
@@ -79,40 +80,17 @@ TestInput
 ```
 @JSCPP(@input,`@input(1)`)
 
+
+## Zielstellung der Veranstaltung
+
+     + Grundlegendes Verständnis von (hardwarenaher) Programmierung
+     + Elementare Fähigkeiten in der Programmiersprache C
+     + Anwendung von Programmiertools im Entwicklungsprozess
+
+## Literaturempfehlungen
+
+
+
 ## Vorlesungsinhalte
 
-
-[1. Einführung](https://github.com/liaScript/CCourse/blob/master/lectures/Einfuehrung.md)
-
-### Variablen und Datentypen
-
-+ Idee der Variablen, Bezug auf Architektur
-+ /Exkurs/ Zahlendarstellung
-+ Definition, Deklaration (fehlende Initialisierung unter c)
-+ Kompilieren eines Programms mit unterschiedlichen Variablentypen --> Einfluss auf Programmgröße
-+ Kennzeichen einer Variablen: Name (Adresse), Datentyp, Wert, Wertebereich, Sichtbarkeit
-+ Typconvertierung, implizite Konvertierung, Beispiel
-+ ...
-
-### Operatoren und Ausdrücke
-### Kontrollstrukturen
-### Funktionen
-
-+ Procedurale Programmierung
-+ Definition, Deklaration, Aufruf
-
-### Arrays
-
-+ Beispiel: Argumentenübergabe mittels argv
-
-### Zeiger
-### Structs, Unions, Bitfelder
-### Speicher, Speicherverwaltung
-### Präprozessor
-### Standardbibliothek
-### Modulare Programmierung
-### Algorithmen und Datenstrukturen
-
-## Variable Inhalte
-### Debuggingtechniken, häufige Fehler
-###
+[1. Einführung](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/lectures/Einfuehrung.md)
