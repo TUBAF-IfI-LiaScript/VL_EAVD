@@ -50,37 +50,60 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
 ### Wie arbeitet ein Rechner eigentlich?
 
-Beispiel: Intel 4004 Architektur (1971)
+Beispiel: Intel 4004 Architektur (1971) (Author Appaloosa):
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png" alt="drawing" width="500"/>
+![atmel](https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png)<!--style="width: 100%"-->
 
-<span style="font-family:Papyrus; font-size:0.5em;">Source:
-<a href="https://commons.wikimedia.org/wiki/File:4004_arch.svg">https://commons.wikimedia.org/wiki/File:4004_arch.svg</a> (Author Appaloosa)</span>
 
 ### Was heißt das "Maschinensprache"?
 
-* Jeder Rechner hat einen spezifischen Satz von Befehlen, die durch "0" und "1" ausgedrückt werden, die er überhaupt abarbeiten kann.
+Jeder Rechner hat einen spezifischen Satz von Befehlen, die durch "0" und "1"
+ausgedrückt werden, die er überhaupt abarbeiten kann.
 
-   Speicherauszug den Intel 4004:
+* Speicherauszug den Intel 4004:
+  *           {{1}}
+    *******************************
+    | Adresse | Speicherinhalt |
+    |:--------|:---------------|
+    | 0000    | 1101 0101      |
+    | 0002    | 1111 0010      |
+    ********************************
+  *        {{2}}
+    *****************************************************
+    | Adresse | Speicherinhalt | OpCode     | Mneomonik |
+    |:--------|:---------------|:-----------|:----------|
+    | 0000    | 1101 0101      | 1101 DDDD  | LD $5     |
+    | 0002    | 1111 0010      | 1111 0010  | IAC       |
+    *****************************************************
 
-                                  {{1-2}}
+
+### Was heißt das "Maschinensprache"?
+
+Jeder Rechner hat einen spezifischen Satz von Befehlen, die durch "0" und "1"
+ausgedrückt werden, die er überhaupt abarbeiten kann.
+
+Speicherauszug den Intel 4004:
+
+    {{1-2}}
 | Adresse | Speicherinhalt |
 |:--------|:---------------|
 | 0000    | 1101 0101      |
 | 0002    | 1111 0010      |
 
-                                  {{2}}
+    {{2}}
 | Adresse | Speicherinhalt | OpCode     | Mneomonik |
 |:--------|:---------------|:-----------|:----------|
 | 0000    | 1101 0101      | 1101 DDDD  | LD $5     |
 | 0002    | 1111 0010      | 1111 0010  | IAC       |
 
-* Unterstützung für die Interpretation aus dem Nutzerhandbuch, das das Instruction set beschreibt:
 
-<img src="https://github.com/liaScript/CCourse/blob/master/img/4004_Instruction_set.png" alt="drawing" width="500"/>
+Unterstützung für die Interpretation aus dem Nutzerhandbuch, das das Instruction set beschreibt[^1]:
 
-<span style="font-family:Papyrus; font-size:0.5em;">Source:
-<a href="http://e4004.szyc.org/asm.html">http://e4004.szyc.org/asm.html</a> Intel 4004 Assembler</span>
+    {{3}}
+![instruction-set](../img/4004_Instruction_set.png)<!-- width="100%" -->
+
+
+[^1]: Intel 4004 Assembler (Quelle: http://e4004.szyc.org/asm.html)
 
 ### Aber möchte man so umfangreiche Programme schreiben?
 
@@ -88,32 +111,46 @@ Vorteil - ggf. sehr effizienter Code (Größe, Ausführungsdauer), der gut auf d
 
 Nachteile
 
-      * systemspezifische Realisierung
-      * geringer Abstraktionsgrad, bereits einfache Konstrukte benötigen viele Codezeilen
-      * weitgehende semantische Analysen möglich
+* systemspezifische Realisierung
+* geringer Abstraktionsgrad, bereits einfache Konstrukte benötigen viele Codezeilen
+* weitgehende semantische Analysen möglich
 
-| Assembler                | Höhere Sprache                 |
-|:-------------------------|:-------------------------------|
-|       .START ST          |   A:=2;                        |
-|  ST: MOV R1,#2           |   FOR I:=1 TO 20 LOOP          |
-|      MOV R2,#1          |       A:=A*I;                   |
-|  M1: CMP R2,#20          |   END LOOP; |
-|      BGT M2             |    PRINT(A); |
-|      MUL R1,R2          | |
-|      INI R2 | |
-|      JMP M1 | |
-|  M2: JSR PRINT | |
-|      .END | |
+``` asm Assembly
+.START ST
+ST: MOV R1, #2
+    MOV R2, #1
+M1: CMP R2, #20
+    BGT M2
+    MUL R1, R2
+    INI R2
+    JMP M1
+M2: JSR PRINT
+.END
+```
 
-"Eine höhere Programmiersprache ist eine Programmiersprache zur Abfassung eines Computerprogramms, die in **Abstraktion und Komplexität** von der Ebene der Maschinensprachen deutlich entfernt ist. ... Die Befehle müssen durch **Interpreter oder Compiler** in Maschinensprache übersetzt werden."
+``` fortran Fortran
+A:=2;
+FOR I:=1 TO 20 LOOP
+    A:=A*I;
+END LOOP;
+PRINT(A);
+```
 
-[https://de.wikipedia.org/wiki/Liste_von_Programmiersprachen](https://de.wikipedia.org/wiki/Liste_von_Programmiersprachen)
+> Eine höhere Programmiersprache ist eine Programmiersprache zur Abfassung eines
+> Computerprogramms, die in **Abstraktion und Komplexität** von der Ebene der
+> Maschinensprachen deutlich entfernt ist. ... Die Befehle müssen durch
+> **Interpreter oder Compiler** in Maschinensprache übersetzt werden.
+
+https://de.wikipedia.org/wiki/Liste_von_Programmiersprachen
 
 ### Compiliervorgang
 
 FALSCHES BILD! richtig ist Compiler Struktur.png
 
-"Ein **Compiler** (auch Kompiler; von englisch für zusammentragen bzw. lateinisch compilare ‚aufhäufen‘) ist ein Computerprogramm, das Quellcodes einer bestimmten Programmiersprache in eine Form übersetzt, die von einem Computer (direkter) ausgeführt werden kann."
+> Ein **Compiler** (auch Kompiler; von englisch für zusammentragen bzw. lateinisch
+> compilare ‚aufhäufen‘) ist ein Computerprogramm, das Quellcodes einer bestimmten
+> Programmiersprache in eine Form übersetzt, die von einem Computer (direkter)
+> ausgeführt werden kann.
 
 <img src="https://github.com/liaScript/CCourse/blob/master/img/4004_Instruction_set.png" alt="drawing" width="500"/>
 
