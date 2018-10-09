@@ -63,7 +63,7 @@ Beispiel: Intel 4004 Architektur (1971)
 
    Speicherauszug den Intel 4004:
 
-                                  {{1}}
+                                  {{1-2}}
 | Adresse | Speicherinhalt |
 |:--------|:---------------|
 | 0000    | 1101 0101      |
@@ -86,11 +86,11 @@ Beispiel: Intel 4004 Architektur (1971)
 
 Vorteil - ggf. sehr effizienter Code (Größe, Ausführungsdauer), der gut auf die Hardware abgestimmt ist
 
-Nachteil
+Nachteile
 
-     * systemspezifische Realisierung
-     * geringer Abstraktionsgrad, bereits einfache Konstrukte benötigen viele Codezeilen
-     * weitgehende semantische Analysen möglich
+      * systemspezifische Realisierung
+      * geringer Abstraktionsgrad, bereits einfache Konstrukte benötigen viele Codezeilen
+      * weitgehende semantische Analysen möglich
 
 | Assembler                | Höhere Sprache                 |
 |:-------------------------|:-------------------------------|
@@ -105,8 +105,23 @@ Nachteil
 |  M2: JSR PRINT | |
 |      .END | |
 
-Eine höhere Programmiersprache ist eine Programmiersprache zur Abfassung eines Computerprogramms, die in **Abstraktion und Komplexität** von der Ebene der Maschinensprachen deutlich entfernt ist. ... Die Befehle müssen durch **Interpreter oder Compiler** in Maschinensprache übersetzt werden. Oft sind noch weitere Stufen wie
+"Eine höhere Programmiersprache ist eine Programmiersprache zur Abfassung eines Computerprogramms, die in **Abstraktion und Komplexität** von der Ebene der Maschinensprachen deutlich entfernt ist. ... Die Befehle müssen durch **Interpreter oder Compiler** in Maschinensprache übersetzt werden."
 
 [https://de.wikipedia.org/wiki/Liste_von_Programmiersprachen](https://de.wikipedia.org/wiki/Liste_von_Programmiersprachen)
 
+### Compiliervorgang
+
+FALSCHES BILD! richtig ist Compiler Struktur.png
+
+"Ein **Compiler** (auch Kompiler; von englisch für zusammentragen bzw. lateinisch compilare ‚aufhäufen‘) ist ein Computerprogramm, das Quellcodes einer bestimmten Programmiersprache in eine Form übersetzt, die von einem Computer (direkter) ausgeführt werden kann."
+
+<img src="https://github.com/liaScript/CCourse/blob/master/img/4004_Instruction_set.png" alt="drawing" width="500"/>
+
+<span style="font-family:Papyrus; font-size:0.5em;">Source:
+<a href="https://medium.com/@vietkieutie/what-happens-when-you-type-gcc-main-c-2a136896ade3">https://medium.com/@vietkieutie/what-happens-when-you-type-gcc-main-c-2a136896ade3</a> Intel 4004 Assembler</span>
+
 ## 2. Warum also C?
+
+### Historische Einordnung
+
+### Eigenschaften von C
