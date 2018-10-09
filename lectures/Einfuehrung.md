@@ -124,4 +124,61 @@ FALSCHES BILD! richtig ist Compiler Struktur.png
 
 ### Historische Einordnung
 
+Zielrichtung ... Entwicklung eines Betriebssystems
+
 ### Eigenschaften von C
+
+      * Adressiert Hochsprachenaspekte und Hardwarenähe -> Hohe Geschwindigkeit bei geringer Programmgröße
+      * Imperative Programmiersprache
+      * Wenige Schlüsselwörter als Sprachumfang
+      * Große Mächtigkeit
+
+### Heutige Anwendung
+
+      Hardwarenahe Programmierung:
+      * Eingebettete Systeme -> Siehe Beispiel
+      * Betriebssysteme
+
+      FALSCHES BILD TIOBE INDEX
+
+      <img src="https://github.com/liaScript/CCourse/blob/master/img/4004_Instruction_set.png" alt="drawing" width="500"/>
+
+      <span style="font-family:Papyrus; font-size:0.5em;">Source:
+      <a href="https://www.informatik-aktuell.de/aktuelle-meldungen/2018/juli/ranking-der-programmiersprachen-java-wieder-ganz-vorne.html">https://www.informatik-aktuell.de/aktuelle-meldungen/2018/juli/ranking-der-programmiersprachen-java-wieder-ganz-vorne.html</a> Intel 4004 Assembler</span>
+
+### "C ist schwierig zu erlernen"
+
+
+## 3. Erstes C Programm
+
+
+### "Hello World"
+
+```cpp                     HelloWorld.c
+/* That's my first c program
+   Karl Klammer, Oct. 2018 */
+
+#include<stdio.h>
+
+int main() {
+	printf("Hello World\\n");
+	return 0;
+}
+```
+@JSCPP(@input, )
+
+### Ein Wort zur Formatierung
+
+```cpp                     HelloWorld.c
+#include<stdio.h>
+
+int main() {
+  int i;
+  i = 5;
+  for (int i; i++; i<10){
+	    printf("Hello World\\n");
+  }
+	return 0;
+}
+```
+@JSCPP(@input, )
