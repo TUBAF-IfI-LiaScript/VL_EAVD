@@ -50,7 +50,7 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
 ### Wie arbeitet ein Rechner eigentlich?
 
-Beispiel: Intel 4004 Architektur (1971) (Author Appaloosa):
+Beispiel: Intel 4004 Architektur (1971) [^1]
 
 ![intel](https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png)<!--style="width: 100%"-->
 
@@ -78,7 +78,7 @@ Speicherauszug den Intel 4004:
 
 Unterstützung für die Interpretation aus dem Nutzerhandbuch, das das Instruction set beschreibt[^1]:
 
-![instruction-set](../img/4004_Instruction_set.png)<!-- width="100%" -->
+![instruction-set](./img/4004_Instruction_set.png)<!-- width="100%" -->
 
 [^1]: Intel 4004 Assembler (Quelle: http://e4004.szyc.org/asm.html)
 
@@ -92,25 +92,19 @@ Nachteile
 * geringer Abstraktionsgrad, bereits einfache Konstrukte benötigen viele Codezeilen
 * weitgehende semantische Analysen möglich
 
-``` asm Assembly
-.START ST
-ST: MOV R1, #2
-    MOV R2, #1
-M1: CMP R2, #20
-    BGT M2
+```
+Assembler Code                            Fortran
+
+.START ST                                 A:=2;
+ST: MOV R1, #2                            FOR I:=1 TO 20 LOOP
+    MOV R2, #1                                  A:=A*I;
+M1: CMP R2, #20                           END LOOP;
+    BGT M2                                PRINT(A);
     MUL R1, R2
     INI R2
     JMP M1
 M2: JSR PRINT
 .END
-```
-
-``` fortran Fortran
-A:=2;
-FOR I:=1 TO 20 LOOP
-    A:=A*I;
-END LOOP;
-PRINT(A);
 ```
 
 > Eine höhere Programmiersprache ist eine Programmiersprache zur Abfassung eines
@@ -122,17 +116,16 @@ https://de.wikipedia.org/wiki/Liste_von_Programmiersprachen
 
 ### Compiliervorgang
 
-FALSCHES BILD! richtig ist Compiler Struktur.png
-
 > Ein **Compiler** (auch Kompiler; von englisch für zusammentragen bzw. lateinisch
 > compilare ‚aufhäufen‘) ist ein Computerprogramm, das Quellcodes einer bestimmten
 > Programmiersprache in eine Form übersetzt, die von einem Computer (direkter)
 > ausgeführt werden kann.
 
-<img src="https://github.com/liaScript/CCourse/blob/master/img/4004_Instruction_set.png" alt="drawing" width="500"/>
+Stufen des Compile-Vorganges[^1]:
 
-<span style="font-family:Papyrus; font-size:0.5em;">Source:
-<a href="https://medium.com/@vietkieutie/what-happens-when-you-type-gcc-main-c-2a136896ade3">https://medium.com/@vietkieutie/what-happens-when-you-type-gcc-main-c-2a136896ade3</a> Intel 4004 Assembler</span>
+![instruction-set](./img/compilerElements.png)<!-- width="100%" -->
+
+[^1]: Abbildung Stufen der Compilierung (Quelle: https://medium.com/@vietkieutie/what-happens-when-you-type-gcc-main-c-2a136896ade3)
 
 ## 2. Warum also C?
 
@@ -142,10 +135,19 @@ Zielrichtung ... Entwicklung eines Betriebssystems
 
 ### Eigenschaften von C
 
-      * Adressiert Hochsprachenaspekte und Hardwarenähe -> Hohe Geschwindigkeit bei geringer Programmgröße
-      * Imperative Programmiersprache
-      * Wenige Schlüsselwörter als Sprachumfang
-      * Große Mächtigkeit
+* Adressiert Hochsprachenaspekte und Hardwarenähe -> Hohe Geschwindigkeit bei geringer Programmgröße
+
+* Imperative Programmiersprache
+{{1}}
+> ALTERNATIVE PARAFDIGMEN
+
+* Wenige Schlüsselwörter als Sprachumfang
+{{2}}
+> Schlüsselwort: Reserviertes Wort, das der Compiler verwendet, um ein Programm zu parsen (z.B. if, def oder while). Schlüsselwörter dürfen nicht als Name für eine Variable gewählt werden
+
+* Große Mächtigkeit
+{{3}}
+> WAS BEDEUTET MÄCHTIGKEIT
 
 ### Heutige Anwendung
 
@@ -154,12 +156,11 @@ Hardwarenahe Programmierung:
 * Eingebettete Systeme -> Siehe Beispiel
 * Betriebssysteme
 
+Relevanz in der Anwendung[^1]
+
 ![instruction-set](../img/TIOBE.png)<!-- width="100%" -->
 
-      <img src="https://github.com/liaScript/CCourse/blob/master/img/4004_Instruction_set.png" alt="drawing" width="500"/>
-
-      <span style="font-family:Papyrus; font-size:0.5em;">Source:
-      <a href="https://www.informatik-aktuell.de/aktuelle-meldungen/2018/juli/ranking-der-programmiersprachen-java-wieder-ganz-vorne.html">https://www.informatik-aktuell.de/aktuelle-meldungen/2018/juli/ranking-der-programmiersprachen-java-wieder-ganz-vorne.html</a> Intel 4004 Assembler</span>
+[^1]: TIOBE Index (Quelle: https://www.informatik-aktuell.de/aktuelle-meldungen/2018/juli/ranking-der-programmiersprachen-java-wieder-ganz-vorne.html)
 
 ### "C ist schwierig zu erlernen"
 
@@ -182,15 +183,22 @@ int main() {
 ```
 @JSCPP(@input, )
 
-### Ein Wort zur Formatierung
+| Zeile | Bedeutung |
+|:------|:---------------|
+| 1 - 2 | Kommentar, wird vom Präprozessor entfernt |
+| 4     | Voraussetzung für das Einbinden von Befehlen der Standardbibliothek hier printf() |
+
+
+### Ein Wort zu den Formalien
 
 ```cpp                     HelloWorld.c
 #include<stdio.h>
 
 int main() {
-  int i;
-  for (i=0; i<10;  i++){
-	    printf("Hello World\n");
+  /* hier steht ein Kommentar */
+  int zahl;
+  for (zahl=0; zahl<3;  zahl++){
+	    printf("Hello World\\n");
   }
 	return 0;
 }
@@ -198,10 +206,47 @@ int main() {
 @JSCPP(@input, )
 
 ```cpp                     BadHelloWorld.c
-#include<stdio.h>
-
-int main() {int i;
-for (i=0; i<10;  i++){printf("Hello World\n");}
+#include<stdio.h> int main() /* hier steht ein Kommentar */ {int i;
+for (zahl=0; zahl<3;  zahl++){printf("Hello World\n");}
 return 0;}
 ```
 @JSCPP(@input, )
+
+* Das *systematische Einrücken* verbessert die Lesbarkeit und senkt damit die Fehleranfälligkeit Ihres Codes!
+* Wählen sie *selbsterklärende Variablen- und Funktionsnamen*!
+* Nutzen Sie ein *Versionsmanagmentsystem*, wenn Sie ihren Code entwickeln!
+* Kommentieren Sie Ihr Vorgehen!
+
+### Gute Kommentare, schlechte Kommentare
+
+
+### Was tuen, wenn es schief geht?
+
+```cpp                     ErroneousHelloWorld.c
+#include<stdio.h>
+
+int main() {
+  for (zahl=0; zahl<3;  zahl++){
+	    printf("Hello World\\n")
+  }
+	return 0;
+}
+```
+@JSCPP(@input, )
+
+Methodisches Vorgehen:
+* ** RUHE BEWAHREN **
+* Lesen der Fehlermeldung
+* Verstehen der Fehlermeldung / Aufstellen von Hypothesen
+* Systematische Evaluation der Thesen
+
+## 4. Werkzeuge
+
+### Arbeitsumgebung
+
+* Arbeiten mit der LiaScript-Umgebung
+* Online-Compiler und Ausführungsumgebungen für C
+
+https://www.onlinegdb.com/online_c_compiler
+
+* Lokale Tool-Chain auf dem eigenen Rechner (Pelles C)
