@@ -37,7 +37,7 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
 # Vorlesung I - Einführung
 
-## Fragen an die Veranstaltung ...
+## Fragen an die heutige Veranstaltung ...
 
 * Wie wird ein textuelles Programm in einen ausführbaren Code transformiert?
 * Was bedeutet der Begriff Hochsprache, was verbirgt ist ein Assembler?
@@ -52,30 +52,9 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
 Beispiel: Intel 4004 Architektur (1971) (Author Appaloosa):
 
-![atmel](https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png)<!--style="width: 100%"-->
+![intel](https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png)<!--style="width: 100%"-->
 
-
-### Was heißt das "Maschinensprache"?
-
-Jeder Rechner hat einen spezifischen Satz von Befehlen, die durch "0" und "1"
-ausgedrückt werden, die er überhaupt abarbeiten kann.
-
-* Speicherauszug den Intel 4004:
-  *           {{1}}
-    *******************************
-    | Adresse | Speicherinhalt |
-    |:--------|:---------------|
-    | 0000    | 1101 0101      |
-    | 0002    | 1111 0010      |
-    ********************************
-  *        {{2}}
-    *****************************************************
-    | Adresse | Speicherinhalt | OpCode     | Mneomonik |
-    |:--------|:---------------|:-----------|:----------|
-    | 0000    | 1101 0101      | 1101 DDDD  | LD $5     |
-    | 0002    | 1111 0010      | 1111 0010  | IAC       |
-    *****************************************************
-
+[^1]: Wikipedia Eintrag Intel 4004 (Autor Appaloosa)
 
 ### Was heißt das "Maschinensprache"?
 
@@ -84,13 +63,13 @@ ausgedrückt werden, die er überhaupt abarbeiten kann.
 
 Speicherauszug den Intel 4004:
 
-    {{1-2}}
+    {{0-1}}
 | Adresse | Speicherinhalt |
 |:--------|:---------------|
 | 0000    | 1101 0101      |
 | 0002    | 1111 0010      |
 
-    {{2}}
+    {{1}}
 | Adresse | Speicherinhalt | OpCode     | Mneomonik |
 |:--------|:---------------|:-----------|:----------|
 | 0000    | 1101 0101      | 1101 DDDD  | LD $5     |
@@ -99,9 +78,7 @@ Speicherauszug den Intel 4004:
 
 Unterstützung für die Interpretation aus dem Nutzerhandbuch, das das Instruction set beschreibt[^1]:
 
-    {{3}}
 ![instruction-set](../img/4004_Instruction_set.png)<!-- width="100%" -->
-
 
 [^1]: Intel 4004 Assembler (Quelle: http://e4004.szyc.org/asm.html)
 
@@ -172,11 +149,12 @@ Zielrichtung ... Entwicklung eines Betriebssystems
 
 ### Heutige Anwendung
 
-      Hardwarenahe Programmierung:
-      * Eingebettete Systeme -> Siehe Beispiel
-      * Betriebssysteme
+Hardwarenahe Programmierung:
 
-      FALSCHES BILD TIOBE INDEX
+* Eingebettete Systeme -> Siehe Beispiel
+* Betriebssysteme
+
+![instruction-set](../img/TIOBE.png)<!-- width="100%" -->
 
       <img src="https://github.com/liaScript/CCourse/blob/master/img/4004_Instruction_set.png" alt="drawing" width="500"/>
 
@@ -211,11 +189,19 @@ int main() {
 
 int main() {
   int i;
-  i = 5;
-  for (int i; i++; i<10){
-	    printf("Hello World\\n");
+  for (i=0; i<10;  i++){
+	    printf("Hello World\n");
   }
 	return 0;
 }
+```
+@JSCPP(@input, )
+
+```cpp                     BadHelloWorld.c
+#include<stdio.h>
+
+int main() {int i;
+for (i=0; i<10;  i++){printf("Hello World\n");}
+return 0;}
 ```
 @JSCPP(@input, )
