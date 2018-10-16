@@ -37,16 +37,29 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
 # Vorlesung I - Einführung
 
-## Fragen an die heutige Veranstaltung ...
+**Fragen an die heutige Veranstaltung ... **
 
 * Wie wird ein textuelles Programm in einen ausführbaren Code transformiert?
 * Was bedeutet der Begriff Hochsprache, was verbirgt ist ein Assembler?
 * Woraus ergibt sich die Aktualität der Sprache C?
 * Welche Eigenschaften grenzt C von anderen Programmiersprachen ab?
 * Welche Aufgabe hat ein Compiler?
-* Wordurch definieren sich verschiedene "Geschmacksrichtungen" im Entwicklungsprozess
+* Wordurch definieren sich verschiedene "Geschmacksrichtungen" im Entwicklungsprozess?
 
 ## 1. Grundlegendes
+
+Programme sind Anweisungslisten, die vom Menschen erdacht, auf einem Rechner zur
+Ausführung kommen. Eine zentrale Hürde ist dabei die Kluft zwischen menschlicher
+Vorstellungskraft und Logik, die **implizite Annahmen und Erfahrungen** einschließt
+und der **"stupiden" Abarbeitung von Befehlsfolgen** in einem Recher.
+
+Programmiersprachen bemühen sich diese Lücke zu schließen und werden dabei von
+einer Vielzahl von Tools begleitet, diesen **Transformationsprozess** unterstützen
+sollen.
+
+Um das Verständnis für diesen Vorgang zu entwickeln werden zunächst die Vorgänge
+in einem Rechner bei der Abarbeitung von Programmen beleuchtet, um dann die
+Realisierung eines Programmes mit C zu adressieren.
 
 ### Wie arbeitet ein Rechner eigentlich?
 
@@ -93,13 +106,13 @@ Nachteile
 * weitgehende semantische Analysen möglich
 
 ```
-Assembler Code                            Fortran
+Assembler Code                 Fortran
 
-.START ST                                 A:=2;
-ST: MOV R1, #2                            FOR I:=1 TO 20 LOOP
-    MOV R2, #1                                  A:=A*I;
-M1: CMP R2, #20                           END LOOP;
-    BGT M2                                PRINT(A);
+.START ST                      A:=2;
+ST: MOV R1, #2                 FOR I:=1 TO 20 LOOP
+    MOV R2, #1                      A:=A*I;
+M1: CMP R2, #20                END LOOP;
+    BGT M2                     PRINT(A);
     MUL R1, R2
     INI R2
     JMP M1
@@ -129,9 +142,39 @@ Stufen des Compile-Vorganges[^1]:
 
 ## 2. Warum also C?
 
+### Alternativen
+
+Relevanz in der Anwendung[^1]
+
+![instruction-set](../img/TIOBE.png)<!-- width="100%" -->
+
+[^1]: TIOBE Index (Quelle: https://www.informatik-aktuell.de/aktuelle-meldungen/2018/juli/ranking-der-programmiersprachen-java-wieder-ganz-vorne.html)
+
+### Heutige Anwendung
+
+Hardwarenahe Programmierung:
+
+* Eingebettete Systeme -> Siehe Beispiel
+* Betriebssysteme
+
+
+
 ### Historische Einordnung
 
-Zielrichtung ... Entwicklung eines Betriebssystems
+Zielrichtung ... Entwicklung eines Betriebssystems in den *AT&T Bell Laboratories* Anfang 1970
+
+![instruction-set](./img/Ken_Thompson_and_Dennis_Ritchie.jpg)<!-- width="100%" --> [Ken Thompson](https://de.wikipedia.org/wiki/Ken_Thompson) und [Dennis Ritchie](https://de.wikipedia.org/wiki/Dennis_Ritchie) [^2]
+
+![instruction-set](./img/Brian_Kernighan.jpg)<!-- width="100%" --> [Brian_Kernighan](https://de.wikipedia.org/wiki/Brian_Kernighan) [^3]
+
+[^2]: Foto Thompson und Ritchie (Quelle: http://www.catb.org/~esr/jargon/html/U/Unix.html)
+
+[^2]: Foto Kernighan (Quelle: http://www.catb.org/~esr/jargon/html/U/Unix.html)
+
+| Version    | Spezifikation                                    |
+|:-----------|:-------------------------------------------------|
+| K&R C      | Definition über das Buch "The C Programming Language"|
+| ANSI C     | Standard des American National Standards Institute (ANSI)  |
 
 ### Eigenschaften von C
 
@@ -149,24 +192,7 @@ Zielrichtung ... Entwicklung eines Betriebssystems
 {{3}}
 > WAS BEDEUTET MÄCHTIGKEIT
 
-### Heutige Anwendung
-
-Hardwarenahe Programmierung:
-
-* Eingebettete Systeme -> Siehe Beispiel
-* Betriebssysteme
-
-Relevanz in der Anwendung[^1]
-
-![instruction-set](../img/TIOBE.png)<!-- width="100%" -->
-
-[^1]: TIOBE Index (Quelle: https://www.informatik-aktuell.de/aktuelle-meldungen/2018/juli/ranking-der-programmiersprachen-java-wieder-ganz-vorne.html)
-
-### "C ist schwierig zu erlernen"
-
-
 ## 3. Erstes C Programm
-
 
 ### "Hello World"
 
@@ -176,17 +202,20 @@ Relevanz in der Anwendung[^1]
 
 #include<stdio.h>
 
-int main() {
-	printf("Hello World\\n");
+int main() { // <- Öffnende Klammer eines Blockes
+	printf("Hello World\\n");  // <- Befehl endet mit Semikolon
 	return 0;
-}
+}            // <- Schließende Klammer eines Blockes
 ```
 @JSCPP(@input, )
 
 | Zeile | Bedeutung |
 |:------|:---------------|
-| 1 - 2 | Kommentar, wird vom Präprozessor entfernt |
-| 4     | Voraussetzung für das Einbinden von Befehlen der Standardbibliothek hier printf() |
+| 1 - 2 | Kommentar (wird vom Präprozessor entfernt) |
+| 4     | Voraussetzung für das Einbinden von Befehlen der Standardbibliothek hier printf()       |
+| 6     | Einsprungstelle für den Beginn des Programmes |
+| 7     | Anwendung einer Funktion ... name(Parameterliste) ... hier zur Ausgabe auf dem Bildschirm|
+| 8     | Definition eines Rückgabewertes|
 
 
 ### Ein Wort zu den Formalien
@@ -215,9 +244,102 @@ return 0;}
 * Das *systematische Einrücken* verbessert die Lesbarkeit und senkt damit die Fehleranfälligkeit Ihres Codes!
 * Wählen sie *selbsterklärende Variablen- und Funktionsnamen*!
 * Nutzen Sie ein *Versionsmanagmentsystem*, wenn Sie ihren Code entwickeln!
-* Kommentieren Sie Ihr Vorgehen!
+* Kommentieren Sie Ihr Vorgehen trotz
+"Good code is self-documenting."
 
-### Gute Kommentare, schlechte Kommentare
+### Gute Kommentare
+
+*1. Kommentare als Pseudocode*
+
+```cpp                     Comments1.c
+/* loop backwards through all elements returned by the server
+(they should be processed chronologically)*/
+for (i = (numElementsReturned - 1); i >= 0; i--){
+    /* process each element's data */
+    updatePattern(i, returnedElements[i]);
+}
+```
+
+*2. Kommentare zur Datei*
+
+```cpp                     Comments2.c
+// This is the mars rover control application
+//
+// Karl Klammer, Oct. 2018
+// Version 109.1.12
+//
+int main(){...}
+```
+
+*3. Beschreibung eines Algorithmus*
+
+```cpp                    Commments3.c
+/* Function:  approx_pi
+ * --------------------
+ * computes an approximation of pi using:
+ *    pi/6 = 1/2 + (1/2 x 3/4) 1/5 (1/2)^3  + (1/2 x 3/4 x 5/6) 1/7 (1/2)^5 +
+ *
+ *  n: number of terms in the series to sum
+ *
+ *  returns: the approximate value of pi obtained by suming the first n terms
+ *           in the above series
+ *           returns zero on error (if n is non-positive)
+ */
+
+ double approx_pi(int n);
+```
+
+In realen Projekten werden Sie für diese Aufgaben Dokumentationstools verwenden,
+die die Generierung von Webseite, Handbüchern auf der Basis eigener
+Schlüsselworte in den Kommentaren unterstützen ->
+[doxygen](http://fnch.users.sourceforge.net/doxygen_c.html).
+
+*4. Debugging*
+
+```cpp                     CommentsForCodes.c
+int main(){
+  ...
+  preProcessedData = filter1(rawData);
+  # printf('Filter1 finished ... \n');
+  # printf('Output %d \n', preProcessedData);
+  result=complexCalculation(preProcessedData);
+  ...
+}
+```
+
+### Schlechte Kommentare
+
+*1. Überkommentierung von Code*
+
+```cpp
+x = x + 1;  /* increment the value of x */
+printf("Hello World\\n"); // displays Hello world
+```
+"... over-commenting your code can be as bad as under-commenting it"[^1]
+
+[^1]: C Code Style Guidelines (Quelle:
+https://www.cs.swarthmore.edu/~newhall/unixhelp/c_codestyle.html)
+
+*2. Merkwürdige Kommentare*
+
+```cpp
+//When I wrote this, only God and I understood what I was doing
+//Now, God only knows
+
+// sometimes I believe compiler ignores all my comments
+
+// Magic. Do not touch.
+
+// I am not responsible of this code.
+
+try {
+
+}
+finally { // should never happen }
+
+```
+[Sammlung von Kommentaren](https://fuzzzyblog.blogspot.com/2014/09/40-most-funny-code-comments.html)
+
 
 
 ### Was tuen, wenn es schief geht?
@@ -242,11 +364,16 @@ Methodisches Vorgehen:
 
 ## 4. Werkzeuge
 
+### Vim oder Eclipse?
+
+>  Eine integrierte Entwicklungsumgebung (Abkürzung IDE, von englisch integrated development environment) ist eine Sammlung von Computerprogrammen, mit denen die Aufgaben der Softwareentwicklung möglichst ohne Medienbrüche bearbeitet werden können.
+
 ### Arbeitsumgebung
 
 * Arbeiten mit der LiaScript-Umgebung
 * Online-Compiler und Ausführungsumgebungen für C
 
 https://www.onlinegdb.com/online_c_compiler
+https://www.learn-c.org/en/Welcome
 
 * Lokale Tool-Chain auf dem eigenen Rechner (Pelles C)

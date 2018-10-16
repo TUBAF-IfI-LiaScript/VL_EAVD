@@ -44,7 +44,8 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 See the interactive version at
 [https://LiaScript.github.io](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/README.md)
 
-## Beispiel
+Der vorliegende C-Kurs wurde für das Semester 2018/19 an der TU Bergakademie Freiberg vorbereitet und auf der Basis von LiaScript realisiert. Die Veranstaltung richtet sich an Nicht-Informatiker aus verschiedenen ingenieurwissenschaftlichen Disziplinen mit keinen oder geringen Programmierkenntnissen. Kern der Lösung ist die Möglichkeit Code direkt in der Webseite auszuführen und auch Änderungen vorzunehmen, die dann in einem
+"Versionssystem light" verfügbar sind.
 
 Ausführbarer C Code sieht wie folgt aus, der Titel kann weggelassen werden.
 
@@ -60,37 +61,70 @@ int main() {
 
 Das folgende Beispiel illustriert die Übergabe von Argumenten über die "Commandozeile".
 
-```cpp                     ExtendedHelloWorld.c
+```cpp                     GetChar.c
 #include<stdio.h>
 
-int main( int argc, char *argv[]){
-  if( argc == 2 ) {
-     printf("The argument supplied is %s\n", argv[1]);
-  }
-  else if( argc > 2 ) {
-     printf("Too many arguments supplied.\n");
-  }
-  else {
-     printf("One argument expected.\n");
-  }
+int main(){
+	char c;
+	printf("Mit welchem Buchstaben beginnt ihr Vorname? ");
+	c = getchar();
+	printf("\nIch weiss jetzt, dass Ihr Vorname mit '%c' beginnt.\n", c);
+	return 0;
 }
 ```
 ``` text                  stdin
-TestInput
+T
 ```
 @JSCPP(@input,`@input(1)`)
 
+Fehlerausgaben werden entsprechend der Compilerimplementierung wie folgt generiert:
 
-## Zielstellung der Veranstaltung
+```cpp                     ErroneousHelloWorld.c
+#include<stdio.h>
 
-     + Grundlegendes Verständnis von (hardwarenaher) Programmierung
-     + Elementare Fähigkeiten in der Programmiersprache C
-     + Anwendung von Programmiertools im Entwicklungsprozess
+int main() {
+	printf("Hello World\n");
+	return 0;
+}
+```
+@JSCPP(@input, )
 
-## Literaturempfehlungen
+# Zielstellung der Veranstaltung
+
++ Grundlegendes Verständnis von (hardwarenaher) Programmierung
++ Elementare Fähigkeiten in der Programmiersprache C
++ Anwendung von Programmiertools im Entwicklungsprozess
++ Systematischer Entwurf von Algorithmen
+
+# Literaturempfehlungen
+
+** Online Kurse**
+
++ [The GNU C Reference Manual](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html)
++ Wolf, J., "C von A bis Z", Rheinwerk Verlag [Link](http://openbook.rheinwerk-verlag.de/c_von_a_bis_z/000_c_vorwort_001.htm#mj764cb3fd439d3b95d1843e7c7d17f235)
++ C Kurs Universität Chemnitz, [Link](https://www.tu-chemnitz.de/urz/archiv/kursunterlagen/C/index.htm)
+
+** Videotutorials **
+
++ Vorlesung Prof. Dr. Justus Piater, Universität Insbruck 2014 [Link]()
++ Vorlesung ...
+
+** Bücher **
+
++ Kernighan B.W., Ritchie D.M., "Programmieren in C", Hanser Verlag
++ Prinz P., Crawford T., "C in a Nutshell", O'Reilly
 
 
+# Vorlesungsinhalte
 
-## Vorlesungsinhalte
+| Datum      | Inhalt                                |
+|:-----------|---------------------------------------|
+| 23.10.2018 | [1.  Einführung](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/Einfuehrung.md)    |
+| 30.10.2018 | Grundkonzepte der Sprache             |
+|            | Variablen und Datentypen              |
 
-[1. Einführung](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/lectures/Einfuehrung.md)
+# "C ist schwierig zu erlernen"
+
+*"Viele haben bei uns wegen dem Info Grundlagen Modul gewechselt. Allerdings hängt das auch von dir und deinem Talent ab. Das Tempo ist rasant. Jede Art von Vorerfahrung hilft dir eigentlich sehr. Also wenn du noch Zeit hast vorm Studienbeginn, schnapp dir ein gutes Buch zur gelehrten Sprache, und fange schonmal bissl an kleine Sachen zu programmieren."* [Foreneintrag]
+
+*"Wenn Du nicht bereit bist, bei Themen, die Dir nicht liegen, Zeit und Energie zu opfern, um sie zu verstehen - bleib ganz von einem Studium weg."*  [Foreneintrag]
