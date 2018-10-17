@@ -97,7 +97,11 @@ int main() {
 |:--------------------|:------------------------------------------|
 |Sebastian Zug        | sebastian.zug@informatik.tu-freiberg.de   |
 |Georg Jäger          | georg.jaeger@informatik.tu-freiberg.de    |
-| Bitte ergänzen      |                                           |
+|Galina Rudolf        | galina.rudolf@informatik.tu-freiberg.de   |
+|Jonas Treumer        | jonas.treumer@informatik.tu-freiberg.de   |
+|Ben Lorenz           | ben.lorenz@informatik.tu-freiberg.de      |
+|Martin Reinhardt     | martin.reinhardt@informatik.tu-freiberg.de|
+|Tobias Bräuer        | tobias.braeuer@informatik.tu-freiberg.de  |
 
 **Zielstellung der Veranstaltung**
 
