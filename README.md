@@ -89,12 +89,28 @@ int main() {
 ```
 @JSCPP(@input, )
 
-# Zielstellung der Veranstaltung
+# Prozedurale Programmierung (WS 2018/19)
+
+**Dozenten**
+| Name                | Email                                     |
+|:--------------------|:------------------------------------------|
+|Sebastian Zug        | sebastian.zug@informatik.tu-freiberg.de   |
+|Georg Jäger          | georg.jaeger@informatik.tu-freiberg.de    |
+| Bitte ergänzen         |   |
+
+**Zielstellung der Veranstaltung**
 
 + Grundlegendes Verständnis von (hardwarenaher) Programmierung
 + Elementare Fähigkeiten in der Programmiersprache C
 + Anwendung von Programmiertools im Entwicklungsprozess
 + Systematischer Entwurf von Algorithmen
+
+**Zeitaufwand und Engagement**
+
+"Der Zeitaufwand beträgt 180h und setzt sich zusammen aus 60h
+Präsenzzeit und 120h Selbststudium. Letzteres umfasst die Vor- und
+Nachbereitung der Lehrveranstaltungen, die eigenständige Lösung von
+Übungsaufgaben sowie die Prüfungsvorbereitung."
 
 # Literaturempfehlungen
 
@@ -106,8 +122,8 @@ int main() {
 
 ** Videotutorials **
 
-+ Vorlesung Prof. Dr. Justus Piater, Universität Insbruck 2014 [Link]()
-+ Vorlesung ...
++ Vorlesung Prof. Dr. Justus Piater, Universität Insbruck 2014 [Link](https://www.youtube.com/watch?v=7P7dSOKAonM)
++ Reihe von Tutorials zu verschiedenen Veranstaltungen der Goethe Universität Frankfurt [Link](https://www.youtube.com/watch?v=CeEfTlRFEA0&t=210s)
 
 ** Bücher **
 
@@ -123,8 +139,36 @@ int main() {
 | 30.10.2018 | Grundkonzepte der Sprache             |
 |            | Variablen und Datentypen              |
 
+# ... und wozu brauche ich das?
+
+**Antwort A:** Das Studium vermittelt ein Weltbild und keine eng zugeschnitte Sicht.
+
+**Antwort B:** Die Fähigkeit in Algorithmen zu denken ist eine Grundlage
+wissenschaftlichen Arbeitens.
+
+**Antwort C:** Am Ende steht Ihnen das Rüstzeug zur Verfügung kleine
+eingebettete C-Projekte selbst anzugehen.
+
+![instruction-set](./img/Example_I_DistanceMeasurements.jpeg)<!-- width="100%" -->
+
 # "C ist schwierig zu erlernen"
 
 *"Viele haben bei uns wegen dem Info Grundlagen Modul gewechselt. Allerdings hängt das auch von dir und deinem Talent ab. Das Tempo ist rasant. Jede Art von Vorerfahrung hilft dir eigentlich sehr. Also wenn du noch Zeit hast vorm Studienbeginn, schnapp dir ein gutes Buch zur gelehrten Sprache, und fange schonmal bissl an kleine Sachen zu programmieren."* [Foreneintrag]
 
-*"Wenn Du nicht bereit bist, bei Themen, die Dir nicht liegen, Zeit und Energie zu opfern, um sie zu verstehen - bleib ganz von einem Studium weg."*  [Foreneintrag]
+*"Ich habe es grade irgendwie selbst gelöst, aber keine Ahnung warum es funktioniert hat."* [Foreneintrag]
+
+
+# Wie können Sie zum Gelingen der Veranstaltung beitragen?
+
++ Stellen Sie Fragen, seinen Sie kommunikativ!
++ Organisieren Sie sich in Arbeitsgruppen!
++ Experimentieren Sie mit verschiedenen Entwicklungsumgebung um "Ihren Editor" zu finden
++ Machen Sie Verbesserungsvorschläge für die Vorlesungsfolien!
+
+![instruction-set](./img/screenShotAtom.png)<!-- width="100%" -->
+
+Link auf den GitHub: https://github.com/liaScript/CCourse
+
+# Autorenliste
+
+Sebastian Zug, Georg Jäger, André Dietrich, ...

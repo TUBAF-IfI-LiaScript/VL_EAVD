@@ -61,6 +61,10 @@ Um das Verständnis für diesen Vorgang zu entwickeln werden zunächst die Vorg�
 in einem Rechner bei der Abarbeitung von Programmen beleuchtet, um dann die
 Realisierung eines Programmes mit C zu adressieren.
 
+![instruction-set](./img/Programmiersprache_Umfeld.png)<!-- width="100%" -->
+
+[^1]: Programmiervorgang und Begriffe (Quelle: https://commons.wikimedia.org/wiki/File:Programmiersprache_Umfeld.png (Autor VÖRBY))
+
 ### Wie arbeitet ein Rechner eigentlich?
 
 Beispiel: Intel 4004 Architektur (1971) [^1]
@@ -79,14 +83,14 @@ Speicherauszug den Intel 4004:
     {{0-1}}
 | Adresse | Speicherinhalt |
 |:--------|:---------------|
-| 0000    | 1101 0101      |
-| 0002    | 1111 0010      |
+| 0010    | 1101 0101      |
+| 0012    | 1111 0010      |
 
     {{1}}
 | Adresse | Speicherinhalt | OpCode     | Mneomonik |
 |:--------|:---------------|:-----------|:----------|
-| 0000    | 1101 0101      | 1101 DDDD  | LD $5     |
-| 0002    | 1111 0010      | 1111 0010  | IAC       |
+| 0010    | 1101 0101      | 1101 DDDD  | LD $5     |
+| 0012    | 1111 0010      | 1111 0010  | IAC       |
 
 
 Unterstützung für die Interpretation aus dem Nutzerhandbuch, das das Instruction set beschreibt[^1]:
@@ -142,9 +146,18 @@ Stufen des Compile-Vorganges[^1]:
 
 ## 2. Warum also C?
 
-### Alternativen
+*Warum gibt es nicht eine höhere Programmiersprache, die für alle Anwendungen gleichermaßen herangezogen werden kann?*
 
-Relevanz in der Anwendung[^1]
++ unterschiedliche Problemstellungen
++ unterschiedliche Anforderungen der Anwendung (zum Beispiel Echtzeitfähigkeit, grafische Ausgaben)
+
+*Und wie finde ich die Sprache die für mein Problem geeignet ist?*
+
+
+
+### Relevanz von C im vergleich mit anderen Programiersprachen
+
+Relevanz laut Tiobe Index (Oktober 2018)[^1]
 
 ![instruction-set](../img/TIOBE.png)<!-- width="100%" -->
 
@@ -155,8 +168,7 @@ Relevanz in der Anwendung[^1]
 Hardwarenahe Programmierung:
 
 * Eingebettete Systeme -> Siehe Beispiel
-* Betriebssysteme
-
+* Programmierung von Betriebssystemen
 
 
 ### Historische Einordnung
@@ -182,11 +194,13 @@ Zielrichtung ... Entwicklung eines Betriebssystems in den *AT&T Bell Laboratorie
 
 * Imperative Programmiersprache
 {{1}}
-> ALTERNATIVE PARAFDIGMEN
+> + **imperative (befehlsorientierte) Programmiersprachen** : Ein Programm besteht aus einer Folge von Befehlen an den Computer. Das Programm beschreibt den Lösungsweg für ein Problem (C, Python, Java, LabView, Matlab, ...).
++ **deklarative Programiersprachen** : Ein Programm beschreibt die allgemeinen Eigenschaften von Objekten und  ihre Beziehungen untereinander. Das Programm beschreibt    zunächst nur das Wissen zur Lösung des Problems (Prolog, Haskal, SQL, ...).
+
 
 * Wenige Schlüsselwörter als Sprachumfang
 {{2}}
-> Schlüsselwort: Reserviertes Wort, das der Compiler verwendet, um ein Programm zu parsen (z.B. if, def oder while). Schlüsselwörter dürfen nicht als Name für eine Variable gewählt werden
+> **Schlüsselwort** Reserviertes Wort, das der Compiler verwendet, um ein Programm zu parsen (z.B. if, def oder while). Schlüsselwörter dürfen nicht als Name für eine Variable gewählt werden
 
 * Große Mächtigkeit
 {{3}}
@@ -196,13 +210,21 @@ Zielrichtung ... Entwicklung eines Betriebssystems in den *AT&T Bell Laboratorie
 
 ### "Hello World"
 
+```cpp                     smallestCProgram.c
+int main(void) {
+	return 0;
+}
+```
+@JSCPP(@input, )
+
+
 ```cpp                     HelloWorld.c
 /* That's my first c program
    Karl Klammer, Oct. 2018 */
 
 #include<stdio.h>
 
-int main() { // <- Öffnende Klammer eines Blockes
+int main(void) { // <- Öffnende Klammer eines Blockes
 	printf("Hello World\\n");  // <- Befehl endet mit Semikolon
 	return 0;
 }            // <- Schließende Klammer eines Blockes
@@ -215,7 +237,7 @@ int main() { // <- Öffnende Klammer eines Blockes
 | 4     | Voraussetzung für das Einbinden von Befehlen der Standardbibliothek hier printf()       |
 | 6     | Einsprungstelle für den Beginn des Programmes |
 | 7     | Anwendung einer Funktion ... name(Parameterliste) ... hier zur Ausgabe auf dem Bildschirm|
-| 8     | Definition eines Rückgabewertes|
+| 8     | Definition eines Rückgabewertes für das Betriebssystem|
 
 
 ### Ein Wort zu den Formalien
@@ -244,8 +266,7 @@ return 0;}
 * Das *systematische Einrücken* verbessert die Lesbarkeit und senkt damit die Fehleranfälligkeit Ihres Codes!
 * Wählen sie *selbsterklärende Variablen- und Funktionsnamen*!
 * Nutzen Sie ein *Versionsmanagmentsystem*, wenn Sie ihren Code entwickeln!
-* Kommentieren Sie Ihr Vorgehen trotz
-"Good code is self-documenting."
+* Kommentieren Sie Ihr Vorgehen trotz "Good code is self-documenting."
 
 ### Gute Kommentare
 
@@ -320,7 +341,7 @@ printf("Hello World\\n"); // displays Hello world
 [^1]: C Code Style Guidelines (Quelle:
 https://www.cs.swarthmore.edu/~newhall/unixhelp/c_codestyle.html)
 
-*2. Merkwürdige Kommentare*
+*2. "Merkwürdige Kommentare"*
 
 ```cpp
 //When I wrote this, only God and I understood what I was doing
@@ -339,8 +360,6 @@ finally { // should never happen }
 
 ```
 [Sammlung von Kommentaren](https://fuzzzyblog.blogspot.com/2014/09/40-most-funny-code-comments.html)
-
-
 
 ### Was tuen, wenn es schief geht?
 
@@ -361,6 +380,7 @@ Methodisches Vorgehen:
 * Lesen der Fehlermeldung
 * Verstehen der Fehlermeldung / Aufstellen von Hypothesen
 * Systematische Evaluation der Thesen
+* Seien Sie im Austausch mit anderen (Kommilitonen, Forenbesucher, usw.) konkret.
 
 ## 4. Werkzeuge
 
