@@ -92,11 +92,12 @@ int main() {
 # Prozedurale Programmierung (WS 2018/19)
 
 **Dozenten**
+
 | Name                | Email                                     |
 |:--------------------|:------------------------------------------|
 |Sebastian Zug        | sebastian.zug@informatik.tu-freiberg.de   |
 |Georg Jäger          | georg.jaeger@informatik.tu-freiberg.de    |
-| Bitte ergänzen         |   |
+| Bitte ergänzen      |                                           |
 
 **Zielstellung der Veranstaltung**
 
