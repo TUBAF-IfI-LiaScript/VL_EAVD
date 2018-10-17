@@ -101,7 +101,7 @@ int main() {
 |Jonas Treumer        | jonas.treumer@informatik.tu-freiberg.de   |
 |Ben Lorenz           | ben.lorenz@informatik.tu-freiberg.de      |
 |Martin Reinhardt     | martin.reinhardt@informatik.tu-freiberg.de|
-|Tobias Bräuer        | tobias.braeuer@informatik.tu-freiberg.de  |
+|Tobias Bräuer        | tobias.braeuer@student.tu-freiberg.de  |
 
 **Zielstellung der Veranstaltung**
 
