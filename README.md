@@ -121,12 +121,12 @@ Nachbereitung der Lehrveranstaltungen, die eigenständige Lösung von
 + Wolf, J., "C von A bis Z", Rheinwerk Verlag [Link](http://openbook.rheinwerk-verlag.de/c_von_a_bis_z/000_c_vorwort_001.htm#mj764cb3fd439d3b95d1843e7c7d17f235)
 + C Kurs Universität Chemnitz, [Link](https://www.tu-chemnitz.de/urz/archiv/kursunterlagen/C/index.htm)
 
-**Videotutorials **
+**Videotutorials**
 
 + Vorlesung Prof. Dr. Justus Piater, Universität Insbruck 2014 [Link](https://www.youtube.com/watch?v=7P7dSOKAonM)
 + Reihe von Tutorials zu verschiedenen Veranstaltungen der Goethe Universität Frankfurt [Link](https://www.youtube.com/watch?v=CeEfTlRFEA0&t=210s)
 
-**Bücher **
+**Bücher**
 
 + Kernighan B.W., Ritchie D.M., "Programmieren in C", Hanser Verlag
 + Prinz P., Crawford T., "C in a Nutshell", O'Reilly
