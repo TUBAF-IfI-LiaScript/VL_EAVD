@@ -169,6 +169,10 @@ eingebettete C-Projekte selbst anzugehen.
 
 Link auf den GitHub: https://github.com/liaScript/CCourse
 
+# Und wenn Sie dann immer noch programmieren wollen ...
+
+![instruction-set](./img/BAF_bots.png)<!-- width="80%" -->
+
 # Autorenliste
 
-Sebastian Zug, Georg Jäger, André Dietrich, ...
+Sebastian Zug, Georg Jäger, André Dietrich

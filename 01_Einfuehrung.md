@@ -92,7 +92,6 @@ Speicherauszug den Intel 4004:
 | 0010    | 1101 0101      | 1101 DDDD  | LD $5     |
 | 0012    | 1111 0010      | 1111 0010  | IAC       |
 
-
 Unterstützung für die Interpretation aus dem Nutzerhandbuch, das das Instruction set beschreibt[^1]:
 
 ![instruction-set](./img/4004_Instruction_set.png)<!-- width="100%" -->
@@ -109,27 +108,30 @@ Nachteile
 * geringer Abstraktionsgrad, bereits einfache Konstrukte benötigen viele Codezeilen
 * weitgehende semantische Analysen möglich
 
-```
-Assembler Code                 Fortran
+Beispiel
 
-.START ST                      A:=2;
-ST: MOV R1, #2                 FOR I:=1 TO 20 LOOP
-    MOV R2, #1                      A:=A*I;
-M1: CMP R2, #20                END LOOP;
-    BGT M2                     PRINT(A);
-    MUL R1, R2
-    INI R2
-    JMP M1
-M2: JSR PRINT
-.END
-```
+<pre>
+  <code style="font-family: Monospace">
+  Assembler Code                 Fortran
 
+  .START ST                      A:=2;
+  ST: MOV R1, #2                 FOR I:=1 TO 20 LOOP
+      MOV R2, #1                      A:=A*I;
+  M1: CMP R2, #20                END LOOP;
+      BGT M2                     PRINT(A);
+      MUL R1, R2
+      INI R2
+      JMP M1
+  M2: JSR PRINT
+  .END
+  </code>
+</pre>
+
+    {{1}}
 > Eine höhere Programmiersprache ist eine Programmiersprache zur Abfassung eines
 > Computerprogramms, die in **Abstraktion und Komplexität** von der Ebene der
 > Maschinensprachen deutlich entfernt ist. ... Die Befehle müssen durch
 > **Interpreter oder Compiler** in Maschinensprache übersetzt werden.
-
-https://de.wikipedia.org/wiki/Liste_von_Programmiersprachen
 
 ### Compiliervorgang
 
@@ -146,14 +148,27 @@ Stufen des Compile-Vorganges[^1]:
 
 ## 2. Warum also C?
 
-*Warum gibt es nicht eine höhere Programmiersprache, die für alle Anwendungen gleichermaßen herangezogen werden kann?*
+**Warum gibt es nicht eine höhere Programmiersprache, die für alle Anwendungen gleichermaßen herangezogen werden kann?**
 
-+ unterschiedliche Problemstellungen
-+ unterschiedliche Anforderungen der Anwendung (zum Beispiel Echtzeitfähigkeit, grafische Ausgaben)
++ unterschiedliche Plattformen (Betriebssystem, Rechnerarchitektur)
 
-*Und wie finde ich die Sprache die für mein Problem geeignet ist?*
+    *Windows Laptop vs. Steuergerät vs. Grafikkarte*
++ unterschiedliche Anwendungen
 
+    *Website vs. PKW Spurerkennung vs. Datenbankabfrage*
++ unterschiedliche Randbedingungen
 
+    *Echtzeitfähigkeit, Sicherheitsanforderungen*
+
+**Und wie finde ich die Sprache die für mein Problem geeignet ist?**
+
++ Analyse der Anforderungen
++ Analyse der Fähigkeiten einzelner Sprachen
++ Analyse der Features möglicher Bibliotheken oder Frameworks
++ Analyse des Einarbeitungsaufwandes
++ (Kosten für die Tool-Chain)
+
+[https://www.heise.de/ct/ausgabe/2015-18-Die-passende-Programmiersprache-finden-2767703.html](https://www.heise.de/ct/ausgabe/2015-18-Die-passende-Programmiersprache-finden-2767703.html)
 
 ### Relevanz von C im vergleich mit anderen Programiersprachen
 
@@ -165,19 +180,18 @@ Relevanz laut Tiobe Index (Oktober 2018)[^1]
 
 ### Heutige Anwendung
 
-Hardwarenahe Programmierung:
-
 * Eingebettete Systeme -> Siehe Beispiel
 * Programmierung von Betriebssystemen
+* Anwendungsentwicklung -> Java Virtual Maschine (JVM)
 
 
 ### Historische Einordnung
 
 Zielrichtung ... Entwicklung eines Betriebssystems in den *AT&T Bell Laboratories* Anfang 1970
 
-![instruction-set](./img/Ken_Thompson_and_Dennis_Ritchie.jpg)<!-- width="100%" --> [Ken Thompson](https://de.wikipedia.org/wiki/Ken_Thompson) und [Dennis Ritchie](https://de.wikipedia.org/wiki/Dennis_Ritchie) [^2]
+![instruction-set](./img/Ken_Thompson_and_Dennis_Ritchie.jpg)<!-- width="40%" --> [Ken Thompson](https://de.wikipedia.org/wiki/Ken_Thompson) und [Dennis Ritchie](https://de.wikipedia.org/wiki/Dennis_Ritchie) [^2]
 
-![instruction-set](./img/Brian_Kernighan.jpg)<!-- width="100%" --> [Brian_Kernighan](https://de.wikipedia.org/wiki/Brian_Kernighan) [^3]
+![instruction-set](./img/Brian_Kernighan.jpg)<!-- width="40%" --> [Brian_Kernighan](https://de.wikipedia.org/wiki/Brian_Kernighan) [^3]
 
 [^2]: Foto Thompson und Ritchie (Quelle: http://www.catb.org/~esr/jargon/html/U/Unix.html)
 
@@ -186,7 +200,18 @@ Zielrichtung ... Entwicklung eines Betriebssystems in den *AT&T Bell Laboratorie
 | Version    | Spezifikation                                    |
 |:-----------|:-------------------------------------------------|
 | K&R C      | Definition über das Buch "The C Programming Language"|
-| ANSI C     | Standard des American National Standards Institute (ANSI)  |
+| ANSI C (C89) | Standard des American National Standards Institute (ANSI)  |
+| C99        |  Übernahme von Features aus C++, Erweiterung Standardbibliothek, Ergänzung Präprozessor Makros  |
+| C11        |   "                                                 |
+| C18        |   "                                                |
+
+Die Veranstaltung baut auf dem C11 (ISO/IEC 9899:2011) Standard auf.
+
+```cpp
+#if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
+ // C11 kompatibler Quellcode.
+#endif
+```
 
 ### Eigenschaften von C
 
@@ -204,9 +229,11 @@ Zielrichtung ... Entwicklung eines Betriebssystems in den *AT&T Bell Laboratorie
 
 * Große Mächtigkeit
 {{3}}
-> WAS BEDEUTET MÄCHTIGKEIT
+> Je höher und komfortabler die Sprache, desto mehr ist der Programmierer daran gebunden, die in ihr vorgesehenen Wege zu beschreiten.
 
 ## 3. Erstes C Programm
+
+![instruction-set](./img/helloWorldFromRitchie.png)<!-- width="90%" --> [Brian_Kernighan, Programming in C:  A Tutorial  1974](http://www.lysator.liu.se/c/bwk-tutor.html#simple-c)
 
 ### "Hello World"
 
@@ -225,7 +252,7 @@ int main(void) {
 #include<stdio.h>
 
 int main(void) { // <- Öffnende Klammer eines Blockes
-	printf("Hello World\\n");  // <- Befehl endet mit Semikolon
+	printf("Hello Worl\\n");  // <- Befehl endet mit Semikolon
 	return 0;
 }            // <- Schließende Klammer eines Blockes
 ```
@@ -262,7 +289,7 @@ for (zahl=0; zahl<3;  zahl++){printf("Hello World\n");}
 return 0;}
 ```
 @JSCPP(@input, )
-
+{{1}}
 * Das *systematische Einrücken* verbessert die Lesbarkeit und senkt damit die Fehleranfälligkeit Ihres Codes!
 * Wählen sie *selbsterklärende Variablen- und Funktionsnamen*!
 * Nutzen Sie ein *Versionsmanagmentsystem*, wenn Sie ihren Code entwickeln!
@@ -321,8 +348,8 @@ Schlüsselworte in den Kommentaren unterstützen ->
 int main(){
   ...
   preProcessedData = filter1(rawData);
-  # printf('Filter1 finished ... \n');
-  # printf('Output %d \n', preProcessedData);
+  // printf('Filter1 finished ... \n');
+  // printf('Output %d \n', preProcessedData);
   result=complexCalculation(preProcessedData);
   ...
 }
@@ -382,9 +409,83 @@ Methodisches Vorgehen:
 * Systematische Evaluation der Thesen
 * Seien Sie im Austausch mit anderen (Kommilitonen, Forenbesucher, usw.) konkret.
 
+### Die häufigsten Compilerfehler
+
+![instruction-set](./img/AuftretenCompilerFehler.png)<!-- width="90%" -->
+
+** Fehlertype 3**
+
+```cpp                     Error.c
+#include<stdio.h>
+
+int main() {
+    printf("Hello World")
+    return 0;
+}
+```
+
+<pre>
+  <code style="font-family: Monospace">
+  ▶ gcc errors.c
+  errors.c: In function ‘main’:
+  errors.c:8:5: error: expected ‘;’ before ‘return’
+       return 0;
+  </code>
+</pre>
+
+** Fehlertype 3**
+
+```cpp                     Error.c
+#include<stdio.h>
+
+int main()
+    printf("Hello World");
+    return 0;
+}
+```
+
+<pre>
+  <code style="font-family: Monospace">
+  ▶ gcc errors.c
+  errors.c: In function ‘main’:
+  errors.c:4:5: error: expected declaration specifiers before ‘printf’
+       printf("Hello World");
+       ^
+  errors.c:5:5: error: expected declaration specifiers before ‘return’
+       return 0;
+       ^
+  errors.c:6:1: error: expected declaration specifiers before ‘}’ token
+   }
+   ^
+  errors.c:6:1: error: expected ‘{’ at end of input
+  </code>
+</pre>
+
+
+### Und wenn es gut geht?
+
+... dann bedeutet es noch immer nicht, dass Ihr Programm wie erwartet funktioniert.
+
+```cpp                     ErroneousHelloWorld.c
+#include<stdio.h>
+
+int main() {
+  char zahl;
+  for (zahl=250; zahl<256;  zahl++){
+	    printf("Hello World");
+  }
+	return 0;
+}
+```
+@JSCPP(@input, )
+
 ## 4. Werkzeuge
 
-### Vim oder Eclipse?
+**Vim oder Eclipse?**
+
+*In the end, you want something that's going to make you the most productive. Whether that's Notepad or Vim or Sublime or something else is up to the user and the tasks required at the time.* [Forenbeitrag]
+
+![instruction-set](./img/VisualStudio.jpg)<!-- width="90%" --> 
 
 >  Eine integrierte Entwicklungsumgebung (Abkürzung IDE, von englisch integrated development environment) ist eine Sammlung von Computerprogrammen, mit denen die Aufgaben der Softwareentwicklung möglichst ohne Medienbrüche bearbeitet werden können.
 
@@ -397,3 +498,7 @@ https://www.onlinegdb.com/online_c_compiler
 https://www.learn-c.org/en/Welcome
 
 * Lokale Tool-Chain auf dem eigenen Rechner (Pelles C)
+
+## Ausblick
+
+... bis zum nächsten mal!
