@@ -141,9 +141,14 @@ Nachbereitung der Lehrveranstaltungen, die eigenständige Lösung von
 | Datum      | Inhalt                                |
 |:-----------|---------------------------------------|
 | 23.10.2018 | [1.  Einführung](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/Einfuehrung.md)    |
-| 30.10.2018 | Grundkonzepte der Sprache             |
-| 30.11.2018 | Variablen und Datentypen, Ein- und Ausgabe              |
-
+| 30.10.2018 | Grundkonzepte der Sprache, Variablen und Datentypen, Ein- und Ausgabe  |
+| 06.11.2018 |              |
+| 13.11.2018 |              |
+| 30.11.2018 |              |
+| 27.11.2018 |              |
+| 04.12.2018 |              |
+| 11.12.2018 |              |
+| 18.12.2018 |              |
 # ... und wozu brauche ich das?
 
 **Antwort A:** Das Studium vermittelt ein Weltbild und keine eng zugeschnitte Sicht.
@@ -162,6 +167,11 @@ eingebettete C-Projekte selbst anzugehen.
 
 *"Ich habe es grade irgendwie selbst gelöst, aber keine Ahnung warum es funktioniert hat."* [Foreneintrag]
 
+Herausforderungen
+
++ Abstrakte Denkweise
++ Penible Beachtung der Syntax
++ Ungewohnte Arbeitsmittel
 
 # Wie können Sie zum Gelingen der Veranstaltung beitragen?
 
