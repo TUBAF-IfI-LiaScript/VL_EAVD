@@ -154,7 +154,7 @@ wissenschaftlichen Arbeitens.
 **Antwort C:** Am Ende steht Ihnen das Rüstzeug zur Verfügung kleine
 eingebettete C-Projekte selbst anzugehen.
 
-![instruction-set](./img/Example_I_DistanceMeasurements.jpeg)<!-- width="50%" -->
+![instruction-set](./img/Example_I_DistanceMeasurements.jpeg)<!-- width="50%" --> US- Distanzsensor
 
 # "C ist schwierig zu erlernen"
 
