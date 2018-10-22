@@ -142,7 +142,7 @@ Nachbereitung der Lehrveranstaltungen, die eigenständige Lösung von
 |:-----------|---------------------------------------|
 | 23.10.2018 | [1.  Einführung](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/Einfuehrung.md)    |
 | 30.10.2018 | Grundkonzepte der Sprache             |
-|            | Variablen und Datentypen              |
+| 30.11.2018 | Variablen und Datentypen, Ein- und Ausgabe              |
 
 # ... und wozu brauche ich das?
 
@@ -154,7 +154,7 @@ wissenschaftlichen Arbeitens.
 **Antwort C:** Am Ende steht Ihnen das Rüstzeug zur Verfügung kleine
 eingebettete C-Projekte selbst anzugehen.
 
-![instruction-set](./img/Example_I_DistanceMeasurements.jpeg)<!-- width="100%" -->
+![instruction-set](./img/Example_I_DistanceMeasurements.jpeg)<!-- width="70%" -->
 
 # "C ist schwierig zu erlernen"
 
