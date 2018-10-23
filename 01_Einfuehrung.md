@@ -174,13 +174,12 @@ Stufen des Compile-Vorganges[^1]:
 
 ### Relevanz von C im vergleich mit anderen Programiersprachen
 
-Relevanz laut Tiobe Index (Oktober 2018)[^1]
-
+Relevanz laut Tiobe Index (Oktober 2018)
 
 ![TIOBEindex](../img/tiobe.jpeg)<!-- width="80%" -->
 
+TIOBE Index (Quelle: https://www.informatik-aktuell.de/aktuelle-meldungen/2018/juli/ranking-der-programmiersprachen-java-wieder-ganz-vorne.html)
 
-[^1]: TIOBE Index (Quelle: https://www.informatik-aktuell.de/aktuelle-meldungen/2018/juli/ranking-der-programmiersprachen-java-wieder-ganz-vorne.html)
 
 ### Heutige Anwendung
 
