@@ -186,6 +186,10 @@ Relevanz laut Tiobe Index (Oktober 2018)[^1]
 * Programmierung von Betriebssystemen
 * Anwendungsentwicklung -> Java Virtual Maschine (JVM)
 
+![instruction-set](./img/InterpreterVSCompiler.jpg)<!-- width="70%" -->
+
+Quelle: Alan Freedman, Irma Morrison [https://www.computerlanguage.com/results.php?definition=interpreter](https://www.computerlanguage.com/results.php?definition=interpreter)
+
 
 ### Historische Einordnung
 
