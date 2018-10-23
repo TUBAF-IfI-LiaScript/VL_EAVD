@@ -34,7 +34,6 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 </script>
 @end
 
-
 -->
 
 
@@ -241,23 +240,23 @@ Die Veranstaltung baut auf dem C11 (ISO/IEC 9899:2011) Standard auf.
 ### "Hello World"
 
 ```cpp                     smallestCProgram.c
-int main() {
-	return 0;
-}
+int main() {   // <- Öffnende Klammer eines Blockes
+	return 0;    // <- Befehl endet mit Semikolon
+}              // <- Schließende Klammer eines Blockes
 ```
 @JSCPP(@input, )
 
 
 ```cpp                     HelloWorld.c
-/* That's my first c program
-   Karl Klammer, Oct. 2018 */
+// That's my first c program
+// Karl Klammer, Oct. 2018
 
 #include<stdio.h>
 
-int main() { // <- Öffnende Klammer eines Blockes
-	printf("Hello World");  // <- Befehl endet mit Semikolon
+int main() {     // alternativ "int main(void)"
+	printf("Hello World");
 	return 0;
-}            // <- Schließende Klammer eines Blockes
+}
 ```
 @JSCPP(@input, )
 
@@ -266,6 +265,7 @@ int main() { // <- Öffnende Klammer eines Blockes
 | 1 - 2 | Kommentar (wird vom Präprozessor entfernt) |
 | 4     | Voraussetzung für das Einbinden von Befehlen der Standardbibliothek hier printf()       |
 | 6     | Einsprungstelle für den Beginn des Programmes |
+| 6 - 9 | Ausführungsblock der main-Funktion         |
 | 7     | Anwendung einer Funktion ... name(Parameterliste) ... hier zur Ausgabe auf dem Bildschirm|
 | 8     | Definition eines Rückgabewertes für das Betriebssystem|
 
@@ -273,13 +273,15 @@ int main() { // <- Öffnende Klammer eines Blockes
 ### Ein Wort zu den Formalien
 
 ```cpp                     HelloWorld.c
+// Karl Klammer
+// Print Hello World drei mal
+
 #include<stdio.h>
 
 int main() {
-  /* hier steht ein Kommentar */
   int zahl;
   for (zahl=0; zahl<3;  zahl++){
-	    printf("Hello World\\n");
+	    printf("Hello World! ");
   }
 	return 0;
 }
@@ -287,8 +289,8 @@ int main() {
 @JSCPP(@input, )
 
 ```cpp                     BadHelloWorld.c
-#include<stdio.h> int main() /* hier steht ein Kommentar */ {int i;
-for (zahl=0; zahl<3;  zahl++){printf("Hello World\n");}
+#include<stdio.h> int main() /* vgl. Loesung 13as321 */ {int i;
+for (zahl=0; zahl<3;  zahl++){printf("Hello World");}
 return 0;}
 ```
 @JSCPP(@input, )
@@ -302,7 +304,7 @@ return 0;}
 
 *1. Kommentare als Pseudocode*
 
-```cpp                     Comments1.c
+```cpp
 /* loop backwards through all elements returned by the server
 (they should be processed chronologically)*/
 for (i = (numElementsReturned - 1); i >= 0; i--){
@@ -313,18 +315,18 @@ for (i = (numElementsReturned - 1); i >= 0; i--){
 
 *2. Kommentare zur Datei*
 
-```cpp                     Comments2.c
+```cpp
 // This is the mars rover control application
 //
 // Karl Klammer, Oct. 2018
 // Version 109.1.12
-//
+
 int main(){...}
 ```
 
 *3. Beschreibung eines Algorithmus*
 
-```cpp                    Commments3.c
+```cpp
 /* Function:  approx_pi
  * --------------------
  * computes an approximation of pi using:
@@ -347,7 +349,7 @@ Schlüsselworte in den Kommentaren unterstützen ->
 
 *4. Debugging*
 
-```cpp                     CommentsForCodes.c
+```cpp
 int main(){
   ...
   preProcessedData = filter1(rawData);
@@ -398,7 +400,7 @@ finally { // should never happen }
 
 int main() {
   for (zahl=0; zahl<3;  zahl++){
-	    printf("Hello World\\n")
+	    printf("Hello World ! ")
   }
 	return 0;
 }
@@ -412,11 +414,9 @@ Methodisches Vorgehen:
 * Systematische Evaluation der Thesen
 * Seien Sie im Austausch mit anderen (Kommilitonen, Forenbesucher, usw.) konkret.
 
-### Die häufigsten Compilerfehler
+### Compilermessages
 
-![instruction-set](./img/AuftretenCompilerFehler.png)<!-- width="90%" -->
-
-** Fehlertype 3**
+**Beispiel 1**
 
 ```cpp                     Error.c
 #include<stdio.h>
@@ -436,7 +436,7 @@ int main() {
   </code>
 </pre>
 
-** Fehlertype 3**
+**Beispiel 2**
 
 ```cpp                     Error.c
 #include<stdio.h>
@@ -464,8 +464,15 @@ int main()
   </code>
 </pre>
 
+ABER ...
 
-### Und wenn es gut geht?
+![instruction-set](./img/AuftretenCompilerFehler.png)<!-- width="90%" -->
+
+Übersicht zu Compilernachrichten und Interpretationshilfe unter
+[http://aop.cs.cornell.edu/errors/index.html](http://aop.cs.cornell.edu/errors/index.html)
+
+
+### Und wenn das Kompilieren gut geht?
 
 ... dann bedeutet es noch immer nicht, dass Ihr Programm wie erwartet funktioniert.
 
@@ -475,7 +482,7 @@ int main()
 int main() {
   char zahl;
   for (zahl=250; zahl<256;  zahl++){
-	    printf("Hello World");
+	    printf("Hello World !");
   }
 	return 0;
 }
@@ -504,4 +511,12 @@ https://www.learn-c.org/en/Welcome
 
 ## Ausblick
 
-... bis zum nächsten mal!
+```cpp                     GoodBy.c
+#include<stdio.h>
+
+int main() {
+  printf("... bis zum nächsten mal!");
+	return 0;
+}
+```
+@JSCPP(@input, )
