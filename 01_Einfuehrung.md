@@ -33,7 +33,10 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
   }
 </script>
 @end
+
+
 -->
+
 
 # Vorlesung I - Einführung
 
@@ -238,7 +241,7 @@ Die Veranstaltung baut auf dem C11 (ISO/IEC 9899:2011) Standard auf.
 ### "Hello World"
 
 ```cpp                     smallestCProgram.c
-int main(void) {
+int main() {
 	return 0;
 }
 ```
@@ -251,8 +254,8 @@ int main(void) {
 
 #include<stdio.h>
 
-int main(void) { // <- Öffnende Klammer eines Blockes
-	printf("Hello Worl\\n");  // <- Befehl endet mit Semikolon
+int main() { // <- Öffnende Klammer eines Blockes
+	printf("Hello World");  // <- Befehl endet mit Semikolon
 	return 0;
 }            // <- Schließende Klammer eines Blockes
 ```
@@ -485,7 +488,7 @@ int main() {
 
 *In the end, you want something that's going to make you the most productive. Whether that's Notepad or Vim or Sublime or something else is up to the user and the tasks required at the time.* [Forenbeitrag]
 
-![instruction-set](./img/VisualStudio.jpg)<!-- width="90%" --> 
+![instruction-set](./img/VisualStudio.jpg)<!-- width="90%" -->
 
 >  Eine integrierte Entwicklungsumgebung (Abkürzung IDE, von englisch integrated development environment) ist eine Sammlung von Computerprogrammen, mit denen die Aufgaben der Softwareentwicklung möglichst ohne Medienbrüche bearbeitet werden können.
 
