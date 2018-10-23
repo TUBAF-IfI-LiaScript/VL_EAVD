@@ -289,9 +289,8 @@ int main() {
 @JSCPP(@input, )
 
 ```cpp                     BadHelloWorld.c
-#include<stdio.h> int main() /* vgl. Loesung 13as321 */ {int i;
-for (zahl=0; zahl<3;  zahl++){printf("Hello World");}
-return 0;}
+#include<stdio.h> int main() {int zahl; for (zahl=0; zahl<3;  zahl++){
+printf("Hello World!"); } return 0;}
 ```
 @JSCPP(@input, )
 {{1}}
@@ -370,8 +369,7 @@ printf("Hello World\\n"); // displays Hello world
 ```
 "... over-commenting your code can be as bad as under-commenting it"[^1]
 
-[^1]: C Code Style Guidelines (Quelle:
-https://www.cs.swarthmore.edu/~newhall/unixhelp/c_codestyle.html)
+[^1]: C Code Style Guidelines (Quelle: https://www.cs.swarthmore.edu/~newhall/unixhelp/c_codestyle.html)
 
 *2. "Merkwürdige Kommentare"*
 
@@ -504,10 +502,14 @@ int main() {
 * Arbeiten mit der LiaScript-Umgebung
 * Online-Compiler und Ausführungsumgebungen für C
 
-https://www.onlinegdb.com/online_c_compiler
-https://www.learn-c.org/en/Welcome
+     https://www.onlinegdb.com/online_c_compiler
+     https://www.learn-c.org/en/Welcome
 
 * Lokale Tool-Chain auf dem eigenen Rechner (Pelles C)
+
+![instruction-set](./img/pelles.png)<!-- width="90%" -->
+
+
 
 ## Ausblick
 
