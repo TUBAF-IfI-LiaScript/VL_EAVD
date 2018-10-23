@@ -144,7 +144,7 @@ Beispiel
 
 Stufen des Compile-Vorganges[^1]:
 
-![instruction-set](./img/compilerElements.png)<!-- width="100%" -->
+![instruction-set](./img/compilerElements.png)<!-- width="80%" -->
 
 [^1]: Abbildung Stufen der Compilierung (Quelle: https://medium.com/@vietkieutie/what-happens-when-you-type-gcc-main-c-2a136896ade3)
 
@@ -176,7 +176,7 @@ Stufen des Compile-Vorganges[^1]:
 
 Relevanz laut Tiobe Index (Oktober 2018)[^1]
 
-![instruction-set](../img/TIOBE.png)<!-- width="100%" -->
+![instruction-set](../img/TIOBE.png)<!-- width="80%" -->
 
 [^1]: TIOBE Index (Quelle: https://www.informatik-aktuell.de/aktuelle-meldungen/2018/juli/ranking-der-programmiersprachen-java-wieder-ganz-vorne.html)
 
