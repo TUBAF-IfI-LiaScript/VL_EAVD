@@ -177,7 +177,7 @@ Stufen des Compile-Vorganges[^1]:
 Relevanz laut Tiobe Index (Oktober 2018)[^1]
 
 
-![TIOBEindex](../img/TIOBE.png)<!-- width="80%" -->
+![TIOBEindex](../img/tiobe.jpeg)<!-- width="80%" -->
 
 
 [^1]: TIOBE Index (Quelle: https://www.informatik-aktuell.de/aktuelle-meldungen/2018/juli/ranking-der-programmiersprachen-java-wieder-ganz-vorne.html)
