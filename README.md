@@ -101,7 +101,7 @@ int main() {
 |Jonas Treumer        | jonas.treumer@informatik.tu-freiberg.de   |
 |Ben Lorenz           | ben.lorenz@informatik.tu-freiberg.de      |
 |Martin Reinhardt     | martin.reinhardt@informatik.tu-freiberg.de|
-|Tobias Bräuer        | tobias.braeuer@student.tu-freiberg.de  |
+|Tobias Bräuer        | tobias.braeuer@informatik.tu-freiberg.de  |
 
 **Zielstellung der Veranstaltung**
 
@@ -134,7 +134,7 @@ Nachbereitung der Lehrveranstaltungen, die eigenständige Lösung von
 
 + Kernighan B.W., Ritchie D.M., "Programmieren in C", Hanser Verlag
 + Prinz P., Crawford T., "C in a Nutshell", O'Reilly
-
++ Wolf J., "Grundkurs C", Rheinwerk Computing
 
 # Vorlesungsinhalte
 
@@ -163,7 +163,7 @@ eingebettete C-Projekte selbst anzugehen.
 
 # "C ist schwierig zu erlernen"
 
-*"Viele haben bei uns wegen dem Info Grundlagen Modul gewechselt. Allerdings hängt das auch von dir und deinem Talent ab. Das Tempo ist rasant. Jede Art von Vorerfahrung hilft dir eigentlich sehr. Also wenn du noch Zeit hast vorm Studienbeginn, schnapp dir ein gutes Buch zur gelehrten Sprache, und fange schonmal bissl an kleine Sachen zu programmieren."* [Foreneintrag]
+*"Viele haben bei uns wegen dem Info-Grundlagenmodul gewechselt. Allerdings hängt das auch von dir und deinem Talent ab. Das Tempo ist rasant. Jede Art von Vorerfahrung hilft dir eigentlich sehr. Also wenn du noch Zeit hast vorm Studienbeginn, schnapp dir ein gutes Buch zur gelehrten Sprache, und fange schonmal bissl an kleine Sachen zu programmieren."* [Foreneintrag]
 
 *"Ich habe es grade irgendwie selbst gelöst, aber keine Ahnung warum es funktioniert hat."* [Foreneintrag]
 

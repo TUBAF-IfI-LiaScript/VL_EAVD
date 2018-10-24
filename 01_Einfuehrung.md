@@ -39,7 +39,7 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
 # Vorlesung I - Einführung
 
-**Fragen an die heutige Veranstaltung ... **
+** Fragen an die heutige Veranstaltung ... **
 
 * Wie wird ein textuelles Programm in einen ausführbaren Code transformiert?
 * Was bedeutet der Begriff Hochsprache, was verbirgt ist ein Assembler?
@@ -53,7 +53,7 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 Programme sind Anweisungslisten, die vom Menschen erdacht, auf einem Rechner zur
 Ausführung kommen. Eine zentrale Hürde ist dabei die Kluft zwischen menschlicher
 Vorstellungskraft und Logik, die **implizite Annahmen und Erfahrungen** einschließt
-und der **"stupiden" Abarbeitung von Befehlsfolgen** in einem Recher.
+und der **"stupiden" Abarbeitung von Befehlsfolgen** in einem Rechner.
 
 Programmiersprachen bemühen sich diese Lücke zu schließen und werden dabei von
 einer Vielzahl von Tools begleitet, diesen **Transformationsprozess** unterstützen
@@ -89,7 +89,7 @@ Speicherauszug den Intel 4004:
 | 0012    | 1111 0010      |
 
     {{1}}
-| Adresse | Speicherinhalt | OpCode     | Mneomonik |
+| Adresse | Speicherinhalt | OpCode     | Mnemonik  |
 |:--------|:---------------|:-----------|:----------|
 | 0010    | 1101 0101      | 1101 DDDD  | LD $5     |
 | 0012    | 1111 0010      | 1111 0010  | IAC       |
@@ -132,7 +132,7 @@ Beispiel
     {{1}}
 > Eine höhere Programmiersprache ist eine Programmiersprache zur Abfassung eines
 > Computerprogramms, die in **Abstraktion und Komplexität** von der Ebene der
-> Maschinensprachen deutlich entfernt ist. ... Die Befehle müssen durch
+> Maschinensprachen deutlich entfernt ist. Die Befehle müssen durch
 > **Interpreter oder Compiler** in Maschinensprache übersetzt werden.
 
 ### Compiliervorgang
@@ -154,7 +154,7 @@ Stufen des Compile-Vorganges[^1]:
 
 + unterschiedliche Plattformen (Betriebssystem, Rechnerarchitektur)
 
-    *Windows Laptop vs. Steuergerät vs. Grafikkarte*
+    *Windows-Laptop vs. Steuergerät vs. Grafikkarte*
 + unterschiedliche Anwendungen
 
     *Website vs. PKW Spurerkennung vs. Datenbankabfrage*
@@ -162,7 +162,7 @@ Stufen des Compile-Vorganges[^1]:
 
     *Echtzeitfähigkeit, Sicherheitsanforderungen*
 
-**Und wie finde ich die Sprache die für mein Problem geeignet ist?**
+**Und wie finde ich die Sprache, die für mein Problem geeignet ist?**
 
 + Analyse der Anforderungen
 + Analyse der Fähigkeiten einzelner Sprachen
@@ -176,7 +176,7 @@ Stufen des Compile-Vorganges[^1]:
 
 Relevanz laut Tiobe Index (Oktober 2018)
 
-![TIOBEindex](../img/tiobe.jpeg)<!-- width="80%" -->
+![TIOBEindex](./img/tiobe.jpeg)<!-- width="80%" -->
 
 TIOBE Index (Quelle: https://www.informatik-aktuell.de/aktuelle-meldungen/2018/juli/ranking-der-programmiersprachen-java-wieder-ganz-vorne.html)
 
@@ -215,7 +215,7 @@ Die Veranstaltung baut auf dem C11 (ISO/IEC 9899:2011) Standard auf.
 
 ```cpp
 #if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
- // C11 kompatibler Quellcode.
+ // C11-kompatibler Quellcode.
 #endif
 ```
 
@@ -226,7 +226,7 @@ Die Veranstaltung baut auf dem C11 (ISO/IEC 9899:2011) Standard auf.
 * Imperative Programmiersprache
 {{1}}
 > + **imperative (befehlsorientierte) Programmiersprachen** : Ein Programm besteht aus einer Folge von Befehlen an den Computer. Das Programm beschreibt den Lösungsweg für ein Problem (C, Python, Java, LabView, Matlab, ...).
-+ **deklarative Programiersprachen** : Ein Programm beschreibt die allgemeinen Eigenschaften von Objekten und  ihre Beziehungen untereinander. Das Programm beschreibt    zunächst nur das Wissen zur Lösung des Problems (Prolog, Haskal, SQL, ...).
++ **deklarative Programiersprachen** : Ein Programm beschreibt die allgemeinen Eigenschaften von Objekten und  ihre Beziehungen untereinander. Das Programm beschreibt zunächst nur das Wissen zur Lösung des Problems (Prolog, Haskal, SQL, ...).
 
 
 * Wenige Schlüsselwörter als Sprachumfang
@@ -235,7 +235,7 @@ Die Veranstaltung baut auf dem C11 (ISO/IEC 9899:2011) Standard auf.
 
 * Große Mächtigkeit
 {{3}}
-> Je höher und komfortabler die Sprache, desto mehr ist der Programmierer daran gebunden, die in ihr vorgesehenen Wege zu beschreiten.
+> Je "höher" und komfortabler die Sprache, desto mehr ist der Programmierer daran gebunden, die in ihr vorgesehenen Wege zu beschreiten.
 
 ## 3. Erstes C Programm
 
@@ -252,7 +252,7 @@ int main() {   // <- Öffnende Klammer eines Blockes
 
 
 ```cpp                     HelloWorld.c
-// That's my first c program
+// That's my first C program
 // Karl Klammer, Oct. 2018
 
 #include<stdio.h>
@@ -280,7 +280,7 @@ int main() {     // alternativ "int main(void)"
 // Karl Klammer
 // Print Hello World drei mal
 
-#include<stdio.h>
+#include <stdio.h>
 
 int main() {
   int zahl;
@@ -421,7 +421,7 @@ Methodisches Vorgehen:
 **Beispiel 1**
 
 ```cpp                     Error.c
-#include<stdio.h>
+#include <stdio.h>
 
 int main() {
     printf("Hello World")
@@ -441,7 +441,7 @@ int main() {
 **Beispiel 2**
 
 ```cpp                     Error.c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
     printf("Hello World");
@@ -479,11 +479,11 @@ ABER ...
 ... dann bedeutet es noch immer nicht, dass Ihr Programm wie erwartet funktioniert.
 
 ```cpp                     ErroneousHelloWorld.c
-#include<stdio.h>
+#include <stdio.h>
 
 int main() {
   char zahl;
-  for (zahl=250; zahl<256;  zahl++){
+  for (zahl=250; zahl<256; zahl++){
 	    printf("Hello World !");
   }
 	return 0;
@@ -499,7 +499,7 @@ int main() {
 
 ![instruction-set](./img/VisualStudio.jpg)<!-- width="90%" -->
 
->  Eine integrierte Entwicklungsumgebung (Abkürzung IDE, von englisch integrated development environment) ist eine Sammlung von Computerprogrammen, mit denen die Aufgaben der Softwareentwicklung möglichst ohne Medienbrüche bearbeitet werden können.
+>  Eine integrierte Entwicklungsumgebung (Abkürzung IDE, aus dem Englischen "integrated development environment") ist eine Sammlung von Computerprogrammen, mit denen die Aufgaben der Softwareentwicklung möglichst ohne Medienbrüche bearbeitet werden können.
 
 ### Arbeitsumgebung
 
@@ -517,11 +517,11 @@ int main() {
 
 ## Ausblick
 
-```cpp                     GoodBy.c
-#include<stdio.h>
+```cpp                     GoodBye.c
+#include <stdio.h>
 
 int main() {
-  printf("... bis zum naechsten mal!");
+  printf("... bis zum naechsten Mal!");
 	return 0;
 }
 ```
