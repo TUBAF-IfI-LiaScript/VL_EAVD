@@ -140,8 +140,8 @@ Nachbereitung der Lehrveranstaltungen, die eigenständige Lösung von
 
 | Datum      | Inhalt                                |
 |:-----------|---------------------------------------|
-| 23.10.2018 | [1.  Einführung](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/Einfuehrung.md)    |
-| 30.10.2018 | [Grundkonzepte der Sprache, Variablen und Datentypen, Ein- und Ausgabe](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/Einfuehrung.md) )  |
+| 23.10.2018 | [1.  Einführung](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/01_Einfuehrung.md)    |
+| 30.10.2018 | Grundkonzepte der Sprache, Variablen und Datentypen, Ein- und Ausgabe  |
 | 06.11.2018 |              |
 | 13.11.2018 |              |
 | 30.11.2018 |              |
