@@ -191,7 +191,6 @@ TIOBE Index (Quelle: https://www.informatik-aktuell.de/aktuelle-meldungen/2018/j
 
 Quelle: Alan Freedman, Irma Morrison [https://www.computerlanguage.com/results.php?definition=interpreter](https://www.computerlanguage.com/results.php?definition=interpreter)
 
-
 ### Historische Einordnung
 
 Zielrichtung ... Entwicklung eines Betriebssystems in den *AT&T Bell Laboratories* Anfang 1970
@@ -522,7 +521,7 @@ int main() {
 #include<stdio.h>
 
 int main() {
-  printf("... bis zum nächsten mal!");
+  printf("... bis zum naechsten mal!");
 	return 0;
 }
 ```
