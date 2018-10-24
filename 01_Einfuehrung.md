@@ -39,7 +39,7 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
 # Vorlesung I - Einführung
 
-** Fragen an die heutige Veranstaltung ... **
+**Fragen an die heutige Veranstaltung ...**
 
 * Wie wird ein textuelles Programm in einen ausführbaren Code transformiert?
 * Was bedeutet der Begriff Hochsprache, was verbirgt ist ein Assembler?
@@ -69,7 +69,7 @@ Realisierung eines Programmes mit C zu adressieren.
 
 ### Wie arbeitet ein Rechner eigentlich?
 
-Beispiel: Intel 4004 Architektur (1971) [^1]
+Beispiel: Intel 4004-Architektur (1971) [^1]
 
 ![intel](https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png)<!--style="width: 80%"-->
 
@@ -172,7 +172,7 @@ Stufen des Compile-Vorganges[^1]:
 
 [https://www.heise.de/ct/ausgabe/2015-18-Die-passende-Programmiersprache-finden-2767703.html](https://www.heise.de/ct/ausgabe/2015-18-Die-passende-Programmiersprache-finden-2767703.html)
 
-### Relevanz von C im vergleich mit anderen Programiersprachen
+### Relevanz von C im Vergleich mit anderen Programiersprachen
 
 Relevanz laut Tiobe Index (Oktober 2018)
 
@@ -395,7 +395,7 @@ finally { // should never happen }
 ```
 [Sammlung von Kommentaren](https://fuzzzyblog.blogspot.com/2014/09/40-most-funny-code-comments.html)
 
-### Was tuen, wenn es schief geht?
+### Was tun, wenn es schief geht?
 
 ```cpp                     ErroneousHelloWorld.c
 #include<stdio.h>

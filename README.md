@@ -50,7 +50,7 @@ Der vorliegende C-Kurs wurde für das Semester 2018/19 an der TU Bergakademie Fr
 Ausführbarer C Code sieht wie folgt aus, der Titel kann weggelassen werden.
 
 ```cpp                     HelloWorld.c
-#include<stdio.h>
+#include <stdio.h>
 
 int main() {
 	printf("Hello World\\n");
@@ -62,7 +62,7 @@ int main() {
 Das folgende Beispiel illustriert die Übergabe von Argumenten über die "Commandozeile".
 
 ```cpp                     GetChar.c
-#include<stdio.h>
+#include <stdio.h>
 
 int main(){
 	char c;
@@ -80,7 +80,7 @@ T
 Fehlerausgaben werden entsprechend der Compilerimplementierung wie folgt generiert:
 
 ```cpp                     ErroneousHelloWorld.c
-#include<stdio.h>
+#include <stdio.h>
 
 int main() {
 	printf("Hello World\n");
@@ -141,7 +141,7 @@ Nachbereitung der Lehrveranstaltungen, die eigenständige Lösung von
 | Datum      | Inhalt                                |
 |:-----------|---------------------------------------|
 | 23.10.2018 | [1.  Einführung](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/Einfuehrung.md)    |
-| 30.10.2018 | Grundkonzepte der Sprache, Variablen und Datentypen, Ein- und Ausgabe  |
+| 30.10.2018 | [Grundkonzepte der Sprache, Variablen und Datentypen, Ein- und Ausgabe](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/Einfuehrung.md) )  |
 | 06.11.2018 |              |
 | 13.11.2018 |              |
 | 30.11.2018 |              |
