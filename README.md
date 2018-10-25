@@ -50,7 +50,7 @@ Der vorliegende C-Kurs wurde für das Semester 2018/19 an der TU Bergakademie Fr
 Ausführbarer C Code sieht wie folgt aus, der Titel kann weggelassen werden.
 
 ```cpp                     HelloWorld.c
-#include<stdio.h>
+#include <stdio.h>
 
 int main() {
 	printf("Hello World\\n");
@@ -62,7 +62,7 @@ int main() {
 Das folgende Beispiel illustriert die Übergabe von Argumenten über die "Commandozeile".
 
 ```cpp                     GetChar.c
-#include<stdio.h>
+#include <stdio.h>
 
 int main(){
 	char c;
@@ -80,7 +80,7 @@ T
 Fehlerausgaben werden entsprechend der Compilerimplementierung wie folgt generiert:
 
 ```cpp                     ErroneousHelloWorld.c
-#include<stdio.h>
+#include <stdio.h>
 
 int main() {
 	printf("Hello World\n");
@@ -101,7 +101,7 @@ int main() {
 |Jonas Treumer        | jonas.treumer@informatik.tu-freiberg.de   |
 |Ben Lorenz           | ben.lorenz@informatik.tu-freiberg.de      |
 |Martin Reinhardt     | martin.reinhardt@informatik.tu-freiberg.de|
-|Tobias Bräuer        | tobias.braeuer@student.tu-freiberg.de  |
+|Tobias Bräuer        | tobias.braeuer@informatik.tu-freiberg.de  |
 
 **Zielstellung der Veranstaltung**
 
@@ -134,13 +134,13 @@ Nachbereitung der Lehrveranstaltungen, die eigenständige Lösung von
 
 + Kernighan B.W., Ritchie D.M., "Programmieren in C", Hanser Verlag
 + Prinz P., Crawford T., "C in a Nutshell", O'Reilly
-
++ Wolf J., "Grundkurs C", Rheinwerk Computing
 
 # Vorlesungsinhalte
 
 | Datum      | Inhalt                                |
 |:-----------|---------------------------------------|
-| 23.10.2018 | [1.  Einführung](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/Einfuehrung.md)    |
+| 23.10.2018 | [1.  Einführung](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/01_Einfuehrung.md)    |
 | 30.10.2018 | Grundkonzepte der Sprache, Variablen und Datentypen, Ein- und Ausgabe  |
 | 06.11.2018 |              |
 | 13.11.2018 |              |
@@ -163,7 +163,7 @@ eingebettete C-Projekte selbst anzugehen.
 
 # "C ist schwierig zu erlernen"
 
-*"Viele haben bei uns wegen dem Info Grundlagen Modul gewechselt. Allerdings hängt das auch von dir und deinem Talent ab. Das Tempo ist rasant. Jede Art von Vorerfahrung hilft dir eigentlich sehr. Also wenn du noch Zeit hast vorm Studienbeginn, schnapp dir ein gutes Buch zur gelehrten Sprache, und fange schonmal bissl an kleine Sachen zu programmieren."* [Foreneintrag]
+*"Viele haben bei uns wegen dem Info-Grundlagenmodul gewechselt. Allerdings hängt das auch von dir und deinem Talent ab. Das Tempo ist rasant. Jede Art von Vorerfahrung hilft dir eigentlich sehr. Also wenn du noch Zeit hast vorm Studienbeginn, schnapp dir ein gutes Buch zur gelehrten Sprache, und fange schonmal bissl an kleine Sachen zu programmieren."* [Foreneintrag]
 
 *"Ich habe es grade irgendwie selbst gelöst, aber keine Ahnung warum es funktioniert hat."* [Foreneintrag]
 
