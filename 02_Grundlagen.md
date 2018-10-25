@@ -49,11 +49,19 @@ Vorwarnung: Man kann Variablen nicht ohne Ausgaben und Ausgaben nicht ohne Varia
 Sie können in einem C-Programm folgende Zeichen verwenden:
 
 + Dezimalziffern
+
+  `0 1 2 3 4 5 6 7 8 9`
+
 + Buchstaben des englischen Alphabets
-+ Grafiksymbole `!"%&/()[]{}\?='#+*~-_.:,`
+
+  `A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z`
+
+
++ Grafiksymbole
+
+   `!"%&/()[]{}\?='#+*~-_.:,`
 
 ```cpp                     Calculator.c
-/* umlaute.c */
 #include <stdio.h>
 
 int main() {
@@ -221,8 +229,34 @@ int main() {
 
 ### Datentypen
 
+Zahlendarstellung im Rechner
 
+{{0-1}}
+| Adresse | Speicherinhalt |
+|         | binär          |
+| 0010    | 0000 1100      |
+| 0011    | 1111 1101      |
+| 0012    | 0001 0000      |
+| 0013    | 1000 0000      |
 
+{{1-2}}
+| Adresse | Speicherinhalt | Zahlenwert |
+|         |                |  (Byte)    |
+| 0010    | 0000 1100      | 13         |
+| 0011    | 1111 1101      | 253 (-125) |
+| 0012    | 0001 0000      | 16         |
+| 0013    | 1000 0000      | 128 (-128) |
+
+{{2}}
+| Adresse | Speicherinhalt | Zahlenwert | Zahlenwert | Zahlenwert   |
+|         |                |  (Byte)    | (2 Byte)   | (4 Byte)     |
+| 0010    | 0000 1100      | 13         |            |              |
+| 0011    | 1111 1101      | 253 (-125) | 3325       |              |
+| 0012    | 0001 0000      | 16         |            |              |
+| 0013    | 1000 0000      | 128 (-128) | 4224       | 217911424    |
+
+{{3}}
+Der dargestellte Speicherauszug kann aber auch eine Kommazahl (Floating Point) umfassen und repräsentiert dann den Wert `3.8990753E-31`
 
 
 ## 2. Ein- und Ausgabe
