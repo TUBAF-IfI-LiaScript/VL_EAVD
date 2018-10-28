@@ -164,7 +164,7 @@ Eine Konvention geht noch einen Schritt weiter und verknüpft Datentypen (an ers
 
 ### Datentypen
 
-Zahlendarstellung im Rechner
+#### Zahlendarstellung im Rechner
 
 {{0-1}}
 | Adresse | Speicherinhalt |
@@ -193,7 +193,8 @@ Zahlendarstellung im Rechner
 {{3}}
 Der dargestellte Speicherauszug kann aber auch eine Kommazahl (Floating Point) umfassen und repräsentiert dann den Wert `3.8990753E-31`
 
-{{3}}
+#### Generische Datentypen
+
 Die Zahlendarstellung im Rechner lässt also sich klassifizieren nach:
 
 + Wertebereichen (größte und kleinste Zahl)
@@ -202,13 +203,13 @@ Die Zahlendarstellung im Rechner lässt also sich klassifizieren nach:
 
 Ganzzahlen sind Zahlen ohne Nachkommastellen mit und ohne Vorzeichen. In C gibt es folgende Typen für Ganzzahlen:
 
-| Schlüsselwort  | Bezeichnung   | Benutzung                    |
-|:---------------|:--------------|:-----------------------------|
-| char           | character     | 1 Byte bzw. 1 Zeichen        |
-| short int      | integer       | ganzzahliger Wert            |
-| int            | integer       | ganzzahliger Wert            |
-| long int       | integer       | ganzzahliger Wert            |
-| long long int  | integer       | ganzzahliger Wert, ab C99    |
+| Schlüsselwort  | Bezeichnung   | Benutzung                    | Mindestgröße |
+|:---------------|:--------------|:-----------------------------|:-------------|
+| char           | character     | 1 Byte bzw. 1 Zeichen        | 1 Byte       |
+| short int      | integer       | ganzzahliger Wert            | 2 Byte       |
+| int            | integer       | ganzzahliger Wert            | 1 Byte       |
+| long int       | integer       | ganzzahliger Wert            | 1 Byte       |
+| long long int  | integer       | ganzzahliger Wert, ab C99    | 1 Byte       |
 
 Wenn die Typ-Spezifizierer (`long` oder `short`) vorhanden sind kann auf die `int` Typangabe verzichtet werden.
 
@@ -217,12 +218,31 @@ short int a; // entspricht short a;
 long int b;  // äquivalent zu long b;
 }
 ```
+
 Standardmäßig wird von vorzeichenbehafteten Zahlenwerten ausgegangen. Somit wird das Schlüsselwort `signed` eigentliche nicht benötigt
 
 ```cpp
 int a;  //  signed int a;
 unsigned long long int b;
 ```
+
+```cpp                     sizeof_int.c
+#include <stdio.h>
+#include <limits.h>   /* INT_MIN und INT_MAX */
+
+int main(void) {
+   printf("int Größe : %d Byte\n", sizeof( int ) );
+   printf("Wertebereich von %d bis %d\n", INT_MIN, INT_MAX);
+   return 0;
+}
+```
+@JSCPP(@input, )
+
+
+
+
+
+
 
 
 ▶ python showResults.py
