@@ -53,7 +53,7 @@ Ausführbarer C Code sieht wie folgt aus, der Titel kann weggelassen werden.
 #include <stdio.h>
 
 int main() {
-	printf("Hello World\\n");
+	printf("Hello World\n");
 	return 0;
 }
 ```
@@ -141,7 +141,7 @@ Nachbereitung der Lehrveranstaltungen, die eigenständige Lösung von
 | Datum      | Inhalt                                |
 |:-----------|---------------------------------------|
 | 23.10.2018 | [1.  Einführung](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/01_Einfuehrung.md)    |
-| 30.10.2018 | Grundkonzepte der Sprache, Variablen und Datentypen, Ein- und Ausgabe  |
+| 30.10.2018 | [2. Variablen und Datentypen, Ein- und Ausgabe](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/02_Grundlagen.md#1)  |
 | 06.11.2018 |              |
 | 13.11.2018 |              |
 | 30.11.2018 |              |
