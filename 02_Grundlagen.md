@@ -64,17 +64,17 @@ Sie können in einem C-Programm folgende Zeichen verwenden:
 
 + Grafiksymbole
 
-   `!"%&/()[]{}\?='#+*~-_.:,`
+  `!"%&/()[]{}\?='#+*~-_.:,`
 
-   ```cpp                     ErroneousHelloWorld.c
-   #include <stdio.h>
+  ```cpp                     ErroneousHelloWorld.c
+  #include <stdio.h>
 
-   int main() {
-   	printf("Einen schönen Tag für Sie!");
-   	return 0;
-   }
-   ```
-   @JSCPP(@input, )
+  int main() {
+      printf("Einen schönen Tag für Sie!");
+      return 0;
+  }
+  ```
+  @JSCPP(@input, )
 
 ![C logo](img/PellesCUmlauteEnglish.png)<!-- width="80%" -->
 
