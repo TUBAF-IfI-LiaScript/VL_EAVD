@@ -66,16 +66,18 @@ Sie können in einem C-Programm folgende Zeichen verwenden:
 
    `!"%&/()[]{}\?='#+*~-_.:,`
 
-```cpp                     Calculator.c
-#include <stdio.h>
+   ```cpp                     ErroneousHelloWorld.c
+   #include <stdio.h>
 
-int main() {
+   int main() {
+   	printf("Einen schönen Tag für Sie!");
+   	return 0;
+   }
+   ```
+   @JSCPP(@input, )
 
-//printf("Heute ist ein schöner Tag!");
-wchar_t s[] = L"Eine kurze Zeichenkette" ;
-   return 0;
-}
-```
+![C logo](img/PellesCUmlauteEnglish.png)<!-- width="80%" -->
+
 
 ## 1. Variablen
 
@@ -136,8 +138,16 @@ Der Name kann Zeichen, Ziffern und den Unterstrich enthalten. Dabei ist zu beach
 | double  | nicht zulässig (Schlüsselwort) |
 | robot.speed | nicht zulässig (`.` im Namen) |
 | 3thName | nicht zulässig (Ziffer als erstes Zeichen)|
+| x y     | nicht zulässig (Leerzeichen im Variablennamen) |
 
-Eine Konvention - die abgewandelte ungarische Notation - verknüpft Datentypen (an erster Stelle) mit dem Namen.
+Das ganze kann dann noch in entsprechenden Notationen verpackt werden, um einem Wildwuchs an Bezeichnern vorzubeugen.
+
+| Bezeichnung   | denkbare Variablennamen           |
+|:--------------|:-----------------------|
+| CamelCase     | `youLikeCamelCase`, `humanDetectionSuccessfull`  |
+| underscores   | `I\_hate\_Camel\_Case`, `human\_detection\_successfull`   |
+
+Eine Konvention geht noch einen Schritt weiter und verknüpft Datentypen (an erster Stelle) und Funktion mit dem Namen (hier abgewandelte *ungarische Notation*).
 
 |Präfix 	|Datentyp 	        |Beispiel|
 |:--------|:------------------|:-----|
@@ -212,17 +222,53 @@ Standardmäßig wird von vorzeichenbehafteten Zahlenwerten ausgegangen. Somit wi
 ```cpp
 int a;  //  signed int a;
 unsigned long long int b;
-}
 ```
 
 
+▶ python showResults.py
+32Bit
+               duration_mean
+optimization            -O0      -O1     -O2     -O3     -Os
+data_type
+uint16_t              2.5420  2.0590  0.6690  2.1165  1.9745
+uint32_t              2.2150  1.9505  0.6695  1.7030  1.9810
+unsigned int          2.2295  1.9400  0.6675  1.6970  1.9725
+unsigned long         2.2245  1.9400  0.6800  1.6955  1.9910
+unsigned short        2.5360  2.0575  0.6720  2.1210  1.9835
 
+64Bit
+               duration_mean
+optimization            -O0      -O1     -O2     -O3     -Os
+data_type
+uint16_t              2.5555  2.0705  0.6880  2.1185  1.9725
+uint32_t              2.2245  1.9455  0.6695  1.7065  1.9855
+unsigned int          2.2105  1.9395  0.6700  1.6985  1.9650
+unsigned long         2.5350  2.0500  0.6685  2.1080  1.9930
+unsigned short        2.5455  2.0660  0.7205  2.1055  1.9735
+
+
+
+
+```cpp                     QuadraticEquation.c
+#include <stdio.h>
+
+int main()
+{
+  int x;
+  printf("Test %d Byte.", (unsigned int)sizeof(int));
+  return 0;
+}
+```
+@JSCPP(@input, )
 
 
 
 ### Werte
 
 Zahlenliterale
+
+### Adressen
+
 
 
 ### Globale Variablentypen
