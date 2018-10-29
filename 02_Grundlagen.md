@@ -66,7 +66,7 @@ Sie können in einem C-Programm folgende Zeichen verwenden:
 
   `!"%&/()[]{}\?='#+*~-_.:,`
 
-  ```cpp                     ErroneousHelloWorld.c
+  ```cpp                     SpecialSigns.c
   #include <stdio.h>
 
   int main() {
@@ -76,12 +76,12 @@ Sie können in einem C-Programm folgende Zeichen verwenden:
   ```
   @JSCPP(@input, )
 
-![C logo](img/PellesCUmlauteEnglish.png)<!-- width="80%" -->
+![C logo](img/PellesCUmlauteEnglish.png)<!-- width="100%" -->
 
 
 ## 1. Variablen
 
-"Ein Rechner ist eigentlich ziemlich dumm, dass aber viele Millionen mal pro Sekunde" [Zitat - Quelle gesucht!]
+*"Ein Rechner ist eigentlich ziemlich dumm, dass aber viele Millionen mal pro Sekunde"* [Zitat - Quelle gesucht!]
 
 ```cpp                     Calculator.c
 #include<stdio.h>
@@ -101,7 +101,7 @@ Unbefriedigenden Lösung, jede neue Berechnung muss in den Source-Code integrier
 int main() {
   int x;
   x = 5;
-  printf("f(%d) = %d ",x, 3*x*x + 4*x + 8);
+  printf("f(%d) = %d \n",x, 3*x*x + 4*x + 8);
   x = 9;
   printf("f(%d) = %d ",x, 3*x*x + 4*x + 8);
 	return 0;
@@ -115,11 +115,11 @@ Eine Variable ist somit ein **abstrakter Behälter** für Inhalte, welche im Ver
 
 Kennzeichen einer Variable:
 
-+ Name
-+ Datentyp
-+ Wert
-+ Adresse
-+ Gültigkeitraum
+1. Name
+2. Datentyp
+3. Wert
+4. Adresse
+5. Gültigkeitraum
 
 
 ### Zulässige Variablennamen
@@ -128,7 +128,7 @@ Der Name kann Zeichen, Ziffern und den Unterstrich enthalten. Dabei ist zu beach
 
 + Das erste Zeichen muss ein Buchstabe sein, der Unterstrich ist auch möglich.
 + C betrachte Groß- und Kleinschreibung - `Zahl` und `zahl` sind also unterschiedliche Variablentypen
-+ Schlüsselworte sind als Namen unzulässig.
++ Schlüsselworte (`auto`, `goto`, `return`, etc.) sind als Namen unzulässig.
 
 | Name    | Zulässigkeit           |
 |:--------|:-----------------------|
@@ -147,7 +147,7 @@ Das ganze kann dann noch in entsprechenden Notationen verpackt werden, um einem 
 | CamelCase     | `youLikeCamelCase`, `humanDetectionSuccessfull`  |
 | underscores   | `I\_hate\_Camel\_Case`, `human\_detection\_successfull`   |
 
-Eine Konvention geht noch einen Schritt weiter und verknüpft Datentypen (an erster Stelle) und Funktion mit dem Namen (hier abgewandelte *ungarische Notation*).
+Verschiedene Konvention geht noch einen Schritt weiter und verknüpft Datentypen (an erster Stelle) und Funktion mit dem Namen (hier abgewandelte *ungarische Notation*).
 
 |Präfix 	|Datentyp 	        |Beispiel|
 |:--------|:------------------|:-----|
@@ -164,7 +164,7 @@ Eine Konvention geht noch einen Schritt weiter und verknüpft Datentypen (an ers
 
 ### Datentypen
 
-#### Zahlendarstellung im Rechner
+Welche Informationen lassen sich mit Blick auf einen Speicherauszug im Hinblick auf die Daten extrahieren?
 
 {{0-1}}
 | Adresse | Speicherinhalt |
@@ -177,7 +177,7 @@ Eine Konvention geht noch einen Schritt weiter und verknüpft Datentypen (an ers
 {{1-2}}
 | Adresse | Speicherinhalt | Zahlenwert |
 |         |                |  (Byte)    |
-| 0010    | 0000 1100      | 13         |
+| 0010    | 0000 1100      | 12         |
 | 0011    | 1111 1101      | 253 (-125) |
 | 0012    | 0001 0000      | 16         |
 | 0013    | 1000 0000      | 128 (-128) |
@@ -185,7 +185,7 @@ Eine Konvention geht noch einen Schritt weiter und verknüpft Datentypen (an ers
 {{2}}
 | Adresse | Speicherinhalt | Zahlenwert | Zahlenwert | Zahlenwert   |
 |         |                |  (Byte)    | (2 Byte)   | (4 Byte)     |
-| 0010    | 0000 1100      | 13         |            |              |
+| 0010    | 0000 1100      | 12         |            |              |
 | 0011    | 1111 1101      | 253 (-125) | 3325       |              |
 | 0012    | 0001 0000      | 16         |            |              |
 | 0013    | 1000 0000      | 128 (-128) | 4224       | 217911424    |
@@ -193,30 +193,48 @@ Eine Konvention geht noch einen Schritt weiter und verknüpft Datentypen (an ers
 {{3}}
 Der dargestellte Speicherauszug kann aber auch eine Kommazahl (Floating Point) umfassen und repräsentiert dann den Wert `3.8990753E-31`
 
-#### Generische Datentypen
+{{4}}
+Folglich bedarf es eines expliziten Wissens um den Charakter der Zahl, um eine korrekte Interpretation zu ermöglichen. Dabei erfolgt die Einteilung nach:
 
-Die Zahlendarstellung im Rechner lässt also sich klassifizieren nach:
-
+{{4}}
 + Wertebereichen (größte und kleinste Zahl)
 + ggf. vorzeichenbehaftet Zahlen
 + ggf. gebrochene Werte
 
+#### Generische Datentypen
+
 Ganzzahlen sind Zahlen ohne Nachkommastellen mit und ohne Vorzeichen. In C gibt es folgende Typen für Ganzzahlen:
 
-| Schlüsselwort  | Bezeichnung   | Benutzung                    | Mindestgröße |
-|:---------------|:--------------|:-----------------------------|:-------------|
-| char           | character     | 1 Byte bzw. 1 Zeichen        | 1 Byte       |
-| short int      | integer       | ganzzahliger Wert            | 2 Byte       |
-| int            | integer       | ganzzahliger Wert            | 1 Byte       |
-| long int       | integer       | ganzzahliger Wert            | 1 Byte       |
-| long long int  | integer       | ganzzahliger Wert, ab C99    | 1 Byte       |
+| Schlüsselwort  | Benutzung                       | Mindestgröße |
+|:---------------|:--------------------------------|:-------------|
+| char           | 1 Byte bzw. 1 Zeichen           | 1 Byte (min/max) |
+| short int      | Ganzahl (ggf. mit Vorzeichen)   | 2 Byte          |
+| int            | Ganzahl (ggf. mit Vorzeichen)   | "natürliche Größe"       |
+| long int       | Ganzahl (ggf. mit Vorzeichen)   |              |
+| long long int  | Ganzahl (ggf. mit Vorzeichen)   |              |
+| float          | Gebrochener Wert mit Vorzeichen | 4 Byte       |
+| double         | Gebrochener Wert mit Vorzeichen | 8 Byte       |
+| long double    | Gebrochener Wert mit Vorzeichen |              |
+| _Bool          | boolsche Variable               | 1 Bit        |
+
+```
+signed char <= short <= int <= long <= long long
+```
+
+Gängige Zuschnitte für `char` oder `int`
+
+| Schlüsselwort  | Wertebereich               |
+|:---------------|:---------------------------|
+| signed char    | -128 bis 127               |
+| char           | 0 bis 255                  |
+| signed int     | 32768  bis 32767     |
+| int            |  65536         |
 
 Wenn die Typ-Spezifizierer (`long` oder `short`) vorhanden sind kann auf die `int` Typangabe verzichtet werden.
 
 ```cpp
 short int a; // entspricht short a;
 long int b;  // äquivalent zu long b;
-}
 ```
 
 Standardmäßig wird von vorzeichenbehafteten Zahlenwerten ausgegangen. Somit wird das Schlüsselwort `signed` eigentliche nicht benötigt
@@ -226,92 +244,254 @@ int a;  //  signed int a;
 unsigned long long int b;
 ```
 
-```cpp                     sizeof_int.c
-#include <stdio.h>
-#include <limits.h>   /* INT_MIN und INT_MAX */
+#### Sonderfall *char*
 
-int main(void) {
-   printf("int Größe : %d Byte\n", sizeof( int ) );
-   printf("Wertebereich von %d bis %d\n", INT_MIN, INT_MAX);
-   return 0;
-}
+Für den Typ `char` ist der mögliche Gebrauch und damit auch die Vorzeichenregel zwiespältig:
+
++ Wird char dazu verwendet einen **numerischen Wert** zu speichern und die Variable nicht explizit als vorzeichenbehaftet oder vorzeichenlos vereinbart, dann ist es implementierungsabhängig, ob char vorzeichenbehaftet ist oder nicht.
++ Wenn ein Zeichen gespeichert wird, so garantiert der Standard, dass der gespeicherte Wert der nichtnegativen Codierung im **Zeichensatz** entspricht.
+
+```cpp
+char c = 'M';  // =  1001101 (ASCII Zeichensatz)
+char c = 77;   // =  1001101
+char s[] = "Eine kurze Zeichenkette";
 ```
-@JSCPP(@input, )
 
+**Achtung: Anders als bei anderen Programmiersprachen unterscheidet C zwischen den verschiedenen Anführungsstrichen.**
 
+![C logo](img/ASCII_Zeichensatz.jpeg)<!-- width="80%" -->
 
+[http://www.chip.de/webapps/ASCII-Tabelle_50073950.html](http://www.chip.de/webapps/ASCII-Tabelle_50073950.html)
 
+--{{1}}--
+Erweiterung erfährt `char` mit der Überarbeitung des C-Standards 1994. Hier wurde das Konzept eines breiten Zeichens (engl. *wide character*) eingeführt, das auch Zeichensätze aufnehmen kann, die mehr als 1 Byte für die Codierung eines Zeichen benötigen (beispielsweise Unicode-Zeichen). Siehe `wchar_t` oder `wprintf`.
 
+#### Architekturspezifische Ausprägung
 
+Der Operator `sizeof` gibt Auskunft über die Größe eines Datentyps oder einer Variablen in Byte.
 
+**Integer Datentypen**
 
-▶ python showResults.py
-32Bit
-               duration_mean
-optimization            -O0      -O1     -O2     -O3     -Os
-data_type
-uint16_t              2.5420  2.0590  0.6690  2.1165  1.9745
-uint32_t              2.2150  1.9505  0.6695  1.7030  1.9810
-unsigned int          2.2295  1.9400  0.6675  1.6970  1.9725
-unsigned long         2.2245  1.9400  0.6800  1.6955  1.9910
-unsigned short        2.5360  2.0575  0.6720  2.1210  1.9835
-
-64Bit
-               duration_mean
-optimization            -O0      -O1     -O2     -O3     -Os
-data_type
-uint16_t              2.5555  2.0705  0.6880  2.1185  1.9725
-uint32_t              2.2245  1.9455  0.6695  1.7065  1.9855
-unsigned int          2.2105  1.9395  0.6700  1.6985  1.9650
-unsigned long         2.5350  2.0500  0.6685  2.1080  1.9930
-unsigned short        2.5455  2.0660  0.7205  2.1055  1.9735
-
-
-
-
-```cpp                     QuadraticEquation.c
+```cpp                     sizeof.c
 #include <stdio.h>
 
 int main()
 {
   int x;
-  printf("Test %d Byte.", (unsigned int)sizeof(int));
+  printf("x umfasst %d Byte.", (unsigned int)sizeof x);
   return 0;
 }
 ```
 @JSCPP(@input, )
 
 
-
-### Werte
-
-Zahlenliterale
-
-### Adressen
-
-
-
-### Globale Variablentypen
-
-Muss eine Variable immer innerhalb von `main` definiert werden?
-
-```cpp                     MissingInitialisation.c
-#include<stdio.h>
-
-int a = 1;
-
-void foo() {
-  printf("a=%d ", a);
-}
+```cpp                     sizeof_example.c
+#include <stdio.h>
+#include <limits.h>   /* INT_MIN und INT_MAX */
 
 int main() {
-  printf("a=%d ", a);
-  foo();
-	return 0;
+   printf("int size : %d Byte\n", (int) sizeof( int ) );
+   printf("Wertebereich von %d bis %d\n", INT_MIN, INT_MAX);
+   printf("char size : %d Byte\n", (int) sizeof( char ) );
+   printf("Wertebereich von %d bis %d\n", CHAR_MIN, CHAR_MAX);
+   return 0;
+}
+```
+
+<!-- style="background: black; color: white;"-->
+<pre class=="lia-code-stdout" >
+▶ gcc sizeof_example.c
+▶ ./a.out
+int size : 4 Byte
+Wertebereich von -2147483648 bis 2147483647
+char size : 1 Byte
+Wertebereich von -128 bis 127
+</pre>
+
+**Fließkommazahlen**
+
+Zur Darstellung von Fließkommazahlen sagt der C-Standard nichts aus. Zur konkreten Realisierung ist die Headerdatei `float.h` auszuwerten.
+
+Im Gegensatz zu Ganzzahlen gibt es bei den Fließkommazahlen keinen Unterschied zwischen vorzeichenbehafteten und vorzeichenlosen Zahlen. Alle Fließkommazahlen sind in C immer vorzeichenbehaftet.
+
+| Schlüsselwort  | Wertebereich               |
+|:---------------|:---------------------------|
+| float          | größte Zahl 3.4028234664e+38       |
+| char           | kleinste Zahl 1.1754943508e-38           |
+
+ACHTUNG: Fließkommazahlen bringen neben den Maximal und Minimalwerten noch einen weiteren Faktor mit - die Unsicherheit
+
+```cpp                     float_precision.c
+#include<stdio.h>
+#include<float.h>
+
+int main() {
+	printf("float Genauigkeit  :%d \n", FLT_DIG);
+	printf("double Genauigkeit :%d \n", DBL_DIG);
+	float x = 0.1;
+  if (x == 0.1) {
+    printf("Gleich\n");
+  }else{
+    printf("Ungleich\n");
+  }
+  return 0;
+}
+```
+
+<!-- style="background: black; color: white;"-->
+<pre class=="lia-code-stdout" >
+▶ gcc float_comparism.c
+▶ ./a.out
+float Genauigkeit :6
+double Genauigkeit :15
+Ungleich
+</pre>
+
+
+#### Spezifische Datentypen
+
+Ab C99 umfasst die Standard Bibliothek das header file `stdint.h`, das Ganzzahldatentypen mit exakten bzw. spezifizierten Datenbreiten einführt. Dabei können die individuellen Realisierungen für verschiedene Compiler auf ein und der selben Architektur durchaus variieren!
+
+| signed       | unsigned      | Bedeutung                       |
+|:-------------|:--------------|:--------------------------------|
+| intN_t       | uintN_t       | exakte Breite von N Bits (uint8_t)|
+| int_leastN_t | uint_leastN_t | garantierte Mindestbreite       |
+| int_fastN_t  | uint_fastN_t  | fokussiert die Ausführungszeit  |
+
+
+#### Und was soll ich nun verwenden?
+
+... das hängt von der Zielstellung ab. Mögliche Optimierungsansätze sind
+
++ die Programmgröße
++ der notwendige Arbeitsspeicher
++ die Laufzeit
++ (die Compilezeit)
+
+Link auf  measureExecutionTime.py
+
+<!-- style="background: black; color: white;"-->
+<pre class=="lia-code-stdout" >
+  ▶ python measureExecutionTime.py
+
+                execution_mean
+                    -O0     -O1     -O2    -Os
+data_type
+uint16_t           3.5170  2.4215  0.7340  2.0100
+uint32_t           2.4725  2.4550  0.9025  2.2945
+uint_fast16_t      3.5195  2.6060  0.7310  2.6415
+unsigned int       3.8970  1.9680  0.9010  2.4775
+unsigned long      4.0015  2.2040  0.6910  2.3460
+unsigned short     2.9580  2.1010  0.7495  2.3240
+</pre>
+
+### Wertspezifikation
+
+Zahlenliterale können in C mehr als Ziffern umfassen!
+
+|  Zahlentyp | Dezimal       | Binär      | Oktal         | Hexadezimal  |
+|:-----------|:--------------|:-----------|---------------|--------------|
+| Eingabe    | x             | (x)        | x             | x            |
+| Ausgabe    | x             | x          | x             | x            |
+| Beispiel   | `12`          |            | `020`         | `0x20`       |
+|            | `1234.342`    |            |               | `0X1a`       |
+
+```cpp                     NumberFormats.c
+#include <stdio.h>
+
+int main()
+{
+  int x=020;
+  int y=0x20;
+  printf("x = %d\n", x);
+  printf("y = %d\n", y);
+  printf("Rechnen mit Oct und Hex z = %d", x + y);
+  return 0;
 }
 ```
 @JSCPP(@input, )
 
+### Adressen
+
+```cpp                     Pointer.c
+#include <stdio.h>
+
+int main()
+{
+  int x=020;
+  printf("%p\n",(void*)&x);
+  return 0;
+}
+```
+<!-- style="background: black; color: white;"-->
+<pre class=="lia-code-stdout" >
+▶ ./a.out
+0x7ffef853c3f4
+</pre>
+
+### Sichtbarkeit und Lebensdauer von Variablen
+
+**Lebensdauer**
+
+Die Lebensdauer einer Variablen gilt immer bis zum Ende des Anweisungsblockes, in dem sie definiert wurde.
+
+```cpp                           lifespan.c
+#include<stdio.h>
+
+int main(){
+  {
+    int v;
+    v = 2;
+    printf("%d", v);
+  }
+  printf("%d", v);
+  return 0;
+}
+```
+@JSCPP(@input, )
+
+**Sichtbarkeit**
+
+Bis C99 musste eine Variable immer am Anfang eines Anweisungsblocks vereinbart werden. Nun genügt es, die Variable unmittelbar vor der ersten Benutzung zu vereinbaren.
+
+Variablen *leben* innerhalb einer Funktion, eine Schleife oder einfach nur ein durch geschwungene Klammern begrenzter Block von Anweisungen.
+
+Wird eine Variable/Konstante z. B. im Kopf einer Schleife vereinbart, gehört sie laut C99-Standard zu dem Block, in dem auch der Code der Schleife steht. Folgender Codeausschnitt soll das verdeutlichen:
+
+```cpp                           visibility.c
+#include<stdio.h>
+
+int main()
+{
+  int v = 1;
+  int w = 5;
+  {
+    int v;
+    v = 2;
+    printf("%d\n", v);
+    printf("%d\n", w);
+  }
+  printf("%d\n", v);
+  return 0;
+}
+```
+@JSCPP(@input, )
+
+**Globale Variablen**
+
+Muss eine Variable immer innerhalb von `main` definiert werden? Nein, allerdings sollten globale Variablen vermieden werden.
+
+```cpp                           visibility.c
+#include<stdio.h>
+
+int main()
+{
+  int v = 1;
+  printf("%d\n", v);
+  return 0;
+}
+```
+@JSCPP(@input, )
 
 ### Definition vs. Deklaration vs. Initialisierung
 
@@ -331,7 +511,14 @@ i = 5;             // Initialisierung
 --{{0}}--
 Das Schlüsselwort extern in obigem Beispiel besagt, dass die Definition der Variablen a irgendwo in einem anderen Modul des Programms liegt. So deklariert man Variablen, die später beim Binden (Linken) aufgelöst werden. Da in diesem Fall kein Speicherplatz reserviert wurde, handelt es sich um keine Definition.
 
+### Qualifikatoren
+
+const
+
+
 ### Typische Fehler
+
+**Fehlende Initialisierung**
 
 ```cpp                     MissingInitialisation.c
 #include<stdio.h>
@@ -352,8 +539,24 @@ int main() {
 ```
 @JSCPP(@input, )
 
+<!-- style="background: black; color: white;"-->
+<pre class=="lia-code-stdout" >
+▶ gcc -Wall experiments.c
+experiments.c: In function ‘foo’:
+experiments.c:5:3: warning: ‘a’ is used uninitialized in this function [-Wuninitialized]
+   printf("a=%d ", a);
+   ^
+experiments.c: In function ‘main’:
+experiments.c:12:3: warning: ‘y’ is used uninitialized in this function [-Wuninitialized]
+   printf("y=%d ", y);
+   ^
+</pre>
+
 --{{0}}--
 Der C++, der für diese Webseite zum Einsatz kommt initialisiert offenbar alle Werte mit 0 führen Sie dieses Beispiel aber einmal mit einem richtigen Compiler aus.
+
+
+**Redeklaration**
 
 ```cpp                     Redeclaration.c
 #include<stdio.h>
@@ -365,8 +568,8 @@ int main() {
 }
 ```
 
-<pre class="lia-code-stdout" style="font-size: 11px;">
-▶ gcc -W doubleDeclaration.c
+<pre class="lia-code-stdout">
+▶ gcc -Wall doubleDeclaration.c
 
 doubleDeclaration.c: In function ‘main’:
 doubleDeclaration.c:5:7: error: redeclaration of ‘x’ with no linkage
@@ -376,8 +579,49 @@ doubleDeclaration.c:4:7: note: previous declaration of ‘x’ was here
    int x;
 </pre>
 
+**Falsche Zahlenliterale**
+
+```cpp                     wrong_float.c
+#include<stdio.h>
+
+int main() {
+  float a=1,5;   /* FALSCH  */
+  float b=1.5;   /* RICHTIG */
+  return 0;
+}
+```
+
+**Was passiert wenn der WERT zu groß ist?**
+
+```cpp                     TooLarge.c
+#include<stdio.h>
+
+int main() {
+  short a;
+  a = 0xFFFF + 2;
+  printf("Schaun wir mal ... %hi\n", a);
+	return 0;
+}
+```
+<pre class="lia-code-stdout">
+▶ gcc -Wall experiments.c
+experiments.c: In function ‘main’:
+experiments.c:5:7: warning: overflow in implicit constant conversion [-Woverflow]
+   a = 0xFFFF + 2;
+       ^
+▶ ./a.out
+Was steckt drin 1
+</pre>
 
 ## 2. Ein- und Ausgabe
+
+Die Bibliotheksfunktion `printf` dient dazu, eine Zeichenkette (engl. String) auf der Standardausgabe auszugeben. In der Regel ist die Standardausgabe der Bildschirm. Über den Rückgabewert liefert printf die Anzahl der ausgegebenen Zeichen. Wenn bei der Ausgabe ein Fehler aufgetreten ist, wird ein negativer Wert zurückgegeben.
+
+Als erstes Argument von printf sind **nur Strings** erlaubt. Bei folgender Zeile gibt der Compiler beim Übersetzen deshalb eine Warnung oder einen Fehler aus:
+```cpp
+printf(55);      // Falsch
+printf("55");    // Korrekt
+```
 
 
 ## Ausblick
