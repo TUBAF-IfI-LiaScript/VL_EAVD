@@ -226,9 +226,9 @@ Gängige Zuschnitte für `char` oder `int`
 | Schlüsselwort  | Wertebereich               |
 |:---------------|:---------------------------|
 | signed char    | -128 bis 127               |
-| char           | 0 bis 255                  |
+| char           | 0 bis 255 (0xFF)            |
 | signed int     | 32768  bis 32767     |
-| int            |  65536         |
+| int            |  65536 (0xFFFF)         |
 
 Wenn die Typ-Spezifizierer (`long` oder `short`) vorhanden sind kann auf die `int` Typangabe verzichtet werden.
 
@@ -290,9 +290,9 @@ int main()
 #include <limits.h>   /* INT_MIN und INT_MAX */
 
 int main() {
-   printf("int size : %d Byte\n", (int) sizeof( int ) );
+   printf("int size : %d Byte\n", (unsigned int) sizeof( int ) );
    printf("Wertebereich von %d bis %d\n", INT_MIN, INT_MAX);
-   printf("char size : %d Byte\n", (int) sizeof( char ) );
+   printf("char size : %d Byte\n", (unsigned int) sizeof( char ) );
    printf("Wertebereich von %d bis %d\n", CHAR_MIN, CHAR_MAX);
    return 0;
 }
@@ -389,12 +389,12 @@ unsigned short     2.9580  2.1010  0.7495  2.3240
 
 Zahlenliterale können in C mehr als Ziffern umfassen!
 
-|  Zahlentyp | Dezimal       | Binär      | Oktal         | Hexadezimal  |
-|:-----------|:--------------|:-----------|---------------|--------------|
-| Eingabe    | x             | (x)        | x             | x            |
-| Ausgabe    | x             | x          | x             | x            |
-| Beispiel   | `12`          |            | `020`         | `0x20`       |
-|            | `1234.342`    |            |               | `0X1a`       |
+|  Zahlentyp | Dezimal       | Oktal         | Hexadezimal  |
+|:-----------|:--------------|---------------|--------------|
+| Eingabe    | x             | x             | x            |
+| Ausgabe    | x             | x             | x            |
+| Beispiel   | `12`          | `020`         | `0x20`       |
+|            | `1234.342`    |               | `0X1a`       |
 
 ```cpp                     NumberFormats.c
 #include <stdio.h>
@@ -413,12 +413,17 @@ int main()
 
 ### Adressen
 
+Um einen Zugriff auf die Adresse einer Variablen zu haben, kann man den Operator `&` nutzen. Gegenwärtig ist noch nicht klar, warum dieser Zugriff erforderlich ist, wird aber in einer der nächsten Veranstaltungen verdeutlicht.
+
 ```cpp                     Pointer.c
 #include <stdio.h>
 
 int main()
 {
   int x=020;
+  //              cast operator
+  //               |  Adressoperator
+  //               |   |
   printf("%p\n",(void*)&x);
   return 0;
 }
@@ -502,19 +507,13 @@ int main()
 **Merke:**  Jede Definition ist gleichzeitig eine Deklaration aber nicht umgekehrt!
 
 ```cpp                     DeclarationVSDefinition.c
+extern int a;      // Deklaration
 int i;             // Definition + Deklaration
 int a,b,c;
-float x, int y;    // Compilerfehler! "Typenreinheit" wird vorausgesetzt
-extern int a;      // Deklaration
 i = 5;             // Initialisierung
 ```
---{{0}}--
-Das Schlüsselwort extern in obigem Beispiel besagt, dass die Definition der Variablen a irgendwo in einem anderen Modul des Programms liegt. So deklariert man Variablen, die später beim Binden (Linken) aufgelöst werden. Da in diesem Fall kein Speicherplatz reserviert wurde, handelt es sich um keine Definition.
 
-### Qualifikatoren
-
-const
-
+Das Schlüsselwort `extern` in obigem Beispiel besagt, dass die Definition der Variablen a irgendwo in einem anderen Modul des Programms liegt. So deklariert man Variablen, die später beim Binden (Linken) aufgelöst werden. Da in diesem Fall kein Speicherplatz reserviert wurde, handelt es sich um keine Definition.
 
 ### Typische Fehler
 
@@ -552,7 +551,7 @@ experiments.c:12:3: warning: ‘y’ is used uninitialized in this function [-Wu
    ^
 </pre>
 
---{{0}}--
+{{0}}
 Der C++, der für diese Webseite zum Einsatz kommt initialisiert offenbar alle Werte mit 0 führen Sie dieses Beispiel aber einmal mit einem richtigen Compiler aus.
 
 
@@ -613,15 +612,198 @@ experiments.c:5:7: warning: overflow in implicit constant conversion [-Woverflow
 Was steckt drin 1
 </pre>
 
-## 2. Ein- und Ausgabe
+## 2. Input-/ Output Operationen
 
-Die Bibliotheksfunktion `printf` dient dazu, eine Zeichenkette (engl. String) auf der Standardausgabe auszugeben. In der Regel ist die Standardausgabe der Bildschirm. Über den Rückgabewert liefert printf die Anzahl der ausgegebenen Zeichen. Wenn bei der Ausgabe ein Fehler aufgetreten ist, wird ein negativer Wert zurückgegeben.
+Ausgabefunktionen wurden bisher genutzt, um den Status unserer Programme zu dokumentieren. Nun soll dieser Mechanismus systematisiert und erweitert werden [^1].
+
+![C logo](img/EVA-Prinzip.png)<!-- width="100%" -->
+
+[^1]: Programmiervorgang und Begriffe (Quelle: https://de.wikipedia.org/wiki/EVA-Prinzip#/media/File:EVA-Prinzip.svg (Autor Deadlyhappen))
+
+### Printf
+
+Die Bibliotheksfunktion `printf` dient dazu, eine Zeichenkette (engl. *String*) auf der Standardausgabe auszugeben. In der Regel ist die Standardausgabe der Bildschirm. Über den Rückgabewert liefert printf die Anzahl der ausgegebenen Zeichen. Wenn bei der Ausgabe ein Fehler aufgetreten ist, wird ein negativer Wert zurückgegeben.
 
 Als erstes Argument von printf sind **nur Strings** erlaubt. Bei folgender Zeile gibt der Compiler beim Übersetzen deshalb eine Warnung oder einen Fehler aus:
+
 ```cpp
 printf(55);      // Falsch
 printf("55");    // Korrekt
 ```
+
+Dabei kann der String um entsprechende Parameter erweitert werden. Jeder Parameter nach dem String wird durch einen Platzhalter in dem selben repäsentiert.
+
+```cpp                             printf_example.c
+#include <stdio.h>
+
+int main(){
+  //       ______________________________
+  //       |                            |
+  printf("%i plus %2.2f ist gleich %s.\n", 3, 2.0, "Fuenf");
+  //      <------------------------>
+  //        String mit Referenzen
+  //            auf Parameter
+  return 0;
+}
+```
+@JSCPP(@input, )
+
+{{1-3}}
+|Zeichen    |	Umwandlung       |
+|:----------|:-----------------|
+|%d oder %i |	int|
+|%c |	einzelnes Zeichen|
+|%e oder %E |	double im Format `[-]d.ddd e±dd` bzw. `[-]d.ddd E±dd`|
+|%f |	double im Format `[-]ddd.ddd`|
+|%o |	int als Oktalzahl ausgeben|
+|%p |	die Adresse eines Zeigers|
+|%s |	Zeichenkette ausgeben|
+|%u |	unsigned int|
+|%x oder %X |	int als Hexadezimalzahl ausgeben|
+|%% |	Prozentzeichen |
+
+{{2-3}}
+Welche Formatierungmöglichkeiten bietet `printf` noch?
+
+{{2-3}}
+
++ die Feldbreite
++ ein Flag
++ durch einen Punkt getrennt die Anzahl der Nachkommstellen (Längenangabe) und an letzter Stelle schließlich
++ das Umwandlungszeichen selbst (siehe Tabelle oben)
+
+#### Feldbreite
+
+Die Feldbreite definiert die Anzahl der nutzbaren Zeichen, sofern diese nicht einen größeren Platz beanspruchen.
+
+```cpp                             printf_numbercount.c
+#include <stdio.h>
+
+int main(){
+  printf("rechtsbuendig      : %5d, %5d, %5d\n",34, 343, 3343);
+  printf("linksbuendig       : %-5d, %-5d, %-5d\n",34, 343, 3343);
+  printf("Zu klein gedacht   : %5d\n", 234534535);
+  //printf("Ohnehin besser     : %*d\n", 12, 234534535);
+  return 0;
+}
+```
+@JSCPP(@input, )
+
+#### Formatierungsflags
+
+| Flag            | Bedeutung              |
+|:----------------|:-----------------------|
+| -               | linksbündig justieren  |
+| +               | Vorzeichen ausgeben    |
+| Leerzeichen     | Leerzeichen            |
+| 0               | numerische Ausgabe mit 0 aufgefüllt |
+| #               | für %x wird ein x in die Hex-Zahl eingefügt, für %e oder %f ein Dezimaltrenner (.) |
+
+```cpp                             printf_flag_examples.c
+#include <stdio.h>
+
+int main(){
+  printf("012345678901234567890\n");
+  printf("Integer: %+11d\n", 42);
+	printf("Integer: %+11d\n", -4242);
+  printf("Integer: %-e\n", 42.2345);
+  printf("Integer: %-g\n", 42.2345);
+  printf("Integer: %#x\n", 42);
+  return 0;
+}
+```
+@JSCPP(@input, )
+
+#### Genauigkeit
+
+ Bei %f werden ansonsten standardmäßig 6 Nachkommastellen ausgegeben. Mit %a.bf kann eine genauere Spezifikation erfolgen. a steht für die Feldbreite, b für die Nachkommastellen
+
+```cpp                             printf_flag_examples.c
+#include <stdio.h>
+
+int main(){
+  float a = 142.23443513452352;
+  printf("Float Wert: %f\n", a);
+  printf("Float Wert: %9.3f\n", a);
+  return 0;
+}
+```
+@JSCPP(@input, )
+
+#### Escape Sequenzen
+
+| Sequenz | Bedeutung  |
+|:------|:-----------|
+|\n |	newline                  |
+|\b |	backspace                |
+|\r |	carriage Return|
+|\t |	horizontal tab|
+|\\\ |	Backslash|
+|\' |	Single quotation mark|
+|\" |	Double quotation mark|
+
+```cpp                             printf_esc_sequences.c
+#include <stdio.h>
+
+int main(){
+  printf("123456789\r");
+  printf("ABCD\n\n");
+	printf("Vorname \t Name \t\t Alter \n");
+	printf("Andreas \t Mustermann\t 42 \n\n");
+	printf("Manchmal braucht man auch ein \"\\\"\n");
+  return 0;
+}
+```
+@JSCPP(@input, )
+
+### getchar
+
+Die Funktion `getchar()` liest Zeichen für Zeichen aus einem Puffer. Dies geschieht aber erst, wenn die Taste Taste `Enter` gedrückt wird.
+
+```cpp                     GetChar.c
+#include <stdio.h>
+
+int main(){
+	char c;
+	printf("Mit welchem Buchstaben beginnt ihr Vorname? ");
+	c = getchar();
+	printf("\nIch weiss jetzt, dass Ihr Vorname mit '%c' beginnt.\n", c);
+	return 0;
+}
+```
+``` text                  stdin
+T
+```
+@JSCPP(@input,`@input(1)`)
+
+Problem: Es lassen sich immer nur einzelne Zeichen erfassen, die durch `Enter` bestätigt wurden. Als flexiblere Lösung lässt sich `scanf` anwenden.
+
+### scanf
+
+```cpp                     scanf_getNumbers.c
+#include <stdio.h>
+
+int main(){
+  int i;
+	float a;
+	char b;
+	printf("Bitte folgende Werte eingeben %%c %%f %%d: ");
+	scanf(" %c %f %4d", &b, &a, &i);
+	printf("%c %f %d\n", b, a, i);
+	return 0;
+}
+```
+
+<!-- style="background: black; color: white;"-->
+<pre class=="lia-code-stdout" >
+▶ gcc sizeof_example.c
+▶ ./a.out
+Bitte folgende Werte eingeben %c %f %d: A -234.24324 234562
+A -234.243240 2345
+</pre>
+
+
+
 
 
 ## Ausblick
@@ -630,7 +812,8 @@ printf("55");    // Korrekt
 #include<stdio.h>
 
 int main() {
-  printf("... bis zum naechsten mal!");
+  printf("... \t bis \n\t\t zum \n\t\t\t");
+  printf("naechsten \n\t\t\t\t\t mal! \n");
 	return 0;
 }
 ```
