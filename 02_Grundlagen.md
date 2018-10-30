@@ -45,7 +45,8 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 + Worin unterscheidet sich die Zahldarstellung von ganzen Zahlen (`int`) von den Gleitkommazahlen (`float`).
 + Welche Datentypen kennt die Sprache C?
 + Erläutern Sie für `char` und `int` welche maximalen und minimalen Zahlenwerte sich damit angeben lassen.
-+ ...
++ Ist printf ein Schlüsselwort der Programmiersprache C?
++ Welche Beschränkung hat `getchar`?
 
 Vorwarnung: Man kann Variablen nicht ohne Ausgaben und Ausgaben nicht ohne Variablen erklären. Deshalb wird im folgenden immer wieder auf einzelne Aspekte vorgegriffen. Nach der Vorlesung sollte sich dann aber ein Gesamtbild ergeben.
 
