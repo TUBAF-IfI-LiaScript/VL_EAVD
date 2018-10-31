@@ -195,11 +195,12 @@ Welche Informationen lassen sich mit Blick auf einen Speicherauszug im Hinblick 
 
 | Adresse | Speicherinhalt | Zahlenwert | Zahlenwert | Zahlenwert   |
 |:--------|:---------------|:-----------|:-----------|:-------------| 
+|         |                |  (Byte)    | (2 Byte)   | (4 Byte)     |
 | 0010    | 0000 1100      | 12         |            |              |
 | 0011    | 1111 1101      | 253 (-125) | 3325       |              |
 | 0012    | 0001 0000      | 16         |            |              |
 | 0013    | 1000 0000      | 128 (-128) | 4224       | 217911424    |
-|         |                |  (Byte)    | (2 Byte)   | (4 Byte)     |
+
 
     {{3}}
 Der dargestellte Speicherauszug kann aber auch eine Kommazahl (Floating Point) umfassen und repräsentiert dann den Wert `3.8990753E-31`
