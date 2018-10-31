@@ -169,12 +169,12 @@ Welche Informationen lassen sich mit Blick auf einen Speicherauszug im Hinblick 
 
 {{0-1}}
 
-    | Adresse | Speicherinhalt |
-    |         | binär          |
-    | 0010    | 0000 1100      |
-    | 0011    | 1111 1101      |
-    | 0012    | 0001 0000      |
-    | 0013    | 1000 0000      |
+| Adresse | Speicherinhalt |
+|         | binär          |
+| 0010    | 0000 1100      |
+| 0011    | 1111 1101      |
+| 0012    | 0001 0000      |
+| 0013    | 1000 0000      |
 
 {{1-2}}
 
