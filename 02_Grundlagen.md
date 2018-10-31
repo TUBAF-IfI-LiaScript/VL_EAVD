@@ -168,28 +168,31 @@ Verschiedene Konvention geht noch einen Schritt weiter und verknüpft Datentypen
 Welche Informationen lassen sich mit Blick auf einen Speicherauszug im Hinblick auf die Daten extrahieren?
 
 {{0-1}}
-| Adresse | Speicherinhalt |
-|         | binär          |
-| 0010    | 0000 1100      |
-| 0011    | 1111 1101      |
-| 0012    | 0001 0000      |
-| 0013    | 1000 0000      |
+
+    | Adresse | Speicherinhalt |
+    |         | binär          |
+    | 0010    | 0000 1100      |
+    | 0011    | 1111 1101      |
+    | 0012    | 0001 0000      |
+    | 0013    | 1000 0000      |
 
 {{1-2}}
-| Adresse | Speicherinhalt | Zahlenwert |
-|         |                |  (Byte)    |
-| 0010    | 0000 1100      | 12         |
-| 0011    | 1111 1101      | 253 (-125) |
-| 0012    | 0001 0000      | 16         |
-| 0013    | 1000 0000      | 128 (-128) |
+
+    | Adresse | Speicherinhalt | Zahlenwert |
+    |         |                |  (Byte)    |
+    | 0010    | 0000 1100      | 12         |
+    | 0011    | 1111 1101      | 253 (-125) |
+    | 0012    | 0001 0000      | 16         |
+    | 0013    | 1000 0000      | 128 (-128) |
 
 {{2}}
-| Adresse | Speicherinhalt | Zahlenwert | Zahlenwert | Zahlenwert   |
-|         |                |  (Byte)    | (2 Byte)   | (4 Byte)     |
-| 0010    | 0000 1100      | 12         |            |              |
-| 0011    | 1111 1101      | 253 (-125) | 3325       |              |
-| 0012    | 0001 0000      | 16         |            |              |
-| 0013    | 1000 0000      | 128 (-128) | 4224       | 217911424    |
+
+    | Adresse | Speicherinhalt | Zahlenwert | Zahlenwert | Zahlenwert   |
+    |         |                |  (Byte)    | (2 Byte)   | (4 Byte)     |
+    | 0010    | 0000 1100      | 12         |            |              |
+    | 0011    | 1111 1101      | 253 (-125) | 3325       |              |
+    | 0012    | 0001 0000      | 16         |            |              |
+    | 0013    | 1000 0000      | 128 (-128) | 4224       | 217911424    |
 
 {{3}}
 Der dargestellte Speicherauszug kann aber auch eine Kommazahl (Floating Point) umfassen und repräsentiert dann den Wert `3.8990753E-31`
@@ -206,17 +209,17 @@ Folglich bedarf es eines expliziten Wissens um den Charakter der Zahl, um eine k
 
 Ganzzahlen sind Zahlen ohne Nachkommastellen mit und ohne Vorzeichen. In C gibt es folgende Typen für Ganzzahlen:
 
-| Schlüsselwort  | Benutzung                       | Mindestgröße |
-|:---------------|:--------------------------------|:-------------|
-| char           | 1 Byte bzw. 1 Zeichen           | 1 Byte (min/max) |
-| short int      | Ganzahl (ggf. mit Vorzeichen)   | 2 Byte          |
-| int            | Ganzahl (ggf. mit Vorzeichen)   | "natürliche Größe"       |
-| long int       | Ganzahl (ggf. mit Vorzeichen)   |              |
-| long long int  | Ganzahl (ggf. mit Vorzeichen)   |              |
-| float          | Gebrochener Wert mit Vorzeichen | 4 Byte       |
-| double         | Gebrochener Wert mit Vorzeichen | 8 Byte       |
-| long double    | Gebrochener Wert mit Vorzeichen |              |
-| _Bool          | boolsche Variable               | 1 Bit        |
+    | Schlüsselwort  | Benutzung                       | Mindestgröße |
+    |:---------------|:--------------------------------|:-------------|
+    | char           | 1 Byte bzw. 1 Zeichen           | 1 Byte (min/max) |
+    | short int      | Ganzahl (ggf. mit Vorzeichen)   | 2 Byte          |
+    | int            | Ganzahl (ggf. mit Vorzeichen)   | "natürliche Größe"       |
+    | long int       | Ganzahl (ggf. mit Vorzeichen)   |              |
+    | long long int  | Ganzahl (ggf. mit Vorzeichen)   |              |
+    | float          | Gebrochener Wert mit Vorzeichen | 4 Byte       |
+    | double         | Gebrochener Wert mit Vorzeichen | 8 Byte       |
+    | long double    | Gebrochener Wert mit Vorzeichen |              |
+    | _Bool          | boolsche Variable               | 1 Bit        |
 
 ```
 signed char <= short <= int <= long <= long long
@@ -224,12 +227,12 @@ signed char <= short <= int <= long <= long long
 
 Gängige Zuschnitte für `char` oder `int`
 
-| Schlüsselwort  | Wertebereich               |
-|:---------------|:---------------------------|
-| signed char    | -128 bis 127               |
-| char           | 0 bis 255 (0xFF)            |
-| signed int     | 32768  bis 32767     |
-| int            |  65536 (0xFFFF)         |
+    | Schlüsselwort  | Wertebereich               |
+    |:---------------|:---------------------------|
+    | signed char    | -128 bis 127               |
+    | char           | 0 bis 255 (0xFF)            |
+    | signed int     | 32768  bis 32767     |
+    | int            |  65536 (0xFFFF)         |
 
 Wenn die Typ-Spezifizierer (`long` oder `short`) vorhanden sind kann auf die `int` Typangabe verzichtet werden.
 
@@ -315,10 +318,10 @@ Zur Darstellung von Fließkommazahlen sagt der C-Standard nichts aus. Zur konkre
 
 Im Gegensatz zu Ganzzahlen gibt es bei den Fließkommazahlen keinen Unterschied zwischen vorzeichenbehafteten und vorzeichenlosen Zahlen. Alle Fließkommazahlen sind in C immer vorzeichenbehaftet.
 
-| Schlüsselwort  | Wertebereich               |
-|:---------------|:---------------------------|
-| float          | größte Zahl 3.4028234664e+38       |
-| char           | kleinste Zahl 1.1754943508e-38           |
+    | Schlüsselwort  | Wertebereich               |
+    |:---------------|:---------------------------|
+    | float          | größte Zahl 3.4028234664e+38       |
+    | char           | kleinste Zahl 1.1754943508e-38           |
 
 ACHTUNG: Fließkommazahlen bringen neben den Maximal und Minimalwerten noch einen weiteren Faktor mit - die Unsicherheit
 
@@ -353,11 +356,11 @@ Ungleich
 
 Ab C99 umfasst die Standard Bibliothek das header file `stdint.h`, das Ganzzahldatentypen mit exakten bzw. spezifizierten Datenbreiten einführt. Dabei können die individuellen Realisierungen für verschiedene Compiler auf ein und der selben Architektur durchaus variieren!
 
-| signed       | unsigned      | Bedeutung                       |
-|:-------------|:--------------|:--------------------------------|
-| intN_t       | uintN_t       | exakte Breite von N Bits (uint8_t)|
-| int_leastN_t | uint_leastN_t | garantierte Mindestbreite       |
-| int_fastN_t  | uint_fastN_t  | fokussiert die Ausführungszeit  |
+    | signed       | unsigned      | Bedeutung                       |
+    |:-------------|:--------------|:--------------------------------|
+    | intN_t       | uintN_t       | exakte Breite von N Bits (uint8_t)|
+    | int_leastN_t | uint_leastN_t | garantierte Mindestbreite       |
+    | int_fastN_t  | uint_fastN_t  | fokussiert die Ausführungszeit  |
 
 
 #### Und was soll ich nun verwenden?
@@ -390,12 +393,12 @@ unsigned short     2.9580  2.1010  0.7495  2.3240
 
 Zahlenliterale können in C mehr als Ziffern umfassen!
 
-|  Zahlentyp | Dezimal       | Oktal         | Hexadezimal  |
-|:-----------|:--------------|---------------|--------------|
-| Eingabe    | x             | x             | x            |
-| Ausgabe    | x             | x             | x            |
-| Beispiel   | `12`          | `020`         | `0x20`       |
-|            | `1234.342`    |               | `0X1a`       |
+    |  Zahlentyp | Dezimal       | Oktal         | Hexadezimal  |
+    |:-----------|:--------------|---------------|--------------|
+    | Eingabe    | x             | x             | x            |
+    | Ausgabe    | x             | x             | x            |
+    | Beispiel   | `12`          | `020`         | `0x20`       |
+    |            | `1234.342`    |               | `0X1a`       |
 
 ```cpp                     NumberFormats.c
 #include <stdio.h>
@@ -650,18 +653,19 @@ int main(){
 @JSCPP(@input, )
 
 {{1-3}}
-|Zeichen    |	Umwandlung       |
-|:----------|:-----------------|
-|%d oder %i |	int|
-|%c |	einzelnes Zeichen|
-|%e oder %E |	double im Format `[-]d.ddd e±dd` bzw. `[-]d.ddd E±dd`|
-|%f |	double im Format `[-]ddd.ddd`|
-|%o |	int als Oktalzahl ausgeben|
-|%p |	die Adresse eines Zeigers|
-|%s |	Zeichenkette ausgeben|
-|%u |	unsigned int|
-|%x oder %X |	int als Hexadezimalzahl ausgeben|
-|%% |	Prozentzeichen |
+
+    |Zeichen    |	Umwandlung       |
+    |:----------|:-----------------|
+    |%d oder %i |	int|
+    |%c |	einzelnes Zeichen|
+    |%e oder %E |	double im Format `[-]d.ddd e±dd` bzw. `[-]d.ddd E±dd`|
+    |%f |	double im Format `[-]ddd.ddd`|
+    |%o |	int als Oktalzahl ausgeben|
+    |%p |	die Adresse eines Zeigers|
+    |%s |	Zeichenkette ausgeben|
+    |%u |	unsigned int|
+    |%x oder %X |	int als Hexadezimalzahl ausgeben|
+    |%% |	Prozentzeichen |
 
 {{2-3}}
 Welche Formatierungmöglichkeiten bietet `printf` noch?
@@ -692,13 +696,13 @@ int main(){
 
 #### Formatierungsflags
 
-| Flag            | Bedeutung              |
-|:----------------|:-----------------------|
-| -               | linksbündig justieren  |
-| +               | Vorzeichen ausgeben    |
-| Leerzeichen     | Leerzeichen            |
-| 0               | numerische Ausgabe mit 0 aufgefüllt |
-| #               | für %x wird ein x in die Hex-Zahl eingefügt, für %e oder %f ein Dezimaltrenner (.) |
+    | Flag            | Bedeutung              |
+    |:----------------|:-----------------------|
+    | -               | linksbündig justieren  |
+    | +               | Vorzeichen ausgeben    |
+    | Leerzeichen     | Leerzeichen            |
+    | 0               | numerische Ausgabe mit 0 aufgefüllt |
+    | #               | für %x wird ein x in die Hex-Zahl eingefügt, für %e oder %f ein Dezimaltrenner (.) |
 
 ```cpp                             printf_flag_examples.c
 #include <stdio.h>
@@ -733,15 +737,15 @@ int main(){
 
 #### Escape Sequenzen
 
-| Sequenz | Bedeutung  |
-|:------|:-----------|
-|\n |	newline                  |
-|\b |	backspace                |
-|\r |	carriage Return|
-|\t |	horizontal tab|
-|\\\ |	Backslash|
-|\' |	Single quotation mark|
-|\" |	Double quotation mark|
+    | Sequenz | Bedeutung  |
+    |:------|:-----------|
+    |\n |	newline                  |
+    |\b |	backspace                |
+    |\r |	carriage Return|
+    |\t |	horizontal tab|
+    |\\\ |	Backslash|
+    |\' |	Single quotation mark|
+    |\" |	Double quotation mark|
 
 ```cpp                             printf_esc_sequences.c
 #include <stdio.h>
