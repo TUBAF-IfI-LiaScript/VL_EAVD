@@ -169,7 +169,6 @@ Welche Informationen lassen sich mit Blick auf einen Speicherauszug im Hinblick 
 
 {{0-1}}
 | Adresse | Speicherinhalt |
-|:--------|:---------------|
 | 0010    | 0000 1100      |
 | 0011    | 1111 1101      |
 | 0012    | 0001 0000      |
@@ -178,7 +177,6 @@ Welche Informationen lassen sich mit Blick auf einen Speicherauszug im Hinblick 
 
 {{1-2}}
 | Adresse | Speicherinhalt | Zahlenwert |
-|:--------|:---------------|:-----------|
 | 0010    | 0000 1100      | 12         |
 | 0011    | 1111 1101      | 253 (-125) |
 | 0012    | 0001 0000      | 16         |
@@ -187,7 +185,6 @@ Welche Informationen lassen sich mit Blick auf einen Speicherauszug im Hinblick 
 
 {{2}}
 | Adresse | Speicherinhalt | Zahlenwert | Zahlenwert | Zahlenwert   |
-|:--------|:---------------|:-----------|:-----------|:-------------|
 | 0010    | 0000 1100      | 12         |            |              |
 | 0011    | 1111 1101      | 253 (-125) | 3325       |              |
 | 0012    | 0001 0000      | 16         |            |              |
