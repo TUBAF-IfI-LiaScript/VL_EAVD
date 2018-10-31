@@ -168,7 +168,6 @@ Verschiedene Konvention geht noch einen Schritt weiter und verknüpft Datentypen
 Welche Informationen lassen sich mit Blick auf einen Speicherauszug im Hinblick auf die Daten extrahieren?
 
     {{0-1}}
-
 | Adresse | Speicherinhalt |
 |:--------|:---------------|
 | 0010    | 0000 1100      |
@@ -178,7 +177,6 @@ Welche Informationen lassen sich mit Blick auf einen Speicherauszug im Hinblick 
 |         | binär          |
 
     {{1-2}}
-
 | Adresse | Speicherinhalt | Zahlenwert |
 |:--------|:---------------|:-----------|
 | 0010    | 0000 1100      | 12         |
@@ -188,7 +186,6 @@ Welche Informationen lassen sich mit Blick auf einen Speicherauszug im Hinblick 
 |         |                |  (Byte)    |
 
     {{2}}
-
 | Adresse | Speicherinhalt | Zahlenwert | Zahlenwert | Zahlenwert   |
 |:--------|:---------------|:-----------|:-----------|:-------------|
 | 0010    | 0000 1100      | 12         |            |              |
