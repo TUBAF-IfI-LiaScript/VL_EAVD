@@ -275,7 +275,7 @@ char s[] = "Eine kurze Zeichenkette";
 
 [http://www.chip.de/webapps/ASCII-Tabelle_50073950.html](http://www.chip.de/webapps/ASCII-Tabelle_50073950.html)
 
---{{1}}--
+    --{{1}}--
 Erweiterung erfährt `char` mit der Überarbeitung des C-Standards 1994. Hier wurde das Konzept eines breiten Zeichens (engl. *wide character*) eingeführt, das auch Zeichensätze aufnehmen kann, die mehr als 1 Byte für die Codierung eines Zeichen benötigen (beispielsweise Unicode-Zeichen). Siehe `wchar_t` oder `wprintf`.
 
 #### Architekturspezifische Ausprägung
@@ -563,7 +563,7 @@ experiments.c:12:3: warning: ‘y’ is used uninitialized in this function [-Wu
    ^
 </pre>
 
-{{0}}
+    {{0}}
 Der C++, der für diese Webseite zum Einsatz kommt initialisiert offenbar alle Werte mit 0 führen Sie dieses Beispiel aber einmal mit einem richtigen Compiler aus.
 
 
@@ -675,11 +675,10 @@ int main(){
 |%x oder %X |	int als Hexadezimalzahl ausgeben                     |
 |%% |	Prozentzeichen                                               |
 
-{{2-3}}
+    {{2-3}}
 Welche Formatierungmöglichkeiten bietet `printf` noch?
 
-{{2-3}}
-
+    {{2-3}}
 + die Feldbreite
 + ein Flag
 + durch einen Punkt getrennt die Anzahl der Nachkommstellen (Längenangabe) und an letzter Stelle schließlich
