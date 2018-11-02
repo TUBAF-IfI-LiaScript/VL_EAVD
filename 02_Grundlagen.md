@@ -191,8 +191,8 @@ Welche Informationen lassen sich mit Blick auf einen Speicherauszug im Hinblick 
 | 0012    | 0001 0000      | 16         |            |              |
 | 0013    | 1000 0000      | 128 (-128) | 4224       | 217911424    |
 
-    --{{2}}--
 
+<!-- hidden = "true" -->
 | Adresse | Speicherinhalt | Zahlenwert | Zahlenwert | Zahlenwert   |
 |:--------|:---------------|:-----------|:-----------|:-------------| 
 |         |                |  (Byte)    | (2 Byte)   | (4 Byte)     |
