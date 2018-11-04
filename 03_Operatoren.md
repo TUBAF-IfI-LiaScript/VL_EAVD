@@ -47,9 +47,11 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
 ANSI C (C89)/ Schlüsselwörter:
 
+|Standard    | Schlüsselwörter |
+|:----------|:-----------|:-----------|:-----------|:------------|:-----------|:------------|
 | C89/C90    | auto | <span style="color:blue">double</span> | <span style="color:blue">int</span> | struct | break|
 |           | else  | <span style="color:blue">long</span> | switch | case | enum |
-|           | register | typedef | <span style="color:blue">char</span> | extern | return |           |
+|           | register | typedef | <span style="color:blue">char</span> | extern | return |
 |           | union | const | <span style="color:blue">float</span> | <span style="color:blue">short</span> | <span style="color:blue">unsigned</span>  |
 |           | continue | for | <span style="color:blue">signed</span> | <span style="color:blue">void</span> | default |
 |           | goto | sizeof | volatile | do | if |
