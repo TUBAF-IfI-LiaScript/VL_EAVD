@@ -20,14 +20,18 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
     JSCPP.run(`@0`, `@1`, {stdio: {write: s => { output += s.replace(/\n/g, "<br>");}}});
     output;
   } catch (msg) {
+    console.log(msg);
     var error = new LiaError(msg, 1);
-    var log = msg.match(/(.*)\nline (\d+) \(column (\d+)\):.*\n.*\n(.*)/);
-    var info = log[1] + " " + log[4];
 
-    if (info.length > 80)
-      info = info.substring(0,76) + "..."
+    try {
+        var log = msg.match(/(.*)\nline (\d+) \(column (\d+)\):.*\n.*\n(.*)/);
+        var info = log[1] + " " + log[4];
 
-    error.add_detail(0, info, "error", log[2]-1, log[3]);
+        if (info.length > 80)
+          info = info.substring(0,76) + "..."
+
+        error.add_detail(0, info, "error", log[2]-1, log[3]);
+    } catch(e) {}
 
     throw error;
   }
@@ -40,7 +44,7 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
 **Fragen an die heutige Veranstaltung ...**
 
-+
+
 
 
 **Wie weit sind wir schon gekommen?**
