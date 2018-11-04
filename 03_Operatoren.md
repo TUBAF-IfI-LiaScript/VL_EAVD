@@ -40,7 +40,14 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
 **Fragen an die heutige Veranstaltung ...**
 
++ Wonach lassen sich Operatoren unterscheiden?
 +
+
+Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
+
+https://github.com/liaScript/CCourse/blob/master/03_Operatoren.md
+
+
 
 
 **Wie weit sind wir schon gekommen?**
@@ -196,6 +203,37 @@ int main(void) {
 @JSCPP(@input, )
 
 
+### Zuweisungsoperator
+
+`=`
+
+HIER FEHLT NOCH EIN BISSCHEN WAS!
+
+
+Achtung: Verwechseln Sie nicht den Zuweisungsoperator `=` mit dem Vergleichsoperator `==` . Der Compiler kann die Fehlerhaftigkeit kaum erkennen und generiert Code, der ein entsprechendes Fehlverhalten zeigt.
+
+```cpp                            IncrementDecrement.c
+#include <stdio.h>
+
+int main(){
+  int x, y;
+  x = 15;             // Zuweisungsoperator
+  y = x = x + 5;
+  printf("x=%d und y=%d\n",x, y);
+
+  y = x == 20;
+  printf("x=%d und y=%d\n",x, y);
+  return 0;
+}
+```
+<pre class="lia-code-stdout">
+▶ gcc experiments.c
+▶ ./a.out
+x=20 und y=20
+x=20 und y=1
+</pre>
+
+
 ### Arithmetische Operatoren
 
 #### Inkrement und Dekrement
@@ -235,39 +273,7 @@ int main(){
 
 In C ist die Wahl beliebig, in C++ sollte immer die Präfixvariante genutzt werden. Siehe die Diskussion unter [stackoverflow](https://stackoverflow.com/questions/24886/is-there-a-performance-difference-between-i-and-i-in-c) und Scott Meyer "More Effective C++".
 
-#### Shift-Operationen
-
-Die Operatoren `<<` und `>>` dienen dazu, den Inhalt einer Variablen bitweise um 1 nach links bzw. um 1 nach rechts zu verschieben.
-
-```cpp                            IncrementDecrement.c
-#include <stdio.h>
-
-// diese Funktion dient nur der Visualisierung
-// Zahl in binaerer Form als char array
-int bin(const char *input) {
-    int pos = 0;
-    int val = 0;
-    while (input[pos]) {
-    	val <<=1;
-    	val |= (input[pos] - '0') & 0x1;
-    	pos++;
-    }
-    return val;
-}
-
-int main(){
-  int x = 15;
-  char [15] output;
-  printf("x=%s \n",output);
-  return 0;
-}
-```
-@JSCPP(@input, )
-
-100000000
-00000000
-00000000
-00010001
+#### Binäre arithmetische Operatoren
 
 | Operator | Bedeutung         | Ganzzahl     | Gleitkomma |
 |:---------|:------------------|:-------------|:-----------|
@@ -277,10 +283,155 @@ int main(){
 | /        | Division          | x (Ganzzahl) | x          |
 | %        | Modulo (Rest einer Division) | x       |        |
 
+```cpp                            calcExamples.c
+#include <stdio.h>
+
+int main(){
+  int zahl1,zahl2;
+  int ergeb;
+  zahl1=10;
+  zahl2=20;
+  printf("Zahl 1= %d\n",zahl1);
+  printf("Zahl 2= %d\n",zahl2);
+
+  // Moeglichkeit 1: zuerst Berechnung, dann Ausgabe
+  ergeb=zahl1+zahl2;
+  printf("Summe der Zahlen:%d\n",ergeb);
+  // Moeglichkeit 2: Berechnung direkt für die Ausgabe
+  printf("%d - %d = %d\n", zahl1, zahl2, zahl1-zahl2);
+}
+```
+@JSCPP(@input, )
+
+Divisionsoperationen werden für Ganzzahl und Gleitkommazahlen unterschiedlich realisiert.
+
++ Wenn zwei Ganzzahlen wie z. B. $4/3$ dividiert werden, erhalten wir das Ergebnis 1 zurück, dar nicht ganzzahlige Anteil der Lösung  bleibt unbeachtet. Um diesen aber ggf. zu erfassen, kann der verbleibene Rest mit dem Modulo Operator `%` bestimmt werden.
++ Für Fließkommazahlen wird die Division wie erwartet realisiert.
+
+```cpp                                  moduloExample.c
+#include <stdio.h>
+
+int main(){
+  int timestamp, sekunden, minuten;
+
+  timestamp = 345; //[s]
+  printf("Zeitstempel %d [s]\n", timestamp);
+  minuten=timestamp/60;
+  sekunden=timestamp%60;
+  printf("Besser lesbar = %d min. %d sek.\n", minuten, sekunden);
+  return 0;
+}
+```
+@JSCPP(@input, )
+
+> Achtung: Der Rechenoperator Modulo mit dem `%` Zeichen hat nichts mit dem Formatierungszeichen in `printf("%d")` und `scanf("%f")` zu tuen.
+
+Die arithmetischen Operatoren lassen sich in verkürzter Schreibweise wie folgt darstellen:
+
+| Operation   | Bedeutung                    |
+|:------------|:-----------------------------|
+| `+=`        | `a+=b` äquivalent zu `a=a+b` |
+| `-=`        | `a-=b` äquivalent zu `a=a-b` |
+| `*=`        | `a*=b` äquivalent zu `a=a*b` |
+| `/=`        | `a/=b` äquivalent zu `a=a/b` |
+| `%=`        | `a%=b` äquivalent zu `a=a%b` |
+
+```cpp                                  moduloExample.c
+#include <stdio.h>
+
+int main() {
+   int x=2, y=4, z=6;
+   printf("x=%d y=%d z=%d\n", x, y, z);
+
+   printf("x = x+y =%d\n", x+=y);
+   printf("z = z+y =%d\n", z+=y);
+   printf("z = z+x =%d\n", z+=x);
+   printf("x=%d y=%d z=%d\n", x, y, z);
+   return 0;
+}
+```
+@JSCPP(@input, )
+
+Verlieren Sie bei langen Berechnungsketten nicht den Überblick! Insbesondere die verkürzte Schreibweise forciert dies.
+
 ### Logische Operatoren
 
+Kern der Logik sind Aussagen, die wahr oder falsch sein können.
 
-#### Vorrangregeln
+
+| Operation   | Bedeutung                    |
+|:------------|:-----------------------------|
+| `<`        | kleiner als  |
+| `>`        | größer als |
+| `<=`        | kleiner oder gleich |
+| `>=`        | größer oder gleich |
+| `==`        | gleich |
+| `!=`        | ungleich |
+
+```cpp                            IncrementDecrement.c
+#include <stdio.h>
+
+int main(){
+  int x = 15;
+  printf("x=%d \n", 15 << 1);
+  return 0;
+}
+```
+@JSCPP(@input, )
+
+
+### Bit-Operationen
+
+#### Shift Operatoren
+
+Die Operatoren `<<` und `>>` dienen dazu, den Inhalt einer Variablen bitweise um 1 nach links bzw. um 1 nach rechts zu verschieben.
+
+```cpp                            IncrementDecrement.c
+#include <stdio.h>
+
+int main(){
+  int x = 15;
+  printf("x=%d \n", 15 << 1);
+  return 0;
+}
+```
+@JSCPP(@input, )
+
+Und wozu braucht man das? Zum einen beim Handling einzelner Bits, wie es heute beim *Beispiel des Tages* gezeigt wird. Zum anderen zur Realisierung von Multiplikations- und Divisionsoperationen mit Faktoren/Divisoren $2^n$
+
+
+
+### Bedingungsoperator
+
+Der Bedingungsoperator liefert in Abhängigkeit von der Gültigkeit einer logischen Aussage einen von zwei möglichen Ergebniswerten zurück. Folglich hat er drei Operanden:
++ die Bedingung
++ den Wert für eine gültige Aussage
++ den Wert für eine falsche Aussage
+
+```cpp
+bedingung ? wert_wenn_wahr : wert_wenn_falsch
+```
+
+Die damit formulierbaren Anweisungen sind äquivalent zu `if`-Statements.
+
+```cpp                     ConditionStatements.c
+// Falls a größer als b ist, wird a zurückgegeben, ansonsten b.
+if (a > b)
+   return a;
+ else
+   return b;
+
+// analog
+return (a > b) ? a : b;
+```
+
+Aussagen mit dem Bedingungsoperator sind nicht verkürzte Schreibweise für `if-else` Anweisungen. Es sind zwei offenkundige Unterschiede zu berücksichtigen:
+
++ Der Bedingungsoperator generiert einen Ergebniswert und kann daher z.B. in Formeln und Funktionsaufrufen verwendet werden
++ Bei if-Anweisungen kann der else-Teil entfallen, der Bedingungsoperator verlangt stets eine Angabe von beiden Ergebniswerten
+
+
+### Vorrangregeln
 
 
 
