@@ -167,7 +167,7 @@ Verschiedene Konvention geht noch einen Schritt weiter und verknüpft Datentypen
 
 Welche Informationen lassen sich mit Blick auf einen Speicherauszug im Hinblick auf die Daten extrahieren?
 
-{{0-1}}
+    {{0-1}}
 | Adresse | Speicherinhalt |
 |         | binär          |
 | 0010    | 0000 1100      |
@@ -175,7 +175,7 @@ Welche Informationen lassen sich mit Blick auf einen Speicherauszug im Hinblick 
 | 0012    | 0001 0000      |
 | 0013    | 1000 0000      |
 
-{{1-2}}
+    {{1-2}}
 | Adresse | Speicherinhalt | Zahlenwert |
 |         |                |  (Byte)    |
 | 0010    | 0000 1100      | 12         |
@@ -183,7 +183,7 @@ Welche Informationen lassen sich mit Blick auf einen Speicherauszug im Hinblick 
 | 0012    | 0001 0000      | 16         |
 | 0013    | 1000 0000      | 128 (-128) |
 
-{{2}}
+    {{2}}
 | Adresse | Speicherinhalt | Zahlenwert | Zahlenwert | Zahlenwert   |
 |         |                |  (Byte)    | (2 Byte)   | (4 Byte)     |
 | 0010    | 0000 1100      | 12         |            |              |
@@ -191,13 +191,24 @@ Welche Informationen lassen sich mit Blick auf einen Speicherauszug im Hinblick 
 | 0012    | 0001 0000      | 16         |            |              |
 | 0013    | 1000 0000      | 128 (-128) | 4224       | 217911424    |
 
-{{3}}
+
+<!-- hidden = "true" -->
+| Adresse | Speicherinhalt | Zahlenwert | Zahlenwert | Zahlenwert   |
+|:--------|:---------------|:-----------|:-----------|:-------------| 
+|         |                |  (Byte)    | (2 Byte)   | (4 Byte)     |
+| 0010    | 0000 1100      | 12         |            |              |
+| 0011    | 1111 1101      | 253 (-125) | 3325       |              |
+| 0012    | 0001 0000      | 16         |            |              |
+| 0013    | 1000 0000      | 128 (-128) | 4224       | 217911424    |
+
+
+    {{3}}
 Der dargestellte Speicherauszug kann aber auch eine Kommazahl (Floating Point) umfassen und repräsentiert dann den Wert `3.8990753E-31`
 
-{{4}}
+    {{4}}
 Folglich bedarf es eines expliziten Wissens um den Charakter der Zahl, um eine korrekte Interpretation zu ermöglichen. Dabei erfolgt die Einteilung nach:
 
-{{4}}
+    {{4}}
 + Wertebereichen (größte und kleinste Zahl)
 + ggf. vorzeichenbehaftet Zahlen
 + ggf. gebrochene Werte
@@ -227,9 +238,9 @@ Gängige Zuschnitte für `char` oder `int`
 | Schlüsselwort  | Wertebereich               |
 |:---------------|:---------------------------|
 | signed char    | -128 bis 127               |
-| char           | 0 bis 255 (0xFF)            |
-| signed int     | 32768  bis 32767     |
-| int            |  65536 (0xFFFF)         |
+| char           | 0 bis 255 (0xFF)           |
+| signed int     | 32768  bis 32767           |
+| int            |  65536 (0xFFFF)            |
 
 Wenn die Typ-Spezifizierer (`long` oder `short`) vorhanden sind kann auf die `int` Typangabe verzichtet werden.
 
@@ -264,7 +275,7 @@ char s[] = "Eine kurze Zeichenkette";
 
 [http://www.chip.de/webapps/ASCII-Tabelle_50073950.html](http://www.chip.de/webapps/ASCII-Tabelle_50073950.html)
 
---{{1}}--
+    --{{1}}--
 Erweiterung erfährt `char` mit der Überarbeitung des C-Standards 1994. Hier wurde das Konzept eines breiten Zeichens (engl. *wide character*) eingeführt, das auch Zeichensätze aufnehmen kann, die mehr als 1 Byte für die Codierung eines Zeichen benötigen (beispielsweise Unicode-Zeichen). Siehe `wchar_t` oder `wprintf`.
 
 #### Architekturspezifische Ausprägung
@@ -315,10 +326,10 @@ Zur Darstellung von Fließkommazahlen sagt der C-Standard nichts aus. Zur konkre
 
 Im Gegensatz zu Ganzzahlen gibt es bei den Fließkommazahlen keinen Unterschied zwischen vorzeichenbehafteten und vorzeichenlosen Zahlen. Alle Fließkommazahlen sind in C immer vorzeichenbehaftet.
 
-| Schlüsselwort  | Wertebereich               |
-|:---------------|:---------------------------|
-| float          | größte Zahl 3.4028234664e+38       |
-| char           | kleinste Zahl 1.1754943508e-38           |
+| Schlüsselwort  | Wertebereich                     |
+|:---------------|:---------------------------------|
+| float          | größte Zahl 3.4028234664e+38     |
+| char           | kleinste Zahl 1.1754943508e-38   |
 
 ACHTUNG: Fließkommazahlen bringen neben den Maximal und Minimalwerten noch einen weiteren Faktor mit - die Unsicherheit
 
@@ -353,11 +364,11 @@ Ungleich
 
 Ab C99 umfasst die Standard Bibliothek das header file `stdint.h`, das Ganzzahldatentypen mit exakten bzw. spezifizierten Datenbreiten einführt. Dabei können die individuellen Realisierungen für verschiedene Compiler auf ein und der selben Architektur durchaus variieren!
 
-| signed       | unsigned      | Bedeutung                       |
-|:-------------|:--------------|:--------------------------------|
+| signed       | unsigned      | Bedeutung                         |
+|:-------------|:--------------|:----------------------------------|
 | intN_t       | uintN_t       | exakte Breite von N Bits (uint8_t)|
-| int_leastN_t | uint_leastN_t | garantierte Mindestbreite       |
-| int_fastN_t  | uint_fastN_t  | fokussiert die Ausführungszeit  |
+| int_leastN_t | uint_leastN_t | garantierte Mindestbreite         |
+| int_fastN_t  | uint_fastN_t  | fokussiert die Ausführungszeit    |
 
 
 #### Und was soll ich nun verwenden?
@@ -552,7 +563,7 @@ experiments.c:12:3: warning: ‘y’ is used uninitialized in this function [-Wu
    ^
 </pre>
 
-{{0}}
+    {{0}}
 Der C++, der für diese Webseite zum Einsatz kommt initialisiert offenbar alle Werte mit 0 führen Sie dieses Beispiel aber einmal mit einem richtigen Compiler aus.
 
 
@@ -649,25 +660,25 @@ int main(){
 ```
 @JSCPP(@input, )
 
-{{1-3}}
-|Zeichen    |	Umwandlung       |
-|:----------|:-----------------|
-|%d oder %i |	int|
-|%c |	einzelnes Zeichen|
-|%e oder %E |	double im Format `[-]d.ddd e±dd` bzw. `[-]d.ddd E±dd`|
-|%f |	double im Format `[-]ddd.ddd`|
-|%o |	int als Oktalzahl ausgeben|
-|%p |	die Adresse eines Zeigers|
-|%s |	Zeichenkette ausgeben|
-|%u |	unsigned int|
-|%x oder %X |	int als Hexadezimalzahl ausgeben|
-|%% |	Prozentzeichen |
+    {{1-3}}
 
-{{2-3}}
+|Zeichen    |	Umwandlung                                           |
+|:----------|:-------------------------------------------------------|
+|%d oder %i |	int                                                  |
+|%c |	einzelnes Zeichen                                            |
+|%e oder %E |	double im Format `[-]d.ddd e±dd` bzw. `[-]d.ddd E±dd`|
+|%f |	double im Format `[-]ddd.ddd`                                |
+|%o |	int als Oktalzahl ausgeben                                   |
+|%p |	die Adresse eines Zeigers                                    |
+|%s |	Zeichenkette ausgeben                                        |
+|%u |	unsigned int                                                 |
+|%x oder %X |	int als Hexadezimalzahl ausgeben                     |
+|%% |	Prozentzeichen                                               |
+
+    {{2-3}}
 Welche Formatierungmöglichkeiten bietet `printf` noch?
 
-{{2-3}}
-
+    {{2-3}}
 + die Feldbreite
 + ein Flag
 + durch einen Punkt getrennt die Anzahl der Nachkommstellen (Längenangabe) und an letzter Stelle schließlich
