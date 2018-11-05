@@ -20,14 +20,18 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
     JSCPP.run(`@0`, `@1`, {stdio: {write: s => { output += s.replace(/\n/g, "<br>");}}});
     output;
   } catch (msg) {
+    console.log(msg);
     var error = new LiaError(msg, 1);
-    var log = msg.match(/(.*)\nline (\d+) \(column (\d+)\):.*\n.*\n(.*)/);
-    var info = log[1] + " " + log[4];
 
-    if (info.length > 80)
-      info = info.substring(0,76) + "..."
+    try {
+        var log = msg.match(/(.*)\nline (\d+) \(column (\d+)\):.*\n.*\n(.*)/);
+        var info = log[1] + " " + log[4];
 
-    error.add_detail(0, info, "error", log[2]-1, log[3]);
+        if (info.length > 80)
+          info = info.substring(0,76) + "..."
+
+        error.add_detail(0, info, "error", log[2]-1, log[3]);
+    } catch(e) {}
 
     throw error;
   }
@@ -41,13 +45,19 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 **Fragen an die heutige Veranstaltung ...**
 
 + Wonach lassen sich Operatoren unterscheiden?
-+
++ Welche unterschiedliche Bedeutung haben `x++` und `++x`
++ Erläutern Sie den Begriff unärer, binärer und tertiärer Operator.
++ Unterscheiden Sie Zuweisung und Anweisung.
++ Was bedeutet rechtsassoziativ und Linksassoziativ?
++ Welche Funktion erfüllen Bit-Operationen?
++ ???
 
+---------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
 https://github.com/liaScript/CCourse/blob/master/03_Operatoren.md
 
-
+---------------------------------------------------------------------
 
 
 **Wie weit sind wir schon gekommen?**
@@ -129,13 +139,72 @@ Hinweis: *Unterschiedliche Compiler verwenden unterschieldliche Konfigurationen 
 | 132e-3    | |
 | .132      | |
 
+### Was passiert bei der Überschreitung des Wertebereiches
+
+> Der Arithmetische Überlauf (arithmetic overflow) tritt auf, wenn das Ergebnis einer Berechnung für den gültigen Zahlenbereich zu groß ist, um noch richtig interpretiert werden zu können.
+
+```cpp                     Overflow.c
+#include <stdio.h>
+#include <limits.h>   /* INT_MIN und INT_MAX */
+
+int main(){
+  short a = 30000;
+  short c;
+  unsigned short d;
+  //unsigned c;
+  printf("unsigned short - Wertebereich von %d bis %d\n", 0, USHRT_MAX);
+  printf("short - Wertebereich von %d bis %d\n", SHRT_MIN, SHRT_MAX);
+  c = 3 * a;
+  printf("c=%d\n", c);
+  d = 3 * a;
+  printf("c=%d\n", d);
+}
+```
+
+<pre class="lia-code-stdout">
+▶ ./a.out
+unsigned short - Wertebereich von 0 bis 65535
+short - Wertebereich von -32768 bis 32767
+c=-5536
+c=24464
+</pre>
+
+Ganzzahlüberläufe in fehlerhaften Berechnung zur Bestimmung der Größe eines Puffers oder der Adressierung eines Feldes können es einem Angreifer ermöglichen den Stack zu überschreiben.
+
+
 ### Scanf Beispiel
 
 hier fehlt es noch
 
-## 1. Zusammengesetzte Datentypen
+## 1. Erweiterte Datentypen
 
-enum
+### Bool
+
+Seid dem C99 Standard existiert ein spezieller Datentyp `_Bool` für binäre Variablen. Zuvor wurden vergleichbare Formate über Makros realisiert.
+
+```cpp                     BoolExample.c
+#include <stdio.h>
+#include <stdbool.h>
+
+int main() {
+   _Bool a = true;
+   _Bool b = false;
+   _Bool c = 45;
+
+   printf("a = %i, b = %i, c = %i\n", a, b, c);
+   return 0;
+}
+```
+<pre class="lia-code-stdout">
+▶ ./a.out
+a = 1, b = 0, c=1
+</pre>
+
+Sinnvoll sind boolsche Variablen insbesondere im Kontext von logischen Ausdrücken.
+
+### Enums
+
+
 
 
 ## 2. Operatoren
@@ -168,51 +237,60 @@ Wiederum können `+` und `-` alle drei Rollen einnehmen:
 ```cpp
 a = b + c; // Infix
 a = -b;    // Präfix
-a = b ++;  // Postfix
+a = b++;  // Postfix
 ```
 
 **Funktion**
 
 + Arithmetische Operatoren
 + Logische Operatoren
-+ ...
++ Bit Operationen
 
+**Assoziativität**
 
-** Assoziativität ?????? **
++ Linksassoziativ - Auswertung von links nach rechts
++ Rechtsassoziativ - Auswertung von rechts nach links
 
+### Zuweisungsoperator
+
+Der Zuweisungsoperator `=` ist vom mathematischen Bedeutung dieses zu trennen - einer Variablen wird ein Wert zugeordnet. Damit macht dann auch `x=x+1` Sinn.
 
 ```cpp                     Pointer.c
 #include <stdio.h>
 
-int main(void) {
+int main() {
    int zahl1 = 10;
    int zahl2 = 20;
    int ergeb;
-
-   // Möglichkeit 1: eigenstaendige Berechnung
+   // Zuweisung des Ausdrucks 'zahl1 + zahl2'
    ergeb = zahl1 + zahl2;
+
    printf("%d + %d = %d\n", zahl1, zahl2, ergeb);
-
-   // Möglichkeit 2: mit Anzeige und Berechnung am Ende der
-   // printf'-Anweisung
-   printf("%d * %d = %d\n", zahl1, zahl2, zahl1*zahl2);
-
    return 0;
 }
 ```
 @JSCPP(@input, )
 
+Die Zuweisungsoperation ist rechtsassoziativ. Der Ausdruck wird von rechts nach links ausgewertet.
 
-### Zuweisungsoperator
+```cpp                     AssociationDirection.c
+#include <stdio.h>
 
-`=`
-
-HIER FEHLT NOCH EIN BISSCHEN WAS!
-
+int main() {
+  int a, b;
+  a = 5;
+  a = b = a + 1;
+  printf("a = %d, b=%d\n", a, b);
+}
+```
+<pre class="lia-code-stdout">
+▶ ./a.out
+a = 6, b=6
+</pre>
 
 Achtung: Verwechseln Sie nicht den Zuweisungsoperator `=` mit dem Vergleichsoperator `==` . Der Compiler kann die Fehlerhaftigkeit kaum erkennen und generiert Code, der ein entsprechendes Fehlverhalten zeigt.
 
-```cpp                            IncrementDecrement.c
+```cpp                            EqualSign.c
 #include <stdio.h>
 
 int main(){
@@ -449,7 +527,7 @@ Aussagen mit dem Bedingungsoperator sind nicht verkürzte Schreibweise für `if-
 ```cpp                     printbinaries.c
 #include<stdio.h>
 
-int int2binOutput(int n) {
+void int2binOutput(int n) {
   int i;
   for(i= (sizeof n) * 8 -1; i>=0; i--) {
       if ((n >> i) & 1)
