@@ -143,6 +143,10 @@ Hinweis: *Unterschiedliche Compiler verwenden unterschieldliche Konfigurationen 
 
 > Der Arithmetische Überlauf (arithmetic overflow) tritt auf, wenn das Ergebnis einer Berechnung für den gültigen Zahlenbereich zu groß ist, um noch richtig interpretiert werden zu können.
 
+![instruction-set](./img/2Komplement.png)<!-- width="100%" -->[^1]
+
+[^1]: Arithmetischer Überlauf (Quelle: https://de.wikipedia.org/wiki/Arithmetischer_%C3%9Cberlauf#/media/File:4Bit-2Komplement.svg (Autor WissensDürster))
+
 ```cpp                     Overflow.c
 #include <stdio.h>
 #include <limits.h>   /* INT_MIN und INT_MAX */
@@ -299,7 +303,7 @@ int main(){
   y = x = x + 5;
   printf("x=%d und y=%d\n",x, y);
 
-  y = x == 20;
+  y = x == 20;        // Gleichheitsoperator
   printf("x=%d und y=%d\n",x, y);
   return 0;
 }
@@ -312,9 +316,7 @@ x=20 und y=1
 </pre>
 
 
-### Arithmetische Operatoren
-
-#### Inkrement und Dekrement
+### Inkrement und Dekrement
 
 Mit den ++ - und -- -Operatoren kann ein L-Wert um eins erhöht bzw. um eins vermindert werden. Man bezeichnet die Erhöhung um eins auch als Inkrement, die Verminderung um eins als Dekrement. Ein Inkrement einer Variable x entspricht x = x + 1, ein Dekrement einer Variable x entspricht x = x - 1.
 
@@ -351,7 +353,7 @@ int main(){
 
 In C ist die Wahl beliebig, in C++ sollte immer die Präfixvariante genutzt werden. Siehe die Diskussion unter [stackoverflow](https://stackoverflow.com/questions/24886/is-there-a-performance-difference-between-i-and-i-in-c) und Scott Meyer "More Effective C++".
 
-#### Binäre arithmetische Operatoren
+### Binäre arithmetische Operatoren
 
 | Operator | Bedeutung         | Ganzzahl     | Gleitkomma |
 |:---------|:------------------|:-------------|:-----------|
@@ -377,6 +379,7 @@ int main(){
   printf("Summe der Zahlen:%d\n",ergeb);
   // Moeglichkeit 2: Berechnung direkt für die Ausgabe
   printf("%d - %d = %d\n", zahl1, zahl2, zahl1-zahl2);
+  return 0;
 }
 ```
 @JSCPP(@input, )
@@ -414,7 +417,7 @@ Die arithmetischen Operatoren lassen sich in verkürzter Schreibweise wie folgt 
 | `/=`        | `a/=b` äquivalent zu `a=a/b` |
 | `%=`        | `a%=b` äquivalent zu `a=a%b` |
 
-```cpp                                  moduloExample.c
+```cpp                                  shortenedOperators.c
 #include <stdio.h>
 
 int main() {
@@ -446,21 +449,116 @@ Kern der Logik sind Aussagen, die wahr oder falsch sein können.
 | `==`        | gleich |
 | `!=`        | ungleich |
 
-```cpp                            IncrementDecrement.c
+```cpp                                       LogicOperators.c
 #include <stdio.h>
 
 int main(){
   int x = 15;
-  printf("x=%d \n", 15 << 1);
+  printf("x = %d \n", x);
+  printf("Aussage x > 5 ist %d \n", (x > 5));
+  printf("Aussage x == 5 ist %d \n", (x == -15));
+  return 0;
+}
+```
+<pre class="lia-code-stdout">
+▶ gcc experiments.c
+▶ ./a.out
+x = 15
+Aussage x > 5 ist 1
+Aussage x == 5 ist 0
+</pre>
+
+### Bit-Operationen / Logische Verknüpfungen
+
+Bitoperatoren verknüpfen logische Aussagen oder manipulieren einzelne Bits in binären Zahlendarstellungen.
+
+| Operation   | Bedeutung                    |
+|:------------|:-----------------------------|
+| `&`, `&=`   | bitweises und                |
+| `|`, `|=`   | bitweises oder               |
+| `^`, `^=`   | bitweises xor                |
+| `~`         | bitweises Komplement         |
+
+```cpp                                       Logic.c
+#include <stdio.h>
+typedef int bool;
+#define true 1
+#define false 0
+
+int main(){
+  int x = 15;
+  // Hier folgt eine logische Aussage in Abhaengigkeit von
+  // deren Aussage die Ausgabe erfolgt
+  //    |
+  //    v
+  if ((x > 5) & (a)){
+    printf("Aussage ist wahr!\n");
+  }else{
+    printf("Aussage ist falsch!\n");
+  }
   return 0;
 }
 ```
 @JSCPP(@input, )
 
+Bei der hardwarenahen Programmierung gilt es häufig Konfigurationen von Komponenten des Prozessors über einzelne Bits zu setzen oder auszulesen.
 
-### Bit-Operationen
+**Auslesen**
 
-#### Shift Operatoren
+Im Beispiel sehen Sie ein fiktives Konfigurationsregister eines Analog-Digital-Wandlers
+
+| 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+|:-----|:-----|:-----|:-----|:-----|:-----|:-----|:-----|
+| XXXX | 8Bit Ausgabe | 10Bit Ausgabe | Loop Modus | XXXX | Start Wandlung | Wandlung Fertig | XXXX |
+
+Wie können wir die Wandlung starten, sprich das 3. Bit setzen?
+
+```cpp                                       Logic.c
+#include <stdio.h>
+
+int main(){
+  int x = 64;  //'0b01000000'
+  // Here we need some magic ...
+  if (x == 68)
+    printf("Wandlung gestartet!\n");
+  else
+    printf("Nein, das passte nicht!\n");
+  return 0;
+}
+```
+@JSCPP(@input, )
+
+Der Analog-Digital-Wandler wurde gestartet, nun wollen wir prüfen, ob die Wandlung abgeschlossen ist. Wie können wir auslesen, ob das 2. Bit (Wandlung Fertig) gesetzt ist?
+
+```cpp                                       Logic.c
+#include <stdio.h>
+
+int main(){
+  int x = 66;  //'0b01000010'
+  printf("Pruefe ADC-Status ... \n");
+  if (0) // Here we need some magic ...
+    printf("Wandlung beendet!\n");
+  else
+    printf("Irgendwas stimmt nicht!\n");
+  return 0;
+}
+```
+@JSCPP(@input, )
+
+Anmerkung: Üblicherweise würde man keine "festen" Werte für die set und test Methoden verwenden. Vielmehr werden dafür durch die Hersteller entsprechende Makros bereitgestellt, die eine Portierbarkeit erlauben.
+
+Anmerkung: Seit dem C99-Standard finden Sie in der Headerdatei <iso646.h> einige Makros, die Sie als alternative Schreibweise für logische Operatoren und Bit-Operatoren nutzen können.
+
+```cpp                            iso646Example.c
+#include <iso646.h>
+...
+char x = 20;
+x = x xor 55;   // Alternative zu:  x = x^55
+```
+
+
+
+### Shift Operatoren
 
 Die Operatoren `<<` und `>>` dienen dazu, den Inhalt einer Variablen bitweise um 1 nach links bzw. um 1 nach rechts zu verschieben.
 
@@ -475,9 +573,20 @@ int main(){
 ```
 @JSCPP(@input, )
 
-Und wozu braucht man das? Zum einen beim Handling einzelner Bits, wie es heute beim *Beispiel des Tages* gezeigt wird. Zum anderen zur Realisierung von Multiplikations- und Divisionsoperationen mit Faktoren/Divisoren $2^n$
+Und wozu braucht man das? Zum einen beim Handling einzelner Bits, wie es heute beim *Beispiel des Tages* gezeigt wird. Zum anderen zur Realisierung von Multiplikations- und Divisionsoperationen mit Faktoren/Divisoren $2^n$.
 
-
+```cpp                            Bit_Test.c
+int Bit_Test(BYTE val, BYTE bit) {
+   BYTE test_val = 0x01;    /* dezimal 1 / binär 0000 0001 */
+   /* Bit an entsprechende Pos. schieben */
+   test_val = (test_val << bit);
+   /* 0=Bit nicht gesetzt; 1=Bit gesetzt */
+   if ((val & test_val) == 0)
+      return 0;      /* nicht gesetzt */
+   else
+      return 1;      /* gesetzt */
+}
+```
 
 ### Bedingungsoperator
 
@@ -508,7 +617,6 @@ Aussagen mit dem Bedingungsoperator sind nicht verkürzte Schreibweise für `if-
 + Der Bedingungsoperator generiert einen Ergebniswert und kann daher z.B. in Formeln und Funktionsaufrufen verwendet werden
 + Bei if-Anweisungen kann der else-Teil entfallen, der Bedingungsoperator verlangt stets eine Angabe von beiden Ergebniswerten
 
-
 ### Vorrangregeln
 
 
@@ -521,8 +629,11 @@ Aussagen mit dem Bedingungsoperator sind nicht verkürzte Schreibweise für `if-
 
 ## Beispiel des Tages
 
+Das folgende Codebeispiel realisiert die binäre Ausgabe einer Zahl in der Konsole. Für die bessere Handhabung wurde die eigentliche Ausgabe in einer  eigene Funktion `int2binOutput` organisiert. Dieser Funktion wird der darzustellende Wert als Parameter `n` übergeben.
 
+Zunächst wird ermittelt, wieviele Bits die Zahl umfasst. Natürlich ließe sich hier auch ein fester Wert hinterlegen, garantiert aber eine weitgehende Unabhänigkeit von der konkreten Architektur. Die binäre Zahlendarstellung muss nun von vorn beginnend durchlaufen werden und geprüft werden, ob an dieser Stelle eine 1 oder eine 0 steht. Dazu wird der Zahlenwert i mal nach rechts geschoben und das dann niederwertigste Bit mit einer 1 verglichen (und-Operator `&`). Sofern das Bit gleich eins ist, wird eine "1" ausgegeben, sonst eine "0".  Dieser Vorgang wird kontinuierlich für einen immer kleiner werdende Index `i` ausgeführt, bis dieser 0 erreicht.
 
+Um die Lesbarkeit zu steigern wird nach 8 Bit ein Leerzeichen eingefügt. Dazu wird in Zeile 10 geprüft, ob die Division mit 8 einen Rest generiert.
 
 ```cpp                     printbinaries.c
 #include<stdio.h>
