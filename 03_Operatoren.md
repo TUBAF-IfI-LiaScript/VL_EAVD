@@ -121,7 +121,7 @@ Hinweis: *Unterschiedliche Compiler verwenden unterschieldliche Konfigurationen 
 |:---------|:--------------------------|
 | 345      | Ganzzahl 345 vom Typ `int`  |
 | -234L     | Ganzzahl 234 vom Typ `signed long` |
-| 100000000000 | Ganzahl vom Typ `long`  |
+| 100000000000 | Ganzzahl vom Typ `long`  |
 | 011       | Ganzzahl also oktale Zahl (Wert $9_d$) |
 | 0x12      | Ganzzahl ($18_d$) |
 
@@ -171,7 +171,7 @@ c=24464
 Ganzzahlüberläufe in fehlerhaften Berechnung zur Bestimmung der Größe eines Puffers oder der Adressierung eines Feldes können es einem Angreifer ermöglichen den Stack zu überschreiben.
 
 
-### Scanf Beispiel
+### scanf-Beispiel
 
 
 ```cpp                     scanf_getNumbers.c
@@ -206,7 +206,7 @@ switch to editor ...
 
 ### Bool
 
-Seid dem C99 Standard existiert ein spezieller Datentyp `_Bool` für binäre Variablen. Zuvor wurden vergleichbare Formate über Makros realisiert.
+Seit dem C99 Standard existiert ein spezieller Datentyp `_Bool` für binäre Variablen. Zuvor wurden vergleichbare Formate über Makros realisiert.
 
 ```cpp                     BoolExample.c
 #include <stdio.h>
@@ -267,7 +267,7 @@ a = b++;  // Postfix
 + Zuweisung
 + Arithmetische Operatoren
 + Logische Operatoren
-+ Bit Operationen
++ Bit-Operationen
 + Bedingungsoperator
 
 **Assoziativität**
