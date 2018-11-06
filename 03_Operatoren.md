@@ -481,9 +481,6 @@ Und wie lassen sich Logische Aussagen verknüpfen?
 | `&&`        | UND |
 | `||`        | ODER |
 | `!`         | NICHT |
-| `>=`        | größer oder gleich |
-| `==`        | gleich |
-| `!=`        | ungleich |
 
 ```cpp                                       Logic.c
 #include <stdio.h>
