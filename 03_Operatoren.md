@@ -48,9 +48,10 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 + Welche unterschiedliche Bedeutung haben `x++` und `++x`
 + Erläutern Sie den Begriff unärer, binärer und tertiärer Operator.
 + Unterscheiden Sie Zuweisung und Anweisung.
-+ Was bedeutet rechtsassoziativ und Linksassoziativ?
++ Was bedeutet rechtsassoziativ und linksassoziativ?
 + Welche Funktion erfüllen Bit-Operationen?
-+ ???
++ Wie werden `shift` Operatoren genutzt?
++ Wie können boolsche Variablen in C ausgedrückt werden?
 
 ---------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
@@ -59,19 +60,18 @@ https://github.com/liaScript/CCourse/blob/master/03_Operatoren.md
 
 ---------------------------------------------------------------------
 
-
 **Wie weit sind wir schon gekommen?**
 
 ANSI C (C89)/ Schlüsselwörter:
 
-|Standard    | Schlüsselwörter |
+|Standard   |            |            |            |             |            |             |
 |:----------|:-----------|:-----------|:-----------|:------------|:-----------|:------------|
 | C89/C90    | auto | <span style="color:blue">double</span> | <span style="color:blue">int</span> | struct | break|
 |           | else  | <span style="color:blue">long</span> | switch | case | enum |
 |           | register | typedef | <span style="color:blue">char</span> | extern | return |
 |           | union | const | <span style="color:blue">float</span> | <span style="color:blue">short</span> | <span style="color:blue">unsigned</span>  |
 |           | continue | for | <span style="color:blue">signed</span> | <span style="color:blue">void</span> | default |
-|           | goto | sizeof | volatile | do | if |
+|           | goto | <span style="color:blue">sizeof</span> | volatile | do | if |
 |           | static |  while|
 | C99  | _Bool | _Complex | _Imaginary | inline | restrict |
 | C11  | _Alignas | _Alignof | _Atomic | _Generic |  _Noreturn|
@@ -88,21 +88,16 @@ Standardbibliotheken
 
 https://en.cppreference.com/w/c/header
 
+---------------------------------------------------------------------
+
+
 ## 0. Wiederholung
 
 **Warnings mit PellesC**
 
-Bilder zur Konfiguration mit folgendem beispiel
+![PellesC Nützlichkeit von Warnings](img/PellesCWarnings.jpeg)<!-- width="100%" -->
 
-```cpp                     Pointer.c
-#include<stdio.h>
 
-int main() {
-  unsigned int v = -5;
-  printf("%u\n", v);
-	return 0;
-}
-```
 
 Hinweis: *Unterschiedliche Compiler verwenden unterschieldliche Konfigurationen und generieren unterschiedliche Ergebnisse!*
 
@@ -143,13 +138,13 @@ Hinweis: *Unterschiedliche Compiler verwenden unterschieldliche Konfigurationen 
 
 > Der Arithmetische Überlauf (arithmetic overflow) tritt auf, wenn das Ergebnis einer Berechnung für den gültigen Zahlenbereich zu groß ist, um noch richtig interpretiert werden zu können.
 
-![instruction-set](./img/2Komplement.png)<!-- width="100%" -->[^1]
+![instruction-set](./img/2Komplement.png)<!-- width="80%" -->[^1]
 
 [^1]: Arithmetischer Überlauf (Quelle: https://de.wikipedia.org/wiki/Arithmetischer_%C3%9Cberlauf#/media/File:4Bit-2Komplement.svg (Autor WissensDürster))
 
 ```cpp                     Overflow.c
 #include <stdio.h>
-#include <limits.h>   /* INT_MIN und INT_MAX */
+#include <limits.h>   /* SHRT_MIN und SHRT_MAX */
 
 int main(){
   short a = 30000;
@@ -178,9 +173,36 @@ Ganzzahlüberläufe in fehlerhaften Berechnung zur Bestimmung der Größe eines 
 
 ### Scanf Beispiel
 
-hier fehlt es noch
 
-## 1. Erweiterte Datentypen
+```cpp                     scanf_getNumbers.c
+#include <stdio.h>
+
+int main(){
+  int i;
+	float a;
+	char b;
+	printf("Bitte folgende Werte eingeben %%c %%f %%d: ");
+	scanf(" %c %f %4d", &b, &a, &i);
+	printf("%c %f %d\n", b, a, i);
+	return 0;
+}
+```
+
+<!-- style="background: black; color: white;"-->
+<pre class=="lia-code-stdout" >
+▶ gcc sizeof_example.c
+▶ ./a.out
+Bitte folgende Werte eingeben %c %f %d: A -234.24324 234562
+A -234.243240 2345
+</pre>
+
+-------------------------------------------------
+
+`scanf` erlaubt auch die sofortige Evaluation von Eingaben anhand vordefinierter Ausdrücke, um diese vorzufiltern.
+
+switch to editor ...
+
+[https://github.com/liaScript/CCourse/blob/master/codeExamples/scanf_check.c](https://github.com/liaScript/CCourse/blob/master/codeExamples/scanf_check.c)
 
 ### Bool
 
@@ -204,11 +226,7 @@ int main() {
 a = 1, b = 0, c=1
 </pre>
 
-Sinnvoll sind boolsche Variablen insbesondere im Kontext von logischen Ausdrücken.
-
-### Enums
-
-
+Sinnvoll sind boolsche Variablen insbesondere im Kontext von logischen Ausdrücken. Diese werden im folgenden eingeführt.
 
 
 ## 2. Operatoren
@@ -246,9 +264,11 @@ a = b++;  // Postfix
 
 **Funktion**
 
++ Zuweisung
 + Arithmetische Operatoren
 + Logische Operatoren
 + Bit Operationen
++ Bedingungsoperator
 
 **Assoziativität**
 
@@ -325,10 +345,10 @@ Mit den ++ - und -- -Operatoren kann ein L-Wert um eins erhöht bzw. um eins ver
 
 int main(){
   int x, result;
-  x = 15;
-  result = ++x;   // Gebrauch als Präfix
+  x = 5;
+  result = 2 * ++x;   // Gebrauch als Präfix
   printf("x=%d und result=%d\n",x, result);
-  result = x++;   // Gebrauch als Postfix
+  result = x * x++;   // Gebrauch als Postfix
   printf("x=%d und result=%d\n",x, result);
   return 0;
 }
@@ -336,20 +356,6 @@ int main(){
 @JSCPP(@input, )
 
 Welche Variante sollte ich benutzen, wenn ich einfach nur eine Variable inkrementieren möchte?
-
-```cpp                            IncrementDecrement.c
-#include <stdio.h>
-
-int main(){
-  int x = 15;
-  x++;              // Variante I
-  printf("x=%d \n",x);
-  ++x;              // Variante II
-  printf("x=%d \n",x);
-  return 0;
-}
-```
-@JSCPP(@input, )
 
 In C ist die Wahl beliebig, in C++ sollte immer die Präfixvariante genutzt werden. Siehe die Diskussion unter [stackoverflow](https://stackoverflow.com/questions/24886/is-there-a-performance-difference-between-i-and-i-in-c) und Scott Meyer "More Effective C++".
 
@@ -468,16 +474,16 @@ Aussage x > 5 ist 1
 Aussage x == 5 ist 0
 </pre>
 
-### Bit-Operationen / Logische Verknüpfungen
-
-Bitoperatoren verknüpfen logische Aussagen oder manipulieren einzelne Bits in binären Zahlendarstellungen.
+Und wie lassen sich Logische Aussagen verknüpfen?
 
 | Operation   | Bedeutung                    |
 |:------------|:-----------------------------|
-| `&`, `&=`   | bitweises und                |
-| `|`, `|=`   | bitweises oder               |
-| `^`, `^=`   | bitweises xor                |
-| `~`         | bitweises Komplement         |
+| `&&`        | UND |
+| `||`        | ODER |
+| `!`         | NICHT |
+| `>=`        | größer oder gleich |
+| `==`        | gleich |
+| `!=`        | ungleich |
 
 ```cpp                                       Logic.c
 #include <stdio.h>
@@ -491,7 +497,7 @@ int main(){
   // deren Aussage die Ausgabe erfolgt
   //    |
   //    v
-  if ((x > 5) & (a)){
+  if (x > 5) {
     printf("Aussage ist wahr!\n");
   }else{
     printf("Aussage ist falsch!\n");
@@ -500,6 +506,19 @@ int main(){
 }
 ```
 @JSCPP(@input, )
+
+Anmerkung: Seit dem C99-Standard finden Sie in der Headerdatei <iso646.h> einige Makros `and`, `or`, `xor`, die Sie als alternative Schreibweise für logische Operatoren und Bit-Operatoren nutzen können.
+
+### Bit-Operationen
+
+Bitoperatoren verknüpfen logische Aussagen oder manipulieren einzelne Bits in binären Zahlendarstellungen.
+
+| Operation   | Bedeutung                    |
+|:------------|:-----------------------------|
+| `&`, `&=`   | bitweises und                |
+| `|`, `|=`   | bitweises oder               |
+| `^`, `^=`   | bitweises xor                |
+| `~`         | bitweises Komplement         |
 
 Bei der hardwarenahen Programmierung gilt es häufig Konfigurationen von Komponenten des Prozessors über einzelne Bits zu setzen oder auszulesen.
 
@@ -546,17 +565,6 @@ int main(){
 @JSCPP(@input, )
 
 Anmerkung: Üblicherweise würde man keine "festen" Werte für die set und test Methoden verwenden. Vielmehr werden dafür durch die Hersteller entsprechende Makros bereitgestellt, die eine Portierbarkeit erlauben.
-
-Anmerkung: Seit dem C99-Standard finden Sie in der Headerdatei <iso646.h> einige Makros, die Sie als alternative Schreibweise für logische Operatoren und Bit-Operatoren nutzen können.
-
-```cpp                            iso646Example.c
-#include <iso646.h>
-...
-char x = 20;
-x = x xor 55;   // Alternative zu:  x = x^55
-```
-
-
 
 ### Shift Operatoren
 
@@ -619,12 +627,54 @@ Aussagen mit dem Bedingungsoperator sind nicht verkürzte Schreibweise für `if-
 
 ### Vorrangregeln
 
+Konsequenterweise bildet auch die Programmiersprache C eigene Vorrangregeln ab, die grundlegende mathematische Definitionen "Punktrechnung vor Strichrechnung" realisieren. Die Liste der unterschiedlichen Operatoren macht aber weitere Festlegungen notwendig.
 
+**Prioritäten**
 
+In welcher Reihung erfolgt beispielsweise die Abarbeitung des folgenden Ausdruckes?
 
+```cpp
+ c = sizeof(x) + ++a / 3;
+```
 
+Für jeden Operator wurde eine Priorität definiert, die die Reihung der Ausführung regelt.
 
+[Liste der Vorranggegeln](https://de.wikibooks.org/wiki/C-Programmierung:_Liste_der_Operatoren_nach_Priorit%C3%A4t)
 
+Im Beispiel bedeutet dies:
+
+```cpp
+c = sizeof(x) + ++a  / 3;
+//    |       |  |   |
+//    |       |  |   |--- Priorität 13
+//    |       |  |--- Priorität 14
+//    |       |--- Priorität 12
+//    |--- Priorität 14
+
+c = (sizeof(x)) + ((++a) / 3);
+```
+
+**Assoziativität**
+
+Für Operatoren mit der gleichen Priorität ist die Reihenfolge (Assoziativität) der Auswertung von Bedeutung.
+
+```cpp
+a = 4 / 2 / 2;
+
+// von rechts nach links (FALSCH)
+// 4 / (2 / 2)   // ergibt 4
+
+// von links nach rechts ausgewertet
+// (4 / 2) / 2   // ergibt 1
+```
+
+**Nebenwirkungen**
+
+C-Programme können sogenannte Nebenwirkungen (engl. side effects) besitzen. Als Nebenwirkungen bezeichnet man die Veränderung des Zustandes des Rechnersystems durch das Programm. Diese Reihung der Realisierung ist teilweise undefiniert.
+
+```c
+x = a() + b() – c();
+```
 
 
 ## Beispiel des Tages
