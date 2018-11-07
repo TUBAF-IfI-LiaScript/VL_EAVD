@@ -3,10 +3,19 @@ import numpy as np
 import copy
 import pandas as pd
 import pickle
+import hashlib
 
-optimization_levels = ['-O0 ', '-O1', '-O2', '-O3', '-Os']
+def md5(fname):
+    hash_md5 = hashlib.md5()
+    with open(fname, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            hash_md5.update(chunk)
+    return hash_md5.hexdigest()
+
+optimization_levels = ['-O0', '-O1', '-O2', '-O3', '-Os']
 data_types =['uint_fast16_t', 'uint16_t', 'uint32_t', 'unsigned short', 'unsigned int', 'unsigned long']
 output = []
+md5_vals = []
 
 for data_type in data_types:
 
@@ -26,6 +35,7 @@ for data_type in data_types:
     with open('datatypeEvaluation_gen.c', 'w') as file:
         file.write(filedata)
 
+    curr_md5_vals = []
 
     for optimization in optimization_levels:
 
@@ -37,6 +47,8 @@ for data_type in data_types:
         print compiler_options
 
         compilation_return = subprocess.check_output(compiler_options, shell=True)
+
+        curr_md5_vals.append((optimization, md5("program.out")))
 
         durations = np.zeros(20, dtype=float)
 
@@ -55,7 +67,17 @@ for data_type in data_types:
 
         output.append(copy.copy(result_sample))
 
+    md5_vals.append((data_type, curr_md5_vals))
+
 df = pd.DataFrame(output)
 pickle.dump( df, open( "save_run_time.p", "wb" ) )
 
 print df.drop('duration_var', axis=1).groupby(['data_type', 'optimization']).mean().unstack()
+
+print "\nMD5 hashes of compiled binaries:"
+for (data_type, md5_vals) in md5_vals:
+	print data_type
+
+	for (optimization, md5_hash) in md5_vals:
+		print "\t" + optimization + ": " + md5_hash
+	print
