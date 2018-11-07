@@ -4,9 +4,9 @@
 int main()
 {
   <type> x;
-  
+
   x= 1;
-  
+
   unsigned long i;
 
   //ulong max == 4294967295
