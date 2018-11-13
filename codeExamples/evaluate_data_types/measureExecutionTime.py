@@ -50,7 +50,7 @@ for data_type in data_types:
 
         curr_md5_vals.append((optimization, md5("program.out")))
 
-        durations = np.zeros(20, dtype=float)
+        durations = np.zeros(1, dtype=float)
 
         for i in range(0,len(durations)):
             time_return = subprocess.check_output(["time", "./program.out"], stderr=subprocess.STDOUT)
