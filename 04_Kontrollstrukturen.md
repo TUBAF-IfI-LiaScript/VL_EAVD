@@ -40,7 +40,7 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
 -->
 
-# Vorlesung III - Operatoren
+# Vorlesung IV - Kontrollstrukturen
 
 **Fragen an die heutige Veranstaltung ...**
 
@@ -96,7 +96,7 @@ https://en.cppreference.com/w/c/header
 
 Im erstegenannten Fall spricht man von
 
-+ impliziten Datentypumwandlung im zweiten von
++ impliziten Datentypumwandlung, im zweiten von
 + expliziter Typumwandlung.
 
 Es wird bei Methoden vorausgesetzt, dass der
@@ -131,11 +131,11 @@ int main()
 ```
 @JSCPP(@input, )
 
-+ Die Division zweiter int-Werte gibt immer nur einen Ganzzahlanteil zurück. Hier findet keine automatische Konvertierung in eine Gleitpunktzahl statt.
++ Die Division zweier `int`-Werte gibt immer nur einen Ganzzahlanteil zurück. Hier findet keine automatische Konvertierung in eine Gleitpunktzahl statt.
 
 + die Umwandlung eines negativen Wertes in einen Typ ohne Vorzeichen
 
-+ Bei der Umwandlung von ganz großen Zahlen (beispielsweise long long) in einen Gleitpunkttyp kann es passieren, dass die Genauigkeit nicht mehr ausreicht, um die Zahl genau darzustellen.
++ Bei der Umwandlung von ganz großen Zahlen (beispielsweise `long long`) in einen Gleitpunkttyp kann es passieren, dass die Genauigkeit nicht mehr ausreicht, um die Zahl genau darzustellen.
 
 **Vermischen von Ganzzahl und Gleitkommawerten**
 
@@ -459,13 +459,13 @@ int main() {
 
 ### Schleifen
 
-Schleifen dienen der Wiederholung von  einen Anweisungsblöcken – dem sogenannten Schleifenrumpf oder Schleifenkörper –, solange die Schleifenbedingung als Laufbedingung gültig bleibt bzw. als Abbruchbedingung nicht eintritt. Schleifen, deren Schleifenbedingung immer zur Fortsetzung führt oder die keine Schleifenbedingung haben, sind *Endlosschleifen*.
+Schleifen dienen der Wiederholung von Anweisungsblöcken – dem sogenannten Schleifenrumpf oder Schleifenkörper –, solange die Schleifenbedingung als Laufbedingung gültig bleibt bzw. als Abbruchbedingung nicht eintritt. Schleifen, deren Schleifenbedingung immer zur Fortsetzung führt oder die keine Schleifenbedingung haben, sind *Endlosschleifen*.
 
 Schleifen können verschachtelt werden. Eine innerhalb eines Schleifenkörpers können weitere Schleifen erzeugt und ausgeführt werden. Zur Beschleunigung des Programmablaufs werden Schleifen oft durch den Compiler entrollt (*Enrollment*).
 
 Grafisch lassen sich die wichtigsten Formen in mit der Nassi-Shneiderman Diagrammen wie folgt darstellen:
 
-+ Iterations Symbol
++ Iterationssymbol
 
     ![Nassi_LineareAnw.png](img/Nassi_for.png)<!-- width="80%" -->[^1]
 
@@ -611,10 +611,10 @@ int main(){
   do {
      scanf("%d", &auswahl);
      switch(auswahl) {
-        case 1  :  printf("\n Das war Auswahl 1 \n"); break;
+        case 1  : printf("\n Das war Auswahl 1 \n"); break;
         case 2  : printf("\n Das war Auswahl 2 \n"); break;
         case 3  : printf("\n Das war Auswahl 3 \n"); break;
-        case 4  : printf("\n Programmende \n");      break;
+        case 4  : printf("\n Programmende \n"); break;
         default : printf("\n Unbekannte Auswahl \n");
      }
   } while(auswahl!=4);
