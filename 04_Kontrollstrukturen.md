@@ -48,8 +48,12 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 + Wann sollte man eine explizite Umwandlung vornehmen?
 + Wie lassen sich Kontrollflüsse grafisch darstellen?
 + Welche Konfigurationen erlaubt die `for`-Schleife?
++ In welchen Funktionen (Verzweigungen, Schleifen) ist Ihnen das Schlüsselwort `break` bekannt?
++ Worin liegt der zentrale Unterschied der `while` und `do-while` Schleife?
++ Recherchieren Sie Beispiele, in denen `goto`-Anweisungen Bugs generierten.
 
----------------------------------------------------------------------
+-------------------------
+--------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
 https://github.com/liaScript/CCourse/blob/master/04_Kontrollstrukturen.md
@@ -118,10 +122,10 @@ Dabei sind einschränkende Konvertierungskonfigurationen kritisch zu sehen:
 int main()
 {
   int i = -1;
-  unsigned int limit = 200U;
+  unsigned int limit = 200;
 
   if ( i < limit )
-    printf("Offenbar ist das Ergebnis falsch!\n");
+    printf(" i < limit \n");
   return 0;
 }
 ```
@@ -659,7 +663,6 @@ int main(){
 
 *Use of goto statement is highly discouraged in any programming language because it makes difficult to trace the control flow of a program, making the program hard to understand and hard to modify. Any program that uses a goto can be rewritten to avoid them.*
 
-
 ```cpp                     gotoExample.c
 #include <stdio.h>
 
@@ -681,7 +684,7 @@ Ein wichtiger Fehler, der häufig immer mit goto in Verbindung gebracht wird, ha
 
 Das Codebeispiel des Tages führt die Berechnung eines sogenannten magischen Quadrates vor.
 
-Das Lösungsbeispiel stammt von der Webseite https://rosettacode.org/ die für das konkrete Problem [Link](https://rosettacode.org/wiki/Magic_squares_of_odd_order#C) und viele andere "Standardprobleme" Lösungen in unterschiedlichen Sprachen präsentiert. Sehr lesenswert!
+Das Lösungsbeispiel stammt von der Webseite https://rosettacode.org/ die für das konkrete Problem [Link](https://rosettacode.org/wiki/Magic_squares_of_odd_order#C) und viele andere "Standardprobleme" Lösungen in unterschiedlichen Sprachen präsentiert. Sehr lesenswerte Sammlung!
 
 ```cpp                     magicSquare.c
 #include <stdio.h>
@@ -694,7 +697,7 @@ int f(int n, int x, int y)
 int main(){
 	int i, j, n;
 
-	//Edit: Input must be odd and not less than 3.
+	//Input must be odd and not less than 3.
 	n = 7;
 	if (n < 3 || (n % 2) == 0) return 2;
 
