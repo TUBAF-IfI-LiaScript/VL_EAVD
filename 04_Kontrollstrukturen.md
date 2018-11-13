@@ -325,6 +325,7 @@ Die Bedingungen können als logische UND artithmetische Operationen / Vergleiche
 #include <stdio.h>
 
 int main(){
+  int WL, WG, WR;
   WL = 1; WG = 0; WR =1;
   if (((!WL) & (WG) & (!WR)) || ((!WL) & (WG) & (WR)))
     printf("Drehung Links\n");
@@ -575,7 +576,7 @@ Dabei sollte erwähnt werden, dass eine `while`-Schleife eine `for`-Schleife ers
 i = 0;
 while (i<10){
    // Anweisungen;
-   i++
+   i++;
 }
 
 for (i==0; i<10; i++){
@@ -590,7 +591,7 @@ Im Gegensatz zur `while`-Schleife führt die `do-while`-Schleife die Überprüfu
 ```cpp
 // generisches Format der while-Schleife
 do
-   Anweisung
+   Anweisung;
  while (Bedingung);
 ```
 Welche Konsequenz hat das? Die `do-while`-Schleife wird in jedem Fall einmal ausgeführt.
