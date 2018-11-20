@@ -119,7 +119,7 @@ int main() {
 
 **Darstellung von Schleifen und Verzweigungen**
 
-* Nasi-Shneiderman-Diagramme
+* Nassi-Shneiderman-Diagramme
 * Flußdiagramme
 
 ![Programmablaufplan.png](img/Programmablaufplan.png)<!-- width="80%" -->[^1]
