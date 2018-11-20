@@ -51,11 +51,14 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 * Erklären Sie den Unterschied zwischen Initalisierung und Zuweisung.
 * Wie vergleichen Sie zwei `structs`?
 
--------------------------
---------------------------------------------
+---------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
 https://github.com/liaScript/CCourse/blob/master/05_ZusammengesetzteDatentypen.md
+
+---------------------------------------------------------------------
+
+![PellesCLineNumbers.jpeg](img/PelleCLineNumbers.jpeg)<!-- width="100%" -->
 
 ---------------------------------------------------------------------
 
