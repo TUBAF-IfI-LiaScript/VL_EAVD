@@ -420,7 +420,7 @@ Datenbank sein.
 struct datum
 {
   int tag;
-  char monat[11];
+  char monat[10];
   int jahr;
 };
 
@@ -445,7 +445,7 @@ int main() {
   struct datum
   {
       int tag;
-      char monat[11];
+      char monat[10];
       int jahr;
   } geburtstag_1 = {18, "April", 1986};              // <- Initialisierung
                                                      //    Variable geburtstag_1
