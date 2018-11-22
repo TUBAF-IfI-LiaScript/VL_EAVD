@@ -214,7 +214,7 @@ int main() {
   for (int i=0; i<3; i++)
     printf("%d ", a[i]);
   printf("\nNur zur Info %d", sizeof(a));
-  printf("\nZahl der Elemente %d", sizeof a / sizeof(int));
+  printf("\nZahl der Elemente %d", sizeof(a) / sizeof(int));
   printf("\nAnwendung des Adressoperators auf das Array %d", *a);
   return 0;
   }
@@ -388,7 +388,7 @@ bei denen Sie nur auf einzelne Elemente zugreifen können.
 #include <string.h>       // notwendig für strcpy
 
 int main() {
-  char a[] = "Das ist der orginal Text";
+  char a[] = "Das ist der Originaltext";
   a = "Das ist ein neuer Text";  // Compiler Error
   //strcpy(a, "Das ist ein neuer Text");
   a[0]='X';
@@ -420,7 +420,7 @@ Datenbank sein.
 struct datum
 {
   int tag;
-  char monat[10];
+  char monat[11];
   int jahr;
 };
 
@@ -435,7 +435,7 @@ struct Student
 
 ### Deklaration, Definition, Initialisierung
 
-Und wie erzeuge ich nun Variablen dieses erweiterten Types? Müssn immer alle
+Und wie erzeuge ich nun Variablen dieses erweiterten Types? Müssen immer alle
 
 ```cpp                           structExample.c
 #include <stdio.h>
@@ -445,7 +445,7 @@ int main() {
   struct datum
   {
       int tag;
-      char monat[10];
+      char monat[11];
       int jahr;
   } geburtstag_1 = {18, "April", 1986};              // <- Initialisierung
                                                      //    Variable geburtstag_1
@@ -524,27 +524,28 @@ int main(){
   int values[]={0,4,3,2,3,4,5,5,2,4,5,6,7,4,2,4,5,5,5,5};
   // Bestimmung des maximalen Wertes im Vektor
   int max_value = 0;
-  for (int i=0; i<sizeof values / sizeof(int); i++){
+  const int count = sizeof(values) / sizeof(int);
+  for (int i=0; i<count; i++){
     if (max_value < values[i]) max_value = values[i];
     printf("%d ", values[i]);
   }
   printf("\nMax value = %d\n\n", max_value);
   // Initialization of the matrix
-  int matrix[max_value+1][sizeof values /sizeof(int)];
+  int matrix[max_value+1][count];
   for (int i=0; i <=max_value; i++){
-       for (int j=0; j<sizeof values / sizeof(int); j++){
+       for (int j=0; j<count; j++){
           matrix[i][j]=0xff;
        }
   }
   // Realisierung der Werte des Vektors
-  for (int i=0; i<sizeof values / sizeof(int); i++){
+  for (int i=0; i<count; i++){
     matrix[values[i]][i] = values[i];
   }
   // Ausgabe
   printf("Values\n     ^\n");
   for (int i=max_value; i>=0; i--){
        printf("%3d  |", i);
-       for (int j=0; j<sizeof values / sizeof(int); j++){
+       for (int j=0; j<count; j++){
           if (matrix[i][j]!=0xff) printf("*");
           else printf(" ");
        }
