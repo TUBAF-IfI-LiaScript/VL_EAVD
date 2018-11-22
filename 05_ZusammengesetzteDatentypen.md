@@ -100,10 +100,10 @@ https://en.cppreference.com/w/c/header
 #include <stdio.h>
 
 int main() {
-  if (0 && 2) printf("Aussage 1. ist war\n");
-  else printf("Aussage 1. ist falsch\n");
-  if (5 & 2) printf("Aussage 2. ist war\n");
-  else printf("Aussage 2. ist falsch\n");
+  if (0 && 2) printf("Aussage 1 ist wahr\n");
+  else printf("Aussage 1 ist falsch\n");
+  if (5 & 2) printf("Aussage 2 ist wahr\n");
+  else printf("Aussage 2 ist falsch\n");
   return 0;
 }
 ```
