@@ -1,14 +1,10 @@
-#include<stdio.h>
-#include<float.h>
+#include <stdio.h>
 
 int main() {
-	printf("float Genauigkeit :%d \n", FLT_DIG);
-	printf("double Genauigkeit :%d \n", DBL_DIG);
-	float x = 0.1;
-  if (x == 0.1) {
-    printf("Gleich\n");
-  }else{
-    printf("Ungleich\n");
+  int a[] = {5, 2, 2, 5, 6};   // Alternative Form der Initialisierung
+  float b[5] = {1.0, [4]=6.4};
+  for (int i=0; i<5; i++){
+    printf("%d  %f\n", a[i], b[i]);
   }
   return 0;
 }
