@@ -107,6 +107,31 @@ int main() {
 ## 1. Definition von Funktionen
 
 
+
+Prozedurale Programmierung Ideen und KOnzepte
+
+
+### Was sind überhaupt Funtionen
+
+Funktionen sind Unterprogramme, die ein Ausgangsproblem in kleine, möglicherweise
+wiederverwendbare Codeelemente zerlegen.
+
+```cpp                          standardabweichung.c
+#include <stdio.h>
+
+int main() {
+  int a[] = {3,4,5,6,2,3,2,5,6,7,8,10};
+  // Berechunung des Mittelwertes
+
+  // Berechung der Varianz
+  
+  return 0;
+}
+```
+@JSCPP(@input, )
+
+
+
 ## 2.  Globale, lokale und statische Variablen
 
 
