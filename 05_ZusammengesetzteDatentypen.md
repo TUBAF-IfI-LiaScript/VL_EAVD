@@ -100,10 +100,10 @@ https://en.cppreference.com/w/c/header
 #include <stdio.h>
 
 int main() {
-  if (0 && 2) printf("Aussage 1. ist war\n");
-  else printf("Aussage 1. ist falsch\n");
-  if (5 & 2) printf("Aussage 2. ist war\n");
-  else printf("Aussage 2. ist falsch\n");
+  if (0 && 2) printf("Aussage 1 ist wahr\n");
+  else printf("Aussage 1 ist falsch\n");
+  if (5 & 2) printf("Aussage 2 ist wahr\n");
+  else printf("Aussage 2 ist falsch\n");
   return 0;
 }
 ```
@@ -214,7 +214,7 @@ int main() {
   for (int i=0; i<3; i++)
     printf("%d ", a[i]);
   printf("\nNur zur Info %d", sizeof(a));
-  printf("\nZahl der Elemente %d", sizeof a / sizeof(int));
+  printf("\nZahl der Elemente %d", sizeof(a) / sizeof(int));
   printf("\nAnwendung des Adressoperators auf das Array %d", *a);
   return 0;
   }
@@ -337,13 +337,14 @@ int main() {
   printf("Diese Form eines Strings haben wir bereits mehrfach benutzt!\n");
   // Alternativ
   char a[50];
+  a[49] = '\0';
   printf("->%s<-\n", a);
   const char b[] = { 'H', 'a', 'l', 'l', 'o', ' ',
-                     'F', 'r', 'e', 'i', 'b', 'e', 'r', 'g'};
+                     'F', 'r', 'e', 'i', 'b', 'e', 'r', 'g', '\0' };
   printf("->%s<-\n", b);
   const char c[] = "Noch eine \0Moeglichkeit";
   printf("->%s<-\n", c);
-  char d[] = { 80, 114, 111, 122, 80, 114, 111, 103, 32, 50, 48, 49, 56  };
+  char d[] = { 80, 114, 111, 122, 80, 114, 111, 103, 32, 50, 48, 49, 56, 0  };
   printf("->%s<-\n", d);
   return 0;
 }
@@ -387,7 +388,7 @@ bei denen Sie nur auf einzelne Elemente zugreifen können.
 #include <string.h>       // notwendig für strcpy
 
 int main() {
-  char a[] = "Das ist der orginal Text";
+  char a[] = "Das ist der Originaltext";
   a = "Das ist ein neuer Text";  // Compiler Error
   //strcpy(a, "Das ist ein neuer Text");
   a[0]='X';
@@ -434,7 +435,7 @@ struct Student
 
 ### Deklaration, Definition, Initialisierung
 
-Und wie erzeuge ich nun Variablen dieses erweiterten Types? Müssn immer alle
+Und wie erzeuge ich nun Variablen dieses erweiterten Types? Müssen immer alle
 
 ```cpp                           structExample.c
 #include <stdio.h>
@@ -523,27 +524,28 @@ int main(){
   int values[]={0,4,3,2,3,4,5,5,2,4,5,6,7,4,2,4,5,5,5,5};
   // Bestimmung des maximalen Wertes im Vektor
   int max_value = 0;
-  for (int i=0; i<sizeof values / sizeof(int); i++){
+  const int count = sizeof(values) / sizeof(int);
+  for (int i=0; i<count; i++){
     if (max_value < values[i]) max_value = values[i];
     printf("%d ", values[i]);
   }
   printf("\nMax value = %d\n\n", max_value);
   // Initialization of the matrix
-  int matrix[max_value+1][sizeof values /sizeof(int)];
+  int matrix[max_value+1][count];
   for (int i=0; i <=max_value; i++){
-       for (int j=0; j<sizeof values / sizeof(int); j++){
+       for (int j=0; j<count; j++){
           matrix[i][j]=0xff;
        }
   }
   // Realisierung der Werte des Vektors
-  for (int i=0; i<sizeof values / sizeof(int); i++){
+  for (int i=0; i<count; i++){
     matrix[values[i]][i] = values[i];
   }
   // Ausgabe
   printf("Values\n     ^\n");
   for (int i=max_value; i>=0; i--){
        printf("%3d  |", i);
-       for (int j=0; j<sizeof values / sizeof(int); j++){
+       for (int j=0; j<count; j++){
           if (matrix[i][j]!=0xff) printf("*");
           else printf(" ");
        }
