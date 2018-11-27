@@ -89,24 +89,75 @@ https://en.cppreference.com/w/c/header
 
 ### Initialisierung von n-dimensionalen Arrays
 
+![Matrix](img/2DArray.jpg)<!-- width="90%" -->
+
 ```cpp                          nDimArray.c
 #include <stdio.h>
 
 int main() {
-  if (0 && 2) printf("Aussage 1. ist war\n");
-  else printf("Aussage 1. ist falsch\n");
-  if (5 & 2) printf("Aussage 2. ist war\n");
-  else printf("Aussage 2. ist falsch\n");
+  // Initiallisierung
+  int brett[8][8] = {0};
+  // Zuweisung
+  brett[2][1] = 1;
+  brett[4][2] = 2;
+  brett[3][5] = 3;
+  brett[6][7] = 4;
+  // Ausgabe
+  int i, j;
+  // Schleife fuer Zeilen, Y-Achse
+  for(i=0; i<8; i++) {
+  	// Schleife fuer Spalten, X-Achse
+  	for(j=0; j<8; j++) {
+  		printf("%d ", brett[i][j]);
+  	}
+  	printf("\n");
+  }
   return 0;
 }
 ```
-@JSCPP(@input, )
+<pre class="lia-code-stdout">
+▶ ./a.out
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 1 0 0 0 0 0 0
+0 0 0 0 0 3 0 0
+0 0 2 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 4
+0 0 0 0 0 0 0 0
+</pre>
+
+Beispiel und Grafik aus dem C-Kurs
+[http://www.c-howto.de/](http://www.c-howto.de/tutorial/arrays-felder/zweidimensionale-felder/)
 
 
 ### Arrays und Pointer auf Arrays
 
 
 ### const char arrays
+
+```cpp                     arrayInitVsAssignment.c
+#include <stdio.h>
+#include <string.h>       // notwendig für strcpy
+
+int main() {
+  const char a[] = "Das ist der Originaltext";
+  strcpy(a, "Das ist ein neuer Text");
+  printf("%s\n",a);
+  return 0;
+}
+```
+<pre class="lia-code-stdout">
+▶ gcc arrayInitVsAssignment.c
+experiments.c: In function ‘main’:
+experiments.c:6:10: warning: passing argument 1 of ‘strcpy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+   strcpy(a, "Das ist ein neuer Text");
+          ^
+In file included from experiments.c:2:0:
+/usr/include/string.h:125:14: note: expected ‘char * restrict’ but argument is of type ‘const char *’
+ extern char *strcpy (char *__restrict __dest, const char *__restrict __src)
+              ^
+</pre>
 
 ### Definition vs. Deklaration
 
