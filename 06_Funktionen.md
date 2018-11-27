@@ -45,7 +45,12 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
 **Fragen an die heutige Veranstaltung ...**
 
-* todo
+* Nennen Sie Vorteile prozeduraler Programmierung!
+* Welche Komponenten beschreiben den Definition einer Funktion?
+* Welche unterschiedlichen Bedeutungen kann das Schlüsselwort `static` ausfüllen?
+* Beschreiben Sie Gefahren bei der impliziten Typkonvertierung.
+* Erläutern Sie die Begriffe Sichtbarkeit und Lebensdauer von Variablen.
+* Welche kritischen Punkte sind bei der Verwendung globaler Variablen zu beachten.
 
 ---------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
@@ -545,7 +550,8 @@ extern float berechneFlaeche(float breite, float hoehe);
 ### Herausforderung komplexer Parametersätze und Rückgabewerte
 
 Bisher wurden Beispiele besprochen, die einen skaleren Rückgabewert realisierten.
-Die
+Allerdings wäre diese Möglichkeit sehr einschränkend. Eine Lösung darüberhinaus
+stellen structs und arrays dar.
 
 ```cpp
 #include <stdio.h>
@@ -624,6 +630,8 @@ int main() {
 | gueltig    | lokal            | nur in `main`                   |
 | linecount  | lokal            | nur im Anweisungsblock von  `if`|
 
+
+** Static Variablen**
 
 ```cpp
 #include <stdio.h>
