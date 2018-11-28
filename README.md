@@ -166,9 +166,9 @@ eingebettete C-Projekte selbst anzugehen.
 
 # "C ist schwierig zu erlernen"
 
-*"Viele haben bei uns wegen dem Info-Grundlagenmodul gewechselt. Allerdings hängt das auch von dir und deinem Talent ab. Das Tempo ist rasant. Jede Art von Vorerfahrung hilft dir eigentlich sehr. Also wenn du noch Zeit hast vorm Studienbeginn, schnapp dir ein gutes Buch zur gelehrten Sprache, und fange schonmal bissl an kleine Sachen zu programmieren."* [Foreneintrag]
+*"Viele haben bei uns wegen dem Info-Grundlagenmodul gewechselt. Allerdings hängt das auch von dir und deinem Talent ab. Das Tempo ist rasant. Jede Art von Vorerfahrung hilft dir eigentlich sehr. Also wenn du noch Zeit hast vorm Studienbeginn, schnapp dir ein gutes Buch zur gelehrten Sprache, und fange schonmal bissl an kleine Sachen zu programmieren.*" \[Foreneintrag\]
 
-*"Ich habe es grade irgendwie selbst gelöst, aber keine Ahnung warum es funktioniert hat."* [Foreneintrag]
+*Ich habe es grade irgendwie selbst gelöst, aber keine Ahnung warum es funktioniert hat.* \[Foreneintrag\]
 
 Herausforderungen
 
