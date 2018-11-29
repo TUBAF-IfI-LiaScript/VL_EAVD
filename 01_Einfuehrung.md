@@ -82,7 +82,7 @@ Realisierung eines Programmes mit C zu adressieren.
 
 Beispiel: Intel 4004-Architektur (1971) [^1]
 
-![intel](https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png)<!--style="width: 80%"-->
+![intel](https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png)<!-- style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
 
 [^1]: Wikipedia Eintrag Intel 4004 (Autor Appaloosa)
 
