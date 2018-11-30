@@ -6,37 +6,35 @@ version:  0.0.1
 language: de
 narrator: Deutsch Female
 
-comment:  This is a very simple comment.
-          Multiline is also okay.
-
-translation: English   translation/english.md
-
 script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
-@JSCPP
+@JSCPP.__eval
 <script>
   try {
     var output = "";
-    JSCPP.run(`@0`, `@1`, {stdio: {write: s => { output += s;}}});
+    JSCPP.run(`@0`, `@1`, {stdio: {write: s => { output += s }}});
     output;
   } catch (msg) {
-    console.log(msg);
     var error = new LiaError(msg, 1);
+    var log = msg.match(/(.*)\nline (\d+) \(column (\d+)\):.*\n.*\n(.*)/);
+    var info = log[1] + " " + log[4];
 
-    try {
-        var log = msg.match(/(.*)\nline (\d+) \(column (\d+)\):.*\n.*\n(.*)/);
-        var info = log[1] + " " + log[4];
+    if (info.length > 80)
+      info = info.substring(0,76) + "..."
 
-        if (info.length > 80)
-          info = info.substring(0,76) + "..."
-
-        error.add_detail(0, info, "error", log[2]-1, log[3]);
-    } catch(e) {}
+    error.add_detail(0, info, "error", log[2]-1, log[3]);
 
     throw error;
   }
 </script>
 @end
+
+
+@JSCPP.eval: @JSCPP.__eval(@input, )
+
+@JSCPP.eval_input: @JSCPP.__eval(@input,`@input(1)`)
+
+@output: <pre class="lia-code-stdout">@0</pre>
 
 -->
 
@@ -66,31 +64,33 @@ https://github.com/liaScript/CCourse/blob/master/05_ZusammengesetzteDatentypen.m
 
 ANSI C (C89)/ Schlüsselwörter:
 
-|Standard   |            |            |            |             |            |             |
-|:----------|:-----------|:-----------|:-----------|:------------|:-----------|:------------|
-| C89/C90   | auto | <span style="color:blue">double</span> | <span style="color:blue">int</span> | struct | <span style="color:blue">break</span>|
-|           | <span style="color:blue">else</span>  | <span style="color:blue">long</span> |  <span style="color:blue">switch</span> |  <span style="color:blue">case</span> | enum |
-|           | register | typedef | <span style="color:blue">char</span> | extern | return |
-|           | union | const | <span style="color:blue">float</span> | <span style="color:blue">short</span> | <span style="color:blue">unsigned</span>  |
-|           |  <span style="color:blue">continue</span>  | <span style="color:blue">for</span>  | <span style="color:blue">signed</span> | <span style="color:blue">void</span> | default |
-|           | <span style="color:blue">goto</span>  | <span style="color:blue">sizeof</span> | volatile | <span style="color:blue">do</span>  | <span style="color:blue">if</span> |
-|           | static |  <span style="color:blue">while</span> |
-| C99  | <span style="color:blue">_Bool</span>   | _Complex | _Imaginary | inline | restrict |
-| C11  | _Alignas | _Alignof | _Atomic | _Generic |  _Noreturn|
-|      |_Static\_assert | \_Thread\_local|
+| Standard    |                |          |            |          |            |
+|:------------|:---------------|:---------|:-----------|:---------|:-----------|
+| **C89/C90** | auto           | `double` | `int`      | struct   | `break`    |
+|             | `else`         | `long`   | `switch`   | `case`   | enum       |
+|             | register       | typedef  | `char`     | extern   | return     |
+|             | union          | const    | `float`    | `short`  | `unsigned` |
+|             | `continue`     | `for`    | `signed`   | `void`   | `default`  |
+|             | `goto`         | `sizeof` | volatile   | `do`     | `if`       |
+|             | static         | `while`  |            |          |            |
+| **C99**     | `_Bool`        | _Complex | _Imaginary | inline   | restrict   |
+| **C11**     | _Alignas       | _Alignof | _Atomic    | _Generic | _Noreturn  |
+|             |_Static\_assert | \_Thread\_local | |   |          |            |
+
+---
 
 Standardbibliotheken
 
-|Name       | Bestandteil| Funktionen                           |
-|:----------|:-----------|:-------------------------------------|
-|<stdio.h> 	|            | Input/output (printf)                |
-|<stdint.h> |(seit C99)  | Integer Datentypen mit fester Breite |
-|<float.h> 	|            | Parameter der Floatwerte             |
-|<limits.h> |            | Größe der Basistypen                 |
-|<fenv.h>   |            | Verhalten bei Typumwandlungen        |
+| Name         | Bestandteil | Funktionen                           |
+|:-------------|:------------|:-------------------------------------|
+| `<stdio.h>`  |             | Input/output (`printf`)              |
+| `<stdint.h>` | (seit C99)  | Integer Datentypen mit fester Breite |
+| `<float.h>`  |             | Parameter der Floatwerte             |
+| `<limits.h>` |             | Größe der Basistypen                 |
+| `<fenv.h>`   |             | Verhalten bei Typumwandlungen        |
+
 https://en.cppreference.com/w/c/header
 
----------------------------------------------------------------------
 
 ## 0. Wiederholung
 
@@ -107,24 +107,31 @@ int main() {
   return 0;
 }
 ```
-@JSCPP(@input, )
+@JSCPP.eval
 
 | Operator | Bedeutung         | Rückgabewert  |
 |:---------|:------------------|---------------|
 | `&&`     | Logische *und* Operation | {0,1}  |
 |          | Ganzzahlen ungleich "0" werden als *wahr* interpretiert, "0" als *falsch* |  |
-| `&`      | Bitweiser *und* Operation | int  |
+| `&`      | Bitweiser *und* Operation | `int`  |
 |          | Sofern eine Übereinstimmung an einer Stelle auftritt, ergibt sich die zugehörige Ganzzahl als Ergebnis. |  |
 
 
 **Darstellung von Schleifen und Verzweigungen**
 
 * Nassi-Shneiderman-Diagramme
-* Flußdiagramme
+* Flußdiagramme[^1]
 
-![Programmablaufplan.png](img/Programmablaufplan.png)<!-- width="80%" -->[^1]
 
-[^1]: Nassi-Shneidermann Diagramme (Quelle: https://de.wikipedia.org/wiki/Programmablaufplan#/media/File:Flowchart_de.svg (Autor Erik Streb))
+![Programmablaufplan.png](img/Programmablaufplan.png)<!--
+style="width: 80%;
+       max-width: 330px; display: block; margin-left: auto; margin-right: auto;" -->
+
+
+
+[^1]: Nassi-Shneidermann Diagramme (Quelle:
+      https://de.wikipedia.org/wiki/Programmablaufplan#/media/File:Flowchart_de.svg
+      (Autor Erik Streb))
 
 ## 1. Aufzählungen
 
@@ -147,10 +154,11 @@ int main() {
   return 0;
 }
 ```
-<pre class="lia-code-stdout">
+
+``` bash @output
 ▶ ./a.out
 Wert der Karte: 0
-</pre>
+```
 
 Möglicherweise sollen den Karten aber auch konkrete Werte zugeordnet werden,
 die bestimmte Wertigkeiten reflektieren.
@@ -159,12 +167,14 @@ die bestimmte Wertigkeiten reflektieren.
 #include <stdio.h>
 
 int main() {
-  enum { karo=9, herz=10, pik=11, kreuz=12};       // Beispiel der Farben beim Skat
+       // Beispiel der Farben beim Skat
+  enum { karo=9, herz=10, pik=11, kreuz=12};
   int karte = karo;
   printf("Wert der Karte: %d\n", karte);
   return 0;
 }
 ```
+
 An dieser Stelle sind Sie aber frei, was die eigentlichen Werte angeht. Es sind
 zum Beispiel Konfigurationen möglich wie
 
@@ -180,26 +190,26 @@ Bisher umfassten unsere Variablen einzelne Skalare. Arrays erweitern das Spektru
 Folgen von Werten, die in n-Dimensionen aufgestellt werden können. Die Deklaration
 erfolgt in folgender Anweisung:
 
-```cpp
+```text
 Datentyp Variablenname[Anzahl_der_Elemente];
 ```
 
-| a\[0\] | a\[1\] | a\[2\] | a\[3\] | a\[4\] | a\[5\] |
+| `a[0]` | `a[1]` | `a[2]` | `a[3]` | `a[4]` | `a[5]` |
 
 
-```cpp
+```text
 Datentyp Variablenname[Anzahl_der_Elemente_Dim0][Anzahl_der_Elemente_Dim1];
 ```
-| a\[0\]\[0\] | a\[0\]\[1\] | a\[0\]\[2\] | a\[0\]\[3\] | a\[0\]\[4\] |
-| a\[1\]\[0\] | a\[1\]\[1\] | a\[1\]\[2\] | a\[1\]\[3\] | a\[1\]\[4\] |
-| a\[2\]\[0\] | a\[2\]\[1\] | a\[2\]\[2\] | a\[2\]\[3\] | a\[2\]\[4\] |
+| `a[0][0]` | `a[0][1]` | `a[0][2]` | `a[0][3]` | `a[0][4]` |
+| `a[1][0]` | `a[1][1]` | `a[1][2]` | `a[1][3]` | `a[1][4]` |
+| `a[2][0]` | `a[2][1]` | `a[2][2]` | `a[2][3]` | `a[2][4]` |
 
 
-> Achtung 1: Im hier beschriebenen Format muss zum Zeitpunkt der Übersetzung die
-Größe des Arrays (Anzahl_der_Elemente) bekannt sein.
+> **Achtung 1:** Im hier beschriebenen Format muss zum Zeitpunkt der Übersetzung
+> die Größe des Arrays (Anzahl_der_Elemente) bekannt sein.
 
-> Achtung 2: Der Variablenname steht nunmehr nicht für einen Wert sondern für
-die Speicheradresse des ersten Feldes!
+> **Achtung 2:** Der Variablenname steht nunmehr nicht für einen Wert sondern
+> für die Speicheradresse des ersten Feldes!
 
 ### Deklaration, Definition, Initialisierung
 
@@ -219,7 +229,7 @@ int main() {
   return 0;
   }
 ```
-@JSCPP(@input, )
+@JSCPP.eval
 
 
 Wie werden arrays initialisiert?
@@ -236,7 +246,7 @@ int main() {
   return 0;
 }
 ```
-@JSCPP(@input, )
+@JSCPP.eval
 
 Und wie bestimme ich den erforderlichen Speicherbedarf bzw. die Größe des
 Arrays?
@@ -251,7 +261,7 @@ int main() {
   return 0;
 }
 ```
-@JSCPP(@input, )
+@JSCPP.eval
 
 ### Fehlerquelle Nummer 1
 
@@ -266,8 +276,8 @@ int main() {
   return 0;
   }
 ```
-@JSCPP(@input, )
-<pre class="lia-code-stdout">
+
+``` bash @output
 ▶ gcc -O experiments.c
 experiments.c: In function ‘main’:
 experiments.c:9:5: warning: iteration 3u invokes undefined behavior [-Waggressive-loop-optimizations]
@@ -276,7 +286,7 @@ experiments.c:9:5: warning: iteration 3u invokes undefined behavior [-Waggressiv
 experiments.c:8:3: note: containing loop
    for (int i=0; i<=3000; i++){
    ^
-</pre>
+```
 
 
 ### Anwendung
@@ -298,7 +308,7 @@ int main() {
   return 0;
   }
 ```
-@JSCPP(@input, )
+@JSCPP.eval
 
 Welche Verbesserungsmöglichkeiten sehen Sie bei dem Programm?
 
@@ -322,13 +332,16 @@ int Matrix[4][4] = {1,2,3,4,5,6,7,8};
 
 ### Anwendungen
 
-Multiplikation zweier Matrizen
+Multiplikation zweier Matrizen:
+
 https://www.codewithc.com/c-program-for-gauss-elimination-method/
 
 
 ### Strings/Zeichenketten
 
-Eine besondere Form der Arrays sind die sogenannten *Strings*, die vom Datentyp `char` sind - Damit alles sich Folgen von Zeichen repräsentieren, wobei am Ende eine ein abschließende "\0" folgt.
+Eine besondere Form der Arrays sind die sogenannten *Strings*, die vom Datentyp
+`char` sind - Damit alles sich Folgen von Zeichen repräsentieren, wobei am Ende
+eine ein abschließende `\0` folgt.
 
 ```cpp                                         stringarray.c
 #include <stdio.h>
@@ -349,7 +362,7 @@ int main() {
   return 0;
 }
 ```
-@JSCPP(@input, )
+@JSCPP.eval
 
 ### Anwendung
 
@@ -374,9 +387,12 @@ int main() {
   return 0;
 }
 ```
-@JSCPP(@input, )
+@JSCPP.eval
 
-![C logo](img/ASCII_Zeichensatz.jpeg)<!-- width="90%" -->
+![ASCII](img/ASCII_Zeichensatz.jpeg)<!--
+width="100%"
+style="min-width: 600px"
+-->
 
 ### Fehlerquellen
 
@@ -396,22 +412,24 @@ int main() {
   return 0;
 }
 ```
-<pre class="lia-code-stdout">
+
+```bash @output
 ▶ gcc experiments.c
 experiments.c: In function ‘main’:
 experiments.c:6:5: error: assignment to expression with array type
    a = "Das ist ein neuer Text";
      ^
-</pre>
+```
 
 Auf die umfangreiche Funktionssammlung der `string.h` zur Manipulation von
 Strings wird in einer folgenden Vorlesung eingegangen.
 
-## 3. structs
+## 3. `structs`
 
-Structs fassen zusammengehörige Variablen unterschiedlicher Datentypen und Bedeutung
-in einem Konstrukt zusammen. Damit wird für den Entwickler der Zusammenhang
-deutlich. Die Variablen der Struktur werden als Komponenten (engl. members) bezeichnet.
+Structs fassen zusammengehörige Variablen unterschiedlicher Datentypen und
+Bedeutung in einem Konstrukt zusammen. Damit wird für den Entwickler der
+Zusammenhang deutlich. Die Variablen der Struktur werden als Komponenten (engl.
+members) bezeichnet.
 
 Beispiele können die Repräsentation eines Datums oder eines Datensatzes in einer
 Datenbank sein.
@@ -464,22 +482,23 @@ int main() {
   return 0;
 }
 ```
-<pre class="lia-code-stdout">
+
+``` bash @output
 ▶ ./a.out
 Person A wurde am 18. April 1986 geboren.
 Person B wurde am 13. April 1803 geboren.
 Person C wurde am  0. September  0 geboren.
-</pre>
+```
 
-### Vergleich von structs
+### Vergleich von `structs`
 
-Der C-Standard kennt keine Methodik um structs in einem Rutsch auf Gleichheit zu prüfen.
-Entsprechend ist es an jedem Entwickler eine eigene Funktion dafür zu schreiben. Diese
-kann unterschiedliche Aspekte des structs adressieren.
+Der C-Standard kennt keine Methodik um `struct`s in einem Rutsch auf Gleichheit
+zu prüfen. Entsprechend ist es an jedem Entwickler eine eigene Funktion dafür zu
+schreiben. Diese kann unterschiedliche Aspekte des `struct`s adressieren.
 
 Im nachfolgenden Beispiel vereinfachen wir die Vergleichsoperation dadurch, dass
-wir für die Repräsentation des Monats ein enum definieren. Damit entfällt aufwändigerer
-Vergleich der Strings.
+wir für die Repräsentation des Monats ein `enum` definieren. Damit entfällt
+aufwändigerer Vergleich der Strings.
 
 ```cpp                           structExample.c
 #include <stdio.h>
@@ -514,8 +533,8 @@ Natürlich lassen sich die beiden erweiterten Datenformate auf der Basis von
 
 ## Beispiel des Tages
 
-Berechnen Sie einen gleitenden Mittelwert und das Maximum aus folgender Zahlenreihe.
-Geben Sie das Resultat in einem Graphen wieder.
+Berechnen Sie einen gleitenden Mittelwert und das Maximum aus folgender
+Zahlenreihe. Geben Sie das Resultat in einem Graphen wieder.
 
 ```cpp                     magicSquare.c
 #include <stdio.h>
@@ -555,4 +574,4 @@ int main(){
   return 0;
 }
 ```
-@JSCPP(@input, )
+@JSCPP.eval

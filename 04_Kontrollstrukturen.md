@@ -6,9 +6,6 @@ version:  0.0.1
 language: de
 narrator: Deutsch Female
 
-comment:  This is a very simple comment.
-          Multiline is also okay.
-
 script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
 @JSCPP.__eval
