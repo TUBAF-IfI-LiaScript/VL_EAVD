@@ -6,21 +6,15 @@ version:  0.0.1
 language: de
 narrator: Deutsch Female
 
-comment:  This is a very simple comment.
-          Multiline is also okay.
-
-translation: English   translation/english.md
-
 script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
-@JSCPP
+@JSCPP.__eval
 <script>
   try {
     var output = "";
-    JSCPP.run(`@0`, `@1`, {stdio: {write: s => { output += s;}}});
+    JSCPP.run(`@0`, `@1`, {stdio: {write: s => { output += s }}});
     output;
   } catch (msg) {
-    console.log(msg);
     var error = new LiaError(msg, 1);
 
     try {
@@ -34,9 +28,16 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
     } catch(e) {}
 
     throw error;
-  }
+    }
 </script>
 @end
+
+
+@JSCPP.eval: @JSCPP.__eval(@input, )
+
+@JSCPP.eval_input: @JSCPP.__eval(@input,`@input(1)`)
+
+@output: <pre class="lia-code-stdout">@0</pre>
 
 -->
 
@@ -47,10 +48,12 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
 * Nennen Sie Vorteile prozeduraler Programmierung!
 * Welche Komponenten beschreiben den Definition einer Funktion?
-* Welche unterschiedlichen Bedeutungen kann das Schlüsselwort `static` ausfüllen?
+* Welche unterschiedlichen Bedeutungen kann das Schlüsselwort `static`
+  ausfüllen?
 * Beschreiben Sie Gefahren bei der impliziten Typkonvertierung.
 * Erläutern Sie die Begriffe Sichtbarkeit und Lebensdauer von Variablen.
-* Welche kritischen Punkte sind bei der Verwendung globaler Variablen zu beachten.
+* Welche kritischen Punkte sind bei der Verwendung globaler Variablen zu
+  beachten.
 
 ---------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
@@ -59,36 +62,39 @@ https://github.com/liaScript/CCourse/blob/master/06_Funktionen.md
 
 ---------------------------------------------------------------------
 
+
 **Wie weit sind wir schon gekommen?**
 
 ANSI C (C89)/ Schlüsselwörter:
 
-|Standard   |            |            |            |             |            |             |
-|:----------|:-----------|:-----------|:-----------|:------------|:-----------|:------------|
-| C89/C90   | auto | <span style="color:blue">double</span> | <span style="color:blue">int</span> | <span style="color:blue">struct</span> | <span style="color:blue">break</span>|
-|           | <span style="color:blue">else</span>  | <span style="color:blue">long</span> |  <span style="color:blue">switch</span> |  <span style="color:blue">case</span> | enum |
-|           | register | typedef | <span style="color:blue">char</span> | extern | return |
-|           | union | const | <span style="color:blue">float</span> | <span style="color:blue">short</span> | <span style="color:blue">unsigned</span>  |
-|           |  <span style="color:blue">continue</span>  | <span style="color:blue">for</span>  | <span style="color:blue">signed</span> | <span style="color:blue">void</span> | default |
-|           | <span style="color:blue">goto</span>  | <span style="color:blue">sizeof</span> | volatile | <span style="color:blue">do</span>  | <span style="color:blue">if</span> |
-|           | static |  <span style="color:blue">while</span> |
-| C99  | <span style="color:blue">_Bool</span>   | _Complex | _Imaginary | inline | restrict |
-| C11  | _Alignas | _Alignof | _Atomic | _Generic |  _Noreturn|
-|      |_Static\_assert | \_Thread\_local|
+| Standard    |                |          |            |          |            |
+|:------------|:---------------|:---------|:-----------|:---------|:-----------|
+| **C89/C90** | auto           | `double` | `int`      | `struct` | `break`    |
+|             | `else`         | `long`   | `switch`   | `case`   | `enum`     |
+|             | register       | typedef  | `char`     | extern   | return     |
+|             | union          | const    | `float`    | `short`  | `unsigned` |
+|             | `continue`     | `for`    | `signed`   | `void`   | `default`  |
+|             | `goto`         | `sizeof` | volatile   | `do`     | `if`       |
+|             | static         | `while`  |            |          |            |
+| **C99**     | `_Bool`        | _Complex | _Imaginary | inline   | restrict   |
+| **C11**     | _Alignas       | _Alignof | _Atomic    | _Generic | _Noreturn  |
+|             |_Static\_assert | \_Thread\_local | |   |          |            |
+
+---
 
 Standardbibliotheken
 
-|Name       | Bestandteil| Funktionen                           |
-|:----------|:-----------|:-------------------------------------|
-|<stdio.h> 	|            | Input/output (printf)                |
-|<stdint.h> |(seit C99)  | Integer Datentypen mit fester Breite |
-|<float.h> 	|            | Parameter der Floatwerte             |
-|<limits.h> |            | Größe der Basistypen                 |
-|<fenv.h>   |            | Verhalten bei Typumwandlungen        |
-|<string.h> |            | Stringfunktionen                     |
+| Name         | Bestandteil | Funktionen                           |
+|:-------------|:------------|:-------------------------------------|
+| `<stdio.h>`  |             | Input/output (`printf`)              |
+| `<stdint.h>` | (seit C99)  | Integer Datentypen mit fester Breite |
+| `<float.h>`  |             | Parameter der Floatwerte             |
+| `<limits.h>` |             | Größe der Basistypen                 |
+| `<fenv.h>`   |             | Verhalten bei Typumwandlungen        |
+| `<string.h>` |             | Stringfunktionen                     |
+
 https://en.cppreference.com/w/c/header
 
----------------------------------------------------------------------
 
 ## 0. Wiederholung
 
@@ -120,7 +126,8 @@ int main() {
   return 0;
 }
 ```
-<pre class="lia-code-stdout">
+
+``` bash @output
 ▶ ./a.out
 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
@@ -130,16 +137,15 @@ int main() {
 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 4
 0 0 0 0 0 0 0 0
-</pre>
+```
 
-Beispiel und Grafik aus dem C-Kurs
-[http://www.c-howto.de/](http://www.c-howto.de/tutorial/arrays-felder/zweidimensionale-felder/)
+Beispiel und Grafik aus dem C-Kurs [http://www.c-howto.de/](http://www.c-howto.de/tutorial/arrays-felder/zweidimensionale-felder/)
 
 
 ### Arrays und Pointer auf Arrays
 
 
-### const char arrays
+### `const char` Arrays
 
 ```cpp                     arrayInitVsAssignment.c
 #include <stdio.h>
@@ -152,7 +158,8 @@ int main() {
   return 0;
 }
 ```
-<pre class="lia-code-stdout">
+
+``` bash @output
 ▶ gcc arrayInitVsAssignment.c
 experiments.c: In function ‘main’:
 experiments.c:6:10: warning: passing argument 1 of ‘strcpy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
@@ -162,15 +169,15 @@ In file included from experiments.c:2:0:
 /usr/include/string.h:125:14: note: expected ‘char * restrict’ but argument is of type ‘const char *’
  extern char *strcpy (char *__restrict __dest, const char *__restrict __src)
               ^
-</pre>
+```
 
 ### Definition vs. Deklaration
 
 Zur Erinnerung ... an die Schritte zur Realisierung einer Variablen
 
-+ Deklaration ist nur die Vergabe eines Namens und eines Typs für die Variable.
-+ Definition ist die Reservierung des Speicherplatzes.
-+ Initialisierung ist die Zuweisung eines ersten Wertes.
+* Deklaration ist nur die Vergabe eines Namens und eines Typs für die Variable.
+* Definition ist die Reservierung des Speicherplatzes.
+* Initialisierung ist die Zuweisung eines ersten Wertes.
 
 ## 1. Definition von Funktionen
 
@@ -210,7 +217,7 @@ int main() {
   return 0;
 }
 ```
-@JSCPP(@input, )
+@JSCPP.eval
 
 Ihre Aufgabe besteht nun darin ein neues Programm zu schreiben, das Ihre
 Implementierung der Mittelwertbestimmung integriert. Wie gehen Sie vor? Was sind
@@ -218,25 +225,36 @@ die Herausforderungen dabei?
 
 **Prozedurale Programmierung Ideen und Konzepte**
 
-+ Bessere Lesbarkeit
+_Bessere Lesbarkeit_
 
-Der Quellcode eines Programms kann schnell mehrere tausend Zeilen umfassen. Beim Linux Kernel sind es sogar über 15 Millionen Zeilen und Windows, das ebenfalls zum Großteil in C geschrieben wurde, umfasst schätzungsweise auch mehrere Millionen Zeilen. Um dennoch die Lesbarkeit des Programms zu gewährleisten, ist die Modularisierung unerlässlich.
+Der Quellcode eines Programms kann schnell mehrere tausend Zeilen umfassen. Beim
+Linux Kernel sind es sogar über 15 Millionen Zeilen und Windows, das ebenfalls
+zum Großteil in C geschrieben wurde, umfasst schätzungsweise auch mehrere
+Millionen Zeilen. Um dennoch die Lesbarkeit des Programms zu gewährleisten, ist
+die Modularisierung unerlässlich.
 
-+ Wiederverwendbarkeit
+_Wiederverwendbarkeit_
 
-In fast jedem Programm tauchen die gleichen Problemstellungen mehrmals auf. Oft gilt dies auch für unterschiedliche Applikationen. Da nur Parameter und Rückgabetyp für die Benutzung einer Funktion bekannt sein müssen, erleichtert dies die Wiederverwendbarkeit. Um die Implementierungsdetails muss sich der Entwickler dann nicht mehr kümmern.
+In fast jedem Programm tauchen die gleichen Problemstellungen mehrmals auf. Oft
+gilt dies auch für unterschiedliche Applikationen. Da nur Parameter und
+Rückgabetyp für die Benutzung einer Funktion bekannt sein müssen, erleichtert
+dies die Wiederverwendbarkeit. Um die Implementierungsdetails muss sich der
+Entwickler dann nicht mehr kümmern.
 
-+ Wartbarkeit
+_Wartbarkeit_
 
-Fehler lassen sich durch die Modularisierung leichter finden und beheben. Darüber hinaus ist es leichter, weitere Funktionalitäten hinzuzufügen oder zu ändern.
+Fehler lassen sich durch die Modularisierung leichter finden und beheben.
+Darüber hinaus ist es leichter, weitere Funktionalitäten hinzuzufügen oder zu
+ändern.
 
-In allen 3 Aspekten ist der Vorteil in der Kapselung der Funktionalität zu suchen.
+In allen 3 Aspekten ist der Vorteil in der Kapselung der Funktionalität zu
+suchen.
 
 
 **Wie würden wir das vorhergehende Beispiel umstellen?**
 
-Funktionen sind Unterprogramme, die ein Ausgangsproblem in kleine, möglicherweise
-wiederverwendbare Codeelemente zerlegen.
+Funktionen sind Unterprogramme, die ein Ausgangsproblem in kleine,
+möglicherweise wiederverwendbare Codeelemente zerlegen.
 
 
 ```cpp                          standardabweichung.c
@@ -274,11 +292,21 @@ https://google.github.io/styleguide/cppguide.html#Write_Short_Functions
 >
 > Prefer small and focused functions.
 >
-> We recognize that long functions are sometimes appropriate, so no hard limit is placed on functions length. If a function exceeds about 40 lines, think about whether it can be broken up without harming the structure of the program.
+> We recognize that long functions are sometimes appropriate, so no hard limit
+> is placed on functions length. If a function exceeds about 40 lines, think
+> about whether it can be broken up without harming the structure of the
+> program.
 >
-> Even if your long function works perfectly now, someone modifying it in a few months may add new behavior. This could result in bugs that are hard to find. Keeping your functions short and simple makes it easier for other people to read and modify your code.
+> Even if your long function works perfectly now, someone modifying it in a few
+> months may add new behavior. This could result in bugs that are hard to find.
+> Keeping your functions short and simple makes it easier for other people to
+> read and modify your code.
 >
-> You could find long and complicated functions when working with some code. Do not be intimidated by modifying existing code: if working with such a function proves to be difficult, you find that errors are hard to debug, or you want to use a piece of it in several different contexts, consider breaking up the function into smaller and more manageable pieces.
+> You could find long and complicated functions when working with some code. Do
+> not be intimidated by modifying existing code: if working with such a function
+> proves to be difficult, you find that errors are hard to debug, or you want to
+> use a piece of it in several different contexts, consider breaking up the
+> function into smaller and more manageable pieces.
 
 ### Funktionsdefinition
 
@@ -289,21 +317,21 @@ https://google.github.io/styleguide/cppguide.html#Write_Short_Functions
 }
 ```
 
-+ Rückgabedatentyp - Welchen Datentyp hat der Rückgabewert?
+* Rückgabedatentyp - Welchen Datentyp hat der Rückgabewert?
 
   Eine Funktion ohne Rückgabewert wird vom Programmierer als `void`
   deklariert. Sollten Sie keinen Rückgabetyp angeben, so wird
   automatisch eine Funktion mit Rückgabewert vom Datentyp int erzeugt.
 
-+ Funktionsname - Dieser Bestandteil der Funktionsdefinition ist
+* Funktionsname - Dieser Bestandteil der Funktionsdefinition ist
   eine eindeutige Bezeichnung, die für den Aufruf der Funktion
   verwendet wird.
 
   Es gelten die gleichen Regeln für die Namensvergabe wie für
   Variablen. Logischerweise sollten keine Funktionsnamen der
-  Laufzeitbibliothek verwenden, wie z. B. printf().
+  Laufzeitbibliothek verwenden, wie z. B. `printf()`.
 
-+ Parameter - Die Parameter sind beim Funktionsaufruf optional,
+* Parameter - Die Parameter sind beim Funktionsaufruf optional,
   die umgebenden Klammern nicht!
 
   Parameter sind Variablen (oder Pointer darauf) die durch einen
@@ -319,13 +347,13 @@ https://google.github.io/styleguide/cppguide.html#Write_Short_Functions
 
 ### Beispiele für Funktionsdefinitionen
 
-```
+``` c
 int main (void) {
   /* Anweisungsblock mit Anweisungen */
 }
 ```
 
-```
+``` c
 int printf(const char * restrict format, ...){
    /* Anweisungsblock mit Anweisungen */
 }
@@ -333,13 +361,13 @@ int printf(const char * restrict format, ...){
 //int a = printf("Hello World\n %d", 1);
 ```
 
-```
+``` c
 void printDatenSatz(struct student datensatz){
    /* Anweisungsblock mit Anweisungen */
 }
 ```
 
-```
+``` c
 int mittelwert(int * array){
    /* Anweisungsblock mit Anweisungen */
 }
@@ -377,6 +405,8 @@ int main(){
     float input = 8.4535;
     printf("Eingabewert %f - Ausgabewert %d\n", input, runden(input));
     printf("Eingabewert %f - Ausgabewert %f\n", input, rundenf(input,2));
+
+    return 0;
 }
 ```
 
@@ -391,13 +421,14 @@ void foo()
 	return 5; /* Fehler */
 }
 ```
-<pre class="lia-code-stdout">
+
+``` bash @output
 ▶ gcc experiments.c
 experiments.c: In function ‘foo’:
 experiments.c:5:10: warning: ‘return’ with a value, in function returning void
    return 1;
           ^
-</pre>
+```
 
 **Erwartung eines Rückgabewertes**
 
@@ -413,13 +444,14 @@ int main() {
   return 0;
 }
 ```
-<pre class="lia-code-stdout">
+
+``` bash @output
 ▶ gcc experiments.c
 experiments.c: In function ‘main’:
 experiments.c:9:11: error: void value not ignored as it ought to be
    int i = foo();
            ^
-</pre>
+```
 
 **Implizite Convertierungen**
 
@@ -435,13 +467,14 @@ int main() {
   return 0;
 }
 ```
-<pre class="lia-code-stdout">
+
+``` bash @output
 ▶ gcc -Wconversion experiments.c
 experiments.c: In function ‘main’:
 experiments.c:9:11: warning: conversion to ‘int’ from ‘float’ may alter its value [-Wfloat-conversion]
    int i = foo();
            ^
-</pre>
+```
 
 **Parameterübergabe ohne entsprechende Spezifikation**
 
@@ -457,7 +490,8 @@ int main() {
   return 0;
 }
 ```
-<pre class="lia-code-stdout">
+
+``` bash @output
 ▶ gcc experiments.c
 experiments.c: In function ‘main’:
 experiments.c:8:11: error: too many arguments to function ‘foo’
@@ -466,7 +500,7 @@ experiments.c:8:11: error: too many arguments to function ‘foo’
 experiments.c:3:5: note: declared here
  int foo(void){
      ^
-</pre>
+```
 
 **Anweisungen nach dem return-Schlüsselwort**
 
@@ -494,11 +528,11 @@ int main() {
   return 0;
 }
 ```
-@JSCPP(@input, )
+@JSCPP.eval
 
 ### Funktionsdeklaration
 
-```cpp
+```cpp  experiments.c
 #include <stdio.h>
 
 int main() {
@@ -510,12 +544,13 @@ int foo(void){         // <- Defintion der Funktion
    return 3;
 }
 ```
-<pre class="lia-code-stdout">
+
+``` bash @output
 experiments.c: In function ‘main’:
 experiments.c:4:11: warning: implicit declaration of function ‘foo’ [-Wimplicit-function-declaration]
    int i = foo(5);
            ^
-</pre>
+```
 
 Damit der Compiler überhaupt von einer Funktion Kenntnis nimmt, muss diese vor
 ihrem Aufruf deklariert werden. Im vorangegangenen Beispiel ist das automatisch
@@ -537,11 +572,11 @@ float berechneFlaeche(float breite, float hoehe){
    return breite * hoehe;
 }
 ```
-@JSCPP(@input, )
+@JSCPP.eval
 
-Das Ganze wird dann relevant, wenn Funktionen aus anderen Quellcodedateien eingefügt
-werden sollen. Die Deklaration macht den Compiler mit dem Aussehen der Funktion
-bekannt. Diese werden mit `extern` als Spezifizierer markiert.
+Das Ganze wird dann relevant, wenn Funktionen aus anderen Quellcodedateien
+eingefügt werden sollen. Die Deklaration macht den Compiler mit dem Aussehen der
+Funktion bekannt. Diese werden mit `extern` als Spezifizierer markiert.
 
 ```cpp
 extern float berechneFlaeche(float breite, float hoehe);
@@ -549,9 +584,9 @@ extern float berechneFlaeche(float breite, float hoehe);
 
 ### Herausforderung komplexer Parametersätze und Rückgabewerte
 
-Bisher wurden Beispiele besprochen, die einen skaleren Rückgabewert realisierten.
-Allerdings wäre diese Möglichkeit sehr einschränkend. Eine Lösung darüberhinaus
-stellen structs und arrays dar.
+Bisher wurden Beispiele besprochen, die einen skaleren Rückgabewert
+realisierten. Allerdings wäre diese Möglichkeit sehr einschränkend. Eine Lösung
+darüberhinaus stellen `struct`s und arrays dar.
 
 ```cpp
 #include <stdio.h>
@@ -578,12 +613,13 @@ int main() {
    return 0;
 }
 ```
-<pre class="lia-code-stdout">
+
+``` bash @output
 ▶ ./a.out
 Name Micky Maus
 Alter 50
 Note 1
-</pre>
+```
 
 ## 2.  Lebensdauer und Sichtbarkeit von Variablen
 
@@ -621,14 +657,14 @@ int main() {
    return 0;
 }
 ```
-@JSCPP(@input, )
+@JSCPP.eval
 
-| Variable   | Spezifik         | Bedeutung                       |
-|:-----------|:-----------------|:--------------------------------|
-| pi         | global, const    | im gesammten Programm           |
-| radius     | lokal            | nur in `berechneFlaeche`        |
-| gueltig    | lokal            | nur in `main`                   |
-| linecount  | lokal            | nur im Anweisungsblock von  `if`|
+| Variable     | Spezifik         | Bedeutung                       |
+|:-------------|:-----------------|:--------------------------------|
+| `pi`         | global, const    | im gesammten Programm           |
+| `radius`     | lokal            | nur in `berechneFlaeche`        |
+| `gueltig`    | lokal            | nur in `main`                   |
+| `linecount`  | lokal            | nur im Anweisungsblock von  `if`|
 
 
 ** Static Variablen**
@@ -648,24 +684,25 @@ int main() {
    return 0;
 }
 ```
-<pre class="lia-code-stdout">
+
+``` bash @output
 ▶ ./a.out
 1
 2
 3
-</pre>
+```
 
 
 ## Beispiel des Tages
 
-Generieren Sie mit einem C Programm Dateien im Excelformat, um diese dann
-weiter verarbeiten zu können. Dazu nutzen wir die Bibliothek libxlsxwriter,
-deren Dokumentation und Quellcode Sie unter
+Generieren Sie mit einem C Programm Dateien im Excelformat, um diese dann weiter
+verarbeiten zu können. Dazu nutzen wir die Bibliothek libxlsxwriter, deren
+Dokumentation und Quellcode Sie unter
 
 https://libxlsxwriter.github.io/index.html
 
-finden. Die Dokumentation für die im Beispiel verwendeten Funktionen findet
-sich dann für lxw_workbook auf der Seite
+finden. Die Dokumentation für die im Beispiel verwendeten Funktionen findet sich
+dann für lxw_workbook auf der Seite
 
 https://libxlsxwriter.github.io/workbook_8h.html#a1cf96608a23ee4eb0e8467c15240d00b
 
