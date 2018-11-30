@@ -537,22 +537,44 @@ Diagrammen wie folgt darstellen:
 
 * Iterationssymbol
 
-    ![Nassi_LineareAnw.png](img/Nassi_for.png)<!-- width="80%" -->[^1]
+  ````
+    __________________________________________________________________
+   |                                                                  |
+   |  zähle [Variable] von [Startwert] bis [Endwert], Schrittweite 1  |
+   |  ________________________________________________________________|
+   | |                                                                |
+   | |  Anweisungsblock 1                                             |
+   |_|________________________________________________________________|
+  ````
 
 * Wiederholungsstruktur mit vorausgehender Bedingungsprüfung
 
-    ![Nassi_LineareAnw.png](img/Nassi_while.png)<!-- width="40%" -->[^1]
+  ````
+    __________________________                                         
+   |                          |
+   |  solange Bedingung wahr  |
+   |  ________________________|
+   | |                        |
+   | |  Anweisungsblock 1     |
+   |_|________________________|
+  ````
 
 * Wiederholungsstruktur mit nachfolgender Bedingungsprüfung
 
-    ![Nassi_LineareAnw.png](img/Nassi_dowhile.png)<!-- width="40%" -->[^1]
+  ````
+    __________________________                                         
+   | |                        |
+   | |  Anweisungsblock 1     |
+   | |________________________|
+   |                          |
+   |   solange Bedingung wahr |
+   |__________________________|
+  ````
 
 
 Die Programmiersprache C kennt diese drei Formen über die Schleifenkonstrukte
 `for`, `while`, `do while`.
 
-
-[^1]: Nassi-Shneidermann Diagramme (Quelle: https://de.wikipedia.org/wiki/Nassi-Shneiderman-Diagramm#/media/File:LineareAnw.png (Autor Renzsorf))
 
 #### `for`-Schleife
 
