@@ -124,18 +124,19 @@ $.ajax ({
 -->
 
 
-# Vorlesung VI - Funktionen
+# Vorlesung VII - Funktionen
 
 **Fragen an die heutige Veranstaltung ...**
 
-* Nennen Sie Vorteile prozeduraler Programmierung!
-* Welche Komponenten beschreiben den Definition einer Funktion?
-* Welche unterschiedlichen Bedeutungen kann das Schlüsselwort `static`
-  ausfüllen?
-* Beschreiben Sie Gefahren bei der impliziten Typkonvertierung.
-* Erläutern Sie die Begriffe Sichtbarkeit und Lebensdauer von Variablen.
-* Welche kritischen Punkte sind bei der Verwendung globaler Variablen zu
-  beachten.
+* Erklären Sie die Idee des Zeigers in der Programmiersprache C.
+* Welche Vorteile ergeben sich, wenn eine Variable nicht mit dem Wert sondern
+über die Adresse übergrben wird?
+* Welche Funktion hat der Adressoperator `&`?
+* Welche Gefahr besteht bei der Initialisierung von Zeigern?
+* Was ist ein `NULL`-Zeiger und wozu wird er verwendet?
+* Wie gibt man die Adresse, auf die ein Zeiger gerichtet ist, mit `printf` aus?
+* Erläutern Sie die mehrfache Nutzung von `*` im Zusammenhang mit der Arbeit von Zeigern.
+* In welchem Kontext ist die Typisierung von Zeigern von Bedeutung?
 
 ---------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
@@ -154,7 +155,7 @@ https://rextester.com/
 
 int main(void) {
   printf("Jetzt kann ich alles was die Konsole kann!\n");
-  printf("Probier es aus!\n");
+  printf("Probier es aus!");
   return EXIT_SUCCESS;
 }
 ```
@@ -227,14 +228,14 @@ int main(void) {
 ```
 @Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
 
-````
- ┏━━━━━━━┳━━━━━━━┳━━━━━━━┳╸╸╸╸╸╸╸┳━━━━━━━┳━━━━━━━┳╸╸╸╸╸╸╸
- ┃ Index ┃   0   ┃   1   ┃       ┃   89  ┃   90  ┃
- ┣━━━━━━━╋━━━━━━━╋━━━━━━━╋╸╸╸╸╸╸╸╋━━━━━━━╋━━━━━━━╋╸╸╸╸╸╸╸
- ┃ Wert  ┃ 0.000 ┃ 0.017 ┃       ┃ 0.999 ┃ 1.000 ┃
- ┗━━━━━━━┻━━━━━━━┻━━━━━━━┻╸╸╸╸╸╸╸┻━━━━━━━┻━━━━━━━┻╸╸╸╸╸╸╸
-````
-
+| Index  | Wert       |
+|:-------|:-----------|
+|  0     |   0        |
+|  1     |   0.017    |
+| ...    |    ...     |
+| 89     |   0.999    |
+| 90     |   1        |
+| ...    |    ...     |
 
 Warum ist es sinnvoll Funktionen in Look-Up-Tables abzubilden, letztendlich
 kostet das Ganze doch Speicherplatz?
@@ -242,52 +243,24 @@ kostet das Ganze doch Speicherplatz?
 ## 1 Zeiger als Konzept
 
 Bisher umfassten unserer Variablen als Datencontainer Zahlen oder Buchstaben.
-Das Konzept des Zeigers (englisch Pointer) erweitert das Spektrum der Inhalte
-auf Adressen.
+Das Konzept des Zeigers (englisch Pointer) erweitert das Spektrum der Inhalte auf Adressen.
 
-An dieser Adresse können entweder Daten, wie Variablen oder Objekte, aber auch
-Programmcodes (Anweisungen) stehen. Durch Dereferenzierung des Zeigers ist es
-möglich, auf die Daten oder den Code zuzugreifen.
+An dieser Adresse können entweder Daten, wie Variablen oder Objekte, aber auch Programmcodes (Anweisungen) stehen. Durch Dereferenzierung des Zeigers ist es möglich, auf die Daten oder den Code zuzugreifen.
 
-Beispiel: Zeiger auf eine Variable
+Beispiel: Zeiger auf eine Variable [^1]
 
-<!--
-style="width: 80%; max-width: 460px; display: block; margin-left: auto; margin-right: auto;"
--->
-````
-  Variablen-     Speicher-      Inhalt
-  name           addresse
-                                ┏━━━━━━━━┓
-                 0000           ┃        ┃
-                                ┣━━━━━━━━┫
-                 0001           ┃        ┃
-                                ┣━━━━━━━━┫
-  a   ------>    0002       +---┃00001007┃
-                          z |   ┣━━━━━━━━┫
-                 0003     e |   ┃        ┃
-                          i |   ┣━━━━━━━━┫
-                 ....     g |   ┃        ┃
-                          t |   ┣━━━━━━━━┫
-                 1005       |   ┃        ┃
-                          a |   ┣━━━━━━━━┫
-                 1006     u |   ┃        ┃
-                          f |   ┣━━━━━━━━┫
-  b   ------>    1007    <--+   ┃01101101┃
-                                ┣━━━━━━━━┫
-                 1008           ┃        ┃
-                                ┣━━━━━━━━┫
-                 ....           ┃        ┃
-````
+![intel](img/Pointers.png)<!-- style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
 
-Welche Vorteile ergeben sich aus der Nutzung von Zeigern, bzw. welche
-Programmiertechniken lassen sich realiseren:
+[^1]: Wikipedia Eintrag "Pointer" (Autor Sven Translation)
 
+Welche Vorteile ergeben sich aus der Nutzung von Zeigern, bzw. welche Programmiertechniken
+lassen sich realiseren:
 * dynamische Verwaltung von Speicherbereichen
-* Übergabe von Datenobjekte an Funktionen via "call-by-reference" [^1]
+* Übergabe von Datenobjekte an Funktionen via "call-by-reference" [^2]
 * Übergabe von Funktionen als Argumente an andere Funktionen
 * Umsetzung rekursiver Datenstrukturen wie Listen und Bäume
 
-[^1]: Der Vollständigkeithalber sei erwähnt, dass C anders als C++ keine Referenzen
+[^2]: Der Vollständigkeithalber sei erwähnt, dass C anders als C++ keine Referenzen
 im eigentlichen Sinne kennt. Hier ist die Übergabe einer Variablen als Paramter
 in Form einer Adresse gemeint und nicht das Konstrukt "Reference".
 
@@ -298,25 +271,31 @@ in Form einer Adresse gemeint und nicht das Konstrukt "Reference".
 Die Definition eines Zeigers besteht aus dem Datentyp des Zeigers und dem gewünschten Zeigernamen. Der Datentyp eines Zeigers besteht wiederum aus dem Datentyp des Werts auf den gezeigt wird sowie aus einem Asterisk. Ein Datentyp eines Zeigers wäre also z. B. `double*`.
 
 ``` c
-/* kann eine Adresse aufnehmen, die auf einen Wert vom Typ Integer zeigt */
-int* zeiger1;
-/* das Leerzeichen kann sich vor oder nach dem Stern befinden */
-float *zeiger2;
-/* ebenfalls möglich */
-char * zeiger3;
-/* Definition von zwei Zeigern */
-int *zeiger4, *zeiger5;
-/* Definition eines Zeigers und einer Variablen vom Typ Integer */
-int *zeiger6, ganzzahl;
+#include <stdio.h>
+#include <stdlib.h>
 
-printf("%p", (void*)zeiger1);
+int main()
+{
+   /* kann eine Adresse aufnehmen, die auf einen Wert vom Typ Integer zeigt */
+  int* zeiger1;
+  /* das Leerzeichen kann sich vor oder nach dem Stern befinden */
+  float *zeiger2;
+  /* ebenfalls möglich */
+  char * zeiger3;
+  /* Definition von zwei Zeigern */
+  int *zeiger4, *zeiger5;
+  /* Definition eines Zeigers und einer Variablen vom Typ Integer */
+  int *zeiger6, ganzzahl;
+  printf("%p", (void*)zeiger1);
+  return EXIT_SUCCESS;
+}
 ```
-
+@Rextester.eval
 
 ### Zuweisung
 
-Die Zuweisung einer Adresse an einen Zeiger erfolgt mithilfe des Adressoperators
-`&`, eines Feldes, eines weiteren Zeigers oder des Wertes von `NULL`.
+Die Zuweisung einer Adresse an einen Zeiger erfolgt mithilfe des
+Adressoperators `&`, eines Feldes, eines weiteren Zeigers oder des Wertes von NULL.
 
 ``` c
 #include <stdio.h>
@@ -344,22 +323,18 @@ int main()
 @Rextester.eval
 
 Die konkrete Zuordnung einer Variablen im Speicher wird durch den Compiler und
-das Betriebssystem bestimmt. Entsprechend kann die Adresse einer Variablen nicht
+das Betriebssystem bstimmt. Entsprechend kann die Adresse einer Variablen nicht
 durch den Programmierer festgelegt werden. Ohne Manipulationen ist die Adresse
 einer Variablen über die gesamte Laufzeit des Programms unveränderlich, ist aber
 bei mehrmaligen Programmstarts unterschiedlich.
 
-Ausgaben von Pointer erfolgen mit `printf("%p", ptr)`, es wird dann eine
-hexadezimale Adresse ausgegeben. Der Pointer muss dafür als `(void *)` gekastet
-werden.
+Ausgaben von Pointer erfolgen mit `printf("%p", ptr)`, es wird dann eine hexadezimale Adresse
+ausgegeben. Der Pointer muss dafür als `(void *)` gekastet werden.
 
 
 Zeiger können mit dem "Wert" `NULL` als ungültig markiert werden. Eine
 Dereferenzierung führt dann meistens zu einem Laufzeitfehler nebst
-Programmabbruch. `NULL` ist ein Macro und wird in mehreren Header-Dateien
-definiert (mindestens in `stddef.h`). Die Definition ist vom Standard
-implementierungsabhängig vorgegeben und vom Compilerhersteller passend
-implementiert, z. B.
+Programmabbruch. NULL ist ein Macro und wird in mehreren Header-Dateien definiert (mindestens in `stddef.h`). Die Definition ist vom Standard implementierungsabhängig vorgegeben und vom Compilerhersteller passend implementiert, z. B.
 
 ``` c
 #define NULL 0
@@ -368,7 +343,7 @@ implementiert, z. B.
 ```
 
 Und umgekehrt, wie erhalten wir den Wert, auf den der Pointer zeigt? Hierfür
-benötigen wir den _Inhaltsoperator_ `*`.
+benötigen wir den *Inhaltsoperator* `*`.
 
 ``` c
 #include <stdio.h>
@@ -392,7 +367,6 @@ int main()
 ### Fehlerquellen
 
 Fehlender Adressopertor bei der Zuweisung
-
 ``` c
 #include <stdio.h>
 #include <stdlib.h>
@@ -410,7 +384,6 @@ int main()
 @Rextester.eval
 
 Fehlender Dereferenzierungsoperator beim Zugriff
-
 ``` c
 #include <stdio.h>
 #include <stdlib.h>
@@ -427,7 +400,6 @@ int main()
 @Rextester.eval
 
 Uninitialierte Pointer zeigen "irgendwo ins nirgendwo"!
-
 ``` c
 #include <stdio.h>
 #include <stdlib.h>
@@ -474,12 +446,10 @@ int main(void) {
 @Rextester.eval
 
 Die Zeigerarithmetik erlaubt:
-
 * Ganzzahl-Additionen
 * Ganzzahl-Substraktionen
 * Inkrementierungen `ptr_i--;`
 * Dekrementierungen `ptr_i++;`
-
 Der Compiler wertet
 dabei den Typ der Variablen aus und inkrementiert bzw. dekrementiert die
 Adresse entsprechend.
@@ -492,15 +462,15 @@ int main()
 {
   int a[] = {0,1,2,3,4,5};
   int *ptr_a = a;
-  printf("Pointer ptr_a             %p\n", (void*)ptr_a);
+  printf("Pointer ptr_a               %p\n", (void*)ptr_a);
   int *ptr_b;
   ptr_b = ptr_a + 1;
   ptr_b ++;
-  printf("Pointer ptr_b             %p\n", (void*)ptr_b);
-  printf("Differenz ptr_b - ptr_a   %ld\n", (long)(ptr_b - ptr_a));
-  printf("Differenz ptr_b - ptr_a   %ld\n", (long)ptr_b - (long)ptr_a);
+  printf("Pointer ptr_b               %p\n", (void*)ptr_b);
+  printf("Differenz ptr_b -  ptr_a    %d\n", (int)(ptr_b - ptr_a));
+  printf("Differenz ptr_b -  ptr_a    %d\n", (int)ptr_b - (int)ptr_a);
 
-  printf("Wert hinter Pointer ptr_b '%d'\n", *ptr_b);
+  printf("Wert hinter Pointer ptr_b   '%d'\n", *ptr_b);
 
   return EXIT_SUCCESS;
 }
@@ -545,7 +515,7 @@ int main()
 #include <math.h>
 
 double sinussatz(double *lookup_sin, int angle, double opositeSide){
-  printf("Größe des Arrays %ld\n", sizeof(*lookup_sin));
+  printf("Größe des Arrays %d\n", sizeof(*lookup_sin));
   return opositeSide*lookup_sin[angle];
 }
 
@@ -554,7 +524,7 @@ int main(void) {
   for(int i=0; i<360; i++) {
     sin_values[i] = sin(i*M_PI/180);
   }
-  printf("Größe des Arrays %ld\n", sizeof(sin_values));
+  printf("Größe des Arrays %d\n", sizeof(sin_values));
   printf("Result =  %lf \n",sinussatz(sin_values, 30, 20));
   return EXIT_SUCCESS;
 }
@@ -593,28 +563,51 @@ int main(void) {
 @Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
 
 
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+void source(int *wert) {
+  int counter = 5;
+  *wert += counter;
+}
+
+int main(void) {
+  char original = "Das ist eine Log-Ausgabe";
+  printf("%s",  );
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
+
 ## 3. Beispiel der Woche
+
+Gegeben ist ein Array, dass eine sortierte Reihung von Ganzzahlen umfasst.
+Geben Sie alle Paare von Einträgen zurück, die in der Summe 18 ergeben.
 
 ```c
 #include <stdio.h>
+#include <stdlib.h>
+
+#define ZIELWERT 18
 
 int main(void)
 {
-  int a,b,c;
-
-  printf("Bitte Länge des Quaders eingeben:\n");
-  scanf("%d",&a);
-  printf("Bitte Breite des Quaders eingeben:\n");
-  scanf("%d",&b);
-  printf("Bitte Höhe des Quaders eingeben:\n");
-  scanf("%d",&c);
-  printf("Quaderoberfläche:\n%d\n", 2 * (a * b + a * c + b * c));
-  return 0;
+  int a[] = {1, 2, 5, 7, 9, 10, 12, 13, 16, 17, 18, 21, 25};
+  int *ptr_left = a;
+  int *ptr_right = (int *)(&a + 1) - 1;
+  printf("Value left %3d right %d\n -----------------------\n", *ptr_left, * ptr_right);
+  do{
+    printf("Value left %3d right %d", *ptr_left, * ptr_right);
+    if (*ptr_right + *ptr_left == ZIELWERT){
+       printf("-> TREFFER");
+    }
+    printf("\n");
+    if (*ptr_right + *ptr_left >= ZIELWERT) ptr_right--;
+    else ptr_left++;
+  }while (ptr_right != ptr_left);
+  return EXIT_SUCCESS;
 }
 ```
-``` bash stdin
-2
-3
-4
-```
-@Rextester.eval_input
+@Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
