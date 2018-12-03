@@ -204,13 +204,13 @@ https://en.cppreference.com/w/c/header
 
 ## 0. Wiederholung
 
-### Arrays & Schleifen
+**Arrays & Schleifen**
 
 Realisieren Sie eine Look-Up-Table für die Berechnung des Sinus von Gradwerten.
 
 http://www2.hs-fulda.de/~klingebiel/c-stdlib/math.htm
 
-```cpp                          nDimArray.c
+``` c
 #include <stdio.h>
 #include <math.h>
 
@@ -226,6 +226,15 @@ int main(void) {
 }
 ```
 @Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
+
+| Index  | Wert       |
+|:-------|:-----------|
+|  0     |   0        |
+|  1     |   0.017    |
+| ...    |    ...     |
+| 89     |   0.999    |
+| 90     |   1        |
+| ...    |    ...     |
 
 Warum ist es sinnvoll Funktionen in Look-Up-Tables abzubilden, letztendlich
 kostet das Ganze doch Speicherplatz?
@@ -243,13 +252,16 @@ Beispiel: Zeiger auf eine Variable [^1]
 
 [^1]: Wikipedia Eintrag "Pointer" (Autor Sven Translation)
 
+Welche Vorteile ergeben sich aus der Nutzung von Zeigern, bzw. welche Programmiertechniken
+lassen sich realiseren:
+* dynamische Verwaltung von Speicherbereichen
+* Übergabe von Datenobjekte an Funktionen via "call-by-reference" [^2]
+* Übergabe von Funktionen als Argumente an andere Funktionen
+* Umsetzung rekursiver Datenstrukturen wie Listen und Bäume
 
-* Speicherbereiche können dynamisch reserviert, verwaltet und wieder gelöscht werden.
-* Mit Zeigern können Sie Datenobjekte direkt (call-by-reference) an Funktionen übergeben.
-* Mit Zeigern lassen sich Funktionen als Argumente an andere Funktionen übergeben.
-* Rekursive Datenstrukturen wie Listen und Bäume lassen sich fast nur mit Zeigern erstellen.
-* Es lässt sich ein typenloser Zeiger (void *) definieren, womit Datenobjekte beliebigen Typs verarbeitet werden können.
-
+[^2]: Der Vollständigkeithalber sei erwähnt, dass C anders als C++ keine Referenzen
+im eigentlichen Sinne kennt. Hier ist die Übergabe einer Variablen als Paramter
+in Form einer Adresse gemeint und nicht das Konstrukt "Reference".
 
 ## 2 Zeiger in C
 
@@ -266,9 +278,9 @@ int main()
    /* kann eine Adresse aufnehmen, die auf einen Wert vom Typ Integer zeigt */
   int* zeiger1;
   /* das Leerzeichen kann sich vor oder nach dem Stern befinden */
-  int *zeiger2;
+  float *zeiger2;
   /* ebenfalls möglich */
-  int * zeiger3;
+  char * zeiger3;
   /* Definition von zwei Zeigern */
   int *zeiger4, *zeiger5;
   /* Definition eines Zeigers und einer Variablen vom Typ Integer */
@@ -281,7 +293,8 @@ int main()
 
 ### Zuweisung
 
-Die Zuweisung einer Adresse an einen Zeiger erfolgt mithilfe des Adressoperators `&`, eines Feldes, eines weiteren Zeigers oder des Wertes von NULL.
+Die Zuweisung einer Adresse an einen Zeiger erfolgt mithilfe des
+Adressoperators `&`, eines Feldes, eines weiteren Zeigers oder des Wertes von NULL.
 
 ``` c
 #include <stdio.h>
@@ -312,18 +325,213 @@ Die konkrete Zuordnung einer Variablen im Speicher wird durch den Compiler und
 das Betriebssystem bstimmt. Entsprechend kann die Adresse einer Variablen nicht
 durch den Programmierer festgelegt werden. Ohne Manipulationen ist die Adresse
 einer Variablen über die gesamte Laufzeit des Programms unveränderlich, ist aber
-bei mehrmaligen Programmstarts unterschiedlich. 
+bei mehrmaligen Programmstarts unterschiedlich.
 
-Ausgaben von Pointer erfolgen mit `%p`, es wird dann eine hexadezimale Adresse
+Ausgaben von Pointer erfolgen mit `printf("%p", ptr)`, es wird dann eine hexadezimale Adresse
 ausgegeben. Der Pointer muss dafür als `(void *)` gekastet werden.
-`printf("%p")`
+
+
+Zeiger können mit dem "Wert" `NULL` als ungültig markiert werden. Eine
+Dereferenzierung führt dann meistens zu einem Laufzeitfehler nebst
+Programmabbruch. NULL ist ein Macro und wird in mehreren Header-Dateien definiert (mindestens in `stddef.h`). Die Definition ist vom Standard implementierungsabhängig vorgegeben und vom Compilerhersteller passend implementiert, z. B.
+
+``` c
+#define NULL 0
+#define NULL 0L
+#define NULL (void *) 0
+```
+
+Und umgekehrt, wie erhalten wir den Wert, auf den der Pointer zeigt? Hierfür
+benötigen wir den *Inhaltsoperator* `*`.
+
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+  int a = 15;
+  int * ptr_a = &a;
+  printf("Wert von a                     %d\n", a);
+  printf("Pointer ptr_a                  %p\n", (void*)ptr_a);
+  printf("Wert hinter dem Pointer ptr_a  %d\n", *ptr_a);
+  *ptr_a = 10;
+  printf("Wert von a                     %d\n", a);
+  printf("Wert hinter dem Pointer ptr_a  %d\n", *ptr_a);
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
+### Fehlerquellen
+
+Fehlender Adressopertor bei der Zuweisung
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+  int a = 5;
+  int * ptr_a;
+  ptr_a = a;
+  printf("Pointer ptr_a                  %p\n", (void*)ptr_a);
+  printf("Wert hinter dem Pointer ptr_a  %d\n", *ptr_a);
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
+Fehlender Dereferenzierungsoperator beim Zugriff
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+  int a = 5;
+  int * ptr_a = &a;
+  printf("Pointer ptr_a                  %p\n", (void*)ptr_a);
+  printf("Wert hinter dem Pointer ptr_a  %d\n", ptr_a);
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
+Uninitialierte Pointer zeigen "irgendwo ins nirgendwo"!
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+  int * ptr_a;
+  *ptr_a = 10;
+  // korrekte Initalisierung
+  // int * ptr_a = NULL;
+  // Prüfung auf gültige Adresse
+  // if (ptr_a != NULL) *ptr_a = 10;
+  printf("Pointer ptr_a                  %p\n", (void*)ptr_a);
+  printf("Wert hinter dem Pointer ptr_a  %d\n", *ptr_a);
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
+### Zeigerarithmetik
+
+Zeiger können manipuliert werden, um variabel auf Inhalte im Speicher zuzugreifen.
+Wie groß ist aber eigentlich ein Zeiger und warum muss er typisiert werden?
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+  char   *v;
+  int    *w;
+  float  *x;
+  double *y;
+  void   *z;
+
+  printf("char\t int\t float\t double\t void\n");
+  printf("%lu\t %lu\t %lu\t %lu\t %lu \n",
+      sizeof(v),sizeof(w), sizeof(x), sizeof(y), sizeof(z));
+  printf("%lu\t %lu\t %lu\t %lu\t %lu \n",
+      sizeof(*v),sizeof(*w), sizeof(*x), sizeof(*y), sizeof(*z));
+   return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
+Die Zeigerarithmetik erlaubt:
+* Ganzzahl-Additionen
+* Ganzzahl-Substraktionen
+* Inkrementierungen `ptr_i--;`
+* Dekrementierungen `ptr_i++;`
+Der Compiler wertet
+dabei den Typ der Variablen aus und inkrementiert bzw. dekrementiert die
+Adresse entsprechend.
+
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+  int a[] = {0,1,2,3,4,5};
+  int *ptr_a = a;
+  printf("Pointer ptr_a               %p\n", (void*)ptr_a);
+  int *ptr_b;
+  ptr_b = ptr_a + 1;
+  ptr_b ++;
+  printf("Pointer ptr_b               %p\n", (void*)ptr_b);
+  printf("Differenz ptr_b -  ptr_a    %d\n", (int)(ptr_b - ptr_a));
+  printf("Differenz ptr_b -  ptr_a    %d\n", (int)ptr_b - (int)ptr_a);
+
+  printf("Wert hinter Pointer ptr_b   '%d'\n", *ptr_b);
+
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
+Was bedeutet das im Umkehrschluss? Eine falsche Deklaration bewirkt ein
+falsches "Bewegungsmuster" über dem Speicher.
+
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+  int a[] = {6,7,8,9};
+  char * ptr_a = a;
+  for (int i=0; i<sizeof(a)/sizeof(int)*4; i++){
+      printf("ptr_a %p -> ", (void*)ptr_a);
+      printf("%d\n", *ptr_a);
+      ptr_a++;
+  }
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
 
 
 
 
 
 
-## Beispiel der Woche
+### Vergleiche von Zeigern
+
+### Zeiger auf Felder
+
+### Zeiger für die Parameterübergrabe
+
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+double sinussatz(double *lookup_sin, int angle, double opositeSide){
+  printf("Größe des Arrays %d\n", sizeof(*lookup_sin));
+  return opositeSide*lookup_sin[angle];
+}
+
+int main(void) {
+  double sin_values[360] = {0};
+  for(int i=0; i<360; i++) {
+    sin_values[i] = sin(i*M_PI/180);
+  }
+  printf("Größe des Arrays %d\n", sizeof(sin_values));
+  printf("Result =  %lf \n",sinussatz(sin_values, 30, 20));
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
+
+
+## 3. Beispiel der Woche
 
 ```c
 #include <stdio.h>
