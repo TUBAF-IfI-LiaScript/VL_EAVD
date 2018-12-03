@@ -147,11 +147,12 @@ https://rextester.com/
 
 ```cpp                          nDimArray.c
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(void) {
   printf("Jetzt kann ich alles was die Konsole kann!\n");
   printf("Probier es aus!");
-  return 0;
+  return EXIT_SUCCESS;
 }
 ```
 @Rextester.eval
@@ -226,10 +227,32 @@ int main(void) {
 Warum ist es sinnvoll Funktionen in Look-Up-Tables abzubilden, letztendlich
 kostet das Ganze doch Speicherplatz?
 
+## 1 Zeiger als Konzept
+
+Bisher umfassten unserer Variablen als Datencontainer Zahlen oder Buchstaben.
+Das Konzept des Zeigers (englisch Pointer) erweitert das Spektrum der Inhalte auf Adressen.
+
+An dieser Adresse können entweder Daten, wie Variablen oder Objekte, aber auch Programmcodes (Anweisungen) stehen. Durch Dereferenzierung des Zeigers ist es möglich, auf die Daten oder den Code zuzugreifen.
+
+Beispiel: Zeiger auf eine Variable [^1]
+
+![intel](img/Pointers.png)<!-- style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
+
+[^1]: Wikipedia Eintrag "Pointer" (Autor Sven Translation)
 
 
-# Demo
+* Speicherbereiche können dynamisch reserviert, verwaltet und wieder gelöscht werden.
+* Mit Zeigern können Sie Datenobjekte direkt (call-by-reference) an Funktionen übergeben.
+* Mit Zeigern lassen sich Funktionen als Argumente an andere Funktionen übergeben.
+* Rekursive Datenstrukturen wie Listen und Bäume lassen sich fast nur mit Zeigern erstellen.
+* Es lässt sich ein typenloser Zeiger (void *) definieren, womit Datenobjekte beliebigen Typs verarbeitet werden können.
 
+
+## 2 Zeiger in C
+
+### Definition
+
+Die Definition eines Zeigers besteht aus dem Datentyp des Zeigers und dem gewünschten Zeigernamen. Der Datentyp eines Zeigers besteht wiederum aus dem Datentyp des Werts auf den gezeigt wird sowie aus einem Asterisk. Ein Datentyp eines Zeigers wäre also z. B. `double*`.
 
 ``` c
 #include <stdio.h>
@@ -237,26 +260,69 @@ kostet das Ganze doch Speicherplatz?
 
 int main()
 {
-        int * ptr;
-
-        ptr = malloc(sizeof * ptr);
-
-        if (!ptr) {
-                printf("Speicher kann nicht bereitgestellt werden\n");
-        } else {
-                printf("Speicher bereitgestellt\n");
-                * ptr = 70;
-                free(ptr);
-        }
-
-        return EXIT_SUCCESS;
+   /* kann eine Adresse aufnehmen, die auf einen Wert vom Typ Integer zeigt */
+  int* zeiger1;
+  /* das Leerzeichen kann sich vor oder nach dem Stern befinden */
+  int *zeiger2;
+  /* ebenfalls möglich */
+  int * zeiger3;
+  /* Definition von zwei Zeigern */
+  int *zeiger4, *zeiger5;
+  /* Definition eines Zeigers und einer Variablen vom Typ Integer */
+  int *zeiger6, ganzzahl;
+  printf("%p", (void*)zeiger1);
+  return EXIT_SUCCESS;
 }
 ```
 @Rextester.eval
 
+### Zuweisung
+
+Die Zuweisung einer Adresse an einen Zeiger erfolgt mithilfe des Adressoperators `&`, eines Feldes, eines weiteren Zeigers oder des Wertes von NULL.
+
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+  int a = 0;
+  int * ptr_a = &a;       /* mit Adressoperator */
+
+  int feld[10];
+  int * ptr_feld = feld;  /* mit Feld */
+
+  int * ptr_b = ptr_a;    /* mit weiterem Zeiger */
+
+  int * ptr_Null = NULL;          /* mit NULL */
+
+  printf("Pointer ptr_a    %p\n", (void*)ptr_a);
+  printf("Pointer ptr_feld %p\n", (void*)ptr_feld);
+  printf("Pointer ptr_b    %p\n", (void*)ptr_b);
+  printf("Pointer ptr_Null %p\n", (void*)ptr_Null);
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
+Die konkrete Zuordnung einer Variablen im Speicher wird durch den Compiler und
+das Betriebssystem bstimmt. Entsprechend kann die Adresse einer Variablen nicht
+durch den Programmierer festgelegt werden. Ohne Manipulationen ist die Adresse
+einer Variablen über die gesamte Laufzeit des Programms unveränderlich, ist aber
+bei mehrmaligen Programmstarts unterschiedlich. 
+
+Ausgaben von Pointer erfolgen mit `%p`, es wird dann eine hexadezimale Adresse
+ausgegeben. Der Pointer muss dafür als `(void *)` gekastet werden.
+`printf("%p")`
 
 
-```cpp
+
+
+
+
+## Beispiel der Woche
+
+```c
 #include <stdio.h>
 
 int main(void)
