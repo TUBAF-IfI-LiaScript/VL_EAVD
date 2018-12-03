@@ -49,30 +49,26 @@ var error  = false;
 
 console.log = function(e){ send.lia("log", JSON.stringify(e), [], true); };
 
-function grep_error(output) {
-  let errors = output.match(/:(\d+):(\d+): error: (.+)/g);
+function grep_(type, output) {
+  try {
+    let re_s = ":(\\d+):(\\d+): "+type+": (.+)";
 
-  let i = 0;
-  for(i = 0; i < errors.length; i++) {
-      let e = errors[i].match(/:(\d+):(\d+): error: (.+)/i);
+    let re_g = new RegExp(re_s, "g");
+    let re_i = new RegExp(re_s, "i");
 
-      errors[i] = { row : e[1]-1, column : e[2], text : e[3], type : "error"};
+    let rslt = output.match(re_g);
+
+    let i = 0;
+    for(i = 0; i < rslt.length; i++) {
+        let e = rslt[i].match(re_i);
+
+        rslt[i] = { row : e[1]-1, column : e[2], text : e[3], type : type};
+    }
+    return [rslt];
+  } catch(e) {
+    return [];
   }
-  return errors;
 }
-
-function grep_warning(output) {
-  let errors = output.match(/:(\d+):(\d+): warning: (.+)/g);
-
-  let i = 0;
-  for(i = 0; i < errors.length; i++) {
-      let e = errors[i].match(/:(\d+):(\d+): warning: (.+)/i);
-
-      errors[i] = { row: e[1]-1, column : e[2], text : e[3], type : "warning"};
-  }
-  return errors;
-}
-
 
 $.ajax ({
     url: "https://rextester.com/rundotnet/api",
@@ -84,24 +80,27 @@ $.ajax ({
             CompilerArgs : @2}
     }).done(function(data) {
         if (data.Errors == null) {
+            let warnings = grep_("warning", data.Warnings);
 
-/*
-            let warnigs = [];
+            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
 
             if(data.Warnings)
-              warnings = [grep_warning(data.Warnings)];
+              stats = "\n-------Warn-------\n"+data.Warnings + stats;
 
-            send.lia("log", data.Result+"\n-------------------\n"+data.Stats.replace(/, /g, "\n"), warnings, true);
-            send.lia("eval", "LIA: stop");  
-*/
-            send.lia("eval", data.Result+"\n-------------------\n"+data.Stats.replace(/, /g, "\n"));
+            send.lia("log", data.Result+stats, warnings, true);
+            send.lia("eval", "LIA: stop");
+
         } else {
-            let errors = grep_error(data.Errors);
+            let errors = grep_("error", data.Errors);
 
-            send.lia("log",
-                     data.Errors+"\n-------------------\n"+data.Stats.replace(/, /g, "\n"),
-                     [errors], false);
+            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
 
+            if(data.Warning)
+              stats = data.Errors + data.Warnings + stats;
+            else
+              stats = data.Errors + data.Warnings + stats;
+
+            send.lia("log", stats, errors, false);
             send.lia("eval", "LIA: stop");
         }
     }).fail(function(data, err) {
@@ -116,7 +115,11 @@ $.ajax ({
 
 @Rextester.eval: @Rextester.__eval(6, ,"-Wall -std=gnu99 -O2 -o a.out source_file.c")
 
+@Rextester.eval_params: @Rextester.__eval(6, ,"@0")
+
 @Rextester.eval_input: @Rextester.__eval(6,`@input(1)`,"-Wall -std=gnu99 -O2 -o a.out source_file.c")
+
+
 
 -->
 
@@ -171,3 +174,22 @@ int main(void)
 4
 ```
 @Rextester.eval_input
+
+
+
+``` c
+#include <stdio.h>
+#include <math.h>
+
+int main(void) {
+  double sin_values[360] = {0};
+  for(int i=0; i<360; i++) {
+    sin_values[i] = sin(i*M_PI/180);
+  }
+
+  int angle = 90;
+  printf("sin %d, %lf\n",angle, sin_values[angle]);
+  return 0;
+}
+```
+@Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
