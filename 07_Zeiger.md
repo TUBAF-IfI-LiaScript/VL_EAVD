@@ -236,28 +236,37 @@ int main(void) {
 | 90     |   1        |
 | ...    |    ...     |
 
+
 Warum ist es sinnvoll Funktionen in Look-Up-Tables abzubilden, letztendlich
 kostet das Ganze doch Speicherplatz?
 
 ## 1 Zeiger als Konzept
 
 Bisher umfassten unserer Variablen als Datencontainer Zahlen oder Buchstaben.
-Das Konzept des Zeigers (englisch Pointer) erweitert das Spektrum der Inhalte auf Adressen.
+Das Konzept des Zeigers (englisch Pointer) erweitert das Spektrum der Inhalte
+auf Adressen.
 
-An dieser Adresse können entweder Daten, wie Variablen oder Objekte, aber auch Programmcodes (Anweisungen) stehen. Durch Dereferenzierung des Zeigers ist es möglich, auf die Daten oder den Code zuzugreifen.
+An dieser Adresse können entweder Daten, wie Variablen oder Objekte, aber auch
+Programmcodes (Anweisungen) stehen. Durch Dereferenzierung des Zeigers ist es
+möglich, auf die Daten oder den Code zuzugreifen.
 
 Beispiel: Zeiger auf eine Variable [^1]
 
-![intel](img/Pointers.png)<!-- style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
+![intel](img/Pointers.png)<!--
+style="width: 80%; display: block; margin-left: auto; margin-right: auto;"
+-->
 
-[^1]: Wikipedia Eintrag "Pointer" (Autor Sven Translation)
 
-Welche Vorteile ergeben sich aus der Nutzung von Zeigern, bzw. welche Programmiertechniken
-lassen sich realiseren:
+Welche Vorteile ergeben sich aus der Nutzung von Zeigern, bzw. welche
+Programmiertechniken lassen sich realiseren:
+
 * dynamische Verwaltung von Speicherbereichen
 * Übergabe von Datenobjekte an Funktionen via "call-by-reference" [^2]
 * Übergabe von Funktionen als Argumente an andere Funktionen
 * Umsetzung rekursiver Datenstrukturen wie Listen und Bäume
+
+
+[^1]: Wikipedia Eintrag "Pointer" (Autor Sven Translation)
 
 [^2]: Der Vollständigkeithalber sei erwähnt, dass C anders als C++ keine Referenzen
 im eigentlichen Sinne kennt. Hier ist die Übergabe einer Variablen als Paramter
@@ -270,31 +279,25 @@ in Form einer Adresse gemeint und nicht das Konstrukt "Reference".
 Die Definition eines Zeigers besteht aus dem Datentyp des Zeigers und dem gewünschten Zeigernamen. Der Datentyp eines Zeigers besteht wiederum aus dem Datentyp des Werts auf den gezeigt wird sowie aus einem Asterisk. Ein Datentyp eines Zeigers wäre also z. B. `double*`.
 
 ``` c
-#include <stdio.h>
-#include <stdlib.h>
+/* kann eine Adresse aufnehmen, die auf einen Wert vom Typ Integer zeigt */
+int* zeiger1;
+/* das Leerzeichen kann sich vor oder nach dem Stern befinden */
+float *zeiger2;
+/* ebenfalls möglich */
+char * zeiger3;
+/* Definition von zwei Zeigern */
+int *zeiger4, *zeiger5;
+/* Definition eines Zeigers und einer Variablen vom Typ Integer */
+int *zeiger6, ganzzahl;
 
-int main()
-{
-   /* kann eine Adresse aufnehmen, die auf einen Wert vom Typ Integer zeigt */
-  int* zeiger1;
-  /* das Leerzeichen kann sich vor oder nach dem Stern befinden */
-  float *zeiger2;
-  /* ebenfalls möglich */
-  char * zeiger3;
-  /* Definition von zwei Zeigern */
-  int *zeiger4, *zeiger5;
-  /* Definition eines Zeigers und einer Variablen vom Typ Integer */
-  int *zeiger6, ganzzahl;
-  printf("%p", (void*)zeiger1);
-  return EXIT_SUCCESS;
-}
+printf("%p", (void*)zeiger1);
 ```
-@Rextester.eval
+
 
 ### Zuweisung
 
-Die Zuweisung einer Adresse an einen Zeiger erfolgt mithilfe des
-Adressoperators `&`, eines Feldes, eines weiteren Zeigers oder des Wertes von NULL.
+Die Zuweisung einer Adresse an einen Zeiger erfolgt mithilfe des Adressoperators
+`&`, eines Feldes, eines weiteren Zeigers oder des Wertes von `NULL`.
 
 ``` c
 #include <stdio.h>
@@ -322,18 +325,22 @@ int main()
 @Rextester.eval
 
 Die konkrete Zuordnung einer Variablen im Speicher wird durch den Compiler und
-das Betriebssystem bstimmt. Entsprechend kann die Adresse einer Variablen nicht
+das Betriebssystem bestimmt. Entsprechend kann die Adresse einer Variablen nicht
 durch den Programmierer festgelegt werden. Ohne Manipulationen ist die Adresse
 einer Variablen über die gesamte Laufzeit des Programms unveränderlich, ist aber
 bei mehrmaligen Programmstarts unterschiedlich.
 
-Ausgaben von Pointer erfolgen mit `printf("%p", ptr)`, es wird dann eine hexadezimale Adresse
-ausgegeben. Der Pointer muss dafür als `(void *)` gekastet werden.
+Ausgaben von Pointer erfolgen mit `printf("%p", ptr)`, es wird dann eine
+hexadezimale Adresse ausgegeben. Der Pointer muss dafür als `(void *)` gekastet
+werden.
 
 
 Zeiger können mit dem "Wert" `NULL` als ungültig markiert werden. Eine
 Dereferenzierung führt dann meistens zu einem Laufzeitfehler nebst
-Programmabbruch. NULL ist ein Macro und wird in mehreren Header-Dateien definiert (mindestens in `stddef.h`). Die Definition ist vom Standard implementierungsabhängig vorgegeben und vom Compilerhersteller passend implementiert, z. B.
+Programmabbruch. `NULL` ist ein Macro und wird in mehreren Header-Dateien
+definiert (mindestens in `stddef.h`). Die Definition ist vom Standard
+implementierungsabhängig vorgegeben und vom Compilerhersteller passend
+implementiert, z. B.
 
 ``` c
 #define NULL 0
@@ -342,7 +349,7 @@ Programmabbruch. NULL ist ein Macro und wird in mehreren Header-Dateien definier
 ```
 
 Und umgekehrt, wie erhalten wir den Wert, auf den der Pointer zeigt? Hierfür
-benötigen wir den *Inhaltsoperator* `*`.
+benötigen wir den _Inhaltsoperator_ `*`.
 
 ``` c
 #include <stdio.h>
@@ -366,6 +373,7 @@ int main()
 ### Fehlerquellen
 
 Fehlender Adressopertor bei der Zuweisung
+
 ``` c
 #include <stdio.h>
 #include <stdlib.h>
@@ -383,6 +391,7 @@ int main()
 @Rextester.eval
 
 Fehlender Dereferenzierungsoperator beim Zugriff
+
 ``` c
 #include <stdio.h>
 #include <stdlib.h>
@@ -399,6 +408,7 @@ int main()
 @Rextester.eval
 
 Uninitialierte Pointer zeigen "irgendwo ins nirgendwo"!
+
 ``` c
 #include <stdio.h>
 #include <stdlib.h>
@@ -445,10 +455,12 @@ int main(void) {
 @Rextester.eval
 
 Die Zeigerarithmetik erlaubt:
+
 * Ganzzahl-Additionen
 * Ganzzahl-Substraktionen
 * Inkrementierungen `ptr_i--;`
 * Dekrementierungen `ptr_i++;`
+
 Der Compiler wertet
 dabei den Typ der Variablen aus und inkrementiert bzw. dekrementiert die
 Adresse entsprechend.
@@ -514,7 +526,7 @@ int main()
 #include <math.h>
 
 double sinussatz(double *lookup_sin, int angle, double opositeSide){
-  printf("Größe des Arrays %d\n", sizeof(*lookup_sin));
+  printf("Größe des Arrays %ld\n", sizeof(*lookup_sin));
   return opositeSide*lookup_sin[angle];
 }
 
@@ -523,7 +535,7 @@ int main(void) {
   for(int i=0; i<360; i++) {
     sin_values[i] = sin(i*M_PI/180);
   }
-  printf("Größe des Arrays %d\n", sizeof(sin_values));
+  printf("Größe des Arrays %ld\n", sizeof(sin_values));
   printf("Result =  %lf \n",sinussatz(sin_values, 30, 20));
   return EXIT_SUCCESS;
 }
