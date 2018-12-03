@@ -473,15 +473,15 @@ int main()
 {
   int a[] = {0,1,2,3,4,5};
   int *ptr_a = a;
-  printf("Pointer ptr_a               %p\n", (void*)ptr_a);
+  printf("Pointer ptr_a             %p\n", (void*)ptr_a);
   int *ptr_b;
   ptr_b = ptr_a + 1;
   ptr_b ++;
-  printf("Pointer ptr_b               %p\n", (void*)ptr_b);
-  printf("Differenz ptr_b -  ptr_a    %d\n", (int)(ptr_b - ptr_a));
-  printf("Differenz ptr_b -  ptr_a    %d\n", (int)ptr_b - (int)ptr_a);
+  printf("Pointer ptr_b             %p\n", (void*)ptr_b);
+  printf("Differenz ptr_b - ptr_a   %ld\n", (long)(ptr_b - ptr_a));
+  printf("Differenz ptr_b - ptr_a   %ld\n", (long)ptr_b - (long)ptr_a);
 
-  printf("Wert hinter Pointer ptr_b   '%d'\n", *ptr_b);
+  printf("Wert hinter Pointer ptr_b '%d'\n", *ptr_b);
 
   return EXIT_SUCCESS;
 }
