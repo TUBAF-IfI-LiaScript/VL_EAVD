@@ -542,6 +542,37 @@ int main(void) {
 ```
 @Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
 
+### Zeiger als Rückgabewerte
+
+Analog zur Bereitstellung von Parametern entsprechend dem "call-by-reference"
+Konzept können auch Rückgabewerte an eine Speicherstelle, die zuvor übergeben
+wurden abgespeichert werden.
+
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+void cumsum(int *wert) {
+  static int counter = 0;
+  counter++;
+  *wert += counter;
+  // Hier steht kein return !
+}
+
+int main(void) {
+  int wert = 0;
+  cumsum(&wert);
+  cumsum(&wert);
+  cumsum(&wert);
+  printf("Der Zählerwert ist : %d\n", wert);
+  cumsum(&wert);
+  printf("Der Zählerwert ist : %d\n", wert);
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
+
 
 ## 3. Beispiel der Woche
 
