@@ -154,7 +154,7 @@ https://rextester.com/
 
 int main(void) {
   printf("Jetzt kann ich alles was die Konsole kann!\n");
-  printf("Probier es aus!");
+  printf("Probier es aus!\n");
   return EXIT_SUCCESS;
 }
 ```
@@ -227,14 +227,13 @@ int main(void) {
 ```
 @Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
 
-| Index  | Wert       |
-|:-------|:-----------|
-|  0     |   0        |
-|  1     |   0.017    |
-| ...    |    ...     |
-| 89     |   0.999    |
-| 90     |   1        |
-| ...    |    ...     |
+````
+ ┏━━━━━━━┳━━━━━━━┳━━━━━━━┳╸╸╸╸╸╸╸┳━━━━━━━┳━━━━━━━┳╸╸╸╸╸╸╸
+ ┃ Index ┃   0   ┃   1   ┃       ┃   89  ┃   90  ┃
+ ┣━━━━━━━╋━━━━━━━╋━━━━━━━╋╸╸╸╸╸╸╸╋━━━━━━━╋━━━━━━━╋╸╸╸╸╸╸╸
+ ┃ Wert  ┃ 0.000 ┃ 0.017 ┃       ┃ 0.999 ┃ 1.000 ┃
+ ┗━━━━━━━┻━━━━━━━┻━━━━━━━┻╸╸╸╸╸╸╸┻━━━━━━━┻━━━━━━━┻╸╸╸╸╸╸╸
+````
 
 
 Warum ist es sinnvoll Funktionen in Look-Up-Tables abzubilden, letztendlich
@@ -250,25 +249,45 @@ An dieser Adresse können entweder Daten, wie Variablen oder Objekte, aber auch
 Programmcodes (Anweisungen) stehen. Durch Dereferenzierung des Zeigers ist es
 möglich, auf die Daten oder den Code zuzugreifen.
 
-Beispiel: Zeiger auf eine Variable [^1]
+Beispiel: Zeiger auf eine Variable
 
-![intel](img/Pointers.png)<!--
-style="width: 80%; display: block; margin-left: auto; margin-right: auto;"
+<!--
+style="width: 80%; max-width: 460px; display: block; margin-left: auto; margin-right: auto;"
 -->
-
+````
+  Variablen-     Speicher-      Inhalt
+  name           addresse
+                                ┏━━━━━━━━┓
+                 0000           ┃        ┃
+                                ┣━━━━━━━━┫
+                 0001           ┃        ┃
+                                ┣━━━━━━━━┫
+  a   ------>    0002      +----┃00001006┃
+                           |    ┣━━━━━━━━┫
+                 0003      |    ┃        ┃
+                           |    ┣━━━━━━━━┫
+                 ....      |    ┃        ┃
+                           |    ┣━━━━━━━━┫
+                 1005      |    ┃        ┃
+                           |    ┣━━━━━━━━┫
+  b   ------>    1006   <--+    ┃01101101┃
+                                ┣━━━━━━━━┫
+                 1007           ┃        ┃
+                                ┣━━━━━━━━┫
+                 1008           ┃        ┃
+                                ┣━━━━━━━━┫
+                 ....           ┃        ┃
+````
 
 Welche Vorteile ergeben sich aus der Nutzung von Zeigern, bzw. welche
 Programmiertechniken lassen sich realiseren:
 
 * dynamische Verwaltung von Speicherbereichen
-* Übergabe von Datenobjekte an Funktionen via "call-by-reference" [^2]
+* Übergabe von Datenobjekte an Funktionen via "call-by-reference" [^1]
 * Übergabe von Funktionen als Argumente an andere Funktionen
 * Umsetzung rekursiver Datenstrukturen wie Listen und Bäume
 
-
-[^1]: Wikipedia Eintrag "Pointer" (Autor Sven Translation)
-
-[^2]: Der Vollständigkeithalber sei erwähnt, dass C anders als C++ keine Referenzen
+[^1]: Der Vollständigkeithalber sei erwähnt, dass C anders als C++ keine Referenzen
 im eigentlichen Sinne kennt. Hier ist die Übergabe einer Variablen als Paramter
 in Form einer Adresse gemeint und nicht das Konstrukt "Reference".
 
