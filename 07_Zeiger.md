@@ -240,7 +240,7 @@ int main(void) {
 Warum ist es sinnvoll Funktionen in Look-Up-Tables abzubilden, letztendlich
 kostet das Ganze doch Speicherplatz?
 
-## 1 Zeiger als Konzept
+## 1 Zeiger in C
 
 Bisher umfassten unserer Variablen als Datencontainer Zahlen oder Buchstaben.
 Das Konzept des Zeigers (englisch Pointer) erweitert das Spektrum der Inhalte auf Adressen.
@@ -249,7 +249,7 @@ An dieser Adresse können entweder Daten, wie Variablen oder Objekte, aber auch 
 
 Beispiel: Zeiger auf eine Variable [^1]
 
-![intel](img/Pointers.png)<!-- style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
+![Zeigerkonzept](img/Pointers.png)<!-- style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
 
 [^1]: Wikipedia Eintrag "Pointer" (Autor Sven Translation)
 
@@ -263,8 +263,6 @@ lassen sich realiseren:
 [^2]: Der Vollständigkeithalber sei erwähnt, dass C anders als C++ keine Referenzen
 im eigentlichen Sinne kennt. Hier ist die Übergabe einer Variablen als Paramter
 in Form einer Adresse gemeint und nicht das Konstrukt "Reference".
-
-## 2 Zeiger in C
 
 ### Definition
 
@@ -581,10 +579,13 @@ int main(void) {
 ```
 @Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
 
-## 3. Beispiel der Woche
+## 2. Beispiel der Woche
 
 Gegeben ist ein Array, dass eine sortierte Reihung von Ganzzahlen umfasst.
 Geben Sie alle Paare von Einträgen zurück, die in der Summe 18 ergeben.
+
+Die intuitive Lösung entwirft einen kreuzweisen Verleich aller Kombinationen
+der Einträge im Array. Haben Sie eine bessere Idee?
 
 ```c
 #include <stdio.h>
