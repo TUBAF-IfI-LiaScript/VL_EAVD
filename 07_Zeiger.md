@@ -129,7 +129,7 @@ $.ajax ({
 **Fragen an die heutige Veranstaltung ...**
 
 * Erklären Sie die Idee des Zeigers in der Programmiersprache C.
-* Welche Vorteile ergeben sich, wenn eine Variable nicht mit dem Wert sondern über die Adresse übergeben wird?
+* Welche Vorteile ergeben sich, wenn eine Variable nicht mit dem gti Wert sondern über die Adresse übergeben wird?
 * Welche Funktion hat der Adressoperator `&`?
 * Welche Gefahr besteht bei der Initialisierung von Zeigern?
 * Was ist ein `NULL`-Zeiger und wozu wird er verwendet?
@@ -642,6 +642,13 @@ Jetzt sind die Adressen gleich!
 ```
 
 ### Zeiger auf Felder
+<!--
+comment: sizeof(char) == 1 ... deshalb kann dieser Anteil entfallen
+         sizeof(text)/sizeof(char)
+         Die Warning Message deutet darauf hin, dass nicht klar ist, ob 
+         char ein Vorzeichen hat. Ein Ersetzen mit int illustriert dies.
+         Danach kann unsigned eingefügt werden ...
+-->
 
 Es gibt zwei Möglichkeiten auf ein Array zuzugreifen, über den Indexoperator
 `[]` oder die Zeiger-basierte Adressierung der Elemente.
@@ -656,15 +663,15 @@ int main(void) {
   char *ptr_text = text;
 
   // Indizierte Adressierung
-  for(char i=0; i<sizeof(text)/sizeof(char); i++) {
+  for(char i=0; i<sizeof(text); i++) {
     printf("%c ", text[i]);
   }
   // Zeiger + Offset
-  for(char i=0; i<sizeof(text)/sizeof(char); i++) {
+  for(char i=0; i<sizeof(text); i++) {
     printf("%c ", *(ptr_text + i));
   }
   // Verschiebung des Zeigers
-  for(char i=0; i<sizeof(text)/sizeof(char); i++, ptr_text++) {
+  for(char i=0; i<sizeof(text); i++, ptr_text++) {
     printf("%c ", *(ptr_text));
   }
   return EXIT_SUCCESS;
@@ -730,7 +737,7 @@ int main(void) {
   for(int i=0; i<360; i++) {
     sin_values[i] = sin(i*M_PI/180);
   }
-  printf("Größe des Arrays %ld\n", sizeof(*sin_values));
+  printf("Größe des Arrays %ld\n", sizeof(sin_values));
   printf("Result =  %lf \n",sinussatz(sin_values, 30, 20));
   return EXIT_SUCCESS;
 }
@@ -738,7 +745,7 @@ int main(void) {
 @Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
 
 ```bash @output_
-Größe des Arrays 8
+Größe des Arrays 2880
 Größe des Arrays 8
 Result =  10.000000
 ```
