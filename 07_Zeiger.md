@@ -119,8 +119,6 @@ $.ajax ({
 
 @Rextester.eval_input: @Rextester.__eval(6,`@input(1)`,"-Wall -std=gnu99 -O2 -o a.out source_file.c")
 
-
-
 -->
 
 
@@ -161,13 +159,13 @@ int main(void) {
 ```
 @Rextester.eval
 
-| Ausgaben              | Bedeutung                       |
-|:----------------------|:--------------------------------|
-| Compilation time      | Dauer der Übersetzung           |
-| absolute running time | Ausführungsdauer auf dem Server |
-| cpu time              |                                 |
-| memory peak           |                                 |
-| absolute service time |                                 |
+| Ausgaben              | Bedeutung                         |
+|:----------------------|:----------------------------------|
+| Compilation time      | Dauer der Übersetzung             |
+| absolute running time | Ausführungsdauer auf dem Server   |
+| cpu time              | Echte Laufzeit des Programms      |
+| memory peak           | Größe des angeforderten Speichers |
+| absolute service time | Dauer der Gesamtanfrage           |
 ---------------------------------------------------------------------
 
 **Wie weit sind wir schon gekommen?**
@@ -191,14 +189,15 @@ ANSI C (C89)/ Schlüsselwörter:
 
 Standardbibliotheken
 
-| Name         | Bestandteil | Funktionen                           |
-|:-------------|:------------|:-------------------------------------|
-| `<stdio.h>`  |             | Input/output (`printf`)              |
-| `<stdint.h>` | (seit C99)  | Integer Datentypen mit fester Breite |
-| `<float.h>`  |             | Parameter der Floatwerte             |
-| `<limits.h>` |             | Größe der Basistypen                 |
-| `<fenv.h>`   |             | Verhalten bei Typumwandlungen        |
-| `<string.h>` |             | Stringfunktionen                     |
+| Name         | Bestandteil | Funktionen                              |
+|:-------------|:------------|:----------------------------------------|
+| `<stdio.h>`  |             | Input/output (`printf`)                 |
+| `<stdint.h>` | (seit C99)  | Integer Datentypen mit fester Breite    |
+| `<float.h>`  |             | Parameter der Floatwerte                |
+| `<limits.h>` |             | Größe der Basistypen                    |
+| `<fenv.h>`   |             | Verhalten bei Typumwandlungen           |
+| `<string.h>` |             | Stringfunktionen                        |
+| `<math.h>`   |             | Mathematische Funktionen und Konstanten |
 
 https://en.cppreference.com/w/c/header
 
@@ -302,7 +301,6 @@ char * zeiger3;
 int *zeiger4, *zeiger5;
 /* Definition eines Zeigers und einer Variablen vom Typ Integer */
 int *zeiger6, ganzzahl;
-printf("%p", (void*)zeiger1);
 ```
 
 ### Zuweisung
@@ -504,7 +502,7 @@ falsches "Bewegungsmuster" über dem Speicher.
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
+int main(void)
 {
   int a[] = {6,7,8,9};
   char * ptr_a = a;
@@ -519,6 +517,35 @@ int main()
 @Rextester.eval
 
 ### Vergleiche von Zeigern
+
+Pointer können natürlich nicht nur manipuliert sondern auch verglichen werden.
+Dabei sei noch mal darauf verwwiesen, dass dabei die Adressen und nicht die
+Werte evaluiert werden.
+
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
+{
+  int a[] = {6,7,6,9};
+  int * ptr_a = a;
+  int * ptr_b = &a[2];
+  printf("ptr_a %p -> %d \n", (void*)ptr_a, *ptr_a);
+  printf("ptr_b %p -> %d \n", (void*)ptr_b, *ptr_b);
+  if (*ptr_a == *ptr_b) printf("Werte sind gleich!\n");
+  // Im Unterschied dazu
+  if (ptr_a == ptr_b) printf("Adressen sind gleich!\n");
+  else printf("Adressen sind ungleich!\n");
+  ptr_a += 2;
+  printf("Nun zeigt ptr_a auf %p\n", (void*)ptr_a);
+  if (ptr_a == ptr_b) printf("Jetzt sind die Adressen gleich!\n");
+  else printf("Adressen sind ungleich!\n");
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
 
 ### Zeiger auf Felder
 
@@ -608,10 +635,8 @@ int main(void) {
 ### Zeiger als Rückgabewerte
 
 Analog zur Bereitstellung von Parametern entsprechend dem "call-by-reference"
-Konzept können auch Rückgabewerte an eine Speicherstelle, die zuvor übergeben
-wurden abgespeichert werden.
-
-Allerdings sollen Sie dabei aufpassen ...
+Konzept können auch Rückgabewerte als Pointer vorgesehen sein. Allerdings
+sollen Sie dabei aufpassen ...
 
 ``` c
 #include <stdio.h>
@@ -656,6 +681,8 @@ int main(void) {
 ```
 @Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
 
+**Variante 2** Rückgabezeiger adressiert mit `static` bezeichnete Variable.
+
 ``` c
 #include <stdio.h>
 #include <stdlib.h>
@@ -680,8 +707,6 @@ int main(void) {
 ```
 @Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
 
-
-
 ## 2. Beispiel der Woche
 
 Gegeben ist ein Array, dass eine sortierte Reihung von Ganzzahlen umfasst.
@@ -701,11 +726,11 @@ int main(void)
   int a[] = {1, 2, 5, 7, 9, 10, 12, 13, 16, 17, 18, 21, 25};
   int *ptr_left = a;
   int *ptr_right = (int *)(&a + 1) - 1;
-  printf("Value left %3d right %d\n -----------------------\n", *ptr_left, * ptr_right);
+  printf("Value left %3d right %d\n-----------------------\n", *ptr_left, * ptr_right);
   do{
     printf("Value left %3d right %d", *ptr_left, * ptr_right);
     if (*ptr_right + *ptr_left == ZIELWERT){
-       printf("-> TREFFER");
+       printf(" -> TREFFER");
     }
     printf("\n");
     if (*ptr_right + *ptr_left >= ZIELWERT) ptr_right--;
