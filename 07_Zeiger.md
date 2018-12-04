@@ -127,8 +127,7 @@ $.ajax ({
 **Fragen an die heutige Veranstaltung ...**
 
 * Erklären Sie die Idee des Zeigers in der Programmiersprache C.
-* Welche Vorteile ergeben sich, wenn eine Variable nicht mit dem Wert sondern
-über die Adresse übergrben wird?
+* Welche Vorteile ergeben sich, wenn eine Variable nicht mit dem Wert sondern über die Adresse übergeben wird?
 * Welche Funktion hat der Adressoperator `&`?
 * Welche Gefahr besteht bei der Initialisierung von Zeigern?
 * Was ist ein `NULL`-Zeiger und wozu wird er verwendet?
@@ -667,7 +666,7 @@ Um diese Situation zu handhaben können Sie zwei Lösungsansätze realisieren.
 #include <math.h>
 
 void kreisflaeche(double *durchmesser, double *flaeche) {
-  *flaeche = M_PI * *durchmesser / 2;
+  *flaeche = M_PI * pow(*durchmesser / 2, 2);
   // Hier steht kein return !
 }
 

@@ -187,12 +187,13 @@ Zur Erinnerung ... an die Schritte zur Realisierung einer Variablen
 #include <stdio.h>
 #include <math.h>
 
+#define VALUECOUNT 17
+
 int main() {
   int a [] = {1,2,3,3,4,2,3,4,5,6,7,8,9,1,2,3,4};
-  int anzahl = sizeof(a)/sizeof(int);
   // Histogramm berechnen
   int hist[10];
-  for (int i=0; i<anzahl; i++){
+  for (int i=0; i<VALUECOUNT; i++){
     hist[a[i]]++;
   }
   // Histgramm ausgeben
@@ -201,18 +202,18 @@ int main() {
   }
   // Berechnen der Gesamtsumme / Mittelwert
   int summe = 0;
-  for (int i=0; i<anzahl; i++){
+  for (int i=0; i<VALUECOUNT; i++){
     summe += a[i];
   }
-  float mittelwert = summe / (float)anzahl;
+  float mittelwert = summe / (float)VALUECOUNT;
   printf("Die Summe betraegt %d, der Mittelwert %3.1f\n", summe, mittelwert);
   // Berechne die Varianz
   float abweichung = 0;
-  for (int i=0; i<anzahl; i++){
+  for (int i=0; i<VALUECOUNT; i++){
     //abweichung += pow((a[i]-mittelwert),2.);
     abweichung += (a[i]-mittelwert)*(a[i]-mittelwert);
   }
-  float std = sqrt(abweichung / anzahl);
+  float std = sqrt(abweichung / VALUECOUNT);
   printf("Die Standardabweichung der Grundgesamtheit betraegt %5.2f\n", std);
   return 0;
 }

@@ -541,33 +541,33 @@ Zahlenreihe. Geben Sie das Resultat in einem Graphen wieder.
 
 ```cpp                     magicSquare.c
 #include <stdio.h>
+#define VALUECOUNT  20
 
 int main(){
   int values[]={0,4,3,2,3,4,5,5,2,4,5,6,7,4,2,4,5,5,5,5};
   // Bestimmung des maximalen Wertes im Vektor
   int max_value = 0;
-  const int count = sizeof(values) / sizeof(int);
-  for (int i=0; i<count; i++){
+  for (int i=0; i<VALUECOUNT; i++){
     if (max_value < values[i]) max_value = values[i];
     printf("%d ", values[i]);
   }
   printf("\nMax value = %d\n\n", max_value);
   // Initialization of the matrix
-  int matrix[max_value+1][count];
+  int matrix[max_value+1][VALUECOUNT];
   for (int i=0; i <=max_value; i++){
-       for (int j=0; j<count; j++){
+       for (int j=0; j<VALUECOUNT; j++){
           matrix[i][j]=0xff;
        }
   }
   // Realisierung der Werte des Vektors
-  for (int i=0; i<count; i++){
+  for (int i=0; i<VALUECOUNT; i++){
     matrix[values[i]][i] = values[i];
   }
   // Ausgabe
   printf("Values\n     ^\n");
   for (int i=max_value; i>=0; i--){
        printf("%3d  |", i);
-       for (int j=0; j<count; j++){
+       for (int j=0; j<VALUECOUNT; j++){
           if (matrix[i][j]!=0xff) printf("*");
           else printf(" ");
        }
