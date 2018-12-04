@@ -39,6 +39,8 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
 @output: <pre class="lia-code-stdout">@0</pre>
 
+@output_: <pre class="lia-code-stdout" hidden="true">@0</pre>
+
 
 script:   https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js
 
@@ -159,6 +161,11 @@ int main(void) {
 ```
 @Rextester.eval
 
+``` bash @output_
+Jetzt kann ich alles was die Konsole kann!
+Probier es aus!
+```
+
 | Ausgaben              | Bedeutung                         |
 |:----------------------|:----------------------------------|
 | Compilation time      | Dauer der Übersetzung             |
@@ -226,6 +233,10 @@ int main(void) {
 }
 ```
 @Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
+
+``` bash @output_
+sin 90, 1.000000
+```
 
 ````
  ┏━━━━━━━┳━━━━━━━┳━━━━━━━┳╸╸╸╸╸╸╸┳━━━━━━━┳━━━━━━━┳╸╸╸╸╸╸╸
@@ -333,6 +344,13 @@ int main()
 ```
 @Rextester.eval
 
+```bash @output_
+Pointer ptr_a    0x7fffc5553eac
+Pointer ptr_feld 0x7fffc5553eb0
+Pointer ptr_b    0x7fffc5553eac
+Pointer ptr_Null (nil)
+```
+
 Die konkrete Zuordnung einer Variablen im Speicher wird durch den Compiler und
 das Betriebssystem bestimmt. Entsprechend kann die Adresse einer Variablen nicht
 durch den Programmierer festgelegt werden. Ohne Manipulationen ist die Adresse
@@ -378,6 +396,14 @@ int main()
 ```
 @Rextester.eval
 
+```bash @output_
+Wert von a                     15
+Pointer ptr_a                  0x7ffdc38ac274
+Wert hinter dem Pointer ptr_a  15
+Wert von a                     10
+Wert hinter dem Pointer ptr_a  10
+```
+
 ### Fehlerquellen
 
 Fehlender Adressopertor bei der Zuweisung
@@ -398,6 +424,13 @@ int main()
 ```
 @Rextester.eval
 
+```bash @output_
+Invalid memory reference (SIGSEGV)source_file.c: In function ‘main’:
+source_file.c:8:9: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   ptr_a = a;
+         ^
+```
+
 Fehlender Dereferenzierungsoperator beim Zugriff
 
 ``` c
@@ -414,6 +447,16 @@ int main()
 }
 ```
 @Rextester.eval
+
+```bash @output_
+Pointer ptr_a                  0x7ffec21b00e4
+Wert hinter dem Pointer ptr_a  -1038417692
+
+-------Warn-------
+source_file.c: In function ‘main’:
+source_file.c:9:10: warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘int *’ [-Wformat=]
+   printf("Wert hinter dem Pointer ptr_a  %d\n", ptr_a);
+```
 
 Uninitialierte Pointer zeigen "irgendwo ins nirgendwo"!
 
@@ -435,6 +478,17 @@ int main()
 }
 ```
 @Rextester.eval
+
+```bash @output_
+Pointer ptr_a                  (nil)
+Wert hinter dem Pointer ptr_a  10
+
+-------Warn-------
+source_file.c: In function ‘main’:
+source_file.c:7:10: warning: ‘ptr_a’ is used uninitialized in this function [-Wuninitialized]
+   *ptr_a = 10;
+          ^
+```
 
 ### Zeigerarithmetik
 
@@ -461,6 +515,12 @@ int main(void) {
 }
 ```
 @Rextester.eval
+
+```bash @output_
+char    int     float   double  void
+8       8       8       8       8
+1       4       4       8       1
+```
 
 Die Zeigerarithmetik erlaubt:
 
@@ -495,6 +555,14 @@ int main()
 ```
 @Rextester.eval
 
+```bash @output_
+Pointer ptr_a               0x7fffebf9be40
+Pointer ptr_b               0x7fffebf9be48
+Differenz ptr_b -  ptr_a    2
+Differenz ptr_b -  ptr_a    8
+Wert hinter Pointer ptr_b   '2'
+```
+
 Was bedeutet das im Umkehrschluss? Eine falsche Deklaration bewirkt ein
 falsches "Bewegungsmuster" über dem Speicher.
 
@@ -515,6 +583,25 @@ int main(void)
 }
 ```
 @Rextester.eval
+
+```bash @output_
+ptr_a 0x7fff266d0840 -> 6
+ptr_a 0x7fff266d0841 -> 0
+ptr_a 0x7fff266d0842 -> 0
+ptr_a 0x7fff266d0843 -> 0
+ptr_a 0x7fff266d0844 -> 7
+ptr_a 0x7fff266d0845 -> 0
+ptr_a 0x7fff266d0846 -> 0
+ptr_a 0x7fff266d0847 -> 0
+ptr_a 0x7fff266d0848 -> 8
+ptr_a 0x7fff266d0849 -> 0
+ptr_a 0x7fff266d084a -> 0
+ptr_a 0x7fff266d084b -> 0
+ptr_a 0x7fff266d084c -> 9
+ptr_a 0x7fff266d084d -> 0
+ptr_a 0x7fff266d084e -> 0
+ptr_a 0x7fff266d084f -> 0
+```
 
 ### Vergleiche von Zeigern
 
@@ -546,6 +633,14 @@ int main(void)
 ```
 @Rextester.eval
 
+```bash @output_
+ptr_a 0x7ffc13428080 -> 6
+ptr_b 0x7ffc13428088 -> 6
+Werte sind gleich!
+Adressen sind ungleich!
+Nun zeigt ptr_a auf 0x7ffc13428088
+Jetzt sind die Adressen gleich!
+```
 
 ### Zeiger auf Felder
 
@@ -578,6 +673,10 @@ int main(void) {
 ```
 @Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
 
+```bash @output_
+P r o z P r o g   P r o z P r o g   P r o z P r o g
+```
+
 **Achtung:** Es gibt erhebliche Unterschiede bei der Zeiger-basierten
 Adressierung von Arrays im Hinblick auf das "Ziel".
 
@@ -597,6 +696,14 @@ int main(void) {
 }
 ```
 @Rextester.eval
+
+```bash @output_
+Zeiger auf arr    0x7ffe162426d0
+Zeiger auf arr[0] 0x7ffe162426d0
+Zeiger &arr       0x7ffe162426d0
+Zeiger auf arr+1  0x7ffe162426d4
+Zeiger &arr+1     0x7ffe162426e4
+```
 
 Offenbar zeigt der Pointer `arr` auf den ersten Eintrag des Arrays und verschiebt
 sich entsprechend dem Datentyp `int` um 4 Byte. Anders für die Referenz auf das
@@ -631,6 +738,12 @@ int main(void) {
 ```
 @Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
 
+```bash @output_
+Größe des Arrays 8
+Größe des Arrays 8
+Result =  10.000000
+```
+
 
 ### Zeiger als Rückgabewerte
 
@@ -655,6 +768,13 @@ int main(void) {
 }
 ```
 @Rextester.eval
+
+```bash @output_
+Invalid memory reference (SIGSEGV)source_file.c: In function ‘doCalc’:
+source_file.c:7:10: warning: function returns address of local variable [-Wreturn-local-addr]
+   return &a;
+          ^
+```
 
 Mit dem Beenden der Funktion werden deren lokale Variablen vom Stack gelöscht.
 Um diese Situation zu handhaben können Sie zwei Lösungsansätze realisieren.
@@ -681,6 +801,10 @@ int main(void) {
 ```
 @Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
 
+```bash @output_
+Die Kreisfläche beträgt für d=5.0[m] 7.9[m²]
+```
+
 **Variante 2** Rückgabezeiger adressiert mit `static` bezeichnete Variable.
 
 ``` c
@@ -706,6 +830,11 @@ int main(void) {
 }
 ```
 @Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
+
+```bash @output_
+Der Zählerwert ist : 6
+Der Zählerwert ist : 10
+```
 
 ## 2. Beispiel der Woche
 
@@ -740,3 +869,20 @@ int main(void)
 }
 ```
 @Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
+
+```bash @output_
+Value left   1 right 25
+-----------------------
+Value left   1 right 25
+Value left   1 right 21
+Value left   1 right 18
+Value left   1 right 17 -> TREFFER
+Value left   1 right 16
+Value left   2 right 16 -> TREFFER
+Value left   2 right 13
+Value left   5 right 13 -> TREFFER
+Value left   5 right 12
+Value left   7 right 12
+Value left   7 right 10
+Value left   9 right 10
+```
