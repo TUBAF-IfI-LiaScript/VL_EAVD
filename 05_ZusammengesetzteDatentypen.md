@@ -542,19 +542,13 @@ Zahlenreihe. Geben Sie das Resultat in einem Graphen wieder.
 ```cpp                     magicSquare.c
 #include <stdio.h>
 #define VALUECOUNT  20
+#define MAXVALUE 10
 
 int main(){
   int values[]={0,4,3,2,3,4,5,5,2,4,5,6,7,4,2,4,5,5,5,5};
-  // Bestimmung des maximalen Wertes im Vektor
-  int max_value = 0;
-  for (int i=0; i<VALUECOUNT; i++){
-    if (max_value < values[i]) max_value = values[i];
-    printf("%d ", values[i]);
-  }
-  printf("\nMax value = %d\n\n", max_value);
   // Initialization of the matrix
-  int matrix[max_value+1][VALUECOUNT];
-  for (int i=0; i <=max_value; i++){
+  int matrix[MAXVALUE+1][VALUECOUNT];
+  for (int i=0; i <=MAXVALUE; i++){
        for (int j=0; j<VALUECOUNT; j++){
           matrix[i][j]=0xff;
        }
@@ -565,7 +559,7 @@ int main(){
   }
   // Ausgabe
   printf("Values\n     ^\n");
-  for (int i=max_value; i>=0; i--){
+  for (int i=MAXVALUE; i>=0; i--){
        printf("%3d  |", i);
        for (int j=0; j<VALUECOUNT; j++){
           if (matrix[i][j]!=0xff) printf("*");
