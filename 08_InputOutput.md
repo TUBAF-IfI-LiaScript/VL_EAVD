@@ -238,7 +238,7 @@ int main(void)
 
 Folgende Zeichen werden bei `scanf()` als Eingabefelder akzeptiert:
 
-+ alle Zeichen bis zum nächsten Whitespace
++ alle Zeichen bis zum nächsten Whitespace oder dem angegebenen Trennungselement
 + bis zu einer bestimmten Feldbreite von n-Zeichen
 + alle Zeichen, bis zum ersten Zeichen, welches nicht mehr in entsprechendes Format konvertiert werden konnte.
 
@@ -255,9 +255,7 @@ Die Ein- und Ausgabe wird unter C über das Konzept des Streams realisiert.
 Ziel sind einheitliche Eigenschaften und Zugriffsmechanismen für verschiedenen
 Ein- und Ausgänge. Dabei werden zwei Varianten unterschieden:
 
-+ *Stream im Textmodus* - Ein Textstrom besteht aus einer oder mehreren Zeilen,
-die durch ein Zeilenzeichen abgeschlossen werden. Diese können sichtbaren
-Zeichen und Steuercodes umfassen.
++ *Stream im Textmodus* - Ein Textstrom besteht aus einer oder mehreren Zeilen, die durch ein Zeilenzeichen abgeschlossen werden. Diese können sichtbaren Zeichen und Steuercodes umfassen.
 
 | Kürzel | ASCII Code | Bedeutung                                             |
 |:-------|:-----------|:------------------------------------------------------|
@@ -288,11 +286,7 @@ C3
 {{1}}
 ![alt-text](img/ASCII_Zeichensatz.jpeg)<!-- width="90%" -->
 
-+ *Stream im Binärmodus* - Ein binärer Strom ist eine geordnete Folge von Nullen
-und Einsen ohne spezifische Festlegungen zu Zeilenumbrüchen etc. Zahlenwerte
-werden in entsprechend ihrer Speicherrepräsentation abgelegt, es findet keine
-automatische Konvertierung statt. Der Vorteil des Binärmodus liegt in der
-kompakten Darstellung.
++ *Stream im Binärmodus* - Ein binärer Strom ist eine geordnete Folge von Nullen und Einsen ohne spezifische Festlegungen zu Zeilenumbrüchen etc. Zahlenwerte werden in entsprechend ihrer Speicherrepräsentation abgelegt, es findet keine automatische Konvertierung statt. Der Vorteil des Binärmodus liegt in der kompakten Darstellung.
 
 ### Standard-Datenströme
 
@@ -436,15 +430,28 @@ int main(void) {
 }
 ```
 
+### Stream-Operationen
+
+Ausgehend von den vordefinierten Standardstreams definiert die Standardbibliothek
+`stdio.h` folgende Funktionen für
+
+| Standard-Stream | mit Streamnamen | Bedeutung                                       |
+|:----------------|:----------------|:------------------------------------------------|
+| printf          | fprintf         | Formatierte Ausgabe                             |
+| vprint          | vfprintf        | Formatierte Ausgabe mit variabler Argumentliste |
+| scanf           | fscanf          | Formatierte Eingabe                             |
+| putchar         | putc, fputc     | Zeichenausgabe                                  |
+| getchar         | getc, fgetc     | Zeicheneingabe                                  |
+| gets            | fgets           | String-Eingabe                                  |
+| puts            | fputs           | String-Ausgabe                                  |
+| perror          |                 | String-Ausgabe an stderr                        |
+
+
 Um beim Lesen des Ende einer Datei aufzuzeigen bietet die `stdio.h` einen
 speziellen end-of-file Indikator.  Dieser gibt eine Wert ungleich 0 zurück,
 wenn das Zeilenende erreicht ist.
 
-```
-Das ist ein Test für die
-Realisierung des EOF.
-
-```
+**Anwendung I - Iterativies Durchlaufen des Streams**
 
 ``` c
 #include <stdio.h>
@@ -471,36 +478,17 @@ int main () {
 }
 ```
 
-### Stream-Operationen
-
-Ausgehend von den vordefinierten Standardstreams definiert die Standardbibliothek
-`stdio.h` folgende Funktionen für
-
-| Standard-Stream | mit Streamnamen | Bedeutung                                       |
-|:----------------|:----------------|:------------------------------------------------|
-| printf          | fprintf         | Formatierte Ausgabe                             |
-| vprint          | vfprintf        | Formatierte Ausgabe mit variabler Argumentliste |
-| scanf           | fscanf          | Formatierte Eingabe                             |
-| putchar         | putc, fputc     | Zeichenausgabe                                  |
-| getchar         | getc, fgetc     | Zeicheneingabe                                  |
-| gets            | fgets           | String-Eingabe                                  |
-| puts            | fputs           | String-Ausgabe                                  |
-| perror          |                 | String-Ausgabe an stderr                        |
-
-
 **Fehlerquelle Buffergröße**
 
-```cpp
-#include <stdio.h>
+Evaluieren Sie das Beispiel mal mit *Das.ist.ein.Test*.
 
-#include <stdio.h>
+```cpp
 #include <stdlib.h>
 
 int main(void) {
-   char string[20];
-
-   if (scanf("%s", string))
-    {printf("Ihre Eingabe: %s\n",string);}
+   char string[5];
+   scanf("%s", string);
+   printf("Ihre Eingabe: %s\n",string);
    return EXIT_SUCCESS;
 }
 ```
@@ -531,29 +519,6 @@ int main(void) {
 Das ist ein Test.
 ```
 @Rextester.eval_input
-
-**Fehlerquelle - Status des Streams**
-
-``` c
-#include <stdio.h>
-#include <stdlib.h>
-
-int main(void) {
-  FILE *fp;    // Dateizeiger erstellen
-  int count=0;
-  fp = fopen("ProzProg.txt", "r");
-  if(fp == NULL) {
-  	printf("Upps, die Datei exisitiert nicht!\n");
-  }else {
-
-    count = fprintf(fp, "Alles gut, Datei gefunden undsal .\n");
-  	fclose(fp);
-  }
-  printf("%d Zeichen geschrieben\n", count);
-  return EXIT_SUCCESS;
-}
-```
-@Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
 
 **Anwendung von `perror`**
 
@@ -666,9 +631,10 @@ kombiniert werden:
 
 ```c
 long fsize(FILE *fp) {
-    fseek(fp, 0, SEEK_END);
-    long bytes = ftell(fp);
-    rewind(fp);
+    fseek(fp, 0, SEEK_END);  // Position auf letztes Datenelement im Stream
+    long bytes = ftell(fp);  // gibt die akutelle Position im Stream zurück
+    rewind(fp);              // zurücksetzen der aktuellen Position auf den
+                             // Anfang
     return bytes;
 }
 ```
@@ -676,6 +642,9 @@ Diese Lösung ist vollständig transparent und übertragbar. Alternative Lösung
 greifen auf Betriebssystem-spezifische Lösungen zurück.
 
 ### Anwendung
+
+Das folgende Beispiel illustriert die Anwendung des Streamkonzepts. Eine Datei
+wird geöffnet und bis zum Ende der Datei durchlaufen.
 
 ```c
 #include <stdio.h>
