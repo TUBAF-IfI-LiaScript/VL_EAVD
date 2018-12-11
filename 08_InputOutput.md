@@ -220,9 +220,9 @@ int main(void)
   int tag, monat, jahr;
   char vorname[20]= "";
   int eval;
-  printf("Bitte geben Sie ihr Geburtsdatum ein [TT.MM.JJJJ]: ");
+  printf("Bitte geben Sie ihr Geburtsdatum ein [TT.MM.JJJJ]: \n");
   eval = scanf("%d.%d.%d+%s", &tag, &monat, &jahr, vorname);
-  printf("Erfolgreich eingelesene Eingaben: %d", eval);
+  printf("Erfolgreich eingelesene Eingaben: %d\n", eval);
   if (eval == 4){
     printf("\n%s, geboren am %04d-%02d-%02d\n", vorname, jahr, monat, tag);
   }else{
@@ -780,7 +780,7 @@ int main(int argc, char *argv[])
   return 0;
 }
 ```
-g
+
 ```bash @output_
 ▶ ./a.out
 1880,    "John",0.0815,"boy"
