@@ -480,20 +480,74 @@ int main () {
 
 **Fehlerquelle Buffergröße**
 
-Evaluieren Sie das Beispiel mal mit *Das.ist.ein.Test*.
+Im Zusammenhang mit dem Lesen von Eingaben wird die notwendigkeit eines
+effektiven Monitorings deutlich. Das folgende Beispiel mappt die Eingaben des
+Nutzers auf ein `char` Array mit 8 Einträgen. Die folgenden Aussagen beziehen
+sich auf die rextester Architektur, auf Ihrem eigenen Rechner können die Ergebnisse,
+da die Ablage und Organisation der Daten nicht im Standard spezifiziert sind
+auch anders aussehen.
+
+Für beide Variablen wurde Speicher auf dem Stack allokiert. Wenn die Länge
+der Eingaben die Kapazität des Arrays überschreitet geschehen zwei Dinge.
+
++ Zum einen werden Inhalte von `nextString` oder von dem überlangen Eingabestring überschrieben.
+
++ Wird die Eingabe so lang, dass die Größe mit dem Stackframe kollidiert, wird das Programm beendet.
+
+| Input           | Größe | Resultat |
+|-----------------|------|---------------------------------------|
+| Das.ist         |  7+1 | Gültige Eingabe entsprechend der Größe von `string`|
+| Das.ist.ein.Tes | 15+1 | Die Terminierung steht an der 16. Stelle und damit nicht im Array|
+| Das.ist.ein.Test | 16+1 | Die Terminierung der Eingabe wird auf den ersten Eintrag von `nextString` geschoben. Damit scheint dieses Array leer.|
+| Das.ist.ein.Test! | 16+x+1 | Alle weiteren Zeichen erscheinen in `nextString`.|
+| Das.ist.ein.Test!Der.Input.ist.zu.groß.. | 41+1 | Die Framegrenze wird überschritten. Das System crashed.|
+
+<!--
+style="width: 80%; max-width: 460px; display: block; margin-left: auto; margin-right: auto;"
+-->
+````
+          ╭              ===========
+          ╎  Variablen       ...
+          ╎              ┣━━━━━━━━━┫
+          ╎  count       ┃       0 ┃
+          ╎              ┣━━━━━━━━━┫
+          ╎                  ...
+ Stack    ╎              ┣━━━━━━━━━┫
+ frame  < ╎  string      ┃         ┃  "Wuchsrichtung"
+          ╎              ┣━━━━━━━━━┫       des
+          ╎                  ...      Stackspeichers
+          ╎              ┣━━━━━━━━━┫        ▲
+          ╎  nextstring  ┃ 0 1 2 3 ┃        ┃
+          ╎              ┃ 4 5 6 7 ┃        ┃
+          ╎              ┣━━━━━━━━━┫
+          ╎                  ...        niedrigere
+          ╰              ===========     Adressen
+````
 
 ```cpp
+#include <stdio.h>
 #include <stdlib.h>
+#define SIZEOFSTRING 4
 
 int main(void) {
-   char string[5];
-   scanf("%s", string);
-   printf("Ihre Eingabe: %s\n",string);
-   return EXIT_SUCCESS;
+
+  int count = 0;
+  char string[SIZEOFSTRING] = {0};
+  char nextString[] = "x-x-x-x-";
+
+  printf("\"string\"     liegt bei %p und reicht bis %p\n", string, string + SIZEOFSTRING);
+  printf("\"nextString\" liegt bei %p und reicht bis %p\n", nextString, &nextString[7]);
+  printf("Gesamtspeicherbereich %d\n", (int)(&nextString[7]-string));
+
+  count = scanf("%s", string);
+  printf("Zeichen: %d\n", count);
+  printf("Inhalt von \"string\"    : %s\n", string);
+  printf("Inhalt von \"nextstring\": %s\n", nextString);
+  return EXIT_SUCCESS;
 }
 ```
 ``` bash stdin
-Das ist ein Test.
+Das.ist.ein.Test!
 ```
 @Rextester.eval_input
 
