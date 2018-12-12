@@ -160,7 +160,7 @@ Prüfungsvorbereitung.
 | 20.11.2018 | [5. Komplexe Datentypen](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/05_ZusammengesetzteDatentypen.md#1)          |
 | 30.11.2018 | [6. Funktionen](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/06_Funktionen.md#1)          |
 | 04.12.2018 | [7. Zeiger](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/07_Zeiger.md#1)          |
-| 11.12.2018 | [8. Zeiger](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/08_InputOutput.md#1)          |
+| 11.12.2018 | [8. Input/Output](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/08_InputOutput.md#1)          |
 | 18.12.2018 |              |
 
 # ... und wozu brauche ich das?
