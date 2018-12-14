@@ -789,7 +789,7 @@ int main(int argc, char *argv[])
   char sex[7];
   do{
     if (fscanf(in,"%d,%[^,],%f,%s", &year, name, &prob, sex) == 4) {
-      count ++;
+      count++;
       if (year != year_old) {
         if (year%10==0) {
           printf("%d,%10s,%1.4f,%s\n", year, name, prob, sex);
