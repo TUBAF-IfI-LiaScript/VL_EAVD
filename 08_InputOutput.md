@@ -361,7 +361,7 @@ Diese Zeichen landen im stdout
 
 ### Stream-Generierung
 
-Nun wollen wir neue Datenströme spezifizieren und konzentrieren uns Dabei auf
+Nun wollen wir neue Datenströme spezifizieren und konzentrieren uns dabei auf
 Dateien.
 
 ```c
@@ -447,7 +447,7 @@ Ausgehend von den vordefinierten Standardstreams definiert die Standardbibliothe
 | perror          |                 | String-Ausgabe an stderr                        |
 
 
-Um beim Lesen des Ende einer Datei aufzuzeigen bietet die `stdio.h` einen
+Um beim Lesen des Ende einer Datei aufzuzeigen, bietet die `stdio.h` einen
 speziellen end-of-file Indikator.  Dieser gibt eine Wert ungleich 0 zurück,
 wenn das Zeilenende erreicht ist.
 
@@ -480,15 +480,15 @@ int main () {
 
 **Fehlerquelle Buffergröße**
 
-Im Zusammenhang mit dem Lesen von Eingaben wird die notwendigkeit eines
+Im Zusammenhang mit dem Lesen von Eingaben wird die Notwendigkeit eines
 effektiven Monitorings deutlich. Das folgende Beispiel mappt die Eingaben des
 Nutzers auf ein `char` Array mit 8 Einträgen. Die folgenden Aussagen beziehen
 sich auf die rextester Architektur, auf Ihrem eigenen Rechner können die Ergebnisse,
-da die Ablage und Organisation der Daten nicht im Standard spezifiziert sind
+da die Ablage und Organisation der Daten nicht im Standard spezifiziert sind,
 auch anders aussehen.
 
 Für beide Variablen wurde Speicher auf dem Stack allokiert. Wenn die Länge
-der Eingaben die Kapazität des Arrays überschreitet geschehen zwei Dinge.
+der Eingaben die Kapazität des Arrays überschreitet, geschehen zwei Dinge.
 
 + Zum einen werden Inhalte von `nextString` oder von dem überlangen Eingabestring überschrieben.
 
@@ -553,7 +553,7 @@ Das.ist.ein.Test!
 
 > People (and especially beginners) should never use scanf("%s") or gets() or any other functions that do not have buffer overflow protection, unless you know for certain that the input will always be of a specific format (and perhaps not even then).
 
-> Remember than scanf stands for "scan formatted" and there's precious little less formatted than user-entered data. It's ideal if you have total control of the input data format but generally unsuitable for user input.
+> Remember that scanf stands for "scan formatted" and there's precious little less formatted than user-entered data. It's ideal if you have total control of the input data format but generally unsuitable for user input.
 
 ```cpp
 #include <stdio.h>
@@ -746,7 +746,7 @@ int main(void){
 ## 2. Beispiel der Woche
 
 Für die Vereinigten Staaten liegen umfangreiche Datensätze zur Namensgebung von
-Neugeborenen seid 1880 vor. Eine entsprechende csv-Datei (comma separated file)
+Neugeborenen seit 1880 vor. Eine entsprechende csv-Datei (comma separated file)
 findet sich im Projektordner und /data, sie umfasst 258.000 Einträge. Diese sind
 wie folgt gegliedert
 
@@ -761,7 +761,7 @@ Anteil der mit diesem Vornamen benannten Kinder und die vierte das Geschlecht an
 
 Der Datensatz steht zum Download unter
 https://osf.io/d2vyg/
-bereit.
+bereit. Bitte entfernen Sie nach dem Herunterladen per Texteditor die erste Zeile (Tabellenkopf).
 
 Lesen Sie aus den Daten die jeweils am häufigsten vergebenen Vornamen aus und
 bestimmen Sie deren Anteil innerhalb des Jahrganges.
@@ -786,18 +786,18 @@ int main(int argc, char *argv[])
   int count = 0;
   char name[24];
   float prob;
-  char sex[6];
-  while(1){
-    if( feof(in) ) {break;}
-    count ++;
-    fscanf(in,"%d,%[^,],%f,%s", &year, name, &prob, sex);
-    if (year != year_old){
-      if (year%10==0) {
-        printf("%d,%10s,%1.4f,%s\n", year, name, prob, sex);
+  char sex[7];
+  do{
+    if (fscanf(in,"%d,%[^,],%f,%s", &year, name, &prob, sex) == 4) {
+      count++;
+      if (year != year_old) {
+        if (year%10==0) {
+          printf("%d,%10s,%1.4f,%s\n", year, name, prob, sex);
+        }
+        year_old = year;
       }
-      year_old = year;
     }
-  }
+  } while (!feof(in));
   printf("\n%d Datensätze gelesen\n", count);
   fclose(in);
   return 0;
@@ -833,5 +833,5 @@ int main(int argc, char *argv[])
 1990, "Jessica",0.0226,"girl"
 2000,   "Emily",0.0130,"girl"
 
-258001 Datensätze gelesen
+258000 Datensätze gelesen
 ```
