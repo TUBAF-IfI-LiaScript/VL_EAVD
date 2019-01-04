@@ -172,6 +172,111 @@ https://en.cppreference.com/w/c/header
 
 
 ## 0. Wiederholung
+
+Fehler in C Programmen lassen sich in 5 Gruppen aufteilen:
+
+ 1. **Lexikalische-Fehler** - bezeichnen falsch geschriebene Worte im Programmcode.
+
+ Indikatoren: Compiler-Fehler "was not declared in this scope" oder Linker-Fehler  "undefined reference to"
+
+```cpp                    LexicalischeFehler.c
+#include <stdio.h>
+#include <stdlib.h>
+
+int Main(void) {
+  int x = 10, y=10;
+  printf("%d", myfunction(x,y));
+  return EXIT_SUCCESS;
+}
+
+int myFunction(int x, int y){
+  return x+y;
+}
+```
+@Rextester.eval
+
+ 2. **Syntax-Fehler** - (englisch syntax error) im Allgemeinen sind Verstöße gegen die  Satzbauregeln einer Sprache. Programme mit Syntaxfehlern werden von einem  Compiler oder Interpreter zurückgewiesen.
+
+Häufigste Typen: fehlende Semikolon, Klammern, Definitionen
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+  int x = 10
+  y = 15;
+  printf("%d", x+y);
+  return EXIT_SUCCESS;
+```
+@Rextester.eval
+
+ 3. **Semantische-Fehler** - (englisch semantic errors) umfassen falsche Deklarationen, die aber keinen syntaktischen Fehler begründen.
+
+Vorkommen: Verwechslung von Operatoren, inkorrekte Annahmen zur Bedeutung von Variablen
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+  int i = 5;
+  if (i = 6){
+  	printf("Wert gleich 6!");
+  }else{
+  	printf("Wert ungleich 6");
+  }
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
+ 4. **Laufzeit-Fehler** - (englisch runtime error) sind Fehler, die während der Laufzeit eines Computerprogramms auftreten. Laufzeitfehler führen zum Absturz des ausgeführten Programms, zu falschen Ergebnissen oder zu nicht vorhersehbarem Verhalten des Programms, z. B. wenn durch falsche/inkonsistente Daten Variablen überschrieben oder mit ungültigen Werten gefüllt werden.
+
+Beispiele: Division durch null, Adressierung von Speicherbereichen außerhalb
+eines Arrays, Endlosschleifen
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+  for (int i = 5; i>=0; i--){
+      printf("Ergebnis %d\n", 100/i );
+  }
+  return EXIT_SUCCESS;
+}
+```
+``` bash @output
+▶ ./a.out
+Ergebnis 20
+Ergebnis 25
+Ergebnis 33
+Ergebnis 50
+Ergebnis 100
+[1]    19533 floating point exception (core dumped)  ./a.out
+```
+
+ 5. **Logische-Fehler** - Das Programm arbeitet in jedem Fall ohne Abbruch, realisiert aber nicht die gewünschte Funktionalität.
+
+```cpp                     LogischerFehler.c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+  int values [] = {0,1,2,3,4,5,6,7,8,9,10};
+  float sum = 0.;
+  int i;
+  for (i = 0; i < 10; i++){
+      sum += values[i];
+  }
+  printf("%f", sum/i );
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
+### Arrays als statisches Speicherelement
 <!--
 comment: Beispielcode um Schleife ergänzen, zum Beispiel Multiplikation aller Elemente
 -->
@@ -207,8 +312,6 @@ style="width: 70%; max-width: 460px; display: block; margin-left: auto; margin-r
    3      ┃      30 ┃
           ┣━━━━━━━━━┫
 ````
-
-### Arrays als statisches Speicherelement
 
 Entwickeln Sie einen Algorithmus für einen Parkautomaten, der Münzen wechselt
 
@@ -375,5 +478,37 @@ sind ist unbestimmt!
 
 ## 2. Dynamische Speicherallokation
 
+Die Mechanismen der Memory Allocation erlauben eine variable Anforderung UND Freigabe von
+Speicherplatz zur Laufzeit. Im Unterschied zu den lokalen Variablen von Funktionen (Stack) oder  globalen Variablen (Datensegment) werden diese im Heap-Speicher abgelegt.
+
+![alt-text](img/memoryLayoutC.jpg)<!-- width="90%" --> [^1]
+
+[^1]: https://www.geeksforgeeks.org/memory-layout-of-c-program/
+     Autor Narendra Kangralkar
+
+
+
+
+
+
+Mit dem Parameter size wird die Größe des Speicherbedarfs in Byte übergeben. Der Rückgabewert ist ein void-Zeiger auf den Anfang des Speicherbereichs oder ein NULL-Zeiger, wenn kein freier Speicher mehr zur Verfügung steht. Der void-Zeiger soll aussagen, dass der Datentyp des belegten Speicherbereichs unbekannt ist.
+
+
+
+Bei erfolgreichem Aufruf liefert die Funktion `malloc()` die Anfangsadresse mit der Größe size Bytes vom Heap zurück. Da die Funktion einen void-Zeiger zurückliefert, hängt diese nicht von einem Datentyp ab.
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(void) {
+  char *msg = malloc (4);
+  strcpy (msg, "Hello World!");
+  printf ("%s\n", msg);
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
 
 ## 3. Beispiel der Woche
