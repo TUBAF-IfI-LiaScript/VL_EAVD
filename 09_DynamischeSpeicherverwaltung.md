@@ -127,6 +127,10 @@ $.ajax ({
 
 **Fragen an die heutige Veranstaltung ...**
 
+* Welche Nachteile bringen Arrays mit variablen Größen (C99) mit sich?
+* Was bedeutet der Begriff "dynamische" Speicherverwaltung?
+* In welchem Bereich werden die dynmische angeforderten Variablen angelegt?
+* Warum ist die Freigabe des allokierten Speichers mit `free` notwendig?
 *
 
 
@@ -456,10 +460,10 @@ int main(void){
 
 Eigenschaften:
 
-+ VLAs können nicht initialisiert werden
++ VLAs können nicht initialisiert werden und werden auf dem Stack abgelegt
 + die Größe kann nur einmalig bei der Definition festgelegt werden
 + VLAs können nur innerhalb von Funktionen angelegt werden (außerhalb von Funktionen müssen Feldgrößen auch in C99 zum Zeitpunkt der Übersetzung bekannt sein)
-+ entsprechend werden VLAs auf dem Stack abgelegt -> Aufrufe von malloc() und free() entfallen
++ Kein Mechanismus zur Prüfung der Größe des verfügbaren Speichers
 
 ACHTUNG: Das Verhalten für Arrays, die größer als der noch verfügbare Stack
 sind ist unbestimmt!
@@ -469,7 +473,6 @@ sind ist unbestimmt!
 > With the in-development Linux 4.20 kernel, Linux kernel is effectively VLA-free. [^2]
 
 ... Im Gegensatz zu C99 ist die Implementierung von VLAs bei C11-konformen Compilern freigestellt. Die Verfügbarkeit kann über das Define `__STDC_NO_VLA__` abgefragt werden, das den Integerwert 1 aufweist, sofern VLAs nicht unterstützt werden.
-
 
 [^1] https://lkml.org/lkml/2018/3/7/621
 
@@ -488,14 +491,26 @@ Speicherplatz zur Laufzeit. Im Unterschied zu den lokalen Variablen von Funktion
 
 
 
+### Anforderung von Speicher
+
+Speicher auf dem Heap wird unter anderem mit `malloc` angefordert. Dazu wird die
+Größe des Speicherbereiches als Parameter übergeben. Rückgabewert ist ein `void`-Pointer.
+Dieser liefert einen NULL-Zeiger für den Fall, dass kein freier Speicher entsprechender
+Größe zur Verfügung steht.
+
+```cpp
+void *malloc(size_t size);
+```
+
+| Aufrufformat                     | Bedeutung / Schwierigkeiten              |
+|:---------------------------------|:-----------------------------------------|
+| `int*p; p = malloc(2);`          | Bereitstellung von 2 Byte                |
+| `int*p; p = malloc(sizeof(int));`| Bereitstellung eines Speicherplatzes für einen `int`-Wert|
+| `int*p; p = malloc(n * sizeof(int));`| Bereitstellung des Speicherplatzes für n `int`-Werte|
+| `int*p; p = malloc(sizeof(*p));` | gängige Notation um nur einmalig den Datentypen zu benennen |
 
 
-
-Mit dem Parameter size wird die Größe des Speicherbedarfs in Byte übergeben. Der Rückgabewert ist ein void-Zeiger auf den Anfang des Speicherbereichs oder ein NULL-Zeiger, wenn kein freier Speicher mehr zur Verfügung steht. Der void-Zeiger soll aussagen, dass der Datentyp des belegten Speicherbereichs unbekannt ist.
-
-
-
-Bei erfolgreichem Aufruf liefert die Funktion `malloc()` die Anfangsadresse mit der Größe size Bytes vom Heap zurück. Da die Funktion einen void-Zeiger zurückliefert, hängt diese nicht von einem Datentyp ab.
+Bei erfolgreichem Aufruf liefert die Funktion `malloc()` die Anfangsadresse mit der Größe size Bytes vom Heap zurück.
 
 ```cpp
 #include <stdio.h>
@@ -511,4 +526,301 @@ int main(void) {
 ```
 @Rextester.eval
 
+### Nachträgliches Vergrößern
+
+```cpp
+void* realloc (void* ptr, size_t size);
+```
+
+`realloc()` versucht zuerst, die Größe des Blocks zu erhöhen, auf den der
+Zeiger ptr zeigt. Ist eine Erweiterung nicht möglich erfolgt stattdessen eine Kopieroperation
+in einen neuen Block und der alte Block wird freigeben.
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(void) {
+  char *str;
+
+  str = (char *) malloc(15);
+  strcpy(str, "01234567890123");
+  printf("Address = %p\n", str);
+
+  /* Reallocating memory */
+  str = (char *) realloc(str, 2);  // <-- Was passiert, wenn wir diesen Wert
+  strcat(str, "!");                //     vergrößern?
+  printf("Address = %p,  String = %s\n", str, str);
+
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
+Lassen Sie uns anhand des Codebeispiels einige Experimente durchführen.
+Was passiert zum Beispiel mit `str` wenn realloc ein neuer Pointer zugewiesen
+wird?
+
+
+### Freigabe von Speicher
+
+Speicherreservierungen auf dem Heap müssen explizit freigegeben werden, wenn sie
+nicht mehr benötig werden. Wird regelmäßig Speicher reserviert, ohne ihn wieder freizugeben, bringt man eventuell die Kapazitäten zum Erschöpfen. Ist dadurch der Speicher komplett belegt, werden die Daten auf die Festplatte ausgelagert, was viel Zeit in Anspruch nimmt.
+
+```cpp
+void free(void *ptr);
+```
+
+Frage: Warum muss ich beim Variablen auf dem Stack keine explizite Freigabe aufrufen?
+
+Welche Probleme sehen Sie in folgendem Code?
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(void) {
+  char *str_1;
+  char *str_2;
+
+  str_1 = (char *) malloc(15);
+  strcpy(str_1, "01234567890123");
+  str_2 = (char *) malloc(15);
+  strcpy(str_2, "ABCDEFGAHCABCD");
+
+  // some magic code is exectuted here.
+
+  str_1 = str_2;
+
+  // and again ...
+
+  free(str_1);
+  free(str_2);
+
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
+### Was passiert bei der Allokation eigentlich?
+
+Die optimale Nutzung des Heaps ist eine aufwändiges Problem, dessen spezifische Lösung von
+verschiedenen Parametern abhängt.
+
+![alt-text](img/StackVSHeap.gif)<!-- width="90%" --> [^1]
+
+[^1]: https://learn.adafruit.com/memories-of-an-arduino/optimizing-sram
+     Adafruit
+
+Lösungsansätze: Paging  vs. Segmentierung
+
+Herausforderung Fragmentierung ...  kann zum Fehlschlagen einer Speicheranforderung führen obwohl ggf. die Summe der Größen aller ungenutzten Fragmente so groß ist wie der zu allozierende Bereich ist. Es gibt also Speicherfragmente, die nicht nutzbar sind, obwohl sie nicht in Verwendung sind.
+
+Interne vs. Externe Fragmentierung
+
+
+### Wie sieht es mit potentiellen Fehlern aus?
+
+**Adressierung von Speicherbereichen außerhalb des allokierten Bereiches führt zu undefiniertem Verhalten.**
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+  int * array_1 = malloc(5 * sizeof(array_1));
+  for (int i = 0; i < 5; i++){
+    array_1[i] = i;
+  }
+  printf ("%d\n", array_1[2]);
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+  int * array_1 = malloc(5 * sizeof(array_1));
+  int * array_2 = malloc(5 * sizeof(array_2));
+  for (int i = 0; i < 50; i++){
+    array_1[i] = i;
+  }
+  printf ("%d\n", array_2[16]);
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
+### Heap und Stack - Wo liegt der Unterschied
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+int * getConstant_Stack(){
+  int *a, b=5;
+  a=&b;
+  return a;
+}
+
+int * getConstant_Heap(){
+  int *a, b=5;
+  a = malloc(sizeof(*a));
+  *a=b;      // SEHEN SIE DEN UNTERSCHIED BEI DER WERTZUWEISUNG?
+  return a;
+}
+
+int main(void) {
+  int * x;
+  x = getConstant_Stack();
+  printf("%d\n", *x);
+  x = getConstant_Heap();
+  printf("%d\n", *x);
+  free(x);
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
+### Anwendung
+
+Berechnen Sie die kummulative Summe aufsteigender Zahlenfolge, die Sie in einem
+Array aufgestellt haben. Nutzen Sie zur Kontrolle die Gaußsche Summenformel.
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+int *iarray(unsigned int n);
+
+int *iarray(unsigned int n){
+  int *iptr = malloc(n * sizeof(*iptr));
+  // int *iptr = malloc(n * sizeof(int)); //äquivalent
+  if (iptr != NULL){
+    for (int i = 0; i<n; i++){
+      iptr[i] = i+1;
+    }
+  }else{
+    printf("Allocation fehlgeschlagen!");
+  }
+  return iptr;
+}
+
+int main(void)
+{
+  unsigned int size;
+  printf("Bitte die Größe des Arrays an:\n");
+  scanf("%d",&size);
+  int *array = iarray(size);
+  for (int i = 1; i<size; i++){
+    array[i] = array[i-1] + array[i];
+  }
+  printf("Summe der Werte von 1-%d = %d\n", size, array[size-1]);
+  free(array);
+  return EXIT_SUCCESS;
+}
+```
+``` bash stdin
+12
+```
+@Rextester.eval_input
+
 ## 3. Beispiel der Woche
+
+Analog zur Auswertung der Babynamen aus der vergangenen Woche wollen wir nunmehr
+die Namen ermitteln, die sowohl für Jungen als auch für Mädchen vergeben wurden.
+
+Wiederum wird die Liste mit über 250.000 Einträgen durchlaufen und zunächst eine
+Aufstellung aller Namen der Jungen erstellt. Dazu wird ein dynamisch erweitertes
+Array genutzt, dessen Einträge im Nachgang mit den vorkommenden Namen der Mädchen
+verglichen werden.
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define FILENAME "./data/baby-names.csv"
+#define INITIALSIZE 100
+#define STEPWIDTH 20
+
+unsigned int max_datensaetze = INITIALSIZE;
+
+struct datensatz{
+  unsigned int year;
+  char name[24];
+  char girlsname;
+};
+
+int main(int argc, char *argv[])
+{
+  FILE *in = fopen(FILENAME,"r");
+  if(in==NULL){
+    perror("File open error");
+    exit(EXIT_FAILURE);
+  }
+
+  struct datensatz * names;
+  names = malloc(max_datensaetze * sizeof(*names));
+
+  unsigned int year;
+  int count = 0;
+  char name[24];
+  float prob;
+  char sex[7];
+  char not_found = 0;
+  do{
+    if (fscanf(in,"%d,%[^,],%f,%s", &year, name, &prob, sex) == 4) {
+      if (0 == strcmp(sex, "\"boy\"")){
+        // neuer Name?
+        not_found = 1;
+        for (int i=0; i<count; i++){
+          if (0 == strcmp(names[i].name, name)) {
+            not_found = 0;
+            break;
+          }
+        }
+        if (not_found){
+          // Hinreichend Speicher im array?
+          if (count >= max_datensaetze){
+            max_datensaetze += STEPWIDTH;
+            names = realloc(names, max_datensaetze * sizeof(*names));
+          }
+          strcpy(names[count].name, name);
+          count++;
+        }
+      }else{
+        for (int i=0; i<count; i++){
+          if (0 == strcmp(names[i].name, name)) {
+            names[i].girlsname = 1;
+
+            break;
+          }
+        }
+      }
+    }
+  } while (!feof(in));
+
+  for (int i=0; i<count; i++){
+    if (1 == names[i].girlsname){
+      printf("%s ", names[i].name);
+    }
+  }
+  free(names);
+  fclose(in);
+  return 0;
+}
+```
+
+```bash @output_
+▶ ./a.out
+"John" "William" "James" "Charles" "George" "Frank" "Joseph" "Thomas" ...
+"Kamari" "Jaidyn" "Teagan" "Camryn" "Santana" "Lyric" "Kamryn" "Marley" "Eden"
+258000 Datensätze gelesen
+```
+Interessanterweise tauchen in dieser Reihe sehr spezifische Jungennamen auf.
+Laut dem Datensatz taucht beispielsweise im Jahr 1887 bei einem von 2777 Mädchen der Name "John" auf der Geburtsurkunde auf.
