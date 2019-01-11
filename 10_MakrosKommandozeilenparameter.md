@@ -6,7 +6,13 @@ version:  0.0.1
 language: de
 narrator: Deutsch Female
 
+
+script:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js
+
+link:     https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css
+
 script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
+
 
 @JSCPP.__eval
 <script>
@@ -121,6 +127,82 @@ $.ajax ({
 
 @Rextester.eval_input: @Rextester.__eval(6,`@input(1)`,"-Wall -std=gnu99 -O2 -o a.out source_file.c")
 
+
+
+@Rextester.pipe
+<script>
+//var result = null;
+var error  = false;
+
+console.log = function(e){ send.lia("log", JSON.stringify(e), [], true); };
+
+function grep_(type, output) {
+  try {
+    let re_s = ":(\\d+):(\\d+): "+type+": (.+)";
+
+    let re_g = new RegExp(re_s, "g");
+    let re_i = new RegExp(re_s, "i");
+
+    let rslt = output.match(re_g);
+
+    let i = 0;
+    for(i = 0; i < rslt.length; i++) {
+        let e = rslt[i].match(re_i);
+
+        rslt[i] = { row : e[1]-1, column : e[2], text : e[3], type : type};
+    }
+    return [rslt];
+  } catch(e) {
+    return [];
+  }
+}
+
+$.ajax ({
+    url: "https://rextester.com/rundotnet/api",
+    type: "POST",
+    timeout: 10000,
+    data: { LanguageChoice: 6,
+            Program: `@input(0)`,
+            Input: `@1`,
+            CompilerArgs : "-Wall -std=gnu99 -O2 -o a.out source_file.c"}
+    }).done(function(data) {
+        if (data.Errors == null) {
+            let warnings = grep_("warning", data.Warnings);
+
+            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
+
+            if(data.Warnings)
+              stats = "\n-------Warn-------\n"+data.Warnings + stats;
+
+            send.lia("log", data.Result+stats, warnings, true);
+
+            @input(1)
+
+            send.lia("eval", "LIA: stop");
+
+        } else {
+            let errors = grep_("error", data.Errors);
+
+            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
+
+            if(data.Warning)
+              stats = data.Errors + data.Warnings + stats;
+            else
+              stats = data.Errors + data.Warnings + stats;
+
+            send.lia("log", stats, errors, false);
+            send.lia("eval", "LIA: stop");
+        }
+    }).fail(function(data, err) {
+        send.lia("log", err, [], false);
+        send.lia("eval", "LIA: stop");
+    });
+
+"LIA: wait"
+</script>
+@end
+
+
 -->
 
 # Vorlesung IX - Dynamische Speicherverwaltung
@@ -229,4 +311,28 @@ int main(void) {
   return EXIT_SUCCESS;
 }
 ```
-@Rextester.eval
+``` javascript -Analyse.js
+let samples = data.Result.match(/[0-9.]+/g);
+let labels = [];
+let series = [];
+
+for(let i=0; i<samples.length; i++) {
+  //samples[i] = parseFloat(samples[i]);
+
+  if(i % 2) {
+    series.push(parseFloat(samples[i]));
+  } else {
+    labels.push(parseFloat(samples[i]));
+  }
+}
+
+// Initialize a Line chart in the container with the ID chart
+new Chartist.Line('#pipe_chart', {
+   labels: labels,
+   series: [series]
+});
+```
+@Rextester.pipe
+
+
+<div class="ct-chart ct-golden-section persistent" id="pipe_chart"></div>
