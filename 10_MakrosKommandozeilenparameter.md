@@ -7,9 +7,7 @@ language: de
 narrator: Deutsch Female
 
 
-script:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js
-
-link:     https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css
+script:  https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts-en.min.js
 
 script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
@@ -504,29 +502,74 @@ int main(void) {
 ```
 ``` javascript -Analyse.js
 let samples = data.Result.match(/[0-9.]+/g);
-let labels = [];
+
+let label;
 let series_1 = [];
 let series_2 = [];
 let series_3 = [];
 
 for(let i=0; i<samples.length; i++) {
   //samples[i] = parseFloat(samples[i]);
+  let value = parseFloat(samples[i]);
   switch (i % 4)
   {
-    case 0:  labels.push(parseFloat(samples[i])); break;
-    case 1:  series_1.push(parseFloat(samples[i])); break;
-    case 2:  series_2.push(parseFloat(samples[i])); break;
-    case 3:  series_3.push(parseFloat(samples[i]));
+    case 0:  label = value; break;
+    case 1:  series_1.push([label, value]); break;
+    case 2:  series_2.push([label, value]); break;
+    case 3:  series_3.push([label, value]);
   }
-
 }
-// Initialize a Line chart in the container with the ID chart
-new Chartist.Line('#pipe_chart', {
-   labels: labels,
-   series: [series_1, series_2, series_3]}
-);
+
+let chart = echarts.init(document.getElementById('pipe_chart'));
+
+
+let option = {
+  title : {
+    text: 'Original Data ',
+    subtext: 'True coefficients'
+  },
+  toolbox: {
+    show : true,
+    feature : {
+      mark : {show: true},
+      dataZoom : {show: true},
+      dataView : {show: true, readOnly: false},
+      restore : {show: true},
+      saveAsImage : {show: true}
+    }
+  },
+  legend: {
+      data:['series_1','series_2','series_3']
+  },
+  xAxis : [{
+    type : 'value',
+    scale: true,
+    axisLabel : { formatter: '{value}' }
+  }],
+  yAxis : [{
+    type : 'value',
+    scale: true,
+    axisLabel : { formatter: '{value}'}
+  }],
+  series : [{
+    name: 'series_1',
+    type: 'line',
+    data: series_1,
+  }, {
+    name: 'series_2',
+    type: 'line',
+    data: series_2,
+  },
+  {
+    name: 'series_3',
+    type: 'line',
+    data: series_3,
+  }]
+};
+
+
+chart.setOption(option);
 ```
 @Rextester.pipe
 
-<div class="ct-chart ct-golden-section persistent" id="pipe_chart"></div>
-<div id="demo"></div>
+<div class="persistent" id="pipe_chart" style="position: relative; width:100%; height:400px;"></div>
