@@ -202,7 +202,9 @@ $.ajax ({
 </script>
 @end
 
+script:   https://cdn.rawgit.com/davidedc/Algebrite/master/dist/algebrite.bundle-for-browser.js
 
+@algebrite.eval:    <script> Algebrite.run(`@input`) </script>
 -->
 
 # Vorlesung IX - Dynamische Speicherverwaltung
@@ -255,14 +257,183 @@ https://en.cppreference.com/w/c/header
 
 ## 0. Wiederholung
 
+### Debugging mit PellesC
+
+https://forum.pellesc.de/index.php?topic=4194.0
+
+Debugging mit PellesC
+
+### Aufruf eines Programms
+
+Bei der Verwendung von PellesC klicken Sie in der Regel auf einen Button, um
+das Programm auszuführen. Sie können dies aber natürlich genauso auf der Kommandozeile
+realisieren.
+
+![Intetral](./img/PellesCAusfuehrung.jpeg)<!-- width="90%" -->[^1]
+
+## 1. Kommandozeilenargumente
+
+In vielen Fällen genügt es aber nicht, lediglich ein Programm zu starten, häufig
+wollen Sie zusätzliche Parameter übergeben, die das Verhalten der Ausführung
+bestimmen.
+
+Beispiele:
+
++ Parameter für Berechnungen - Sie legen die Randbedingungen oder Startwerte einer Integralberechnung fest.
++ Filterkriterien - Sie suchen in unserem Namensdatenbank nach einer spezifischen Konfiguration von Datensätzen ("Alle weiblichen Vornamen, deren Träger zwischen 1955 und 1965 gebohren und mit G beginnen.")
++ Name der Datei, in die die Ausgaben geschrieben werden
+
+Anwendungsfall gcc (C-Compiler)
+
+Das Programm kennt eine Vielzahl von Eingabeparametern, die sich teilweise
+gegenseitig bedingen.
+
+1. Aufruf ohne Parameter - Fehler
+``` bash @output
+▶ gcc
+gcc: fatal error: no input files
+compilation terminated.
+```
+
+2. Abfordern der Versions- und Parameterkonfiguration
+``` bash @output
+▶ gcc -v
+Using built-in specs.
+COLLECT_GCC=gcc
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/5/lto-wrapper
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 5.4.0-6ubuntu1~16.04.10' ...
+Thread model: posix
+gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.10)
+```
+
+3. Aufruf der Hilfe
+``` bash @output
+▶ gcc --help
+Usage: gcc [options] file...
+Options:
+  -pass-exit-codes         Exit with highest error code from a phase
+  --help                   Display this information
+  --target-help            Display target specific command line options
+  --help={common|optimizers|params|target|warnings|[^]{joined|separate|undocumented}}[,...]
+                           Display specific types of command line options
+  (Use '-v --help' to display command line options of sub-processes)
+  --version                Display compiler version information
+  -dumpspecs               Display all of the built in spec strings
+  -dumpversion             Display the version of the compiler
+...
+```
+Das Verhalten des Programmes verändert sich in Abhänigkeit von der Wahl der
+Kommandozeilenparameter.
+
+``` bash @output
+▶ gcc main.c
+▶ gcc main.c -o main.out
+```
+
+### Erfassen der Parameter
+
+```c
+int main(int argc, char *argv[]) { /* ... */ } // anstatt
+int main{void}
+```
+
+Dei zwei Parameter mit den Namen argc und argv. Die Namen dieser Parameter sind
+NICHT vorgeschrieben und können beliebig angepasst werden. Allerdings sind
+diese in vielen Programmiersprachen üblich, so dass der Lesefluss dadurch ggf.
+gestört werden würde.
+
+Die einzelnen Argumente, die dem Programm übergeben werden, müssen immer durch mindestens ein Leerzeichen getrennt sein.
+
+| Name      | Datentyp                       | Inhalt                |
+|:----------|:-------------------------------|:----------------------|
+| argc      | integer                        | Zähler der Argumente  |
+| acgv      | Pointer auf array von Pointern | Parameter             |
 
 
+```cpp         InputArgs.c
+#include <stdio.h>
+#include <stdlib.h>
 
+int main(int argc, char *argv[]) {
+   int i;
+
+   printf("%d Parameter eingelesen\n", argc);
+
+   for(i=0; i < argc; i++) {
+      printf("argv[%d] = %s ", i, argv[i]);
+      printf("\n");
+   }
+   return EXIT_SUCCESS;
+}
+```
+``` bash @output
+▶ ./a.out das ist ein Test
+5 Parameter eingelesen
+argv[0] = ./a.out
+argv[1] = das
+argv[2] = ist
+argv[3] = ein
+argv[4] = Test
+▶
+▶ ./a.out Leerzeichen als Trenner 4 5 6
+7 Parameter eingelesen
+argv[0] = ./a.out
+argv[1] = Leerzeichen
+argv[2] = als
+argv[3] = Trenner
+argv[4] = 4
+argv[5] = 5
+argv[6] = 6
+```
+
+### Überprüfungen
+
+```c              CheckCommandlineParameters.c
+#include <stdio.h>
+
+int main( int argc, char *argv[] )  {
+   if( argc == 2 ) {
+      printf("Parameter erfasst - \"%s\"\nEs kann weitergehen ...", argv[1]);
+   }
+   else if( argc > 2 ) {
+      printf("Zu viele Parameter!.\n");
+   }
+   else {
+      printf("Erwartet einen Parameter!.\n");
+   }
+}
+```
+
+Ist das Format der Parameter korrekt?
+
+## 2. Makros
 
 ## 3. Beispiel der Woche
 
-Realisieren Sie eine numerische Integration für variabel konfigurierbare
-Funktionen.
+Der folgende Code implementiert unterschiedliche Formen der numerische
+Integration für Funktionen mit einer veränderlichen. Im Beispiel wurde
+
+$$
+f(x) = 2x^2 - 14
+$$
+
+gewählt und das bestimmte Integral in den Grenzen von 1 bis 10 für variierende
+Schrittweiten bestimmt. Die exakte Lösung lässt sich mit Hilfe eines
+Algebra-Systemes mittels des Befehls `defint` bestimmen.
+
+Die Lösung umfasst sowohl das linksseitige als auch das rechtsseitige
+Integral.
+
+![Intetral](./img/Integrals.jpeg)<!-- width="90%" -->[^1]
+
+[^1]: Bilder aus den Vorlesungsunterlagen von Lia Vas, University of the Sciences, Philadelphia
+
+```Maxima
+f=2*x^2-14
+defint(f,x,1,10)
+```
+@algebrite.eval
 
 ```cpp                          Integral.c
 #include <stdio.h>
@@ -275,7 +446,7 @@ struct samples{
 };
 
 double myFunction(double x){
-  return 2 * x + 4;
+  return 2 * x * x - 14;
 }
 
 struct samples * generateValues(double from, double to, int number){
@@ -289,12 +460,30 @@ struct samples * generateValues(double from, double to, int number){
   return values;
 }
 
-double int_leftrect(struct samples * values, int number)
-{
+double int_leftrect(struct samples * values, int number){
    double resolution = (values[number].x - values[0].x)/ number;
    double sum = 0;
    for (int i=0; i < number; i++){
+      //printf("%f %f\n", values[i].x, values[i].x);
        sum = sum + values[i].y * resolution;
+   }
+   return sum;
+}
+
+double int_rightrect(struct samples * values, int number){
+   double resolution = (values[number].x - values[0].x)/ number;
+   double sum = 0;
+   for (int i=1; i <=number; i++){
+       sum = sum + values[i].y * resolution;
+   }
+   return sum;
+}
+
+double int_trapez(struct samples * values, int number){
+   double resolution = (values[number].x - values[0].x)/ number;
+   double sum = 0;
+   for (int i=0; i <number; i++){
+       sum = sum + (values[i].y + values[i+1].y)/2 * resolution;
    }
    return sum;
 }
@@ -303,10 +492,12 @@ int main(void) {
   struct samples * values;
   double from = 1;
   double to = 10;
-  int number = 10;
-  for (int j=3; j<50; j++){
-    values = generateValues(from, to, j);
-    printf("n = %3d - Int = %f\n", j, int_leftrect(values, j));
+  for (int number=3; number<150; number++){
+    values = generateValues(from, to, number);
+    printf("n = %3d - Integral = %f, %f, %f\n", number,
+                                       int_leftrect(values, number),
+                                       int_rightrect(values, number),
+                                       int_trapez(values, number));
   }
   return EXIT_SUCCESS;
 }
@@ -314,25 +505,28 @@ int main(void) {
 ``` javascript -Analyse.js
 let samples = data.Result.match(/[0-9.]+/g);
 let labels = [];
-let series = [];
+let series_1 = [];
+let series_2 = [];
+let series_3 = [];
 
 for(let i=0; i<samples.length; i++) {
   //samples[i] = parseFloat(samples[i]);
-
-  if(i % 2) {
-    series.push(parseFloat(samples[i]));
-  } else {
-    labels.push(parseFloat(samples[i]));
+  switch (i % 4)
+  {
+    case 0:  labels.push(parseFloat(samples[i])); break;
+    case 1:  series_1.push(parseFloat(samples[i])); break;
+    case 2:  series_2.push(parseFloat(samples[i])); break;
+    case 3:  series_3.push(parseFloat(samples[i]));
   }
-}
 
+}
 // Initialize a Line chart in the container with the ID chart
 new Chartist.Line('#pipe_chart', {
    labels: labels,
-   series: [series]
-});
+   series: [series_1, series_2, series_3]}
+);
 ```
 @Rextester.pipe
 
-
 <div class="ct-chart ct-golden-section persistent" id="pipe_chart"></div>
+<div id="demo"></div>
