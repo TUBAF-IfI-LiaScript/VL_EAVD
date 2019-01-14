@@ -630,6 +630,81 @@ int main(void) {
 ```
 @Rextester.eval
 
+Im Standard-C müssen bereits einige Makros im Präprozessor vordefiniert sein. Die Namen der vordefinierten Makros beginnen und enden jeweils mit zwei Unterstrichen. Die wichtigsten vordefinierten Makros sind in der folgenden Tabelle aufgelistet.
+
+| Define    | Bedeutung                                         |
+|:----------|:--------------------------------------------------|
+|`__LINE__` 	| Zeilennummer innerhalb der aktuellen Quellcodedatei |
+|`__FILE__` 	|Name der aktuellen Quellcodedatei  |
+|`__DATE__` 	|Datum, wann das Programm compiliert wurde (als Zeichenkette)|
+|`__STDC__` 	|Liefert eine 1, wenn sich der Compiler nach dem Standard-C richtet. |
+|`__STDC_VERSION__` | 	Liefert die Zahl 199409L, wenn sich der Compiler nach dem  C95-Standard richtet; die Zahl 199901L, wenn sich der Compiler nach dem C99-Standard richtet. Ansonsten ist dieses Makro nicht definiert.|
+
+Daneben gibt es weitere vordefinierte Makros, die das Betriebssystem zurückgeben.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+#define TAUSCHE(a, b, typ) { typ temp; temp=b; b=a; a=temp; }
+
+int main(void) {
+  printf("Programm wurde compiliert am ");
+  printf("%s um %s.\n", __DATE__, __TIME__);
+
+  printf("Diese Programmzeile steht in Zeile ");
+  printf("%d in der Datei %s.\n", __LINE__, __FILE__);
+
+  #ifdef __STDC__
+  printf("Standard-C-Compiler!\n");
+  #else
+  printf("Kein Standard-C-Compiler!\n");
+  #endif
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
+### #if
+
+Mit #if kann ähnlich wie mit #ifdef eine bedingte Übersetzung eingeleitet werden, jedoch können hier konstante Ausdrücke ausgewertet werden.
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+#define TEST
+
+int main(void) {
+  int a = 3, b = 5, c;
+  c = a * b;
+  #ifdef TEST
+    printf("Variableninhalte:\n");
+    printf("a = %i\nb = %i\nc = %i\n", a, b, c);
+  #else
+    printf("Ergebnis von %i mal %i ist %i\n", a, b, c);
+  #endif
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
+### #error
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+  #if defined(linux)
+      #error Du wolltest doch für ein Windows System compilieren!.
+  #elif
+  printf("Das ist ein Windows Programm!");
+  return EXIT_SUCCESS;
+}
+```
+
+
 
 ## 3. Beispiel der Woche
 
@@ -709,7 +784,7 @@ int main(void) {
   struct samples * values;
   double from = 1;
   double to = 10;
-  for (int number=3; number<150; number++){
+  for (int number=3; number<150; number=number+5){
     values = generateValues(from, to, number);
     printf("n = %3d - Integral = %f, %f, %f\n", number,
                                        int_leftrect(values, number),
@@ -744,8 +819,8 @@ let chart = echarts.init(document.getElementById('pipe_chart'));
 
 let option = {
   title : {
-    text: 'Original Data ',
-    subtext: 'True coefficients'
+    text: 'Numerische Integration',
+    subtext: 'Einfluss der Schrittweite n'
   },
   toolbox: {
     show : true,
@@ -758,7 +833,7 @@ let option = {
     }
   },
   legend: {
-      data:['series_1','series_2','series_3']
+      data:['left_Integral','right_Integral','trapezoidal_Integral']
   },
   xAxis : [{
     type : 'value',
@@ -771,16 +846,16 @@ let option = {
     axisLabel : { formatter: '{value}'}
   }],
   series : [{
-    name: 'series_1',
+    name: 'left_Integral',
     type: 'line',
     data: series_1,
   }, {
-    name: 'series_2',
+    name: 'right_Integral',
     type: 'line',
     data: series_2,
   },
   {
-    name: 'series_3',
+    name: 'trapezoidal_Integral',
     type: 'line',
     data: series_3,
   }]
