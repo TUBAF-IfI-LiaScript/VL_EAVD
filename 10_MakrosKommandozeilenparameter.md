@@ -207,10 +207,14 @@ script:   https://cdn.rawgit.com/davidedc/Algebrite/master/dist/algebrite.bundle
 @algebrite.eval:    <script> Algebrite.run(`@input`) </script>
 -->
 
-# Vorlesung IX - Dynamische Speicherverwaltung
+# Vorlesung X - Kommandozeilenparameter und Makros
 
 **Fragen an die heutige Veranstaltung ...**
 
+* Welche Bedeutung haben Kommandozeilenargumente für die Ausführung einer Anwendung?
+* Nennen Sie beispielhafte Kommandozeilenargumente für einen Compiler.
+* Wie lassen sich Kommandozeilenparameter erfassen, welche Prüfungen sollten
+umgesetzt werden?
 *
 
 
@@ -331,7 +335,7 @@ Kommandozeilenparameter.
 ▶ gcc main.c -o main.out
 ```
 
-### Erfassen der Parameter
+### Methodik
 
 ```c
 int main(int argc, char *argv[]) { /* ... */ } // anstatt
@@ -387,27 +391,247 @@ argv[5] = 5
 argv[6] = 6
 ```
 
-### Überprüfungen
+### Anwendung 1 - Text to File
 
-```c              CheckCommandlineParameters.c
+Welches Verbesserungspotential sehen Sie bei folgendem Programm, dass zwei
+Strings von der Kommandozeile übernimmt und diese als Dateinamen bzw. als zu
+schreibenden Inhalt interpretiert. Denkbare Eingabe für das Programm wären
+
+
+|               | ohne Dateiname   | mit Dateiname    |
+| mit Text      | Fehlermeldung    | alles korrekt    |
+| ohne Text     | Fehlermeldung    | Fehlermeldung (?) |
+
+
+1. Entwurf ...
+
+```c                                   writeTextToFile.c
 #include <stdio.h>
+#include <stdlib.h>
+
+int write2File(const char *filename, const char *text){
+  FILE *f = fopen(filename, "w");
+  if (f == NULL)
+  {
+      printf("Error opening file!\n");
+      return -1;
+  }
+  int count = fprintf(f, "%s\n", text);
+  fclose(f);
+  return count;
+}
 
 int main( int argc, char *argv[] )  {
-   if( argc == 2 ) {
-      printf("Parameter erfasst - \"%s\"\nEs kann weitergehen ...", argv[1]);
-   }
-   else if( argc > 2 ) {
-      printf("Zu viele Parameter!.\n");
-   }
-   else {
-      printf("Erwartet einen Parameter!.\n");
-   }
+  if( argc != 3 ) {
+    printf("False Parameter Anzahl!.\n");
+    showHelp();
+    return EXIT_FAILURE;
+  }
+  else {
+    printf("Korrekte Parameteranzahl!\n");
+    //write2File("text.txt", "Hossa!");
+    return EXIT_SUCCESS;
+  }
 }
 ```
 
-Ist das Format der Parameter korrekt?
+Lediglich die Zahl der Argumente wird bisher abgrprüft, welche Funktionalitäten sollten
+noch integriert werden?
 
-## 2. Makros
++ Ausgabe der möglichen Parameter (gekürzte Anwenderinformation)
++ Hinweis auf die Anwendungsvarianten des Programms
++ mögliche Konfigurationen der Eingaben
+
+Wie lösen wir das Problem möglicher Vertauschungen der Parameter?
+
+```
+ writeTextToFile File.txt Dasasdfkjasldfjasölfjasö
+ writeTextToFile Dasasdfkjasldfjasölfjasö File.txt
+```
+
+Lösung in der Datei ./codeExamples/writeTextToFile.c
+
+### Anwendung 2 - Taschenrechner
+
+```
+Taschenrechner 5 + 4 - 8 * 2
+```
+
+```c                                   Taschenrechner.c
+
+/* Beispiel aus dem Lehrbuch des Rheinwerk-Verlages "C von A bis Z"
+   Jürgen Wolf, 2017
+   penbook.rheinwerk-verlag.de/c_von_a_bis_z/013_c_kommandozeilenargumente_001.htm
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(int argc, char *argv[]) {
+   int i, j ;
+   long y, erg;
+
+   if(argc < 4) {
+      printf("Benötige mindestens 4 Argumente!\n");
+      printf("Aufruf: %s <zahl><op><zahl> ...\n", *argv);
+      return EXIT_FAILURE;
+   }
+   /* 1.Zahl in einen Integer konvertieren*/
+   erg = strtol(argv[1], NULL, 10);
+   if( erg == 0 ) {
+      printf("Keine gültige Ganzzahl ... \n");
+      return EXIT_FAILURE;
+   }
+
+   for(i = 1; i < argc-1; i += 2) {
+      for(j=i+1; j < i+2; j++) {
+         y = strtol(argv[i+2], NULL, 10);
+         if( y == 0 ) {
+            printf("Keine gültige Ganzzahl ... \n");
+            printf("argc: %d (%s)?!\n", i+2, argv[i+2]);
+            return EXIT_FAILURE;
+         }
+         if(strcmp(argv[j],"+") == 0)
+            erg += y;
+         else if(strcmp(argv[j],"-") == 0)
+            erg -= y;
+          else if(strcmp(argv[j], "x") == 0)
+             erg *= y;
+          else if(strcmp(argv[j],"/") == 0)
+             erg/=y;
+          else {
+             printf("Ungültiger Operand: %s\n", argv[j]);
+             return EXIT_FAILURE;
+          }
+      }
+   }
+   printf("%ld\n",erg);
+   return EXIT_SUCCESS;
+}
+```
+
+Wie können wir die Funktionalität auf Klammerausdrücke ausdehnen? Welche
+zusätzlichen Prüfungen werden dann notwendig?
+
+
+## 2. Präprozessor-Direktiven
+
+Ein Präprozessor (seltener auch Präcompiler) ist ein Computerprogramm, das Eingabedaten vorbereitet und zur weiteren Bearbeitung an ein anderes Programm weitergibt. Der Präprozessor wird häufig von Compilern oder Interpretern dazu verwendet, einen Eingabetext zu konvertieren und das Ergebnis im eigentlichen Programm weiter zu verarbeiten.
+
+Da sich der C-Präprozessor nicht auf die Beschreibung der Sprache C stützt, sondern ausschließlich seine ihm bekannten Anweisungen erkennt und bearbeitet, kann er auch als reiner Textersetzer für andere Zwecke verwendet werden.
+
+![instruction-set](./img/compilerElements.png)<!-- width="100%" -->
+
+Der C-Präprozessor realisiert dabei die
+
++ Zusammenfassung von Strings
++ Löcschung von Zeilenumbrüchen und Kommentaren (Ersetzung durch Leerzeichen)
++ Whitespace-Zeichen zwischen Tokens werden gelöscht.
++ Kopieren der Header- und Quelldateien in den Quelltext kopieren (`#include`)
++ Einbinden von Konstanten (`#define`)
++ Extrahieren von Codebereichen mit einer bedingten Kompilierung (`#ifdef`, `#elseif`, ...)
+
+Letztgeannten 3 Abläufe werden durch den Entwickler spezifiziert. Dazu bedient er
+sich sogenannter Direktiven. Sie beginnen mit # und müssen nicht mit einem Semikolon abgeschlossen werden. Eventuell vorkommende Sonderzeichen in den Parametern müssen nicht escaped werden.
+
+```c
+#Direktive Parameter
+```
+
+### #include
+
+Include-Direktiven kennen Sie bereits aus unseren Beispielprogrammen. Damit binden
+wir Standardbibliotheken oder eigenen Source-Datei ein.
+Es gibt zwei Arten der #include-Direktive, nämlich
+
+```c
+#include <Datei.h>
+#include "Datei.h"
+```
+
+Die erste Anweisung sucht die Datei im Standard-Includeverzeichnis des Compilers, die zweite Anweisung sucht die Datei zuerst im Verzeichnis, in der sich die aktuelle Sourcedatei befindet; sollte dort keine Datei mit diesem Namen vorhanden sein, sucht sie ebenfalls im Standard-Includeverzeichnis.
+
+Mit dem Präprozessoraufruf werden die Inhalte der Header-Files in unseren Code
+kopiert. Dieser wird dadurch um ein vielfaches größer, umfasst nun aber alle
+Funktionsdeklarationen, die genutzt werden sollen.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+  printf("Präprozessorkrams \n")
+  return EXIT_SUCCESS;
+}
+```
+
+``` bash @output
+▶ gcc experiments.c -E -o experiments_pre.txt
+```
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+  printf("Präprozessorkrams \n")
+  return EXIT_SUCCESS;
+}
+```
+
+### #define
+
+`#define` kann in drei verschiedenen Arten genutzt werden, um ein Symbol überhaupt
+zu definieren, einen konkreten Wert zuzuordnen oder aber
+
+```c
+#define SYMBOL
+#define KONSTANTE Wert
+#define ERDBESCHLEUNIGUNG (9.80665)
+#define MAKRO(Parameter ...) Ausdruck
+```
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MATH_PI 3.14
+#define VOLLKREIS MATH_PI*2
+#define HALBIEREN(wert) ((wert) / 2)
+#define MAX_VALUE(a,b) ((a >= b) ? (a) : (b))
+
+int main(void)
+{
+  float r=5;
+  printf("Kreisfläche %f\n", r * r * MATH_PI);
+  printf("Kreisumfang %f\n", r * VOLLKREIS);
+  printf("Halber Wert von Pi %f\n", HALBIEREN(MATH_PI));
+  printf("Vergleich %f\n", MAX_VALUE(MATH_PI, r));
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
+In allen Fällen erfolgt lediglich eine Textersetzung im Programmcode! Dies kann
+auch auf weitergehende Codefragmente ausgedehnt werden.
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+#define TAUSCHE(a, b, typ) { typ temp; temp=b; b=a; a=temp; }
+
+int main(void) {
+	int zahla=4, zahlb=7;
+	printf("zahl A: %d\nzahl B: %d\n", zahla, zahlb);
+ 	TAUSCHE(zahla, zahlb, int);
+	printf("zahl A: %d\nzahl B: %d\n", zahla, zahlb);
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
 
 ## 3. Beispiel der Woche
 
@@ -480,12 +704,7 @@ double int_rightrect(struct samples * values, int number){
 }
 
 double int_trapez(struct samples * values, int number){
-   double resolution = (values[number].x - values[0].x)/ number;
-   double sum = 0;
-   for (int i=0; i <number; i++){
-       sum = sum + (values[i].y + values[i+1].y)/2 * resolution;
-   }
-   return sum;
+   return 0;
 }
 
 int main(void) {
