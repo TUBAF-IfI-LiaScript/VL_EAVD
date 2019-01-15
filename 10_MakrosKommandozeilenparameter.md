@@ -338,7 +338,7 @@ Kommandozeilenparameter.
 
 ```c
 int main(int argc, char *argv[]) { /* ... */ } // anstatt
-int main{void}
+int main(void){}
 ```
 
 Dei zwei Parameter mit den Namen argc und argv. Die Namen dieser Parameter sind
@@ -820,7 +820,7 @@ double int_rightrect(struct samples * values, int number){
 }
 
 double int_trapez(struct samples * values, int number){
-   // Hier fehlt Ihr Beitrag! 
+   // Hier fehlt Ihr Beitrag!
    return 0;
 }
 
