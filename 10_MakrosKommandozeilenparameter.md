@@ -213,13 +213,14 @@ script:   https://cdn.rawgit.com/davidedc/Algebrite/master/dist/algebrite.bundle
 * Nennen Sie beispielhafte Kommandozeilenargumente für einen Compiler.
 * Wie lassen sich Kommandozeilenparameter erfassen, welche Prüfungen sollten
 umgesetzt werden?
-*
+* Welche Chancen eröffnet der Präcompiler?
+* Welche Gefahren bestehen bei der Realisierung von Präcompiler Makros?
 
 
 ---------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-https://github.com/liaScript/CCourse/blob/master/10_MakrosKommandozeilenparamter.md
+https://github.com/liaScript/CCourse/blob/master/10_MakrosKommandozeilenparameter.md
 
 ---------------------------------------------------------------------
 
@@ -512,7 +513,6 @@ int main(int argc, char *argv[]) {
 Wie können wir die Funktionalität auf Klammerausdrücke ausdehnen? Welche
 zusätzlichen Prüfungen werden dann notwendig?
 
-
 ## 2. Präprozessor-Direktiven
 
 Ein Präprozessor (seltener auch Präcompiler) ist ein Computerprogramm, das Eingabedaten vorbereitet und zur weiteren Bearbeitung an ein anderes Programm weitergibt. Der Präprozessor wird häufig von Compilern oder Interpretern dazu verwendet, einen Eingabetext zu konvertieren und das Ergebnis im eigentlichen Programm weiter zu verarbeiten.
@@ -569,14 +569,30 @@ int main(void) {
 ```
 
 ```c
-#include <stdio.h>
-#include <stdlib.h>
+...
+# 1 "/usr/include/x86_64-linux-gnu/bits/types.h" 1 3 4
+# 27 "/usr/include/x86_64-linux-gnu/bits/types.h" 3 4
+# 1 "/usr/include/x86_64-linux-gnu/bits/wordsize.h" 1 3 4
+# 28 "/usr/include/x86_64-linux-gnu/bits/types.h" 2 3 4
 
+typedef unsigned char __u_char;
+typedef unsigned short int __u_short;
+typedef unsigned int __u_int;
+typedef unsigned long int __u_long;
+...
+
+# 4 "experiments.c"
 int main(void) {
   printf("Präprozessorkrams \n")
-  return EXIT_SUCCESS;
+  return
+# 6 "experiments.c" 3 4
+        0
+# 6 "experiments.c"
+                    ;
 }
 ```
+
+Warum muss vermieden werden, dass headerfiles kreuzweise eingebunden werden?
 
 ### #define
 
@@ -689,21 +705,48 @@ int main(void) {
 ```
 @Rextester.eval
 
-### #error
-
-```cpp
+```cpp                         DeleteMonitor.c
+/* Beispiel aus dem Lehrbuch des Rheinwerk-Verlages "C von A bis Z"
+   Jürgen Wolf, 2017
+*/
 #include <stdio.h>
 #include <stdlib.h>
+#ifdef __unix__
+   #define clrscr() printf("\x1B[2J")
+#elif __BORLANDC__ && __MSDOS__
+   #include <conio.h>
+#elif __WIN32__ || _MSC_VER
+   #define clrscr() system("cls")
+#else
+   #define clrscr() printf("clrscr() - Fehler!!\n")
+#endif
 
 int main(void) {
-  #if defined(linux)
-      #error Du wolltest doch für ein Windows System compilieren!.
-  #elif
-  printf("Das ist ein Windows Programm!");
-  return EXIT_SUCCESS;
+   /* universale Routine zum Löschen des Bildschirms */
+   clrscr();
+   return EXIT_SUCCESS;
 }
 ```
 
+### #error
+
+Zur expliziten Abbildung von Fehlern ist `#error` vorgesehen. Damit ist es möglich
+bestimmte Aspekte zu prüfen und die Kompilierung abzubrechen.
+
+```cpp
+#include<stdio.h>
+#ifndef __MATH_H
+#error First include then compile
+#else
+int main(void){
+    float a,b=25;
+    a=sqrt(b);
+    printf("%f",a);
+    return 0;
+}
+#endif
+```
+@Rextester.eval
 
 
 ## 3. Beispiel der Woche
@@ -777,6 +820,7 @@ double int_rightrect(struct samples * values, int number){
 }
 
 double int_trapez(struct samples * values, int number){
+   // Hier fehlt Ihr Beitrag! 
    return 0;
 }
 
