@@ -164,6 +164,7 @@ Prüfungsvorbereitung.
 | 18.12.2018 | Ausfall             |
 | 08.01.2019 | [9. Dynamische Speicherverwaltung](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/09_DynamischeSpeicherverwaltung.md#1)          |
 | 14.01.2019 | [10. Parameterübergabe und Makros](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/10_MakrosKommandozeilenparameter.md#1)          |
+| 12.01.2019 | [11. Standardbibliothek](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/11_Standardbibliothek.md#1)          |
 
 # ... und wozu brauche ich das?
 
