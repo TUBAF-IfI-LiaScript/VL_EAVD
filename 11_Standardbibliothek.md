@@ -1,0 +1,818 @@
+<!--
+
+author:   Sebastian Zug & André Dietrich
+email:    zug@ovgu.de   & andre.dietrich@ovgu.de
+version:  0.0.1
+language: de
+narrator: Deutsch Female
+
+
+script:  https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts-en.min.js
+
+script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
+
+
+@JSCPP.__eval
+<script>
+  try {
+    var output = "";
+    JSCPP.run(`@0`, `@1`, {stdio: {write: s => { output += s }}});
+    output;
+  } catch (msg) {
+    var error = new LiaError(msg, 1);
+
+    try {
+        var log = msg.match(/(.*)\nline (\d+) \(column (\d+)\):.*\n.*\n(.*)/);
+        var info = log[1] + " " + log[4];
+
+        if (info.length > 80)
+          info = info.substring(0,76) + "..."
+
+        error.add_detail(0, info, "error", log[2]-1, log[3]);
+    } catch(e) {}
+
+    throw error;
+    }
+</script>
+@end
+
+
+@JSCPP.eval: @JSCPP.__eval(@input, )
+
+@JSCPP.eval_input: @JSCPP.__eval(@input,`@input(1)`)
+
+@output: <pre class="lia-code-stdout">@0</pre>
+
+@output_: <pre class="lia-code-stdout" hidden="true">@0</pre>
+
+
+script:   https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js
+
+@Rextester.__eval
+<script>
+//var result = null;
+var error  = false;
+
+console.log = function(e){ send.lia("log", JSON.stringify(e), [], true); };
+
+function grep_(type, output) {
+  try {
+    let re_s = ":(\\d+):(\\d+): "+type+": (.+)";
+
+    let re_g = new RegExp(re_s, "g");
+    let re_i = new RegExp(re_s, "i");
+
+    let rslt = output.match(re_g);
+
+    let i = 0;
+    for(i = 0; i < rslt.length; i++) {
+        let e = rslt[i].match(re_i);
+
+        rslt[i] = { row : e[1]-1, column : e[2], text : e[3], type : type};
+    }
+    return [rslt];
+  } catch(e) {
+    return [];
+  }
+}
+
+$.ajax ({
+    url: "https://rextester.com/rundotnet/api",
+    type: "POST",
+    timeout: 10000,
+    data: { LanguageChoice: @0,
+            Program: `@input`,
+            Input: `@1`,
+            CompilerArgs : @2}
+    }).done(function(data) {
+        if (data.Errors == null) {
+            let warnings = grep_("warning", data.Warnings);
+
+            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
+
+            if(data.Warnings)
+              stats = "\n-------Warn-------\n"+data.Warnings + stats;
+
+            send.lia("log", data.Result+stats, warnings, true);
+            send.lia("eval", "LIA: stop");
+
+        } else {
+            let errors = grep_("error", data.Errors);
+
+            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
+
+            if(data.Warning)
+              stats = data.Errors + data.Warnings + stats;
+            else
+              stats = data.Errors + data.Warnings + stats;
+
+            send.lia("log", stats, errors, false);
+            send.lia("eval", "LIA: stop");
+        }
+    }).fail(function(data, err) {
+        send.lia("log", err, [], false);
+        send.lia("eval", "LIA: stop");
+    });
+
+"LIA: wait"
+</script>
+@end
+
+
+@Rextester.eval: @Rextester.__eval(6, ,"-Wall -std=gnu99 -O2 -o a.out source_file.c")
+
+@Rextester.eval_params: @Rextester.__eval(6, ,"@0")
+
+@Rextester.eval_input: @Rextester.__eval(6,`@input(1)`,"-Wall -std=gnu99 -O2 -o a.out source_file.c")
+
+
+
+@Rextester.pipe
+<script>
+//var result = null;
+var error  = false;
+
+console.log = function(e){ send.lia("log", JSON.stringify(e), [], true); };
+
+function grep_(type, output) {
+  try {
+    let re_s = ":(\\d+):(\\d+): "+type+": (.+)";
+
+    let re_g = new RegExp(re_s, "g");
+    let re_i = new RegExp(re_s, "i");
+
+    let rslt = output.match(re_g);
+
+    let i = 0;
+    for(i = 0; i < rslt.length; i++) {
+        let e = rslt[i].match(re_i);
+
+        rslt[i] = { row : e[1]-1, column : e[2], text : e[3], type : type};
+    }
+    return [rslt];
+  } catch(e) {
+    return [];
+  }
+}
+
+$.ajax ({
+    url: "https://rextester.com/rundotnet/api",
+    type: "POST",
+    timeout: 10000,
+    data: { LanguageChoice: 6,
+            Program: `@input(0)`,
+            Input: `@1`,
+            CompilerArgs : "-Wall -std=gnu99 -O2 -o a.out source_file.c"}
+    }).done(function(data) {
+        if (data.Errors == null) {
+            let warnings = grep_("warning", data.Warnings);
+
+            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
+
+            if(data.Warnings)
+              stats = "\n-------Warn-------\n"+data.Warnings + stats;
+
+            send.lia("log", data.Result+stats, warnings, true);
+
+            @input(1)
+
+            send.lia("eval", "LIA: stop");
+
+        } else {
+            let errors = grep_("error", data.Errors);
+
+            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
+
+            if(data.Warning)
+              stats = data.Errors + data.Warnings + stats;
+            else
+              stats = data.Errors + data.Warnings + stats;
+
+            send.lia("log", stats, errors, false);
+            send.lia("eval", "LIA: stop");
+        }
+    }).fail(function(data, err) {
+        send.lia("log", err, [], false);
+        send.lia("eval", "LIA: stop");
+    });
+
+"LIA: wait"
+</script>
+@end
+
+script:   https://cdn.rawgit.com/davidedc/Algebrite/master/dist/algebrite.bundle-for-browser.js
+
+@algebrite.eval:    <script> Algebrite.run(`@input`) </script>
+-->
+
+# Vorlesung X - Kommandozeilenparameter und Makros
+
+**Fragen an die heutige Veranstaltung ...**
+
+*
+
+
+---------------------------------------------------------------------
+Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
+
+https://github.com/liaScript/CCourse/blob/master/10_MakrosKommandozeilenparameter.md
+
+---------------------------------------------------------------------
+
+**Wie weit sind wir schon gekommen?**
+
+ANSI C (C89)/ Schlüsselwörter:
+
+| Standard    |                |          |            |          |            |
+|:------------|:---------------|:---------|:-----------|:---------|:-----------|
+| **C89/C90** | auto           | `double` | `int`      | `struct` | `break`    |
+|             | `else`         | `long`   | `switch`   | `case`   | `enum`     |
+|             | register       | typedef  | `char`     | extern   | return     |
+|             | union          | const    | `float`    | `short`  | `unsigned` |
+|             | `continue`     | `for`    | `signed`   | `void`   | `default`  |
+|             | `goto`         | `sizeof` | volatile   | `do`     | `if`       |
+|             | static         | `while`  |            |          |            |
+| **C99**     | `_Bool`        | _Complex | _Imaginary | inline   | restrict   |
+| **C11**     | _Alignas       | _Alignof | _Atomic    | _Generic | _Noreturn  |
+|             |_Static\_assert | \_Thread\_local | |   |          |            |
+
+---
+
+Standardbibliotheken
+
+| Name         | Bestandteil | Funktionen                              |
+|:-------------|:------------|:----------------------------------------|
+| `<stdio.h>`  |             | Input/output (`printf`)                 |
+| `<stdint.h>` | (seit C99)  | Integer Datentypen mit fester Breite    |
+| `<float.h>`  |             | Parameter der Floatwerte                |
+| `<limits.h>` |             | Größe der Basistypen                    |
+| `<fenv.h>`   |             | Verhalten bei Typumwandlungen           |
+| `<string.h>` |             | Stringfunktionen                        |
+| `<math.h>`   |             | Mathematische Funktionen und Konstanten |
+
+https://en.cppreference.com/w/c/header
+
+
+## 1. Standardbibliothek als Ganzes
+
+Die Standardbibliothek umfasst Funktionen und Makros, die für die Entwicklung
+vereinfachen, bzw. die Anpassung auf die konkrete Architektur übernehmen.
+
+| Name         | Bestandteil | Funktionen                              |
+|:-------------|:------------|:----------------------------------------|
+| `<stdio.h>`  |             | Input/output (`printf`)                 |
+| `<stdint.h>` | (seit C99)  | Integer Datentypen mit fester Breite    |
+| `<float.h>`  |             | Parameter der Floatwerte                |
+| `<limits.h>` |             | Größe der Basistypen                    |
+| `<fenv.h>`   |             | Verhalten bei Typumwandlungen           |
+| `<string.h>` |             | Stringfunktionen                        |
+| `<math.h>`   |             | Mathematische Funktionen und Konstanten |
+
+Wie werden die entsprechenden Funktionen genutzt?
+
+```cpp                     mathOperations.c
+int main(void)
+{
+    printf("Hello World\n");
+
+    return(EXIT_SUCCESS);
+}
+```@Rextester.eval
+
+In folgendem Beispiel werden mathematische Funktionen der `math.h` genutzt. Aus
+historischen Gründen muss dabei im Fall einer echten Berechnung zur Laufzeit
+die entsprechende Bibliothek gelinkt werden.
+
+```cpp                     mathOperations.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main(void)
+{
+    double a=6;
+    printf("Sin von 3.14 %f\n", sin(a));
+    printf("Potenz von 3.14 %f\n", pow(2.0, a));
+
+    return(EXIT_SUCCESS);
+}
+```@Rextester.eval
+
+In der vorliegenden Form erfolgt die Berechnung statisch zur Compilezeit.
+Wandeln Sie das Beispiel so ab, dass eine "echte" Berechnung notwenig wird.
+
+```bash @output
+▶ gcc experiments.c
+/tmp/cctWOjnA.o: In function `main':
+experiments.c:(.text+0x34): undefined reference to `pow'
+collect2: error: ld returned 1 exit status
+```
+
+Der Aufruf des Compilers muss dann entsprechend angepasst werden:
+
+```bash @output
+▶ gcc experiments.c -lm
+```
+
+> The functions in stdlib.h and stdio.h have implementations in libc.so (or libc.a for static linking), which is linked into your executable by default (as if -lc were specified). GCC can be instructed to avoid this automatic link with the -nostdlib or -nodefaultlibs options.
+
+
+### time.h
+
+Die Definitionsdatei <time.h> vereinbart Typen und Funktionen zum Umgang mit
+Datum und Uhrzeit. Manche Funktionen verarbeiten die Ortszeit, die von der
+Kalenderzeit zum Beispiel wegen einer Zeitzone abweicht. Zwei Methoden - time
+und clock können benutzt werden, um den aktuellen Zeitwert auszulesen und auf
+einen der folgenden Datentypen abzubilden:
+
+| Name      | Format                                      |
+|:----------|:--------------------------------------------|
+| `clock_t` | Relatives Format zur Zeitangabe bezogen auf den Prozess |
+| `time_t`  | Sekunden seit dem 1. Januar 1970 00:00 UTC  |
+| `tm`      | struct mit Einträgen für Sekunden - Jahre   |
+
+Die Darstellung von `tm` umfasst dabei folgende Elemente
+
+| Member	| Type|	Meaning	Range |
+| `tm_sec`	| int	| seconds after the minute	0-61|
+| `tm_min`| int	| minutes after the hour	0-59|
+| `tm_hour`	| int	| hours since midnight	0-23|
+| `tm_mday`	| int	| day of the month	1-31|
+| `tm_mon`	| int	| months since January	0-11|
+| `tm_year`	| int	| years since 1900|
+| `tm_wday`	| int	| days since Sunday	0-6|
+| `tm_yday`	| int	| days since January 1	0-365|
+| `tm_isdst`| int	| Daylight Saving Time flag|
+
+Die Funktionen
+
+```cpp
+time_t time(time_t *tloc);
+clock_t clock(void);
+```
+
+liefern als Rückgabewert eine Zeitangabe. `localtime()` wandelt die Kalenderzeit der Adresse time_t \*zeitzeiger in lokale Ortszeit um, `gmtime()` dagegen wandelt die Kalenderzeit in die UTC-Zeit.
+
+**Anwendung I - Laufzeitmessung mit clock()**
+
+```cpp                     printDuration.c
+#include <stdio.h>
+#include <time.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main(void) {
+  clock_t start = clock();
+  long result = 0;
+  int i;
+  for(i=0; i<1000000000; ++i)
+      result = result + 1;
+  printf("%d Additionen von 1 ergeben %ld\n", i-1, result);
+  clock_t end = clock();
+  double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+
+  printf("Der Rechner braucht dafür %f Sekunden \n", cpu_time_used);
+  printf("Die Taktrate beträgt %d Ticks/Sekunde \n",  CLOCKS_PER_SEC);
+  return EXIT_SUCCESS;
+}
+```@Rextester.eval
+Welchen Fehler sehen Sie den gedanklichen Fehler im obrigen Programm?
+
+**Anwendung II - Zeitbestimmung mit time()**
+
+Die Funktion `time_t time(time_t *arg)` gibt die aktuelle Kalenderzeit als
+Epochenausdruck zurück. Ein
+
+```cpp                     printTime.c
+#include <time.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+int main(void)
+{
+    time_t current_time;
+    char* c_time_string;
+    /* Obtain current time. */
+    current_time = time(NULL);
+    printf("Current time is %ld \n", current_time);
+
+    if (current_time == ((time_t)-1)){
+        printf("Failure to obtain the current time.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    /* converts a time_t value to a textual representation */
+    c_time_string = ctime(&current_time);
+    if (c_time_string == NULL){
+        printf("Failure to convert the current time.\n");
+        exit(EXIT_FAILURE);
+    }
+    printf("Current time is %s", c_time_string);
+    return(EXIT_SUCCESS);
+}
+```@Rextester.eval
+
+**Anwendung 3 - Ausgabe von Zeitformaten**
+
+Variantenreichere Ausgaben von Zeitangaben können mit strftime` erzeugt werden.
+Die möglichkeiten umfassen dabei:
+
+| Format   | Bedeutung                                | Beispiel |
+|:---------|:-----------------------------------------|:---------|
+| %a       | abgekürzter Wochentagsname               |	Thu      |
+| %A       | Wochentagsname                           | Thursday |
+| %c       | volle Datums- und Zeitrepresentation    |	Thu Aug 23 14:55:02 2001 |
+| %p       | AM oder PM Angabe 	PM                    | PM       |
+| %W       | Wochennummer mit dem ersten Montag als ersten Tag der ersten Woche (00-53) | 	34  |
+
+https://www.proggen.org/doku.php?id=c:lib:time:strftime
+
+```cpp                     printTime.c
+#include <time.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+int main(void)
+{
+    time_t current_time;
+    struct tm * timeInfo;
+    char        buffer[80];
+
+    current_time = time(NULL);
+    timeInfo = localtime( &current_time );
+
+    strftime( buffer, 80, "Es ist nun %H Uhr, %M Minuten.", timeInfo );
+    printf("%s", buffer);
+    strftime( buffer, 80, "%c", timeInfo );
+    printf("%s", buffer);
+    return(EXIT_SUCCESS);
+}
+```@Rextester.eval
+
+### assert.h
+
+Mit dem assert-Makro aus dem Headerfile `assert.h` fügt man Testpunkte zu
+die dann zur Laufzeit ausgewertet werden.
+
+```cpp
+void assert(int expression)
+```
+
+hat expression den Wert Null wenn ausgeführt wird, dann gibt der assert-Makro
+auf `stderr` etwa folgende Meldung aus:
+
+```bash @output
+ Assertion failed: expression, file filename, line nnn
+```
+
+Anschließend wird die Ausführung durch Aufruf von abort abgebrochen. Der Dateiname der Programmquelle sowie die Zeilennummer stammen von den Prozessor-Makros `__FILE__` und `__LINE__`.
+
+Wenn beim **Einfügen** von <assert.h> ein Makroname `NDEBUG` definiert ist, wird der assert-Makro ignoriert.
+
+Beispiel: Entwickeln Sie eine Funktion, die die mathematische Funktion
+
+$$f(a,b)=\sqrt{\frac{a}{b}}$$
+
+implementiert
+
+```cpp                     assertBeispiele.c
+#include <stdlib.h>
+#include <stdio.h>
+//#define NDEBUG
+#include <assert.h>
+
+float myFunktion(int a, int b);
+
+int main(void){
+    int a = 7;
+    for (int b=-a; b<=a; b++){
+      assert(a==b);
+      printf("f(%2d, %2d) = %2.4f \n", a, b,  myFunktion(a, b));
+    }
+    return(EXIT_SUCCESS);
+}
+
+float myFunktion(int a, int b){
+  // precondition
+  // postcondition
+  return 1.0;
+}
+
+```@Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
+
+Welchen Vorteile bringt das `assert` Makro gegenüber alternativen printf Ausgaben
+mit sich? Wie könnte man ein gleiches Verhalten ohne Spuren im Code zu hinterlassen
+mit printf umsetzen?
+
+### stdlib.h
+
+**Beenden eines Programmes**
+
+`stdlib.h` umfasst unter anderem die Methoden zur Beendigung des Programms und
+unterscheidet dabei zwischen
+
+| exit | beliebige Position im Programmcode, führt zum Leeren der Puffer, dem Schließen von Datein, Löschung von Daten |
+| abort | abnormaler Abbruch mit Fehlerausgabe  |
+| return | kann nur am Ende der main stehen, Verhalten äquivalent zu exit |
+
+Mit `aexit.h` kann das geordnete Verlassen eines Programmes koordiniert werden.
+Dabei wird ein Stack von Funktionshandlern angelegt, die nach und nach abgearbeitet
+werden. Die Programmbereiche, die nach dem exit-Aufruf folgen, werden logischerweise
+nie ausgeführt.
+
+
+```cpp                     aexitBeispiele.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+char *memPtr;
+
+void writeLogMessage(void) {
+  time_t current_time;
+  struct tm * timeInfo;
+  char        buffer[80];
+
+  current_time = time(NULL);
+  timeInfo = localtime( &current_time );
+  strftime( buffer, 80, "%c", timeInfo );
+  printf("%s - Programmabbruch mit unbekannter Ursache\n", buffer);
+}
+
+void free_malloc(void) {
+   /* Wurde überhaupt Speicher reserviert? */
+   if(memPtr == NULL)
+      printf("Kein Speicher war reserviert!!!\n");
+   else {
+      free(memPtr);
+      printf("Speicher wurde freigegeben!!\n");
+   }
+}
+
+int main(void) {
+   memPtr =(char *) malloc(10000);
+   if(memPtr==NULL)
+      printf("Konnte keinen Speicher reservieren\n");
+
+   if(atexit (free_malloc) != 0)
+      printf("Konnte Funktionshandler nicht einrichten\n");
+   atexit(writeLogMessage);
+   /* Hier passieren viele Operationen über unserem Array. */
+
+   exit(EXIT_FAILURE);
+   printf("Wird nicht mehr ausgegeben\n");
+   return EXIT_SUCCESS;
+}
+```@Rextester.eval
+
+**Erzeugung von Zufallszahlen**
+
+Für das Testen eines Algorithmus werden häufig Zufallszahlen herangezogen, um
+variierende Eingangsdaten zu simulieren. Die Funktion
+
+```cpp
+int rand(void);
+```
+
+gibt dafür einen Wert zwischen 0 und `RAND_MAX` zurück. Damit sind entsprechend
+nur Gleichverteilungen möglich. Andere Konfigurationen lassen sich über eine
+entsprechende Modulo-Operation realisieren
+
+```cpp
+(rand()/(double) RAND_MAX) % ((y + 1) - x) + x   // x<= out <=y
+```
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+   printf("Der Wert von RAND_MAX beträgt %d", RAND_MAX);
+   for(int i = 0; i < 5; i++)
+      printf("Die Zufallszahl lautet %d\n", rand());
+   return EXIT_SUCCESS;
+}
+```@Rextester.eval
+Starten Sie das Programm mehrfach und beobachten Sie die Entwicklung der
+Werte. Welchen Nachteil hat dieser Ansatz?
+
+Die Funktion überwindet diese Einschränkung und generiert Zufallswerte
+ausgehend von einem Startwert
+
+```cpp
+void srand(unsigned int startwert);
+```
+
+Integrieren Sie diese Funtion in das obrige Beispiel und evaluieren Sie das
+Verhalten! Welcher Startwert bietet sich an, um eine kontinuierlich veränderliche
+Folge von Zufallswerten zu generieren?
+
+```cpp
+srand(time(NULL));
+```
+
+**Sortieren und Suchen**
+
+Die Standardbibliothek umfasst eine Suchfunktion, die es erlaubt Arrays nach
+beliebigen Kriterien zu sortieren. Der Name `qsort()` deutet dabei an, dass der
+Quicksort-Algorithmus zum EInsatz kommt. Die Vergleichsoperation, die vom
+Anwender zu implementieren ist, akzeptiert als Übergabewerte Zeiger auf zwei
+Einträge im Array und setzt diese in Beziehung. Bei einem negativen Rückgabewert ist das
+erste Element kleiner, für einen positiven Wert größer als das zweite Übergabewert. Für den Wert 0 liegt
+Gleichheit vor.
+
+```cpp
+void qsort(
+   void *array,        // Anfangsadresse des Vektors
+   size_t n,           // Anzahl der Elemente zum Sortieren
+   size_t size,        // Größe des Datentyps, der sortiert wird
+   int (*vergleich_func)(const void*, const void*)   );
+```
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+int values[] = { 88, 56, 100, 2, 25 };
+
+int cmpfunc (const void * a, const void * b) {
+   return ( *(int*)a - *(int*)b );
+}
+
+int main (void) {
+   int n;
+   printf("Before sorting the list is: \n");
+   for( n = 0 ; n < 5; n++ ) {
+      printf("%d ", values[n]);
+   }
+
+   qsort(values, 5, sizeof(int), cmpfunc);
+
+   printf("\nAfter sorting the list is: \n");
+   for( n = 0 ; n < 5; n++ ) {
+      printf("%d ", values[n]);
+   }
+
+   return(EXIT_SUCCESS);
+}
+```@Rextester.eval
+
+Eine analoge Funktion steht für die Suche in sortierten Listen bereit. `bsearch()`
+durchsucht diese und gibt einen Pointer zurück, der mit dem Suchkriterium
+übereinstimmt.
+
+**Ausführung von Kommandozeilenaufrufen**
+
+In der `stdlib` bietet C die Möglichkeit Kommandozeilenbefehle auszuführen.
+Damit lässt sich zum Beispiel sehr komfortabel auf das Dateisystem zurückgreifen
+aber auch andere Programme starten und deren Ergebnisse erfassen.
+
+```cpp
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main(void) {
+  char command[50];
+  strcpy( command, "dir" );
+  system(command);
+  return EXIT_SUCCESS;
+}
+```@Rextester.eval
+
+
+```cpp   generateCodeAndCompile.c
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+char programmCode[] = "#include <stdio.h> \n int main(){printf(\"C-Code Datei generiert und kompiliert!\"); return 0;}";
+
+int main(void) {
+  printf("Schreibe den Code in Datei ...\n");
+  FILE * fp;
+  fp = fopen ("myCode.c","w");
+  fprintf (fp, programmCode);
+  fclose (fp);
+
+  char command[50];
+  printf("Kompiliere ...\n");
+  strcpy(command, "gcc myCode.c -o myCode.out" );
+  system(command);
+  printf("Führe aus ...\n");
+  strcpy(command, "./myCode.out" );
+  system(command);
+  return EXIT_SUCCESS;
+}
+```
+``` bash @output
+▶ ./a.out
+Schreibe den Code in Datei ...
+Kompiliere ...
+Führe aus ...
+C-Code Datei generiert und kompiliert!%
+```
+### string.h
+
+In der Definitionsdatei `string.h` werden Gruppen von Funktionen für Zeichenketten vereinbart. Für unsere Veranstaltung sind dabei folgende von Bedeutung:
+
+| Befehl               | Bedeutung                                              |
+|:--------------------|:-------------------------------------------------------|
+| `char *strcpy(s,ct)`	|Zeichenkette ct in Vektor s kopieren, inklusive '\0'; liefert s.|
+|`char *strncpy(s,ct,n)`	|höchstens n Zeichen aus ct in s kopieren; liefert s. Mit '\0' auffüllen, wenn ct weniger als n Zeichen hat.|
+|`char *strcat(s,ct)`	| Zeichenkette ct hinten an die Zeichenkette s anfügen; liefert s.|
+|`char *strncat(s,ct,n)` |	höchstens n Zeichen von ct hinten an die Zeichenkette s anfügen und s mit '\0' abschließen; liefert s.|
+|`int strcmp(cs,ct)` |Zeichenketten cs und ct vergleichen; liefert <0 wenn cs<ct, 0 wenn cs==ct,oder >0, wenn cs>ct.|
+|`char *strchr(cs,c)`	 |liefert Zeiger auf das erste c in cs oder NULL, falls nicht vorhanden.|
+|`char *strrchr(cs,c)` |	liefert Zeiger auf das letzte c in cs, oder NULL, falls nicht vorhanden, |
+|`char *strpbrk(cs,ct)`	| liefert Zeiger auf die Position in cs, an der irgendein Zeichen aus ct erstmals vorkommt, oder NULL, falls keines vorkommt. |
+|`size_t strlen(cs)` |	liefert Länge von cs (ohne '\0'). |
+|`char *strerror(n)` |	liefert Zeiger auf Zeichenkette, die in der Implementierung für Fehler n definiert ist. |
+
+
+
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(void){
+  char text[80];
+  strcpy(text, "Es werden nur zehn Zeichen ");
+  printf("%s\n", text);
+  strncat(text, "angehaengt, der Rest nicht.", 10);
+  printf("%s\n", text);
+  printf("%d\n", strcmp(text, "Es werden "));
+  printf("%s\n", strpbrk(text, "aou"));
+
+  char trennzeichen[] = " ";
+  char *wort;
+  wort = strtok(text, trennzeichen);
+  while(wort != NULL) {
+      printf("%s\n", wort);
+      wort = strtok(NULL, trennzeichen);
+  }
+  return EXIT_SUCCESS;
+}
+```@Rextester.eval
+
+
+## 2. Beispiel der Woche
+
+Berechnen Sie die die Distanz zwischen dem aktuellen Datum und einem beliebigen
+Zeitwert, der mittels Tag, Monat, Jahr definiert wird.
+
+Fallunterscheidung:
+
+* der Vergleichsmonat liegt vor dem aktuellen Monat
+  (Monat_heute = 13. Januar, Monat = 15. Mai)
+  diff_monat = Monat - Monat_heute - 1
+
+* der Vergleichsmonat liegt nach dem aktuellen Monat
+  (Monat_heute = 15. Mai, Monat = 13. Januar)
+  diff_monat = 12 - Monate_heute + Monat - 1
+
+```cpp
+/* time2.c
+http://openbook.rheinwerk-verlag.de/c_von_a_bis_z/019_c_zeitroutinen_001.htm
+ */
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main(void) {
+   int tag, monat, jahr;
+
+   printf("Bitte gib Deinen Geburtstag ein!\n");
+   printf("Tag : ");
+   scanf("%d", &tag);
+   printf("Monat : ");
+   scanf("%d", &monat);
+   printf("Jahr (jjjj) : ");
+   scanf("%d", &jahr);
+   printf("%d.%d.%d\n", tag, monat, jahr);
+
+   struct tm birthday_tm;
+   birthday_tm.tm_mon  = monat -1;
+   birthday_tm.tm_yday  = tag;
+   birthday_tm.tm_year = jahr - 1900;
+   birthday_tm.tm_hour = 0;
+   birthday_tm.tm_min = 0;
+   birthday_tm.tm_sec = 1;
+   birthday_tm.tm_isdst = -1;
+
+   long birthday = mktime(&birthday_tm);
+   time_t tnow = time(&tnow);
+
+   double diff_t = tnow -birthday;
+   printf("%f Sekunden ... hier machen Sie weiter :-)", diff_t);
+   return EXIT_SUCCESS;
+}
+```
+``` bash stdin
+9
+11
+1965
+```
+@Rextester.eval_input
