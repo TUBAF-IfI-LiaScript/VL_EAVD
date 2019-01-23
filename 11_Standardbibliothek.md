@@ -209,13 +209,19 @@ script:   https://cdn.rawgit.com/davidedc/Algebrite/master/dist/algebrite.bundle
 
 **Fragen an die heutige Veranstaltung ...**
 
-*
-
+* Welche Konzepte sind in der Standardbibliothek implementiert, die das Zeit abbilden.
+* Welche Vor- und Nachteile haben diese Formate?
+* Benennen Sie die unterschiedlichen Befehle mit denen der Programmablauf beendet werden kann.
+* Erläutern Sie die Besonderheit beim Umgang mit strings verglichen mit anderen Arrays
+* Nach welchem Algorithmus arbeitet die `qsort` funktion, die Bestandteil der Standardbibliothek ist.
+* Wie setzen Sie das `assert` Makro im Rahmen Ihres Entwicklungsprozesses ein?
+* Welche Aspkekte sind bei der Nutzung von Zufallszahlen auf der Basis der `rand` zu berücksichtigen.
+* Wie mappen Sie die Ausgaben von `rand` auf einen beliebigen Bereich von Werten?
 
 ---------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-https://github.com/liaScript/CCourse/blob/master/10_MakrosKommandozeilenparameter.md
+https://github.com/liaScript/CCourse/blob/master/11_Standardbibliothek.md
 
 ---------------------------------------------------------------------
 
@@ -579,7 +585,7 @@ nur Gleichverteilungen möglich. Andere Konfigurationen lassen sich über eine
 entsprechende Modulo-Operation realisieren
 
 ```cpp
-(rand()/(double) RAND_MAX) % ((y + 1) - x) + x   // x<= out <=y
+rand() % ((y + 1) - x) + x   // x<= out <=y
 ```
 
 ```cpp
@@ -762,16 +768,6 @@ int main(void){
 
 Berechnen Sie die die Distanz zwischen dem aktuellen Datum und einem beliebigen
 Zeitwert, der mittels Tag, Monat, Jahr definiert wird.
-
-Fallunterscheidung:
-
-* der Vergleichsmonat liegt vor dem aktuellen Monat
-  (Monat_heute = 13. Januar, Monat = 15. Mai)
-  diff_monat = Monat - Monat_heute - 1
-
-* der Vergleichsmonat liegt nach dem aktuellen Monat
-  (Monat_heute = 15. Mai, Monat = 13. Januar)
-  diff_monat = 12 - Monate_heute + Monat - 1
 
 ```cpp
 /* time2.c
