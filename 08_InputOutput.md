@@ -123,14 +123,14 @@ $.ajax ({
 
 -->
 
-# Vorlesung VIII - Input Output Operationen
+# Vorlesung VIII - Input- und Output-Operationen
 
 **Fragen an die heutige Veranstaltung ...**
 
-* Welche Bedeutung haben die Standard-Datenströme `stdin` und `stdout`.
-* Was versteht man unter dem wahlfreien Zugriff auf Dateiinhalte.
-* Was sind binäre Dateien, nennen Sie Beispiele.
-* Welche Bedeutung haben die unterschieldlichen Modi, mit denen eine Datei geöffnet werden kann.
+* Welche Bedeutung haben die Standard-Datenströme `stdin` und `stdout`?
+* Was versteht man unter dem wahlfreien Zugriff auf Dateiinhalte?
+* Was sind binäre Dateien, nennen Sie Beispiele?
+* Welche Bedeutung haben die unterschieldlichen Modi, mit denen eine Datei geöffnet werden kann?
 * Was bedeutet EOF?
 * Welchen Datentyp hat FILE? Welche Informationen sind darin codiert?
 

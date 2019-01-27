@@ -205,14 +205,14 @@ script:   https://cdn.rawgit.com/davidedc/Algebrite/master/dist/algebrite.bundle
 @algebrite.eval:    <script> Algebrite.run(`@input`) </script>
 -->
 
-# Vorlesung X - Kommandozeilenparameter und Makros
+# Vorlesung XI - Standardbibliotheken
 
 **Fragen an die heutige Veranstaltung ...**
 
-* Welche Konzepte sind in der Standardbibliothek implementiert, die das Zeit abbilden.
+* Welche Konzepte sind in der Standardbibliothek implementiert, die die Zeit abbilden?
 * Welche Vor- und Nachteile haben diese Formate?
 * Benennen Sie die unterschiedlichen Befehle mit denen der Programmablauf beendet werden kann.
-* Erläutern Sie die Besonderheit beim Umgang mit strings verglichen mit anderen Arrays
+* Erläutern Sie die Besonderheit beim Umgang mit `strings` verglichen mit anderen Arrays.
 * Nach welchem Algorithmus arbeitet die `qsort` funktion, die Bestandteil der Standardbibliothek ist.
 * Wie setzen Sie das `assert` Makro im Rahmen Ihres Entwicklungsprozesses ein?
 * Welche Aspkekte sind bei der Nutzung von Zufallszahlen auf der Basis der `rand` zu berücksichtigen.
