@@ -7,6 +7,10 @@ language: de
 narrator: Deutsch Female
 
 
+script: https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js
+
+link:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css
+
 script:  https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts-en.min.js
 
 script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
@@ -423,7 +427,8 @@ int main(void){
   printf("\nArray \n%d %d", max, count);
   return(EXIT_SUCCESS);
 }
-```@Rextester.eval_params(-Wall -std=gnu11 -o a.out source_file.c -lm)
+```
+@Rextester.eval_params(-Wall -std=gnu11 -o a.out source_file.c -lm)
 
 
 ## 3. Sortieren
@@ -492,7 +497,8 @@ int main(void){
 
   return(EXIT_SUCCESS);
 }
-```@Rextester.eval
+```
+@Rextester.eval
 
 * Das Ursprungsarray wird beim Sortiervorgang zerstört, am Ende umfasst es ausschließlich -1-Einträge
 * Die Ausführungsdauer wird durch `SAMPLES` x `SAMPLES` Vergleichsoperationen bestimmt.
@@ -502,9 +508,11 @@ Welche Konsequenz hat dieses Verhalten?
 <div class="ct-chart ct-golden-section" id="chart">
 </div>
 
+
 <script>
-  let chart = new Chartist.Line('#chart', {
-    labels: [1, 2, 3, 4],
-    series: [[100, 120, 180, 200]]
-  });
+  $.getScript("https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js", function(){
+    let chart = new Chartist.Line('#chart', {
+      labels: [1, 2, 3, 4],
+      series: [[100, 120, 180, 200]]
+  })});
 </script>
