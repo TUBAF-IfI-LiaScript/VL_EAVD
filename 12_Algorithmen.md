@@ -258,10 +258,67 @@ https://en.cppreference.com/w/c/header
 
 ## 0. Hinweise zur Klausur
 
+Typen von Aufgaben:
 
-## 1. max($n_0$, $n_1$, $n_2$)
++ Schreiben Sie eine C-Funktion, die ...
 
-Bestimmen Sie aus drei Zahlenwerten den größten und geben Sie diesen aus.
+  + die Inhalte eines Arrays formatiert ausgibt
+  + Den Mittelwert über einem Array bestimmt.
+  + Adressdaten in einem Array aus `struct` ausliest und filtert.
+  + Daten einem Muster entsprechend in eine Datei schreibt.
+
+
++ Interpretieren Sie den in Listing 1 enthaltenen Code. Wie oft wird die Schleife
+  aus Zeile X durchlaufen, welchen Wert hat die Variable am Ende der Ausführung?
+  Auf welche Variable zeigt der Zeiger X?
+
++ Multiple Choice :
+
+  + Der Divisionsoperator '/' hat für unterschiedliche Datentypen eine andere Funktion
+  + Präprozessordirektiven beschreiben die Anpassung der Codes vor der Komplierung
+  + Algorithmen sind programmiersprachenunabhänigige Vorgehensbeschreibungen zu Lösung eines Problems
+  + ...
+
+
++ Bringen Sie folgende Elemente der Erzeugung eines ausführbaren Programmes aus einem C Code in die richtige Reihenfolge: Compilierung, Präprozessorlauf, Assemblierung, Linken
+
+
+## 1. Algorithmusbegriff
+
+Ein Algorithmus gibt eine strukturierte Vorgehensweise vor, um ein Problem zu lösen. Er implmentiert Einzelschritte zur Abbildung von Eingabedaten auf Ausgabedaten.
+Algorithmen bilden die Grundlage der Programmierung und sind **unabhängig** von einer konkreten Programmiersprache. Algorithmen werden nicht nur maschinell durch einen Rechner ausgeführt sondern können auch von Menschen in „natürlicher“ Sprache formuliert und abgearbeitet werden.
+
+ 1. Beispiel - Nassi-Shneiderman-Diagramm - Prüfung von Mineralen
+
+![Smaragdtest](./img/Struckto_smaragd.jpg)<!-- width="60%" -->[^1]
+
+[^1]: Anton Kubala, https://wiki.zum.de/wiki/Hauptseite
+
+ 2. Beispiel - Funktionsdarstellung - Berechnung der Position
+
+$$ s(t) = \int_{0}^{t} v(t) dt + s_0 $$
+
+ 3. Beispiel - Verbale Darstellung - Rezept
+
+*"Nehmen Sie ... Schneiden Sie ... Lassen Sie alles gut abkühlen ..."*
+
+Algorithmen umfassen Sequenzen (Kompositionen), Wiederholungen (Iterationen) und Verzweigungen (Selektionen) von Handlungsanweisungen.
+und besitzen die folgenden charakteristischen Eigenschaften:
+
++ Eindeutigkeit: ein Algorithmus darf keine widersprüchliche Beschreibung haben. Diese muss eindeutig sein.
++ Ausführbarkeit: jeder Einzelschritt muss ausführbar sein.
++ Finitheit (= Endlichkeit): die Beschreibung des Algorithmus ist von endlicher Länge (statische Finitheit) und belegt zu jedem Zeitpunkt nur eine endliche Menge von Ressourcen (dynamische Finitheit).
++ Terminierung: nach endlich vielen Schritten muss der Algorithmus enden und ein Ergebnis liefern.
++ Determiniertheit: der Algorithmus muss bei gleichen Voraussetzungen stets das gleiche Ergebnis liefern.
++ Determinismus: zu jedem Zeitpunkt der Ausführung besteht höchstens eine Möglichkeit der Fortsetzung. Der Folgeschritt ist also eindeutig bestimmt.
+
+Der erste für einen Computer gedachte Algorithmus (zur Berechnung von Bernoullizahlen) wurde 1843 von Ada Lovelace in ihren Notizen zu Charles Babbages Analytical Engine festgehalten. Sie gilt deshalb als die erste Programmiererin. Weil Charles Babbage seine Analytical Engine nicht vollenden konnte, wurde Ada Lovelaces Algorithmus allerdings nie darauf implementiert.
+
+## 2. Beispiele
+
+### 1.Suche des Maximums
+
+Bestimmen Sie aus drei Zahlenwerten den größten und geben Sie diesen aus $max(n_0, n_1, n_2)$.
 
 ```cpp
 #include <stdio.h>
@@ -287,7 +344,7 @@ int main(void) {
 }
 ```
 ``` bash stdin
-11 5 A
+11 5 23
 ```
 @Rextester.eval_input
 
@@ -303,7 +360,7 @@ Welche Verbesserungsmöglichkeit sehen Sie für diesen Lösungsansatz?
 Eine Lösung, die die genannten Kritikpunkte adressiert könnte wie folgt
 entworfen werden:
 
-```cpp
+```cpp                       Compare3Values.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -329,7 +386,7 @@ int main(void) {
 }
 ```
 ``` bash stdin
-11 5 24
+11 5 A
 ```
 @Rextester.eval_input
 
@@ -362,12 +419,8 @@ int main(void) {
 ```
 @Rextester.eval_input
 
-
-
-## 2. max($n_0, ... n_k$)
-
 Darfs auch etwas mehr sein? Wie lösen wir die gleiche Aufgabe für größere Mengen
-von Zahlenwerten? Entwerfen Sie dazu folgende Funktionen:
+von Zahlenwerten $max(n_0, ... n_k)$ ? Entwerfen Sie dazu folgende Funktionen:
 
 + `int * generateRandomArray(int n_samples)`
 + `int countMaxValue(int *ptr, int n_samples)`
@@ -375,7 +428,7 @@ von Zahlenwerten? Entwerfen Sie dazu folgende Funktionen:
 die zunächst gleichverteilte Werte zwischen `MAXVALUE` und `MINVALUE` befüllt
 und dann die Häufigkeit des größten Wertes ermittelt.
 
-```cpp                     mathOperations.c
+```cpp                     FindMaxInArray.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -386,24 +439,13 @@ und dann die Häufigkeit des größten Wertes ermittelt.
 
 int * generateRandomArray(int n_samples){
   int * ptr;
-  ptr = calloc(n_samples, sizeof(*ptr));
-  for (int i = 0; i< n_samples; i++){
-      ptr[i] = rand() % (MAXVALUE - MINVALUE + 1) + MINVALUE;
-  }
+  //TODO
   return ptr;
 }
 
-int maxValue(int *ptr, int n_samples, volatile int *count){
+int maxValue(int *ptr, int n_samples, int *count){
   int max = 0;
-  for (int i = 0; i< n_samples; i++){
-      if (ptr[i] > max) {
-        max = ptr[i];
-        *count = 0;
-      }
-      if (ptr[i] == max) {
-        (*count)++;
-      }
-  }
+  //TODO
   return max;
 }
 
@@ -420,20 +462,49 @@ void printArray(int *ptr, int n_samples, int maxValue){
 int main(void){
   int * samples;
   samples = generateRandomArray(SAMPLES);
-  volatile int count = 0;
-  printf("\n--> %d %d <--\n", maxValue(samples, SAMPLES, &count), count);
-  int max = maxValue(samples, SAMPLES, &count);
+  int max = maxValue(samples, SAMPLES);
+  //int count = 0;
+  //int max = maxValue(samples, SAMPLES, &count);
   printArray(samples, SAMPLES, max);
-  printf("\nArray \n%d %d", max, count);
+  //printf("\nIm Array wurde %d %d-mal gefunden", max, count);
   return(EXIT_SUCCESS);
 }
 ```
 @Rextester.eval_params(-Wall -std=gnu11 -o a.out source_file.c -lm)
 
+Aufgabenteil 2: Erweitern Sie die Funktionalität von `maxValue()` um die Rückgabe
+der Häufigkeit des Auftretens des maximalen Wertes.
 
-## 3. Sortieren
+Mögliche Lösungen könnten wie folgt implmentiert werden:
 
-Lassen Sie uns die Idee der Max-Funktion nutzen um das Array insgesammt zu
+```cpp
+int * generateRandomArray(int n_samples){
+  int * ptr;
+  ptr = calloc(n_samples, sizeof(*ptr));
+  for (int i = 0; i< n_samples; i++){
+      ptr[i] = rand() % (MAXVALUE - MINVALUE + 1) + MINVALUE;
+  }
+  return ptr;
+}
+
+int maxValue(int *ptr, int n_samples, int *count){
+  int max = 0;
+  for (int i = 0; i< n_samples; i++){
+      if (ptr[i] > max) {
+        max = ptr[i];
+        *count = 0;
+      }
+      if (ptr[i] == max) {
+        (*count)++;
+      }
+  }
+  return max;
+}
+```
+
+### 3. Sortieren
+
+Lassen Sie uns die Idee der Max-Funktion nutzen, um das Array insgesammt zu
 sortieren. Dazu wird in einer Schleife (Zeile 42) der maximale Wert bestimmt,
 wobei dessen Eintrag aus dem bestehenden Array mit einer -1 überschrieben
 wird.
@@ -492,8 +563,7 @@ int main(void){
   clock_t end = clock();
   double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 
-  printf("Der Rechner braucht dafür %f Sekunden \n", cpu_time_used);
-  printf("%d ", max );
+  printf("Der Rechner benötigt für %d Samples %f Sekunden \n", SAMPLES,cpu_time_used);
 
   return(EXIT_SUCCESS);
 }
@@ -508,11 +578,221 @@ Welche Konsequenz hat dieses Verhalten?
 <div class="ct-chart ct-golden-section" id="chart">
 </div>
 
-
 <script>
   $.getScript("https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js", function(){
     let chart = new Chartist.Line('#chart', {
-      labels: [1, 2, 3, 4],
-      series: [[100, 120, 180, 200]]
+      labels: [500, 5000, 50000],
+      series: [[0.0003, 0.03, 2.5]]
   })});
 </script>
+
+Die Informatik kennt eine Vielzahl von Sortierverfahren, die unterschiedliche
+Eigenschaften aufweisen. Ein sehr einfacher Ansatz ist BubbleSort, der
+namensgebend die größten oder kleinsten Zahlen Gasblasen gleich aufsteigen lässt.
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAXVALUE 100
+#define MINVALUE 5
+#define SAMPLES 20
+
+int * generateRandomArray(int n_samples){
+  int * ptr;
+  ptr = calloc(n_samples, sizeof(*ptr));
+  for (int i = 0; i< n_samples; i++){
+      ptr[i] = rand() % (MAXVALUE - MINVALUE + 1) + MINVALUE;
+  }
+  return ptr;
+}
+
+void bubble(int *array, int n_samples) {
+  int temp;
+  while(n_samples--){
+    for(int i = 1; i <= n_samples; i++){
+     if(array[i-1] > array[i]) {
+      temp=array[i];
+      array[i]=array[i-1];
+      array[i-1]=temp;
+     }
+    }
+  }
+}
+
+void printArray(int *ptr, int n_samples){
+  for (int i = 0; i< n_samples; i++){
+    printf("%d ", ptr[i]);
+  }
+  printf("\n");
+}
+
+int main(void) {
+  int * samples;
+  int max = 0;
+  samples = generateRandomArray(SAMPLES);
+
+  bubble(samples, SAMPLES);
+  printArray(samples, SAMPLES);
+
+   return(EXIT_SUCCESS);
+}
+```@Rextester.eval
+
+Worin unterscheidet sich dieser Ansatz von dem vorhergehenden?
+
+
+
+
+### 4. Suchen
+
+Suchen beschreibt die Identifikation von bestimmten Mustern in Daten. Das Spektrum kann dabei von einzelne Zahlenwerten oder Buchstaben bis hin zu komplexen zusammengesetzten Datentypen reichen.
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+int values[] = { 88, 56, 100, 2, 25 };
+
+int cmpfunc (const void * a, const void * b) {
+   return ( *(int*)a - *(int*)b );
+}
+
+int main (void) {
+   int n;
+   printf("Before sorting the list is: \n");
+   for( n = 0 ; n < 5; n++ ) {
+      printf("%d ", values[n]);
+   }
+
+   qsort(values, 5, sizeof(int), cmpfunc);
+
+   printf("\nAfter sorting the list is: \n");
+   for( n = 0 ; n < 5; n++ ) {
+      printf("%d ", values[n]);
+   }
+
+   return(EXIT_SUCCESS);
+}
+```@Rextester.eval
+
+
+
+## 3. Beispiel der Woche
+
+Schätzen Sie die Größe der Kreiszahl $\pi$ mittels Monte-Carlo-Simulation ab.
+Nutzen Sie dafür den Ansatz, dass bei der projektion von $n$ gleichverteilten
+Paaren $(x,y)$ $\pi$ über den Anteil zwischen denjenigen Paaren innerhalb eines
+Quadranten unter dem Einheitskreis und denjenigen außerhalb bestimmt werden
+kann.
+
+Die Fläche des Quadrates ist $4$, der Flächenanteil des Kreises beträgt $1^2\cdot\pi$. Somit gilt
+
+$$\pi \approx \frac{count_{in}}{count_{out}}\cdot 4$$
+
+
+```cpp                          Integral.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+
+double bestimmePI(unsigned int samples){
+  // ToDo
+  return (double)rand()/RAND_MAX;;
+}
+
+int main(void) {
+  struct samples * values;
+  double from = 1;
+  double to = 10;
+  for (int number=5; number<150; number=number+5){
+    printf("n = %3d - Ergebnis = %f, %f\n", number,
+                                       M_PI,
+                                       bestimmePI(number));
+  }
+  return EXIT_SUCCESS;
+}
+```
+``` javascript -Analyse.js
+let samples = data.Result.match(/[0-9.]+/g);
+
+let label;
+let series_1 = [];
+let series_2 = [];
+
+for(let i=0; i<samples.length; i++) {
+  //samples[i] = parseFloat(samples[i]);
+  let value = parseFloat(samples[i]);
+  switch (i % 3)
+  {
+    case 0:  label = value; break;
+    case 1:  series_1.push([label, value]); break;
+    case 2:  series_2.push([label, value]);
+  }
+}
+
+let chart = echarts.init(document.getElementById('pipe_chart'));
+
+let option = {
+  title : {
+    text: 'Abschätzung von pi',
+    subtext: 'Einfluss der SampleZahl n'
+  },
+  toolbox: {
+    show : true,
+    feature : {
+      mark : {show: true},
+      dataZoom : {show: true},
+      dataView : {show: true, readOnly: false},
+      restore : {show: true},
+      saveAsImage : {show: true}
+    }
+  },
+  legend: {
+      data:['MC-Simulation','Pi']
+  },
+  xAxis : [{
+    type : 'value',
+    scale: true,
+    axisLabel : { formatter: '{value}' }
+  }],
+  yAxis : [{
+    type : 'value',
+    scale: true,
+    axisLabel : { formatter: '{value}'}
+  }],
+  series : [{
+    name: 'MC-Simulatio',
+    type: 'line',
+    data: series_1,
+  }, {
+    name: 'Pi',
+    type: 'line',
+    data: series_2,
+  }]
+};
+
+
+chart.setOption(option);
+```
+@Rextester.pipe
+
+<div class="persistent" id="pipe_chart" style="position: relative; width:100%; height:400px;"></div>
+
+Eine mögliche Lösung könnte sich wie folgt darstellen:
+
+```cpp
+double bestimmePI(unsigned int samples){
+  double x, y, z;
+  int count = 0;
+  srand(time(NULL));
+  count=0;
+  for (int i=0; i<samples; i++) {
+     x = (double)rand()/RAND_MAX;
+     y = (double)rand()/RAND_MAX;
+     z = x*x+y*y;
+     if (z<=1) count++;
+     }
+  return (double)count/samples*4;
+}
