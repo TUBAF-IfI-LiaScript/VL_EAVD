@@ -219,6 +219,7 @@ script:   https://cdn.rawgit.com/davidedc/Algebrite/master/dist/algebrite.bundle
 * Wie erfolgt die Transformation des Algorithmus auf eine Programmiersprache?
 * Was bedeutet der Begriff der Komplexität eines Algorithmus?
 * Welchem fundamentalen Konzept der Informatik unterliegen der Quicksort Algorithmus und die binäre Suche?
+* Ich habe eine gute Idee
 
 ---------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
