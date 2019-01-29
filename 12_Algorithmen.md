@@ -502,7 +502,7 @@ int maxValue(int *ptr, int n_samples, int *count){
 }
 ```
 
-### 3. Sortieren
+### 2. Sortieren
 
 Lassen Sie uns die Idee der Max-Funktion nutzen, um das Array insgesammt zu
 sortieren. Dazu wird in einer Schleife (Zeile 42) der maximale Wert bestimmt,
@@ -586,11 +586,17 @@ Welche Konsequenz hat dieses Verhalten?
   })});
 </script>
 
+**BubbleSort**
+
 Die Informatik kennt eine Vielzahl von Sortierverfahren, die unterschiedliche
 Eigenschaften aufweisen. Ein sehr einfacher Ansatz ist BubbleSort, der
 namensgebend die größten oder kleinsten Zahlen Gasblasen gleich aufsteigen lässt.
 
-```cpp
+![BubbleSort](./img/330px-Bubblesort_Animation.gif)<!-- width="60%" -->[^1]
+
+[^1]: Stummvoll, https://de.wikipedia.org/wiki/Bubblesort#/media/File:Bubblesort_Animation.gif
+
+```cpp  BubbleSort.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -601,6 +607,7 @@ namensgebend die größten oder kleinsten Zahlen Gasblasen gleich aufsteigen lä
 int * generateRandomArray(int n_samples){
   int * ptr;
   ptr = calloc(n_samples, sizeof(*ptr));
+  srand(time(NULL));
   for (int i = 0; i< n_samples; i++){
       ptr[i] = rand() % (MAXVALUE - MINVALUE + 1) + MINVALUE;
   }
@@ -635,48 +642,225 @@ int main(void) {
   bubble(samples, SAMPLES);
   printArray(samples, SAMPLES);
 
-   return(EXIT_SUCCESS);
+  return(EXIT_SUCCESS);
 }
 ```@Rextester.eval
 
 Worin unterscheidet sich dieser Ansatz von dem vorhergehenden?
 
+Um das erste (und größte) Element $n$ ganz nach rechts zu bewegen, werden n − 1
+Vertauschungen vorgenommen, für das nächstfolgende n-2 usw. Für die Gesamtanzahl
+muss also die Summe über k von 1 bis n-1 gebildet werden. Mit der Summenformel
+von Gauss kann gezeigt werden, dass im Falle der umgekehrt sortierten Liste werden maximal $\frac{n\cdot (n-1)}{2}$ Vertauschungen zuführen sind.
 
+Welches Optimierungspotential sehen Sie?
 
+In den Code sollte ein Abbruchkriterium integriert werden, wenn während eines
+Durchlaufes keine Änderungen vollzogen werden. Im günstigsten Fall lässt sich
+damit das Verfahren nach einem Durchlauf beenden.
 
-### 4. Suchen
+**Quicksort**
+
+Quicksort ist ein rekursiver Sortieralgorithmus, der die zu sortierende Liste in zwei Teillisten unterteilt und alle Elemente, die kleiner sind als das Pivot-Element, in die linke Teilliste, alle anderen in die rechte Teilliste einsortiert.
+
+Die Buchstabenfolge „einbeispiel“ soll alphabetisch sortiert werden.
+
+Ausgangssituation nach Initialisierung von i und j, das Element rechts (l) ist das Pivotelement:
+
+```
+  e i n b e i s p i e l
+  ^                 ^
+  i                 j
+```
+
+Nach der ersten Suche in den inneren Schleifen hat i auf einem Element >= l und j auf einem Element <= l gehalten:
+
+```
+  e i n b e i s p i e l
+      ^             ^
+      i             j
+```
+
+Nach dem Tauschen der Elemente bei i und j:
+
+```
+  e i e b e i s p i n l
+      ^             ^
+      i             j
+```
+
+Nach der nächsten Suche und Tauschen:
+
+```
+  e i e b e i i p s n l
+              ^   ^
+              i   j
+```
+
+Nach einer weiteren Suche sind die Indizes aneinander vorbeigelaufen:
+
+```
+  e i e b e i i p s n l
+              ^ ^
+              j i
+```
+
+Nach dem Tauschen von i und Pivot bezeichnet i die Trennstelle der Teillisten. Bei i steht das Pivot-Element, links davon sind nur Elemente ≤ Pivot und rechts nur solche > Pivot:
+
+```
+  e i e b e i i l s n p
+                ^
+                i
+```
+Darauf aufbauend wird der Algorithmus nun auf die beiden Teile "eiebeii" und "snp" angewand.
+
+```cpp  QuickSort.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define MAXVALUE 100
+#define MINVALUE 5
+#define SAMPLES 20
+
+int * generateRandomArray(int n_samples){
+  int * ptr;
+  ptr = calloc(n_samples, sizeof(*ptr));
+  srand(time(NULL));
+  for (int i = 0; i< n_samples; i++){
+      ptr[i] = rand() % (MAXVALUE - MINVALUE + 1) + MINVALUE;
+  }
+  return ptr;
+}
+
+void quicksort(int *ptr, int first, int last){
+   int i, j, pivot, temp;
+
+   if(first<last){
+      pivot=first;
+      i=first;
+      j=last;
+
+      while(i<j){
+         while(ptr[i]<=ptr[pivot]&&i<last)
+            i++;
+         while(ptr[j]>ptr[pivot])
+            j--;
+         if(i<j){
+            temp=ptr[i];
+            ptr[i]=ptr[j];
+            ptr[j]=temp;
+         }
+      }
+      temp=ptr[pivot];
+      ptr[pivot]=ptr[j];
+      ptr[j]=temp;
+      quicksort(ptr,first,j-1);
+      quicksort(ptr,j+1,last);
+   }
+}
+
+void printArray(int *ptr, int n_samples){
+  for (int i = 0; i< n_samples; i++){
+    printf("%d ", ptr[i]);
+  }
+  printf("\n");
+}
+
+int main(void) {
+  int * samples;
+  samples = generateRandomArray(SAMPLES);
+  quicksort(samples, 0, SAMPLES);
+  printArray(samples, SAMPLES);
+  return(EXIT_SUCCESS);
+}
+```@Rextester.eval
+
+Obwohl Quicksort im schlechtesten Fall quadratische Laufzeit hat, ist er in der Praxis einer der schnellsten Sortieralgorithmen
+Die C-Standardbibliothek umfassst in der `stdlib.h` eine Implementierung von quicksort - `qsort()` an. Sie wurde in der vorangegangenen Vorlesung besprochen. Ein Anwendungsbeispiel finden Sie
+im nachfolgenden Abschnitt.
+
+### 3. Suchen
 
 Suchen beschreibt die Identifikation von bestimmten Mustern in Daten. Das Spektrum kann dabei von einzelne Zahlenwerten oder Buchstaben bis hin zu komplexen zusammengesetzten Datentypen reichen.
+
+Wie würden Sie vorgehen, um in einer sortierten List einen bestimmten Eintrag zu
+finden?
 
 ```cpp
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
-int values[] = { 88, 56, 100, 2, 25 };
+#define MAXVALUE 100
+#define MINVALUE 5
+#define SAMPLES 20
+
+int * generateRandomArray(int n_samples){
+  int * ptr;
+  ptr = calloc(n_samples, sizeof(*ptr));
+  for (int i = 0; i< n_samples; i++){
+      ptr[i] = rand() % (MAXVALUE - MINVALUE + 1) + MINVALUE;
+  }
+  return ptr;
+}
 
 int cmpfunc (const void * a, const void * b) {
    return ( *(int*)a - *(int*)b );
 }
 
+void printArray(int *ptr, int n_samples){
+  for (int i = 0; i< n_samples; i++){
+    printf("%d ", ptr[i]);
+  }
+  printf("\n");
+}
+
+int binsearch (int *ptr, int links, int rechts, int wert) {
+    if (links > rechts) {
+        return -1;
+    }
+    int mitte = (rechts+links)/2;
+    if (ptr[mitte] == wert) {
+        return mitte;
+    }
+    if (wert < ptr[mitte]) {
+        return binsearch(ptr, links, mitte - 1, wert);
+    } else {
+        return binsearch(ptr, mitte + 1, rechts, wert);
+    }
+}
+
 int main (void) {
-   int n;
-   printf("Before sorting the list is: \n");
-   for( n = 0 ; n < 5; n++ ) {
-      printf("%d ", values[n]);
+   int * samples;
+   samples = generateRandomArray(SAMPLES);
+   qsort(samples, SAMPLES, sizeof(int), cmpfunc);
+   printArray(samples, SAMPLES);
+   int pattern = 36;
+   int index = binsearch (samples, 0, SAMPLES-1, pattern);
+   if (-1==index){
+     printf("Nicht gefunden!");
+   }else{
+     printf("Index von %d ist %d",pattern, index);
    }
-
-   qsort(values, 5, sizeof(int), cmpfunc);
-
-   printf("\nAfter sorting the list is: \n");
-   for( n = 0 ; n < 5; n++ ) {
-      printf("%d ", values[n]);
-   }
-
    return(EXIT_SUCCESS);
 }
 ```@Rextester.eval
 
+Die Suchtiefe kann mit $\lceil \log_2 (n+1) \rceil$ bestimmt werden.
 
+Die binäre Suche ist in der `stdlib.h` als Funktion implementiert. Die Deklaration
+erfasst folgende Parameter:
+
+```cpp
+void *bsearch(const void *key,
+              const void *base,
+              size_t nitems,
+              size_t size,
+              int (*compar)(const void *, const void *))
+```
+Analog zu `qsort()` wird ein Funktionspointer *compar() der den Vergleich des
+`key` mit den Einträgen in `base` realisiert.
 
 ## 3. Beispiel der Woche
 
@@ -690,7 +874,6 @@ Die Fläche des Quadrates ist $4$, der Flächenanteil des Kreises beträgt $1^2\
 
 $$\pi \approx \frac{count_{in}}{count_{out}}\cdot 4$$
 
-
 ```cpp                          Integral.c
 #include <stdio.h>
 #include <stdlib.h>
@@ -703,9 +886,6 @@ double bestimmePI(unsigned int samples){
 }
 
 int main(void) {
-  struct samples * values;
-  double from = 1;
-  double to = 10;
   for (int number=5; number<150; number=number+5){
     printf("n = %3d - Ergebnis = %f, %f\n", number,
                                        M_PI,
@@ -796,3 +976,4 @@ double bestimmePI(unsigned int samples){
      }
   return (double)count/samples*4;
 }
+```
