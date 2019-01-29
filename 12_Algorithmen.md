@@ -214,7 +214,11 @@ script:   https://cdn.rawgit.com/davidedc/Algebrite/master/dist/algebrite.bundle
 
 **Fragen an die heutige Veranstaltung ...**
 
-*
+* Was ist ein Algorithmus und über welche Merkmale lässt er sich ausdrücken.
+* Nennen Sie Beispiele für Algorithmen aus dem täglichen Leben.
+* Wie erfolgt die Transformation des Algorithmus auf eine Programmiersprache?
+* Was bedeutet der Begriff der Komplexität eines Algorithmus?
+* Welchem fundamentalen Konzept der Informatik unterliegen der Quicksort Algorithmus und die binäre Suche?
 
 ---------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
@@ -282,6 +286,8 @@ Typen von Aufgaben:
 
 + Bringen Sie folgende Elemente der Erzeugung eines ausführbaren Programmes aus einem C Code in die richtige Reihenfolge: Compilierung, Präprozessorlauf, Assemblierung, Linken
 
+Sie dürfen in der Prüfung alle schriftlichen Unterlagen benutzen. Elektronische Geräte sind nicht
+erlaubt.
 
 ## 1. Algorithmusbegriff
 
