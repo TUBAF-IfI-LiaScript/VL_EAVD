@@ -277,7 +277,17 @@ Eventgesteuerte Programmabarbeitung
 
 ## 2. C und C++, dass klingt doch sehr ähnlich
 
-**Einleitung**
+```cpp    HelloWorld.cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    cout << "Hello, World!";
+    return 0;
+}
+```
+Was ist jetzt das besondere? Im Beispiel ändert sich lediglich die API der Ausgaben und die _includes_ haben kein ".h" mehr?
 
 Analog zu C ist C++ eine von der ISO genormte Programmiersprache. Sie wurde ab 1979 von Bjarne Stroustrup  bei AT&T als Erweiterung der Programmiersprache C entwickelt.
 C++ erweitert die Abstraktionsmöglichkeiten erlaubt aber trotzdem eine
@@ -299,17 +309,6 @@ Oft geäußerte Kritik an der Sprache umfasst beispielsweise:
 + Geschwindigkeitsvorteil als fehlendes Argument für Anwendungsentwickler
 
 > “In C++ it’s harder to shoot yourself in the foot, but when you do, you blow off your whole leg.” \[Bjarne Stroustrup\]
-
-```cpp
-#include <iostream>
-using namespace std;
-
-int main()
-{
-    cout << "Hello, World!";
-    return 0;
-}
-```
 
 ### Objektorientierte Programmierung
 
@@ -358,7 +357,7 @@ wird zur Compilezeit durch die Typen der Parametervariablen getroffen.
 ### Elemente Objektorientierter Programmierung im Beispiel
 
 Klassen erweitern das Konzept der `structs` und verschmelzen Daten und Methoden
-in einem "Objekt".
+in einem "Objekt" und deklarieren den individuellen Zugriff.
 
 ```cpp
 class class_name {
@@ -367,23 +366,28 @@ class class_name {
   access_specifier_2:
     member2;
   ...
-};
+}object_name;
 
 class_name instance_name;
 ```
+Wenn `class_name`  ein gültiger Bezeichner für die Klasse ist, ist `object_name` eine optionale Liste von Namen für Objekte dieser Klasse. Der Hauptteil der Deklaration kann _member_ enthalten, die entweder Daten- oder Funktionsdeklarationen sein können und jeweils einem Zugriffsbezeichner `access_spefier`.
 
-Der `class_name` beschreibt dabei den Typ, `access_specifier_1` die Zugriffsregel
-oder Schutz
+Ein Zugriffsbezeichner ist eines der folgenden drei Schlüsselwörter: `private`, `public` oder `protected`. Diese Bezeichner ändern die Zugriffsrechte für die *member*, die ihnen nachfolgen:
+
++ `private` *member* einer Klasse sind nur von anderen *members* derselben Klasse (oder von ihren "Freunden") aus zugänglich.
++ `protected`  *member*  sind von anderen  *member*  derselben Klasse (oder von ihren "Freunden") aus zugänglich, aber auch von Mitgliedern ihrer abgeleiteten Klassen.
++ `public` *member*  sind öffentliche  *member*  von überall her zugänglich, wo das Objekt sichtbar ist.
 
 ```cpp
 #include <iostream>
 using namespace std;
 
 class Rectangle {
+  private:     // nicht nötig, default Konfiguration
     int width, height;
   public:
-    void set_values (int,int);
-    int area() {return width*height;}
+    void set_values (int,int);          // Deklaration
+    int area() {return width*height;}   // Deklaration und Defintion
 };
 
 void Rectangle::set_values (int x, int y) {
@@ -399,6 +403,22 @@ int main () {
 }
 ```
 @Rextester.eval
+
+Folgender Code zeigt eine beispielhafte Implementierung einer Klasse "Rectangle".
+Die einzigen  *member* von rect, auf die von außerhalb der Klasse nicht zugegriffen werden kann, sind _width_ und _height_, da sie über einen privaten Zugriff verfügen und nur von anderen Mitgliedern derselben Klasse aus referenziert werden können.
+
+In diesem Beispiel wird der Bereichsoperator (`::` zwei Doppelpunkte) eingeführt. Hier wird es bei der Definition der Funktion _set_values_ ​​verwendet, um ein Member einer Klasse außerhalb der Klasse selbst zu definieren.
+
+Die wichtigste Eigenschaft einer Klasse ist, dass es sich um einen Typ handelt. Daher können wir mehrere Objekte davon deklarieren. Nach dem vorherigen Beispiel der Klasse Rectangle hätten wir beispielsweise das Objekt rect_b zusätzlich zum Objekt rect_b deklarieren können:
+
+Lassen Sie uns einige Experimente machen:
+
++ Versuchen Sie in der Meh
+
+
+
+
+
 
 ## 3. Anwendung auf der Mikrocontrolerebene
 
