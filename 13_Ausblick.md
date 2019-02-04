@@ -357,7 +357,7 @@ wird zur Compilezeit durch die Typen der Parametervariablen getroffen.
 ### Elemente Objektorientierter Programmierung im Beispiel
 
 Klassen erweitern das Konzept der `structs` und verschmelzen Daten und Methoden
-in einem "Objekt" und deklarieren den individuellen Zugriff.
+in einem "Objekt" und deklarieren den individuellen Zugriff. Die wichtigste Eigenschaft einer Klasse ist, dass es sich um einen Typ handelt!
 
 ```cpp
 class class_name {
@@ -377,6 +377,8 @@ Ein Zugriffsbezeichner ist eines der folgenden drei Schlüsselwörter: `private`
 + `private` *member* einer Klasse sind nur von anderen *members* derselben Klasse (oder von ihren "Freunden") aus zugänglich.
 + `protected`  *member*  sind von anderen  *member*  derselben Klasse (oder von ihren "Freunden") aus zugänglich, aber auch von Mitgliedern ihrer abgeleiteten Klassen.
 + `public` *member*  sind öffentliche  *member*  von überall her zugänglich, wo das Objekt sichtbar ist.
+
+**Einführungsbeispiel**
 
 ```cpp
 #include <iostream>
@@ -409,12 +411,57 @@ Die einzigen  *member* von rect, auf die von außerhalb der Klasse nicht zugegri
 
 In diesem Beispiel wird der Bereichsoperator (`::` zwei Doppelpunkte) eingeführt. Hier wird es bei der Definition der Funktion _set_values_ ​​verwendet, um ein Member einer Klasse außerhalb der Klasse selbst zu definieren.
 
-Die wichtigste Eigenschaft einer Klasse ist, dass es sich um einen Typ handelt. Daher können wir mehrere Objekte davon deklarieren. Nach dem vorherigen Beispiel der Klasse Rectangle hätten wir beispielsweise das Objekt rect_b zusätzlich zum Objekt rect_b deklarieren können:
-
 Lassen Sie uns einige Experimente machen:
 
-+ Versuchen Sie in der Meh
++ Legen Sie eine weitere Instanz der Klasse `Rectangle` an!
++ Versuchen Sie aus der `main()` Funktion heraus auf die `private` Variablen width oder height zuzugreifen.
++ Implementieren Sie eine weitere Funktion, die feststellt, ob es sich um ein Quadrat handelt.
++ Was passiert, wenn Sie die Flächenberechnung aufrufen, bevor Sie width and height initialisiert haben?
 
+**Konstruktoren**
+
+Das Verhalten ist unbestimmt! Wir müssen also dafür sorgen, dass vor der Verwendung
+einer Klasseninstanz alle notwendigen Membervariablen ein Wert zugewiesen wurde.
+Diese Aufgabe übernehmen sogenannte Konstruktoren.
+
+```cpp
+class_name::class_name(parameter){
+    // initalisiert die Variablen
+}
+```
+Diese Konstruktorfunktion wird wie eine reguläre Memberfunktion deklariert,
+jedoch mit einem Namen, der mit dem Klassennamen übereinstimmt. Die Parameterliste
+wird bei der Deklaration einer Instanz übergeben. Es gibt keinen
+Rückgabewert!
+
+Ändern Sie das nachfolgende Beispiel ab, so dass wir statt `set_values` einen
+Konstruktor benutzen.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Rectangle {
+  private:     // nicht nötig, default Konfiguration
+    int width, height;
+  public:
+    void set_values (int,int);          // Deklaration
+    int area() {return width*height;}   // Deklaration und Defintion
+};
+
+void Rectangle::set_values (int x, int y) {
+  width = x;
+  height = y;
+}
+
+int main () {
+  Rectangle rect;
+  rect.set_values (3,4);
+  cout << "area: " << rect.area();
+  return 0;
+}
+```
+@Rextester.eval
 
 
 
