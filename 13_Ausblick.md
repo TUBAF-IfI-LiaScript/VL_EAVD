@@ -277,16 +277,18 @@ Eventgesteuerte Programmabarbeitung
 
 ## 2. C und C++, dass klingt doch sehr ähnlich
 
-```cpp    HelloWorld.cpp
+```cpp
 #include <iostream>
 using namespace std;
 
 int main()
 {
-    cout << "Hello, World!";
+    cout << "That's our first C++ Programm!";
     return 0;
 }
 ```
+@Rextester.__eval(7, ,"-Wall -std=c++14 -O2 -o a.out source_file.cpp")
+
 Was ist jetzt das besondere? Im Beispiel ändert sich lediglich die API der Ausgaben und die _includes_ haben kein ".h" mehr?
 
 Analog zu C ist C++ eine von der ISO genormte Programmiersprache. Sie wurde ab 1979 von Bjarne Stroustrup  bei AT&T als Erweiterung der Programmiersprache C entwickelt.
@@ -309,6 +311,7 @@ Oft geäußerte Kritik an der Sprache umfasst beispielsweise:
 + Geschwindigkeitsvorteil als fehlendes Argument für Anwendungsentwickler
 
 > “In C++ it’s harder to shoot yourself in the foot, but when you do, you blow off your whole leg.” \[Bjarne Stroustrup\]
+
 
 ### Objektorientierte Programmierung
 
@@ -462,9 +465,6 @@ int main () {
 }
 ```
 @Rextester.eval
-
-
-
 
 
 ## 3. Anwendung auf der Mikrocontrolerebene
