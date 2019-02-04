@@ -266,7 +266,17 @@ https://en.cppreference.com/w/c/header
 
 ## 1. Grafische Benutzerinterfaces
 
-Eventgesteuerte Programmabarbeitung
+Worin unterscheidet sich der Programmablauf hinter einem Graphical User Interface (GUI) von den bisher besprochenen Abläufen?
+
+![EventDrivenGUI](./img/pelles.png)<!-- width="80%" -->[^1]
+
+[^2]: PellesC IDE Dokumentation
+
+Was bedeutet die Idee der eventgesteuerten Programmabarbeitung?
+
+![EventDrivenGUI](./img/eventloop.svg)<!-- width="70%" -->[^2]
+
+[^2]: http://krashan.ppa.pl/mph/event-driven-programming-notifications
 
 
 ### GTK Konzepte
@@ -407,7 +417,7 @@ int main () {
   return 0;
 }
 ```
-@Rextester.eval
+@Rextester.__eval(7, ,"-Wall -std=c++14 -O2 -o a.out source_file.cpp")
 
 Folgender Code zeigt eine beispielhafte Implementierung einer Klasse "Rectangle".
 Die einzigen  *member* von rect, auf die von außerhalb der Klasse nicht zugegriffen werden kann, sind _width_ und _height_, da sie über einen privaten Zugriff verfügen und nur von anderen Mitgliedern derselben Klasse aus referenziert werden können.
@@ -432,13 +442,14 @@ class_name::class_name(parameter){
     // initalisiert die Variablen
 }
 ```
+
 Diese Konstruktorfunktion wird wie eine reguläre Memberfunktion deklariert,
 jedoch mit einem Namen, der mit dem Klassennamen übereinstimmt. Die Parameterliste
 wird bei der Deklaration einer Instanz übergeben. Es gibt keinen
 Rückgabewert!
 
 Ändern Sie das nachfolgende Beispiel ab, so dass wir statt `set_values` einen
-Konstruktor benutzen.
+Konstruktor benutzen!
 
 ```cpp
 #include <iostream>
@@ -464,11 +475,159 @@ int main () {
   return 0;
 }
 ```
-@Rextester.eval
+@Rextester.__eval(7, ,"-Wall -std=c++14 -O2 -o a.out source_file.cpp")
 
+Reicht uns aber eine Initialisierungsfunktion? Braucht unser Programm möglicherweise
+auch Default-Initalisierungswerte, falls height und width zunächst unbekannt sind?
+Folglich brauchen wir mehrere Konstruktoren, die in Abhängigkeit von der Konfiguration
+der Definition aktiviert werden. Diese Funktionalität setzt man mit dem "Überladen
+einer Funktion" um, die hier beispielhaft für Konstruktoren gezeigt wird, aber auf
+beliebige Anwendung finden kann.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Rectangle {
+  private:     // nicht nötig, default Konfiguration
+    int width, height;
+  public:
+    Rectangle (int,int);
+    Rectangle ();
+    int area() {return width*height;}
+};
+
+Rectangle::Rectangle (int x, int y) {
+  width = x;
+  height = y;
+}
+
+Rectangle::Rectangle () {
+  width = 0;
+  height = 0;
+}
+
+int main () {
+  Rectangle rect_1(3,4);
+  Rectangle rect_2;
+  cout << "area: " << rect_1.area() << endl;
+  cout << "area: " << rect_2.area();
+  return 0;
+}
+```
+@Rextester.__eval(7, ,"-Wall -std=c++14 -O2 -o a.out source_file.cpp")
+
+
+**Überladen von Operatoren**
+
+Klassen repräsentieren abstrakte Repräsentationen. Wie sind Operatoren wie
+`+`, `<` oder `!` in diesem Fall zu interpretieren? Da die Antwort auf diese
+Fragen abhängig vom Kontext der Klasse sind, muss sich der Entwickler entsprechend
+darum kümmern.
+
+```cpp
+class_name class_name::operator+ (const class_name& param) {
+  class_name temp;
+  // addiere die relevanten member von param zur
+  return temp;
+}
+```
+
+```cpp   OverloadingPlus.cpp
+#include <iostream>
+using namespace std;
+
+class Rectangle {
+  private:     // nicht nötig, default Konfiguration
+    int width, height;
+  public:
+    Rectangle (int,int);
+    Rectangle ();
+    int area() {return width*height;}
+    Rectangle operator + (const Rectangle&);
+};
+
+Rectangle::Rectangle (int x, int y) {
+  width = x;
+  height = y;
+}
+
+Rectangle::Rectangle () {
+  width = 0;
+  height = 0;
+}
+
+Rectangle Rectangle::operator+ (const Rectangle &param) {
+  Rectangle temp;
+  temp.width = (double)(width + param.width)/2;
+  temp.height = (double)(height + param.height)/2;
+  return temp;
+}
+
+int main () {
+  Rectangle rect_1 (3,4);
+  Rectangle rect_2 (5,9);
+  Rectangle rect_3 ;
+  rect_3 = rect_1 + rect_2;
+  cout << "area: " << rect_3.area();
+  return 0;
+}
+```
+@Rextester.__eval(7, ,"-Wall -std=c++14 -O2 -o a.out source_file.cpp")
+
+Der Funktionsoperator `+` der Klasse `Rectangle` überladen den Additionsoperator (+) für diesen Typ. Nach der Deklaration kann diese Funktion entweder implizit mit dem Operator oder explizit mit ihrem Funktionsnamen aufgerufen werden:
+
+```cpp
+c = a + b;
+c = a.operator+(b)
+```
+
+**Vererbung**
+
+Auf der Basis der Kapselung von Funktionen, Daten und Operatoren können
+nun sogenannte Vererbungen realisiert werden. Dabei werden die Eigenschaften
+eines Objekttypes an hierachisch darunterliegende weitergegeben.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Polygon {
+  protected:
+    int width, height;
+  public:
+    void set_values (int a, int b)
+      { width=a; height=b;}
+ };
+
+class Rectangle: public Polygon {
+  public:
+    int area ()
+      { return width * height; }
+ };
+
+class Triangle: public Polygon {
+  public:
+    int area ()
+      { return width * height / 2; }
+  };
+
+int main () {
+  Rectangle rect;
+  Triangle trgl;
+  rect.set_values (4,5);
+  trgl.set_values (4,5);
+  cout << rect.area() << '\n';
+  cout << trgl.area() << '\n';
+  return 0;
+}
+```
+@Rextester.__eval(7, ,"-Wall -std=c++14 -O2 -o a.out source_file.cpp")
+
+Welche Probleme sehen Sie bei der Vererbung?
 
 ## 3. Anwendung auf der Mikrocontrolerebene
 
 ## That's alll
 
-Vielen Dank für Ihre Teilnahme an der Veranstaltung!
+Vielen Dank für Ihre Teilnahme an der Veranstaltung! Viel Erfolg bei der Klausur!
