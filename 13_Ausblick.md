@@ -210,20 +210,16 @@ script:   https://cdn.rawgit.com/davidedc/Algebrite/master/dist/algebrite.bundle
 
 -->
 
-# Vorlesung XI - Anwendung auf abstrakte Algorithmen
+# Vorlesung XIII - Ausblick und Diskussion
 
 **Fragen an die heutige Veranstaltung ...**
 
-* Was ist ein Algorithmus und über welche Merkmale lässt er sich ausdrücken.
-* Nennen Sie Beispiele für Algorithmen aus dem täglichen Leben.
-* Wie erfolgt die Transformation des Algorithmus auf eine Programmiersprache?
-* Was bedeutet der Begriff der Komplexität eines Algorithmus?
-* Welchem fundamentalen Konzept der Informatik unterliegen der Quicksort Algorithmus und die binäre Suche?
+* ... wie geht es weiter?
 
 ---------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-https://github.com/liaScript/CCourse/blob/master/12_Algorithmen.md
+https://github.com/liaScript/CCourse/blob/master/13_Ausblick.md
 
 ---------------------------------------------------------------------
 
@@ -329,7 +325,7 @@ Worin unterscheidet sich der Programmablauf hinter einem Graphical User Interfac
 
 Was bedeutet die Idee der eventgesteuerten Programmabarbeitung?
 
-![EventDrivenGUI](./img/eventloop.svg)<!-- width="70%" -->[^2]
+![EventDrivenGUI](./img/eventloop.png)<!-- width="70%" -->[^2]
 
 [^2]: http://krashan.ppa.pl/mph/event-driven-programming-notifications
 
@@ -362,6 +358,7 @@ Die Bibliothek wurde anfangs von Peter Mattis, Spencer Kimball und Josh MacDonal
 Die Beispiele und Texte sind zum überwiegenden Teil aus den Tutorials
 
 http://zetcode.com/gui/gtk2/gtkevents/
+
 https://de.wikibooks.org/wiki/GTK_mit_Builder:_Erste_Schritte
 
 entlehnt.
@@ -579,15 +576,8 @@ Was wollen wir gern erreichen:
 + Kapselung - Strukturierung eines Programms in mehrere voneinander unabhängig operierenden Objekten, die "ihre" Daten bündeln
 + Geheimnisprinzip - die internen Daten eines Objekts sollen dem Benutzer verborgen werden. Sofern notwendig gibt es aber Funktionen, die notwendige Zugriffe lenken
 + Vererbung - Wiederverwendung von Code soll durch die Übernahme von Objektkonfigurationen realisiert werden. Vererbung ermöglicht die  Erweiterung bestehender Objekt um speziellere Funktionalität aber auch die Weitergabe entlang einer Hierarchie von Oberklassen
-+ Polymorphie - Durch Subtyping kann anstelle eines Basistyps eine beliebige davon abgeleitete Klasse verwendet werden. Durch dynamisches Binden der Methodenaufrufe des Objekts kommen die
-in der abgeleiteten Klasse überschriebenen Methoden zur Laufzeit anstelle derjenigen aus der
-Basisklasse zur Ausführung. Hierdurch wird es einfach einmal geschriebene Algorithmen auf
-neue Objekte mit passender Schnittstelle anzuwenden, ohne die bestehende Implementierung
-anzupassen.
-+ Überladung Da Objektklassen auf Oberklassen implizit konvertiert werden, wird Überladung be-
-sonders nützlich. Diese erlaubt mehrere sematisch ähnliche Funktionen mit unterschiedlicher
-Signatur unter einen Namen zu gruppieren. Die Auswahl der konkret aufgerufenen Funktion
-wird zur Compilezeit durch die Typen der Parametervariablen getroffen.
++ Polymorphie - Durch Subtyping kann anstelle eines Basistyps eine beliebige davon abgeleitete Klasse verwendet werden. Hierdurch wird es einfach einmal geschriebene Algorithmen auf neue Objekte mit passender Schnittstelle anzuwenden, ohne die bestehende Implementierung anzupassen.
++ Überladung - Da Objektklassen auf Oberklassen implizit konvertiert werden, wird Überladung besonders nützlich. Diese erlaubt mehrere sematisch ähnliche Funktionen mit unterschiedlicher Signatur unter einen Namen zu gruppieren. Die Auswahl der konkret aufgerufenen Funktion wird zur Compilezeit durch die Typen der Parametervariablen getroffen.
 
 ### Elemente Objektorientierter Programmierung im Beispiel
 
@@ -914,7 +904,7 @@ void loop() {
 }
 ```
 
-![Welcome](./img/Mikrocontroller.jpg)<!-- width="50%" --> 
+![Welcome](./img/Mikrocontroller.jpg)<!-- width="50%" -->
 
 ## That's alll
 
