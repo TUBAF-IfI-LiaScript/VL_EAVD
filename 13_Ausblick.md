@@ -260,9 +260,64 @@ Standardbibliotheken
 
 https://en.cppreference.com/w/c/header
 
-## 0. Mehr als eine Datei ...
+## 0. Eine Datei ...
 
+... ist manchmal nicht genug. Um die Wiederverwendbarkeit des Codes zu steigern sollten generische Funktionen und spezifische Implementierungen getrennt
+werden.
 
+Die drei folgenden Dateien umfassen zum einen die Anwendungssimplementierung in
+der main.c und zum anderen eine allgemeinverwendbare Funktion `Sum()` die
+in verschiedenen Projekten zum Einsatz kommen kann.
+
+```cpp    functions.h
+#ifndef FUNCTIONS_H_INCLUDED
+#define FUNCTIONS_H_INCLUDED
+/* ^^ these are the include guards */
+
+/* Prototypes for the functions */
+int Sum(int a, int b);
+
+#endif
+```
+
+```cpp    functions.c
+#include "Functions.h"
+
+int Sum(int a, int b){
+    return a+b;
+}
+```
+
+```cpp    main.c
+#include <stdio.h>
+#include "Functions.h"
+
+int main(void)
+{
+    int a, b;
+    printf("Insert two numbers: ");
+    if(scanf("%d %d", &a, &b)!=2)
+    {
+        fputs("Invalid input", stderr);
+        return 1;
+    }
+    printf("%d + %d = %d", a, b, Sum(a, b));
+    return 0;
+}
+```
+
+**Schritt 1 - Kompilieren**
+``` bash @output
+gcc main.c -o main.o -c
+gcc functions.c -o functions.o -c
+```
+
+**Schritt 2 - Linken**
+``` bash @output
+gcc -o myprog main.o module.o
+```
+
+Üblicherweise werden sogenannte Makesysteme wie das Programm Make, qmake oder Scons für die automatisierte Ausführung von Kompilation und Linken genutzt.
 
 ## 1. Grafische Benutzerinterfaces
 
@@ -270,7 +325,7 @@ Worin unterscheidet sich der Programmablauf hinter einem Graphical User Interfac
 
 ![EventDrivenGUI](./img/pelles.png)<!-- width="80%" -->[^1]
 
-[^2]: PellesC IDE Dokumentation
+[^1]: PellesC IDE Dokumentation
 
 Was bedeutet die Idee der eventgesteuerten Programmabarbeitung?
 
@@ -279,11 +334,179 @@ Was bedeutet die Idee der eventgesteuerten Programmabarbeitung?
 [^2]: http://krashan.ppa.pl/mph/event-driven-programming-notifications
 
 
-### GTK Konzepte
+Realisiert werden GUI mit Hilfe aufwändiger GUI-Toolkits, Programmbibliotheken, die zur Programmierung der Darstellung und Interaktion in grafischen Benutzeroberflächen dienen. Dafür stellt ein GUI-Toolkit einen Satz an Steuerelementen (Widgets) zur Verfügung.
 
-![GTKArchitektur](./img/GTK-Architecture.png)
+Beispiele für plattformübergreifende Toolkits sind GTK+, Qt, wxWidgets, daneben
+gibt es weitere, die auf bestimmten Betriebssysteme zugeschnitten sind oder in
+spezifischen Einsatzfeldern Anwendung finden.
 
-### Hello World Beispiele
+
+### GTK
+
+GTK+ (GIMP-Toolkit) ist ein freies GUI-Toolkit unter der LGPL. GTK+ enthält viele Steuerelemente, mit denen sich grafische Benutzeroberflächen (GUI) für Software erstellen lassen.
+
+Die Bibliothek wurde anfangs von Peter Mattis, Spencer Kimball und Josh MacDonald entwickelt, um abseits von Motif eine Benutzeroberfläche für das Grafikprogramm GIMP zu schaffen. Mittlerweile wird GTK+ von den Desktop-Umgebungen Gnome, Xfce, LXDE, Cinnamon und Pantheon sowie von einer Vielzahl weiterer Anwendungen verwendet und ist somit, neben Qt, eines der erfolgreichsten GUI-Toolkits für das X Window System.
+
+![GTKArchitektur](./img/GTK-Architecture.png)<!-- width="50%" -->[^1]
+
+[^1]: GTK Dokumentation
+
+
++ GLib - Bibliothek, die die Basis von GTK + bildet. Es bietet Datenstrukturhandling für C, Portability-Wrapper und Schnittstellen für Laufzeitfunktionen wie Ereignisschleife, Threads, dynamisches Laden und ein Objektsystem
++ Pango - Bibliothek zum Layout und Rendern von Text mit dem Schwerpunkt Internationalisierung. Es bildet den Kern der Text- und Schriftverarbeitung für GTK+.
++ Cairo - Bibliothek für 2D-Grafiken mit Unterstützung für mehrere Ausgabegeräte (einschließlich X Window System, Win32), während auf allen Medien eine konsistente Ausgabe erzeugt wird, während die verfügbare Hardwarebeschleunigung genutzt wird.
++ ATK - Bibliothek für eine Reihe von Schnittstellen, die den Zugriff ermöglichen. Durch die Unterstützung der ATK-Schnittstellen kann eine Anwendung oder ein Toolkit mit Tools wie Bildschirmlesegeräten, Lupen und alternativen Eingabegeräten verwendet werden.
+
+### Einführungsbeispiele mit GTK+
+
+Die Beispiele und Texte sind zum überwiegenden Teil aus den Tutorials
+
+http://zetcode.com/gui/gtk2/gtkevents/
+https://de.wikibooks.org/wiki/GTK_mit_Builder:_Erste_Schritte
+
+entlehnt.
+
+**Hello World - Beispiel**
+
+```cpp    gtkWindow.c
+#include <gtk/gtk.h>
+
+static void on_window_closed (GtkWidget *widget, gpointer data)
+{
+    g_print("Aus die Maus\n");
+    gtk_main_quit ();
+}
+
+int main(int argc, char *argv[]) {
+  GtkWidget *window;
+  gtk_init(&argc, &argv);
+
+  window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title(GTK_WINDOW(window), "Erstes GUI Window");
+
+  g_signal_connect(G_OBJECT(window), "destroy",
+      G_CALLBACK(on_window_closed), NULL);
+
+  gtk_widget_show_all(window);
+
+  gtk_main();
+
+  return 0;
+}
+```
+
+``` bash @output
+▶ gcc gtkWindow.c -Wall `pkg-config --libs --cflags gtk+-2.0`
+```
+
+![GTKWindow](./img/GTKScreenshot.jpg)<!-- width="80%" -->
+
+Ein GTK+-Programm wird am Anfang mit der Funktion `gtk_init()` initialisiert. Diese Funktion hat die Aufgabe, Standardargumente aus einer eventuell bereitgestellten Menge an Programmparametern zu filtern, wie auch das eigentliche Toolkit zu initialisieren. Wenn keine Kommunikation mit dem Fenstermanager möglich ist, dann sorgt diese Funktion dafür, dass das Programm sofort terminiert. Das Hauptfenster wird mit der Funktion gtk_window_new() erzeugt.
+
+In diesem Beispiel wird zunächst nur ein Event definiert. _destroy_ beendet
+die Ausführung des Programmes durch einen Klick auf das entsprechende Symbol
+auf der Fensterleister. Mit Hilfe der Funktion `g_signal_connect()` wird
+das entsprechende Signal mit einer Funktion verknüpft, die aufgerufen wird, wenn das Ereignis eintritt. In unserem Fall heißt die zu verknüpfende Funktion `on_window_closed()`.
+
+**Widgets**
+
+![GTKWidgets](./img/GTK+3-widget-factory.png)<!-- width="80%" -->[^1]
+
+[^1]: https://en.wikipedia.org/wiki/File:GTK%2B3-widget-factory-3-12.png
+
+Wir erweitern das Programm um einen Button als Interaktionselement. Natürlich muss auch diesem ein Event zugeordnet werden. Nachfolgendes Codefragment generiert wiederum eine Ausgabe, wenn das Event ausgelöst wurde.
+
+```cpp
+static int counter = 0;
+
+void greet( GtkWidget *widget, gpointer data ){
+   g_print ("%s clicked %d times\n",
+      (char*)data, ++counter);
+}
+
+int main(int argc, char *argv[]) {
+  ...
+  GtkWidget *button;
+  button = gtk_button_new_with_label ("Click Me!");
+  g_signal_connect (GTK_OBJECT(button),
+     "clicked",G_CALLBACK (greet),
+     "button");
+
+  gtk_container_add (GTK_CONTAINER (window), button);
+  ...
+}
+```
+
+Erweitern Sie den Code aus gtkWindow.c um die Implementierung eines Buttons. Was missfällt Ihnen am Ergebnis, wenn Sie dafür einfach das obrige Fragment verwenden?
+
+
+![GTKWidgets](./img/GTK-ClickMeSmallWindow.jpeg)<!-- width="80%" -->
+
+**Anordnung im Fenster**
+
+Offenbar müssen wir uns auch Gedanken hinsichtlich der Anordnung der Elemente unserer GUI machen. Dazu können verschiedene Koordinatensysteme definiert werden, innerhalb derer die Buttons, Lables usw. angeordnet werden.
+
+```cpp    gtkWindow.c
+#include <gtk/gtk.h>
+
+static int counter = 0;
+
+void greet( GtkWidget *widget, gpointer data ){
+   g_print ("Hi there! Welcome to GTK\n");
+   g_print ("%s clicked %d times\n",
+      (char*)data, ++counter);
+}
+
+static void on_window_closed (GtkWidget *widget, gpointer data){
+    g_print("Aus die Maus\n");
+    gtk_main_quit ();
+}
+
+int main(int argc, char *argv[]) {
+
+  GtkWidget *window;
+  gtk_init(&argc, &argv);
+
+  window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title(GTK_WINDOW(window), "Erstes GUI Window");
+  gtk_window_set_default_size(GTK_WINDOW(window), 300, 200);
+  gtk_container_set_border_width(GTK_CONTAINER(window), 15);
+
+  GtkWidget *halign;
+  halign = gtk_alignment_new(0, 0, 0, 0);
+
+  GtkWidget *button;
+  button = gtk_button_new_with_label ("Click Me!");
+  g_signal_connect (GTK_OBJECT(button),
+     "clicked",G_CALLBACK (greet),
+     "button");
+
+  gtk_container_add(GTK_CONTAINER(halign), button);
+  gtk_container_add(GTK_CONTAINER(window), halign);
+
+  g_signal_connect(G_OBJECT(window), "destroy",
+      G_CALLBACK(on_window_closed), NULL);
+
+  gtk_widget_show_all(window);
+
+  gtk_main();
+
+  return 0;
+}
+```
+
+### Grafische Erstellung von GUIs
+
+... am Beispiel von Glade. Es gibt eine große Zahl weiterer GUI Editoren, einzelne
+Funktionalitäten sind auch Bestandteil von PellesC.
+
+Glade ist eine freie visuelle Programmierumgebung zum intuitiven Erstellen von GTK+-Benutzeroberflächen (GUI). Glade ist unabhängig von der verwendeten Programmiersprache!
+
+Es erzeugt keinen Programmcode für Ereignisse, sondern eine XML-Datei und – falls erwünscht – eine oder mehrere C-Dateien, in die der Programmierer seinen Programmcode einsetzt. Glade ist in zweierlei Versionen erhältlich – eine für GTK+ 2 und eine für Version 3.
+
+![GTKWidgets](./img/Glade_3_screenshot.png)<!-- width="80%" -->[^1]
+
+[^1]: Glade developers - Glade's official website https://glade.gnome.org/
 
 ## 2. C und C++, dass klingt doch sehr ähnlich
 
@@ -356,8 +579,7 @@ Was wollen wir gern erreichen:
 + Kapselung - Strukturierung eines Programms in mehrere voneinander unabhängig operierenden Objekten, die "ihre" Daten bündeln
 + Geheimnisprinzip - die internen Daten eines Objekts sollen dem Benutzer verborgen werden. Sofern notwendig gibt es aber Funktionen, die notwendige Zugriffe lenken
 + Vererbung - Wiederverwendung von Code soll durch die Übernahme von Objektkonfigurationen realisiert werden. Vererbung ermöglicht die  Erweiterung bestehender Objekt um speziellere Funktionalität aber auch die Weitergabe entlang einer Hierarchie von Oberklassen
-+ Polymorphie Durch Subtyping kann anstelle eines Basistyps eine beliebige davon abgeleitete Klasse
-verwendet werden. Durch dynamisches Binden der Methodenaufrufe des Objekts kommen die
++ Polymorphie - Durch Subtyping kann anstelle eines Basistyps eine beliebige davon abgeleitete Klasse verwendet werden. Durch dynamisches Binden der Methodenaufrufe des Objekts kommen die
 in der abgeleiteten Klasse überschriebenen Methoden zur Laufzeit anstelle derjenigen aus der
 Basisklasse zur Ausführung. Hierdurch wird es einfach einmal geschriebene Algorithmen auf
 neue Objekte mit passender Schnittstelle anzuwenden, ohne die bestehende Implementierung
@@ -626,7 +848,73 @@ int main () {
 
 Welche Probleme sehen Sie bei der Vererbung?
 
-## 3. Anwendung auf der Mikrocontrolerebene
+## 3. Beispiel der Woche
+
+<!--
+style="width: 80%; max-width: 460px; display: block; margin-left: auto; margin-right: auto;"
+-->
+````
+                  .- 100s -. .-- 2s --. .- 100s -.
+                  |        | |        | |        |
+                  |        v |        v |        v
+                 .-.       .-.        .-.       .-.
+ Ampelzustände  ( 0 )     ( 1 )      ( 2 )     ( 3 )
+                 '-'       '-'        '-'       '-'
+                  ^                              |
+                  |                              |
+                  .------------- 2s -------------.
+
+                 RED  RED/YELLOW     GREEN     YELLOW
+````
+
+Implementierung in C für einen Arduino Uno (Atmega 328 Controller)
+
+```cpp
+typedef struct {
+    int state;
+    int next;
+    int A_red;
+    int A_yellow;
+    int A_green;
+    int timer;
+} ampel_state_t;
+
+ampel_state_t state_table[4] = {
+
+// state     A_red             timer
+//  |   next  |  A_yellow       |
+//  |    |    |   |    A_green  |
+//----------------------------------------------
+{   0,   1,   1,  0,    0,      10},
+{   1,   2,   1,  1,    0,      2 },
+{   2,   3,   0,  0,    1,      10},
+{   3,   0,   0,  1,    0,      2,}
+};
+
+const int greenPin = A0;
+const int yellowPin = 11;
+const int redPin = 13;
+int state = 0;
+
+void setup() {
+  pinMode(greenPin, OUTPUT);
+  pinMode(yellowPin, OUTPUT);
+  pinMode(redPin, OUTPUT);
+}
+
+void loop() {
+  if (state_table[state].A_red == 1) digitalWrite(redPin, HIGH);
+  else digitalWrite(redPin, LOW);
+  if (state_table[state].A_yellow == 1) digitalWrite(yellowPin, HIGH);
+  else digitalWrite(yellowPin, LOW);
+  if (state_table[state].A_green == 1) digitalWrite(greenPin, HIGH);
+  else digitalWrite(greenPin, LOW);
+  delay(state_table[state].timer*1000);
+  state =  state_table[state].next;
+}
+```
+
+![Welcome](./img/Mikrocontroller.jpg)<!-- width="50%" --> 
 
 ## That's alll
 
