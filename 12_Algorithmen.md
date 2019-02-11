@@ -210,7 +210,7 @@ script:   https://cdn.rawgit.com/davidedc/Algebrite/master/dist/algebrite.bundle
 
 -->
 
-# Vorlesung XI - Anwendung auf abstrakte Algorithmen
+# Vorlesung XII - Anwendung auf abstrakte Algorithmen
 
 **Fragen an die heutige Veranstaltung ...**
 
