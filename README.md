@@ -166,6 +166,7 @@ Prüfungsvorbereitung.
 | 15.01.2019 | [10. Parameterübergabe und Makros](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/10_MakrosKommandozeilenparameter.md#1)          |
 | 22.01.2019 | [11. Standardbibliothek](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/11_Standardbibliothek.md#1)          |
 | 29.01.2019 | [12. Algorithmen](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/12_Algorithmen.md#1)          |
+| 05.02.2019 | [13. Ausblick](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/13_Ausblick.md#1)          |
 
 # ... und wozu brauche ich das?
 
