@@ -167,7 +167,7 @@ Standardbibliotheken
 
 | Name         | Bestandteil | Funktionen                              |
 |:-------------|:------------|:----------------------------------------|
-| `<stdio.h>`  |             | Input/output (`printf`)                 |
+| `<stdio.h>`  |             | Input/output (`scanf`, `printf`)                 |
 | `<stdint.h>` | (seit C99)  | Integer Datentypen mit fester Breite    |
 | `<float.h>`  |             | Parameter der Floatwerte                |
 | `<limits.h>` |             | Größe der Basistypen                    |
@@ -236,7 +236,7 @@ int main(void)
 ```
 @Rextester.eval_input
 
-Folgende Zeichen werden bei `scanf()` als Eingabefelder akzeptiert:
+Folgende Zeichen werden bei `scanf` als Eingabefelder akzeptiert:
 
 + alle Zeichen bis zum nächsten Whitespace oder dem angegebenen Trennungselement
 + bis zu einer bestimmten Feldbreite von n-Zeichen
@@ -286,16 +286,16 @@ C3
 {{1}}
 ![alt-text](img/ASCII_Zeichensatz.jpeg)<!-- width="90%" -->
 
-+ *Stream im Binärmodus* - Ein binärer Strom ist eine geordnete Folge von Nullen und Einsen ohne spezifische Festlegungen zu Zeilenumbrüchen etc. Zahlenwerte werden in entsprechend ihrer Speicherrepräsentation abgelegt, es findet keine automatische Konvertierung statt. Der Vorteil des Binärmodus liegt in der kompakten Darstellung.
+* *Stream im Binärmodus* - Ein binärer Strom ist eine geordnete Folge von Nullen und Einsen ohne spezifische Festlegungen zu Zeilenumbrüchen etc. Zahlenwerte werden entsprechend ihrer Speicherrepräsentation abgelegt, es findet keine automatische Konvertierung statt. Der Vorteil des Binärmodus liegt in der kompakten Darstellung.
 
 ### Standard-Datenströme
 
 Die bisherigen Ein- und Ausgaben mittels `printf` und `scanf` erfolgten über
 den Standard-Datenströmen.
 
-+ stdin - Die Standardeingabe (standard input) ist üblicherweise mit der Tastatur verbunden. Der Stream wird zeilenweise gepuffert.
-+ stdout - Die Standardausgabe (standard output) ist mit dem Bildschirm verknüpft und ebenfalls zeilenweise gepuffert.
-+ stderr - Die Standardfehlerausgabe (standard error output) ist analog zu stdout mit dem Bildschirm verbunden.
+* stdin - Die Standardeingabe (standard input) ist üblicherweise mit der Tastatur verbunden. Der Stream wird zeilenweise gepuffert.
+* stdout - Die Standardausgabe (standard output) ist mit dem Bildschirm verknüpft und ebenfalls zeilenweise gepuffert.
+* stderr - Die Standardfehlerausgabe (standard error output) ist analog zu stdout mit dem Bildschirm verbunden.
 
 ![alt-text](/img/Stdstreams.png)<!-- width="90%" --> [^1]
 
@@ -322,9 +322,9 @@ Textausgabe zum stdout
 ```
 
 Einige Betriebssysteme (wie zum Beispiel DOS) stellten weitere Datenstromtypen
-vor und betteten Drucker und Serielle Schnittstellen in das Konzept ein.
-Alle 3 Standard-Datenströme können umgelenkt werden. Dies kann innerhalb des
-Programmes durch entsprechende Standardfunktionen `freopen()` erfolgen.
+vor und betteten Drucker und serielle Schnittstellen in das Konzept ein.
+Alle drei Standard-Datenströme können umgelenkt werden. Dies kann innerhalb des
+Programmes durch entsprechende Standardfunktionen `freopen` erfolgen.
 
 ```cpp
 #include <stdio.h>
@@ -372,45 +372,47 @@ FILE *freopen(const char *pfadname, const char *mode, FILE *stream);
 
 Was steckt hinter dem `FILE` struct, das in `stdio.h` deklariert ist?
 
-+ Puffer mit Anfangsadresse, aktuellem Zeiger und Größe,
-+ Status des Stroms
-+ Filename
+* Puffer mit Anfangsadresse, aktuellem Zeiger und Größe,
+* Status des Stroms
+* Filename
 + ...
 
-Als Pfadangabe (pfadname) sind alle zulässigen Strings erlaubt. Die maximale Stringlänge für pfadname ist in der Konstante FILENAME_MAX deklariert.
+Als Pfadangaben (Pfadnamen) sind alle zulässigen Bezeichner erlaubt. Die maximale Länge für den Pfadnamen ist in der Konstante `FILENAME_MAX` deklariert.
 
 > Unter Windows wird der Dateipfad mit den schrägen Strichen nach hinten
-> (Backslash) geschrieben, z.B. „C:\\BAF\\daten.txt“. Unter Linux-Systemen wird
-> statt dem Backslash der normale Slash verwendet, z.B. „/home/BAF/daten.txt“.
+> (Backslash) geschrieben, z.B. “C:\\BAF\\daten.txt“. Unter Linux-Systemen wird
+> statt dem Backslash der normale Slash verwendet, z.B. “/home/BAF/daten.txt“.
 
-Mit modus geben Sie an, wie auf den Stream zugegriffen wird. Bei einem Fehler erhalten Sie hingegen den NULL-Zeiger zurück.
+Mit Modus geben Sie an, wie auf den Stream zugegriffen wird. Die Funktionen
+liefern als Ergebnis einen FILE-Zeiger, bei einem Fehler erhalten Sie hingegen
+den NULL-Zeiger zurück.
 
 | Modus     | Beschreibung                                                  |
 |:----------|:--------------------------------------------------------------|
-|"r"        | Textdatei zum lesen und eröffnen                              |
+|"r"        | Textdatei zum Lesen und Eröffnen                              |
 |"w"	      | Textdatei zum Schreiben erzeugen; gegebenenfalls alten Inhalt wegwerfen|
 |"a"	      | anfügen; Textdatei zum Schreiben am Dateiende eröffnen oder erzeugen|
 |"r+"	      | Textdatei zum Ändern eröffnen (Lesen und Schreiben)|
 |"w+"	      | Textdatei zum Ändern erzeugen; gegebenenfalls alten Inhalt wegwerfen|
 
-Die Angaben können kombiniert werden „rw“ öffnet eine Datei zum Lesen und
-Schreiben. Wichtig für die Arbeit ist der append Modus, der als Schreibmodus die
+Die Angaben können kombiniert werden `"rw"` öffnet eine Datei zum Lesen und
+Schreiben. Wichtig für die Arbeit ist der append-Modus, der als Schreibmodus die
 ursprünglichen Daten der Datei unverändert belässt und neue Daten am Ende der
 Datei einfügt.
 
 ACHTUNG:
 
-+ Existiert eine Datei und wird diese im Schreibmodus `"w"` geöffnet, so wird der komplette Inhalt ohne Meldung gelöscht.
+* Existiert eine Datei und wird diese im Schreibmodus `"w"` geöffnet, so wird der komplette Inhalt ohne Meldung gelöscht.
 
-+ Existiert eine Datei nicht und wird versucht diese im Schreibmodus zu öffnen, so wird automatisch eine neue leere Datei erzeugt.
+* Existiert eine Datei nicht und wird versucht diese im Schreibmodus zu öffnen, so wird automatisch eine neue leere Datei erzeugt.
 
 Wie werden Datenströme warum geschlossen?
 
-+ Wenn sich ein Programm beendet, schließen sich automatisch alle noch offenen Streams.
+* Wenn sich ein Programm beendet, schließen sich automatisch alle noch offenen Streams.
 
-+ Die Anzahl der geöffneten Dateien ist begrenzt und wird in der Standard-Library `stdio.h` mit der Konstante FOPEN_MAX festgelegt. Mit fclose() kann wieder ein FILE-Zeiger freigegeben werden.
+* Die Anzahl der geöffneten Dateien ist begrenzt und wird in der Standard-Library `stdio.h` mit der Konstante `FOPEN_MAX` festgelegt. Mit `fclose` kann wieder ein FILE-Zeiger freigegeben werden.
 
-+ Wenn eine Datei im Schreibmodus geöffnet wurde, wird diese erst beschrieben, wenn der Puffer voll ist oder die Schreiboperation explizit angefordert wird. Beendet sich das Programm aber mit einem Fehler, dann sind die Daten im Puffer verloren.
+* Wenn eine Datei im Schreibmodus geöffnet wurde, wird diese erst beschrieben, wenn der Puffer voll ist oder die Schreiboperation explizit angefordert wird. Beendet sich das Programm aber mit einem Fehler, dann sind die Daten im Puffer verloren.
 
 ``` c
 #include <stdio.h>
@@ -438,11 +440,11 @@ Ausgehend von den vordefinierten Standardstreams definiert die Standardbibliothe
 | Standard-Stream | mit Streamnamen | Bedeutung                                       |
 |:----------------|:----------------|:------------------------------------------------|
 | printf          | fprintf         | Formatierte Ausgabe                             |
-| vprint          | vfprintf        | Formatierte Ausgabe mit variabler Argumentliste |
+| vprintf          | vfprintf        | Formatierte Ausgabe mit variabler Argumentliste |
 | scanf           | fscanf          | Formatierte Eingabe                             |
 | putchar         | putc, fputc     | Zeichenausgabe                                  |
 | getchar         | getc, fgetc     | Zeicheneingabe                                  |
-| gets            | fgets           | String-Eingabe                                  |
+| gets (gets_s)            | fgets           | String-Eingabe                                  |
 | puts            | fputs           | String-Ausgabe                                  |
 | perror          |                 | String-Ausgabe an stderr                        |
 
@@ -488,16 +490,16 @@ da die Ablage und Organisation der Daten nicht im Standard spezifiziert sind,
 auch anders aussehen.
 
 Für beide Variablen wurde Speicher auf dem Stack allokiert. Wenn die Länge
-der Eingaben die Kapazität des Arrays überschreitet, geschehen zwei Dinge.
+der Eingaben die Kapazität des Arrays überschreitet, geschehen zwei Dinge:
 
-+ Zum einen werden Inhalte von `nextString` oder von dem überlangen Eingabestring überschrieben.
+* Zum einen werden Inhalte von `nextString` oder von dem überlangen Eingabestring überschrieben.
 
-+ Wird die Eingabe so lang, dass die Größe mit dem Stackframe kollidiert, wird das Programm beendet.
+* Wird die Eingabe so lang, dass die Größe mit dem Stackframe kollidiert, wird das Programm beendet.
 
 | Input           | Größe | Resultat |
 |-----------------|------|---------------------------------------|
-| Das.ist         |  7+1 | Gültige Eingabe entsprechend der Größe von `string`|
-| Das.ist.ein.Tes | 15+1 | Die Terminierung steht an der 16. Stelle und damit nicht im Array|
+| Das.ist         |  7+1 | Gültige Eingabe entsprechend der Größe von `string`.|
+| Das.ist.ein.Tes | 15+1 | Die Terminierung steht an der 16. Stelle und damit nicht im Array.|
 | Das.ist.ein.Test | 16+1 | Die Terminierung der Eingabe wird auf den ersten Eintrag von `nextString` geschoben. Damit scheint dieses Array leer.|
 | Das.ist.ein.Test! | 16+x+1 | Alle weiteren Zeichen erscheinen in `nextString`.|
 | Das.ist.ein.Test!Der.Input.ist.zu.groß.. | 41+1 | Die Framegrenze wird überschritten. Das System crashed.|
@@ -624,23 +626,27 @@ Value of errno: 2
 ```c
 int rename(const char *oldname, const char *newname)
 ```
-rename ändert den Namen einer Datei und liefert nicht Null, wenn der Versuch fehlschlägt.
+Die Funktion `rename` ändert den Namen einer Datei und liefert nicht Null, wenn
+der Versuch fehlschlägt.
 
 ```c
 int remove(const char *filename);
 ```
-remove entfernt die angegebene Datei, so daß ein anschließender Versuch, sie zu eröffnen, fehlschlagen wird. Die Funktion liefert bei Fehlern einen von Null verschiedenen Wert.
+Die Funktion `remove` entfernt die angegebene Datei, so dass ein anschließender Versuch, sie
+zu eröffnen, fehlschlagen wird. Die Funktion liefert bei Fehlern einen von Null verschiedenen Wert.
 
 ```c
 FILE *tmpfile(void)
 ```
-tmpfile erzeugt eine temporäre Datei mit Zugriff "wb+", die automatisch gelöscht wird, wenn der Zugriff abgeschlossen wird, oder wenn das Programm normal zu Ende geht. tmpfile liefert einen Datenstrom oder NULL, wenn die Datei nicht erzeugt werden konnte.
+Die Funktion `tmpfile` erzeugt eine temporäre Datei mit Zugriff "wb+", die automatisch gelöscht wird, wenn der Zugriff abgeschlossen wird, oder wenn das Programm normal zu Ende geht. Funktion liefert einen Datenstrom oder NULL, wenn
+die Datei nicht erzeugt werden konnte.
 
 ```c
 char *tmpnam(char s[L_tmpnam])
 ```
-tmpnam generiert einen zufälligen Dateinamen, der im Ordner noch nicht vorkommt. Damit kann
-sichergestellt werden, dass Daten mit jeweils neuen Dateinamen abgespeichert werden.
+Die Funktion `tmpnam` generiert einen zufälligen Dateinamen, der im Ordner noch nicht
+vorkommt. Damit kann sichergestellt werden, dass Daten mit jeweils neuen
+Dateinamen abgespeichert werden.
 
 ```c
 #include <stdio.h>
@@ -670,15 +676,14 @@ Temporary name 2: /tmp/fileZObkAs
 ```c
 void rewind(FILE *stream)
 ```
-Die Funktion setzt die Lese-/Schreibposition für einen Datenstrom zurück auf den
-Anfang.
+Die Funktion  `rewind` setzt die Lese-/Schreibposition für einen Datenstrom
+zurück auf den Anfang.
 
 ```c
 int fseek(FILE *stream, long int offset, int whence)
 ```
-Die Funktion setzt die Lese-/Schreibposition für einen Datenstrom mit einem
-Offset bezogen auf SEEK_SET (Dateianfang), SEEK_CUR (aktuelle Position) oder
-SEEK_END (letzte Position).
+Die Funktion `fseek` setzt die Lese-/Schreibposition für einen Datenstrom mit
+einem Offset bezogen auf `SEEK_SET` (Dateianfang), `SEEK_CUR` (aktuelle Position) oder `SEEK_END` (letzte Position).
 
 Diese Varianten können zum Beispiel zur Bestimmung der Größe einer Datei
 kombiniert werden:
@@ -747,8 +752,8 @@ int main(void){
 
 Für die Vereinigten Staaten liegen umfangreiche Datensätze zur Namensgebung von
 Neugeborenen seit 1880 vor. Eine entsprechende csv-Datei (comma separated file)
-findet sich im Projektordner und /data, sie umfasst 258.000 Einträge. Diese sind
-wie folgt gegliedert
+befindet sich im Unterverzeichnis "data" des Projektordners, sie umfasst 258.000 Einträge. Diese
+sind wie folgt gegliedert:
 
 ```
 1880,"John",0.081541,"boy"

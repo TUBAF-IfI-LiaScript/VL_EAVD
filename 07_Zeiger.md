@@ -124,97 +124,65 @@ $.ajax ({
 -->
 
 
-# Vorlesung VII - Funktionen
+# Vorlesung VII - Zeiger
 
 **Fragen an die heutige Veranstaltung ...**
 
 * Erklären Sie die Idee des Zeigers in der Programmiersprache C.
-* Welche Vorteile ergeben sich, wenn eine Variable nicht mit dem gti Wert sondern über die Adresse übergeben wird?
+* Welche Vorteile ergeben sich, wenn eine Variable nicht mit dem gti Wert
+  sondern über die Adresse übergeben wird?
 * Welche Funktion hat der Adressoperator `&`?
 * Welche Gefahr besteht bei der Initialisierung von Zeigern?
 * Was ist ein `NULL`-Zeiger und wozu wird er verwendet?
 * Wie gibt man die Adresse, auf die ein Zeiger gerichtet ist, mit `printf` aus?
-* Erläutern Sie die mehrfache Nutzung von `*` im Zusammenhang mit der Arbeit von Zeigern.
+* Erläutern Sie die mehrfache Nutzung von `*` im Zusammenhang mit der Arbeit
+  von Zeigern.
 * In welchem Kontext ist die Typisierung von Zeigern von Bedeutung?
 
 ---------------------------------------------------------------------
-Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
+[Aktuelle Vorlesung im Versionsmanagementsystem GitHub](https://github.com/liaScript/CCourse/blob/master/07_Zeiger.md)
 
-https://github.com/liaScript/CCourse/blob/master/07_Zeiger.md
-
----------------------------------------------------------------------
-
-Und noch was neues ...dank rextester wird LiaScript jetzt noch leistungsfähiger
-
-https://rextester.com/
-
-```cpp                          nDimArray.c
-#include <stdio.h>
-#include <stdlib.h>
-
-int main(void) {
-  printf("Jetzt kann ich alles was die Konsole kann!\n");
-  printf("Probier es aus!\n");
-  return EXIT_SUCCESS;
-}
-```
-@Rextester.eval
-
-``` bash @output_
-Jetzt kann ich alles was die Konsole kann!
-Probier es aus!
-```
-
-| Ausgaben              | Bedeutung                         |
-|:----------------------|:----------------------------------|
-| Compilation time      | Dauer der Übersetzung             |
-| absolute running time | Ausführungsdauer auf dem Server   |
-| cpu time              | Echte Laufzeit des Programms      |
-| memory peak           | Größe des angeforderten Speichers |
-| absolute service time | Dauer der Gesamtanfrage           |
 ---------------------------------------------------------------------
 
 **Wie weit sind wir schon gekommen?**
 
-ANSI C (C89)/ Schlüsselwörter:
 
 | Standard    |                |          |            |          |            |
 |:------------|:---------------|:---------|:-----------|:---------|:-----------|
-| **C89/C90** | auto           | `double` | `int`      | `struct` | `break`    |
+| **C89/C90** | `auto`         | `double` | `int`      | `struct` | `break`    |
 |             | `else`         | `long`   | `switch`   | `case`   | `enum`     |
-|             | register       | typedef  | `char`     | extern   | return     |
-|             | union          | const    | `float`    | `short`  | `unsigned` |
+|             | `register`     | `typedef`| `char`     | `extern` | `return`   |
+|             | union          | `const`  | `float`    | `short`  | `unsigned` |
 |             | `continue`     | `for`    | `signed`   | `void`   | `default`  |
-|             | `goto`         | `sizeof` | volatile   | `do`     | `if`       |
-|             | static         | `while`  |            |          |            |
-| **C99**     | `_Bool`        | _Complex | _Imaginary | inline   | restrict   |
+|             | `goto`         | `sizeof` | `volatile` | `do`     | `if`       |
+|             | `static`       | `while`  |            |          |            |
+| **C99**     | `_Bool`        | _Complex | _Imaginary | `inline` | restrict   |
 | **C11**     | _Alignas       | _Alignof | _Atomic    | _Generic | _Noreturn  |
 |             |_Static\_assert | \_Thread\_local | |   |          |            |
 
 ---
 
+{{1}}
 Standardbibliotheken
 
-| Name         | Bestandteil | Funktionen                              |
-|:-------------|:------------|:----------------------------------------|
-| `<stdio.h>`  |             | Input/output (`printf`)                 |
-| `<stdint.h>` | (seit C99)  | Integer Datentypen mit fester Breite    |
-| `<float.h>`  |             | Parameter der Floatwerte                |
-| `<limits.h>` |             | Größe der Basistypen                    |
-| `<fenv.h>`   |             | Verhalten bei Typumwandlungen           |
-| `<string.h>` |             | Stringfunktionen                        |
-| `<math.h>`   |             | Mathematische Funktionen und Konstanten |
+{{1}}
+| Name         | Bestandteil | Funktionen                           |
+|:-------------|:------------|:-------------------------------------|
+| `<stdio.h>`  |             | Input/output                         |
+| `<stdint.h>` | (seit C99)  | Integer Datentypen mit fester Breite |
+| `<float.h>`  |             | Parameter der Floatwerte             |
+| `<limits.h>` |             | Größe der Basistypen                 |
+| `<fenv.h>`   |             | Verhalten bei Typumwandlungen        |
 
-https://en.cppreference.com/w/c/header
+{{1}}
+[C standard library header files](https://en.cppreference.com/w/c/header)
 
 
-## 0. Wiederholung
-
-**Arrays & Schleifen**
+## 0. Arrays & Schleifen
 
 Realisieren Sie eine Look-Up-Table für die Berechnung des Sinus von Gradwerten.
 
-http://www2.hs-fulda.de/~klingebiel/c-stdlib/math.htm
+Quelle: [http://www2.hs-fulda.de/~klingebiel/c-stdlib/math.htm](http://www2.hs-fulda.de/~klingebiel/c-stdlib/math.htm)
 
 ``` c
 #include <stdio.h>
@@ -245,19 +213,24 @@ sin 90, 1.000000
  ┗━━━━━━━┻━━━━━━━┻━━━━━━━┻╸╸╸╸╸╸╸┻━━━━━━━┻━━━━━━━┻╸╸╸╸╸╸╸
 ````
 
-Warum ist es sinnvoll Funktionen in Look-Up-Tables abzubilden, letztendlich
-kostet das Ganze doch Speicherplatz?
-
 ## 1 Zeiger in C
 
 Bisher umfassten unserer Variablen als Datencontainer Zahlen oder Buchstaben.
-Das Konzept des Zeigers (englisch Pointer) erweitert das Spektrum der Inhalte auf Adressen.
+Das Konzept des Zeigers (englisch Pointer) erweitert das Spektrum der Inhalte
+auf Adressen.
 
-An dieser Adresse können entweder Daten, wie Variablen oder Objekte, aber auch Programmcodes (Anweisungen) stehen. Durch Dereferenzierung des Zeigers ist es möglich, auf die Daten oder den Code zuzugreifen.
+An dieser Adresse können entweder Daten, wie Variablen oder Objekte, aber auch
+Programmcodes (Anweisungen) stehen. Durch Dereferenzierung des Zeigers ist es
+möglich, auf die Daten oder den Code zuzugreifen.
 
 
 <!--
-style="width: 80%; max-width: 460px; display: block; margin-left: auto; margin-right: auto;"
+style=" width: 70%;
+        max-width: 400x;
+        min-width: 400px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;"
 -->
 ````
   Variablen-     Speicher-      Inhalt
@@ -285,20 +258,21 @@ style="width: 80%; max-width: 460px; display: block; margin-left: auto; margin-r
 ````
 
 
-Welche Vorteile ergeben sich aus der Nutzung von Zeigern, bzw. welche Programmiertechniken
-lassen sich realiseren:
-* dynamische Verwaltung von Speicherbereichen
-* Übergabe von Datenobjekte an Funktionen via "call-by-reference" [^1]
-* Übergabe von Funktionen als Argumente an andere Funktionen
-* Umsetzung rekursiver Datenstrukturen wie Listen und Bäume
+Welche Vorteile ergeben sich aus der Nutzung von Zeigern, bzw. welche
+Programmiertechniken lassen sich realiseren:
+* dynamische Verwaltung von Speicherbereichen,
+* Übergabe von Datenobjekte an Funktionen via "call-by-reference" [^1],
+* Übergabe von Funktionen als Argumente an andere Funktionen,
+* Umsetzung rekursiver Datenstrukturen wie Listen und Bäume.
 
-[^1]: Der Vollständigkeithalber sei erwähnt, dass C anders als C++ keine Referenzen
-im eigentlichen Sinne kennt. Hier ist die Übergabe einer Variablen als Paramter
-in Form einer Adresse gemeint und nicht das Konstrukt "Reference".
+[^1]: Der Vollständigkeithalber sei erwähnt, dass C anders als C++ keine Referenzen im eigentlichen Sinne kennt. Hier ist die Übergabe der Adresse einer Variablen als Parameter gemeint und nicht das Konstrukt "Reference".
 
 ### Definition von Zeigern
 
-Die Definition eines Zeigers besteht aus dem Datentyp des Zeigers und dem gewünschten Zeigernamen. Der Datentyp eines Zeigers besteht wiederum aus dem Datentyp des Werts auf den gezeigt wird sowie aus einem Asterisk. Ein Datentyp eines Zeigers wäre also z. B. `double*`.
+Die Definition eines Zeigers besteht aus dem Datentyp des Zeigers und dem
+gewünschten Zeigernamen. Der Datentyp eines Zeigers besteht wiederum aus dem
+Datentyp des Werts auf den gezeigt wird sowie aus einem Asterisk. Ein Datentyp
+eines Zeigers wäre also z. B. `double*`.
 
 ``` c
 /* kann eine Adresse aufnehmen, die auf einen Wert vom Typ Integer zeigt */
@@ -313,31 +287,37 @@ int *zeiger4, *zeiger5;
 int *zeiger6, ganzzahl;
 ```
 
-### Zuweisung
+### Initialisierung
 
-Die Zuweisung einer Adresse an einen Zeiger erfolgt mithilfe des Adressoperators
-`&`, eines Feldes, eines weiteren Zeigers oder des Wertes von `NULL`.
+> **Merke:** Zeiger müssen vor der Verwendung initialisiert werden.
+
+Der Zeiger kann initialisiert werden durch die Zuweisung:
+* der Adresse einer Variable, wobei die Adresse mit Hilfe des Adressoperators
+  `&` ermittelt wird,
+* eines Arrays,
+* eines weiteren Zeigers oder
+* des Wertes von `NULL`.
 
 ``` c
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
+int main(void)
 {
   int a = 0;
   int * ptr_a = &a;       /* mit Adressoperator */
 
   int feld[10];
-  int * ptr_feld = feld;  /* mit Feld */
+  int * ptr_feld = feld;  /* mit Array */
 
   int * ptr_b = ptr_a;    /* mit weiterem Zeiger */
 
-  int * ptr_Null = NULL;          /* mit NULL */
+  int * ptr_Null = NULL;  /* mit NULL */
 
-  printf("Pointer ptr_a    %p\n", (void*)ptr_a);
-  printf("Pointer ptr_feld %p\n", (void*)ptr_feld);
-  printf("Pointer ptr_b    %p\n", (void*)ptr_b);
-  printf("Pointer ptr_Null %p\n", (void*)ptr_Null);
+  printf("Pointer ptr_a    %p\n", ptr_a);
+  printf("Pointer ptr_feld %p\n", ptr_feld);
+  printf("Pointer ptr_b    %p\n", ptr_b);
+  printf("Pointer ptr_Null %p\n", ptr_Null);
   return EXIT_SUCCESS;
 }
 ```
@@ -350,16 +330,18 @@ Pointer ptr_b    0x7fffc5553eac
 Pointer ptr_Null (nil)
 ```
 
+{{1}}
 Die konkrete Zuordnung einer Variablen im Speicher wird durch den Compiler und
 das Betriebssystem bestimmt. Entsprechend kann die Adresse einer Variablen nicht
 durch den Programmierer festgelegt werden. Ohne Manipulationen ist die Adresse
 einer Variablen über die gesamte Laufzeit des Programms unveränderlich, ist aber
 bei mehrmaligen Programmstarts unterschiedlich.
 
+{{1}}
 Ausgaben von Pointer erfolgen mit `printf("%p", ptr)`, es wird dann eine
-hexadezimale Adresse ausgegeben. Der Pointer muss dafür als `(void *)` gekastet
-werden.
+hexadezimale Adresse ausgegeben.
 
+{{1}}
 Zeiger können mit dem "Wert" `NULL` als ungültig markiert werden. Eine
 Dereferenzierung führt dann meistens zu einem Laufzeitfehler nebst
 Programmabbruch. NULL ist ein Macro und wird in mehreren Header-Dateien
@@ -367,25 +349,28 @@ definiert (mindestens in `stddef.h`). Die Definition ist vom Standard
 implementierungsabhängig vorgegeben und vom Compilerhersteller passend
 implementiert, z. B.
 
+{{1}}
 ``` c
 #define NULL 0
 #define NULL 0L
 #define NULL (void *) 0
 ```
 
+{{2}}
 Und umgekehrt, wie erhalten wir den Wert, auf den der Pointer zeigt? Hierfür
-benötigen wir den _Inhaltsoperator_ `*`.
+benötigen wir den *Inhaltsoperator* `*`.
 
+{{2}}
 ``` c
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
+int main(void)
 {
   int a = 15;
   int * ptr_a = &a;
   printf("Wert von a                     %d\n", a);
-  printf("Pointer ptr_a                  %p\n", (void*)ptr_a);
+  printf("Pointer ptr_a                  %p\n", ptr_a);
   printf("Wert hinter dem Pointer ptr_a  %d\n", *ptr_a);
   *ptr_a = 10;
   printf("Wert von a                     %d\n", a);
@@ -411,12 +396,12 @@ Fehlender Adressopertor bei der Zuweisung
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
+int main(void)
 {
   int a = 5;
   int * ptr_a;
   ptr_a = a;
-  printf("Pointer ptr_a                  %p\n", (void*)ptr_a);
+  printf("Pointer ptr_a                  %p\n", ptr_a);
   printf("Wert hinter dem Pointer ptr_a  %d\n", *ptr_a);
   return EXIT_SUCCESS;
 }
@@ -430,13 +415,15 @@ source_file.c:8:9: warning: assignment makes pointer from integer without a cast
          ^
 ```
 
+{{1}}
 Fehlender Dereferenzierungsoperator beim Zugriff
 
+{{1}}
 ``` c
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
+int main(void)
 {
   int a = 5;
   int * ptr_a = &a;
@@ -457,13 +444,15 @@ source_file.c:9:10: warning: format ‘%d’ expects argument of type ‘int’,
    printf("Wert hinter dem Pointer ptr_a  %d\n", ptr_a);
 ```
 
+{{2}}
 Uninitialierte Pointer zeigen "irgendwo ins nirgendwo"!
 
+{{2}}
 ``` c
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
+int main(void)
 {
   int * ptr_a;
   *ptr_a = 10;
@@ -521,29 +510,33 @@ char    int     float   double  void
 1       4       4       8       1
 ```
 
+{{1}}
 Die Zeigerarithmetik erlaubt:
 
+{{1}}
 * Ganzzahl-Additionen
 * Ganzzahl-Substraktionen
 * Inkrementierungen `ptr_i--;`
 * Dekrementierungen `ptr_i++;`
 
+{{1}}
 Der Compiler wertet dabei den Typ der Variablen aus und inkrementiert bzw.
 dekrementiert die Adresse entsprechend.
 
+{{1}}
 ``` c
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
+int main(void)
 {
   int a[] = {0,1,2,3,4,5};
   int *ptr_a = a;
-  printf("Pointer ptr_a               %p\n", (void*)ptr_a);
+  printf("Pointer ptr_a               %p\n", ptr_a);
   int *ptr_b;
   ptr_b = ptr_a + 1;
   ptr_b ++;
-  printf("Pointer ptr_b               %p\n", (void*)ptr_b);
+  printf("Pointer ptr_b               %p\n", ptr_b);
   printf("Differenz ptr_b -  ptr_a    %ld\n", (long)(ptr_b - ptr_a));
   printf("Differenz ptr_b -  ptr_a    %ld\n", (long)ptr_b - (long)ptr_a);
 
@@ -562,9 +555,11 @@ Differenz ptr_b -  ptr_a    8
 Wert hinter Pointer ptr_b   '2'
 ```
 
+{{2}}
 Was bedeutet das im Umkehrschluss? Eine falsche Deklaration bewirkt ein
 falsches "Bewegungsmuster" über dem Speicher.
 
+{{2}}
 ``` c
 #include <stdio.h>
 #include <stdlib.h>
@@ -574,7 +569,7 @@ int main(void)
   int a[] = {6,7,8,9};
   char * ptr_a = a;
   for (int i=0; i<sizeof(a)/sizeof(int)*4; i++){
-      printf("ptr_a %p -> ", (void*)ptr_a);
+      printf("ptr_a %p -> ", ptr_a);
       printf("%d\n", *ptr_a);
       ptr_a++;
   }
@@ -645,7 +640,7 @@ Jetzt sind die Adressen gleich!
 <!--
 comment: sizeof(char) == 1 ... deshalb kann dieser Anteil entfallen
          sizeof(text)/sizeof(char)
-         Die Warning Message deutet darauf hin, dass nicht klar ist, ob 
+         Die Warning Message deutet darauf hin, dass nicht klar ist, ob
          char ein Vorzeichen hat. Ein Ersetzen mit int illustriert dies.
          Danach kann unsigned eingefügt werden ...
 -->

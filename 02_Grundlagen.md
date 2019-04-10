@@ -6,7 +6,15 @@ version:  0.0.1
 language: de
 narrator: Deutsch Female
 
+
+script: https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js
+
+link:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css
+
+script:  https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts-en.min.js
+
 script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
+
 
 @JSCPP.__eval
 <script>
@@ -39,6 +47,167 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 
 @output: <pre class="lia-code-stdout">@0</pre>
 
+@output_: <pre class="lia-code-stdout" hidden="true">@0</pre>
+
+
+script:   https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js
+
+@Rextester.__eval
+<script>
+//var result = null;
+var error  = false;
+
+console.log = function(e){ send.lia("log", JSON.stringify(e), [], true); };
+
+function grep_(type, output) {
+  try {
+    let re_s = ":(\\d+):(\\d+): "+type+": (.+)";
+
+    let re_g = new RegExp(re_s, "g");
+    let re_i = new RegExp(re_s, "i");
+
+    let rslt = output.match(re_g);
+
+    let i = 0;
+    for(i = 0; i < rslt.length; i++) {
+        let e = rslt[i].match(re_i);
+
+        rslt[i] = { row : e[1]-1, column : e[2], text : e[3], type : type};
+    }
+    return [rslt];
+  } catch(e) {
+    return [];
+  }
+}
+
+$.ajax ({
+    url: "https://rextester.com/rundotnet/api",
+    type: "POST",
+    timeout: 10000,
+    data: { LanguageChoice: @0,
+            Program: `@input`,
+            Input: `@1`,
+            CompilerArgs : @2}
+    }).done(function(data) {
+        if (data.Errors == null) {
+            let warnings = grep_("warning", data.Warnings);
+
+            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
+
+            if(data.Warnings)
+              stats = "\n-------Warn-------\n"+data.Warnings + stats;
+
+            send.lia("log", data.Result+stats, warnings, true);
+            send.lia("eval", "LIA: stop");
+
+        } else {
+            let errors = grep_("error", data.Errors);
+
+            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
+
+            if(data.Warning)
+              stats = data.Errors + data.Warnings + stats;
+            else
+              stats = data.Errors + data.Warnings + stats;
+
+            send.lia("log", stats, errors, false);
+            send.lia("eval", "LIA: stop");
+        }
+    }).fail(function(data, err) {
+        send.lia("log", err, [], false);
+        send.lia("eval", "LIA: stop");
+    });
+
+"LIA: wait"
+</script>
+@end
+
+
+@Rextester.eval: @Rextester.__eval(6, ,"-Wall -std=gnu99 -O2 -o a.out source_file.c")
+
+@Rextester.eval_params: @Rextester.__eval(6, ,"@0")
+
+@Rextester.eval_input: @Rextester.__eval(6,`@input(1)`,"-Wall -std=gnu99 -O2 -o a.out source_file.c")
+
+
+
+@Rextester.pipe
+<script>
+//var result = null;
+var error  = false;
+
+console.log = function(e){ send.lia("log", JSON.stringify(e), [], true); };
+
+function grep_(type, output) {
+  try {
+    let re_s = ":(\\d+):(\\d+): "+type+": (.+)";
+
+    let re_g = new RegExp(re_s, "g");
+    let re_i = new RegExp(re_s, "i");
+
+    let rslt = output.match(re_g);
+
+    let i = 0;
+    for(i = 0; i < rslt.length; i++) {
+        let e = rslt[i].match(re_i);
+
+        rslt[i] = { row : e[1]-1, column : e[2], text : e[3], type : type};
+    }
+    return [rslt];
+  } catch(e) {
+    return [];
+  }
+}
+
+$.ajax ({
+    url: "https://rextester.com/rundotnet/api",
+    type: "POST",
+    timeout: 10000,
+    data: { LanguageChoice: 6,
+            Program: `@input(0)`,
+            Input: `@1`,
+            CompilerArgs : "-Wall -std=gnu99 -O2 -o a.out source_file.c"}
+    }).done(function(data) {
+        if (data.Errors == null) {
+            let warnings = grep_("warning", data.Warnings);
+
+            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
+
+            if(data.Warnings)
+              stats = "\n-------Warn-------\n"+data.Warnings + stats;
+
+            send.lia("log", data.Result+stats, warnings, true);
+
+            @input(1)
+
+            send.lia("eval", "LIA: stop");
+
+        } else {
+            let errors = grep_("error", data.Errors);
+
+            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
+
+            if(data.Warning)
+              stats = data.Errors + data.Warnings + stats;
+            else
+              stats = data.Errors + data.Warnings + stats;
+
+            send.lia("log", stats, errors, false);
+            send.lia("eval", "LIA: stop");
+        }
+    }).fail(function(data, err) {
+        send.lia("log", err, [], false);
+        send.lia("eval", "LIA: stop");
+    });
+
+"LIA: wait"
+</script>
+@end
+
+script:   https://cdn.rawgit.com/davidedc/Algebrite/master/dist/algebrite.bundle-for-browser.js
+
+@algebrite.eval:    <script> Algebrite.run(`@input`) </script>
+
 -->
 
 # Vorlesung II - Grundlagen der Sprache C
@@ -56,6 +225,8 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 * Ist `printf` ein Schlüsselwort der Programmiersprache C?
 * Welche Beschränkung hat `getchar`
 
+[Aktuelle Vorlesung im Versionsmanagementsystem GitHub](https://github.com/liaScript/CCourse/blob/master/02_Grundlagen.md)
+
 **Vorwarnung:** Man kann Variablen nicht ohne Ausgaben und Ausgaben nicht ohne
 Variablen erklären. Deshalb wird im folgenden immer wieder auf einzelne Aspekte
 vorgegriffen. Nach der Vorlesung sollte sich dann aber ein Gesamtbild ergeben.
@@ -70,7 +241,9 @@ Sie können in einem C-Programm folgende Zeichen verwenden:
 
 * Buchstaben des englischen Alphabets
 
-  `A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z`
+  `A B C D E F G H I J K L M N O P Q R S T U V W X Y Z`
+
+  `a b c d e f g h i j k l m n o p q r s t u v w x y z`
 
 * Grafiksymbole
 
@@ -84,33 +257,42 @@ Sie können in einem C-Programm folgende Zeichen verwenden:
       return 0;
   }
   ```
-  @JSCPP.eval
+  @Rextester.eval
 
-![C logo](img/PellesCUmlauteEnglish.png)<!-- width="100%" -->
+![C logo](img/PellesCUmlauteEnglish.png)<!--
+style=" width: 100%;
+        max-width: 800px;
+        min-width: 400px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;"
+-->
 
 
 ## 1. Variablen
 
-> Ein Rechner ist eigentlich ziemlich dumm, dass aber viele Millionen mal pro
-> Sekunde (Zitat - Quelle gesucht!)
+> *Ein Rechner ist eigentlich ziemlich dumm, dass aber viele Millionen mal pro*
+> *Sekunde*
+>
+>Zitat - Quelle gesucht!
 
 ```cpp                     Calculator.c
 #include<stdio.h>
 
-int main() {
+int main(void) {
   printf("%d",43 + 17);
 	return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.eval
 
-Unbefriedigenden Lösung, jede neue Berechnung muss in den Source-Code integriert
+Unbefriedigende Lösung, jede neue Berechnung muss in den Source-Code integriert
 und dieser dann kompiliert werden. Ein Taschenrechner wäre die bessere Lösung!
 
 ```cpp                     QuadraticEquation.c
 #include<stdio.h>
 
-int main() {
+int main(void) {
   int x;
   x = 5;
   printf("f(%d) = %d \n",x, 3*x*x + 4*x + 8);
@@ -119,17 +301,33 @@ int main() {
 	return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.eval
 
+{{1}}
 Ein Programm manipuliert Daten, die in Variablen organisiert werden.
 
+{{1}}
 Eine Variable ist somit ein **abstrakter Behälter** für Inhalte, welche im
 Verlauf eines Rechenprozesses benutzt werden. Im Normalfall wird eine Variable
 im Quelltext durch einen Namen bezeichnet, der die Adresse im Speicher
-repräsentiert.
+repräsentiert. Alle Variablen müssen vor Gebrauch vereinbart werden.
 
+{{1}}
+Mit `const` kann bei einer Vereinbarung der Variable festgelegt werden, dass
+ihr Wert sich nicht ändert.
+
+{{1}}
+```c
+const double e = 2.71828182845905;
+```
+{{1}}
+Weiterer wenig verwendete Typqualifikator ist `volatile`. Er gibt an, dass der
+Wert der Variable sich jederzeit z. B. durch andere Prozesse ändern kann.
+
+{{2}}
 Kennzeichen einer Variable:
 
+{{2}}
 1. Name
 2. Datentyp
 3. Wert
@@ -144,7 +342,7 @@ beachten:
 
 * Das erste Zeichen muss ein Buchstabe sein, der Unterstrich ist auch möglich.
 * C betrachte Groß- und Kleinschreibung - `Zahl` und `zahl` sind also
-  unterschiedliche Variablentypen
+  unterschiedliche Variablennamen.
 * Schlüsselworte (`auto`, `goto`, `return`, etc.) sind als Namen unzulässig.
 
 | Name            | Zulässigkeit                                   |
@@ -165,10 +363,12 @@ Wildwuchs an Bezeichnern vorzubeugen.
 | CamelCase     | `youLikeCamelCase`, `humanDetectionSuccessfull`    |
 | underscores   | `I_hate_Camel_Case`, `human_detection_successfull` |
 
+{{1}}
 Verschiedene Konvention geht noch einen Schritt weiter und verknüpft Datentypen
 (an erster Stelle) und Funktion mit dem Namen (hier abgewandelte
 *ungarische Notation*).
 
+{{1}}
 | Präfix | Datentyp                      | Beispiel     |
 |:-------|:------------------------------|:-------------|
 | n      | Integer                       | `nSize`      |
@@ -180,18 +380,19 @@ Verschiedene Konvention geht noch einen Schritt weiter und verknüpft Datentypen
 | dw     | Double Word, 32 Bit, unsigned | `dwNumber`   |
 | w      | Word, 16 Bit, unsigned        | `wNumber`    |
 
-> Encoding the type of a function into the name (so-called Hungarian notation)
-> is brain damaged – the compiler knows the types anyway and can check those,
-> and it only confuses the programmer.
+{{1}}
+> *Encoding the type of a function into the name (so-called Hungarian notation)*
+> *is brain damaged – the compiler knows the types anyway and can check those,*
+> *and it only confuses the programmer.*
 >
-> (Linus Torvalds)
+> Linus Torvalds
 
 ### Datentypen
 
 Welche Informationen lassen sich mit Blick auf einen Speicherauszug im Hinblick
 auf die Daten extrahieren?
 
-    {{0-1}}
+{{0-1}}
 | Adresse | Speicherinhalt |
 |         | binär          |
 | 0010    | 0000 1100      |
@@ -199,7 +400,7 @@ auf die Daten extrahieren?
 | 0012    | 0001 0000      |
 | 0013    | 1000 0000      |
 
-    {{1-2}}
+{{1-2}}
 | Adresse | Speicherinhalt | Zahlenwert |
 |         |                |  (Byte)    |
 | 0010    | 0000 1100      | 12         |
@@ -207,7 +408,7 @@ auf die Daten extrahieren?
 | 0012    | 0001 0000      | 16         |
 | 0013    | 1000 0000      | 128 (-128) |
 
-    {{2}}
+{{2}}
 | Adresse | Speicherinhalt | Zahlenwert | Zahlenwert | Zahlenwert   |
 |         |                |  (Byte)    | (2 Byte)   | (4 Byte)     |
 | 0010    | 0000 1100      | 12         |            |              |
@@ -226,22 +427,23 @@ auf die Daten extrahieren?
 | 0013    | 1000 0000      | 128 (-128) | 4224       | 217911424    |
 
 
-    {{3}}
+{{3}}
 Der dargestellte Speicherauszug kann aber auch eine Kommazahl (Floating Point)
 umfassen und repräsentiert dann den Wert `3.8990753E-31`
 
-    {{4}}
+{{4}}
 Folglich bedarf es eines expliziten Wissens um den Charakter der Zahl, um eine
 korrekte Interpretation zu ermöglichen. Dabei erfolgt die Einteilung nach:
 
-    {{4}}
+{{4}}
 * Wertebereichen (größte und kleinste Zahl)
 * ggf. vorzeichenbehaftet Zahlen
 * ggf. gebrochene Werte
 
-#### Generische Datentypen
+#### Ganze Zahlen, `char` und `_Bool`
 
-Ganzzahlen sind Zahlen ohne Nachkommastellen mit und ohne Vorzeichen. In C gibt es folgende Typen für Ganzzahlen:
+Ganzzahlen sind Zahlen ohne Nachkommastellen mit und ohne Vorzeichen. In C gibt
+es folgende Typen für Ganzzahlen:
 
 | Schlüsselwort    | Benutzung                       | Mindestgröße       |
 |:-----------------|:--------------------------------|:-------------------|
@@ -250,9 +452,6 @@ Ganzzahlen sind Zahlen ohne Nachkommastellen mit und ohne Vorzeichen. In C gibt 
 | `int`            | Ganzahl (ggf. mit Vorzeichen)   | "natürliche Größe" |
 | `long int`       | Ganzahl (ggf. mit Vorzeichen)   |                    |
 | `long long int`  | Ganzahl (ggf. mit Vorzeichen)   |                    |
-| `float`          | Gebrochener Wert mit Vorzeichen | 4 Byte             |
-| `double`         | Gebrochener Wert mit Vorzeichen | 8 Byte             |
-| `long double`    | Gebrochener Wert mit Vorzeichen |                    |
 | `_Bool`          | boolsche Variable               | 1 Bit              |
 
 ``` c
@@ -276,7 +475,8 @@ short int a; // entspricht short a;
 long int b;  // äquivalent zu long b;
 ```
 
-Standardmäßig wird von vorzeichenbehafteten Zahlenwerten ausgegangen. Somit wird das Schlüsselwort `signed` eigentliche nicht benötigt
+Standardmäßig wird von vorzeichenbehafteten Zahlenwerten ausgegangen. Somit wird
+das Schlüsselwort `signed` eigentliche nicht benötigt
 
 ```cpp
 int a;  //  signed int a;
@@ -301,12 +501,18 @@ char c = 77;   // =  1001101
 char s[] = "Eine kurze Zeichenkette";
 ```
 
-> **Achtung:** Anders als bei anderen Programmiersprachen unterscheidet C
-> zwischen den verschiedenen Anführungsstrichen.
+> **Achtung:** Anders als bei einigen anderen Programmiersprachen unterscheidet
+> C zwischen den verschiedenen Anführungsstrichen.
 
-![C logo](img/ASCII_Zeichensatz.jpeg)<!-- style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
-
-http://www.chip.de/webapps/ASCII-Tabelle_50073950.html
+![C logo](img/ASCII_Zeichensatz.jpeg)<!--
+style=" width: 80%;
+        max-width: 600px;
+        min-width: 400px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;"
+-->
+Quelle: [ASCII-Tabelle](http://www.chip.de/webapps/ASCII-Tabelle_50073950.html)
 
     --{{1}}--
 Erweiterung erfährt `char` mit der Überarbeitung des C-Standards 1994. Hier
@@ -315,32 +521,56 @@ das auch Zeichensätze aufnehmen kann, die mehr als 1 Byte für die Codierung
 eines Zeichen benötigen (beispielsweise Unicode-Zeichen). Siehe `wchar_t` oder
 `wprintf`.
 
+#### Sonderfall `Bool`
+Seit dem C99 Standard existiert ein spezieller Datentyp `_Bool` für binäre
+Variablen. Zuvor konnte das Wertepaar `true` (für wahr) und `false` (für falsch)
+verwendet werden, die in der Headerdatei `<stdbool.h>` mit der Konstante 1 und 0 definiert sind.
 
-#### Architekturspezifische Ausprägung
+```cpp                     BoolExample.c
+#include <stdio.h>
+#include <stdbool.h>
+
+int main() {
+   _Bool a = true;
+   _Bool b = false;
+   _Bool c = 45;
+
+   printf("a = %i, b = %i, c = %i\n", a, b, c);
+   return 0;
+}
+```
+
+``` bash @output
+▶ ./a.out
+a = 1, b = 0, c=1
+```
+
+Sinnvoll sind boolsche Variablen insbesondere im Kontext von logischen
+Ausdrücken. Diese werden zum späteren Zeitpunkt eingeführt.
+
+#### Architekturspezifische Ausprägung (Integer Datentypen)
 
 Der Operator `sizeof` gibt Auskunft über die Größe eines Datentyps oder einer
 Variablen in Byte.
 
-**Integer Datentypen**
-
 ```cpp                     sizeof.c
 #include <stdio.h>
 
-int main()
+int main(void)
 {
   int x;
   printf("x umfasst %d Byte.", (unsigned int)sizeof x);
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.eval
 
 
 ```cpp                     sizeof_example.c
 #include <stdio.h>
 #include <limits.h>   /* INT_MIN und INT_MAX */
 
-int main() {
+int main(void) {
    printf("int size : %d Byte\n", (unsigned int) sizeof( int ) );
    printf("Wertebereich von %d bis %d\n", INT_MIN, INT_MAX);
    printf("char size : %d Byte\n", (unsigned int) sizeof( char ) );
@@ -358,28 +588,113 @@ char size : 1 Byte
 Wertebereich von -128 bis 127
 ```
 
-**Fließkommazahlen**
+{{1}}
+Die implementierungspezifische Werte, wie die Grenzen des Wertebereichs der
+ganzzahlinen Datentypen sind in `limits.h` definiert, z.B.
 
-Zur Darstellung von Fließkommazahlen sagt der C-Standard nichts aus. Zur
-konkreten Realisierung ist die Headerdatei `float.h` auszuwerten.
+{{1}}
+| Makro    | Wert                   |
+|:---------|:-----------------------|
+|CHAR_MIN  |-128                    |
+|CHAR_MAX  |+127                    |
+|SHRT_MIN  |-32768                  |
+|SHRT_MAX  |+32767                  |
+|INT_MIN   |-2147483648             |
+|INT_MAX   |+2147483647             |
+|LONG_MIN  |-9223372036854775808    |
+|LONG_MAX  |+9223372036854775807    |
 
+
+#### Was passiert bei der Überschreitung des Wertebereiches
+
+> Der Arithmetische Überlauf (arithmetic overflow) tritt auf, wenn das Ergebnis
+> einer Berechnung für den gültigen Zahlenbereich zu groß ist, um noch richtig
+> interpretiert werden zu können.
+
+![instruction-set](./img/2Komplement.png)<!--
+style=" width: 80%;
+        max-width: 500px;
+        min-width: 250px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;"
+-->
+
+Quelle: [Arithmetischer Überlauf (Autor: WissensDürster)](https://de.wikipedia.org/wiki/Arithmetischer_%C3%9Cberlauf#/media/File:4Bi-2Komplement.svg)
+
+{{1}}
+```cpp                     Overflow.c
+#include <stdio.h>
+#include <limits.h>   /* SHRT_MIN und SHRT_MAX */
+
+int main(){
+  short a = 30000;
+  short c;
+  unsigned short d;
+  //unsigned c;
+  printf("unsigned short - Wertebereich von %d bis %d\n", 0, USHRT_MAX);
+  printf("short - Wertebereich von %d bis %d\n", SHRT_MIN, SHRT_MAX);
+  c = 3 * a;
+  printf("c=%d\n", c);
+  d = 3 * a;
+  printf("c=%d\n", d);
+}
+```
+{{1}}
+``` bash @output
+▶ ./a.out
+unsigned short - Wertebereich von 0 bis 65535
+short - Wertebereich von -32768 bis 32767
+c=-5536
+c=24464
+```
+
+{{1}}
+Ganzzahlüberläufe in der fehlerhaften Bestimmung der Größe eines
+Puffers oder in der Adressierung eines Feldes können es einem Angreifer
+ermöglichen den Stack zu überschreiben.
+
+####Fließkommazahlen
+
+Fließkommazahlen sind Zahlen mit Nachkommastellen (reelle Zahlen).
 Im Gegensatz zu Ganzzahlen gibt es bei den Fließkommazahlen keinen Unterschied
 zwischen vorzeichenbehafteten und vorzeichenlosen Zahlen. Alle Fließkommazahlen
 sind in C immer vorzeichenbehaftet.
 
-| Schlüsselwort    | Wertebereich                     |
-|:-----------------|:---------------------------------|
-| `float`          | größte Zahl 3.4028234664e+38     |
-| `char`           | kleinste Zahl 1.1754943508e-38   |
+In C gibt es zur Darstellung reeller Zahlen folgende Typen:
 
-> **ACHTUNG:** Fließkommazahlen bringen neben den Maximal und Minimalwerten noch
-> einen weiteren Faktor mit - die Unsicherheit
+| Schlüsselwort    | Mindestgröße            |
+|:-----------------|:------------------------|
+| `float`          | 4 Byte                  |
+| `double`         | 8 Byte                  |
+| `long double`    | je nach Implementierung |
 
+``` c
+float <= double <=  long double
+```
+
+Gleitpunktzahlen werden halb logarithmisch dargestellt. Die Darstellung basiert
+auf die Zerlegung in drei Teile: ein Vorzeichen, eine Mantisse und einen
+Exponenten zur Basis 2.
+
+Zur Darstellung von Fließkommazahlen sagt der C-Standard nichts aus. Zur
+konkreten Realisierung ist die Headerdatei `float.h` auszuwerten.
+
+|                        |`float`           |`double`                |
+|:-----------------------|:-----------------|------------------------|
+| kleinste positive Zahl |1.1754943508e-38  |2.2250738585072014E-308 |
+| Wertebereich           |±3.4028234664e+38 |±1.7976931348623157E+308|
+
+{{1}}
+> **Achtung:** Fließkommazahlen bringen einen weiteren Faktor mit
+>  - die Unsicherheit
+
+{{1}}
 ```cpp                     float_precision.c
 #include<stdio.h>
 #include<float.h>
 
-int main() {
+int main(void) {
 	printf("float Genauigkeit  :%d \n", FLT_DIG);
 	printf("double Genauigkeit :%d \n", DBL_DIG);
 	float x = 0.1;
@@ -392,6 +707,7 @@ int main() {
 }
 ```
 
+{{1}}
 ``` bash @output
 ▶ gcc float_comparism.c
 ▶ ./a.out
@@ -400,6 +716,30 @@ double Genauigkeit :15
 Ungleich
 ```
 
+#### Datentyp `void`
+
+`void` wird im C-Standard als „unvollständiger Typ“ bezeichnet,
+umfasst eine leere Wertemenge und wird verwendet überall dort, wo kein
+Wert vorhanden oder benötigt wird.
+
+Anwendungsbeispiele:
+
+* Rückgabewert einer Funktion
+* Parameter einer Funktion
+* anonymer Zeigertyp `void*`
+
+```cpp  
+int main(void) {
+	//Anweisungen
+  return 0;
+}
+```
+
+```cpp  
+void funktion(void) {
+	//Anweisungen
+}
+```
 
 #### Spezifische Datentypen
 
@@ -444,17 +784,54 @@ unsigned short     2.9580  2.1010  0.7495  2.3240
 
 Zahlenliterale können in C mehr als Ziffern umfassen!
 
+|*decimal-digits*       |`0` `1` `2` `3` `4` `5` `6` `7` `8` `9`|
+|*octal-prefix*         |`0`                                    |
+|*octal-digits*         |`0` `1` `2` `3` `4` `5` `6` `7`        |
+|*hexadecimal-prefix*   |`0x` `0X`                              |
+|*hexadecimal-digits*   |`0` `1` `2` `3` `4` `5` `6` `7` `8` `9`|
+|                       |`a` `b` `c` `d` `e` `f`                |
+|                       |`A` `B` `C` `D` `E` `F`                |
+|*unsigned-suffix*      |`u` `U`                                |
+|*long-suffix*          |`l` `L`                                |
+|*long-long-suffix*     |`ll` `LL`                              |
+|*fractional-constant*  |`.`                                    |
+|*exponent-part*        |`e` `E`                                |
+|*binary-exponent-part* |`p` `P`                                |
+|*sign*                 |`+` `-`                                |
+|*floating-suffix*      |`f` `l` `F` `L`                        |
+
+
+
 |  Zahlentyp | Dezimal       | Oktal         | Hexadezimal  |
 |:-----------|:--------------|---------------|--------------|
 | Eingabe    | x             | x             | x            |
 | Ausgabe    | x             | x             | x            |
-| Beispiel   | `12`          | `020`         | `0x20`       |
-|            | `1234.342`    |               | `0X1a`       |
+| Beispiel   | `12`          | `011`         | `0x12`       |
+|            | `0.123`       |               | `0X1a`       |
+|            | `123e-2`      |               | `0xC.68p+2`  |
+|            | `1.23F`       |               |              |
 
+{{1}}
+`Variable = (Vorzeichen)(Zahlensystem)[Wert](Typ);`
+
+{{1}}
+| Literal      | Bedeutung                              |
+|:-------------|:---------------------------------------|
+| 12           | Ganzzahl vom Typ `int`                 |
+| -234L        | Ganzzahl vom Typ `signed long`         |
+| 100000000000 | Ganzzahl vom Typ `long`                |
+| 011          | Ganzzahl also oktale Zahl (Wert $9_d$) |
+| 0x12         | Ganzzahl ($18_d$)                      |
+| 1.23F        | Fließkommazahl vom Typ `float`         |
+| 0.132        | Fließkommazahl vom Typ `double`        |
+| 123e-2       | Fließkommazahl vom Typ `double`        |
+| 0xC.68p+2    | hexadizimale Fließkommazahl vom Typ `double` |
+
+{{1}}
 ```cpp                     NumberFormats.c
 #include <stdio.h>
 
-int main()
+int main(void)
 {
   int x=020;
   int y=0x20;
@@ -464,44 +841,40 @@ int main()
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.eval
 
 ### Adressen
 
-Um einen Zugriff auf die Adresse einer Variablen zu haben, kann man den Operator `&`
-nutzen. Gegenwärtig ist noch nicht klar, warum dieser Zugriff erforderlich ist,
-wird aber in einer der nächsten Veranstaltungen verdeutlicht.
+> **Merke:** Einige Anweisungen, wie z.B. `scanf`, verwenden Adressen von
+> Variablen.
+
+Um einen Zugriff auf die Adresse einer Variablen zu haben, kann man den Operator
+`&` nutzen. Gegenwärtig ist noch nicht klar, warum dieser Zugriff erforderlich
+ist, wird aber in einer der nächsten Veranstaltungen verdeutlicht.
 
 ```cpp                     Pointer.c
 #include <stdio.h>
 
-int main()
+int main(void)
 {
   int x=020;
-  //              cast operator
-  //               |  Adressoperator
-  //               |   |
-  printf("%p\n",(void*)&x);
+  printf("%p\n",&x);
   return 0;
 }
 ```
-
-``` bash @output
-▶ ./a.out
-0x7ffef853c3f4
-```
+@Rextester.eval
 
 ### Sichtbarkeit und Lebensdauer von Variablen
 
-**Lebensdauer**
+**Automatische Lebensdauer**
 
-Die Lebensdauer einer Variablen gilt immer bis zum Ende des Anweisungsblockes,
+Die Lebensdauer einer Variablen gilt bis zum Ende des Anweisungsblockes,
 in dem sie definiert wurde.
 
 ```cpp                           lifespan.c
 #include<stdio.h>
 
-int main(){
+int main(void){
   {
     int v;
     v = 2;
@@ -511,16 +884,41 @@ int main(){
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.eval
 
-**Sichtbarkeit**
+Die automatischen Variablen können mit dem Schlüsselwort `auto` deklariert
+werden, aber auch ohne Schlüsselwort sind "lokale" Variable "automatisch".  
+
+**Statische Lebensdauer**
+
+Die Variable wird einmal deklariert, initialisiert und existiert während der
+gesamten Programmausführung.
+
+`static`-Variablen behalten ihren Wert nach dem Verlassen des Funktionsblocks, weil sie nicht im Stacksegment, sondern im Datensegment gespeichert werden.
+Diese Interpretation des Schlüsselworts `static` gilt aber nur für die innerhalb eines Blocks definierten Variablen. Eine besondere Bedeutung haben die
+`static`-Variablen im Zusammenhang mit Funktionen, werden deswegen in der
+Funktionen gewidmeten Vorlesung behandelt.
+
+    {{1}}
+Nicht diskutiert wird an dieser Stellen die Lebensdauer von thread- und
+allocated-Variablen.
+
+    {{1}}
+**`register`-Variablen**
+
+    {{1}}
+Das Schlüsselwort `register` weist den Compiler an, eine Variable so lange wie
+möglich im Prozessorregister zu halten. Die Entscheidung darüber trifft der
+Compiler letztendlich selbst.
+
+####Lokale Variablen
 
 Bis C99 musste eine Variable immer am Anfang eines Anweisungsblocks vereinbart
 werden. Nun genügt es, die Variable unmittelbar vor der ersten Benutzung zu
 vereinbaren.
 
-Variablen *leben* innerhalb einer Funktion, eine Schleife oder einfach nur ein
-durch geschwungene Klammern begrenzter Block von Anweisungen.
+Variablen *leben* innerhalb einer Funktion, einer Schleife oder einfach nur
+innerhalb eines durch geschwungene Klammern begrenzten Blocks von Anweisungen.
 
 Wird eine Variable/Konstante z. B. im Kopf einer Schleife vereinbart, gehört sie
 laut C99-Standard zu dem Block, in dem auch der Code der Schleife steht.
@@ -529,7 +927,7 @@ Folgender Codeausschnitt soll das verdeutlichen:
 ```cpp                           visibility.c
 #include<stdio.h>
 
-int main()
+int main(void)
 {
   int v = 1;
   int w = 5;
@@ -543,9 +941,9 @@ int main()
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.eval
 
-**Globale Variablen**
+####Globale Variablen
 
 Muss eine Variable immer innerhalb von `main` definiert werden? Nein, allerdings
 sollten globale Variablen vermieden werden.
@@ -553,15 +951,19 @@ sollten globale Variablen vermieden werden.
 ```cpp                           visibility.c
 #include<stdio.h>
 
-int main()
+int v = 1; /*globale Variable*/
+
+int main(void)
 {
-  int v = 1;
   printf("%d\n", v);
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.eval
 
+Sichtbarkeit und Lebensdauer spielen beim Definieren neuer Funktionen eine
+wesentliche Rolle und werden in einer weiteren Vorlesung in diesem
+Zusammenhang nochmals behandelt.
 
 ### Definition vs. Deklaration vs. Initialisierung
 
@@ -571,7 +973,9 @@ int main()
 > Definition ist die Reservierung des Speicherplatzes. Initialisierung ist die
 > Zuweisung eines ersten Wertes.
 
-**Merke:** Jede Definition ist gleichzeitig eine Deklaration aber nicht umgekehrt!
+
+> **Merke:** Jede Definition ist gleichzeitig eine Deklaration aber nicht
+> umgekehrt!
 
 ```cpp                     DeclarationVSDefinition.c
 extern int a;      // Deklaration
@@ -581,7 +985,7 @@ i = 5;             // Initialisierung
 ```
 
 Das Schlüsselwort `extern` in obigem Beispiel besagt, dass die Definition der
-Variablen a irgendwo in einem anderen Modul des Programms liegt. So deklariert
+Variablen `a` irgendwo in einem anderen Modul des Programms liegt. So deklariert
 man Variablen, die später beim Binden (Linken) aufgelöst werden. Da in diesem
 Fall kein Speicherplatz reserviert wurde, handelt es sich um keine Definition.
 
@@ -593,20 +997,20 @@ Fall kein Speicherplatz reserviert wurde, handelt es sich um keine Definition.
 #include<stdio.h>
 
 void foo() {
-  int a;     // <- Fehlende Initialisierung dynamische Variable
+  int a;     // <- Fehlende Initialisierung
   printf("a=%d ", a);
 }
 
-int main() {
+int main(void) {
   int x = 5;
   printf("x=%d ", x);
-  int y;     // <- Fehlende Initialisierung statische Variable
+  int y;     // <- Fehlende Initialisierung
   printf("y=%d ", y);
   foo();
 	return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.eval
 
 ``` bash @output
 ▶ gcc -Wall experiments.c
@@ -620,24 +1024,25 @@ experiments.c:12:3: warning: ‘y’ is used uninitialized in this function [-Wu
    ^
 ```
 
-    {{0}}
 Der C++, der für diese Webseite zum Einsatz kommt initialisiert offenbar alle
 Werte mit 0 führen Sie dieses Beispiel aber einmal mit einem richtigen Compiler
 aus.
 
-
+{{1}}
 **Redeklaration**
 
+{{1}}
 ```cpp                     Redeclaration.c
 #include<stdio.h>
 
-int main() {
+int main(void) {
   int x;
   int x;
   return 0;
 }
 ```
 
+{{1}}
 ``` bash @output
 ▶ gcc -Wall doubleDeclaration.c
 
@@ -649,24 +1054,28 @@ doubleDeclaration.c:4:7: note: previous declaration of ‘x’ was here
    int x;
 ```
 
+{{2}}
 **Falsche Zahlenliterale**
 
+{{2}}
 ```cpp                     wrong_float.c
 #include<stdio.h>
 
-int main() {
+int main(void) {
   float a=1,5;   /* FALSCH  */
   float b=1.5;   /* RICHTIG */
   return 0;
 }
 ```
 
-**Was passiert wenn der WERT zu groß ist?**
+{{3}}
+**Was passiert wenn der Wert zu groß ist?**
 
+{{3}}
 ```cpp                     TooLarge.c
 #include<stdio.h>
 
-int main() {
+int main(void) {
   short a;
   a = 0xFFFF + 2;
   printf("Schaun wir mal ... %hi\n", a);
@@ -674,6 +1083,7 @@ int main() {
 }
 ```
 
+{{3}}
 ``` bash @output
 ▶ gcc -Wall experiments.c
 experiments.c: In function ‘main’:
@@ -684,17 +1094,65 @@ experiments.c:5:7: warning: overflow in implicit constant conversion [-Woverflow
 Was steckt drin 1
 ```
 
-## 2. Input-/ Output Operationen
+## 2. Compiler
+
+**Warnings mit PellesC**
+
+![PellesC Nützlichkeit von Warnings](img/PellesCWarnings.jpeg)<!--
+style=" width: 100%;
+        max-width: 800px;
+        min-width: 400px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;"
+-->
+
+
+> **Hinweis:** Unterschiedliche Compiler verwenden unterschieldliche
+> Konfigurationen und generieren unterschiedliche Ergebnisse!
+
+{{1}}
+| Name            | Bezeichnung                                  |
+|:----------------|:---------------------------------------------|
+| Gnu C Compiler  | Linux "Standard" C Compiler (auch in cygwin) |
+|                 |[Dokumentation](https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html) |
+|                 
+|[Erläuterung zu den Warning Konfigurationen](https://kristerw.blogspot.com/2017/09/useful-gcc-warning-options-not-enabled.html) |
+| LLC (in PellesC) | `Local C Compiler` or `Little C Compiler`   |
+|                 
+|[Dokumentation](https://sites.google.com/site/lccretargetablecompiler/lccmanpage) |
+| Microsoft Compiler | enthalten im Microsoft Studio              |
+|                    
+|[Dokumentation](https://msdn.microsoft.com/de-de/library/19z1t1wy.aspx) |
+
+{{2}}
+**Zeilennummern**
+
+{{2}}
+![PellesCLineNumbers.jpeg](img/PelleCLineNumbers.jpeg)<!--
+style=" width: 100%;
+        max-width: 800px;
+        min-width: 400px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;"
+-->
+
+
+## 3. Input-/ Output Operationen
 
 Ausgabefunktionen wurden bisher genutzt, um den Status unserer Programme zu
-dokumentieren. Nun soll dieser Mechanismus systematisiert und erweitert werden
-[^1].
+dokumentieren. Nun soll dieser Mechanismus systematisiert und erweitert werden.
 
-![C logo](img/EVA-Prinzip.png)<!-- width="100%" -->
-
-[^1]: Programmiervorgang und Begriffe (Quelle:
-      https://de.wikipedia.org/wiki/EVA-Prinzip#/media/File:EVA-Prinzip.svg
-      (Autor Deadlyhappen))
+![EVA-Prinzip](img/EVA-Prinzip.png)<!--
+style=" width: 100%;
+        max-width: 600px;
+        min-width: 400px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;"
+-->
+Quelle: [EVA-Prinzip (Autor:  Deadlyhappen)](https://de.wikipedia.org/wiki/EVA-Prinzip#/media/File:EVA-Prinzip.svg)
 
 ### `printf`
 
@@ -713,7 +1171,9 @@ printf(55);      // Falsch
 printf("55");    // Korrekt
 ```
 
-Dabei kann der String um entsprechende Parameter erweitert werden. Jeder Parameter nach dem String wird durch einen Platzhalter in dem selben repäsentiert.
+Dabei kann der String um entsprechende Parameter erweitert werden. Jeder
+Parameter nach dem String wird durch einen Platzhalter in dem selben
+repäsentiert.
 
 ```cpp                             printf_example.c
 #include <stdio.h>
@@ -728,7 +1188,7 @@ int main(){
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.eval
 
                                  {{1-3}}
 | Zeichen        | Umwandlung                                              |
@@ -745,10 +1205,10 @@ int main(){
 | `%%`           | Prozentzeichen                                          |
 
 
-    {{2-3}}
+{{2-3}}
 Welche Formatierungmöglichkeiten bietet `printf` noch?
 
-    {{2-3}}
+{{2-3}}
 + die Feldbreite
 + ein Flag
 + durch einen Punkt getrennt die Anzahl der Nachkommstellen (Längenangabe) und
@@ -771,7 +1231,7 @@ int main(){
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.eval
 
 #### Formatierungsflags
 
@@ -781,7 +1241,7 @@ int main(){
 | `+`               | Vorzeichen ausgeben                 |
 | Leerzeichen       | Leerzeichen                         |
 | `0`               | numerische Ausgabe mit 0 aufgefüllt |
-| `#`               | für `%x` wird ein x in die Hex-Zahl eingefügt, für `%e` oder `%f` ein Dezimaltrenner (.) |
+| `#`               | für `%x` wird ein x in die Hex-Zahl eingefügt, für `%e`oder `%f` ein Dezimaltrenner (.) |
 
 ```cpp                             printf_flag_examples.c
 #include <stdio.h>
@@ -796,11 +1256,13 @@ int main(){
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.eval
 
 #### Genauigkeit
 
- Bei %f werden ansonsten standardmäßig 6 Nachkommastellen ausgegeben. Mit %a.bf kann eine genauere Spezifikation erfolgen. a steht für die Feldbreite, b für die Nachkommastellen
+ Bei `%f` werden standardmäßig 6 Nachkommastellen ausgegeben. Mit `%a.bf` kann
+ eine genauere Spezifikation erfolgen. `a` steht für die Feldbreite, `b` für die
+ Nachkommastellen.
 
 ```cpp                             printf_flag_examples.c
 #include <stdio.h>
@@ -812,19 +1274,19 @@ int main(){
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.eval
 
-#### Escape Sequenzen
+#### Escape-Sequenzen
 
 | Sequenz | Bedeutung             |
 |:--------|:----------------------|
 | `\n`    | newline               |
 | `\b`    | backspace             |
-| `\r`    | carriage Return       |
+| `\r`    | carriage return       |
 | `\t`    | horizontal tab        |
-| `\\\`   | Backslash             |
-| `\'`    | Single quotation mark |
-| `\"`    | Double quotation mark |
+| `\\\`   | backslash             |
+| `\'`    | single quotation mark |
+| `\"`    | double quotation mark |
 
 ```cpp                             printf_esc_sequences.c
 #include <stdio.h>
@@ -838,7 +1300,7 @@ int main(){
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.eval
 
 ### `getchar`
 
@@ -859,12 +1321,19 @@ int main(){
 ``` text                  stdin
 T
 ```
-@JSCPP.eval_input
+@Rextester.eval_input
 
-Problem: Es lassen sich immer nur einzelne Zeichen erfassen, die durch `Enter`
-bestätigt wurden. Als flexiblere Lösung lässt sich `scanf` anwenden.
+Problem: Es lassen sich immer nur einzelne Zeichen erfassen, die durch
+Enter-Taste bestätigt wurden. Als flexiblere Lösung lässt sich `scanf` anwenden.
 
 ### `scanf`
+
+Format-String der `scanf`-Anweisung kann folgendes enthalten:
+
+* % specifier
+* count  of input characters
+* length modifier (`hh` `h` `l` `ll`)
+* conversion specifier
 
 ```cpp                     scanf_getNumbers.c
 #include <stdio.h>
@@ -874,8 +1343,8 @@ int main(){
   float a;
   char b;
   printf("Bitte folgende Werte eingeben %%c %%f %%d: ");
-  scanf(" %c %f %4d", &b, &a, &i);
-  printf("%c %f %d\n", b, a, i);
+  scanf("%c %f %4d", &b, &a, &i);
+  printf("%d %c %f %d\n", b, a, i);
   return 0;
 }
 ```
@@ -886,7 +1355,47 @@ int main(){
 Bitte folgende Werte eingeben %c %f %d: A -234.24324 234562
 A -234.243240 2345
 ```
+-------------------------------------------------
 
+`scanf` erlaubt auch die sofortige Evaluation von Eingaben anhand vordefinierter
+Ausdrücke, um diese vorzufiltern.
+
+[switch to editor ...](https://github.com/liaScript/CCourse/blob/master/codeExamples/scanf_check.c)
+
+{{1}}
+Und noch was neues ...dank rextester wird LiaScript jetzt noch leistungsfähiger
+
+{{1}}
+[https://rextester.com/](https://rextester.com/)
+
+{{1}}
+```cpp                          nDimArray.c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+  printf("Jetzt kann ich alles was die Konsole kann!\n");
+  printf("Probier es aus!\n");
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.eval
+
+{{1}}
+``` bash @output_
+Jetzt kann ich alles was die Konsole kann!
+Probier es aus!
+```
+
+{{1}}
+| Ausgaben              | Bedeutung                         |
+|:----------------------|:----------------------------------|
+| Compilation time      | Dauer der Übersetzung             |
+| absolute running time | Ausführungsdauer auf dem Server   |
+| cpu time              | Echte Laufzeit des Programms      |
+| memory peak           | Größe des angeforderten Speichers |
+| absolute service time | Dauer der Gesamtanfrage           |
+---------------------------------------------------------------------
 
 ## Ausblick
 
@@ -899,4 +1408,4 @@ int main() {
 	return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.eval

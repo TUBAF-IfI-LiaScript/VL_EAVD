@@ -56,39 +56,42 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 * Recherchieren Sie Beispiele, in denen `goto`-Anweisungen Bugs generierten.
 
 --------------------------------------------
-Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
+[Aktuelle Vorlesung im Versionsmanagementsystem GitHub](https://github.com/liaScript/CCourse/blob/master/04_Kontrollstrukturen.md)
 
-https://github.com/liaScript/CCourse/blob/master/04_Kontrollstrukturen.md
-
-------------------------------------------------
-
+----------------------------------------------------------------------
+{{1}}
 **Wie weit sind wir schon gekommen?**
 
+{{1}}
 ANSI C (C89)/ Schlüsselwörter:
 
+{{1}}
 | Standard    |                |          |            |          |            |
 |:------------|:---------------|:---------|:-----------|:---------|:-----------|
-| **C89/C90** | auto           | `double` | `int`      | struct   | break      |
+| **C89/C90** | `auto`         | `double` | `int`      | struct   | break      |
 |             | else           | `long`   | switch     | case     | enum       |
-|             | register       | typedef  | `char`     | extern   | return     |
-|             | union          | const    | `float`    | `short`  | `unsigned` |
+|             | `register`     | typedef  | `char`     | `extern` | return     |
+|             | union          | `const`  | `float`    | `short`  | `unsigned` |
 |             | continue       | for      | `signed`   | `void`   | default    |
-|             | goto           | `sizeof` | volatile   | do       | if         |
-|             | static         | while    |            |          |            |
-| **C99**     | `_Bool`          | _Complex | _Imaginary | inline   | restrict   |
+|             | goto           | `sizeof` | `volatile` | do       | if         |
+|             | `static`       | while    |            |          |            |
+| **C99**     | `_Bool`        | _Complex | _Imaginary | inline   | restrict   |
 | **C11**     | _Alignas       | _Alignof | _Atomic    | _Generic | _Noreturn  |
 |             |_Static\_assert | \_Thread\_local | |   |          |            |
 
+{{1}}
 Standardbibliotheken
 
+{{1}}
 | Name         | Bestandteil | Funktionen                           |
 |:-------------|:------------|:-------------------------------------|
-| `<stdio.h>`  |             | Input/output (`printf`)              |
+| `<stdio.h>`  |             | Input/output                         |
 | `<stdint.h>` | (seit C99)  | Integer Datentypen mit fester Breite |
 | `<float.h>`  |             | Parameter der Floatwerte             |
 | `<limits.h>` |             | Größe der Basistypen                 |
 
-https://en.cppreference.com/w/c/header
+    {{1}}
+[C standard library header files](https://en.cppreference.com/w/c/header)
 
 
 ## 1. Cast-Operatoren
@@ -97,7 +100,7 @@ https://en.cppreference.com/w/c/header
 > kann entweder automatisch durch den Compiler vorgenommen oder durch den
 > Programmierer angefordert werden.
 
-Im erstgenannten Fall spricht man von
+Im erst genannten Fall spricht man von
 
 * impliziten Datentypumwandlung, im zweiten von
 * expliziter Typumwandlung.
@@ -108,7 +111,7 @@ sein!
 
 ### Implizite Datentypumwandlung
 
-Operanden dürfen in C einen Variablen mit unterschiedlichen Datentyp verknüpfen.
+Operanden dürfen in C eine Variable mit unterschiedlichen Datentyp verknüpfen.
 Die implizite Typumwandlung generiert einen gemeinsamen Datentyp, der in einer
 Rangfolge am weitesten oben steht. Das Ergebnis ist ebenfalls von diesem Typ.
 
@@ -121,8 +124,8 @@ Dabei sind einschränkende Konvertierungskonfigurationen kritisch zu sehen:
 
 * Bei der Umwandlung von höherwertigen Datentypen in niederwertigere Datentypen
   kann es zu Informationsverlust kommen.
-* Der Verleich von `signed`- und `unsigned`-Typen kann falsch sein. So kann
-  beispielsweise `-1 > 1U` wahr sein.
+* Der Verleich von `signed`- und `unsigned`-Typen kann zum falschen Ergebnis
+  führen. So kann beispielsweise `-1 > 1U` wahr sein.
 
 ```cpp                     NumberFormats.c
 #include <stdio.h>
@@ -133,30 +136,51 @@ int main()
   unsigned int limit = 200;
 
   if ( i < limit )
-    printf(" i < limit \n");
+    printf(" i < limit \n");  
   return 0;
 }
 ```
 @JSCPP.eval
 
+{{1}}
+**Konvertierung zu `_Bool`**
 
-* Die Division zweier `int`-Werte gibt immer nur einen Ganzzahlanteil zurück.
-  Hier findet keine automatische Konvertierung in eine Gleitpunktzahl statt.
-* die Umwandlung eines negativen Wertes in einen Typ ohne Vorzeichen
-+ Bei der Umwandlung von ganz großen Zahlen (beispielsweise `long long`) in
-  einen Gleitpunkttyp kann es passieren, dass die Genauigkeit nicht mehr
-  ausreicht, um die Zahl genau darzustellen.
+{{1}}
+> *6.3.1.2  When any scalar value is converted to _Bool, the result is 0 if the*
+> *value compares equal to 0; otherwise, the result is 1*
+>
+> C99 Standard
 
+{{1}}
+**Konvertierung zum `int`-Typ**
+
+{{1}}
+Beim Konvertieren des Wertes von einem in das andere `int`-Typ
+
+{{1}}
+* bleibt der Wert unverändert, wenn die Darstellung im Zieltyp möglich ist,
+* anderenfalls ist das Ergebnis implementierungabhängig bzw. führt zu einer
+  Fehlermeldung
+
+{{2}}
 **Vermischen von Ganzzahl und Gleitkommawerten**
 
-> 6.3.1.4 Real floating and integer - When a finite value of real floating type
-> is converted to an integer type other than `_Bool`, the fractional part is
-> discarded (i.e., the value is truncated toward zero). If the value of the
-> integral part cannot be represented by the integer type, the behavior is
-> undefined.
->
-> __C99 Standard__
+{{2}}
+* Die Division zweier `int`-Werte gibt immer nur einen Ganzzahlanteil zurück.
+  Hier findet keine automatische Konvertierung in eine Gleitpunktzahl statt.
+* Bei der Umwandlung von ganz großen Zahlen (beispielsweise `long long`) in
+  einen Gleitpunkttyp kann es passieren, dass die Zahl nicht mehr darzustellbar ist.
 
+{{2}}
+> *6.3.1.4 Real floating and integer - When a finite value of real floating type*
+> *is converted to an integer type other than `_Bool`, the fractional part is*
+> *discarded (i.e., the value is truncated toward zero). If the value of the*
+> *integral part cannot be represented by the integer type, the behavior is*
+> *undefined.*
+>
+> C99 Standard
+
+{{2}}
 ```cpp                     NumberFormats.c
 #include <stdio.h>
 
@@ -170,12 +194,10 @@ int main()
 ```
 @JSCPP.eval
 
-Die Headerdatei `<fenv.h>` definiert verschiedene Einstellungen für das Rechnen
-mit Gleitpunktzahlen. Unter anderem können Sie das Rundungsverhalten von
-Gleitpunkt-Arithmetiken über entsprechende Makros anpassen.
-
+{{3}}
 > **Achtung:** Implizite Typumwandlung bergen erhebliche Risiken in sich!
 
+{{3}}
 ```cpp                     Overflow.c
 #include <stdio.h>
 
@@ -189,16 +211,24 @@ int main()
 }
 ```
 
+{{3}}
 ``` bash @output
 ▶ ./a.out
 float value = -3.140000 / Integer-Anteil -3
 float value = -3.140000 / Integer-Anteil 4294967293
 ```
 
+{{3}}
+Die Headerdatei `<fenv.h>` definiert verschiedene Einstellungen für das Rechnen
+mit Gleitpunktzahlen. Unter anderem können Sie das Rundungsverhalten von
+Gleitpunkt-Arithmetiken über entsprechende Makros anpassen.
+
+
+
 ### Explizite Datentypumwandlung
 
-Anders als bei der impliziten Typumwandlung bei der expliziten Typumwandlung der
-Zieldatentyp konkret im Code angegeben.
+Anders als bei der impliziten Typumwandlung wird bei der expliziten
+Typumwandlung der Zieldatentyp konkret im Code angegeben.
 
 ```c
 (Zieltyp) ausdruck;
@@ -219,7 +249,11 @@ int main()
 ```
 @JSCPP.eval
 
-## 2. Kontrollfluß
+Im Beispiel wird in der ersten `printf`-Anweisung das Ergebnis der ganzzahlegen
+Division `i/j` in `float` konvertiert, in der zweiten `printf`-Anweisung die
+Variable `i`.
+
+## 2. Kontrollfluss
 
 Bisher haben wir Programme entworfen, die eine sequenzielle Abfolge von
 Anweisungen enthielt.
@@ -237,10 +271,10 @@ Anweisungen enthielt.
   ┗━━━━━━━━━━━━━━┛
 ````
 
-Diese Einschränkung wollen wir nun in 3 Formen überwinden:
+Diese Einschränkung wollen wir nun mit Hilfe weiterer Anweisungen überwinden:
 
-1. **Verzweigungen**: In Abhängigkeit von einer Bedingung wird der Programmfluß
-   an unterschiedlichen Stellen fortgesetzt.
+1. **Verzweigungen (Selektion)**: In Abhängigkeit von einer Bedingung wird der
+   Programmfluss an unterschiedlichen Stellen fortgesetzt.
 
    Beispiel: Wenn bei einer Flächenberechnung ein Ergebnis kleiner Null
    generiert wird, erfolgt eine Fehlerausgabe. Sonst wird im Programm
@@ -253,41 +287,63 @@ Diese Einschränkung wollen wir nun in 3 Formen überwinden:
    bestimmen. Wenn der letzte Eintrag erreicht ist, wird der Durchlauf
    abgebrochen und das Ergebnis ausgegeben.
 
-3. **Sprünge**: Die Programmausführung wird mithilfe von Sprungmarken an einer
-   anderen Position fortgesetzt.
 
-   Beispiel: Statt die nächste Anweisung auszuführen wird (zunächst) an eine
-   ganz andere Stelle im Code gesprungen.
+Des Weiteren verfügt C über **Sprünge**: die Programmausführung wird mit Hilfe
+von Sprungmarken an einer anderen Position fortgesetzt. Formal sind sie jedoch
+nicht notwendig.
+
+Beispiel: Statt die nächste Anweisung auszuführen, wird (zunächst) an eine ganz
+andere Stelle im Code gesprungen.
 
 ### Verzweigungen
 
 Verzweigungen entfalten mehrere mögliche Pfade für die Ausführung des Programms.
-__EINE__ Möglichkeit der Strukturierung für diese spezifische Zuordnung der
-Anweisung zu bestimmten Bedingungen sind Nassi-Shneidermann Diagramme
-[Link](https://de.wikipedia.org/wiki/Nassi-Shneiderman-Diagramm) gemäß DIN
+**EINE** Möglichkeit der Strukturierung für diese spezifische Zuordnung der
+Anweisung zu bestimmten Bedingungen sind [Nassi-Shneidermann Diagramme](https://de.wikipedia.org/wiki/Nassi-Shneiderman-Diagramm) gemäß DIN
 66261.
 
 ---
 
 Beispiel für eine mehrstufige Verzweigung (`if`)
 
-![Nassi_LineareAnw.png](img/Nassi_MehrfAusw.png)<!-- style="width: 300px;" -->[^1]
+![Nassi_LineareAnw.png](img/Nassi_MehrfAusw.png)<!--
+style=" width: 60%;
+        max-width: 400px;
+        min-width: 200px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;"
+-->
 
 ---
 
 Beispiel für eine mehrfache Verzweigung (`switch`)
 
-![Nassi_LineareAnw.png](img/Nassi_switch.png)<!-- width="900px" -->[^1]
+![Nassi_LineareAnw.png](img/Nassi_MehrfAusw1.png)<!--
+style=" width: 100%;
+        max-width: 700px;
+        min-width: 400px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;"
+-->
 
-[^1]: Nassi-Shneidermann Diagramme (Quelle:
-      https://de.wikipedia.org/wiki/Nassi-Shneiderman-Diagramm#/media/File:LineareAnw.png
-      (Autor Renzsorf))
+---
+
+
+<!--- Kommentar? img/Nassi_switch.png --->
+
+
+Quelle: [Nassi-Shneiderman-Diagramm (Autor Renzsorf)](https://de.wikipedia.org/wiki/Nassi-Shneiderman-Diagramm)
 
 #### `if`-Anweisungen
 
-Im einfachsten Fall definiert die `if`-Anweisung eine einzelne bedingte
+Im einfachsten Fall enthält die `if`-Anweisung eine einzelne bedingte
 Anweisung oder einen Anweisungsblock. Sie kann mit `else` um eine Alternative
 erweitert werden.
+
+Zum Anweisungsblock werden die Anweisungen mit geschweiften Klammern (`{` und
+`}`) zusammengefasst.
 
 ```c
 if(Bedingung) Anweisung;  // <- Einzelne Anweisung
@@ -308,8 +364,10 @@ else
   Anweisung;
 ```
 
+{{1}}
 Mehrere Fälle können verschachtelt abgefragt werden:
 
+{{1}}
 ```c
 if(Bedingung)
   Anweisung;
@@ -320,6 +378,7 @@ else
     Anweisung;
 ```
 
+{{1}}
 ```cpp                     IfExample.c
 #include <stdio.h>
 
@@ -334,11 +393,14 @@ int main(){
 ```
 @JSCPP.eval
 
+{{2}}
 **Weitere Beispiele für Bedingungen**
 
-Die Bedingungen können als logische UND artithmetische Operationen / Vergleiche
+{{2}}
+Die Bedingungen können als logische UND arithmetische Ausdrücke
 formuliert werden.
 
+{{2}}
 | Ausdruck     | Bedeutung                                       |
 |--------------|-------------------------------------------------|
 | `if (a)`     | `if (a != 0)`                                   |
@@ -347,18 +409,30 @@ formuliert werden.
 | `if ((a-b))` | `ìf (a != b)`                                   |
 | `if (a & b)` | $a>0$, $b>0$, mindestens ein $i$ mit $a_i==b_i$ |
 
+{{3}}
 **Mögliche Fehlerquellen**
 
+{{3}}
 1. Zuweisungs- statt Vergleichsoperator in der Bedingung (kein Compilerfehler)
 2. Bedingung ohne Klammern (Compilerfehler)
 3. `;` hinter der Bedingung (kein Compilerfehler)
 4. Multiple Anweisungen ohne Anweisungsblock
 5. Komplexität der Statements
 
+{{4}}
 **Beispiel**
 
-![robotMaze.jpeg](img/robotMaze.jpeg)<!-- width="100%" -->
+{{4}}
+![robotMaze.jpeg](img/robotMaze.jpeg)<!--
+style=" width: 80%;
+        max-width: 600px;
+        min-width: 400px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;"
+-->
 
+{{4}}
 | WL  | WG  | WR  | Verhalten                  |
 |:----|:----|:----|:---------------------------|
 | 0   | 0   | 0   | Vorwärts                   |
@@ -370,7 +444,7 @@ formuliert werden.
 | 1   | 1   | 0   | Drehung 180 Grad, Vorwärts |
 | 1   | 1   | 1   | Drehung 180 Grad, Vorwärts |
 
-
+{{5}}
 ```cpp                     IfExample.c
 #include <stdio.h>
 
@@ -387,19 +461,25 @@ int main(){
 ```
 @JSCPP.eval
 
+{{5}}
 **Sehen Sie mögliche Vereinfachungen des Codes?**
 
 #### `switch`-Anweisungen
 
-*"Too many ifs - I think I switch"* [^1](http://www.peacesoftware.de/ckurs7.html)
+> [*Too many ifs - I think I switch* ](http://www.peacesoftware.de/ckurs7.html)
+>
+> Berndt Wischnewski
 
 Eine übersichtlichere Art der Verzweigung für viele, sich ausschließende
 Bedingungen wird durch die `switch`-Anweisung bereitgestellt. Sie wird in der
-Regel verwendet, wenn eine unter vielen Bedingungen ausgewählt werden soll.
+Regel verwendet, wenn eine oder einige unter vielen Bedingungen ausgewählt
+werden sollen. Das Ergebnis der "expression"-Auswertung soll eine Ganzzahl
+(oder `char`-Wert) sein. Stimmt es mit einem "const_expr"-Wert
+überein, wird die Ausführung an dem entsprechenden `case`-Zweig fortgesetzt.
 Trifft keine der Bedingungen zu, wird der `default`-Fall aktiviert.
 
 ```c
-switch(Variable)
+switch(expression)
  {
    case const-expr: Anweisung break;
    case const-expr:
@@ -410,6 +490,7 @@ switch(Variable)
  }
 ```
 
+{{1}}
 ```cpp                     SwitchExample.c
 #include <stdio.h>
 
@@ -444,11 +525,12 @@ int main() {
 ```
 @JSCPP.eval_input
 
+{{2}}
 Im Unterschied zu einer `if`-Abfrage wird in den unterschiedlichen Fällen immer
 nur auf Gleichheit geprüft! Eine abgefragte Konstante darf zudem nur einmal
-abgefragt werden.
+abgefragt werden und muss ganzzahlig oder `char` sein.
 
-
+{{2}}
 ```cpp
 // Fehlerhafte case Blöcke
 switch(x)
@@ -457,17 +539,19 @@ switch(x)
      y = 1000;
   break;
 
-  case x > 100: // das ist genauso falsch
+  case 100.1: // das ist genauso falsch
      y = 5000;
      z = 3000;
   break;
 }
 ```
 
+{{3}}
 Und wozu brauche ich das `break`? Ohne das `break` am Ende eines Falls werden
 alle darauf folgenden Fälle bis zum Ende des `switch` oder dem nächsten `break`
 zwingend ausgeführt.
 
+{{3}}
 ```cpp                     SwitchBreak.c
 #include <stdio.h>
 
@@ -491,8 +575,11 @@ int main() {
 ```
 @JSCPP.eval
 
-Unter Ausnutzung von `break` können Kategorien definiert werden, die aufeinander aufbauen. dann übergreifend "aktiviert" werden.
+{{4}}
+Unter Ausnutzung von `break` können Kategorien definiert werden, die aufeinander
+aufbauen und dann übergreifend "aktiviert" werden.
 
+{{4}}
 ```cpp                     MovementDetection.c
 #include <stdio.h>
 
@@ -523,12 +610,12 @@ int main() {
 ### Schleifen
 
 Schleifen dienen der Wiederholung von Anweisungsblöcken – dem sogenannten
-Schleifenrumpf oder Schleifenkörper –, solange die Schleifenbedingung als
+Schleifenrumpf oder Schleifenkörper – solange die Schleifenbedingung als
 Laufbedingung gültig bleibt bzw. als Abbruchbedingung nicht eintritt. Schleifen,
 deren Schleifenbedingung immer zur Fortsetzung führt oder die keine
 Schleifenbedingung haben, sind *Endlosschleifen*.
 
-Schleifen können verschachtelt werden. Eine innerhalb eines Schleifenkörpers
+Schleifen können verschachtelt werden, d.h. innerhalb eines Schleifenkörpers
 können weitere Schleifen erzeugt und ausgeführt werden. Zur Beschleunigung des
 Programmablaufs werden Schleifen oft durch den Compiler entrollt (*Enrollment*).
 
@@ -538,13 +625,13 @@ Diagrammen wie folgt darstellen:
 * Iterationssymbol
 
   ````
-    __________________________________________________________________
-   |                                                                  |
-   |  zähle [Variable] von [Startwert] bis [Endwert], Schrittweite 1  |
-   |  ________________________________________________________________|
-   | |                                                                |
-   | |  Anweisungsblock 1                                             |
-   |_|________________________________________________________________|
+    _____________________________________________________________________
+   |                                                                     |
+   |  zähle [Variable] von [Startwert] bis [Endwert], mit [Schrittweite] |
+   |  ___________________________________________________________________|
+   | |                                                                   |
+   | |  Anweisungsblock 1                                                |
+   |_|___________________________________________________________________|
   ````
 
 * Wiederholungsstruktur mit vorausgehender Bedingungsprüfung
@@ -573,16 +660,17 @@ Diagrammen wie folgt darstellen:
 
 
 Die Programmiersprache C kennt diese drei Formen über die Schleifenkonstrukte
-`for`, `while`, `do while`.
+`for`, `while` und `do while`.
 
 
 #### `for`-Schleife
 
-Der Parametersatz der `for`-Schleife besteht aus maximal 2 Anweisungen und einer
-Bedingungen. Mit diesen wird ein  **Schleifenzähler** initiert, dessn
+Der Parametersatz der `for`-Schleife besteht aus zwei Anweisungsblöcken und einer
+Bedingung, die durch Semikolons getrennt werden. Mit diesen wird ein  
+**Schleifenzähler** initiert, dessen
 Manipulation spezifiziert und das Abbruchkriterium festgelegt. Häufig wird die
-Variable mit jedem Durchgang inkrementiert oder dekrementiert, um dann anahd des
-zweiten Ausdruck evaluiert zu werden. Es wird überprüft, ob die Schleife
+Variable mit jedem Durchgang inkrementiert oder dekrementiert, um dann anhand
+eines Ausdrucks evaluiert zu werden. Es wird überprüft, ob die Schleife
 fortgesetzt oder abgebrochen werden soll. Letzterer Fall tritt ein, wenn dieser
 den Wert 0 annimmt – also der Ausdruck false (falsch) ist.
 
@@ -612,14 +700,17 @@ int main(){
 ```
 @JSCPP.eval
 
+{{1}}
 **Beliebte Fehlerquellen**
 
-* Semikolon hinter der schließenden Klammner von `for`
-* Kommas anstatt Semikolon zwischen den Parametern von `for`
+{{1}}
+* Semikolon hinter der schließenden Klammer von `for`
+* Kommas anstatt Semikolons zwischen den Parametern von `for`
 * fehlerhafte Konfiguration von Zählschleifen
-* vergessen, dass die Zählvariable nach dem Ende der Schleife über dem
-  Abbruchkriterium liegt.
+* Nichtberücksichtigung der Tatsache, dass die Zählvariable nach dem Ende der
+  Schleife über dem Abbruchkriterium liegt
 
+{{1}}
 ```cpp                     SemicolonAfterFor.c
 #include <stdio.h>
 
@@ -637,7 +728,7 @@ int main(){
 #### `while`-Schleife
 
 Während bei der `for`-Schleife auf ein n-maliges Durchlaufen Anweisungsfolge
-konfiguriert wird, definiert die `while`-Schleife nur ein Bedingung für den
+konfiguriert wird, definiert die `while`-Schleife nur eine Bedingung für den
 Fortführung/Abbruch.
 
 ```c
@@ -676,9 +767,11 @@ Prozedurale Programmierung_
 Anzahl der Leerzeichen: 3
 ```
 
-Dabei sollte erwähnt werden, dass eine `while`-Schleife eine `for`-Schleife
+{{1}}
+Dabei soll erwähnt werden, dass eine `while`-Schleife eine `for`-Schleife
 ersetzen kann.
 
+{{1}}
 ```cpp
 // generisches Format der while-Schleife
 i = 0;
@@ -687,7 +780,7 @@ while (i<10){
    i++;
 }
 
-for (i==0; i<10; i++){
+for (i=0; i<10; i++){
    // Anweisungen;
 }
 ```
@@ -707,7 +800,7 @@ do
 Welche Konsequenz hat das? Die `do-while`-Schleife wird in jedem Fall einmal
 ausgeführt.
 
-
+{{1}}
 ```cpp                     GetChar.c
 #include <stdio.h>
 
@@ -734,10 +827,11 @@ int main(){
 }
 ```
 
-#### Kontrollierte Sprünge aus Schleifen
+### Kontrolliertes Verlassen der Anweisungen
 
-Zum vorzeitigen Verlassen der Schleife kann in allen drei Fällen `break` benutzt
-werden. Damit wird aber nur die unmittelbar umgebende Schleife beendet!
+Bei allen drei Arten der Schleifen kann zum vorzeitigen Verlassen der Schleife
+ `break` benutzt werden. Damit wird aber nur die unmittelbar umgebende Schleife
+ beendet!
 
 ```cpp                     breakForLoop.c
 #include <stdio.h>
@@ -754,10 +848,12 @@ int main(){
 ```
 @JSCPP.eval
 
+{{1}}
 Eine weitere wichtige Eingriffsmöglichkeit für Schleifenkonstrukte bietet
 `continue`. Damit wird nicht die Schleife insgesamt, sondern nur der aktuelle
-Ausführung gestoppt.
+Durchgang gestoppt.
 
+{{1}}
 ```cpp                     continueForLoop.c
 #include <stdio.h>
 
@@ -772,16 +868,22 @@ int main(){
 ```
 @JSCPP.eval
 
+{{2}}
+Durch `return`- Anweisung wird das Verlassen einer Funktion veranlasst (genaues
+in der Vorlesung zu Funktionen).
+
 ### GoTo or not GoTo?
 
 `Goto` erlaubt es Sprungmarken (Labels) zu definieren und bei der Anweisung, die
-diese referenziert die Ausführung fortzusetzen. Konsequenterweise ist damit aber
+diese referenziert, die Ausführung fortzusetzen. Konsequenterweise ist damit aber
 eine nahezu beliebige Auflösung der Ordnung des Codes möglich.
 
-> Use of `goto` statement is highly discouraged in any programming language
-> because it makes difficult to trace the control flow of a program, making the
-> program hard to understand and hard to modify. Any program that uses a `goto`
-> can be rewritten to avoid them.
+>  *Use of `goto` statement is highly discouraged in any programming language*
+>  *because it makes difficult to trace the control flow of a program, making*
+>  *the program hard to understand and hard to modify. Any program that uses a*
+> * `goto` can be rewritten to avoid them.*
+>
+> [Tutorialspoint](https://www.tutorialspoint.com/cprogramming/c_goto_statement.html)
 
 ```cpp                     gotoExample.c
 #include <stdio.h>
@@ -802,15 +904,29 @@ aber eigentlich nichts damit zu tun
 [Apple-SSL Bug](http://www.spiegel.de/netzwelt/web/goto-fail-apples-furchtbarer-fehler-a-955154.html)
 
 
+## Darstellung von Algorithmen
+
+* Nassi-Shneiderman-Diagramme
+* [Flußdiagramme](https://de.wikipedia.org/wiki/Programmablaufplan)
+
+[Beispiel eines Flussdiagramms (Autor: Erik Streb)](https://de.wikipedia.org/wiki/Programmablaufplan#/media/File:Flowchart_de.svg)
+
+![Programmablaufplan.png](img/Programmablaufplan.png)<!--
+style="width: 80%;
+       max-width: 330px;
+       display: block;
+       margin-left: auto;
+       margin-right: auto;" -->
+
 ## Beispiel des Tages
 
 Das Codebeispiel des Tages führt die Berechnung eines sogenannten magischen
 Quadrates vor.
 
-Das Lösungsbeispiel stammt von der Webseite https://rosettacode.org die für das
-konkrete Problem
-[Link](https://rosettacode.org/wiki/Magic_squares_of_odd_order#C) und viele
-andere "Standardprobleme" Lösungen in unterschiedlichen Sprachen präsentiert.
+Das Lösungsbeispiel stammt von der Webseite https://rosettacode.org, die für das
+Problem
+["magic square"](https://rosettacode.org/wiki/Magic_squares_of_odd_order#C) und
+viele andere "Standardprobleme" Lösungen in unterschiedlichen Sprachen präsentiert.
 Sehr lesenswerte Sammlung!
 
 ```cpp                     magicSquare.c
