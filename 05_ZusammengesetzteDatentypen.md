@@ -53,103 +53,60 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 * Wie vergleichen Sie zwei `structs`?
 
 ---------------------------------------------------------------------
-Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
+[Aktuelle Vorlesung im Versionsmanagementsystem GitHub](https://github.com/liaScript/CCourse/blob/master/05_ZusammengesetzteDatentypen.md)
 
-https://github.com/liaScript/CCourse/blob/master/05_ZusammengesetzteDatentypen.md
+----------------------------------------------------------------------
 
----------------------------------------------------------------------
-
-![PellesCLineNumbers.jpeg](img/PelleCLineNumbers.jpeg)<!-- width="100%" -->
-
----------------------------------------------------------------------
-
+{{1}}
 **Wie weit sind wir schon gekommen?**
 
+{{1}}
 ANSI C (C89)/ Schlüsselwörter:
 
+{{1}}
 | Standard    |                |          |            |          |            |
 |:------------|:---------------|:---------|:-----------|:---------|:-----------|
-| **C89/C90** | auto           | `double` | `int`      | struct   | `break`    |
+| **C89/C90** | `auto`         | `double` | `int`      | struct   | `break`    |
 |             | `else`         | `long`   | `switch`   | `case`   | enum       |
-|             | register       | typedef  | `char`     | extern   | return     |
-|             | union          | const    | `float`    | `short`  | `unsigned` |
+|             | `register`     | typedef  | `char`     | `extern` | return     |
+|             | union          | `const`  | `float`    | `short`  | `unsigned` |
 |             | `continue`     | `for`    | `signed`   | `void`   | `default`  |
-|             | `goto`         | `sizeof` | volatile   | `do`     | `if`       |
-|             | static         | `while`  |            |          |            |
+|             | `goto`         | `sizeof` | `volatile` | `do`     | `if`       |
+|             | `static`       | `while`  |            |          |            |
 | **C99**     | `_Bool`        | _Complex | _Imaginary | inline   | restrict   |
 | **C11**     | _Alignas       | _Alignof | _Atomic    | _Generic | _Noreturn  |
 |             |_Static\_assert | \_Thread\_local | |   |          |            |
 
----
-
+{{1}}
 Standardbibliotheken
 
+{{1}}
 | Name         | Bestandteil | Funktionen                           |
 |:-------------|:------------|:-------------------------------------|
-| `<stdio.h>`  |             | Input/output (`printf`)              |
+| `<stdio.h>`  |             | Input/output                         |
 | `<stdint.h>` | (seit C99)  | Integer Datentypen mit fester Breite |
 | `<float.h>`  |             | Parameter der Floatwerte             |
 | `<limits.h>` |             | Größe der Basistypen                 |
 | `<fenv.h>`   |             | Verhalten bei Typumwandlungen        |
 
-https://en.cppreference.com/w/c/header
-
-
-## 0. Wiederholung
-
-**Logische Operatoren**
-
-```cpp                     ArrayExample.c
-#include <stdio.h>
-
-int main() {
-  if (0 && 2) printf("Aussage 1 ist wahr\n");
-  else printf("Aussage 1 ist falsch\n");
-  if (5 & 2) printf("Aussage 2 ist wahr\n");
-  else printf("Aussage 2 ist falsch\n");
-  return 0;
-}
-```
-@JSCPP.eval
-
-| Operator | Bedeutung         | Rückgabewert  |
-|:---------|:------------------|---------------|
-| `&&`     | Logische *und* Operation | {0,1}  |
-|          | Ganzzahlen ungleich "0" werden als *wahr* interpretiert, "0" als *falsch* |  |
-| `&`      | Bitweiser *und* Operation | `int`  |
-|          | Sofern eine Übereinstimmung an einer Stelle auftritt, ergibt sich die zugehörige Ganzzahl als Ergebnis. |  |
-
-
-**Darstellung von Schleifen und Verzweigungen**
-
-* Nassi-Shneiderman-Diagramme
-* Flußdiagramme[^1]
-
-
-![Programmablaufplan.png](img/Programmablaufplan.png)<!--
-style="width: 80%;
-       max-width: 330px; display: block; margin-left: auto; margin-right: auto;" -->
-
-
-
-[^1]: Nassi-Shneidermann Diagramme (Quelle:
-      https://de.wikipedia.org/wiki/Programmablaufplan#/media/File:Flowchart_de.svg
-      (Autor Erik Streb))
+{{1}}
+[C standard library header files](https://en.cppreference.com/w/c/header)
 
 ## 1. Aufzählungen
 
-Enumerationen, kurz `enums` dienen der Definition bestimmter Sets von Elementen,
+Enumerationen, kurz `enum`, dienen der Definition bestimmter Sets von Elementen,
 die eine Variable überhaupt annehmen kann. Wenn wir zum Beispiel die Farben
-einer Ampel in einem Programm handhaben wollen sind dies lediglich "Rot", "Gelb"
+einer Ampel in einem Programm handhaben wollen, sind dies lediglich "Rot", "Gelb"
 und "Grün". Im Schachspiel sind nur die Figuren "Bauer", "Pferd", "Springer",
 "Turm", "Dame" und "König" definiert.
 
-Die Definition eines Aufzählungsdatentyps `enum` hat die Form
+Die Definition eines Aufzählungsdatentyps `enum` hat die Form wie im folgenden
+Beispiel:
 
 ```cpp
 #include <stdio.h>
 
-int main() {
+int main(void) {
   enum { karo, herz, pik, kreuz};                // Beispiel der Farben beim Skat
   // const int kreuz=0, pik=1, karo=2, herz=3;   // Analoge Anweisung
   int karte = karo;
@@ -163,13 +120,15 @@ int main() {
 Wert der Karte: 0
 ```
 
+{{1}}
 Möglicherweise sollen den Karten aber auch konkrete Werte zugeordnet werden,
 die bestimmte Wertigkeiten reflektieren.
 
+{{1}}
 ```cpp
 #include <stdio.h>
 
-int main() {
+int main(void) {
        // Beispiel der Farben beim Skat
   enum { karo=9, herz=10, pik=11, kreuz=12};
   int karte = karo;
@@ -178,9 +137,11 @@ int main() {
 }
 ```
 
+{{1}}
 An dieser Stelle sind Sie aber frei, was die eigentlichen Werte angeht. Es sind
 zum Beispiel Konfigurationen möglich wie
 
+{{1}}
 ```cpp
 enum { karo=9, herz=10, pik=11, kreuz=12};
 enum { karo=9, herz, pik, kreuz};            // Gleiches Resultat
@@ -189,12 +150,17 @@ enum { karo=9, herz, pik=123, kreuz};        // implizit kreuz = 124
 
 ## 2. Arrays
 
-Bisher umfassten unsere Variablen einzelne Skalare. Arrays erweitern das Spektrum um
-Folgen von Werten, die in n-Dimensionen aufgestellt werden können. Die Deklaration
-erfolgt in folgender Anweisung:
+Bisher umfassten unsere Variablen einzelne Skalare. Arrays erweitern das
+Spektrum um Folgen von Werten, die in n-Dimensionen aufgestellt werden können.
+Array ist eine geordnete Folge von Werten des gleichen Datyps.
+Die Deklaration erfolgt in folgender Anweisung:
 
 ```text
 Datentyp Variablenname[Anzahl_der_Elemente];
+```
+
+```cpp
+int a[6];
 ```
 
 | `a[0]` | `a[1]` | `a[2]` | `a[3]` | `a[4]` | `a[5]` |
@@ -203,23 +169,31 @@ Datentyp Variablenname[Anzahl_der_Elemente];
 ```text
 Datentyp Variablenname[Anzahl_der_Elemente_Dim0][Anzahl_der_Elemente_Dim1];
 ```
+
+```cpp
+int a[3][5];
+```
+
 | `a[0][0]` | `a[0][1]` | `a[0][2]` | `a[0][3]` | `a[0][4]` |
 | `a[1][0]` | `a[1][1]` | `a[1][2]` | `a[1][3]` | `a[1][4]` |
 | `a[2][0]` | `a[2][1]` | `a[2][2]` | `a[2][3]` | `a[2][4]` |
 
 
 > **Achtung 1:** Im hier beschriebenen Format muss zum Zeitpunkt der Übersetzung
-> die Größe des Arrays (Anzahl_der_Elemente) bekannt sein.
+> die Größe des Arrays (Anzahl\_der\_Elemente) bekannt sein.
 
 > **Achtung 2:** Der Variablenname steht nunmehr nicht für einen Wert sondern
 > für die Speicheradresse des ersten Feldes!
 
-### Deklaration, Definition, Initialisierung
+### Deklaration, Definition, Initialisierung, Zugriff
+
+Initialisierung und genereller Zugriff auf die einzelnen Elemente des Arrays
+sind über einen Index möglich.
 
 ```cpp                     ArrayExample.c
 #include <stdio.h>
 
-int main() {
+int main(void) {
   int a[3];       // Array aus 3 int Werten
   a[0] = -2;
   a[1] = 5;
@@ -234,13 +208,14 @@ int main() {
 ```
 @JSCPP.eval
 
+{{1}}
+Wie können Arrays noch initialisiert werden?
 
-Wie werden arrays initialisiert?
-
+{{1}}
 ```cpp                     ArrayExample.c
 #include <stdio.h>
 
-int main() {
+int main(void) {
   int a[] = {5, 2, 2, 5, 6};   // Alternative Form der Initialisierung
   float b[5] = {1.0};
   for (int i=0; i<5; i++){
@@ -251,13 +226,15 @@ int main() {
 ```
 @JSCPP.eval
 
+{{2}}
 Und wie bestimme ich den erforderlichen Speicherbedarf bzw. die Größe des
 Arrays?
 
+{{2}}
 ```cpp                     ArrayExample.c
 #include <stdio.h>
 
-int main() {
+int main(void) {
   int a[3];
   printf("\nNur zur Speicherplatz [Byte] %d", sizeof(a));
   printf("\nZahl der Elemente %d\n", sizeof(a)/sizeof(int));
@@ -266,12 +243,12 @@ int main() {
 ```
 @JSCPP.eval
 
-### Fehlerquelle Nummer 1
+### Fehlerquelle Nummer 1 - out of range
 
 ```cpp                     ArrayExample.c
 #include <stdio.h>
 
-int main() {
+int main(void) {
   int a[3];
   a[0] = -2; a[1] = 5; a[2] = 99;
   for (int i=0; i<=3; i++)
@@ -292,15 +269,15 @@ experiments.c:8:3: note: containing loop
 ```
 
 
-### Anwendung
+### Anwendung eines eindimesionalen Arrays
 
-Schreiben Sie ein Programm, dass zwei Vektoren miteinander vergleicht. Warum ist
+Schreiben Sie ein Programm, das zwei Vektoren miteinander vergleicht. Warum ist
 die intuitive Lösung `a == b` nicht korrekt, wenn `a` und `b` arrays sind?
 
 ```cpp                     ArrayExample.c
 #include <stdio.h>
 
-int main() {
+int main(void) {
   int a[] = {0, 1, 2, 4, 3, 5, 6, 7, 8, 9};
   int b[10];
   for (int i=0; i<10; i++)
@@ -317,9 +294,15 @@ Welche Verbesserungsmöglichkeiten sehen Sie bei dem Programm?
 
 ### Mehrdimensionale Arrays
 
+Deklaration:
+
 ```cpp
 int Matrix[4][5];    /* Zweidimensional - 4 Zeilen x 5 Spalten */
+```
 
+Deklaration mit einer sofortigen Initialisierung aller bzw. einiger Elemente:
+
+```cpp
 int Matrix[4][5] = { {1,2,3,4,5},
                      {6,7,8,9,10},
                      {11,12,13,14,15},
@@ -333,23 +316,100 @@ int Matrix[4][4] = { {1,},
 int Matrix[4][4] = {1,2,3,4,5,6,7,8};
 ```
 
-### Anwendungen
+{{1}}
+Initialisierung eines n-dimensionalen Arrays:
 
-Multiplikation zweier Matrizen:
+{{1}}
+![Matrix](img/2DArray.jpg)<!--
+style=" width: 90%;
+        max-width: 800px;
+        min-width: 400px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;"
+-->
 
-https://www.codewithc.com/c-program-for-gauss-elimination-method/
+{{2}}
+```cpp                          nDimArray.c
+#include <stdio.h>
+
+int main(void) {
+  // Initiallisierung
+  int brett[8][8] = {0};
+  // Zuweisung
+  brett[2][1] = 1;
+  brett[4][2] = 2;
+  brett[3][5] = 3;
+  brett[6][7] = 4;
+  // Ausgabe
+  int i, j;
+  // Schleife fuer Zeilen, Y-Achse
+  for(i=0; i<8; i++) {
+  	// Schleife fuer Spalten, X-Achse
+  	for(j=0; j<8; j++) {
+  		printf("%d ", brett[i][j]);
+  	}
+  	printf("\n");
+  }
+  return 0;
+}
+```
+
+{{2}}
+``` bash @output
+▶ ./a.out
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 1 0 0 0 0 0 0
+0 0 0 0 0 3 0 0
+0 0 2 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 4
+0 0 0 0 0 0 0 0
+```
+
+{{2}}
+Quelle: [C-Kurs](http://www.c-howto.de/tutorial/arrays-felder/zweidimensionale-felder/)
+
+
+
+### Anwendung eines zweidimesionalen Arrays
+
+Addition zweier Matrizen
+
+```cpp
+int main(void)
+{
+    int A[2][3]={{1,2,3},{4,5,6}};
+    int B[2][3]={{10,20,30},{40,50,60}};
+	int C[2][3];
+	int i,j;
+	for (i=0;i<2;i++)
+		for (j=0;j<3;j++)
+			C[i][j]=A[i][j]+B[i][j];
+	for (i=0;i<2;i++)
+	{
+		for (j=0;j<3;j++)
+			printf("%d\t",C[i][j]);
+		printf("\n");
+	}
+    return 0;
+}
+```
+
+[Multiplikation zweier Matrizen](https://www.codewithc.com/c-program-for-gauss-elimination-method/)
 
 
 ### Strings/Zeichenketten
 
-Eine besondere Form der Arrays sind die sogenannten *Strings*, die vom Datentyp
-`char` sind - Damit alles sich Folgen von Zeichen repräsentieren, wobei am Ende
-eine ein abschließende `\0` folgt.
+Folgen von Zeichen, die sogenannten *Strings* werden in C durch Arrays mit
+Elementen vom Datentyp `char` repräsentiert. Die Zeichenfolgen werden mit
+`\0` abgeschlossen.
 
 ```cpp                                         stringarray.c
 #include <stdio.h>
 
-int main() {
+int main(void) {
   printf("Diese Form eines Strings haben wir bereits mehrfach benutzt!\n");
   // Alternativ
   char a[50];
@@ -367,10 +427,42 @@ int main() {
 ```
 @JSCPP.eval
 
-### Anwendung
+{{1}}
+Beispiel einer fehlerhaften Verwendung eines `const char` Arrays
 
-Schreiben Sie ein Programm, dass in einem Text großgeschriebene Buchstaben
-durch kleingeschriebene ersetzt und umgekehrt.
+{{1}}
+```cpp                     arrayInitVsAssignment.c
+#include <stdio.h>
+#include <string.h>       // notwendig für strcpy
+
+int main(void) {
+  const char a[] = "Das ist der Originaltext";
+  strcpy(a, "Das ist ein neuer Text");
+  printf("%s\n",a);
+  return 0;
+}
+```
+
+{{1}}
+``` bash @output
+▶ gcc arrayInitVsAssignment.c
+experiments.c: In function ‘main’:
+experiments.c:6:10: warning: passing argument 1 of ‘strcpy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+   strcpy(a, "Das ist ein neuer Text");
+          ^
+In file included from experiments.c:2:0:
+/usr/include/string.h:125:14: note: expected ‘char * restrict’ but argument is of type ‘const char *’
+ extern char *strcpy (char *__restrict __dest, const char *__restrict __src)
+              ^
+```
+
+
+### Anwendung von Zeichenketten
+
+Schreiben Sie ein Programm, dass in einem Text groß geschriebene Buchstaben
+durch klein geschriebene ersetzt und umgekehrt.
+
+Da Variablen des Datentyps `char` genau ein Byte benötigen, liefert `sizeof`-Operator im folgenden Beispiel die Anzahl der Elemente des Arrays.
 
 ```cpp                     ArrayExample.c
 #include <stdio.h>
@@ -392,10 +484,16 @@ int main() {
 ```
 @JSCPP.eval
 
+{{1}}
+Des Weiteren verwendet das Programm die ASCII-Codierung der Zeichen.
+
+{{1}}
 ![ASCII](img/ASCII_Zeichensatz.jpeg)<!--
-width="100%"
-style="min-width: 600px"
--->
+style="width: 100%;
+       max-width: 600px;
+       display: block;
+       margin-left: auto;
+       margin-right: auto;" -->
 
 ### Fehlerquellen
 
@@ -406,7 +504,7 @@ bei denen Sie nur auf einzelne Elemente zugreifen können.
 #include <stdio.h>
 #include <string.h>       // notwendig für strcpy
 
-int main() {
+int main(void) {
   char a[] = "Das ist der Originaltext";
   a = "Das ist ein neuer Text";  // Compiler Error
   //strcpy(a, "Das ist ein neuer Text");
@@ -427,15 +525,14 @@ experiments.c:6:5: error: assignment to expression with array type
 Auf die umfangreiche Funktionssammlung der `string.h` zur Manipulation von
 Strings wird in einer folgenden Vorlesung eingegangen.
 
-## 3. `structs`
+## 3. `struct`
 
-Structs fassen zusammengehörige Variablen unterschiedlicher Datentypen und
-Bedeutung in einem Konstrukt zusammen. Damit wird für den Entwickler der
+Mit `struct` werden zusammengehörige Variablen unterschiedlicher Datentypen und
+Bedeutung in einem Konstrukt zusammengefasst. Damit wird für den Entwickler der
 Zusammenhang deutlich. Die Variablen der Struktur werden als Komponenten (engl.
 members) bezeichnet.
 
-Beispiele können die Repräsentation eines Datums oder eines Datensatzes in einer
-Datenbank sein.
+Beispiele:
 
 ```cpp
 struct datum
@@ -454,9 +551,17 @@ struct Student
 };  // <- Hier steht ein Semikolon!
 ```
 
-### Deklaration, Definition, Initialisierung
+### Deklaration, Definition, Initialisierung und Zugriff
 
-Und wie erzeuge ich nun Variablen dieses erweiterten Types? Müssen immer alle
+Und wie erzeuge ich Variablen dieses erweiterten Types, wie werden diese
+initialisiert und wie kann ich auf die einzelnen Komponenten zugreifen?
+
+Der Bespiel zeigt, dass die Definition der Variable unmittelbar nach der
+`struct`-Definition oder mit einer gesonderten Anweisung mit einer vollständigen,
+partiellen Initialisierung bzw. ohne Initialisierung erfolgen kann.
+
+Die nachträgliche Veränderung einzelner Komponenten ist über Zugriff mit Hilfe
+des Punkt-Operators möglich.
 
 ```cpp                           structExample.c
 #include <stdio.h>
@@ -493,14 +598,15 @@ Person B wurde am 13. April 1803 geboren.
 Person C wurde am  0. September  0 geboren.
 ```
 
-### Vergleich von `structs`
+### Vergleich von `struct`-Variablen
 
 Der C-Standard kennt keine Methodik um `struct`s in einem Rutsch auf Gleichheit
 zu prüfen. Entsprechend ist es an jedem Entwickler eine eigene Funktion dafür zu
 schreiben. Diese kann unterschiedliche Aspekte des `struct`s adressieren.
 
-Im nachfolgenden Beispiel vereinfachen wir die Vergleichsoperation dadurch, dass
-wir für die Repräsentation des Monats ein `enum` definieren. Damit entfällt
+Im nachfolgenden Beispiel werden zur Überprüfung der Gleichheit die `tag`und
+`monat` vergliehen. Der Vergleich wird dadurch vereinfacht, dass
+wir für die Repräsentation des Monats ein `enum` verwenden. Damit entfällt
 aufwändigerer Vergleich der Strings.
 
 ```cpp                           structExample.c
@@ -533,6 +639,43 @@ Natürlich lassen sich die beiden erweiterten Datenformate auf der Basis von
 `struct` und Arrays miteinander kombinieren.
 
 -> Live (arrayOfStructs.c)
+
+### Typdefinition mit `typedef`
+
+Mit Hilfe des Schlüsselworts `typedef` kann für einen Datentyp, einschließlich
+eines `struct`-Datentyps, ein neuer Bezeichner definiert werden:
+
+```c
+typedef Typendefinition Bezeichner;
+```
+Zum Beispiel kann der Datentyp `Datum` definiert und zur einfacheren
+Variablendeklaration verwendet werden:
+
+```cpp
+struct datum
+{
+  int tag;
+  char monat[10];
+  int jahr;
+};
+
+typedef struct datum Datum;
+
+Datum geburtsdatum;
+```
+
+Alternative Möglichkeit der Definition des Datentyp zeigt folgender Beispiel:
+
+```cpp
+typedef struct datum
+{
+  int tag;
+  char monat[10];
+  int jahr;
+} Datum;
+
+Datum geburtsdatum;
+```
 
 ## Beispiel des Tages
 

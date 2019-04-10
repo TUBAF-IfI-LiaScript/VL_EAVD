@@ -50,202 +50,51 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 **Fragen an die heutige Veranstaltung ...**
 
 * Wonach lassen sich Operatoren unterscheiden?
-* Welche unterschiedliche Bedeutung haben `x++` und `++x`
+* Welche unterschiedliche Bedeutung haben `x++` und `++x`?
 * Erläutern Sie den Begriff unärer, binärer und tertiärer Operator.
 * Unterscheiden Sie Zuweisung und Anweisung.
 * Was bedeutet rechtsassoziativ und linksassoziativ?
 * Welche Funktion erfüllen Bit-Operationen?
-+ Wie werden Shift-Operatoren genutzt?
+* Wie werden Shift-Operatoren genutzt?
 * Wie können boolsche Variablen in C ausgedrückt werden?
 
 ---------------------------------------------------------------------
-Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
-
-https://github.com/liaScript/CCourse/blob/master/03_Operatoren.md
+[Aktuelle Vorlesung im Versionsmanagementsystem GitHub](https://github.com/liaScript/CCourse/blob/master/03_Operatoren.md)
 
 ---------------------------------------------------------------------
-
+{{1}}
 **Wie weit sind wir schon gekommen?**
 
+{{1}}
 ANSI C (C89)/ Schlüsselwörter:
 
+{{1}}
 | Standard    |                |          |            |          |            |
 |:------------|:---------------|:---------|:-----------|:---------|:-----------|
-| **C89/C90** | auto           | `double` | `int`      | struct   | break      |
+| **C89/C90** | `auto`         | `double` | `int`      | struct   | break      |
 |             | else           | `long`   | switch     | case     | enum       |
-|             | register       | typedef  | `char`     | extern   | return     |
-|             | union          | const    | `float`    | `short`  | `unsigned` |
+|             | `register`     | typedef  | `char`     | `extern` | return     |
+|             | union          | `const`  | `float`    | `short`  | `unsigned` |
 |             | continue       | for      | `signed`   | `void`   | default    |
-|             | goto           | `sizeof` | volatile   | do       | if         |
+|             | goto           | `sizeof` | `volatile` | do       | if         |
 |             | static         | while    |            |          |            |
-| **C99**     | _Bool          | _Complex | _Imaginary | inline   | restrict   |
+| **C99**     | `_Bool`        | _Complex | _Imaginary | inline   | restrict   |
 | **C11**     | _Alignas       | _Alignof | _Atomic    | _Generic | _Noreturn  |
 |             |_Static\_assert | \_Thread\_local | |   |          |            |
 
+{{1}}
 Standardbibliotheken
 
+{{1}}
 | Name         | Bestandteil | Funktionen                           |
 |:-------------|:------------|:-------------------------------------|
-| `<stdio.h>`  |             | Input/output (`printf`)              |
+| `<stdio.h>`  |             | Input/output                         |
 | `<stdint.h>` | (seit C99)  | Integer Datentypen mit fester Breite |
 | `<float.h>`  |             | Parameter der Floatwerte             |
 | `<limits.h>` |             | Größe der Basistypen                 |
 
-https://en.cppreference.com/w/c/header
-
-
-
-## 0. Wiederholung
-
-**Warnings mit PellesC**
-
-![PellesC Nützlichkeit von Warnings](img/PellesCWarnings.jpeg)<!-- width="100%" -->
-
-
-> **Hinweis:** Unterschiedliche Compiler verwenden unterschieldliche
-> Konfigurationen und generieren unterschiedliche Ergebnisse!
-
-| Name            | Bezeichnung                                  |
-|:----------------|:---------------------------------------------|
-| Gnu C Compiler  | Linux "Standard" C Compiler (auch in cygwin) |
-|                 | [Dokumentation](https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html) |
-|                 | [Erläuterung zu den Warning Konfigurationen](https://kristerw.blogspot.com/2017/09/useful-gcc-warning-options-not-enabled.html) |
-| LLC (in PellesC) | `Local C Compiler` or `Little C Compiler`   |
-|                 | [Dokumentation](https://sites.google.com/site/lccretargetablecompiler/lccmanpage) |
-| Microsoft Compiler | enthalten im Microsoft Studio              |
-|                    | [Dokumentation](https://msdn.microsoft.com/de-de/library/19z1t1wy.aspx) |
-
-### Zahlenliterale
-
-**Ganzzahlenliterale**
-
-`Variable = (Vorzeichen)(Zahlensystem)[Wert](Typ);`
-
-| Literal      | Bedeutung                              |
-|:-------------|:---------------------------------------|
-| 345          | Ganzzahl 345 vom Typ `int`             |
-| -234L        | Ganzzahl 234 vom Typ `signed long`     |
-| 100000000000 | Ganzzahl vom Typ `long`                |
-| 011          | Ganzzahl also oktale Zahl (Wert $9_d$) |
-| 0x12         | Ganzzahl ($18_d$)                      |
-
-**Gleitkommazahlenliterale**
-
-| Literal | Bedeutung                       |
-|:--------|:--------------------------------|
-| 123.34f | Fließkommazahl vom Typ `float`  |
-| 0.132   | Fließkommazahl vom Typ `double` |
-| 132e-3  |                                 |
-| .132    |                                 |
-
-### Was passiert bei der Überschreitung des Wertebereiches
-
-> Der Arithmetische Überlauf (arithmetic overflow) tritt auf, wenn das Ergebnis
-> einer Berechnung für den gültigen Zahlenbereich zu groß ist, um noch richtig
-> interpretiert werden zu können.
-
-![instruction-set](./img/2Komplement.png)<!--
-style=" width: 80%;
-        max-width: 500px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;"
--->[^1]
-
-
-```cpp                     Overflow.c
-#include <stdio.h>
-#include <limits.h>   /* SHRT_MIN und SHRT_MAX */
-
-int main(){
-  short a = 30000;
-  short c;
-  unsigned short d;
-  //unsigned c;
-  printf("unsigned short - Wertebereich von %d bis %d\n", 0, USHRT_MAX);
-  printf("short - Wertebereich von %d bis %d\n", SHRT_MIN, SHRT_MAX);
-  c = 3 * a;
-  printf("c=%d\n", c);
-  d = 3 * a;
-  printf("c=%d\n", d);
-}
-```
-
-``` bash @output
-▶ ./a.out
-unsigned short - Wertebereich von 0 bis 65535
-short - Wertebereich von -32768 bis 32767
-c=-5536
-c=24464
-```
-
-Ganzzahlüberläufe in fehlerhaften Berechnung zur Bestimmung der Größe eines
-Puffers oder der Adressierung eines Feldes können es einem Angreifer ermöglichen
-den Stack zu überschreiben.
-
-
-[^1]: Arithmetischer Überlauf (Quelle: https://de.wikipedia.org/wiki/Arithmetischer_%C3%9Cberlauf#/media/File:4Bit-2Komplement.svg (Autor WissensDürster))
-
-
-### `scanf`-Beispiel
-
-
-```cpp                     scanf_getNumbers.c
-#include <stdio.h>
-
-int main(){
-  int i;
-  float a;
-  char b;
-  printf("Bitte folgende Werte eingeben %%c %%f %%d: ");
-  scanf(" %c %f %4d", &b, &a, &i);
-  printf("%c %f %d\n", b, a, i);
-  return 0;
-}
-```
-
-```bash @output
-▶ gcc sizeof_example.c
-▶ ./a.out
-Bitte folgende Werte eingeben %c %f %d: A -234.24324 234562
-A -234.243240 2345
-```
-
--------------------------------------------------
-
-`scanf` erlaubt auch die sofortige Evaluation von Eingaben anhand vordefinierter
-Ausdrücke, um diese vorzufiltern.
-
-switch to editor ...
-
-https://github.com/liaScript/CCourse/blob/master/codeExamples/scanf_check.c
-
-### Bool
-
-Seit dem C99 Standard existiert ein spezieller Datentyp `_Bool` für binäre
-Variablen. Zuvor wurden vergleichbare Formate über Makros realisiert.
-
-```cpp                     BoolExample.c
-#include <stdio.h>
-#include <stdbool.h>
-
-int main() {
-   _Bool a = true;
-   _Bool b = false;
-   _Bool c = 45;
-
-   printf("a = %i, b = %i, c = %i\n", a, b, c);
-   return 0;
-}
-```
-
-``` bash @output
-▶ ./a.out
-a = 1, b = 0, c=1
-```
-
-Sinnvoll sind boolsche Variablen insbesondere im Kontext von logischen
-Ausdrücken. Diese werden im folgenden eingeführt.
+    {{1}}
+[C standard library header files](https://en.cppreference.com/w/c/header)
 
 
 ## 2. Operatoren
@@ -266,41 +115,45 @@ Man unterscheidet in der Sprache C *unäre*, *binäre* und *ternäre* Operatoren
 | Ternäre Operatoren |     3     | `?` Bedingungsoperator  |
 
 Es gibt auch Operatoren, die, je nachdem wo sie stehen, entweder unär oder binär
-sind. Ein Beispiel dafür ist `-`, dass ein Vorzeichen (unär) und arithmetische
-Operationen (binär) repräsentieren kann.
+sind. Ein Beispiel dafür ist der `-`-Operator, der ein Vorzeichen (unär) und
+eine arithmetische Operation (binär) repräsentieren kann.
 
 **Position**
 
 Des Weiteren wird unterschieden, welche Position der Operator einnimmt:
+* *Infix* – der Operator steht zwischen den Operanden.
+* *Präfix* – der Operator steht vor den Operanden.
+* *Postfix* – der Operator steht hinter den Operanden.
 
-* _Infix_ – der Operator steht zwischen den Operanden.
-* _Präfix_ – der Operator steht vor den Operanden.
-* _Postfix_ – der Operator steht hinter den Operanden.
-
-Wiederum können `+` und `-` alle drei Rollen einnehmen:
+`+` und `-` können alle drei Rollen einnehmen:
 
 ```cpp
 a = b + c; // Infix
 a = -b;    // Präfix
-a = b++;  // Postfix
+a = b++;   // Postfix
 ```
 
+{{1}}
+**Assoziativität**  
+
+{{1}}
+|Linksassoziativ  | Auswertung von links nach rechts |
+|Rechtsassoziativ | Auswertung von rechts nach links |
+
+    {{2}}
 **Funktion**
 
+    {{2}}
 * Zuweisung
 * Arithmetische Operatoren
 * Logische Operatoren
 * Bit-Operationen
 * Bedingungsoperator
 
-**Assoziativität**
-
-* Linksassoziativ - Auswertung von links nach rechts
-* Rechtsassoziativ - Auswertung von rechts nach links
 
 ### Zuweisungsoperator
 
-Der Zuweisungsoperator `=` ist vom mathematischen Bedeutung dieses zu trennen -
+Der Zuweisungsoperator `=` ist von seiner mathematischen Bedeutung zu trennen -
 einer Variablen wird ein Wert zugeordnet. Damit macht dann auch `x=x+1` Sinn.
 
 ```cpp                     Pointer.c
@@ -338,10 +191,12 @@ int main() {
 a = 6, b=6
 ```
 
-Achtung: Verwechseln Sie nicht den Zuweisungsoperator `=` mit dem
-Vergleichsoperator `==`. Der Compiler kann die Fehlerhaftigkeit kaum erkennen
-und generiert Code, der ein entsprechendes Fehlverhalten zeigt.
+{{1}}
+> **Achtung:** Verwechseln Sie nicht den Zuweisungsoperator `=` mit dem
+> Vergleichsoperator `==`. Der Compiler kann die Fehlerhaftigkeit kaum erkennen
+> und generiert Code, der ein entsprechendes Fehlverhalten zeigt.
 
+{{1}}
 ```cpp                            EqualSign.c
 #include <stdio.h>
 
@@ -357,6 +212,7 @@ int main(){
 }
 ```
 
+{{1}}
 ``` bash @output
 ▶ gcc experiments.c
 ▶ ./a.out
@@ -367,7 +223,7 @@ x=20 und y=1
 
 ### Inkrement und Dekrement
 
-Mit den `++`, `-` und `--` -Operatoren kann ein L-Wert um eins erhöht bzw. um
+Mit den `++` und `--` -Operatoren kann ein L-Wert um eins erhöht bzw. um
 eins vermindert werden. Man bezeichnet die Erhöhung um eins auch als Inkrement,
 die Verminderung um eins als Dekrement. Ein Inkrement einer Variable `x`
 entspricht `x = x + 1`, ein Dekrement einer Variable `x` entspricht `x = x - 1`.
@@ -397,12 +253,12 @@ und Scott Meyer "More Effective C++".
 
 ### Binäre arithmetische Operatoren
 
-| Operator | Bedeutung                    | Ganzzahl     | Gleitkomma |
+| Operator | Bedeutung                    | Ganzzahlen   | Gleitkommazahlen |
 |:--------:|:-----------------------------|:-------------|:-----------|
 | `+`      | Additon                      | x            | x          |
 | `-`      | Subtraktion                  | x            | x          |
 | `*`      | Multiplikation               | x            | x          |
-| `/`      | Division                     | x (Ganzzahl) | x          |
+| `/`      | Division                     | x            | x          |
 | `%`      | Modulo (Rest einer Division) | x            |            |
 
 ```cpp                            calcExamples.c
@@ -426,15 +282,18 @@ int main(){
 ```
 @JSCPP.eval
 
-Divisionsoperationen werden für Ganzzahl und Gleitkommazahlen unterschiedlich
-realisiert.
+{{1}}
+> **Achtung:** Divisionsoperationen werden für Ganzzahlen und Gleitkommazahlen
+> unterschiedlich realisiert.
 
+{{1}}
 * Wenn zwei Ganzzahlen wie z. B. $4/3$ dividiert werden, erhalten wir das
-  Ergebnis 1 zurück, dar nicht ganzzahlige Anteil der Lösung bleibt
+  Ergebnis 1 zurück, der nicht ganzzahlige Anteil der Lösung bleibt
   unbeachtet. Um diesen aber ggf. zu erfassen, kann der verbleibende Rest mit
   dem Modulo Operator `%` bestimmt werden.
-* Für Fließkommazahlen wird die Division wie erwartet realisiert.
+* Für Fließkommazahlen wird die Division wie erwartet realisiert.  
 
+{{1}}
 ```cpp                                  moduloExample.c
 #include <stdio.h>
 
@@ -451,12 +310,15 @@ int main(){
 ```
 @JSCPP.eval
 
-> Achtung: Der Rechenoperator Modulo mit dem `%` Zeichen hat nichts mit dem
-> Formatierungszeichen in `printf("%d")` und `scanf("%f")` zu tuen.
+{{1}}
+> **Achtung:** Der Rechenoperator Modulo mit dem `%` Zeichen hat nichts mit dem
+> Formatierungszeichen in `printf("%d")` und `scanf("%f")` zu tun.
 
+{{2}}
 Die arithmetischen Operatoren lassen sich in verkürzter Schreibweise wie folgt
 darstellen:
 
+{{2}}
 | Operation | Bedeutung                    |
 |:---------:|:-----------------------------|
 |   `+=`    | `a+=b` äquivalent zu `a=a+b` |
@@ -465,6 +327,7 @@ darstellen:
 |   `/=`    | `a/=b` äquivalent zu `a=a/b` |
 |   `%=`    | `a%=b` äquivalent zu `a=a%b` |
 
+{{2}}
 ```cpp             shortenedOperators.c
 #include <stdio.h>
 
@@ -481,8 +344,9 @@ int main() {
 ```
 @JSCPP.eval
 
-Verlieren Sie bei langen Berechnungsketten nicht den Überblick! Insbesondere die
-verkürzte Schreibweise forciert dies.
+{{2}}
+> **Achtung:** Verlieren Sie bei langen Berechnungsketten nicht den Überblick!
+> Insbesondere die verkürzte Schreibweise forciert dies.
 
 ### Logische Operatoren
 
@@ -518,14 +382,17 @@ Aussage x > 5 ist 1
 Aussage x == 5 ist 0
 ```
 
+{{1}}
 Und wie lassen sich Logische Aussagen verknüpfen?
 
+{{1}}
 | Operation | Bedeutung |
 |:---------:|:----------|
 |   `&&`    | UND       |
 |   `||`    | ODER      |
 |   `!`     | NICHT     |
 
+{{1}}
 ```cpp                                       Logic.c
 #include <stdio.h>
 typedef int bool;
@@ -548,6 +415,7 @@ int main(){
 ```
 @JSCPP.eval
 
+{{1}}
 Anmerkung: Seit dem C99-Standard finden Sie in der Headerdatei `<iso646.h>`
 einige Makros `and`, `or`, `xor`, die Sie als alternative Schreibweise für
 logische Operatoren und Bit-Operatoren nutzen können.
@@ -575,8 +443,19 @@ Im Beispiel sehen Sie ein fiktives Konfigurationsregister eines Analog-Digital-W
 |:-----|:-----|:-----|:-----|:-----|:-----|:-----|:-----|
 | XXXX | 8Bit Ausgabe | 10Bit Ausgabe | Loop Modus | XXXX | Start Wandlung | Wandlung Fertig | XXXX |
 
+|7 |XXXX            |
+|6 |8 Bit Ausgabe   |
+|5 |10 Bit Ausgabe  |
+|4 |Loop Modus      |
+|3 |XXXX            |
+|2 |Start Wandlung  |
+|1 |Wandlung Fertig |
+|0 |XXXX            |
+
+{{1}}
 Wie können wir die Wandlung starten, sprich das 3. Bit setzen?
 
+{{1}}
 ```cpp                                       Logic.c
 #include <stdio.h>
 
@@ -592,10 +471,12 @@ int main(){
 ```
 @JSCPP.eval
 
+{{2}}
 Der Analog-Digital-Wandler wurde gestartet, nun wollen wir prüfen, ob die
 Wandlung abgeschlossen ist. Wie können wir auslesen, ob das 2. Bit (Wandlung
 Fertig) gesetzt ist?
 
+{{2}}
 ```cpp                                       Logic.c
 #include <stdio.h>
 
@@ -611,14 +492,41 @@ int main(){
 ```
 @JSCPP.eval
 
+{{2}}
 Anmerkung: Üblicherweise würde man keine "festen" Werte für die set und test
 Methoden verwenden. Vielmehr werden dafür durch die Hersteller entsprechende
 Makros bereitgestellt, die eine Portierbarkeit erlauben.
 
+{{3}}
+**Unterschied zu den logischen Operatoren**
+
+{{3}}
+```cpp                     ArrayExample.c
+#include <stdio.h>
+
+int main() {
+  if (0 && 2) printf("Aussage 1 ist wahr\n");
+  else printf("Aussage 1 ist falsch\n");
+  if (5 & 2) printf("Aussage 2 ist wahr\n");
+  else printf("Aussage 2 ist falsch\n");
+  return 0;
+}
+```
+@JSCPP.eval
+
+{{3}}
+| Operator | Bedeutung         | Rückgabewert  |
+|:---------|:------------------|---------------|
+| `&&`     | logischer *und* - Operator | {0,1}  |
+|          | Ganzzahlen ungleich "0" werden als *wahr* interpretiert, "0" als *falsch* |  |
+| `&`      | bitweiser *und* -  Operator | `int`  |
+|          | Sofern eine Übereinstimmung an einer Stelle auftritt, ergibt sich die zugehörige Ganzzahl als Ergebnis. |  |
+
+
 ### Shift Operatoren
 
 Die Operatoren `<<` und `>>` dienen dazu, den Inhalt einer Variablen bitweise um
-1 nach links bzw. um 1 nach rechts zu verschieben.
+einige Stellen nach links bzw. nach rechts zu verschieben.
 
 ```cpp                            IncrementDecrement.c
 #include <stdio.h>
@@ -680,9 +588,19 @@ Aussagen mit dem Bedingungsoperator sind nicht verkürzte Schreibweise für
 berücksichtigen:
 
 * Der Bedingungsoperator generiert einen Ergebniswert und kann daher z.B. in
-  Formeln und Funktionsaufrufen verwendet werden
+  Formeln und Funktionsaufrufen verwendet werden.
 * Bei `if`-Anweisungen kann der `else`-Teil entfallen, der Bedingungsoperator
-  verlangt stets eine Angabe von beiden Ergebniswerten
+  verlangt stets eine Angabe von beiden Ergebniswerten.
+
+### `sizeof` - Operator
+
+Der Operator `sizeof` ermittelt die Größe eines Datentyps (in Byte) zur
+Kompiliertzeit.
+
+* `sizeof` ist keine Funktion, sondern ein Operator.
+* `sizeof` wird häufig zur dynamischen Speicherreservierung verwendet.
+
+
 
 ### Vorrangregeln
 
@@ -703,7 +621,7 @@ Ausdruckes?
 Für jeden Operator wurde eine Priorität definiert, die die Reihung der
 Ausführung regelt.
 
-[Liste der Vorranggegeln](https://de.wikibooks.org/wiki/C-Programmierung:_Liste_der_Operatoren_nach_Priorit%C3%A4t)
+[Liste der Vorrangregeln](https://de.wikibooks.org/wiki/C-Programmierung:_Liste_der_Operatoren_nach_Priorit%C3%A4t)
 
 Im Beispiel bedeutet dies:
 
@@ -717,12 +635,14 @@ c = sizeof(x) + ++a  / 3;
 
 c = (sizeof(x)) + ((++a) / 3);
 ```
-
+{{1}}
 **Assoziativität**
 
+{{1}}
 Für Operatoren mit der gleichen Priorität ist die Reihenfolge (Assoziativität)
 der Auswertung von Bedeutung.
 
+{{1}}
 ```cpp
 a = 4 / 2 / 2;
 
@@ -733,12 +653,15 @@ a = 4 / 2 / 2;
 // (4 / 2) / 2   // ergibt 1
 ```
 
+{{2}}
 **Nebenwirkungen**
 
+{{2}}
 C-Programme können sogenannte Nebenwirkungen (engl. side effects) besitzen. Als
 Nebenwirkungen bezeichnet man die Veränderung des Zustandes des Rechnersystems
 durch das Programm. Diese Reihung der Realisierung ist teilweise undefiniert.
 
+{{2}}
 ```c
 x = a() + b() – c();
 ```
@@ -748,15 +671,16 @@ x = a() + b() – c();
 
 Das folgende Codebeispiel realisiert die binäre Ausgabe einer Zahl in der
 Konsole. Für die bessere Handhabung wurde die eigentliche Ausgabe in einer
-eigene Funktion `int2binOutput` organisiert. Dieser Funktion wird der
+eigenen Funktion `int2binOutput` organisiert. Dieser Funktion wird der
 darzustellende Wert als Parameter `n` übergeben.
 
 Zunächst wird ermittelt, wieviele Bits die Zahl umfasst. Natürlich ließe sich
 hier auch ein fester Wert hinterlegen, garantiert aber eine weitgehende
 Unabhänigkeit von der konkreten Architektur. Die binäre Zahlendarstellung muss
 nun von vorn beginnend durchlaufen werden und geprüft werden, ob an dieser
-Stelle eine 1 oder eine 0 steht. Dazu wird der Zahlenwert i mal nach rechts
-geschoben und das dann niederwertigste Bit mit einer 1 verglichen (und-Operator `&`).
+Stelle eine 1 oder eine 0 steht. Dazu wird der Zahlenwert `i` mal nach rechts
+geschoben und das dann niederwertigste Bit mit einer 1 verglichen (und-Operator
+  `&`).
 Sofern das Bit gleich eins ist, wird eine "1" ausgegeben, sonst eine "0".
 Dieser Vorgang wird kontinuierlich für einen immer kleiner werdende Index `i`
 ausgeführt, bis dieser 0 erreicht.
