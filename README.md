@@ -32,7 +32,7 @@ Ausführbarer C Code sieht wie folgt aus, der Titel kann weggelassen werden.
 ```cpp                     HelloWorld.c
 #include <stdio.h>
 
-int main(void) {
+int main() {
 	printf("Hello World\n");
 	return 0;
 }
@@ -58,7 +58,7 @@ und der Ausführungsparameter.
 ```cpp                     HelloWorld.c
 #include <stdio.h>
 
-int main(void) {
+int main() {
 	printf("Hello World\n");
 	return 0;
 }
@@ -70,7 +70,7 @@ Das folgende Beispiel `@Rextester.C(false,`@input(1)`)` illustriert die Übergab
 ```cpp                     GetChar.c
 #include <stdio.h>
 
-int main(void){
+int main(){
 	char c;
 	printf("Mit welchem Buchstaben beginnt ihr Vorname? ");
 	c = getchar();
@@ -88,7 +88,7 @@ Fehlerausgaben werden entsprechend der Compilerimplementierung wie folgt generie
 ```cpp                     ErroneousHelloWorld.c
 #include <stdio.h>
 
-int main(void) {
+int main() {
 	printf("Hello World\n")
 	return 0;
 }
