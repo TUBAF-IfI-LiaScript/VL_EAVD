@@ -1,43 +1,12 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich
-email:    zug@ovgu.de   & andre.dietrich@ovgu.de
+author:   Sebastian Zug & André Dietrich & Galina Rudolf
+email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
 version:  0.0.1
 language: de
 narrator: Deutsch Female
 
-script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
-
-@JSCPP.__eval
-<script>
-  try {
-    var output = "";
-    JSCPP.run(`@0`, `@1`, {stdio: {write: s => { output += s }}});
-    output;
-  } catch (msg) {
-    var error = new LiaError(msg, 1);
-
-    try {
-        var log = msg.match(/(.*)\nline (\d+) \(column (\d+)\):.*\n.*\n(.*)/);
-        var info = log[1] + " " + log[4];
-
-        if (info.length > 80)
-          info = info.substring(0,76) + "..."
-
-        error.add_detail(0, info, "error", log[2]-1, log[3]);
-    } catch(e) {}
-
-    throw error;
-    }
-</script>
-@end
-
-
-@JSCPP.eval: @JSCPP.__eval(@input, )
-
-@JSCPP.eval_input: @JSCPP.__eval(@input,`@input(1)`)
-
-@output: <pre class="lia-code-stdout">@0</pre>
+import: https://raw.githubusercontent.com/LiaTemplates/Rextester/master/README.md
 
 -->
 
@@ -187,7 +156,7 @@ Und wie finde ich die Sprache, die für mein Problem geeignet ist?
 * Analyse des Einarbeitungsaufwandes
 * (Kosten für die Tool-Chain)
 
-https://www.heise.de/ct/ausgabe/2015-18-Die-passende-Programmiersprache-finden-2767703.html
+vgl: https://www.heise.de/ct/ausgabe/2015-18-Die-passende-Programmiersprache-finden-2767703.html
 
 ### Relevanz von C im Vergleich mit anderen Programiersprachen
 
@@ -206,7 +175,7 @@ Relevanz laut Tiobe Index (Oktober 2018)[^1]
 
 ![instruction-set](./img/InterpreterVSCompiler.jpg)<!-- style="width: 70%; display: block; margin-left: auto; margin-right: auto" -->
 
-Quelle: Alan Freedman, Irma Morrison [https://www.computerlanguage.com/results.php?definition=interpreter](https://www.computerlanguage.com/results.php?definition=interpreter)
+[^1]: Quelle: Alan Freedman, Irma Morrison [https://www.computerlanguage.com/results.php?definition=interpreter](https://www.computerlanguage.com/results.php?definition=interpreter)
 
 ### Historische Einordnung
 
@@ -238,11 +207,8 @@ Die Veranstaltung baut auf dem C11 (ISO/IEC 9899:2011) Standard auf.
 #endif
 ```
 
-
 [^1]: Foto Thompson und Ritchie (Quelle: http://www.catb.org/~esr/jargon/html/U/Unix.html)
-
 [^2]: Foto Kernighan (Quelle: http://www.catb.org/~esr/jargon/html/U/Unix.html)
-
 
 
 ### Eigenschaften von C
@@ -278,9 +244,9 @@ Die Veranstaltung baut auf dem C11 (ISO/IEC 9899:2011) Standard auf.
 
 ## 3. Erstes C Programm
 
-![instruction-set](./img/helloWorldFromRitchie.png)<!-- width="90%" -->
+![instruction-set](./img/helloWorldFromRitchie.png)<!-- width="90%" -->[^1]
 
-[Brian_Kernighan, Programming in C: A Tutorial  1974](http://www.lysator.liu.se/c/bwk-tutor.html#simple-c)
+[^1]: [Brian_Kernighan, Programming in C: A Tutorial  1974](http://www.lysator.liu.se/c/bwk-tutor.html#simple-c)
 
 ### "Hello World"
 
@@ -289,8 +255,9 @@ int main() {   // <- Öffnende Klammer eines Blockes
 	return 0;    // <- Befehl endet mit Semikolon
 }              // <- Schließende Klammer eines Blockes
 ```
-@JSCPP.eval
+@Rextester.C
 
+Führen Sie das Programm durch Klicken des Buttons aus. Überrascht Sie die Ausgabe?
 
 ```cpp                     HelloWorld.c
 // That's my first C program
@@ -298,12 +265,12 @@ int main() {   // <- Öffnende Klammer eines Blockes
 
 #include<stdio.h>
 
-int main() {     // alternativ "int main(void)"
+int main(void) {     // alternativ "int main(void)"
 	printf("Hello World");
 	return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 | Zeile | Bedeutung                                                                                   |
 |:------|:--------------------------------------------------------------------------------------------|
@@ -331,14 +298,14 @@ int main() {
 	return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 
 ```cpp                     BadHelloWorld.c
-#include<stdio.h> int main() {int zahl; for (zahl=0; zahl<3;  zahl++){
-printf("Hello World!"); } return 0;}
+#include <stdio.h>
+int main() {int zahl; for (zahl=0; zahl<3;  zahl++){ printf("Hello World! ");} return 0;}
 ```
-@JSCPP.eval
+@Rextester.C
 
                                   {{1}}
 * Das *systematische Einrücken* verbessert die Lesbarkeit und senkt damit die
@@ -456,7 +423,7 @@ int main() {
 	return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 Methodisches Vorgehen:
 
@@ -473,18 +440,12 @@ Methodisches Vorgehen:
 ```cpp                     Error.c
 #include <stdio.h>
 
-int main() {
-    printf("Hello World")
+int mani() {
+    printf("Hello World");
     return 0;
 }
 ```
-
-```bash @output
-▶ gcc errors.c
-errors.c: In function ‘main’:
-errors.c:8:5: error: expected ‘;’ before ‘return’
-     return 0;
-```
+@Rextester.C
 
 **Beispiel 2**
 
@@ -496,23 +457,19 @@ int main()
     return 0;
 }
 ```
+@Rextester.C
 
-``` bash @output
-▶ gcc errors.c
-errors.c: In function ‘main’:
-errors.c:4:5: error: expected declaration specifiers before ‘printf’
-     printf("Hello World");
-     ^
-errors.c:5:5: error: expected declaration specifiers before ‘return’
-     return 0;
-     ^
-errors.c:6:1: error: expected declaration specifiers before ‘}’ token
- }
- ^
-errors.c:6:1: error: expected ‘{’ at end of input
+Dabei hängen die Ausgaben entscheidend vom verwendeten Compiler ab. Der Fehler bleibt aber der gleiche :-)
+
+```cpp                     Error.c
+#include <stdio.h>
+
+int main()
+    printf("Hello World");
+    return 0;
+}
 ```
-
----
+@Rextester.C_clang
 
 **ABER ...**
 
@@ -538,7 +495,7 @@ int main() {
 	return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 
 ## 4. Werkzeuge
@@ -578,8 +535,8 @@ the tasks required at the time. \[Forenbeitrag\]
 #include <stdio.h>
 
 int main() {
-  printf("... bis zum naechsten Mal!");
+  printf("... bis zum nächsten Mal!");
 	return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
