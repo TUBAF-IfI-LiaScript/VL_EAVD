@@ -10,6 +10,8 @@ import: https://raw.githubusercontent.com/LiaTemplates/Rextester/master/README.m
 
 -->
 
+Eine interaktive Version der Darstellung ist unter folgendem Link möglich [LiaScriptVersion](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CCourse/master/01_Einfuehrung.md#1)
+
 
 # Vorlesung I - Einführung
 
