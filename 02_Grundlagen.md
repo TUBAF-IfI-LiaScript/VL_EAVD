@@ -1,213 +1,12 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich
-email:    zug@ovgu.de   & andre.dietrich@ovgu.de
+author:   Sebastian Zug & André Dietrich & Galina Rudolf
+email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
 version:  0.0.1
 language: de
 narrator: Deutsch Female
 
-
-script: https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js
-
-link:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css
-
-script:  https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts-en.min.js
-
-script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
-
-
-@JSCPP.__eval
-<script>
-  try {
-    var output = "";
-    JSCPP.run(`@0`, `@1`, {stdio: {write: s => { output += s }}});
-    output;
-  } catch (msg) {
-    var error = new LiaError(msg, 1);
-
-    try {
-        var log = msg.match(/(.*)\nline (\d+) \(column (\d+)\):.*\n.*\n(.*)/);
-        var info = log[1] + " " + log[4];
-
-        if (info.length > 80)
-          info = info.substring(0,76) + "..."
-
-        error.add_detail(0, info, "error", log[2]-1, log[3]);
-    } catch(e) {}
-
-    throw error;
-    }
-</script>
-@end
-
-
-@JSCPP.eval: @JSCPP.__eval(@input, )
-
-@JSCPP.eval_input: @JSCPP.__eval(@input,`@input(1)`)
-
-@output: <pre class="lia-code-stdout">@0</pre>
-
-@output_: <pre class="lia-code-stdout" hidden="true">@0</pre>
-
-
-script:   https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js
-
-@Rextester.__eval
-<script>
-//var result = null;
-var error  = false;
-
-console.log = function(e){ send.lia("log", JSON.stringify(e), [], true); };
-
-function grep_(type, output) {
-  try {
-    let re_s = ":(\\d+):(\\d+): "+type+": (.+)";
-
-    let re_g = new RegExp(re_s, "g");
-    let re_i = new RegExp(re_s, "i");
-
-    let rslt = output.match(re_g);
-
-    let i = 0;
-    for(i = 0; i < rslt.length; i++) {
-        let e = rslt[i].match(re_i);
-
-        rslt[i] = { row : e[1]-1, column : e[2], text : e[3], type : type};
-    }
-    return [rslt];
-  } catch(e) {
-    return [];
-  }
-}
-
-$.ajax ({
-    url: "https://rextester.com/rundotnet/api",
-    type: "POST",
-    timeout: 10000,
-    data: { LanguageChoice: @0,
-            Program: `@input`,
-            Input: `@1`,
-            CompilerArgs : @2}
-    }).done(function(data) {
-        if (data.Errors == null) {
-            let warnings = grep_("warning", data.Warnings);
-
-            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
-
-            if(data.Warnings)
-              stats = "\n-------Warn-------\n"+data.Warnings + stats;
-
-            send.lia("log", data.Result+stats, warnings, true);
-            send.lia("eval", "LIA: stop");
-
-        } else {
-            let errors = grep_("error", data.Errors);
-
-            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
-
-            if(data.Warning)
-              stats = data.Errors + data.Warnings + stats;
-            else
-              stats = data.Errors + data.Warnings + stats;
-
-            send.lia("log", stats, errors, false);
-            send.lia("eval", "LIA: stop");
-        }
-    }).fail(function(data, err) {
-        send.lia("log", err, [], false);
-        send.lia("eval", "LIA: stop");
-    });
-
-"LIA: wait"
-</script>
-@end
-
-
-@Rextester.eval: @Rextester.__eval(6, ,"-Wall -std=gnu99 -O2 -o a.out source_file.c")
-
-@Rextester.eval_params: @Rextester.__eval(6, ,"@0")
-
-@Rextester.eval_input: @Rextester.__eval(6,`@input(1)`,"-Wall -std=gnu99 -O2 -o a.out source_file.c")
-
-
-
-@Rextester.pipe
-<script>
-//var result = null;
-var error  = false;
-
-console.log = function(e){ send.lia("log", JSON.stringify(e), [], true); };
-
-function grep_(type, output) {
-  try {
-    let re_s = ":(\\d+):(\\d+): "+type+": (.+)";
-
-    let re_g = new RegExp(re_s, "g");
-    let re_i = new RegExp(re_s, "i");
-
-    let rslt = output.match(re_g);
-
-    let i = 0;
-    for(i = 0; i < rslt.length; i++) {
-        let e = rslt[i].match(re_i);
-
-        rslt[i] = { row : e[1]-1, column : e[2], text : e[3], type : type};
-    }
-    return [rslt];
-  } catch(e) {
-    return [];
-  }
-}
-
-$.ajax ({
-    url: "https://rextester.com/rundotnet/api",
-    type: "POST",
-    timeout: 10000,
-    data: { LanguageChoice: 6,
-            Program: `@input(0)`,
-            Input: `@1`,
-            CompilerArgs : "-Wall -std=gnu99 -O2 -o a.out source_file.c"}
-    }).done(function(data) {
-        if (data.Errors == null) {
-            let warnings = grep_("warning", data.Warnings);
-
-            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
-
-            if(data.Warnings)
-              stats = "\n-------Warn-------\n"+data.Warnings + stats;
-
-            send.lia("log", data.Result+stats, warnings, true);
-
-            @input(1)
-
-            send.lia("eval", "LIA: stop");
-
-        } else {
-            let errors = grep_("error", data.Errors);
-
-            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
-
-            if(data.Warning)
-              stats = data.Errors + data.Warnings + stats;
-            else
-              stats = data.Errors + data.Warnings + stats;
-
-            send.lia("log", stats, errors, false);
-            send.lia("eval", "LIA: stop");
-        }
-    }).fail(function(data, err) {
-        send.lia("log", err, [], false);
-        send.lia("eval", "LIA: stop");
-    });
-
-"LIA: wait"
-</script>
-@end
-
-script:   https://cdn.rawgit.com/davidedc/Algebrite/master/dist/algebrite.bundle-for-browser.js
-
-@algebrite.eval:    <script> Algebrite.run(`@input`) </script>
-
+import: https://raw.githubusercontent.com/liaScript/rextester_template/master/README.md
 -->
 
 # Vorlesung II - Grundlagen der Sprache C
@@ -257,7 +56,7 @@ Sie können in einem C-Programm folgende Zeichen verwenden:
       return 0;
   }
   ```
-  @Rextester.eval
+  @Rextester.C
 
 ![C logo](img/PellesCUmlauteEnglish.png)<!--
 style=" width: 100%;
@@ -284,7 +83,7 @@ int main(void) {
 	return 0;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
 Unbefriedigende Lösung, jede neue Berechnung muss in den Source-Code integriert
 und dieser dann kompiliert werden. Ein Taschenrechner wäre die bessere Lösung!
@@ -301,7 +100,7 @@ int main(void) {
 	return 0;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
 {{1}}
 Ein Programm manipuliert Daten, die in Variablen organisiert werden.
@@ -539,11 +338,7 @@ int main() {
    return 0;
 }
 ```
-
-``` bash @output
-▶ ./a.out
-a = 1, b = 0, c=1
-```
+@Rextester.C
 
 Sinnvoll sind boolsche Variablen insbesondere im Kontext von logischen
 Ausdrücken. Diese werden zum späteren Zeitpunkt eingeführt.
@@ -563,7 +358,7 @@ int main(void)
   return 0;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
 
 ```cpp                     sizeof_example.c
@@ -578,15 +373,8 @@ int main(void) {
    return 0;
 }
 ```
+@Rextester.C
 
-```bash @output
-▶ gcc sizeof_example.c
-▶ ./a.out
-int size : 4 Byte
-Wertebereich von -2147483648 bis 2147483647
-char size : 1 Byte
-Wertebereich von -128 bis 127
-```
 
 {{1}}
 Die implementierungspezifische Werte, wie die Grenzen des Wertebereichs der
@@ -640,14 +428,8 @@ int main(){
   printf("c=%d\n", d);
 }
 ```
-{{1}}
-``` bash @output
-▶ ./a.out
-unsigned short - Wertebereich von 0 bis 65535
-short - Wertebereich von -32768 bis 32767
-c=-5536
-c=24464
-```
+@Rextester.C
+
 
 {{1}}
 Ganzzahlüberläufe in der fehlerhaften Bestimmung der Größe eines
@@ -706,15 +488,8 @@ int main(void) {
   return 0;
 }
 ```
+@Rextester.C
 
-{{1}}
-``` bash @output
-▶ gcc float_comparism.c
-▶ ./a.out
-float Genauigkeit :6
-double Genauigkeit :15
-Ungleich
-```
 
 #### Datentyp `void`
 
@@ -754,31 +529,6 @@ der selben Architektur durchaus variieren!
 | `int_leastN_t` | `uint_leastN_t` | garantierte Mindestbreite            |
 | `int_fastN_t`  | `uint_fastN_t`  | fokussiert die Ausführungszeit       |
 
-
-#### Und was soll ich nun verwenden?
-
-... das hängt von der Zielstellung ab. Mögliche Optimierungsansätze sind
-
-* die Programmgröße
-* der notwendige Arbeitsspeicher
-* die Laufzeit
-* (die Compilezeit)
-
-TODO: Link auf measureExecutionTime.py
-
-``` bash @output
-▶ python measureExecutionTime.py
-
-                           execution_mean
-                    -O0     -O1     -O2    -Os
-data_type
-uint16_t           3.5170  2.4215  0.7340  2.0100
-uint32_t           2.4725  2.4550  0.9025  2.2945
-uint_fast16_t      3.5195  2.6060  0.7310  2.6415
-unsigned int       3.8970  1.9680  0.9010  2.4775
-unsigned long      4.0015  2.2040  0.6910  2.3460
-unsigned short     2.9580  2.1010  0.7495  2.3240
-```
 
 ### Wertspezifikation
 
@@ -841,7 +591,7 @@ int main(void)
   return 0;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
 ### Adressen
 
@@ -862,7 +612,7 @@ int main(void)
   return 0;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
 ### Sichtbarkeit und Lebensdauer von Variablen
 
@@ -884,7 +634,7 @@ int main(void){
   return 0;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
 Die automatischen Variablen können mit dem Schlüsselwort `auto` deklariert
 werden, aber auch ohne Schlüsselwort sind "lokale" Variable "automatisch".  
@@ -941,7 +691,7 @@ int main(void)
   return 0;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
 ####Globale Variablen
 
@@ -959,7 +709,7 @@ int main(void)
   return 0;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
 Sichtbarkeit und Lebensdauer spielen beim Definieren neuer Funktionen eine
 wesentliche Rolle und werden in einer weiteren Vorlesung in diesem
@@ -1010,19 +760,8 @@ int main(void) {
 	return 0;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
-``` bash @output
-▶ gcc -Wall experiments.c
-experiments.c: In function ‘foo’:
-experiments.c:5:3: warning: ‘a’ is used uninitialized in this function [-Wuninitialized]
-   printf("a=%d ", a);
-   ^
-experiments.c: In function ‘main’:
-experiments.c:12:3: warning: ‘y’ is used uninitialized in this function [-Wuninitialized]
-   printf("y=%d ", y);
-   ^
-```
 
 Der C++, der für diese Webseite zum Einsatz kommt initialisiert offenbar alle
 Werte mit 0 führen Sie dieses Beispiel aber einmal mit einem richtigen Compiler
@@ -1041,18 +780,8 @@ int main(void) {
   return 0;
 }
 ```
+@Rextester.C
 
-{{1}}
-``` bash @output
-▶ gcc -Wall doubleDeclaration.c
-
-doubleDeclaration.c: In function ‘main’:
-doubleDeclaration.c:5:7: error: redeclaration of ‘x’ with no linkage
-   int x;
-       ^
-doubleDeclaration.c:4:7: note: previous declaration of ‘x’ was here
-   int x;
-```
 
 {{2}}
 **Falsche Zahlenliterale**
@@ -1067,6 +796,8 @@ int main(void) {
   return 0;
 }
 ```
+@Rextester.C
+
 
 {{3}}
 **Was passiert wenn der Wert zu groß ist?**
@@ -1082,17 +813,7 @@ int main(void) {
 	return 0;
 }
 ```
-
-{{3}}
-``` bash @output
-▶ gcc -Wall experiments.c
-experiments.c: In function ‘main’:
-experiments.c:5:7: warning: overflow in implicit constant conversion [-Woverflow]
-   a = 0xFFFF + 2;
-       ^
-▶ ./a.out
-Was steckt drin 1
-```
+@Rextester.C
 
 ## 2. Compiler
 
@@ -1188,7 +909,7 @@ int main(){
   return 0;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
                                  {{1-3}}
 | Zeichen        | Umwandlung                                              |
@@ -1231,7 +952,7 @@ int main(){
   return 0;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
 #### Formatierungsflags
 
@@ -1256,7 +977,7 @@ int main(){
   return 0;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
 #### Genauigkeit
 
@@ -1274,7 +995,7 @@ int main(){
   return 0;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
 #### Escape-Sequenzen
 
@@ -1300,7 +1021,7 @@ int main(){
   return 0;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
 ### `getchar`
 
@@ -1321,7 +1042,7 @@ int main(){
 ``` text                  stdin
 T
 ```
-@Rextester.eval_input
+@Rextester.C(false,`@input(1)`)
 
 Problem: Es lassen sich immer nur einzelne Zeichen erfassen, die durch
 Enter-Taste bestätigt wurden. Als flexiblere Lösung lässt sich `scanf` anwenden.
@@ -1343,18 +1064,16 @@ int main(){
   float a;
   char b;
   printf("Bitte folgende Werte eingeben %%c %%f %%d: ");
-  scanf("%c %f %4d", &b, &a, &i);
-  printf("%d %c %f %d\n", b, a, i);
+  int n=scanf("%c %f %d", &b, &a, &i);
+  printf("\n%c %f %d %d\n", b, a, i, n);
   return 0;
 }
 ```
-
-``` bash @output
-▶ gcc sizeof_example.c
-▶ ./a.out
-Bitte folgende Werte eingeben %c %f %d: A -234.24324 234562
+``` text                  stdin
 A -234.243240 2345
 ```
+@Rextester.C(false,`@input(1)`)
+
 -------------------------------------------------
 
 `scanf` erlaubt auch die sofortige Evaluation von Eingaben anhand vordefinierter
@@ -1362,14 +1081,10 @@ Ausdrücke, um diese vorzufiltern.
 
 [switch to editor ...](https://github.com/liaScript/CCourse/blob/master/codeExamples/scanf_check.c)
 
-{{1}}
-Und noch was neues ...dank rextester wird LiaScript jetzt noch leistungsfähiger
+Mehr zu rextester: [https://rextester.com/](https://rextester.com/)
 
 {{1}}
-[https://rextester.com/](https://rextester.com/)
-
-{{1}}
-```cpp                          nDimArray.c
+```cpp                          
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -1379,13 +1094,8 @@ int main(void) {
   return EXIT_SUCCESS;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
-{{1}}
-``` bash @output_
-Jetzt kann ich alles was die Konsole kann!
-Probier es aus!
-```
 
 {{1}}
 | Ausgaben              | Bedeutung                         |
@@ -1408,4 +1118,4 @@ int main() {
 	return 0;
 }
 ```
-@Rextester.eval
+@Rextester.C

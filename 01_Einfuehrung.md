@@ -6,8 +6,7 @@ version:  0.0.1
 language: de
 narrator: Deutsch Female
 
-import: https://raw.githubusercontent.com/LiaTemplates/Rextester/master/README.md
-
+import: https://raw.githubusercontent.com/liaScript/rextester_template/master/README.md
 -->
 
 # Vorlesung I - Einführung
@@ -42,16 +41,16 @@ Realisierung eines Programmes mit C zu adressieren.
 
 ![instruction-set](./img/Programmiersprache_Umfeld.png)<!-- width="100%" -->
 
-[^1]: Programmiervorgang und Begriffe (Quelle: https://commons.wikimedia.org/wiki/File:Programmiersprache_Umfeld.png (Autor VÖRBY))
+Quelle: [Programmiervorgang und Begriffe(Autor VÖRBY)](https://commons.wikimedia.org/wiki/File:Programmiersprache_Umfeld.png)
 
 
 ### Wie arbeitet ein Rechner eigentlich?
 
-Beispiel: Intel 4004-Architektur (1971) [^1]
+Beispiel: Intel 4004-Architektur (1971)
 
 ![intel](https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png)<!-- style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
 
-[^1]: Wikipedia Eintrag Intel 4004 (Autor Appaloosa)
+Quelle: [Intel 4004 (Autor Appaloosa)](https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png)
 
 
 ### Was heißt das "Maschinensprache"?
@@ -77,11 +76,11 @@ Speicherauszug den Intel 4004:
 
 
 Unterstützung für die Interpretation aus dem Nutzerhandbuch, dass das Instruction
-set beschreibt[^1]:
+set beschreibt:
 
 ![instruction-set](./img/4004_Instruction_set.png)<!-- width="100%" -->
 
-[^1]: Intel 4004 Assembler (Quelle: http://e4004.szyc.org/asm.html)
+Quelle: [Intel 4004 Assembler](http://e4004.szyc.org/asm.html)
 
 ### Aber möchte man so umfangreiche Programme schreiben?
 
@@ -125,11 +124,11 @@ Hardware abgestimmt ist
 > Computer (direkter) ausgeführt werden kann.
 
 
-Stufen des Compile-Vorganges[^1]:
+Stufen des Compile-Vorganges:
 
 ![instruction-set](./img/compilerElements.png)<!-- width="80%" -->
 
-[^1]: Abbildung Stufen der Compilierung (Quelle: https://medium.com/@vietkieutie/what-happens-when-you-type-gcc-main-c-2a136896ade3)
+Quelle: [Stufen der Compilierung](https://medium.com/@vietkieutie/what-happens-when-you-type-gcc-main-c-2a136896ade3)
 
 ## 2. Warum also C?
 
@@ -157,15 +156,15 @@ Und wie finde ich die Sprache, die für mein Problem geeignet ist?
 * Analyse des Einarbeitungsaufwandes
 * (Kosten für die Tool-Chain)
 
-vgl: https://www.heise.de/ct/ausgabe/2015-18-Die-passende-Programmiersprache-finden-2767703.html
+[Heise online: Die passende Programmiersprache finden](https://www.heise.de/ct/ausgabe/2015-18-Die-passende-Programmiersprache-finden-2767703.html)
 
 ### Relevanz von C im Vergleich mit anderen Programiersprachen
 
-Relevanz laut Tiobe Index (Oktober 2018)[^1]
+Relevanz laut Tiobe Index (Oktober 2018)
 
 ![TIOBEindex](./img/tiobe.jpeg)<!-- style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
 
-[^1]: Quelle: https://www.informatik-aktuell.de/aktuelle-meldungen/2018/juli/ranking-der-programmiersprachen-java-wieder-ganz-vorne.html
+Quelle: [https://www.informatik-aktuell.de](https://www.informatik-aktuell.de/aktuelle-meldungen/2018/juli/ranking-der-programmiersprachen-java-wieder-ganz-vorne.html)
 
 
 ### Heutige Anwendung
@@ -176,7 +175,7 @@ Relevanz laut Tiobe Index (Oktober 2018)[^1]
 
 ![instruction-set](./img/InterpreterVSCompiler.jpg)<!-- style="width: 70%; display: block; margin-left: auto; margin-right: auto" -->
 
-[^1]: Quelle: Alan Freedman, Irma Morrison [https://www.computerlanguage.com/results.php?definition=interpreter](https://www.computerlanguage.com/results.php?definition=interpreter)
+Quelle: [https://www.computerlanguage.com (Alan Freedman, Irma Morrison)](https://www.computerlanguage.com/results.php?definition=interpreter)
 
 ### Historische Einordnung
 
@@ -185,20 +184,23 @@ Zielrichtung ... Entwicklung eines Betriebssystems in den
 
 ![instruction-set](./img/Ken_Thompson_and_Dennis_Ritchie.jpg)<!-- width="300px" -->
 
-[Ken Thompson](https://de.wikipedia.org/wiki/Ken_Thompson) und [Dennis Ritchie](https://de.wikipedia.org/wiki/Dennis_Ritchie)[^1]
+[Ken Thompson](https://de.wikipedia.org/wiki/Ken_Thompson) und [Dennis Ritchie](https://de.wikipedia.org/wiki/Dennis_Ritchie)
+
+Quelle: [http://www.catb.org/~esr/jargon/html/U/Unix.html](http://www.catb.org/~esr/jargon/html/U/Unix.html)
 
 ![instruction-set](./img/Brian_Kernighan.jpg)<!-- width="300px" -->
 
-[Brian_Kernighan](https://de.wikipedia.org/wiki/Brian_Kernighan) [^2]
+[Brian Kernighan](https://de.wikipedia.org/wiki/Brian_Kernighan)
 
+Quelle: [http://www.catb.org/~esr/jargon/html/U/Unix.html](http://www.catb.org/~esr/jargon/html/U/Unix.html)
 
 | Version      | Spezifikation                                                                                 |
 |:-------------|:----------------------------------------------------------------------------------------------|
 | K&R C        | Definition über das Buch "The C Programming Language"                                         |
 | ANSI C (C89) | Standard des American National Standards Institute (ANSI)                                     |
 | C99          | Übernahme von Features aus C++, Erweiterung Standardbibliothek, Ergänzung Präprozessor Makros |
-| C11          |                                             "                                                 |
-| C18          |                                             "                                                 |
+| C11          |   bessere Kompatibilität mit C++, einige neue Features       |
+| C18          | entspricht weitgehend C11 mit der Ausnahme von Fehlerkorrekturen    |
 
 Die Veranstaltung baut auf dem C11 (ISO/IEC 9899:2011) Standard auf.
 
@@ -208,10 +210,6 @@ Die Veranstaltung baut auf dem C11 (ISO/IEC 9899:2011) Standard auf.
 #endif
 ```
 
-[^1]: Foto Thompson und Ritchie (Quelle: http://www.catb.org/~esr/jargon/html/U/Unix.html)
-[^2]: Foto Kernighan (Quelle: http://www.catb.org/~esr/jargon/html/U/Unix.html)
-
-
 ### Eigenschaften von C
 
 * Adressiert Hochsprachenaspekte und Hardwarenähe -> Hohe Geschwindigkeit bei
@@ -219,12 +217,12 @@ Die Veranstaltung baut auf dem C11 (ISO/IEC 9899:2011) Standard auf.
 * Imperative Programmiersprache
 
                                  {{1}}
-  > **imperative (befehlsorientierte) Programmiersprachen** : Ein Programm
+  > **imperative (befehlsorientierte) Programmiersprachen**: Ein Programm
   > besteht aus einer Folge von Befehlen an den Computer. Das Programm
   > beschreibt den Lösungsweg für ein Problem (C, Python, Java, LabView,
   > Matlab, ...).
   >
-  > **deklarative Programiersprachen** : Ein Programm beschreibt die
+  > **deklarative Programiersprachen**: Ein Programm beschreibt die
   > allgemeinen Eigenschaften von Objekten und ihre Beziehungen
   > untereinander. Das Programm beschreibt zunächst nur das Wissen zur Lösung
   > des Problems (Prolog, Haskal, SQL, ...).
@@ -245,9 +243,9 @@ Die Veranstaltung baut auf dem C11 (ISO/IEC 9899:2011) Standard auf.
 
 ## 3. Erstes C Programm
 
-![instruction-set](./img/helloWorldFromRitchie.png)<!-- width="90%" -->[^1]
+![instruction-set](./img/helloWorldFromRitchie.png)<!-- width="90%" -->
 
-[^1]: [Brian_Kernighan, Programming in C: A Tutorial  1974](http://www.lysator.liu.se/c/bwk-tutor.html#simple-c)
+Quelle: [Brian_Kernighan, Programming in C: A Tutorial  1974](http://www.lysator.liu.se/c/bwk-tutor.html#simple-c)
 
 ### "Hello World"
 
@@ -266,7 +264,7 @@ Führen Sie das Programm durch Klicken des Buttons aus. Überrascht Sie die Ausg
 
 #include<stdio.h>
 
-int main(void) {     // alternativ "int main(void)"
+int main(void) {     // alternativ "int main()"
 	printf("Hello World");
 	return 0;
 }
@@ -313,7 +311,7 @@ int main() {int zahl; for (zahl=0; zahl<3;  zahl++){ printf("Hello World! ");} r
   Fehleranfälligkeit Ihres Codes!
 * Wählen sie *selbsterklärende Variablen- und Funktionsnamen*!
 * Nutzen Sie ein *Versionsmanagmentsystem*, wenn Sie ihren Code entwickeln!
-* Kommentieren Sie Ihr Vorgehen trotz "Good code is self-documenting."
+* Kommentieren Sie Ihr Vorgehen trotz "Good code is self-documenting"
 
 ### Gute Kommentare
 
@@ -384,8 +382,9 @@ x = x + 1;  /* increment the value of x */
 printf("Hello World\n"); // displays Hello world
 ```
 
-"... over-commenting your code can be as bad as under-commenting it"[^1]
+"... over-commenting your code can be as bad as under-commenting it"
 
+Quelle: [C Code Style Guidelines](https://www.cs.swarthmore.edu/~newhall/unixhelp/c_codestyle.html)
 
 *2. "Merkwürdige Kommentare"*
 
@@ -406,10 +405,8 @@ try {
 } finally { // should never happen }
 
 ```
+
 [Sammlung von Kommentaren](https://fuzzzyblog.blogspot.com/2014/09/40-most-funny-code-comments.html)
-
-
-[^1]: C Code Style Guidelines (Quelle: https://www.cs.swarthmore.edu/~newhall/unixhelp/c_codestyle.html)
 
 
 ### Was tun, wenn es schief geht?
@@ -432,7 +429,7 @@ Methodisches Vorgehen:
 * Lesen der Fehlermeldung
 * Verstehen der Fehlermeldung / Aufstellen von Hypothesen
 * Systematische Evaluation der Thesen
-* Seien Sie im Austausch mit anderen (Kommilitonen, Forenbesucher, usw.) konkret.
+* Seien Sie im Austausch mit anderen (Kommilitonen, Forenbesucher, usw.) konkret
 
 ### Compilermessages
 
