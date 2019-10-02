@@ -1,45 +1,12 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich
-email:    zug@ovgu.de   & andre.dietrich@ovgu.de
+author:   Sebastian Zug & André Dietrich & Galina Rudolf
+email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
 version:  0.0.1
 language: de
 narrator: Deutsch Female
 
-script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
-
-@JSCPP.__eval
-<script>
-  try {
-    var output = "";
-    JSCPP.run(`@0`, `@1`, {stdio: {write: s => { output += s }}});
-    output;
-  } catch (msg) {
-    var error = new LiaError(msg, 1);
-
-    try {
-        var log = msg.match(/(.*)\nline (\d+) \(column (\d+)\):.*\n.*\n(.*)/);
-        var info = log[1] + " " + log[4];
-
-        if (info.length > 80)
-          info = info.substring(0,76) + "..."
-
-        error.add_detail(0, info, "error", log[2]-1, log[3]);
-    } catch(e) {}
-
-    throw error;
-    }
-</script>
-@end
-
-
-@JSCPP.eval: @JSCPP.__eval(@input, )
-
-@JSCPP.eval_input: @JSCPP.__eval(@input,`@input(1)`)
-
-@output: <pre class="lia-code-stdout">@0</pre>
-
-
+import: https://raw.githubusercontent.com/liaScript/rextester_template/master/README.md
 -->
 
 # Vorlesung IV - Kontrollstrukturen
@@ -56,7 +23,7 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 * Recherchieren Sie Beispiele, in denen `goto`-Anweisungen Bugs generierten.
 
 --------------------------------------------
-[Aktuelle Vorlesung im Versionsmanagementsystem GitHub](https://github.com/liaScript/CCourse/blob/master/04_Kontrollstrukturen.md)
+[Aktuelle Vorlesung im Versionsmanagementsystem GitHub](https://github.com/SebastianZug/CCourse/blob/master/04_Kontrollstrukturen.md)
 
 ----------------------------------------------------------------------
 {{1}}
@@ -102,7 +69,7 @@ Standardbibliotheken
 
 Im erst genannten Fall spricht man von
 
-* impliziten Datentypumwandlung, im zweiten von
+* impliziten Typumwandlung, im zweiten von
 * expliziter Typumwandlung.
 
 Es wird bei Methoden vorausgesetzt, dass der Compiler eine Typumwandlung auch
@@ -135,12 +102,13 @@ int main()
   int i = -1;
   unsigned int limit = 200;
 
-  if ( i < limit )
-    printf(" i < limit \n");  
+  if ( i > limit )
+    printf(" i > limit \n");  
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
+
 
 {{1}}
 **Konvertierung zu `_Bool`**
@@ -192,10 +160,10 @@ int main()
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 {{3}}
-> **Achtung:** Implizite Typumwandlung bergen erhebliche Risiken in sich!
+> **Achtung:** Implizite Typumwandlungen bergen erhebliche Risiken in sich!
 
 {{3}}
 ```cpp                     Overflow.c
@@ -205,18 +173,17 @@ int main()
 {
   float f = -3.14;
   unsigned int i = f;
-  printf("float value = %f / Integer-Anteil %d \n", f, i);
   printf("float value = %f / Integer-Anteil %u \n", f, i);
+  printf("float value = %f / Integer-Anteil %d \n", f, i);
   return 0;
 }
 ```
+@Rextester.C
 
-{{3}}
-``` bash @output
-▶ ./a.out
+<!--
 float value = -3.140000 / Integer-Anteil -3
 float value = -3.140000 / Integer-Anteil 4294967293
-```
+-->
 
 {{3}}
 Die Headerdatei `<fenv.h>` definiert verschiedene Einstellungen für das Rechnen
@@ -247,7 +214,7 @@ int main()
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 Im Beispiel wird in der ersten `printf`-Anweisung das Ergebnis der ganzzahlegen
 Division `i/j` in `float` konvertiert, in der zweiten `printf`-Anweisung die
@@ -391,7 +358,7 @@ int main(){
 	return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 {{2}}
 **Weitere Beispiele für Bedingungen**
@@ -459,7 +426,7 @@ int main(){
 	return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 {{5}}
 **Sehen Sie mögliche Vereinfachungen des Codes?**
@@ -523,7 +490,8 @@ int main() {
 ``` text                  stdin
 +
 ```
-@JSCPP.eval_input
+@Rextester.C(false,`@input(1)`)
+
 
 {{2}}
 Im Unterschied zu einer `if`-Abfrage wird in den unterschiedlichen Fällen immer
@@ -573,7 +541,7 @@ int main() {
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 {{4}}
 Unter Ausnutzung von `break` können Kategorien definiert werden, die aufeinander
@@ -604,7 +572,7 @@ int main() {
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 
 ### Schleifen
@@ -698,7 +666,7 @@ int main(){
 	return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 {{1}}
 **Beliebte Fehlerquellen**
@@ -723,7 +691,7 @@ int main(){
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 #### `while`-Schleife
 
@@ -846,7 +814,7 @@ int main(){
 	return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 {{1}}
 Eine weitere wichtige Eingriffsmöglichkeit für Schleifenkonstrukte bietet
@@ -866,7 +834,7 @@ int main(){
 	return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 {{2}}
 Durch `return`- Anweisung wird das Verlassen einer Funktion veranlasst (genaues
@@ -897,7 +865,7 @@ int main(){
 	return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 Ein wichtiger Fehler, der häufig immer mit goto in Verbindung gebracht wird, hat
 aber eigentlich nichts damit zu tun
@@ -954,4 +922,4 @@ int main() {
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C

@@ -1,48 +1,12 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich
-email:    zug@ovgu.de   & andre.dietrich@ovgu.de
+author:   Sebastian Zug & André Dietrich & Galina Rudolf
+email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
 version:  0.0.1
 language: de
 narrator: Deutsch Female
 
-comment:  This is a very simple comment.
-          Multiline is also okay.
-
-script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
-
-@JSCPP.__eval
-<script>
-  try {
-    var output = "";
-    JSCPP.run(`@0`, `@1`, {stdio: {write: s => { output += s }}});
-    output;
-  } catch (msg) {
-    var error = new LiaError(msg, 1);
-
-    try {
-        var log = msg.match(/(.*)\nline (\d+) \(column (\d+)\):.*\n.*\n(.*)/);
-        var info = log[1] + " " + log[4];
-
-        if (info.length > 80)
-          info = info.substring(0,76) + "..."
-
-        error.add_detail(0, info, "error", log[2]-1, log[3]);
-    } catch(e) {}
-
-    throw error;
-    }
-</script>
-@end
-
-
-@JSCPP.eval: @JSCPP.__eval(@input, )
-
-@JSCPP.eval_input: @JSCPP.__eval(@input,`@input(1)`)
-
-@output: <pre class="lia-code-stdout">@0</pre>
-
-
+import: https://raw.githubusercontent.com/liaScript/rextester_template/master/README.md
 -->
 
 # Vorlesung III - Operatoren
@@ -59,7 +23,7 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 * Wie können boolsche Variablen in C ausgedrückt werden?
 
 ---------------------------------------------------------------------
-[Aktuelle Vorlesung im Versionsmanagementsystem GitHub](https://github.com/liaScript/CCourse/blob/master/03_Operatoren.md)
+[Aktuelle Vorlesung im Versionsmanagementsystem GitHub](https://github.com/SebastianZug/CCourse/blob/master/03_Operatoren.md)
 
 ---------------------------------------------------------------------
 {{1}}
@@ -170,7 +134,7 @@ int main() {
    return 0;
 }
 ```
-@JSCPP.eval
+  @Rextester.C
 
 Die Zuweisungsoperation ist rechtsassoziativ. Der Ausdruck wird von rechts nach
 links ausgewertet.
@@ -185,11 +149,7 @@ int main() {
   printf("a = %d, b=%d\n", a, b);
 }
 ```
-
-``` bash @output
-▶ ./a.out
-a = 6, b=6
-```
+  @Rextester.C
 
 {{1}}
 > **Achtung:** Verwechseln Sie nicht den Zuweisungsoperator `=` mit dem
@@ -211,15 +171,7 @@ int main(){
   return 0;
 }
 ```
-
-{{1}}
-``` bash @output
-▶ gcc experiments.c
-▶ ./a.out
-x=20 und y=20
-x=20 und y=1
-```
-
+@Rextester.C
 
 ### Inkrement und Dekrement
 
@@ -236,12 +188,12 @@ int main(){
   x = 5;
   result = 2 * ++x;   // Gebrauch als Präfix
   printf("x=%d und result=%d\n",x, result);
-  result = x * x++;   // Gebrauch als Postfix
+  result = 2 * x++;   // Gebrauch als Postfix
   printf("x=%d und result=%d\n",x, result);
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 Welche Variante sollte ich benutzen, wenn ich einfach nur eine Variable
 inkrementieren möchte?
@@ -280,7 +232,8 @@ int main(){
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
+
 
 {{1}}
 > **Achtung:** Divisionsoperationen werden für Ganzzahlen und Gleitkommazahlen
@@ -308,7 +261,7 @@ int main(){
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 {{1}}
 > **Achtung:** Der Rechenoperator Modulo mit dem `%` Zeichen hat nichts mit dem
@@ -342,7 +295,7 @@ int main() {
    return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 {{2}}
 > **Achtung:** Verlieren Sie bei langen Berechnungsketten nicht den Überblick!
@@ -368,22 +321,15 @@ Kern der Logik sind Aussagen, die wahr oder falsch sein können.
 int main(){
   int x = 15;
   printf("x = %d \n", x);
-  printf("Aussage x > 5 ist %d \n", (x > 5));
-  printf("Aussage x == 5 ist %d \n", (x == -15));
+  printf("Aussage x > 5 ist %d \n", x > 5);
+  printf("Aussage x == 5 ist %d \n", x == -15);
   return 0;
 }
 ```
-
-``` bash @output
-▶ gcc experiments.c
-▶ ./a.out
-x = 15
-Aussage x > 5 ist 1
-Aussage x == 5 ist 0
-```
+@Rextester.C
 
 {{1}}
-Und wie lassen sich Logische Aussagen verknüpfen?
+Und wie lassen sich logische Aussagen verknüpfen?
 
 {{1}}
 | Operation | Bedeutung |
@@ -395,9 +341,9 @@ Und wie lassen sich Logische Aussagen verknüpfen?
 {{1}}
 ```cpp                                       Logic.c
 #include <stdio.h>
-typedef int bool;
-#define true 1
-#define false 0
+//typedef int bool;
+//#define true 1
+//#define false 0
 
 int main(){
   int x = 15;
@@ -405,7 +351,7 @@ int main(){
   // deren Aussage die Ausgabe erfolgt
   //    |
   //    v
-  if (x > 5) {
+  if (x > 5 && x<20) {
     printf("Aussage ist wahr!\n");
   }else{
     printf("Aussage ist falsch!\n");
@@ -413,7 +359,7 @@ int main(){
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 {{1}}
 Anmerkung: Seit dem C99-Standard finden Sie in der Headerdatei `<iso646.h>`
@@ -469,7 +415,7 @@ int main(){
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 {{2}}
 Der Analog-Digital-Wandler wurde gestartet, nun wollen wir prüfen, ob die
@@ -490,7 +436,7 @@ int main(){
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 {{2}}
 Anmerkung: Üblicherweise würde man keine "festen" Werte für die set und test
@@ -505,14 +451,14 @@ Makros bereitgestellt, die eine Portierbarkeit erlauben.
 #include <stdio.h>
 
 int main() {
-  if (0 && 2) printf("Aussage 1 ist wahr\n");
+  if (1 && 2) printf("Aussage 1 ist wahr\n");
   else printf("Aussage 1 ist falsch\n");
-  if (5 & 2) printf("Aussage 2 ist wahr\n");
+  if (1 & 2) printf("Aussage 2 ist wahr\n");
   else printf("Aussage 2 ist falsch\n");
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 {{3}}
 | Operator | Bedeutung         | Rückgabewert  |
@@ -532,12 +478,11 @@ einige Stellen nach links bzw. nach rechts zu verschieben.
 #include <stdio.h>
 
 int main(){
-  int x = 15;
-  printf("x=%d \n", 15 << 1);
+  printf("%d \n", 15 << 1);
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 Und wozu braucht man das? Zum einen beim Handling einzelner Bits, wie es heute
 beim *Beispiel des Tages* gezeigt wird. Zum anderen zur Realisierung von
@@ -600,6 +545,16 @@ Kompiliertzeit.
 * `sizeof` ist keine Funktion, sondern ein Operator.
 * `sizeof` wird häufig zur dynamischen Speicherreservierung verwendet.
 
+```cpp
+#include <stdio.h>
+
+int main(){
+  double wert=0.0;
+  printf("%ld %ld %ld\n", sizeof(0),sizeof(double),sizeof(wert));
+return 0;
+}
+```
+@Rextester.C
 
 
 ### Vorrangregeln
@@ -710,4 +665,4 @@ int main(){
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
