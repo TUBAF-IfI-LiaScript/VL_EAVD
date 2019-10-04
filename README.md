@@ -17,7 +17,7 @@ import: https://raw.githubusercontent.com/LiaTemplates/Rextester/master/README.m
 See the interactive version at
 [https://LiaScript.github.io](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/README.md)
 
-Der vorliegende C-Kurs wird seid dem Wintersemester 2018/19 an der TU Bergakademie
+Der vorliegende C-Kurs wird seit dem Wintersemester 2018/19 an der TU Bergakademie
 Freiberg für die Veranstalutng "Prozedurale Programmierung" genutzt und auf der Basis von LiaScript realisiert. Die
 Veranstaltung richtet sich an Nicht-Informatiker aus verschiedenen
 ingenieurwissenschaftlichen Disziplinen mit keinen oder geringen
