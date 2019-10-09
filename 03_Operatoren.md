@@ -23,7 +23,9 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 * Wie können boolsche Variablen in C ausgedrückt werden?
 
 ---------------------------------------------------------------------
-[Aktuelle Vorlesung im Versionsmanagementsystem GitHub](https://github.com/SebastianZug/CCourse/blob/master/03_Operatoren.md)
+Aktuelle Vorlesung im Versionsmanagementsystem GitHub:
+
+[https://github.com/SebastianZug/CCourse/blob/master/03_Operatoren.md](https://github.com/SebastianZug/CCourse/blob/master/03_Operatoren.md)
 
 ---------------------------------------------------------------------
 {{1}}
