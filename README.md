@@ -233,10 +233,7 @@ style="width: 40%;" -->
 
 <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/596617/charts/1?bgcolor=%23ffffff&color=%23d62020&days=1&dynamic=true&type=line"></iframe>
 
-
-
 *******************************************************************************
-
 
 # "C ist schwierig zu erlernen"
 
