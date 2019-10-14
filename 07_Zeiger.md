@@ -1,126 +1,12 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich
-email:    zug@ovgu.de   & andre.dietrich@ovgu.de
+author:   Sebastian Zug & André Dietrich & Galina Rudolf
+email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
 version:  0.0.1
 language: de
 narrator: Deutsch Female
 
-script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
-
-@JSCPP.__eval
-<script>
-  try {
-    var output = "";
-    JSCPP.run(`@0`, `@1`, {stdio: {write: s => { output += s }}});
-    output;
-  } catch (msg) {
-    var error = new LiaError(msg, 1);
-
-    try {
-        var log = msg.match(/(.*)\nline (\d+) \(column (\d+)\):.*\n.*\n(.*)/);
-        var info = log[1] + " " + log[4];
-
-        if (info.length > 80)
-          info = info.substring(0,76) + "..."
-
-        error.add_detail(0, info, "error", log[2]-1, log[3]);
-    } catch(e) {}
-
-    throw error;
-    }
-</script>
-@end
-
-
-@JSCPP.eval: @JSCPP.__eval(@input, )
-
-@JSCPP.eval_input: @JSCPP.__eval(@input,`@input(1)`)
-
-@output: <pre class="lia-code-stdout">@0</pre>
-
-@output_: <pre class="lia-code-stdout" hidden="true">@0</pre>
-
-
-script:   https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js
-
-@Rextester.__eval
-<script>
-//var result = null;
-var error  = false;
-
-console.log = function(e){ send.lia("log", JSON.stringify(e), [], true); };
-
-function grep_(type, output) {
-  try {
-    let re_s = ":(\\d+):(\\d+): "+type+": (.+)";
-
-    let re_g = new RegExp(re_s, "g");
-    let re_i = new RegExp(re_s, "i");
-
-    let rslt = output.match(re_g);
-
-    let i = 0;
-    for(i = 0; i < rslt.length; i++) {
-        let e = rslt[i].match(re_i);
-
-        rslt[i] = { row : e[1]-1, column : e[2], text : e[3], type : type};
-    }
-    return [rslt];
-  } catch(e) {
-    return [];
-  }
-}
-
-$.ajax ({
-    url: "https://rextester.com/rundotnet/api",
-    type: "POST",
-    timeout: 10000,
-    data: { LanguageChoice: @0,
-            Program: `@input`,
-            Input: `@1`,
-            CompilerArgs : @2}
-    }).done(function(data) {
-        if (data.Errors == null) {
-            let warnings = grep_("warning", data.Warnings);
-
-            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
-
-            if(data.Warnings)
-              stats = "\n-------Warn-------\n"+data.Warnings + stats;
-
-            send.lia("log", data.Result+stats, warnings, true);
-            send.lia("eval", "LIA: stop");
-
-        } else {
-            let errors = grep_("error", data.Errors);
-
-            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
-
-            if(data.Warning)
-              stats = data.Errors + data.Warnings + stats;
-            else
-              stats = data.Errors + data.Warnings + stats;
-
-            send.lia("log", stats, errors, false);
-            send.lia("eval", "LIA: stop");
-        }
-    }).fail(function(data, err) {
-        send.lia("log", err, [], false);
-        send.lia("eval", "LIA: stop");
-    });
-
-"LIA: wait"
-</script>
-@end
-
-
-@Rextester.eval: @Rextester.__eval(6, ,"-Wall -std=gnu99 -O2 -o a.out source_file.c")
-
-@Rextester.eval_params: @Rextester.__eval(6, ,"@0")
-
-@Rextester.eval_input: @Rextester.__eval(6,`@input(1)`,"-Wall -std=gnu99 -O2 -o a.out source_file.c")
-
+import: https://raw.githubusercontent.com/liaScript/rextester_template/master/README.md
 -->
 
 
@@ -140,7 +26,9 @@ $.ajax ({
 * In welchem Kontext ist die Typisierung von Zeigern von Bedeutung?
 
 ---------------------------------------------------------------------
-[Aktuelle Vorlesung im Versionsmanagementsystem GitHub](https://github.com/liaScript/CCourse/blob/master/07_Zeiger.md)
+Aktuelle Vorlesung im Versionsmanagementsystem GitHub:
+
+[https://github.com/SebastianZug/CCourse/blob/master/07_Zeiger.md](https://github.com/SebastianZug/CCourse/blob/master/07_Zeiger.md)
 
 ---------------------------------------------------------------------
 
@@ -186,6 +74,7 @@ Quelle: [http://www2.hs-fulda.de/~klingebiel/c-stdlib/math.htm](http://www2.hs-f
 
 ``` c
 #include <stdio.h>
+#define _USE_MATH_DEFINES
 #include <math.h>
 
 int main(void) {
@@ -199,11 +88,7 @@ int main(void) {
   return 0;
 }
 ```
-@Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
-
-``` bash @output_
-sin 90, 1.000000
-```
+@Rextester.eval(@C, false, ,`-Wall -std=gnu99 -O2 -o a.out source_file.c -lm`)
 
 ````
  ┏━━━━━━━┳━━━━━━━┳━━━━━━━┳╸╸╸╸╸╸╸┳━━━━━━━┳━━━━━━━┳╸╸╸╸╸╸╸
@@ -321,14 +206,8 @@ int main(void)
   return EXIT_SUCCESS;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
-```bash @output_
-Pointer ptr_a    0x7fffc5553eac
-Pointer ptr_feld 0x7fffc5553eb0
-Pointer ptr_b    0x7fffc5553eac
-Pointer ptr_Null (nil)
-```
 
 {{1}}
 Die konkrete Zuordnung einer Variablen im Speicher wird durch den Compiler und
@@ -378,15 +257,8 @@ int main(void)
   return EXIT_SUCCESS;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
-```bash @output_
-Wert von a                     15
-Pointer ptr_a                  0x7ffdc38ac274
-Wert hinter dem Pointer ptr_a  15
-Wert von a                     10
-Wert hinter dem Pointer ptr_a  10
-```
 
 ### Fehlerquellen
 
@@ -406,14 +278,7 @@ int main(void)
   return EXIT_SUCCESS;
 }
 ```
-@Rextester.eval
-
-```bash @output_
-Invalid memory reference (SIGSEGV)source_file.c: In function ‘main’:
-source_file.c:8:9: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
-   ptr_a = a;
-         ^
-```
+@Rextester.C
 
 {{1}}
 Fehlender Dereferenzierungsoperator beim Zugriff
@@ -432,17 +297,7 @@ int main(void)
   return EXIT_SUCCESS;
 }
 ```
-@Rextester.eval
-
-```bash @output_
-Pointer ptr_a                  0x7ffec21b00e4
-Wert hinter dem Pointer ptr_a  -1038417692
-
--------Warn-------
-source_file.c: In function ‘main’:
-source_file.c:9:10: warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘int *’ [-Wformat=]
-   printf("Wert hinter dem Pointer ptr_a  %d\n", ptr_a);
-```
+@Rextester.C
 
 {{2}}
 Uninitialierte Pointer zeigen "irgendwo ins nirgendwo"!
@@ -465,18 +320,7 @@ int main(void)
   return EXIT_SUCCESS;
 }
 ```
-@Rextester.eval
-
-```bash @output_
-Pointer ptr_a                  (nil)
-Wert hinter dem Pointer ptr_a  10
-
--------Warn-------
-source_file.c: In function ‘main’:
-source_file.c:7:10: warning: ‘ptr_a’ is used uninitialized in this function [-Wuninitialized]
-   *ptr_a = 10;
-          ^
-```
+@Rextester.C
 
 ### Zeigerarithmetik
 
@@ -502,13 +346,7 @@ int main(void) {
    return EXIT_SUCCESS;
 }
 ```
-@Rextester.eval
-
-```bash @output_
-char    int     float   double  void
-8       8       8       8       8
-1       4       4       8       1
-```
+@Rextester.C
 
 {{1}}
 Die Zeigerarithmetik erlaubt:
@@ -545,15 +383,8 @@ int main(void)
   return EXIT_SUCCESS;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
-```bash @output_
-Pointer ptr_a               0x7fffebf9be40
-Pointer ptr_b               0x7fffebf9be48
-Differenz ptr_b -  ptr_a    2
-Differenz ptr_b -  ptr_a    8
-Wert hinter Pointer ptr_b   '2'
-```
 
 {{2}}
 Was bedeutet das im Umkehrschluss? Eine falsche Deklaration bewirkt ein
@@ -576,26 +407,8 @@ int main(void)
   return EXIT_SUCCESS;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
-```bash @output_
-ptr_a 0x7fff266d0840 -> 6
-ptr_a 0x7fff266d0841 -> 0
-ptr_a 0x7fff266d0842 -> 0
-ptr_a 0x7fff266d0843 -> 0
-ptr_a 0x7fff266d0844 -> 7
-ptr_a 0x7fff266d0845 -> 0
-ptr_a 0x7fff266d0846 -> 0
-ptr_a 0x7fff266d0847 -> 0
-ptr_a 0x7fff266d0848 -> 8
-ptr_a 0x7fff266d0849 -> 0
-ptr_a 0x7fff266d084a -> 0
-ptr_a 0x7fff266d084b -> 0
-ptr_a 0x7fff266d084c -> 9
-ptr_a 0x7fff266d084d -> 0
-ptr_a 0x7fff266d084e -> 0
-ptr_a 0x7fff266d084f -> 0
-```
 
 ### Vergleiche von Zeigern
 
@@ -625,16 +438,8 @@ int main(void)
   return EXIT_SUCCESS;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
-```bash @output_
-ptr_a 0x7ffc13428080 -> 6
-ptr_b 0x7ffc13428088 -> 6
-Werte sind gleich!
-Adressen sind ungleich!
-Nun zeigt ptr_a auf 0x7ffc13428088
-Jetzt sind die Adressen gleich!
-```
 
 ### Zeiger auf Felder
 <!--
@@ -651,32 +456,28 @@ Es gibt zwei Möglichkeiten auf ein Array zuzugreifen, über den Indexoperator
 ``` c
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
 int main(void) {
   char text[] = "ProzProg\0";
   char *ptr_text = text;
 
   // Indizierte Adressierung
-  for(char i=0; i<sizeof(text); i++) {
+  for(int i=0; i<sizeof(text); i++) {
     printf("%c ", text[i]);
   }
   // Zeiger + Offset
-  for(char i=0; i<sizeof(text); i++) {
+  for(int i=0; i<sizeof(text); i++) {
     printf("%c ", *(ptr_text + i));
   }
   // Verschiebung des Zeigers
-  for(char i=0; i<sizeof(text); i++, ptr_text++) {
+  for(int i=0; i<sizeof(text); i++, ptr_text++) {
     printf("%c ", *(ptr_text));
   }
   return EXIT_SUCCESS;
 }
 ```
-@Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
+@Rextester.C
 
-```bash @output_
-P r o z P r o g   P r o z P r o g   P r o z P r o g
-```
 
 **Achtung:** Es gibt erhebliche Unterschiede bei der Zeiger-basierten
 Adressierung von Arrays im Hinblick auf das "Ziel".
@@ -696,26 +497,47 @@ int main(void) {
   return EXIT_SUCCESS;
 }
 ```
-@Rextester.eval
+@Rextester.C
 
-```bash @output_
-Zeiger auf arr    0x7ffe162426d0
-Zeiger auf arr[0] 0x7ffe162426d0
-Zeiger &arr       0x7ffe162426d0
-Zeiger auf arr+1  0x7ffe162426d4
-Zeiger &arr+1     0x7ffe162426e4
-```
 
 Offenbar zeigt der Pointer `arr` auf den ersten Eintrag des Arrays und verschiebt
 sich entsprechend dem Datentyp `int` um 4 Byte. Anders für die Referenz auf das
 gesamte Array `&arr`. Hier wird bei der Inkrementierung das gesamte Array
-übersprungen. Folglich lässt sich der letzte Eintrag mit
+übersprungen. Folglich erreicht man den letzten Eintrag mit
 
 ``` c
 int *ptr_last_entry = (&arr + 1) - 1;
 ```
 
 ### Zeiger für die Parameterübergrabe
+Mit Hilfe des Zeigers wird in C die "call-by-reference"- Parameterübergabe
+realisiert. In der Liste der formalen Parameter wird ein Zeiger eines
+passenden Typs definiert. Beim Funktionsaufruf wird als Argument statt
+Variable eine Adresse übergeben. Beachten Sie, dass für den Zugriff auf den Inhalt des Zeigers (einer Adresse) der Inhaltsoperator `*` benötigt wird.
+
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+
+void inkrementieren(int *variable){
+  (*variable)++;
+}
+
+int main(void) {
+  int a=0;
+  inkrementieren(&a);
+  printf("a = %d\n", a);
+  inkrementieren(&a);
+  printf("a = %d\n", a);
+  return EXIT_SUCCESS;
+}
+```
+@Rextester.C
+
+
+Die Adresse einer Variable wird mit dem Adressenoperator `&`
+ermittelt. Weiterhin kann an den Zeiger-Parameter eine Array-Variable
+übergeben werden.
 
 ``` c
 #include <stdio.h>
@@ -737,14 +559,31 @@ int main(void) {
   return EXIT_SUCCESS;
 }
 ```
-@Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
+@Rextester.eval(@C, false, ,`-Wall -std=gnu99 -O2 -o a.out source_file.c -lm`)
 
-```bash @output_
-Größe des Arrays 2880
-Größe des Arrays 8
-Result =  10.000000
+Der Vorteil der Verwendung der Zeiger als Parameter besteht darin, dass
+in der Funktion mehrere Variablen auf eine elegante Weise verändert
+werden können. Die Funktion hat somit quazi mehrere Ergebnisse.
+
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+
+void tauschen(char *anna, char *hanna){
+  char h=*anna;
+  *anna=*hanna;
+  *hanna=h;
+}
+
+int main(void) {
+  char anna='A',hanna='H';
+  printf("%c und %c\n", anna,hanna);
+  tauschen(&anna,&hanna);
+  printf("%c und %c\n", anna,hanna);;
+  return EXIT_SUCCESS;
+}
 ```
-
+@Rextester.C
 
 ### Zeiger als Rückgabewerte
 
@@ -768,14 +607,7 @@ int main(void) {
   return EXIT_SUCCESS;
 }
 ```
-@Rextester.eval
-
-```bash @output_
-Invalid memory reference (SIGSEGV)source_file.c: In function ‘doCalc’:
-source_file.c:7:10: warning: function returns address of local variable [-Wreturn-local-addr]
-   return &a;
-          ^
-```
+@Rextester.C
 
 Mit dem Beenden der Funktion werden deren lokale Variablen vom Stack gelöscht.
 Um diese Situation zu handhaben können Sie zwei Lösungsansätze realisieren.
@@ -787,55 +619,117 @@ Um diese Situation zu handhaben können Sie zwei Lösungsansätze realisieren.
 #include <stdlib.h>
 #include <math.h>
 
-void kreisflaeche(double *durchmesser, double *flaeche) {
-  *flaeche = M_PI * pow(*durchmesser / 2, 2);
+void kreisflaeche(double durchmesser, double *flaeche) {
+  *flaeche = M_PI * pow(durchmesser / 2, 2);
   // Hier steht kein return !
 }
 
 int main(void) {
   double wert = 5.0;
   double flaeche = 0;
-  kreisflaeche(&wert, &flaeche);
+  kreisflaeche(wert, &flaeche);
   printf("Die Kreisfläche beträgt für d=%3.1lf[m] %3.1lf[m²] \n", wert, flaeche);
   return EXIT_SUCCESS;
 }
 ```
-@Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
+@Rextester.eval(@C, false, ,`-Wall -std=gnu99 -O2 -o a.out source_file.c -lm`)
 
-```bash @output_
-Die Kreisfläche beträgt für d=5.0[m] 7.9[m²]
-```
+{{1}}
+**Variante 2** Rückgabezeiger adressiert mit `static` bezeichnete Variable. Aber Achtung: funktieoniert nicht bei rekursiven Aufrufen.
 
-**Variante 2** Rückgabezeiger adressiert mit `static` bezeichnete Variable.
-
+{{1}}
 ``` c
 #include <stdio.h>
 #include <stdlib.h>
 
-void cumsum(int *wert) {
-  static int counter = 0;
-  counter++;
-  *wert += counter;
-  // Hier steht kein return !
+int* cumsum(int wert) {
+  static int sum = 0;
+  sum += wert;
+  return &sum;
 }
 
 int main(void) {
-  int wert = 0;
-  cumsum(&wert);
-  cumsum(&wert);
-  cumsum(&wert);
-  printf("Der Zählerwert ist : %d\n", wert);
-  cumsum(&wert);
-  printf("Der Zählerwert ist : %d\n", wert);
+  int wert = 2;
+  int *sum;
+  sum=cumsum(wert);
+  sum=cumsum(wert);
+  printf("Die Summe ist : %d\n", *sum);
+  sum=cumsum(wert);
+  printf("Die Summe ist : %d\n", *sum);
   return EXIT_SUCCESS;
 }
 ```
-@Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
+@Rextester.C
 
-```bash @output_
-Der Zählerwert ist : 6
-Der Zählerwert ist : 10
+{{2}}
+**Variante 3** Für den Rückgabezeiger wird der Speicherplatz mit `malloc` dynamisch angelegt (dazu später mehr).
+
+{{2}}
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+double* kreisflaeche(double durchmesser) {
+  double *flaeche=(double*)malloc(sizeof(double));
+  *flaeche = M_PI * pow(durchmesser / 2, 2);
+  return flaeche;
+}
+
+int main(void) {
+  double wert = 5.0;
+  double *flaeche;
+  flaeche=kreisflaeche(wert);
+  printf("Die Kreisfläche beträgt für d=%3.1lf[m] %3.1lf[m²] \n", wert, *flaeche);
+  return EXIT_SUCCESS;
+}
 ```
+@Rextester.eval(@C, false, ,`-Wall -std=gnu99 -O2 -o a.out source_file.c -lm`)
+
+### `void`-Zeiger
+
+`void`-Zeiger ist zu jedem anderen Daten-Zeiger kompatibel und wird
+verwendet, wenn der Datentyp des Zeigers noch nicht feststeht.
+In C ist die implizite und explizite Typumwandlung des `void`-Zeigers in einen anderen Typ möglich.
+
+```c
+int a=5;
+void *pv=&a;
+int *pi=pv;
+int *pii=(int*)pv;
+```
+Vorwiegend findet ein `void`-Zeiger Anwendung in Funktionen, die mit
+unterschiedlichen Zeigern aufgerufen werden bzw. unterschiedliche Zeiger
+als einen Rückgabewert liefern.
+
+Beispiele:
+* Die Funktion `memcmp()` (`<string.h>`) zum Vergleichen von Zeichenketten erlaubt die Verwendung mit `char*` und `int*`.
+* Das Ergebnis der Funktion `malloc()` (`<stdlib.h>`) zum Bereistellen des Speicherplatzes kann in `char*`, `int*`, `double*` usw. umgewandelt werden.
+
+```c
+int memcmp (const void*, const void*, size_t);
+void *malloc(size_t size);
+```
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(void) {
+   char str1[]="abcde";
+   char str2[]="ABCDE";
+
+   if(memcmp(str1,str2, sizeof(str1)) == 0)
+      printf("Strings sind gleich\n");
+   else
+      printf("Strings sind nicht gleich\n");
+
+   return EXIT_SUCCESS;
+}
+```
+@Rextester.C
+
 
 ## 2. Beispiel der Woche
 
@@ -869,21 +763,4 @@ int main(void)
   return EXIT_SUCCESS;
 }
 ```
-@Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
-
-```bash @output_
-Value left   1 right 25
------------------------
-Value left   1 right 25
-Value left   1 right 21
-Value left   1 right 18
-Value left   1 right 17 -> TREFFER
-Value left   1 right 16
-Value left   2 right 16 -> TREFFER
-Value left   2 right 13
-Value left   5 right 13 -> TREFFER
-Value left   5 right 12
-Value left   7 right 12
-Value left   7 right 10
-Value left   9 right 10
-```
+@Rextester.C

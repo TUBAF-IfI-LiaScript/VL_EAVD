@@ -1,44 +1,12 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich
-email:    zug@ovgu.de   & andre.dietrich@ovgu.de
+author:   Sebastian Zug & André Dietrich & Galina Rudolf
+email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
 version:  0.0.1
 language: de
 narrator: Deutsch Female
 
-script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
-
-@JSCPP.__eval
-<script>
-  try {
-    var output = "";
-    JSCPP.run(`@0`, `@1`, {stdio: {write: s => { output += s }}});
-    output;
-  } catch (msg) {
-    var error = new LiaError(msg, 1);
-
-    try {
-        var log = msg.match(/(.*)\nline (\d+) \(column (\d+)\):.*\n.*\n(.*)/);
-        var info = log[1] + " " + log[4];
-
-        if (info.length > 80)
-          info = info.substring(0,76) + "..."
-
-        error.add_detail(0, info, "error", log[2]-1, log[3]);
-    } catch(e) {}
-
-    throw error;
-    }
-</script>
-@end
-
-
-@JSCPP.eval: @JSCPP.__eval(@input, )
-
-@JSCPP.eval_input: @JSCPP.__eval(@input,`@input(1)`)
-
-@output: <pre class="lia-code-stdout">@0</pre>
-
+import: https://raw.githubusercontent.com/liaScript/rextester_template/master/README.md
 -->
 
 # Vorlesung V - Strukturierte Datentypen
@@ -53,7 +21,9 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
 * Wie vergleichen Sie zwei `structs`?
 
 ---------------------------------------------------------------------
-[Aktuelle Vorlesung im Versionsmanagementsystem GitHub](https://github.com/liaScript/CCourse/blob/master/05_ZusammengesetzteDatentypen.md)
+Aktuelle Vorlesung im Versionsmanagementsystem GitHub:
+
+[https://github.com/SebastianZug/CCourse/blob/master/05_ZusammengesetzteDatentypen.md](https://github.com/SebastianZug/CCourse/blob/master/05_ZusammengesetzteDatentypen.md)
 
 ----------------------------------------------------------------------
 
@@ -114,11 +84,8 @@ int main(void) {
   return 0;
 }
 ```
+@Rextester.C
 
-``` bash @output
-▶ ./a.out
-Wert der Karte: 0
-```
 
 {{1}}
 Möglicherweise sollen den Karten aber auch konkrete Werte zugeordnet werden,
@@ -136,6 +103,7 @@ int main(void) {
   return 0;
 }
 ```
+@Rextester.C
 
 {{1}}
 An dieser Stelle sind Sie aber frei, was die eigentlichen Werte angeht. Es sind
@@ -200,13 +168,13 @@ int main(void) {
   a[2] = 99;
   for (int i=0; i<3; i++)
     printf("%d ", a[i]);
-  printf("\nNur zur Info %d", sizeof(a));
-  printf("\nZahl der Elemente %d", sizeof(a) / sizeof(int));
+  printf("\nNur zur Info %ld", sizeof(a));
+  printf("\nZahl der Elemente %ld", sizeof(a) / sizeof(int));
   printf("\nAnwendung des Adressoperators auf das Array %d", *a);
   return 0;
   }
 ```
-@JSCPP.eval
+@Rextester.C
 
 {{1}}
 Wie können Arrays noch initialisiert werden?
@@ -224,7 +192,7 @@ int main(void) {
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 {{2}}
 Und wie bestimme ich den erforderlichen Speicherbedarf bzw. die Größe des
@@ -236,12 +204,12 @@ Arrays?
 
 int main(void) {
   int a[3];
-  printf("\nNur zur Speicherplatz [Byte] %d", sizeof(a));
-  printf("\nZahl der Elemente %d\n", sizeof(a)/sizeof(int));
+  printf("\nNur zur Speicherplatz [Byte] %ld", sizeof(a));
+  printf("\nZahl der Elemente %ld\n", sizeof(a)/sizeof(int));
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 ### Fehlerquelle Nummer 1 - out of range
 
@@ -256,17 +224,7 @@ int main(void) {
   return 0;
   }
 ```
-
-``` bash @output
-▶ gcc -O experiments.c
-experiments.c: In function ‘main’:
-experiments.c:9:5: warning: iteration 3u invokes undefined behavior [-Waggressive-loop-optimizations]
-     printf("%d ", a[i]);}
-     ^
-experiments.c:8:3: note: containing loop
-   for (int i=0; i<=3000; i++){
-   ^
-```
+@Rextester.C
 
 
 ### Anwendung eines eindimesionalen Arrays
@@ -288,7 +246,7 @@ int main(void) {
   return 0;
   }
 ```
-@JSCPP.eval
+@Rextester.C
 
 Welche Verbesserungsmöglichkeiten sehen Sie bei dem Programm?
 
@@ -354,19 +312,7 @@ int main(void) {
   return 0;
 }
 ```
-
-{{2}}
-``` bash @output
-▶ ./a.out
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
-0 1 0 0 0 0 0 0
-0 0 0 0 0 3 0 0
-0 0 2 0 0 0 0 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 4
-0 0 0 0 0 0 0 0
-```
+@Rextester.C
 
 {{2}}
 Quelle: [C-Kurs](http://www.c-howto.de/tutorial/arrays-felder/zweidimensionale-felder/)
@@ -378,6 +324,8 @@ Quelle: [C-Kurs](http://www.c-howto.de/tutorial/arrays-felder/zweidimensionale-f
 Addition zweier Matrizen
 
 ```cpp
+#include <stdio.h>
+
 int main(void)
 {
     int A[2][3]={{1,2,3},{4,5,6}};
@@ -396,6 +344,7 @@ int main(void)
     return 0;
 }
 ```
+@Rextester.C
 
 [Multiplikation zweier Matrizen](https://www.codewithc.com/c-program-for-gauss-elimination-method/)
 
@@ -420,12 +369,12 @@ int main(void) {
   printf("->%s<-\n", b);
   const char c[] = "Noch eine \0Moeglichkeit";
   printf("->%s<-\n", c);
-  char d[] = { 80, 114, 111, 122, 80, 114, 111, 103, 32, 50, 48, 49, 56, 0  };
+  char d[] = { 80, 114, 111, 122, 80, 114, 111, 103, 32, 50, 48, 49, 57, 0  };
   printf("->%s<-\n", d);
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 {{1}}
 Beispiel einer fehlerhaften Verwendung eines `const char` Arrays
@@ -442,19 +391,8 @@ int main(void) {
   return 0;
 }
 ```
+@Rextester.C
 
-{{1}}
-``` bash @output
-▶ gcc arrayInitVsAssignment.c
-experiments.c: In function ‘main’:
-experiments.c:6:10: warning: passing argument 1 of ‘strcpy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
-   strcpy(a, "Das ist ein neuer Text");
-          ^
-In file included from experiments.c:2:0:
-/usr/include/string.h:125:14: note: expected ‘char * restrict’ but argument is of type ‘const char *’
- extern char *strcpy (char *__restrict __dest, const char *__restrict __src)
-              ^
-```
 
 
 ### Anwendung von Zeichenketten
@@ -482,7 +420,7 @@ int main() {
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 {{1}}
 Des Weiteren verwendet das Programm die ASCII-Codierung der Zeichen.
@@ -513,14 +451,8 @@ int main(void) {
   return 0;
 }
 ```
+@Rextester.C
 
-```bash @output
-▶ gcc experiments.c
-experiments.c: In function ‘main’:
-experiments.c:6:5: error: assignment to expression with array type
-   a = "Das ist ein neuer Text";
-     ^
-```
 
 Auf die umfangreiche Funktionssammlung der `string.h` zur Manipulation von
 Strings wird in einer folgenden Vorlesung eingegangen.
@@ -590,13 +522,7 @@ int main() {
   return 0;
 }
 ```
-
-``` bash @output
-▶ ./a.out
-Person A wurde am 18. April 1986 geboren.
-Person B wurde am 13. April 1803 geboren.
-Person C wurde am  0. September  0 geboren.
-```
+@Rextester.C
 
 ### Vergleich von `struct`-Variablen
 
@@ -612,12 +538,12 @@ aufwändigerer Vergleich der Strings.
 ```cpp                           structExample.c
 #include <stdio.h>
 
-enum {Januar, Februar, Maerz, April, Mai};
+enum MONAT {Januar, Februar, Maerz, April, Mai};
 
 struct datum
 {
     int tag;
-    char monat;
+    enum MONAT monat;
     int jahr;
 };
 
@@ -632,6 +558,7 @@ int main() {
       printf("Ungleiche Geburtstage!\n");
 }
 ```
+@Rextester.C
 
 ### Arrays von Strukturen
 
@@ -714,4 +641,4 @@ int main(){
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C

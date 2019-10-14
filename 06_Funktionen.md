@@ -1,44 +1,12 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich
-email:    zug@ovgu.de   & andre.dietrich@ovgu.de
+author:   Sebastian Zug & André Dietrich & Galina Rudolf
+email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
 version:  0.0.1
 language: de
 narrator: Deutsch Female
 
-script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
-
-@JSCPP.__eval
-<script>
-  try {
-    var output = "";
-    JSCPP.run(`@0`, `@1`, {stdio: {write: s => { output += s }}});
-    output;
-  } catch (msg) {
-    var error = new LiaError(msg, 1);
-
-    try {
-        var log = msg.match(/(.*)\nline (\d+) \(column (\d+)\):.*\n.*\n(.*)/);
-        var info = log[1] + " " + log[4];
-
-        if (info.length > 80)
-          info = info.substring(0,76) + "..."
-
-        error.add_detail(0, info, "error", log[2]-1, log[3]);
-    } catch(e) {}
-
-    throw error;
-    }
-</script>
-@end
-
-
-@JSCPP.eval: @JSCPP.__eval(@input, )
-
-@JSCPP.eval_input: @JSCPP.__eval(@input,`@input(1)`)
-
-@output: <pre class="lia-code-stdout">@0</pre>
-
+import: https://raw.githubusercontent.com/liaScript/rextester_template/master/README.md
 -->
 
 
@@ -58,7 +26,9 @@ script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
   kostet das Ganze doch Speicherplatz?
 
 ---------------------------------------------------------------------
-[Aktuelle Vorlesung im Versionsmanagementsystem GitHub](https://github.com/liaScript/CCourse/blob/master/06_Funktionen.md)
+Aktuelle Vorlesung im Versionsmanagementsystem GitHub:
+
+[https://github.com/SebastianZug/CCourse/blob/master/06_Funktionen.md](https://github.com/SebastianZug/CCourse/blob/master/06_Funktionen.md)
 
 ---------------------------------------------------------------------
 
@@ -144,7 +114,7 @@ int main(void) {
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.eval(@C, false, ,`-Wall -std=gnu99 -O2 -o a.out source_file.c -lm`)
 
 Ihre Aufgabe besteht nun darin ein neues Programm zu schreiben, das Ihre
 Implementierung der Mittelwertbestimmung integriert. Wie gehen Sie vor? Was sind
@@ -356,6 +326,8 @@ int main(void){
     return 0;
 }
 ```
+@Rextester.eval(@C, false, ,`-Wall -std=gnu99 -O2 -o a.out source_file.c -lm`)
+
 
 ### Fehler
 
@@ -367,15 +339,13 @@ void foo()
 	/* Code */
 	return 5; /* Fehler */
 }
-```
 
-``` bash @output
-▶ gcc experiments.c
-experiments.c: In function ‘foo’:
-experiments.c:5:10: warning: ‘return’ with a value, in function returning void
-   return 1;
-          ^
+int main(void)
+{
+  return 0;
+}
 ```
+@Rextester.C
 
 {{1}}
 **Erwartung eines Rückgabewertes**
@@ -393,15 +363,8 @@ int main(void) {
   return 0;
 }
 ```
+@Rextester.C
 
-{{1}}
-``` bash @output
-▶ gcc experiments.c
-experiments.c: In function ‘main’:
-experiments.c:9:11: error: void value not ignored as it ought to be
-   int i = foo();
-           ^
-```
 
 {{2}}
 **Implizite Convertierungen**
@@ -416,9 +379,11 @@ float foo(){
 
 int main(void) {
   int i = foo();
+  printf("%d\n",i);
   return 0;
 }
 ```
+@Rextester.C
 
 {{2}}
 ``` bash @output
@@ -445,18 +410,8 @@ int main(void) {
   return 0;
 }
 ```
+@Rextester.C
 
-{{3}}
-``` bash @output
-▶ gcc experiments.c
-experiments.c: In function ‘main’:
-experiments.c:8:11: error: too many arguments to function ‘foo’
-   int i = foo(5);
-           ^
-experiments.c:3:5: note: declared here
- int foo(void){
-     ^
-```
 
 {{4}}
 **Anweisungen nach dem return-Schlüsselwort**
@@ -488,7 +443,7 @@ int main(void) {
   return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 ### Funktionsdeklaration
 
@@ -504,13 +459,8 @@ int foo(void){         // <- Defintion der Funktion
    return 3;
 }
 ```
+@Rextester.C
 
-``` bash @output
-experiments.c: In function ‘main’:
-experiments.c:4:11: warning: implicit declaration of function ‘foo’ [-Wimplicit-function-declaration]
-   int i = foo(5);
-           ^
-```
 
 Damit der Compiler überhaupt von einer Funktion Kenntnis nimmt, muss diese vor
 ihrem Aufruf bekannt gegeben werden. Im vorangegangenen Beispiel wird die
@@ -537,7 +487,7 @@ float berechneFlaeche(float breite, float hoehe){
    return breite * hoehe;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 {{2}}
 Das Ganze wird dann relevant, wenn Funktionen aus anderen Quellcodedateien
@@ -604,14 +554,8 @@ int main(void) {
    return 0;
 }
 ```
+@Rextester.C
 
-``` bash @output
-
-▶ ./a.out
-Name Micky Maus
-Alter 50
-Note 1
-```
 
 {{1}}
 An die Funktion übergebene Arrays werden nicht wie bei *call-by-value* kopiert, sondern als Zeiger übergeben (*call-by-reference*) und können
@@ -716,7 +660,7 @@ int main() {
    return 0;
 }
 ```
-@JSCPP.eval
+@Rextester.C
 
 | Variable     | Spezifik         | Bedeutung                       |
 |:-------------|:-----------------|:--------------------------------|
@@ -748,15 +692,7 @@ int main() {
    return 0;
 }
 ```
-
-{{1}}
-``` bash @output
-▶ ./a.out
-1
-2
-3
-```
-
+@Rextester.C
 
 ## Beispiel des Tages
 
