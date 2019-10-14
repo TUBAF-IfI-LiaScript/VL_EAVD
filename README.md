@@ -100,10 +100,10 @@ int main() {
 **Dozenten**
 
 | Name             | Email                                      |
-|:-----------------|:-------------------------------------------|
+|:---------------- |:------------------------------------------ |
 | Sebastian Zug    | sebastian.zug@informatik.tu-freiberg.de    |
 | Galina Rudolf    | galina.rudolf@informatik.tu-freiberg.de    |
-| Jonas Treumer    | jonas.treumer@informatik.tu-freiberg.de    |
+| Martin Reinhardt | martin.reinhardt@informatik.tu-freiberg.de |
 | Alexander Buhl   | alexander.buhl@student.tu-freiberg.de      |
 
 **Zielstellung der Veranstaltung**
@@ -121,6 +121,15 @@ Lehrveranstaltungen, die eigenständige Lösung von Übungsaufgaben sowie die
 Prüfungsvorbereitung.
 
 # Literaturempfehlungen
+
+Der Kurs selbst ist unter
+
+https://github.com/SebastianZug/CCourse
+
+verfügbar. Diese können entweder in der Markdown-Syntax oder als Interaktives
+Dokument betrachtet werden.
+
+Achtung! Es handelt sich um "lebende" Materialien.
 
 **Online Kurse**
 
@@ -147,7 +156,9 @@ Prüfungsvorbereitung.
 
 | Datum      | Inhalt                                                                                                                                                                   |
 |:---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 14.10.2018 | [1.  Einführung](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/01_Einfuehrung.md)                                       |
+| 14.10.2019 | [1.  Einführung](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/01_Einfuehrung.md)                                       |
+
+<!--
 
 [//]: #  | 30.10.2018 | [2. Variablen und Datentypen, Ein- und Ausgabe](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/02_Grundlagen.md#1)       |
 | 06.11.2018 | [3. Operatoren](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/03_Operatoren.md#1)                                       |
@@ -161,9 +172,15 @@ Prüfungsvorbereitung.
 | 15.01.2019 | [10. Parameterübergabe und Makros](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/10_MakrosKommandozeilenparameter.md#1) |
 | 22.01.2019 | [11. Standardbibliothek](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/11_Standardbibliothek.md#1)                      |
 | 29.01.2019 | [12. Algorithmen](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/12_Algorithmen.md#1)                                    |
-| 05.02.2019 | [13. Ausblick](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/13_Ausblick.md#1)                                          |
+| 05.02.2019 | [13. Ausblick](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/13_Ausblick.md#1)     
+                                    |
+
+-->
 
 # ... und wozu brauche ich das?
+
+                                 {{0-1}}
+*******************************************************************************
 
 **Antwort A:**
 Das Studium vermittelt ein Weltbild und keine eng zugeschnitte Sicht.
@@ -176,14 +193,50 @@ Arbeitens.
 Am Ende steht Ihnen das Rüstzeug zur Verfügung kleine eingebettete C-Projekte
 selbst anzugehen.
 
-![US- Distanzsensor](./img/Example_I_DistanceMeasurements.jpeg)<!--
-style="width: 50%; display: block; margin-left: auto; margin-right: auto;" -->
+*******************************************************************************
 
-Beispielanwendung: Monitoring der Helligkeit und des Noisepegels im Hörsaal
 
-HAVE TO BE ACTIVATED
+                                 {{1-2}}
+*******************************************************************************
 
-<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/596617/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+**... zum Beispiel im Rahmen eines Arduino Projektes ...**
+
+Mit einiger Erfahrung in C (und C++) lassen sich einfache Mess- und Regelungstechnikaufgaben
+sehr einfach automatisieren. Ein Startpunkt dafür ist das Arduino Projekt, dass sowohl eine
+entsprechende Hardware, wie auch eine Programmierumgebung bereitstellt.
+
+```cpp        ArduinoHelloWorld.ino
+void setup() {      // Konfiguration
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+
+void loop() {       // Ausführung
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(1000);                     
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(1000);                     
+}
+```
+
+**Ein bisschen realistischer bitte!**
+
+... gut, dass ist noch nicht sonderlich beeindruckend. Vielleicht lässt folgende
+Anwendung das Potential etwas deutlicher werden. Lassen Sie uns annehmen, wir
+wollen die Lichtsitiation an einem bestimmten Punkt vermessen. Dazu verwenden
+wir einen Sensor, der mit einem Controller verbunden ist und senden die
+gesammelten Daten an einen Server. Dieser übernimmt die Aufbereitung und visualisierung.
+
+Forschungshypothese: Am Wochende strahlt die Sonne heller.
+
+![C logo](img/LightConditions.jpeg)<!--
+style="width: 40%;" -->
+
+<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/596617/charts/1?bgcolor=%23ffffff&color=%23d62020&days=1&dynamic=true&type=line"></iframe>
+
+
+
+*******************************************************************************
+
 
 # "C ist schwierig zu erlernen"
 
