@@ -24,9 +24,7 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 * Ist `printf` ein Schlüsselwort der Programmiersprache C?
 * Welche Beschränkung hat `getchar`
 
-Aktuelle Vorlesung im Versionsmanagementsystem GitHub:
-
-[https://github.com/SebastianZug/CCourse/blob/master/02_Grundlagen.mdw](https://github.com/SebastianZug/CCourse/blob/master/02_Grundlagen.md)
+Hier geht es zur interaktiven Version des Kurses [LiaScript](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CCourse/master/02_Grundlagen.md#1)
 
 **Vorwarnung:** Man kann Variablen nicht ohne Ausgaben und Ausgaben nicht ohne
 Variablen erklären. Deshalb wird im folgenden immer wieder auf einzelne Aspekte

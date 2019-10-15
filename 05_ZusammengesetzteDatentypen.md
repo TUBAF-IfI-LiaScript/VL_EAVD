@@ -21,9 +21,7 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 * Wie vergleichen Sie zwei `structs`?
 
 ---------------------------------------------------------------------
-Aktuelle Vorlesung im Versionsmanagementsystem GitHub:
-
-[https://github.com/SebastianZug/CCourse/blob/master/05_ZusammengesetzteDatentypen.md](https://github.com/SebastianZug/CCourse/blob/master/05_ZusammengesetzteDatentypen.md)
+Hier geht es zur interaktiven Version des Kurses [LiaScript](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CCourse/master/05_ZusammengesetzteDatentypen.md#1)
 
 ----------------------------------------------------------------------
 
