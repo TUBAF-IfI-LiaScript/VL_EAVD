@@ -26,9 +26,7 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 * In welchem Kontext ist die Typisierung von Zeigern von Bedeutung?
 
 ---------------------------------------------------------------------
-Aktuelle Vorlesung im Versionsmanagementsystem GitHub:
-
-[https://github.com/SebastianZug/CCourse/blob/master/07_Zeiger.md](https://github.com/SebastianZug/CCourse/blob/master/07_Zeiger.md)
+Hier geht es zur interaktiven Version des Kurses [LiaScript](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CCourse/master/07_Zeiger.md#1)
 
 ---------------------------------------------------------------------
 

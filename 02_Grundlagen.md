@@ -24,9 +24,7 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 * Ist `printf` ein Schlüsselwort der Programmiersprache C?
 * Welche Beschränkung hat `getchar`
 
-Aktuelle Vorlesung im Versionsmanagementsystem GitHub:
-
-[https://github.com/SebastianZug/CCourse/blob/master/02_Grundlagen.mdw](https://github.com/SebastianZug/CCourse/blob/master/02_Grundlagen.md)
+Hier geht es zur interaktiven Version des Kurses [LiaScript](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CCourse/master/02_Grundlagen.md#1)
 
 **Vorwarnung:** Man kann Variablen nicht ohne Ausgaben und Ausgaben nicht ohne
 Variablen erklären. Deshalb wird im folgenden immer wieder auf einzelne Aspekte
@@ -55,6 +53,7 @@ Sie können in einem C-Programm folgende Zeichen verwenden:
 
   int main() {
       printf("Einen schönen Tag für Sie!");
+      //printf("Einen sch\x94nen Tag f\x81r Sie!");
       return 0;
   }
   ```
@@ -205,7 +204,7 @@ auf die Daten extrahieren?
 | Adresse | Speicherinhalt | Zahlenwert |
 |         |                |  (Byte)    |
 | 0010    | 0000 1100      | 12         |
-| 0011    | 1111 1101      | 253 (-125) |
+| 0011    | 1111 1101      | 253 (-3)   |
 | 0012    | 0001 0000      | 16         |
 | 0013    | 1000 0000      | 128 (-128) |
 
@@ -213,7 +212,7 @@ auf die Daten extrahieren?
 | Adresse | Speicherinhalt | Zahlenwert | Zahlenwert | Zahlenwert   |
 |         |                |  (Byte)    | (2 Byte)   | (4 Byte)     |
 | 0010    | 0000 1100      | 12         |            |              |
-| 0011    | 1111 1101      | 253 (-125) | 3325       |              |
+| 0011    | 1111 1101      | 253 (-3)   | 3325       |              |
 | 0012    | 0001 0000      | 16         |            |              |
 | 0013    | 1000 0000      | 128 (-128) | 4224       | 217911424    |
 
@@ -223,7 +222,7 @@ auf die Daten extrahieren?
 |:--------|:---------------|:-----------|:-----------|:-------------|
 |         |                |  (Byte)    | (2 Byte)   | (4 Byte)     |
 | 0010    | 0000 1100      | 12         |            |              |
-| 0011    | 1111 1101      | 253 (-125) | 3325       |              |
+| 0011    | 1111 1101      | 253 (-3)   | 3325       |              |
 | 0012    | 0001 0000      | 16         |            |              |
 | 0013    | 1000 0000      | 128 (-128) | 4224       | 217911424    |
 
@@ -647,7 +646,7 @@ Die Variable wird einmal deklariert, initialisiert und existiert während der
 gesamten Programmausführung.
 
 `static`-Variablen behalten ihren Wert nach dem Verlassen des Funktionsblocks, weil sie nicht im Stacksegment, sondern im Datensegment gespeichert werden.
-Diese Interpretation des Schlüsselworts `static` gilt aber nur für die innerhalb eines Blocks definierten Variablen. Eine besondere Bedeutung haben die
+Diese Interpretation des Schlüsselworts `static` gilt aber nur für die innerhalb eines Funktionsblocks definierten Variablen. Eine besondere Bedeutung haben die
 `static`-Variablen im Zusammenhang mit Funktionen, werden deswegen in der
 Funktionen gewidmeten Vorlesung behandelt.
 
@@ -763,11 +762,6 @@ int main(void) {
 }
 ```
 @Rextester.C
-
-
-Der C++, der für diese Webseite zum Einsatz kommt initialisiert offenbar alle
-Werte mit 0 führen Sie dieses Beispiel aber einmal mit einem richtigen Compiler
-aus.
 
 {{1}}
 **Redeklaration**
@@ -1096,7 +1090,7 @@ int main(void) {
   return EXIT_SUCCESS;
 }
 ```
-@Rextester.C
+@Rextester.C(true, )
 
 
 {{1}}

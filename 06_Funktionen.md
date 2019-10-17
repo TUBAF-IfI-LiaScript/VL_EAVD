@@ -26,9 +26,7 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
   kostet das Ganze doch Speicherplatz?
 
 ---------------------------------------------------------------------
-Aktuelle Vorlesung im Versionsmanagementsystem GitHub:
-
-[https://github.com/SebastianZug/CCourse/blob/master/06_Funktionen.md](https://github.com/SebastianZug/CCourse/blob/master/06_Funktionen.md)
+Hier geht es zur interaktiven Version des Kurses [LiaScript](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CCourse/master/06_Funktionen.md#1)
 
 ---------------------------------------------------------------------
 
