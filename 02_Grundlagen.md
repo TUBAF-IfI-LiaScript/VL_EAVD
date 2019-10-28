@@ -1070,39 +1070,6 @@ A -234.243240 2345
 ```
 @Rextester.C(false,`@input(1)`)
 
--------------------------------------------------
-
-`scanf` erlaubt auch die sofortige Evaluation von Eingaben anhand vordefinierter
-Ausdrücke, um diese vorzufiltern.
-
-[switch to editor ...](https://github.com/liaScript/CCourse/blob/master/codeExamples/scanf_check.c)
-
-Mehr zu rextester: [https://rextester.com/](https://rextester.com/)
-
-{{1}}
-```cpp                          
-#include <stdio.h>
-#include <stdlib.h>
-
-int main(void) {
-  printf("Jetzt kann ich alles was die Konsole kann!\n");
-  printf("Probier es aus!\n");
-  return EXIT_SUCCESS;
-}
-```
-@Rextester.C(true, )
-
-
-{{1}}
-| Ausgaben              | Bedeutung                         |
-|:----------------------|:----------------------------------|
-| Compilation time      | Dauer der Übersetzung             |
-| absolute running time | Ausführungsdauer auf dem Server   |
-| cpu time              | Echte Laufzeit des Programms      |
-| memory peak           | Größe des angeforderten Speichers |
-| absolute service time | Dauer der Gesamtanfrage           |
----------------------------------------------------------------------
-
 ## Ausblick
 
 ```cpp                     GoodBy.c
