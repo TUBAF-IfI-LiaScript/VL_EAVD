@@ -224,17 +224,17 @@ Variable `i`.
 Bisher haben wir Programme entworfen, die eine sequenzielle Abfolge von
 Anweisungen enthielt.
 
-<!-- style="width: 80%; max-width: 260px; display: block; margin-left: auto; margin-right: auto;" -->
-````
-  ┏━━━━━━━━━━━━━━┓
-  ┃ Anweisung  1    ┃
-  ┣━━━━━━━━━━━━━━┫
-  ┃ Anweisung  2    ┃
-  ┣━━━━━━━━━━━━━━┫
-  ┃ Anweisung ...   ┃
-  ┣━━━━━━━━━━━━━━┫
-  ┃ Anweisung  n    ┃  
-  ┗━━━━━━━━━━━━━━┛
+<!-- style="width: 100%; max-width: 460px; display: block; margin-left: auto; margin-right: auto;" -->
+````ascii
+  +---------------+   
+  | Anweisung  1  |   |
+  +---------------+   |
+  | Anweisung  2  |   |
+  +---------------+   |  Sequenz der Abarbeitung
+  | Anweisung ... |   |
+  +---------------+   |
+  | Anweisung  n  |   V
+  +---------------+   
 ````
 
 Diese Einschränkung wollen wir nun mit Hilfe weiterer Anweisungen überwinden:
@@ -389,6 +389,13 @@ formuliert werden.
 **Beispiel**
 
 {{4}}
+Nehmen wir an, dass wir einen kleinen Roboter aus einem Labyrinth fahren lassen
+wollen. Dazu gehen wir davon aus, dass er bereits an einer Wand steht. Dieser soll er mit der "Linke-Hand-Regel" folgen. Dabei wird von einem einfach zusammenhängenden Labyrith ausgegangen.
+
+{{4}}
+Die nachfolgende Grafik illustriert den Aufbau des Roboters und die vier möglichen Konfigurationen des Labyrinths, nachdem ein neues Feld betreten wurde.
+
+{{4}}
 ![robotMaze.jpeg](img/robotMaze.jpeg)<!--
 style=" width: 80%;
         max-width: 600px;
@@ -399,16 +406,25 @@ style=" width: 80%;
 -->
 
 {{4}}
-| WL  | WG  | WR  | Verhalten                  |
-|:----|:----|:----|:---------------------------|
-| 0   | 0   | 0   | Vorwärts                   |
-| 0   | 0   | 1   | Vorwärts                   |
-| 0   | 1   | 0   | Drehung Links, Vorwärts    |
-| 0   | 1   | 1   | Drehung Links, Vorwärts    |
-| 1   | 0   | 0   | Drehung 180 Grad, Vorwärts |
-| 1   | 0   | 1   | Vorwärts                   |
-| 1   | 1   | 0   | Drehung 180 Grad, Vorwärts |
-| 1   | 1   | 1   | Drehung 180 Grad, Vorwärts |
+| Fall | Bedeutung                                                                                                                         |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------- |
+| 1.   | Die Wand knickt nach links weg. Unabhängig von WG und WR folgt der Robter diesem Verlauf.                                         |
+| 2.   | Der Roboter folgt der linksseitigen Wand.                                                                                         |
+| 3.   | Die Wand blockiert die Fahrt. Der Roboter dreht sich nach rechts, damit liegt diese Wandelement nun wieder zu seiner linken Hand. |
+| 4.   | Der Roboter folgt dem Verlauf nach einer Drehung um 180 Grad.                                                                     |
+
+
+{{4}}
+| WL  | WG  | WR  | Fall | Verhalten                  |
+|:--- |:--- |:--- | ---- |:-------------------------- |
+| 0   | 0   | 0   | 1    | Drehung Links, Vorwärts    |
+| 0   | 0   | 1   | 1    | Drehung Links, Vorwärts    |
+| 0   | 1   | 0   | 1    | Drehung Links, Vorwärts    |
+| 0   | 1   | 1   | 1    | Drehung Links, Vorwärts    |
+| 1   | 0   | 0   | 2    | Vorwärts                   |
+| 1   | 0   | 1   | 2    | Vorwärts                   |
+| 1   | 1   | 0   | 3    | Drehung Rechts, Vorwärts   |
+| 1   | 1   | 1   | 4    | Drehung 180 Grad           |
 
 {{5}}
 ```cpp                     IfExample.c
@@ -416,12 +432,15 @@ style=" width: 80%;
 
 int main(){
   int WL, WG, WR;
-  WL = 1; WG = 0; WR =1;
-  if (((!WL) & (WG) & (!WR)) || ((!WL) & (WG) & (WR)))
-    printf("Drehung Links\n");
-  if (((WL) & (!WG) & (!WR)) || ((WL) & (WG) & (!WR)) || ((WL) & (WG) & (!WR)))
+  WL = 0; WG = 1; WR =1;
+  if (!WL)                         // Fall 1
+    printf("Drehung Links\n");     
+  if ((WL) & (WG) & (!WR))         // Fall 3
+    printf("Drehung Rechts\n");    
+  if ((WL) & (WG) & (WR))          // Fall 4
     printf("Drehung 180 Grad\n");
-  printf("Vorwaerts\n");
+  if (!((WL) & (WG) & (WR)))       // !Fall 4
+    printf("Vorwaerts\n");
 	return 0;
 }
 ```
