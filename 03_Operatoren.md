@@ -335,8 +335,11 @@ Und wie lassen sich logische Aussagen verknüpfen?
 | Operation | Bedeutung |
 |:---------:|:----------|
 |   `&&`    | UND       |
-|   `||`    | ODER      |
+|   `||`    | ODER      |   
 |   `!`     | NICHT     |
+
+{{1}}
+Das ODER wird durch senkrechte Striche repräsentiert (Altgr+`<` Taste) und nicht durch große `I`!
 
 {{1}}
 ```cpp                                       Logic.c
