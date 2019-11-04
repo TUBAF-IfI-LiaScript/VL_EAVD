@@ -180,10 +180,9 @@ int main()
 ```
 @Rextester.C
 
-<!--
-float value = -3.140000 / Integer-Anteil -3
-float value = -3.140000 / Integer-Anteil 4294967293
--->
+<!-- float value = -3.140000 / Integer-Anteil -3 -->
+<!-- float value = -3.140000 / Integer-Anteil 4294967293  -->
+
 
 {{3}}
 Die Headerdatei `<fenv.h>` definiert verschiedene Einstellungen für das Rechnen
@@ -228,13 +227,13 @@ Anweisungen enthielt.
 <!-- style="width: 80%; max-width: 260px; display: block; margin-left: auto; margin-right: auto;" -->
 ````
   ┏━━━━━━━━━━━━━━┓
-  ┃ Anweisung  1 ┃
+  ┃ Anweisung  1    ┃
   ┣━━━━━━━━━━━━━━┫
-  ┃ Anweisung  2 ┃
+  ┃ Anweisung  2    ┃
   ┣━━━━━━━━━━━━━━┫
-  ┃ Anweisung ...┃
+  ┃ Anweisung ...   ┃
   ┣━━━━━━━━━━━━━━┫
-  ┃ Anweisung  n ┃  
+  ┃ Anweisung  n    ┃  
   ┗━━━━━━━━━━━━━━┛
 ````
 
@@ -273,7 +272,7 @@ Anweisung zu bestimmten Bedingungen sind [Nassi-Shneidermann Diagramme](https://
 
 Beispiel für eine mehrstufige Verzweigung (`if`)
 
-![Nassi_LineareAnw.png](img/Nassi_MehrfAusw.png)<!--
+![Nassi_LineareAnw.png](img/NassiMehrfAusw.png)<!--
 style=" width: 60%;
         max-width: 400px;
         min-width: 200px;
@@ -286,7 +285,7 @@ style=" width: 60%;
 
 Beispiel für eine mehrfache Verzweigung (`switch`)
 
-![Nassi_LineareAnw.png](img/Nassi_MehrfAusw1.png)<!--
+![Nassi_LineareAnw.png](img/NassiMehrfAusw1.png)<!--
 style=" width: 100%;
         max-width: 700px;
         min-width: 400px;
@@ -374,7 +373,7 @@ formuliert werden.
 | `if (!a)`    | `if (a == 0)`                                   |
 | `if (a > b)` | `if (!(a <= b))`                                |
 | `if ((a-b))` | `ìf (a != b)`                                   |
-| `if (a & b)` | $a>0$, $b>0$, mindestens ein $i$ mit $a_i==b_i$ |
+| `if (a & b)` | a>0, b>0, mindestens ein $i$ mit $a_i==b_i$ |
 
 {{3}}
 **Mögliche Fehlerquellen**
