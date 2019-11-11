@@ -324,10 +324,11 @@ Optional kann eine alternative Anweisung angegeben werden, wenn die Bedingung
 nicht erfüllt wird:
 
 ```c
-if(Bedingung)
+if(Bedingung){
   Anweisung;
-else
+}else{
   Anweisung;
+}
 ```
 
 {{1}}
@@ -342,7 +343,12 @@ else
     Anweisung;
   else
     Anweisung;
+    Anweisung;     //!!!
 ```
+{{1}}
+> **Merke**: An diesem Beispiel wird deutlich, dass die Klammern für die
+> Zuordnung elementar wichtig sind. Die letzte Anweisung gehört NICHT zum zweite
+> `else` Zweig sondern zum ersten!
 
 {{1}}
 ```cpp                     IfExample.c
