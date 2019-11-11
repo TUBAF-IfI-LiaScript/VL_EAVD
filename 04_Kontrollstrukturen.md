@@ -455,6 +455,38 @@ int main(){
 {{5}}
 **Sehen Sie mögliche Vereinfachungen des Codes?**
 
+#### Zwischenfrage
+
+```cpp                     Test.c
+#include <stdio.h>
+
+int main()
+{
+    int Punkte = 45;
+    int Zusatzpunkte = 15;
+    if (Punkte + Zusatzpunkte >= 50)
+    {
+       printf("Test ist bestanden!\n");
+       if (Zusatzpunkte >= 15)
+       {
+          printf("Alle Zusatzpunkte geholt!\n");
+       }else{
+           if(Zusatzpunkte > 8) {
+               printf("Respektable Leistung\n");
+           }
+       }
+    }else{
+       printf("Leider durchgefallen!\n");
+    }
+    return 0;
+}
+```
+@Rextester.C
+
+<div style='position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;'><iframe sandbox='allow-scripts allow-same-origin allow-presentation' allowfullscreen='true' allowtransparency='true' frameborder='0' height='315' src='https://www.mentimeter.com/embed/087d7e8b2cfccc0d25e0310c176628a7/783b516b2d62' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;' width='420'></iframe></div>
+
+
+
 #### `switch`-Anweisungen
 
 > [*Too many ifs - I think I switch* ](http://www.peacesoftware.de/ckurs7.html)
