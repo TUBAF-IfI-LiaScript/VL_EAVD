@@ -710,7 +710,7 @@ for(;;){
 }
 ```
 
-```cpp                     magicSquare.c
+```cpp                     ForLoopExample.c
 #include <stdio.h>
 
 int main(){
@@ -723,6 +723,9 @@ int main(){
 }
 ```
 @Rextester.C
+
+<iframe width="800" height="500" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=%23include%20%3Cstdio.h%3E%0A%0Aint%20main%28%29%7B%0A%20%20%20%20int%20i%3B%0A%20%20for%20%28i%20%3D%201%3B%20i%3C10%3B%20i%2B%2B%29%0A%20%20%20%20printf%28%22%25d%20%22,%20i%29%3B%0A%0A%20%20printf%28%22%5CnNach%20der%20Schleife%20hat%20i%20den%20Wert%20%25d%5Cn%22%20,i%29%3B%0A%20%20%20%20return%200%3B%0A%7D&codeDivHeight=400&codeDivWidth=350&curInstr=0&origin=opt-frontend.js&py=cpp&rawInputLstJSON=%5B%5D"> </iframe>
+
 
 {{1}}
 **Beliebte Fehlerquellen**
@@ -748,6 +751,8 @@ int main(){
 }
 ```
 @Rextester.C
+
+Im Projektordner gibt ist ein Programmcode, der für einen Arduino eine Balkenanzeige auf der Basis von If-Statements implmentiert. Prüfen Sie, in wie weit Sie hier durch eine Loop eine Vereinfachung des Codes realisieren können.
 
 #### `while`-Schleife
 
