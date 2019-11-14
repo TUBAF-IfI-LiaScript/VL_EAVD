@@ -114,16 +114,16 @@ int main(void)
   return 0;
 }
 ```
-``` bash stdin
+``` text                  stdin
 20.05.2018+Alexander
 ```
-@Rextester.eval_input
+@Rextester.C(false,`@input(1)`)
 
 Folgende Zeichen werden bei `scanf` als Eingabefelder akzeptiert:
 
-+ alle Zeichen bis zum nächsten Whitespace oder dem angegebenen Trennungselement
-+ bis zu einer bestimmten Feldbreite von n-Zeichen
-+ alle Zeichen, bis zum ersten Zeichen, welches nicht mehr in entsprechendes Format konvertiert werden konnte.
+* alle Zeichen bis zum nächsten Whitespace oder dem angegebenen Trennungselement
+* bis zu einer bestimmten Feldbreite von n-Zeichen
+* alle Zeichen, bis zum ersten Zeichen, welches nicht mehr in entsprechendes Format konvertiert werden konnte.
 
 ## 1. Ein- und Ausgabeoperationen
 
@@ -138,8 +138,10 @@ Die Ein- und Ausgabe wird unter C über das Konzept des Streams realisiert.
 Ziel sind einheitliche Eigenschaften und Zugriffsmechanismen für verschiedenen
 Ein- und Ausgänge. Dabei werden zwei Varianten unterschieden:
 
-+ *Stream im Textmodus* - Ein Textstrom besteht aus einer oder mehreren Zeilen, die durch ein Zeilenzeichen abgeschlossen werden. Diese können sichtbaren Zeichen und Steuercodes umfassen.
+{{1}}
+* *Stream im Textmodus* - Ein Textstrom besteht aus einer oder mehreren Zeilen, die durch ein Zeilenzeichen abgeschlossen werden. Diese können sichtbaren Zeichen und Steuercodes umfassen.
 
+{{1}}
 | Kürzel | ASCII Code | Bedeutung                                             |
 |:-------|:-----------|:------------------------------------------------------|
 | \n     |     0a     | (new line) = bewegt den Cursor auf die Anfangsposition der nächsten Zeile.|
@@ -151,7 +153,7 @@ Ein- und Ausgänge. Dabei werden zwei Varianten unterschieden:
 | \v     |     0B     | (vertical tab) = Setzt den Cursor auf die nächste vertikale Tabulatorposition. Wenn der Cursor bereits die letzte Tabulatorposition erreicht hat, dann ist das Verhalten unspezifiziert (wenn eine solche existiert). |
 | \\0     |           | ist die Endmarkierung einer Zeichenkette  |
 
-
+{{1}}
 ```
 
 A1
@@ -160,15 +162,17 @@ C3
 
 ```
 
+{{1}}
 ``` bash @output
 ▶ hexdump -C Text.txt
 00000000  0a 41 31 0a 42 32 0a 43  33 0a                    |.A1.B2.C3.|
 0000000a
 ```
 
-{{1}}
+{{2}}
 ![alt-text](img/ASCII_Zeichensatz.jpeg)<!-- width="90%" -->
 
+{{3}}
 * *Stream im Binärmodus* - Ein binärer Strom ist eine geordnete Folge von Nullen und Einsen ohne spezifische Festlegungen zu Zeilenumbrüchen etc. Zahlenwerte werden entsprechend ihrer Speicherrepräsentation abgelegt, es findet keine automatische Konvertierung statt. Der Vorteil des Binärmodus liegt in der kompakten Darstellung.
 
 ### Standard-Datenströme
@@ -176,15 +180,15 @@ C3
 Die bisherigen Ein- und Ausgaben mittels `printf` und `scanf` erfolgten über
 den Standard-Datenströmen.
 
-* stdin - Die Standardeingabe (standard input) ist üblicherweise mit der Tastatur verbunden. Der Stream wird zeilenweise gepuffert.
-* stdout - Die Standardausgabe (standard output) ist mit dem Bildschirm verknüpft und ebenfalls zeilenweise gepuffert.
-* stderr - Die Standardfehlerausgabe (standard error output) ist analog zu stdout mit dem Bildschirm verbunden.
+* `stdin` - Die Standardeingabe (standard input) ist üblicherweise mit der Tastatur verbunden. Der Stream wird zeilenweise gepuffert.
+* `stdout` - Die Standardausgabe (standard output) ist mit dem Bildschirm verknüpft und ebenfalls zeilenweise gepuffert.
+* `stderr` - Die Standardfehlerausgabe (standard error output) ist analog zu stdout mit dem Bildschirm verbunden.
 
-![alt-text](/img/Stdstreams.png)<!-- width="90%" --> [^1]
+![alt-text](/img/Stdstreams.png)<!-- width="90%" -->
 
-[^1]: https://de.wikipedia.org/wiki/Standard-Datenstr%C3%B6me#/media/File:Stdstreams-notitle.svg
-     Autor Danielpr85
+Quelle: [Standard-Datenströme (Autor Danielpr85)](https://de.wikipedia.org/wiki/Standard-Datenstr%C3%B6me#/media/File:Stdstreams-notitle.svg)
 
+{{1}}
 ```cpp
 #include <stdio.h>
 #include <stdlib.h>
@@ -197,6 +201,7 @@ int main () {
 }
 ```
 
+{{1}}
 ``` bash @output
 ▶ ./a.out
 Textausgabe zum stdout
@@ -204,11 +209,13 @@ Textausgabe zum stderr
 Textausgabe zum stdout
 ```
 
+{{2}}
 Einige Betriebssysteme (wie zum Beispiel DOS) stellten weitere Datenstromtypen
 vor und betteten Drucker und serielle Schnittstellen in das Konzept ein.
 Alle drei Standard-Datenströme können umgelenkt werden. Dies kann innerhalb des
 Programmes durch entsprechende Standardfunktionen `freopen` erfolgen.
 
+{{2}}
 ```cpp
 #include <stdio.h>
 #include <stdlib.h>
@@ -222,9 +229,11 @@ int main(void) {
 }
 ```
 
+{{3}}
 Alternativ kann aber auch beim Aufruf eines Programms in der Kommandozeile eine
 Umleitung erfolgen.
 
+{{3}}
 ```cpp
 #include <stdio.h>
 #include <stdlib.h>
@@ -235,6 +244,7 @@ int main(void) {
 }
 ```
 
+{{3}}
 ``` bash @output
 ▶ gcc experiments.c
 ▶ ./a.out > text.txt
@@ -263,13 +273,18 @@ Was steckt hinter dem `FILE` struct, das in `stdio.h` deklariert ist?
 Als Pfadangaben (Pfadnamen) sind alle zulässigen Bezeichner erlaubt. Die maximale Länge für den Pfadnamen ist in der Konstante `FILENAME_MAX` deklariert.
 
 > Unter Windows wird der Dateipfad mit den schrägen Strichen nach hinten
-> (Backslash) geschrieben, z.B. “C:\\BAF\\daten.txt“. Unter Linux-Systemen wird
+> (Backslash) geschrieben, z.B. “C:\\BAF\\daten.txt“. Beachten Sie, dass
+> Backslash mit einem weiteren Backslash maskiert werden muss.
+
+> Unter Linux-Systemen wird
 > statt dem Backslash der normale Slash verwendet, z.B. “/home/BAF/daten.txt“.
 
+{{1}}
 Mit Modus geben Sie an, wie auf den Stream zugegriffen wird. Die Funktionen
 liefern als Ergebnis einen FILE-Zeiger, bei einem Fehler erhalten Sie hingegen
 den NULL-Zeiger zurück.
 
+{{1}}
 | Modus     | Beschreibung                                                  |
 |:----------|:--------------------------------------------------------------|
 |"r"        | Textdatei zum Lesen und Eröffnen                              |
@@ -278,25 +293,28 @@ den NULL-Zeiger zurück.
 |"r+"	      | Textdatei zum Ändern eröffnen (Lesen und Schreiben)|
 |"w+"	      | Textdatei zum Ändern erzeugen; gegebenenfalls alten Inhalt wegwerfen|
 
+{{1}}
 Die Angaben können kombiniert werden `"rw"` öffnet eine Datei zum Lesen und
 Schreiben. Wichtig für die Arbeit ist der append-Modus, der als Schreibmodus die
 ursprünglichen Daten der Datei unverändert belässt und neue Daten am Ende der
 Datei einfügt.
 
+{{2}}
 ACHTUNG:
 
+{{2}}
 * Existiert eine Datei und wird diese im Schreibmodus `"w"` geöffnet, so wird der komplette Inhalt ohne Meldung gelöscht.
-
 * Existiert eine Datei nicht und wird versucht diese im Schreibmodus zu öffnen, so wird automatisch eine neue leere Datei erzeugt.
 
+{{3}}
 Wie werden Datenströme warum geschlossen?
 
+{{3}}
 * Wenn sich ein Programm beendet, schließen sich automatisch alle noch offenen Streams.
-
 * Die Anzahl der geöffneten Dateien ist begrenzt und wird in der Standard-Library `stdio.h` mit der Konstante `FOPEN_MAX` festgelegt. Mit `fclose` kann wieder ein FILE-Zeiger freigegeben werden.
-
 * Wenn eine Datei im Schreibmodus geöffnet wurde, wird diese erst beschrieben, wenn der Puffer voll ist oder die Schreiboperation explizit angefordert wird. Beendet sich das Programm aber mit einem Fehler, dann sind die Daten im Puffer verloren.
 
+{{3}}
 ``` c
 #include <stdio.h>
 #include <stdlib.h>
@@ -336,8 +354,10 @@ Um beim Lesen des Ende einer Datei aufzuzeigen, bietet die `stdio.h` einen
 speziellen end-of-file Indikator.  Dieser gibt eine Wert ungleich 0 zurück,
 wenn das Zeilenende erreicht ist.
 
+{{1}}
 **Anwendung I - Iterativies Durchlaufen des Streams**
 
+{{1}}
 ``` c
 #include <stdio.h>
 
@@ -350,21 +370,22 @@ int main () {
       perror("Error in opening file");
       return(-1);
    }
-   while(1) {
+   while(!feof(fp)) {
       c = fgetc(fp);
       if( feof(fp) ) {
          printf("<-\n");
-         break ;
       }
-      printf("%c", c);
+      else printf("%c", c);
    }
    fclose(fp);
    return(0);
 }
 ```
 
+{{2}}
 **Fehlerquelle Buffergröße**
 
+{{2}}
 Im Zusammenhang mit dem Lesen von Eingaben wird die Notwendigkeit eines
 effektiven Monitorings deutlich. Das folgende Beispiel mappt die Eingaben des
 Nutzers auf ein `char` Array mit 8 Einträgen. Die folgenden Aussagen beziehen
@@ -372,13 +393,15 @@ sich auf die rextester Architektur, auf Ihrem eigenen Rechner können die Ergebn
 da die Ablage und Organisation der Daten nicht im Standard spezifiziert sind,
 auch anders aussehen.
 
+{{2}}
 Für beide Variablen wurde Speicher auf dem Stack allokiert. Wenn die Länge
 der Eingaben die Kapazität des Arrays überschreitet, geschehen zwei Dinge:
 
+{{2}}
 * Zum einen werden Inhalte von `nextString` oder von dem überlangen Eingabestring überschrieben.
-
 * Wird die Eingabe so lang, dass die Größe mit dem Stackframe kollidiert, wird das Programm beendet.
 
+{{3}}
 | Input           | Größe | Resultat |
 |-----------------|------|---------------------------------------|
 | Das.ist         |  7+1 | Gültige Eingabe entsprechend der Größe von `string`.|
@@ -387,6 +410,7 @@ der Eingaben die Kapazität des Arrays überschreitet, geschehen zwei Dinge:
 | Das.ist.ein.Test! | 16+x+1 | Alle weiteren Zeichen erscheinen in `nextString`.|
 | Das.ist.ein.Test!Der.Input.ist.zu.groß.. | 41+1 | Die Framegrenze wird überschritten. Das System crashed.|
 
+{{3}}
 <!--
 style="width: 80%; max-width: 460px; display: block; margin-left: auto; margin-right: auto;"
 -->
@@ -409,6 +433,7 @@ style="width: 80%; max-width: 460px; display: block; margin-left: auto; margin-r
           ╰              ===========     Adressen
 ````
 
+{{4}}
 ```cpp
 #include <stdio.h>
 #include <stdlib.h>
@@ -431,15 +456,18 @@ int main(void) {
   return EXIT_SUCCESS;
 }
 ```
-``` bash stdin
+``` text                  stdin
 Das.ist.ein.Test!
 ```
-@Rextester.eval_input
+@Rextester.C(false,`@input(1)`)
 
+{{5}}
 > People (and especially beginners) should never use scanf("%s") or gets() or any other functions that do not have buffer overflow protection, unless you know for certain that the input will always be of a specific format (and perhaps not even then).
 
+{{5}}
 > Remember that scanf stands for "scan formatted" and there's precious little less formatted than user-entered data. It's ideal if you have total control of the input data format but generally unsuitable for user input.
 
+{{5}}
 ```cpp
 #include <stdio.h>
 #include <stdlib.h>
@@ -454,13 +482,15 @@ int main(void) {
    return EXIT_SUCCESS;
 }
 ```
-``` bash stdin
-Das ist ein Test.
+``` text                  stdin
+Das.ist.ein.Test!
 ```
-@Rextester.eval_input
+@Rextester.C(false,`@input(1)`)
 
+{{6}}
 **Anwendung von `perror`**
 
+{{6}}
 ```cpp
 #include <stdio.h>
 #include <errno.h>
@@ -468,7 +498,6 @@ Das ist ein Test.
 extern int errno ;
 
 int main (){
-  int sys_nerr;
   for (size_t i = 0; i < 10; i++) {
     printf("%*zu = %s\n", 3, i, sys_errlist[i]);
   }
@@ -484,7 +513,9 @@ int main (){
   return 0;
 }
 ```
+@Rextester.C
 
+{{6}}
 ``` bash @output
 ▶ ./a.out
   0 = Success
@@ -518,19 +549,24 @@ int remove(const char *filename);
 Die Funktion `remove` entfernt die angegebene Datei, so dass ein anschließender Versuch, sie
 zu eröffnen, fehlschlagen wird. Die Funktion liefert bei Fehlern einen von Null verschiedenen Wert.
 
+{{1}}
 ```c
 FILE *tmpfile(void)
 ```
+{{1}}
 Die Funktion `tmpfile` erzeugt eine temporäre Datei mit Zugriff "wb+", die automatisch gelöscht wird, wenn der Zugriff abgeschlossen wird, oder wenn das Programm normal zu Ende geht. Funktion liefert einen Datenstrom oder NULL, wenn
 die Datei nicht erzeugt werden konnte.
 
+{{1}}
 ```c
 char *tmpnam(char s[L_tmpnam])
 ```
+{{1}}
 Die Funktion `tmpnam` generiert einen zufälligen Dateinamen, der im Ordner noch nicht
 vorkommt. Damit kann sichergestellt werden, dass Daten mit jeweils neuen
 Dateinamen abgespeichert werden.
 
+{{2}}
 ```c
 #include <stdio.h>
 
@@ -548,29 +584,37 @@ int main () {
 }
 ```
 
+{{2}}
 ``` bash @output
 ▶ ./a.out
 Temporary name 1: /tmp/fileB8A3W0
 Temporary name 2: /tmp/fileZObkAs
 ```
 
+{{3}}
 **Wahlfreier Zugriff**
 
+{{3}}
 ```c
 void rewind(FILE *stream)
 ```
+{{3}}
 Die Funktion  `rewind` setzt die Lese-/Schreibposition für einen Datenstrom
 zurück auf den Anfang.
 
+{{3}}
 ```c
 int fseek(FILE *stream, long int offset, int whence)
 ```
+{{3}}
 Die Funktion `fseek` setzt die Lese-/Schreibposition für einen Datenstrom mit
 einem Offset bezogen auf `SEEK_SET` (Dateianfang), `SEEK_CUR` (aktuelle Position) oder `SEEK_END` (letzte Position).
 
+{{4}}
 Diese Varianten können zum Beispiel zur Bestimmung der Größe einer Datei
 kombiniert werden:
 
+{{4}}
 ```c
 long fsize(FILE *fp) {
     fseek(fp, 0, SEEK_END);  // Position auf letztes Datenelement im Stream
@@ -580,6 +624,7 @@ long fsize(FILE *fp) {
     return bytes;
 }
 ```
+{{4}}
 Diese Lösung ist vollständig transparent und übertragbar. Alternative Lösungen
 greifen auf Betriebssystem-spezifische Lösungen zurück.
 
