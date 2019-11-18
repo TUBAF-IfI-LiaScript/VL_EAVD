@@ -60,6 +60,37 @@ Standardbibliotheken
 {{1}}
 [C standard library header files](https://en.cppreference.com/w/c/header)
 
+## Übung zu Einstimmung ...
+
+... welche Werte werden ausgegeben? Welche Funktionalität realisiert das Programm?
+
+```cpp                 repetition.c
+#include <stdio.h>
+
+int main(void) {
+  int start = 10;
+  int end = 14;
+  int o = 0;
+  int e = 0;
+  for (int i = start; i <= end; i++){
+    switch( i%2 )
+    {
+      case 0 :
+          o++;
+          break;
+      case 1 :
+          e++;
+          break;
+    }
+  }
+  printf("%d\n", o);
+  printf("%d\n", e);
+  return 0;
+  }
+```
+@Rextester.C
+
+
 ## 1. Aufzählungen
 
 Enumerationen, kurz `enum`, dienen der Definition bestimmter Sets von Elementen,
@@ -83,7 +114,6 @@ int main(void) {
 }
 ```
 @Rextester.C
-
 
 {{1}}
 Möglicherweise sollen den Karten aber auch konkrete Werte zugeordnet werden,
@@ -321,7 +351,7 @@ Quelle: [C-Kurs](http://www.c-howto.de/tutorial/arrays-felder/zweidimensionale-f
 
 Addition zweier Matrizen
 
-```cpp
+```cpp       Addition.c
 #include <stdio.h>
 
 int main(void)
@@ -358,9 +388,12 @@ Elementen vom Datentyp `char` repräsentiert. Die Zeichenfolgen werden mit
 
 int main(void) {
   printf("Diese Form eines Strings haben wir bereits mehrfach benutzt!\n");
-  // Alternativ
-  char a[50];
-  a[49] = '\0';
+  //////////////////////////////////////////////////////////////////////////////
+
+  char a[] = "Ich bin ein char Array!";  // Der Kompiler fügt das \0 automatisch ein!
+  if (a[23] == '\0')
+    printf("char Array Abschluss in a gefunden!");
+
   printf("->%s<-\n", a);
   const char b[] = { 'H', 'a', 'l', 'l', 'o', ' ',
                      'F', 'r', 'e', 'i', 'b', 'e', 'r', 'g', '\0' };
@@ -375,7 +408,7 @@ int main(void) {
 @Rextester.C
 
 {{1}}
-Beispiel einer fehlerhaften Verwendung eines `const char` Arrays
+Wie kopiere ich die Inhalte in einem Array?
 
 {{1}}
 ```cpp                     arrayInitVsAssignment.c
@@ -383,7 +416,7 @@ Beispiel einer fehlerhaften Verwendung eines `const char` Arrays
 #include <string.h>       // notwendig für strcpy
 
 int main(void) {
-  const char a[] = "Das ist der Originaltext";
+  char a[] = "012345678901234567890123456789";
   strcpy(a, "Das ist ein neuer Text");
   printf("%s\n",a);
   return 0;
