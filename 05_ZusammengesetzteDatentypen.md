@@ -60,9 +60,9 @@ Standardbibliotheken
 {{1}}
 [C standard library header files](https://en.cppreference.com/w/c/header)
 
-## Übung zu Einstimmung ...
+## Übung zu Einstimmung
 
-... welche Werte werden ausgegeben? Welche Funktionalität realisiert das Programm?
+Welche Werte werden ausgegeben? Welche Funktionalität realisiert das Programm?
 
 ```cpp                 repetition.c
 #include <stdio.h>
