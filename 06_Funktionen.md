@@ -85,23 +85,19 @@ Zur Erinnerung ... an die Schritte zur Realisierung einer Variablen
 
 int main(void) {
   int a [] = {1,2,3,3,4,2,3,4,5,6,7,8,9,1,2,3,4};
-  // Histogramm berechnen
-  int hist[10];
+  int hist[10] = {0,0,0,0,0,0,0,0,0,0};
   for (int i=0; i<VALUECOUNT; i++){
     hist[a[i]]++;
   }
-  // Histgramm ausgeben
   for (int i=0; i<10; i++){
      printf("%d - %d\n", i, hist[i]);
   }
-  // Berechnen der Gesamtsumme / Mittelwert
   int summe = 0;
   for (int i=0; i<VALUECOUNT; i++){
     summe += a[i];
   }
   float mittelwert = summe / (float)VALUECOUNT;
   printf("Die Summe betraegt %d, der Mittelwert %3.1f\n", summe, mittelwert);
-  // Berechne die Varianz
   float abweichung = 0;
   for (int i=0; i<VALUECOUNT; i++){
     //abweichung += pow((a[i]-mittelwert),2.);
@@ -513,6 +509,25 @@ In allen Beispielen bis jetzt wurden Parameter an die Funktionen *call-by-value*
 Kopie der Variable gearbeitet wird und die Änderungen sich nicht auf den
 ursprünglichen Wert auswirken.
 
+```cpp          Student.c
+#include <stdio.h>
+
+// Definitionsteil
+void doSomething(int a){
+  printf("%d a in der Schleife\n", ++a);
+}
+
+int main(void) {
+   int a = 5;
+   printf("%d a in main\n", a);
+   doSomething(a);
+   printf("%d a in main\n", a);
+   return 0;
+}
+```
+@Rextester.C
+
+
 **call-by-reference**
 
 Bei einer Übergabe als Referenz wirken sich Änderungen an den Parametern auf die
@@ -527,7 +542,7 @@ eingehend diskutiert.
 Eine weitere Möglichkeit mehrere Werte zu übergeben bieten die zusammengesetzen
 Datentypen `struct`s und arrays.
 
-```cpp
+```cpp          Student.c
 #include <stdio.h>
 #include <string.h>
 
@@ -561,25 +576,30 @@ demzufolge in der Funktion verändert werden. Übergeben wird an die Funktion
 die Anfangsadresse des Arrays.
 
 {{1}}
-```cpp
+```cpp       ByReference.c
 #include <stdio.h>
 
 void pluseins(int feld[])
 {
 	int i;
-	for (i=0;i<10;i++) feld[i]++;
+	for (i=0;i<10;i++) {
+    feld[i]++;
+    printf("%d ", feld[i]);
+  }
 }
+
 int main(void)
 {
     int feld[10];
   	int i;
-	  for (i=0;i<10;i++) feld[i]=0;
+	  for (i=0;i<10;i++) feld[i]=i;
 
     pluseins(feld);
     //oder pluseins(&feld[0]);
     return 0;
 }
 ```
+@Rextester.C
 
 ### `main`-Funktion
 
@@ -627,7 +647,7 @@ Zur Erinnerung: **globale**-Variable werden außerhalb jeder Funktionen definier
 und gelten in allen Funktionen, **lokale**-Variablen gelten nur in der Funktion,
 in der sie definiert sind.
 
-```cpp
+```cpp                 variables.c
 #include <stdio.h>
 
 const float pi = 3.14;
@@ -675,7 +695,7 @@ int main() {
 dem Verlassen des Funktionsblocks.
 
 {{1}}
-```cpp
+```cpp                static.c
 #include <stdio.h>
 
 int zaehler(){
