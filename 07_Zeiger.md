@@ -66,11 +66,13 @@ Standardbibliotheken
 
 ## 0. Arrays & Schleifen
 
+**Beispiel 1**
+
 Realisieren Sie eine Look-Up-Table für die Berechnung des Sinus von Gradwerten.
 
 Quelle: [http://www2.hs-fulda.de/~klingebiel/c-stdlib/math.htm](http://www2.hs-fulda.de/~klingebiel/c-stdlib/math.htm)
 
-``` c
+``` c                  sinValues.c
 #include <stdio.h>
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -88,13 +90,50 @@ int main(void) {
 ```
 @Rextester.eval(@C, false, ,`-Wall -std=gnu99 -O2 -o a.out source_file.c -lm`)
 
+<!--
+style="width: 60%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
+-->
+```ascii
+
+   Index       0       1              89      90  
+           +-------+-------+-.....-+-------+-------+-...
+   Wert    | 0.000 | 0.017 |       | 0.999 | 1.000 |
+           +-------+-------+-.....-+-------+-------+-...
 ````
- ┏━━━━━━━┳━━━━━━━┳━━━━━━━┳╸╸╸╸╸╸╸┳━━━━━━━┳━━━━━━━┳╸╸╸╸╸╸╸
- ┃ Index ┃   0   ┃   1   ┃       ┃   89  ┃   90  ┃
- ┣━━━━━━━╋━━━━━━━╋━━━━━━━╋╸╸╸╸╸╸╸╋━━━━━━━╋━━━━━━━╋╸╸╸╸╸╸╸
- ┃ Wert  ┃ 0.000 ┃ 0.017 ┃       ┃ 0.999 ┃ 1.000 ┃
- ┗━━━━━━━┻━━━━━━━┻━━━━━━━┻╸╸╸╸╸╸╸┻━━━━━━━┻━━━━━━━┻╸╸╸╸╸╸╸
-````
+
+**Beispiel 2**
+
+``` c             functions.c
+#include <stdio.h>
+#include <stdlib.h>
+
+#define NUMBEROFVALUE 10
+
+int main(void) {
+  int a[NUMBEROFVALUES] = {0};
+  fillArray(a);
+  printf("Die Gesamtsumme beträgt: %d", addArray(a));
+  return 0;
+}
+
+void fillArray (int * array)
+ {
+   for(int i = 0; i<NUMBEROFVALUES; i++)
+      array[i] = rand()%100;
+      printf("%d ", array[i]);
+}
+
+void addArray (int * array)
+ {
+   int sum = 0;
+   for (int i = 0; i<NUMBEROFVALUES; i++)
+      sum=sum+i
+}
+
+
+```
+@Rextester.eval(@C, false, ,`-Wall -std=gnu99 -O2 -o a.out source_file.c -lm`)
+
 
 ## 1 Zeiger in C
 
@@ -119,36 +158,36 @@ style=" width: 70%;
   Variablen-     Speicher-      Inhalt
   name           addresse
                                 ┏━━━━━━━━━━┓
-                 0000           ┃          ┃
+                 0000           |          |
                                 ┣━━━━━━━━━━┫
-                 0001           ┃          ┃
+                 0001           |          |
                                 ┣━━━━━━━━━━┫
-  a   ------>    0002       +---┃ 00001007 ┃
+  a   ------>    0002       +---| 00001007 |
                           z |   ┣━━━━━━━━━━┫
-                 0003     e |   ┃          ┃
+                 0003     e |   |          |
                           i |   ┣━━━━━━━━━━┫
-                 ....     g |   ┃          ┃
+                 ....     g |   |          |
                           t |   ┣━━━━━━━━━━┫
-                 1005       |   ┃          ┃
+                 1005       |   |          |
                           a |   ┣━━━━━━━━━━┫
-                 1006     u |   ┃          ┃
+                 1006     u |   |          |
                           f |   ┣━━━━━━━━━━┫
-  b   ------>    1007    <--+   ┃ 01101101 ┃
+  b   ------>    1007    <--+   | 01101101 |
                                 ┣━━━━━━━━━━┫
-                 1008           ┃          ┃
+                 1008           |          |
                                 ┣━━━━━━━━━━┫
-                 ....           ┃          ┃
+                 ....           |          |
 ````
 
 
 Welche Vorteile ergeben sich aus der Nutzung von Zeigern, bzw. welche
-Programmiertechniken lassen sich realiseren:
+Programmiertechniken lassen sich realisieren:
 * dynamische Verwaltung von Speicherbereichen,
 * Übergabe von Datenobjekte an Funktionen via "call-by-reference" [^1],
 * Übergabe von Funktionen als Argumente an andere Funktionen,
 * Umsetzung rekursiver Datenstrukturen wie Listen und Bäume.
 
-[^1]: Der Vollständigkeithalber sei erwähnt, dass C anders als C++ keine Referenzen im eigentlichen Sinne kennt. Hier ist die Übergabe der Adresse einer Variablen als Parameter gemeint und nicht das Konstrukt "Reference".
+[^1]: Der Vollständigkeit halber sei erwähnt, dass C anders als C++ keine Referenzen im eigentlichen Sinne kennt. Hier ist die Übergabe der Adresse einer Variablen als Parameter gemeint und nicht das Konstrukt "Reference".
 
 ### Definition von Zeigern
 
@@ -170,6 +209,7 @@ int *zeiger4, *zeiger5;
 int *zeiger6, ganzzahl;
 ```
 
+
 ### Initialisierung
 
 > **Merke:** Zeiger müssen vor der Verwendung initialisiert werden.
@@ -181,7 +221,7 @@ Der Zeiger kann initialisiert werden durch die Zuweisung:
 * eines weiteren Zeigers oder
 * des Wertes von `NULL`.
 
-``` c
+``` c                      PointerExamples.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -238,7 +278,7 @@ Und umgekehrt, wie erhalten wir den Wert, auf den der Pointer zeigt? Hierfür
 benötigen wir den *Inhaltsoperator* `*`.
 
 {{2}}
-``` c
+``` c                   DereferencingPointers.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -260,9 +300,9 @@ int main(void)
 
 ### Fehlerquellen
 
-Fehlender Adressopertor bei der Zuweisung
+Fehlender Adressoperator bei der Zuweisung            
 
-``` c
+``` c               PointerFailuresI.c         
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -282,7 +322,7 @@ int main(void)
 Fehlender Dereferenzierungsoperator beim Zugriff
 
 {{1}}
-``` c
+``` c          PointerFailuresII.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -301,7 +341,7 @@ int main(void)
 Uninitialierte Pointer zeigen "irgendwo ins nirgendwo"!
 
 {{2}}
-``` c
+``` c                  PointerFailuresIII.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -313,7 +353,7 @@ int main(void)
   // int * ptr_a = NULL;
   // Prüfung auf gültige Adresse
   // if (ptr_a != NULL) *ptr_a = 10;
-  printf("Pointer ptr_a                  %p\n", (void*)ptr_a);
+  printf("Pointer ptr_a                  %p\n", ptr_a);
   printf("Wert hinter dem Pointer ptr_a  %d\n", *ptr_a);
   return EXIT_SUCCESS;
 }
@@ -325,7 +365,7 @@ int main(void)
 Zeiger können manipuliert werden, um variabel auf Inhalte im Speicher zuzugreifen.
 Wie groß ist aber eigentlich ein Zeiger und warum muss er typisiert werden?
 
-```c
+```c                   MathWithPointer.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -389,7 +429,7 @@ Was bedeutet das im Umkehrschluss? Eine falsche Deklaration bewirkt ein
 falsches "Bewegungsmuster" über dem Speicher.
 
 {{2}}
-``` c
+``` c               WrongMath.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -411,10 +451,10 @@ int main(void)
 ### Vergleiche von Zeigern
 
 Pointer können natürlich nicht nur manipuliert sondern auch verglichen werden.
-Dabei sei noch mal darauf verwwiesen, dass dabei die Adressen und nicht die
+Dabei sei noch mal darauf verwiesen, dass dabei die Adressen und nicht die
 Werte evaluiert werden.
 
-``` c
+``` c                  PointerComp.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -451,7 +491,7 @@ comment: sizeof(char) == 1 ... deshalb kann dieser Anteil entfallen
 Es gibt zwei Möglichkeiten auf ein Array zuzugreifen, über den Indexoperator
 `[]` oder die Zeiger-basierte Adressierung der Elemente.
 
-``` c
+``` c                    IndexingArray.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -480,7 +520,7 @@ int main(void) {
 **Achtung:** Es gibt erhebliche Unterschiede bei der Zeiger-basierten
 Adressierung von Arrays im Hinblick auf das "Ziel".
 
-``` c
+``` c                  IndexingArray.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -513,7 +553,7 @@ realisiert. In der Liste der formalen Parameter wird ein Zeiger eines
 passenden Typs definiert. Beim Funktionsaufruf wird als Argument statt
 Variable eine Adresse übergeben. Beachten Sie, dass für den Zugriff auf den Inhalt des Zeigers (einer Adresse) der Inhaltsoperator `*` benötigt wird.
 
-``` c
+``` c                    ParameterI.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -537,7 +577,7 @@ Die Adresse einer Variable wird mit dem Adressenoperator `&`
 ermittelt. Weiterhin kann an den Zeiger-Parameter eine Array-Variable
 übergeben werden.
 
-``` c
+``` c                   ParameterII.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -563,12 +603,12 @@ Der Vorteil der Verwendung der Zeiger als Parameter besteht darin, dass
 in der Funktion mehrere Variablen auf eine elegante Weise verändert
 werden können. Die Funktion hat somit quazi mehrere Ergebnisse.
 
-``` c
+``` c     ParameterIII.c
 #include <stdio.h>
 #include <stdlib.h>
 
 void tauschen(char *anna, char *hanna){
-  char h=*anna;
+  char aux=*anna;
   *anna=*hanna;
   *hanna=h;
 }
@@ -589,7 +629,7 @@ Analog zur Bereitstellung von Parametern entsprechend dem "call-by-reference"
 Konzept können auch Rückgabewerte als Pointer vorgesehen sein. Allerdings
 sollen Sie dabei aufpassen ...
 
-``` c
+``` c                         returnPointer.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -633,10 +673,10 @@ int main(void) {
 @Rextester.eval(@C, false, ,`-Wall -std=gnu99 -O2 -o a.out source_file.c -lm`)
 
 {{1}}
-**Variante 2** Rückgabezeiger adressiert mit `static` bezeichnete Variable. Aber Achtung: funktieoniert nicht bei rekursiven Aufrufen.
+**Variante 2** Rückgabezeiger adressiert mit `static` bezeichnete Variable. Aber Achtung: funktioniert nicht bei rekursiven Aufrufen.
 
 {{1}}
-``` c
+``` c                             PointerInsteadOfReturnI.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -663,7 +703,7 @@ int main(void) {
 **Variante 3** Für den Rückgabezeiger wird der Speicherplatz mit `malloc` dynamisch angelegt (dazu später mehr).
 
 {{2}}
-``` c
+``` c                        PointerInsteadOfReturnII.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -737,7 +777,7 @@ Geben Sie alle Paare von Einträgen zurück, die in der Summe 18 ergeben.
 Die intuitive Lösung entwirft einen kreuzweisen Verleich aller Kombinationen
 der Einträge im Array. Haben Sie eine bessere Idee?
 
-```c
+```c                             Pairing.c
 #include <stdio.h>
 #include <stdlib.h>
 
