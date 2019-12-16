@@ -171,10 +171,13 @@ int main(void) {
 ```
 @Rextester.C
 
-## Arrays als statisches Speicherelement (Wiederholung)
+## Konfiguration von Arrays
 <!--
 comment: Beispielcode um Schleife ergänzen, zum Beispiel Multiplikation aller Elemente
 -->
+
+                              {{0-1}}
+****************************************************************************
 
 ```cpp                          nDimArray.c
 #include <stdio.h>
@@ -182,37 +185,22 @@ comment: Beispielcode um Schleife ergänzen, zum Beispiel Multiplikation aller E
 
 int main(void) {
   int myArray[] = {0, 10, 20, 30};
-  printf("%d %d = Inhalt des ersten und zweiten Eintrages", myArray[0], myArray[1]);
+  printf("%d %d = Inhalt des ersten und zweiten Eintrages\n", myArray[0], myArray[1]);
   printf("Pointer auf den ersten Eintrag %p", myArray);
   return EXIT_SUCCESS;
 }
 ```
 @Rextester.C
 
-<!--
-style="width: 70%; max-width: 460px; display: block; margin-left: auto; margin-right: auto;"
--->
-````
- Speicherauszug
+****************************************************************************
 
- index    int-Breite
+                              {{1-3}}
+****************************************************************************
 
-          ┣━━━━━━━━━┫
-   0      ┃       0 ┃  <- myArray
-          ┣━━━━━━━━━┫
-   1      ┃      10 ┃
-          ┣━━━━━━━━━┫
-   2      ┃      20 ┃
-          ┣━━━━━━━━━┫
-   3      ┃      30 ┃
-          ┣━━━━━━━━━┫
-````
-
-{{1}}
 Entwickeln Sie einen Algorithmus für einen Parkautomaten, der Münzen wechselt
 
-{{1}}
-```cpp
+
+```cpp          RemainingMoney.cpp
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -244,11 +232,14 @@ int main(void)
 ```
 @Rextester.C(false,`@input(1)`)
 
-{{2}}
+****************************************************************************
+
+                            {{2-3}}
+****************************************************************************
+
 Was ist an dieser Lösung unbefriedigend und welche Änderungen sollten vollzogen
 werden?
 
-{{2}}
 | Problem                             | Lösungsansatz                             |
 |:------------------------------------|:------------------------------------------|
 | Offenbar werden alle Beträge in 1 Cent Münzen ausgezahlt. | Denkfehler im Algorithmus? |
@@ -256,11 +247,13 @@ werden?
 | Die Ausgabe erfolgt lediglich in der Konsole, eine Speicherung ist nicht vorgesehen. | Variable für die Rückgabe anlegen |
 | Das Programm ist monolitisch aufgebaut. | Kapselung der Methode in einer Funktion |
 
-{{3}}
+****************************************************************************
+
+                                     {{3}}
+********************************************************************************
 Lösungsvorlage
 
-{{3}}
-```cpp
+```cpp                      Result.cpp
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -292,11 +285,16 @@ int main(void)
   return EXIT_SUCCESS;
 }
 ```
+@Rextester.C
 
-{{3}}
-<!--
+********************************************************************************
+
+                     {{4}}
+*******************************************************************************
+
+Lösung für die Funktion Restgeld
+
 ```cpp
-#include <stdio.h>
 void Restgeld(unsigned int gebuehr, unsigned int zahlung,
               unsigned int * muenzen,
               unsigned int * anzahl,
@@ -314,13 +312,16 @@ void Restgeld(unsigned int gebuehr, unsigned int zahlung,
   }
 }
 ```
--->
 
-{{4}}
+*******************************************************************************
+
+                      {{5}}
+*******************************************************************************
 Allerdings ist die Lösung im Hinblick auf die Veränderung der Münzeinteilung
 immer noch unbefriedigend. Eine Anpassung der Münznominale muss immer auch eine
 Adaption des Rückgabewertes einschließen. Hier wäre eine dynamische Lösung
 wünschenswert.
+*******************************************************************************
 
 ## Arrays variabler Länge (VLA)
 
@@ -359,7 +360,6 @@ Nachteile von VLA:
 
 Wirklich dynamisch sind die mit `malloc()` zur Laufzeit angelegten  Arrays.
 
-<!--
 ```cpp
 #include <stdio.h>
 #include <stdlib.h>
@@ -380,7 +380,8 @@ int main(void){
   	return 0;
 }
 ```
--->
+@Rextester.C
+
 
 ##  Dynamische Speicherallokation
 
@@ -604,7 +605,7 @@ int main(void) {
 Berechnen Sie die kummulative Summe aufsteigender Zahlenfolge, die Sie in einem
 Array aufgestellt haben. Nutzen Sie zur Kontrolle die Gaußsche Summenformel.
 
-```cpp
+```cpp                 SumOfNumbers.cpp
 #include <stdio.h>
 #include <stdlib.h>
 
