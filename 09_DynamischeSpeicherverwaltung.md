@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  0.0.1
+version:  1.0.1
 language: de
 narrator: Deutsch Female
 
@@ -610,7 +610,7 @@ Array aufgestellt haben. Nutzen Sie zur Kontrolle die Gaußsche Summenformel.
 #include <stdlib.h>
 
 int *iarray(unsigned int n);
-
+of size 4
 int *iarray(unsigned int n){
   int *iptr = malloc(n * sizeof(*iptr));
   // int *iptr = malloc(n * sizeof(int)); //äquivalent
