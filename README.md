@@ -18,7 +18,7 @@ See the interactive version at
 [https://LiaScript.github.io](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/README.md)
 
 Der vorliegende C-Kurs wird seit dem Wintersemester 2018/19 an der TU Bergakademie
-Freiberg für die Veranstalutng "Prozedurale Programmierung" genutzt und auf der Basis von LiaScript realisiert. Die
+Freiberg für die Veranstaltung "Prozedurale Programmierung" genutzt und auf der Basis von LiaScript realisiert. Die
 Veranstaltung richtet sich an Nicht-Informatiker aus verschiedenen
 ingenieurwissenschaftlichen Disziplinen mit keinen oder geringen
 Programmierkenntnissen. Kern der Lösung ist die Möglichkeit Code direkt in der
@@ -83,7 +83,7 @@ T
 ```
 @Rextester.C(false,`@input(1)`)
 
-Fehlerausgaben werden entsprechend der Compilerimplementierung wie folgt generiert:
+Fehlerausgaben werden entsprechend der Compiler-Implementierung wie folgt generiert:
 
 ```cpp                     ErroneousHelloWorld.c
 #include <stdio.h>
@@ -157,25 +157,14 @@ Achtung! Es handelt sich um "lebende" Materialien.
 | Datum      | Inhalt                                                                                                                                                                   |
 |:---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | 14.10.2019 | [1.  Einführung](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/01_Einfuehrung.md)                                       |
-
-<!--
-
-[//]: #  | 30.10.2018 | [2. Variablen und Datentypen, Ein- und Ausgabe](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/02_Grundlagen.md#1)       |
-| 06.11.2018 | [3. Operatoren](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/03_Operatoren.md#1)                                       |
-| 13.11.2018 | [4. Kontrollstrukturen](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/04_Kontrollstrukturen.md#1)                       |
-| 20.11.2018 | [5. Komplexe Datentypen](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/05_ZusammengesetzteDatentypen.md#1)              |
-| 27.11.2018 | [6. Funktionen](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/06_Funktionen.md#1)                                       |
-| 04.12.2018 | [7. Zeiger](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/07_Zeiger.md#1)                                               |
-| 11.12.2018 | [8. Input/Output](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/08_InputOutput.md#1)                                    |
-| 18.12.2018 | Ausfall                                                                                                                                                                  |
-| 08.01.2019 | [9. Dynamische Speicherverwaltung](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/09_DynamischeSpeicherverwaltung.md#1)  |
-| 15.01.2019 | [10. Parameterübergabe und Makros](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/10_MakrosKommandozeilenparameter.md#1) |
-| 22.01.2019 | [11. Standardbibliothek](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/11_Standardbibliothek.md#1)                      |
-| 29.01.2019 | [12. Algorithmen](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/12_Algorithmen.md#1)                                    |
-| 05.02.2019 | [13. Ausblick](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/13_Ausblick.md#1)     
-                                    |
-
--->
+| 21.10.2019 | [2. Variablen und Datentypen, Ein- und Ausgabe](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/02_Grundlagen.md#1)       |
+| 28.10.2019 | [3. Operatoren](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/03_Operatoren.md#1)                                       |
+|  4.11.2019 | [4. Kontrollstrukturen](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/04_Kontrollstrukturen.md#1)                       |
+| 11/18.11.2019 | [5. Komplexe Datentypen](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/05_ZusammengesetzteDatentypen.md#1)              |
+| 25.11.2019 | [6. Funktionen](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/06_Funktionen.md#1)                                       |
+|  2.12.2019 | [7. Zeiger](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/07_Zeiger.md#1)                                               |
+|  9.12.2018 | [8. Input/Output](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/08_InputOutput.md#1)                                    |
+|  16.12.2018 | [9. Dynamische Speicherverwaltung](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/09_DynamischeSpeicherverwaltung.md#1)  |
 
 # ... und wozu brauche ich das?
 
@@ -224,9 +213,9 @@ void loop() {       // Ausführung
 Anwendung das Potential etwas deutlicher werden. Lassen Sie uns annehmen, wir
 wollen die Lichtsitiation an einem bestimmten Punkt vermessen. Dazu verwenden
 wir einen Sensor, der mit einem Controller verbunden ist und senden die
-gesammelten Daten an einen Server. Dieser übernimmt die Aufbereitung und visualisierung.
+gesammelten Daten an einen Server. Dieser übernimmt die Aufbereitung und Visualisierung.
 
-Forschungshypothese: Am Wochende strahlt die Sonne heller.
+Forschungshypothese: Am Wochenende strahlt die Sonne heller.
 
 ![C logo](img/LightConditions.jpeg)<!--
 style="width: 40%;" -->
