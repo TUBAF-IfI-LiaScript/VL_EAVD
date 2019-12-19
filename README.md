@@ -6,8 +6,7 @@ version:  1.0.1
 language: de
 narrator: Deutsch Female
 
-commment: C-Kurs für Nicht-Informatiker
-
+comment: C-Kurs für Nicht-Informatiker 
 logo: ./img/LogoCodeExample.png
 
 import: https://raw.githubusercontent.com/LiaTemplates/Rextester/master/README.md
