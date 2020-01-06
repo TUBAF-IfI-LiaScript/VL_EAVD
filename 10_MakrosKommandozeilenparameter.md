@@ -646,10 +646,11 @@ int main(void) {
   double to = 10;
   for (int number=5; number<150; number=number+15){
     values = generateValues(from, to, number);
-    printf("n = %3d - Integral = %f, %f, %f\n", number,
-                                       int_leftrect(values, number),
-                                       int_rightrect(values, number),
-                                       int_trapez(values, number));
+    printf("n = %3d = %f, %f, %f\n", number,
+                                     int_leftrect(values, number),
+                                     int_rightrect(values, number),
+                                     int_trapez(values, number));
+    free(values);
   }
   return EXIT_SUCCESS;
 }

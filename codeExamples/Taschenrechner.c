@@ -13,7 +13,8 @@ int main(int argc, char *argv[]) {
 
    if(argc < 4) {
       printf("Benötige mindestens 4 Argumente!\n");
-      printf("Aufruf: %s <zahl><op><zahl> ...\n", *argv);
+      printf("Zulässige Operatoren sind +-*/\n");
+      printf("Aufruf: %s <zahl> <op> <zahl> ...\n", *argv);
       return EXIT_FAILURE;
    }
    /* 1.Zahl in einen Integer konvertieren*/
