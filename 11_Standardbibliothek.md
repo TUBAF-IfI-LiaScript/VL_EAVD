@@ -148,7 +148,6 @@ Die Darstellung von `tm` umfasst dabei folgende Elemente
 | `tm_mday`	| int	| day of the month	1-31|
 | `tm_mon`	| int	| months since January	0-11|
 | `tm_year`	| int	| years since 1900|
-| `tm_year`	| int	| years since 1900|
 | `tm_wday`	| int	| days since Sunday	0-6|
 | `tm_yday`	| int	| days since January 1	0-365|
 | `tm_isdst`| int	| Daylight Saving Time flag|
