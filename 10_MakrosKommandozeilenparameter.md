@@ -290,7 +290,7 @@ int main(int argc, char *argv[]) {
       printf("Aufruf: %s <zahl><op><zahl> ...\n", *argv);
       return EXIT_FAILURE;
    }
-   /* 1.Zahl in einen Integer konvertieren*/
+
    erg = strtol(argv[1], NULL, 10);
    if( erg == 0 ) {
       printf("Keine gültige Ganzzahl ... \n");

@@ -1,208 +1,13 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich
-email:    zug@ovgu.de   & andre.dietrich@ovgu.de
-version:  0.0.1
+author:   Sebastian Zug & André Dietrich & Galina Rudolf
+email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
+version:  1.0.2
 language: de
 narrator: Deutsch Female
 
+import: https://raw.githubusercontent.com/liaScript/rextester_template/master/README.md
 
-script:  https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts-en.min.js
-
-script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
-
-
-@JSCPP.__eval
-<script>
-  try {
-    var output = "";
-    JSCPP.run(`@0`, `@1`, {stdio: {write: s => { output += s }}});
-    output;
-  } catch (msg) {
-    var error = new LiaError(msg, 1);
-
-    try {
-        var log = msg.match(/(.*)\nline (\d+) \(column (\d+)\):.*\n.*\n(.*)/);
-        var info = log[1] + " " + log[4];
-
-        if (info.length > 80)
-          info = info.substring(0,76) + "..."
-
-        error.add_detail(0, info, "error", log[2]-1, log[3]);
-    } catch(e) {}
-
-    throw error;
-    }
-</script>
-@end
-
-
-@JSCPP.eval: @JSCPP.__eval(@input, )
-
-@JSCPP.eval_input: @JSCPP.__eval(@input,`@input(1)`)
-
-@output: <pre class="lia-code-stdout">@0</pre>
-
-@output_: <pre class="lia-code-stdout" hidden="true">@0</pre>
-
-
-script:   https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js
-
-@Rextester.__eval
-<script>
-//var result = null;
-var error  = false;
-
-console.log = function(e){ send.lia("log", JSON.stringify(e), [], true); };
-
-function grep_(type, output) {
-  try {
-    let re_s = ":(\\d+):(\\d+): "+type+": (.+)";
-
-    let re_g = new RegExp(re_s, "g");
-    let re_i = new RegExp(re_s, "i");
-
-    let rslt = output.match(re_g);
-
-    let i = 0;
-    for(i = 0; i < rslt.length; i++) {
-        let e = rslt[i].match(re_i);
-
-        rslt[i] = { row : e[1]-1, column : e[2], text : e[3], type : type};
-    }
-    return [rslt];
-  } catch(e) {
-    return [];
-  }
-}
-
-$.ajax ({
-    url: "https://rextester.com/rundotnet/api",
-    type: "POST",
-    timeout: 10000,
-    data: { LanguageChoice: @0,
-            Program: `@input`,
-            Input: `@1`,
-            CompilerArgs : @2}
-    }).done(function(data) {
-        if (data.Errors == null) {
-            let warnings = grep_("warning", data.Warnings);
-
-            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
-
-            if(data.Warnings)
-              stats = "\n-------Warn-------\n"+data.Warnings + stats;
-
-            send.lia("log", data.Result+stats, warnings, true);
-            send.lia("eval", "LIA: stop");
-
-        } else {
-            let errors = grep_("error", data.Errors);
-
-            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
-
-            if(data.Warning)
-              stats = data.Errors + data.Warnings + stats;
-            else
-              stats = data.Errors + data.Warnings + stats;
-
-            send.lia("log", stats, errors, false);
-            send.lia("eval", "LIA: stop");
-        }
-    }).fail(function(data, err) {
-        send.lia("log", err, [], false);
-        send.lia("eval", "LIA: stop");
-    });
-
-"LIA: wait"
-</script>
-@end
-
-
-@Rextester.eval: @Rextester.__eval(6, ,"-Wall -std=gnu99 -O2 -o a.out source_file.c")
-
-@Rextester.eval_params: @Rextester.__eval(6, ,"@0")
-
-@Rextester.eval_input: @Rextester.__eval(6,`@input(1)`,"-Wall -std=gnu99 -O2 -o a.out source_file.c")
-
-
-
-@Rextester.pipe
-<script>
-//var result = null;
-var error  = false;
-
-console.log = function(e){ send.lia("log", JSON.stringify(e), [], true); };
-
-function grep_(type, output) {
-  try {
-    let re_s = ":(\\d+):(\\d+): "+type+": (.+)";
-
-    let re_g = new RegExp(re_s, "g");
-    let re_i = new RegExp(re_s, "i");
-
-    let rslt = output.match(re_g);
-
-    let i = 0;
-    for(i = 0; i < rslt.length; i++) {
-        let e = rslt[i].match(re_i);
-
-        rslt[i] = { row : e[1]-1, column : e[2], text : e[3], type : type};
-    }
-    return [rslt];
-  } catch(e) {
-    return [];
-  }
-}
-
-$.ajax ({
-    url: "https://rextester.com/rundotnet/api",
-    type: "POST",
-    timeout: 10000,
-    data: { LanguageChoice: 6,
-            Program: `@input(0)`,
-            Input: `@1`,
-            CompilerArgs : "-Wall -std=gnu99 -O2 -o a.out source_file.c"}
-    }).done(function(data) {
-        if (data.Errors == null) {
-            let warnings = grep_("warning", data.Warnings);
-
-            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
-
-            if(data.Warnings)
-              stats = "\n-------Warn-------\n"+data.Warnings + stats;
-
-            send.lia("log", data.Result+stats, warnings, true);
-
-            @input(1)
-
-            send.lia("eval", "LIA: stop");
-
-        } else {
-            let errors = grep_("error", data.Errors);
-
-            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
-
-            if(data.Warning)
-              stats = data.Errors + data.Warnings + stats;
-            else
-              stats = data.Errors + data.Warnings + stats;
-
-            send.lia("log", stats, errors, false);
-            send.lia("eval", "LIA: stop");
-        }
-    }).fail(function(data, err) {
-        send.lia("log", err, [], false);
-        send.lia("eval", "LIA: stop");
-    });
-
-"LIA: wait"
-</script>
-@end
-
-script:   https://cdn.rawgit.com/davidedc/Algebrite/master/dist/algebrite.bundle-for-browser.js
-
-@algebrite.eval:    <script> Algebrite.run(`@input`) </script>
 -->
 
 # Vorlesung XI - Standardbibliotheken
@@ -276,14 +81,14 @@ vereinfachen, bzw. die Anpassung auf die konkrete Architektur übernehmen.
 
 Wie werden die entsprechenden Funktionen genutzt?
 
-```cpp                     mathOperations.c
+```cpp                     libusage.c
 int main(void)
 {
     printf("Hello World\n");
 
     return(EXIT_SUCCESS);
 }
-```@Rextester.eval
+```@Rextester.C
 
 In folgendem Beispiel werden mathematische Funktionen der `math.h` genutzt. Aus
 historischen Gründen muss dabei im Fall einer echten Berechnung zur Laufzeit
@@ -291,18 +96,15 @@ die entsprechende Bibliothek gelinkt werden.
 
 ```cpp                     mathOperations.c
 #include <stdio.h>
-#include <stdlib.h>
 #include <math.h>
 
 int main(void)
 {
-    double a=6;
+    double a=3.14;
     printf("Sin von 3.14 %f\n", sin(a));
-    printf("Potenz von 3.14 %f\n", pow(2.0, a));
-
-    return(EXIT_SUCCESS);
+    return 0;
 }
-```@Rextester.eval
+```
 
 In der vorliegenden Form erfolgt die Berechnung statisch zur Compilezeit.
 Wandeln Sie das Beispiel so ab, dass eine "echte" Berechnung notwenig wird.
@@ -346,6 +148,7 @@ Die Darstellung von `tm` umfasst dabei folgende Elemente
 | `tm_mday`	| int	| day of the month	1-31|
 | `tm_mon`	| int	| months since January	0-11|
 | `tm_year`	| int	| years since 1900|
+| `tm_year`	| int	| years since 1900|
 | `tm_wday`	| int	| days since Sunday	0-6|
 | `tm_yday`	| int	| days since January 1	0-365|
 | `tm_isdst`| int	| Daylight Saving Time flag|
@@ -371,23 +174,27 @@ int main(void) {
   clock_t start = clock();
   long result = 0;
   int i;
-  for(i=0; i<1000000000; ++i)
+  for(i=0; i<1000000; ++i){
       result = result + 1;
+      result = log(pow(result, 2));
+  }
   printf("%d Additionen von 1 ergeben %ld\n", i-1, result);
   clock_t end = clock();
   double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 
   printf("Der Rechner braucht dafür %f Sekunden \n", cpu_time_used);
-  printf("Die Taktrate beträgt %d Ticks/Sekunde \n",  CLOCKS_PER_SEC);
+  printf("Die Taktrate beträgt %ld Ticks/Sekunde \n",  CLOCKS_PER_SEC);
   return EXIT_SUCCESS;
 }
-```@Rextester.eval
+```@Rextester.eval(@C,false, ,`-Wall -std=gnu99 -O2 -lm -o a.out source_file.c`)
+
 Welchen Fehler sehen Sie den gedanklichen Fehler im obrigen Programm?
 
 **Anwendung II - Zeitbestimmung mit time()**
 
 Die Funktion `time_t time(time_t *arg)` gibt die aktuelle Kalenderzeit als
-Epochenausdruck zurück. Ein
+Epochenausdruck zurück. Die Funktion `ctime(&current_time)` bildet sie auf einen  
+string ab.
 
 ```cpp                     printTime.c
 #include <time.h>
@@ -416,7 +223,7 @@ int main(void)
     printf("Current time is %s", c_time_string);
     return(EXIT_SUCCESS);
 }
-```@Rextester.eval
+```@Rextester.C
 
 **Anwendung 3 - Ausgabe von Zeitformaten**
 
@@ -447,24 +254,26 @@ int main(void)
     current_time = time(NULL);
     timeInfo = localtime( &current_time );
 
+    printf("%d\n", timeInfo->tm_year);
+
     strftime( buffer, 80, "Es ist nun %H Uhr, %M Minuten.", timeInfo );
     printf("%s", buffer);
     strftime( buffer, 80, "%c", timeInfo );
     printf("%s", buffer);
     return(EXIT_SUCCESS);
 }
-```@Rextester.eval
+```@Rextester.C
 
 ### assert.h
 
-Mit dem assert-Makro aus dem Headerfile `assert.h` fügt man Testpunkte zu
+Mit dem assert-Makro aus dem Headerfile `assert.h` fügt man Testpunkte in ein Program ein,
 die dann zur Laufzeit ausgewertet werden.
 
 ```cpp
 void assert(int expression)
 ```
 
-hat expression den Wert Null wenn ausgeführt wird, dann gibt der assert-Makro
+hat `expression` den Wert Null wenn ausgeführt wird, dann gibt der assert-Makro
 auf `stderr` etwa folgende Meldung aus:
 
 ```bash @output
@@ -482,8 +291,9 @@ $$f(a,b)=\sqrt{\frac{a}{b}}$$
 implementiert
 
 ```cpp                     assertBeispiele.c
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 //#define NDEBUG
 #include <assert.h>
 
@@ -500,11 +310,13 @@ int main(void){
 
 float myFunktion(int a, int b){
   // precondition
-  // postcondition
-  return 1.0;
+  assert(b==0);
+  assert(a/b>0);
+  double y = sqrt(a/b);
+  return y;
 }
 
-```@Rextester.eval_params(-Wall -std=gnu99 -O2 -o a.out source_file.c -lm)
+```
 
 Welchen Vorteile bringt das `assert` Makro gegenüber alternativen printf Ausgaben
 mit sich? Wie könnte man ein gleiches Verhalten ohne Spuren im Code zu hinterlassen
@@ -569,7 +381,7 @@ int main(void) {
    printf("Wird nicht mehr ausgegeben\n");
    return EXIT_SUCCESS;
 }
-```@Rextester.eval
+```@Rextester.C
 
 **Erzeugung von Zufallszahlen**
 
@@ -588,17 +400,18 @@ entsprechende Modulo-Operation realisieren
 rand() % ((y + 1) - x) + x   // x<= out <=y
 ```
 
-```cpp
+```c randomValues.c
 #include <stdio.h>
 #include <stdlib.h>
 
 int main(void) {
-   printf("Der Wert von RAND_MAX beträgt %d", RAND_MAX);
+   printf("Der Wert von RAND_MAX beträgt %d\n", RAND_MAX);
    for(int i = 0; i < 5; i++)
-      printf("Die Zufallszahl lautet %d\n", rand());
+      printf("Die Zufallszahl lautet %d \n", rand());
    return EXIT_SUCCESS;
 }
-```@Rextester.eval
+```@Rextester.C
+
 Starten Sie das Programm mehrfach und beobachten Sie die Entwicklung der
 Werte. Welchen Nachteil hat dieser Ansatz?
 
@@ -627,7 +440,7 @@ Einträge im Array und setzt diese in Beziehung. Bei einem negativen Rückgabewe
 erste Element kleiner, für einen positiven Wert größer als das zweite Übergabewert. Für den Wert 0 liegt
 Gleichheit vor.
 
-```cpp
+```c
 void qsort(
    void *array,        // Anfangsadresse des Vektors
    size_t n,           // Anzahl der Elemente zum Sortieren
@@ -635,7 +448,7 @@ void qsort(
    int (*vergleich_func)(const void*, const void*)   );
 ```
 
-```cpp
+```c  sort.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -661,7 +474,7 @@ int main (void) {
 
    return(EXIT_SUCCESS);
 }
-```@Rextester.eval
+```@Rextester.C
 
 Eine analoge Funktion steht für die Suche in sortierten Listen bereit. `bsearch()`
 durchsucht diese und gibt einen Pointer zurück, der mit dem Suchkriterium
@@ -673,18 +486,18 @@ In der `stdlib` bietet C die Möglichkeit Kommandozeilenbefehle auszuführen.
 Damit lässt sich zum Beispiel sehr komfortabel auf das Dateisystem zurückgreifen
 aber auch andere Programme starten und deren Ergebnisse erfassen.
 
-```cpp
+```c runDir.c
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
 int main(void) {
   char command[50];
-  strcpy( command, "dir" );
+  strcpy(command, "dir" );
   system(command);
   return EXIT_SUCCESS;
 }
-```@Rextester.eval
+```@Rextester.C
 
 
 ```cpp   generateCodeAndCompile.c
@@ -735,10 +548,7 @@ In der Definitionsdatei `string.h` werden Gruppen von Funktionen für Zeichenket
 |`size_t strlen(cs)` |	liefert Länge von cs (ohne '\0'). |
 |`char *strerror(n)` |	liefert Zeiger auf Zeichenkette, die in der Implementierung für Fehler n definiert ist. |
 
-
-
-
-```cpp
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -749,19 +559,21 @@ int main(void){
   printf("%s\n", text);
   strncat(text, "angehaengt, der Rest nicht.", 10);
   printf("%s\n", text);
-  printf("%d\n", strcmp(text, "Es werden "));
-  printf("%s\n", strpbrk(text, "aou"));
+  printf("%d\n", strcmp(text, "Es werden "));    // compare
+  printf("%s\n", strpbrk(text, "aou"));          // first match
+
+ printf("------------------------------------\n");
 
   char trennzeichen[] = " ";
   char *wort;
-  wort = strtok(text, trennzeichen);
+  wort = strtok(text, trennzeichen);         // split to tokens
   while(wort != NULL) {
       printf("%s\n", wort);
       wort = strtok(NULL, trennzeichen);
   }
   return EXIT_SUCCESS;
 }
-```@Rextester.eval
+```@Rextester.C
 
 
 ## 2. Beispiel der Woche
@@ -779,30 +591,33 @@ http://openbook.rheinwerk-verlag.de/c_von_a_bis_z/019_c_zeitroutinen_001.htm
 
 int main(void) {
    int tag, monat, jahr;
+   int aux = 0;
 
    printf("Bitte gib Deinen Geburtstag ein!\n");
    printf("Tag : ");
-   scanf("%d", &tag);
+   aux = scanf("%d", &tag);
    printf("Monat : ");
-   scanf("%d", &monat);
+   aux = aux + scanf("%d", &monat);
    printf("Jahr (jjjj) : ");
-   scanf("%d", &jahr);
+   aux = aux + scanf("%d", &jahr);
    printf("%d.%d.%d\n", tag, monat, jahr);
 
-   struct tm birthday_tm;
-   birthday_tm.tm_mon  = monat -1;
-   birthday_tm.tm_yday  = tag;
-   birthday_tm.tm_year = jahr - 1900;
-   birthday_tm.tm_hour = 0;
-   birthday_tm.tm_min = 0;
-   birthday_tm.tm_sec = 1;
-   birthday_tm.tm_isdst = -1;
+   if (aux==0){
+     struct tm birthday_tm;
+     birthday_tm.tm_mon  = monat -1;
+     birthday_tm.tm_yday  = tag;
+     birthday_tm.tm_year = jahr - 1900;
+     birthday_tm.tm_hour = 0;
+     birthday_tm.tm_min = 0;
+     birthday_tm.tm_sec = 1;
+     birthday_tm.tm_isdst = -1;
 
-   long birthday = mktime(&birthday_tm);
-   time_t tnow = time(&tnow);
+     long birthday = mktime(&birthday_tm);
+     time_t tnow = time(&tnow);
 
-   double diff_t = tnow -birthday;
-   printf("%f Sekunden ... hier machen Sie weiter :-)", diff_t);
+     double diff_t = tnow -birthday;
+     printf("%f Sekunden \n ... hier machen Sie weiter :-)", diff_t);
+   }
    return EXIT_SUCCESS;
 }
 ```
@@ -811,4 +626,4 @@ int main(void) {
 11
 1965
 ```
-@Rextester.eval_input
+@Rextester.C
