@@ -1,212 +1,12 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich
-email:    zug@ovgu.de   & andre.dietrich@ovgu.de
-version:  0.0.1
+author:   Sebastian Zug & André Dietrich & Galina Rudolf
+email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
+version:  1.0.2
 language: de
 narrator: Deutsch Female
 
-
-script: https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js
-
-link:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css
-
-script:  https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts-en.min.js
-
-script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
-
-
-@JSCPP.__eval
-<script>
-  try {
-    var output = "";
-    JSCPP.run(`@0`, `@1`, {stdio: {write: s => { output += s }}});
-    output;
-  } catch (msg) {
-    var error = new LiaError(msg, 1);
-
-    try {
-        var log = msg.match(/(.*)\nline (\d+) \(column (\d+)\):.*\n.*\n(.*)/);
-        var info = log[1] + " " + log[4];
-
-        if (info.length > 80)
-          info = info.substring(0,76) + "..."
-
-        error.add_detail(0, info, "error", log[2]-1, log[3]);
-    } catch(e) {}
-
-    throw error;
-    }
-</script>
-@end
-
-
-@JSCPP.eval: @JSCPP.__eval(@input, )
-
-@JSCPP.eval_input: @JSCPP.__eval(@input,`@input(1)`)
-
-@output: <pre class="lia-code-stdout">@0</pre>
-
-@output_: <pre class="lia-code-stdout" hidden="true">@0</pre>
-
-
-script:   https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js
-
-@Rextester.__eval
-<script>
-//var result = null;
-var error  = false;
-
-console.log = function(e){ send.lia("log", JSON.stringify(e), [], true); };
-
-function grep_(type, output) {
-  try {
-    let re_s = ":(\\d+):(\\d+): "+type+": (.+)";
-
-    let re_g = new RegExp(re_s, "g");
-    let re_i = new RegExp(re_s, "i");
-
-    let rslt = output.match(re_g);
-
-    let i = 0;
-    for(i = 0; i < rslt.length; i++) {
-        let e = rslt[i].match(re_i);
-
-        rslt[i] = { row : e[1]-1, column : e[2], text : e[3], type : type};
-    }
-    return [rslt];
-  } catch(e) {
-    return [];
-  }
-}
-
-$.ajax ({
-    url: "https://rextester.com/rundotnet/api",
-    type: "POST",
-    timeout: 10000,
-    data: { LanguageChoice: @0,
-            Program: `@input`,
-            Input: `@1`,
-            CompilerArgs : @2}
-    }).done(function(data) {
-        if (data.Errors == null) {
-            let warnings = grep_("warning", data.Warnings);
-
-            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
-
-            if(data.Warnings)
-              stats = "\n-------Warn-------\n"+data.Warnings + stats;
-
-            send.lia("log", data.Result+stats, warnings, true);
-            send.lia("eval", "LIA: stop");
-
-        } else {
-            let errors = grep_("error", data.Errors);
-
-            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
-
-            if(data.Warning)
-              stats = data.Errors + data.Warnings + stats;
-            else
-              stats = data.Errors + data.Warnings + stats;
-
-            send.lia("log", stats, errors, false);
-            send.lia("eval", "LIA: stop");
-        }
-    }).fail(function(data, err) {
-        send.lia("log", err, [], false);
-        send.lia("eval", "LIA: stop");
-    });
-
-"LIA: wait"
-</script>
-@end
-
-
-@Rextester.eval: @Rextester.__eval(6, ,"-Wall -std=gnu99 -O2 -o a.out source_file.c")
-
-@Rextester.eval_params: @Rextester.__eval(6, ,"@0")
-
-@Rextester.eval_input: @Rextester.__eval(6,`@input(1)`,"-Wall -std=gnu99 -O2 -o a.out source_file.c")
-
-
-
-@Rextester.pipe
-<script>
-//var result = null;
-var error  = false;
-
-console.log = function(e){ send.lia("log", JSON.stringify(e), [], true); };
-
-function grep_(type, output) {
-  try {
-    let re_s = ":(\\d+):(\\d+): "+type+": (.+)";
-
-    let re_g = new RegExp(re_s, "g");
-    let re_i = new RegExp(re_s, "i");
-
-    let rslt = output.match(re_g);
-
-    let i = 0;
-    for(i = 0; i < rslt.length; i++) {
-        let e = rslt[i].match(re_i);
-
-        rslt[i] = { row : e[1]-1, column : e[2], text : e[3], type : type};
-    }
-    return [rslt];
-  } catch(e) {
-    return [];
-  }
-}
-
-$.ajax ({
-    url: "https://rextester.com/rundotnet/api",
-    type: "POST",
-    timeout: 10000,
-    data: { LanguageChoice: 6,
-            Program: `@input(0)`,
-            Input: `@1`,
-            CompilerArgs : "-Wall -std=gnu99 -O2 -o a.out source_file.c"}
-    }).done(function(data) {
-        if (data.Errors == null) {
-            let warnings = grep_("warning", data.Warnings);
-
-            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
-
-            if(data.Warnings)
-              stats = "\n-------Warn-------\n"+data.Warnings + stats;
-
-            send.lia("log", data.Result+stats, warnings, true);
-
-            @input(1)
-
-            send.lia("eval", "LIA: stop");
-
-        } else {
-            let errors = grep_("error", data.Errors);
-
-            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
-
-            if(data.Warning)
-              stats = data.Errors + data.Warnings + stats;
-            else
-              stats = data.Errors + data.Warnings + stats;
-
-            send.lia("log", stats, errors, false);
-            send.lia("eval", "LIA: stop");
-        }
-    }).fail(function(data, err) {
-        send.lia("log", err, [], false);
-        send.lia("eval", "LIA: stop");
-    });
-
-"LIA: wait"
-</script>
-@end
-
-script:   https://cdn.rawgit.com/davidedc/Algebrite/master/dist/algebrite.bundle-for-browser.js
-
-@algebrite.eval:    <script> Algebrite.run(`@input`) </script>
+import: https://raw.githubusercontent.com/liaScript/rextester_template/master/README.md
 
 -->
 
@@ -219,7 +19,6 @@ script:   https://cdn.rawgit.com/davidedc/Algebrite/master/dist/algebrite.bundle
 * Wie erfolgt die Transformation des Algorithmus auf eine Programmiersprache?
 * Was bedeutet der Begriff der Komplexität eines Algorithmus?
 * Welchem fundamentalen Konzept der Informatik unterliegen der Quicksort Algorithmus und die binäre Suche?
-* Ich habe eine gute Idee
 
 ---------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
@@ -234,24 +33,26 @@ ANSI C (C89)/ Schlüsselwörter:
 
 | Standard    |                |          |            |          |            |
 |:------------|:---------------|:---------|:-----------|:---------|:-----------|
-| **C89/C90** | auto           | `double` | `int`      | `struct` | `break`    |
+| **C89/C90** | `auto`         | `double` | `int`      | `struct` | `break`    |
 |             | `else`         | `long`   | `switch`   | `case`   | `enum`     |
-|             | register       | typedef  | `char`     | extern   | return     |
-|             | union          | const    | `float`    | `short`  | `unsigned` |
+|             | `register`     | `typedef`| `char`     | `extern` | `return`   |
+|             | union          | `const`  | `float`    | `short`  | `unsigned` |
 |             | `continue`     | `for`    | `signed`   | `void`   | `default`  |
-|             | `goto`         | `sizeof` | volatile   | `do`     | `if`       |
-|             | static         | `while`  |            |          |            |
-| **C99**     | `_Bool`        | _Complex | _Imaginary | inline   | restrict   |
+|             | `goto`         | `sizeof` | `volatile` | `do`     | `if`       |
+|             | `static`       | `while`  |            |          |            |
+| **C99**     | `_Bool`        | _Complex | _Imaginary | `inline` | restrict   |
 | **C11**     | _Alignas       | _Alignof | _Atomic    | _Generic | _Noreturn  |
 |             |_Static\_assert | \_Thread\_local | |   |          |            |
 
 ---
 
+{{1}}
 Standardbibliotheken
 
+{{1}}
 | Name         | Bestandteil | Funktionen                              |
 |:-------------|:------------|:----------------------------------------|
-| `<stdio.h>`  |             | Input/output (`printf`)                 |
+| `<stdio.h>`  |             | Input/output                            |
 | `<stdint.h>` | (seit C99)  | Integer Datentypen mit fester Breite    |
 | `<float.h>`  |             | Parameter der Floatwerte                |
 | `<limits.h>` |             | Größe der Basistypen                    |
@@ -259,7 +60,9 @@ Standardbibliotheken
 | `<string.h>` |             | Stringfunktionen                        |
 | `<math.h>`   |             | Mathematische Funktionen und Konstanten |
 
-https://en.cppreference.com/w/c/header
+{{1}}
+[C standard library header files](https://en.cppreference.com/w/c/header)
+
 
 ## 0. Hinweise zur Klausur
 
@@ -295,7 +98,7 @@ erlaubt.
 Ein Algorithmus gibt eine strukturierte Vorgehensweise vor, um ein Problem zu lösen. Er implmentiert Einzelschritte zur Abbildung von Eingabedaten auf Ausgabedaten.
 Algorithmen bilden die Grundlage der Programmierung und sind **unabhängig** von einer konkreten Programmiersprache. Algorithmen werden nicht nur maschinell durch einen Rechner ausgeführt sondern können auch von Menschen in „natürlicher“ Sprache formuliert und abgearbeitet werden.
 
- 1. Beispiel - Nassi-Shneiderman-Diagramm - Prüfung von Mineralen
+1. Beispiel - Nassi-Shneiderman-Diagramm - Prüfung von Mineralen
 
 ![Smaragdtest](./img/Struckto_smaragd.jpg)<!-- width="60%" -->[^1]
 
@@ -321,18 +124,21 @@ und besitzen die folgenden charakteristischen Eigenschaften:
 
 Der erste für einen Computer gedachte Algorithmus (zur Berechnung von Bernoullizahlen) wurde 1843 von Ada Lovelace in ihren Notizen zu Charles Babbages Analytical Engine festgehalten. Sie gilt deshalb als die erste Programmiererin. Weil Charles Babbage seine Analytical Engine nicht vollenden konnte, wurde Ada Lovelaces Algorithmus allerdings nie darauf implementiert.
 
+_"„Die Grenzen der Arithmetik wurden in dem Augenblick überschritten, in dem die Idee zur Verwendung der [Programmier]Karten entstand, und die Analytical Engine hat keine Gemeinsamkeit mit schlichten Rechenmaschinen. Sie ist einmalig, und die Möglichkeiten, die sie andeutet, sind höchst interessant.“_
+
 ## 2. Beispiele
 
 ### 1.Suche des Maximums
 
 Bestimmen Sie aus drei Zahlenwerten den größten und geben Sie diesen aus $max(n_0, n_1, n_2)$.
 
-```cpp
+```cpp      LargestNumber.c
 #include <stdio.h>
 #include <stdlib.h>
 
 int main(void) {
   double n1, n2, n3;
+
 
   printf("Geben Sie drei Zahlenwerte ein: \n");
   scanf("%lf %lf %lf", &n1, &n2, &n3);
@@ -347,22 +153,22 @@ int main(void) {
   if( n3>=n1 && n3>=n2 )
       printf("%f is the largest number.", n3);
 
-  return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
 ```
-``` bash stdin
-11 5 23
+``` text                  stdin
+11 4 2
 ```
-@Rextester.eval_input
+@Rextester.C(false,`@input(1)`)
 
 Welche Verbesserungsmöglichkeit sehen Sie für diesen Lösungsansatz?
 
-| Aspekt                 | Kritik                                       |
-|:-----------------------|:---------------------------------------------|
-| Userinterface          | Es erfolgt keine Prüfung der Eingaben!       |
-| Userinterface          | Das Ausgabeformat ist "unschön".             |
-| Design                 | Die Ausgabe erfolgt in 3 sehr ähnlichen Aufrufen. |
-| Algorithmus            | Es werden 6 Vergleichsoperationen und 3 logische Operationen genutzt. |
+| Aspekt        | Kritik                                                                |
+|:------------- |:--------------------------------------------------------------------- |
+| Userinterface | Es erfolgt keine Prüfung der Eingaben!                                |
+| Userinterface | Das Ausgabeformat ist "unschön".                                      |
+| Design        | Die Ausgabe erfolgt in 3 sehr ähnlichen Aufrufen.                     |
+| Algorithmus   | Es werden 6 Vergleichsoperationen und 3 logische Operationen genutzt. |
 
 Eine Lösung, die die genannten Kritikpunkte adressiert könnte wie folgt
 entworfen werden:
@@ -392,15 +198,15 @@ int main(void) {
   return EXIT_SUCCESS;
 }
 ```
-``` bash stdin
-11 5 A
+``` text                  stdin
+11 4 2
 ```
-@Rextester.eval_input
+@Rextester.C(false,`@input(1)`)
 
 Ein alternativer Ansatz kann mit Hilfe von Makrooperationen umgesetzt werden,
 die eine `MAX`-Methode implementieren.
 
-```cpp
+```cpp                  Compare3ValuesWithMacro.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -421,10 +227,10 @@ int main(void) {
   return EXIT_SUCCESS;
 }
 ```
-``` bash stdin
-11 5 50
+``` text                  stdin
+11 4 2
 ```
-@Rextester.eval_input
+@Rextester.C(false,`@input(1)`)
 
 Darfs auch etwas mehr sein? Wie lösen wir die gleiche Aufgabe für größere Mengen
 von Zahlenwerten $max(n_0, ... n_k)$ ? Entwerfen Sie dazu folgende Funktionen:
@@ -444,20 +250,30 @@ und dann die Häufigkeit des größten Wertes ermittelt.
 #define MINVALUE 5
 #define SAMPLES 50
 
-int * generateRandomArray(int n_samples){
+int * generateRandomArray(){
   int * ptr;
-  //TODO
+  ptr = calloc(SAMPLES, sizeof(*ptr));
+  for (int i = 0; i< SAMPLES; i++){
+      ptr[i] = rand() % (MAXVALUE - MINVALUE + 1) + MINVALUE;
+  }
   return ptr;
 }
 
-int maxValue(int *ptr, int n_samples, int *count){
+int maxValue(int *ptr){
   int max = 0;
-  //TODO
+  for (int i = 0; i< SAMPLES; i++){
+      if (ptr[i] > max) {
+        max = ptr[i];
+      }
+  }
   return max;
 }
 
-void printArray(int *ptr, int n_samples, int maxValue){
-  for (int i = 0; i< n_samples; i++){
+void printArray(int *ptr, int maxValue){
+  for (int i = 0; i< SAMPLES; i++){
+    if ((i>0) && (i%10==0)) {
+      printf("\n");
+    }
     if (ptr[i]!=maxValue){
       printf(" %3d ", ptr[i]);
     }else{
@@ -468,35 +284,25 @@ void printArray(int *ptr, int n_samples, int maxValue){
 
 int main(void){
   int * samples;
-  samples = generateRandomArray(SAMPLES);
-  int max = maxValue(samples, SAMPLES);
-  //int count = 0;
-  //int max = maxValue(samples, SAMPLES, &count);
-  printArray(samples, SAMPLES, max);
-  //printf("\nIm Array wurde %d %d-mal gefunden", max, count);
+  samples = generateRandomArray();
+  int max = maxValue(samples);
+  //int count = 0;     // Aufgabenteil 2
+  //int max = maxValue(samples, &count);
+  printArray(samples, max);
+  printf("\nIm Array wurde %d als Maximum gefunden!", max);
+  free(samples);
   return(EXIT_SUCCESS);
 }
 ```
-@Rextester.eval_params(-Wall -std=gnu11 -o a.out source_file.c -lm)
+@Rextester.C
 
 Aufgabenteil 2: Erweitern Sie die Funktionalität von `maxValue()` um die Rückgabe
-der Häufigkeit des Auftretens des maximalen Wertes.
-
-Mögliche Lösungen könnten wie folgt implmentiert werden:
+der Häufigkeit des Auftretens des maximalen Wertes. Ein Kommilitone schlägt folgende Lösung vor:
 
 ```cpp
-int * generateRandomArray(int n_samples){
-  int * ptr;
-  ptr = calloc(n_samples, sizeof(*ptr));
-  for (int i = 0; i< n_samples; i++){
-      ptr[i] = rand() % (MAXVALUE - MINVALUE + 1) + MINVALUE;
-  }
-  return ptr;
-}
-
-int maxValue(int *ptr, int n_samples, int *count){
+int maxValue(int *ptr, int *count){
   int max = 0;
-  for (int i = 0; i< n_samples; i++){
+  for (int i = 0; i< SAMPLES; i++){
       if (ptr[i] > max) {
         max = ptr[i];
         *count = 0;
@@ -509,7 +315,12 @@ int maxValue(int *ptr, int n_samples, int *count){
 }
 ```
 
+Bewerten Sie diese und entwerfen Sie ggf. eine alternative Implementierung.
+
 ### 2. Sortieren
+
+              {{0-1}}
+********************************************************************************
 
 Lassen Sie uns die Idee der Max-Funktion nutzen, um das Array insgesammt zu
 sortieren. Dazu wird in einer Schleife (Zeile 42) der maximale Wert bestimmt,
@@ -518,7 +329,7 @@ wird.
 
 Welche Nachteile sehen Sie in diesem Konzept?
 
-```cpp                     mathOperations.c
+```cpp                     Duration.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -528,19 +339,19 @@ Welche Nachteile sehen Sie in diesem Konzept?
 #define MINVALUE 5
 #define SAMPLES 1000
 
-int * generateRandomArray(int n_samples){
+int * generateRandomArray(){
   int * ptr;
-  ptr = calloc(n_samples, sizeof(*ptr));
-  for (int i = 0; i< n_samples; i++){
+  ptr = calloc(SAMPLES, sizeof(*ptr));
+  for (int i = 0; i< SAMPLES; i++){
       ptr[i] = rand() % (MAXVALUE - MINVALUE + 1) + MINVALUE;
   }
   return ptr;
 }
 
-int maxValue(int *ptr, int n_samples){
+int maxValue(int *ptr){
   int max = 0;
   int max_index = 0;
-  for (int i = 0; i< n_samples; i++){
+  for (int i = 0; i< SAMPLES; i++){
       if (ptr[i] > max) {
         max = ptr[i];
         max_index = i;
@@ -550,48 +361,34 @@ int maxValue(int *ptr, int n_samples){
   return max;
 }
 
-void printArray(int *ptr, int n_samples){
-  for (int i = 0; i< n_samples; i++){
-    printf("%d ", ptr[i]);
-  }
-  printf("\n");
-}
-
 int main(void){
   int * samples;
   int max = 0;
-  samples = generateRandomArray(SAMPLES);
-  //printArray(samples, SAMPLES);
+  samples = generateRandomArray();
   clock_t start = clock();
   for (int i = 0; i< SAMPLES; i++){
-    max = maxValue(samples, SAMPLES);
+    max = maxValue(samples);
     //printf("%d ", max );
   }
   clock_t end = clock();
   double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 
   printf("Der Rechner benötigt für %d Samples %f Sekunden \n", SAMPLES,cpu_time_used);
-
+  free(samples);
   return(EXIT_SUCCESS);
 }
 ```
-@Rextester.eval
+@Rextester.C
 
 * Das Ursprungsarray wird beim Sortiervorgang zerstört, am Ende umfasst es ausschließlich -1-Einträge
 * Die Ausführungsdauer wird durch `SAMPLES` x `SAMPLES` Vergleichsoperationen bestimmt.
 
 Welche Konsequenz hat dieses Verhalten?
 
-<div class="ct-chart ct-golden-section" id="chart">
-</div>
+********************************************************************************
 
-<script>
-  $.getScript("https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js", function(){
-    let chart = new Chartist.Line('#chart', {
-      labels: [500, 5000, 50000],
-      series: [[0.0003, 0.03, 2.5]]
-  })});
-</script>
+                 {{1-3}}
+********************************************************************************
 
 **BubbleSort**
 
@@ -599,29 +396,33 @@ Die Informatik kennt eine Vielzahl von Sortierverfahren, die unterschiedliche
 Eigenschaften aufweisen. Ein sehr einfacher Ansatz ist BubbleSort, der
 namensgebend die größten oder kleinsten Zahlen Gasblasen gleich aufsteigen lässt.
 
-![BubbleSort](./img/330px-Bubblesort_Animation.gif)<!-- width="60%" -->[^1]
+![BubbleSort](./img/330px-Bubblesort_Animation.gif)<!-- width="50%" -->[^1]
+
+_Bubble-Sort Algorithmus in grafischer Repräsentation_
 
 [^1]: Stummvoll, https://de.wikipedia.org/wiki/Bubblesort#/media/File:Bubblesort_Animation.gif
 
 ```cpp  BubbleSort.c
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define MAXVALUE 100
 #define MINVALUE 5
 #define SAMPLES 20
 
-int * generateRandomArray(int n_samples){
+int * generateRandomArray(){
   int * ptr;
-  ptr = calloc(n_samples, sizeof(*ptr));
+  ptr = calloc(SAMPLES, sizeof(*ptr));
   srand(time(NULL));
-  for (int i = 0; i< n_samples; i++){
+  for (int i = 0; i< SAMPLES; i++){
       ptr[i] = rand() % (MAXVALUE - MINVALUE + 1) + MINVALUE;
   }
   return ptr;
 }
 
-void bubble(int *array, int n_samples) {
+void bubble(int *array) {
+  int n_samples = SAMPLES;
   int temp;
   while(n_samples--){
     for(int i = 1; i <= n_samples; i++){
@@ -634,24 +435,25 @@ void bubble(int *array, int n_samples) {
   }
 }
 
-void printArray(int *ptr, int n_samples){
-  for (int i = 0; i< n_samples; i++){
-    printf("%d ", ptr[i]);
+void printArray(int *ptr){
+  for (int i = 0; i< SAMPLES; i++){
+    if ((i>0) && (i%10==0)) {
+      printf("\n");
+    }
+    printf("%3d ", ptr[i]);
   }
   printf("\n");
 }
 
 int main(void) {
   int * samples;
-  int max = 0;
-  samples = generateRandomArray(SAMPLES);
-
-  bubble(samples, SAMPLES);
-  printArray(samples, SAMPLES);
-
+  samples = generateRandomArray();
+  bubble(samples);
+  printArray(samples);
+  free(samples);
   return(EXIT_SUCCESS);
 }
-```@Rextester.eval
+```@Rextester.C
 
 Worin unterscheidet sich dieser Ansatz von dem vorhergehenden?
 
@@ -662,9 +464,19 @@ von Gauss kann gezeigt werden, dass im Falle der umgekehrt sortierten Liste werd
 
 Welches Optimierungspotential sehen Sie?
 
+********************************************************************************
+
+                 {{2-3}}
+********************************************************************************
+
 In den Code sollte ein Abbruchkriterium integriert werden, wenn während eines
 Durchlaufes keine Änderungen vollzogen werden. Im günstigsten Fall lässt sich
 damit das Verfahren nach einem Durchlauf beenden.
+
+********************************************************************************
+
+                 {{3-4}}
+********************************************************************************
 
 **Quicksort**
 
@@ -680,7 +492,7 @@ Ausgangssituation nach Initialisierung von i und j, das Element rechts (l) ist d
   i                 j
 ```
 
-Nach der ersten Suche in den inneren Schleifen hat i auf einem Element >= l und j auf einem Element <= l gehalten:
+Nach der ersten Suche in den inneren Schleifen hat i auf einem Element $>= l$ und j auf einem Element $<= l$ gehalten:
 
 ```
   e i n b e i s p i e l
@@ -730,11 +542,11 @@ Darauf aufbauend wird der Algorithmus nun auf die beiden Teile "eiebeii" und "sn
 #define MINVALUE 5
 #define SAMPLES 20
 
-int * generateRandomArray(int n_samples){
+int * generateRandomArray(){
   int * ptr;
-  ptr = calloc(n_samples, sizeof(*ptr));
+  ptr = calloc(SAMPLES, sizeof(*ptr));
   srand(time(NULL));
-  for (int i = 0; i< n_samples; i++){
+  for (int i = 0; i< SAMPLES; i++){
       ptr[i] = rand() % (MAXVALUE - MINVALUE + 1) + MINVALUE;
   }
   return ptr;
@@ -767,25 +579,30 @@ void quicksort(int *ptr, int first, int last){
    }
 }
 
-void printArray(int *ptr, int n_samples){
-  for (int i = 0; i< n_samples; i++){
-    printf("%d ", ptr[i]);
+void printArray(int *ptr){
+  for (int i = 0; i< SAMPLES; i++){
+    if ((i>0) && (i%10==0)) {
+      printf("\n");
+    }
+    printf("%3d ", ptr[i]);
   }
   printf("\n");
 }
 
 int main(void) {
   int * samples;
-  samples = generateRandomArray(SAMPLES);
+  samples = generateRandomArray();
   quicksort(samples, 0, SAMPLES);
-  printArray(samples, SAMPLES);
+  printArray(samples);
   return(EXIT_SUCCESS);
 }
-```@Rextester.eval
+```@Rextester.C
 
 Obwohl Quicksort im schlechtesten Fall quadratische Laufzeit hat, ist er in der Praxis einer der schnellsten Sortieralgorithmen
 Die C-Standardbibliothek umfassst in der `stdlib.h` eine Implementierung von quicksort - `qsort()` an. Sie wurde in der vorangegangenen Vorlesung besprochen. Ein Anwendungsbeispiel finden Sie
 im nachfolgenden Abschnitt.
+
+********************************************************************************
 
 ### 3. Suchen
 
@@ -794,7 +611,7 @@ Suchen beschreibt die Identifikation von bestimmten Mustern in Daten. Das Spektr
 Wie würden Sie vorgehen, um in einer sortierten List einen bestimmten Eintrag zu
 finden?
 
-```cpp
+```cpp Search.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -803,10 +620,10 @@ finden?
 #define MINVALUE 5
 #define SAMPLES 20
 
-int * generateRandomArray(int n_samples){
+int * generateRandomArray(){
   int * ptr;
-  ptr = calloc(n_samples, sizeof(*ptr));
-  for (int i = 0; i< n_samples; i++){
+  ptr = calloc(SAMPLES, sizeof(*ptr));
+  for (int i = 0; i< SAMPLES; i++){
       ptr[i] = rand() % (MAXVALUE - MINVALUE + 1) + MINVALUE;
   }
   return ptr;
@@ -816,9 +633,12 @@ int cmpfunc (const void * a, const void * b) {
    return ( *(int*)a - *(int*)b );
 }
 
-void printArray(int *ptr, int n_samples){
-  for (int i = 0; i< n_samples; i++){
-    printf("%d ", ptr[i]);
+void printArray(int *ptr){
+  for (int i = 0; i< SAMPLES; i++){
+    if ((i>0) && (i%10==0)) {
+      printf("\n");
+    }
+    printf("%3d ", ptr[i]);
   }
   printf("\n");
 }
@@ -840,9 +660,10 @@ int binsearch (int *ptr, int links, int rechts, int wert) {
 
 int main (void) {
    int * samples;
-   samples = generateRandomArray(SAMPLES);
+   srand(time(NULL));
+   samples = generateRandomArray();
    qsort(samples, SAMPLES, sizeof(int), cmpfunc);
-   printArray(samples, SAMPLES);
+   printArray(samples);
    int pattern = 36;
    int index = binsearch (samples, 0, SAMPLES-1, pattern);
    if (-1==index){
@@ -852,7 +673,7 @@ int main (void) {
    }
    return(EXIT_SUCCESS);
 }
-```@Rextester.eval
+```@Rextester.C
 
 Die Suchtiefe kann mit $\lceil \log_2 (n+1) \rceil$ bestimmt werden.
 
@@ -888,89 +709,6 @@ $$\pi \approx \frac{count_{in}}{count_{out}}\cdot 4$$
 #include <time.h>
 
 double bestimmePI(unsigned int samples){
-  // ToDo
-  return (double)rand()/RAND_MAX;;
-}
-
-int main(void) {
-  for (int number=5; number<150; number=number+5){
-    printf("n = %3d - Ergebnis = %f, %f\n", number,
-                                       M_PI,
-                                       bestimmePI(number));
-  }
-  return EXIT_SUCCESS;
-}
-```
-``` javascript -Analyse.js
-let samples = data.Result.match(/[0-9.]+/g);
-
-let label;
-let series_1 = [];
-let series_2 = [];
-
-for(let i=0; i<samples.length; i++) {
-  //samples[i] = parseFloat(samples[i]);
-  let value = parseFloat(samples[i]);
-  switch (i % 3)
-  {
-    case 0:  label = value; break;
-    case 1:  series_1.push([label, value]); break;
-    case 2:  series_2.push([label, value]);
-  }
-}
-
-let chart = echarts.init(document.getElementById('pipe_chart'));
-
-let option = {
-  title : {
-    text: 'Abschätzung von pi',
-    subtext: 'Einfluss der SampleZahl n'
-  },
-  toolbox: {
-    show : true,
-    feature : {
-      mark : {show: true},
-      dataZoom : {show: true},
-      dataView : {show: true, readOnly: false},
-      restore : {show: true},
-      saveAsImage : {show: true}
-    }
-  },
-  legend: {
-      data:['MC-Simulation','Pi']
-  },
-  xAxis : [{
-    type : 'value',
-    scale: true,
-    axisLabel : { formatter: '{value}' }
-  }],
-  yAxis : [{
-    type : 'value',
-    scale: true,
-    axisLabel : { formatter: '{value}'}
-  }],
-  series : [{
-    name: 'MC-Simulatio',
-    type: 'line',
-    data: series_1,
-  }, {
-    name: 'Pi',
-    type: 'line',
-    data: series_2,
-  }]
-};
-
-
-chart.setOption(option);
-```
-@Rextester.pipe
-
-<div class="persistent" id="pipe_chart" style="position: relative; width:100%; height:400px;"></div>
-
-Eine mögliche Lösung könnte sich wie folgt darstellen:
-
-```cpp
-double bestimmePI(unsigned int samples){
   double x, y, z;
   int count = 0;
   srand(time(NULL));
@@ -983,4 +721,13 @@ double bestimmePI(unsigned int samples){
      }
   return (double)count/samples*4;
 }
-```
+
+int main(void) {
+  for (int number=5; number<150; number=number+5){
+    printf("n = %3d - Ergebnis = %f, %f\n", number,
+                                       M_PI,
+                                       bestimmePI(number));
+  }
+  return EXIT_SUCCESS;
+}
+```@Rextester.C
