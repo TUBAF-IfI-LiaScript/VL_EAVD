@@ -716,16 +716,16 @@ double bestimmePI(unsigned int samples){
   srand(time(NULL));
   count=0;
   for (int i=0; i<samples; i++) {
-     x = (double)rand()/RAND_MAX;
-     y = (double)rand()/RAND_MAX;
+     x = rand() / (double) RAND_MAX;
+     y = rand() / (double) RAND_MAX;
      z = x*x+y*y;
-     if (z<=1) count++;
+     if (x*x+y*y<1) count++;
      }
   return (double)count/samples*4;
 }
 
 int main(void) {
-  for (int number=5; number<150; number=number+5){
+  for (int number=5; number<15000; number=number+50){
     printf("%3d, %f, %f\n", number,
                             M_PI,
                             bestimmePI(number));
@@ -735,15 +735,16 @@ int main(void) {
 ```
 ```js -Visualization
 var i = 0;
-var n = [];
-var pi_est = [];
-var pi = [];
-var allTextLines = data.Result.split(/\r?\n/);
-for (i=0; i<allTextLines.length; i++){
-  var values = allTextLines[i].split(', ');
-  n.push(parseInt(values[0]));
-  pi.push(parseFloat(values[1]));
-  pi_est.push(parseFloat(values[2]));
+var Lines = data.Result.split("\n");
+var n = new Array(Lines.length).fill(0);
+var pi_est = new Array(Lines.length).fill(0);
+var pi = new Array(Lines.length).fill(0);
+
+for (i=0; i<Lines.length; i++){
+  var values = Lines[i].split(', ');
+  n[i] = parseInt(values[0], 10);
+  pi[i] = parseFloat(values[1]);
+  pi_est[i] = parseFloat(values[2]);
 }
 
 var layout = {
@@ -754,7 +755,7 @@ var layout = {
     },
     showlegend: true,
     legend: { x: 1, xanchor: 'right', y: 1},
-    tracetoggle: false
+    tracetoggle: false,
 };
 
 var trace1 = {
@@ -772,7 +773,7 @@ var trace2 = {
 };
 
 Plotly.newPlot('visualizationPi', [trace1, trace2], layout);
-
+console.log("Aus Maus")
 ```@Rextester._eval_(@uid, @C,`@0`,`@1`,`-Wall -std=gnu99 -O2 -o a.out source_file.c`,`@input(1)`)
 
 <div id="visualizationPi"></div>
