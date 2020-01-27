@@ -738,8 +738,8 @@ var i = 0;
 var n = [];
 var pi_est = [];
 var pi = [];
-var allTextLines = data.Result.split("\n");
-for (i=0; i<(allTextLines.length); i++){
+var allTextLines = data.Result.split(/\r?\n/);
+for (i=0; i<allTextLines.length; i++){
   var values = allTextLines[i].split(', ');
   n.push(parseInt(values[0]));
   pi.push(parseFloat(values[1]));
