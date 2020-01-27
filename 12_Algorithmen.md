@@ -8,6 +8,8 @@ narrator: Deutsch Female
 
 import: https://raw.githubusercontent.com/liaScript/rextester_template/master/README.md
 
+script:   https://cdn.plot.ly/plotly-latest.min.js
+
 -->
 
 # Vorlesung XII - Anwendung auf abstrakte Algorithmen
@@ -724,10 +726,53 @@ double bestimmePI(unsigned int samples){
 
 int main(void) {
   for (int number=5; number<150; number=number+5){
-    printf("n = %3d - Ergebnis = %f, %f\n", number,
-                                       M_PI,
-                                       bestimmePI(number));
+    printf("%3d, %f, %f\n", number,
+                            M_PI,
+                            bestimmePI(number));
   }
   return EXIT_SUCCESS;
 }
-```@Rextester.C
+```
+```js -Visualization
+var i = 0;
+var n = [];
+var pi_est = [];
+var pi = [];
+var allTextLines = data.Result.split("\n");
+for (i=0; i<(allTextLines.length); i++){
+  var values = allTextLines[i].split(', ');
+  n.push(parseInt(values[0]));
+  pi.push(parseFloat(values[1]));
+  pi_est.push(parseFloat(values[2]));
+}
+
+var layout = {
+     xaxis: {
+          title: {
+              text: 'Number of samples',
+                 }
+    },
+    showlegend: true,
+    legend: { x: 1, xanchor: 'right', y: 1},
+    tracetoggle: false
+};
+
+var trace1 = {
+  x: n,
+  y: pi_est,
+  name: 'Annaeherung von Pi',
+  mode: 'markers'
+};
+
+var trace2 = {
+  x: n,
+  y: pi,
+  name: 'Pi',
+  mode: 'line'
+};
+
+Plotly.newPlot('visualizationPi', [trace1, trace2], layout);
+
+```@Rextester._eval_(@uid, @C,`@0`,`@1`,`-Wall -std=gnu99 -O2 -o a.out source_file.c`,`@input(1)`)
+
+<div id="visualizationPi"></div>
