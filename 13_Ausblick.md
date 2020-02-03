@@ -1,212 +1,14 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich
-email:    zug@ovgu.de   & andre.dietrich@ovgu.de
-version:  0.0.1
+author:   Sebastian Zug & André Dietrich & Galina Rudolf
+email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 
+import: https://raw.githubusercontent.com/liaScript/rextester_template/master/README.md
 
-script: https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js
-
-link:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css
-
-script:  https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts-en.min.js
-
-script:   https://felixhao28.github.io/JSCPP/dist/JSCPP.es5.min.js
-
-
-@JSCPP.__eval
-<script>
-  try {
-    var output = "";
-    JSCPP.run(`@0`, `@1`, {stdio: {write: s => { output += s }}});
-    output;
-  } catch (msg) {
-    var error = new LiaError(msg, 1);
-
-    try {
-        var log = msg.match(/(.*)\nline (\d+) \(column (\d+)\):.*\n.*\n(.*)/);
-        var info = log[1] + " " + log[4];
-
-        if (info.length > 80)
-          info = info.substring(0,76) + "..."
-
-        error.add_detail(0, info, "error", log[2]-1, log[3]);
-    } catch(e) {}
-
-    throw error;
-    }
-</script>
-@end
-
-
-@JSCPP.eval: @JSCPP.__eval(@input, )
-
-@JSCPP.eval_input: @JSCPP.__eval(@input,`@input(1)`)
-
-@output: <pre class="lia-code-stdout">@0</pre>
-
-@output_: <pre class="lia-code-stdout" hidden="true">@0</pre>
-
-
-script:   https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js
-
-@Rextester.__eval
-<script>
-//var result = null;
-var error  = false;
-
-console.log = function(e){ send.lia("log", JSON.stringify(e), [], true); };
-
-function grep_(type, output) {
-  try {
-    let re_s = ":(\\d+):(\\d+): "+type+": (.+)";
-
-    let re_g = new RegExp(re_s, "g");
-    let re_i = new RegExp(re_s, "i");
-
-    let rslt = output.match(re_g);
-
-    let i = 0;
-    for(i = 0; i < rslt.length; i++) {
-        let e = rslt[i].match(re_i);
-
-        rslt[i] = { row : e[1]-1, column : e[2], text : e[3], type : type};
-    }
-    return [rslt];
-  } catch(e) {
-    return [];
-  }
-}
-
-$.ajax ({
-    url: "https://rextester.com/rundotnet/api",
-    type: "POST",
-    timeout: 10000,
-    data: { LanguageChoice: @0,
-            Program: `@input`,
-            Input: `@1`,
-            CompilerArgs : @2}
-    }).done(function(data) {
-        if (data.Errors == null) {
-            let warnings = grep_("warning", data.Warnings);
-
-            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
-
-            if(data.Warnings)
-              stats = "\n-------Warn-------\n"+data.Warnings + stats;
-
-            send.lia("log", data.Result+stats, warnings, true);
-            send.lia("eval", "LIA: stop");
-
-        } else {
-            let errors = grep_("error", data.Errors);
-
-            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
-
-            if(data.Warning)
-              stats = data.Errors + data.Warnings + stats;
-            else
-              stats = data.Errors + data.Warnings + stats;
-
-            send.lia("log", stats, errors, false);
-            send.lia("eval", "LIA: stop");
-        }
-    }).fail(function(data, err) {
-        send.lia("log", err, [], false);
-        send.lia("eval", "LIA: stop");
-    });
-
-"LIA: wait"
-</script>
-@end
-
-
-@Rextester.eval: @Rextester.__eval(6, ,"-Wall -std=gnu99 -O2 -o a.out source_file.c")
-
-@Rextester.eval_params: @Rextester.__eval(6, ,"@0")
-
-@Rextester.eval_input: @Rextester.__eval(6,`@input(1)`,"-Wall -std=gnu99 -O2 -o a.out source_file.c")
-
-
-
-@Rextester.pipe
-<script>
-//var result = null;
-var error  = false;
-
-console.log = function(e){ send.lia("log", JSON.stringify(e), [], true); };
-
-function grep_(type, output) {
-  try {
-    let re_s = ":(\\d+):(\\d+): "+type+": (.+)";
-
-    let re_g = new RegExp(re_s, "g");
-    let re_i = new RegExp(re_s, "i");
-
-    let rslt = output.match(re_g);
-
-    let i = 0;
-    for(i = 0; i < rslt.length; i++) {
-        let e = rslt[i].match(re_i);
-
-        rslt[i] = { row : e[1]-1, column : e[2], text : e[3], type : type};
-    }
-    return [rslt];
-  } catch(e) {
-    return [];
-  }
-}
-
-$.ajax ({
-    url: "https://rextester.com/rundotnet/api",
-    type: "POST",
-    timeout: 10000,
-    data: { LanguageChoice: 6,
-            Program: `@input(0)`,
-            Input: `@1`,
-            CompilerArgs : "-Wall -std=gnu99 -O2 -o a.out source_file.c"}
-    }).done(function(data) {
-        if (data.Errors == null) {
-            let warnings = grep_("warning", data.Warnings);
-
-            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
-
-            if(data.Warnings)
-              stats = "\n-------Warn-------\n"+data.Warnings + stats;
-
-            send.lia("log", data.Result+stats, warnings, true);
-
-            @input(1)
-
-            send.lia("eval", "LIA: stop");
-
-        } else {
-            let errors = grep_("error", data.Errors);
-
-            let stats = "\n-------Stat-------\n"+data.Stats.replace(/, /g, "\n");
-
-            if(data.Warning)
-              stats = data.Errors + data.Warnings + stats;
-            else
-              stats = data.Errors + data.Warnings + stats;
-
-            send.lia("log", stats, errors, false);
-            send.lia("eval", "LIA: stop");
-        }
-    }).fail(function(data, err) {
-        send.lia("log", err, [], false);
-        send.lia("eval", "LIA: stop");
-    });
-
-"LIA: wait"
-</script>
-@end
-
-script:   https://cdn.rawgit.com/davidedc/Algebrite/master/dist/algebrite.bundle-for-browser.js
-
-@algebrite.eval:    <script> Algebrite.run(`@input`) </script>
+script:   https://cdn.plot.ly/plotly-latest.min.js
 
 -->
 
@@ -303,13 +105,15 @@ int main(void)
 ```
 
 **Schritt 1 - Kompilieren**
-``` bash @output
+
+```bash
 gcc main.c -o main.o -c
 gcc functions.c -o functions.o -c
 ```
 
 **Schritt 2 - Linken**
-``` bash @output
+
+```bash
 gcc -o myprog main.o module.o
 ```
 
@@ -337,7 +141,6 @@ gibt es weitere, die auf bestimmten Betriebssysteme zugeschnitten sind oder in
 spezifischen Einsatzfeldern Anwendung finden.
 
 
-### GTK
 
 GTK+ (GIMP-Toolkit) ist ein freies GUI-Toolkit unter der LGPL. GTK+ enthält viele Steuerelemente, mit denen sich grafische Benutzeroberflächen (GUI) für Software erstellen lassen.
 
@@ -507,7 +310,7 @@ Es erzeugt keinen Programmcode für Ereignisse, sondern eine XML-Datei und – f
 
 ## 2. C und C++, dass klingt doch sehr ähnlich
 
-```cpp
+```cpp  HelloWorld.cpp
 #include <iostream>
 using namespace std;
 
@@ -517,7 +320,7 @@ int main()
     return 0;
 }
 ```
-@Rextester.__eval(7, ,"-Wall -std=c++14 -O2 -o a.out source_file.cpp")
+@Rextester.CPP
 
 Was ist jetzt das besondere? Im Beispiel ändert sich lediglich die API der Ausgaben und die _includes_ haben kein ".h" mehr?
 
@@ -547,7 +350,7 @@ Oft geäußerte Kritik an der Sprache umfasst beispielsweise:
 
 Wo sind wir? C erlaubt es abstrakte Datentypen für einen spezifischen Anwendungsfall zu entwickeln, diese mit ener dosierten Lebensdauer und Geltungsbereich zu versehen.
 
-```cpp
+```cpp  classes.cpp
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -569,7 +372,7 @@ int main(void) {
   return EXIT_SUCCESS;
 }
 ```
-@Rextester.eval
+@Rextester.CPP
 
 Was wollen wir gern erreichen:
 
@@ -605,12 +408,12 @@ Ein Zugriffsbezeichner ist eines der folgenden drei Schlüsselwörter: `private`
 
 **Einführungsbeispiel**
 
-```cpp
+```cpp    Rectangle.cpp
 #include <iostream>
 using namespace std;
 
 class Rectangle {
-  private:     // nicht nötig, default Konfiguration
+  private:     
     int width, height;
   public:
     void set_values (int,int);          // Deklaration
@@ -629,7 +432,7 @@ int main () {
   return 0;
 }
 ```
-@Rextester.__eval(7, ,"-Wall -std=c++14 -O2 -o a.out source_file.cpp")
+@Rextester.CPP
 
 Folgender Code zeigt eine beispielhafte Implementierung einer Klasse "Rectangle".
 Die einzigen  *member* von rect, auf die von außerhalb der Klasse nicht zugegriffen werden kann, sind _width_ und _height_, da sie über einen privaten Zugriff verfügen und nur von anderen Mitgliedern derselben Klasse aus referenziert werden können.
@@ -663,12 +466,12 @@ Rückgabewert!
 Ändern Sie das nachfolgende Beispiel ab, so dass wir statt `set_values` einen
 Konstruktor benutzen!
 
-```cpp
+```cpp     Constructor.cpp
 #include <iostream>
 using namespace std;
 
 class Rectangle {
-  private:     // nicht nötig, default Konfiguration
+  private:     
     int width, height;
   public:
     void set_values (int,int);          // Deklaration
@@ -687,7 +490,7 @@ int main () {
   return 0;
 }
 ```
-@Rextester.__eval(7, ,"-Wall -std=c++14 -O2 -o a.out source_file.cpp")
+@Rextester.CPP
 
 Reicht uns aber eine Initialisierungsfunktion? Braucht unser Programm möglicherweise
 auch Default-Initalisierungswerte, falls height und width zunächst unbekannt sind?
@@ -696,12 +499,12 @@ der Definition aktiviert werden. Diese Funktionalität setzt man mit dem "Überl
 einer Funktion" um, die hier beispielhaft für Konstruktoren gezeigt wird, aber auf
 beliebige Anwendung finden kann.
 
-```cpp
+```cpp    OverloadingConstructor.cpp
 #include <iostream>
 using namespace std;
 
 class Rectangle {
-  private:     // nicht nötig, default Konfiguration
+  private:     
     int width, height;
   public:
     Rectangle (int,int);
@@ -727,7 +530,7 @@ int main () {
   return 0;
 }
 ```
-@Rextester.__eval(7, ,"-Wall -std=c++14 -O2 -o a.out source_file.cpp")
+@Rextester.CPP
 
 
 **Überladen von Operatoren**
@@ -785,7 +588,7 @@ int main () {
   return 0;
 }
 ```
-@Rextester.__eval(7, ,"-Wall -std=c++14 -O2 -o a.out source_file.cpp")
+@Rextester.CPP
 
 Der Funktionsoperator `+` der Klasse `Rectangle` überladen den Additionsoperator (+) für diesen Typ. Nach der Deklaration kann diese Funktion entweder implizit mit dem Operator oder explizit mit ihrem Funktionsnamen aufgerufen werden:
 
@@ -800,7 +603,7 @@ Auf der Basis der Kapselung von Funktionen, Daten und Operatoren können
 nun sogenannte Vererbungen realisiert werden. Dabei werden die Eigenschaften
 eines Objekttypes an hierachisch darunterliegende weitergegeben.
 
-```cpp
+```cpp     Inheritance.cpp
 #include <iostream>
 using namespace std;
 
@@ -834,7 +637,7 @@ int main () {
   return 0;
 }
 ```
-@Rextester.__eval(7, ,"-Wall -std=c++14 -O2 -o a.out source_file.cpp")
+@Rextester.CPP
 
 Welche Probleme sehen Sie bei der Vererbung?
 
@@ -843,7 +646,7 @@ Welche Probleme sehen Sie bei der Vererbung?
 <!--
 style="width: 80%; max-width: 460px; display: block; margin-left: auto; margin-right: auto;"
 -->
-````
+```ascii
                   .- 100s -. .-- 2s --. .- 100s -.
                   |        | |        | |        |
                   |        v |        v |        v
@@ -906,6 +709,6 @@ void loop() {
 
 ![Welcome](./img/Mikrocontroller.jpg)<!-- width="50%" -->
 
-## That's alll
+## That's all!
 
 Vielen Dank für Ihre Teilnahme an der Veranstaltung! Viel Erfolg bei der Klausur!
