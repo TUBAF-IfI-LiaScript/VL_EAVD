@@ -127,11 +127,15 @@ Worin unterscheidet sich der Programmablauf hinter einem Graphical User Interfac
 
 [^1]: PellesC IDE Dokumentation
 
+![Schreibtischmetapher](./img/Schreibtischmetapher_Windows.png)<!-- width="80%" -->[^2]
+
+[^2]: Wikipedia, Autor unbekannt, https://de.wikipedia.org/wiki/Datei:Schreibtischmetapher_Windows_1.x.png
+
 Was bedeutet die Idee der eventgesteuerten Programmabarbeitung?
 
-![EventDrivenGUI](./img/eventloop.png)<!-- width="70%" -->[^2]
+![EventDrivenGUI](./img/eventloop.png)<!-- width="70%" -->[^3]
 
-[^2]: http://krashan.ppa.pl/mph/event-driven-programming-notifications
+[^3]: http://krashan.ppa.pl/mph/event-driven-programming-notifications
 
 
 Realisiert werden GUI mit Hilfe aufwändiger GUI-Toolkits, Programmbibliotheken, die zur Programmierung der Darstellung und Interaktion in grafischen Benutzeroberflächen dienen. Dafür stellt ein GUI-Toolkit einen Satz an Steuerelementen (Widgets) zur Verfügung.
