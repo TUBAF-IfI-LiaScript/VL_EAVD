@@ -17,14 +17,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: docker://pandoc/latex:2.9
         with: 
-          args: |
-            --toc
-            --top-level-division=chapter 
-            -V geometry:margin=2cm 
-            -V linkcolor:blue 
-            --latex-engine=xelatex 
-            --output course.pdf 
-            *.md
+          args: "--latex-engine=xelatex --output course.pdf *.md"
       - uses: actions/upload-artifact@master
         with:
           name: course.pdf
