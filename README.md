@@ -97,12 +97,12 @@ Die roten Punkte stellen die Verteilung der Wochenendmessungen der vergangenen W
 
 **Dozenten**
 
-| Name          | Email                                   |
-|:------------- |:--------------------------------------- |
-| Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de |
-| Galina Rudolf | galina.rudolf@informatik.tu-freiberg.de |
-| ???           | @student.tu-freiberg.de                 |
-| ???           | @student.tu-freiberg.de                 |
+| Name            | Email                                                  |
+|:--------------- |:------------------------------------------------------ |
+| Sebastian Zug   | sebastian.zug@informatik.tu-freiberg.de                |
+| Galina Rudolf   | galina.rudolf@informatik.tu-freiberg.de                |
+| Nico Sonack     | nico.sonack@student.tu-freiberg.de                     |
+| Baldur Paulwitz | baldur-heinrich-eckart.paulwitz@student.tu-freiberg.de |
 
 **Übungen**
 
