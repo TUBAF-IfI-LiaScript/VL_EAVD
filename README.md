@@ -15,10 +15,8 @@ import: https://github.com/liascript/CodeRunner
 
 # Vorlesung Prozedurale Programmierung
 
-![C logo](img/logo.png)
-
 See the interactive version at
-[https://LiaScript.github.io](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/liaScript/CCourse/master/README.md)
+[https://LiaScript.github.io](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/VL_ProzeduraleProgrammierung/master/README.md)
 
 Der vorliegende C-Kurs wird seit dem Wintersemester 2018/19 an der TU Bergakademie
 Freiberg für die Veranstaltung "Prozedurale Programmierung" genutzt und auf der Basis von LiaScript realisiert. Die
@@ -93,7 +91,7 @@ Hier lassen sich dann die eigentlichen "Untersuchungen" realisieren und zum Beis
 
 Die roten Punkte stellen die Verteilung der Wochenendmessungen der vergangenen Woche dar, während die blauen Kreuze die Wochentage illustrieren. Dunkelheit wird durch einen Wert nahe 1023 ausgedrückt, während helle Messituationen durch kleine Werte dargestellt werden.
 
-Lust auf mehr?
+> Lust auf mehr?
 
 ## Organisation
 
@@ -158,7 +156,7 @@ imt main() {
 	return 0;
 }
 ```
-
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 ## Literatur
 
@@ -216,17 +214,16 @@ selbst anzugehen.
 
 *******************************************************************************
 
-
 ## "C und C++ sind schwierig zu erlernen"
 
-> Viele haben bei uns wegen dem Info-Grundlagenmodul gewechselt. Allerdings
-> hängt das auch von dir und deinem Talent ab. Das Tempo ist rasant. Jede Art
-> von Vorerfahrung hilft dir eigentlich sehr. Also wenn du noch Zeit hast vorm
-> Studienbeginn, schnapp dir ein gutes Buch zur gelehrten Sprache, und fange
-> schonmal bissl an kleine Sachen zu programmieren." _(Foreneintrag)_
+> _Viele haben bei uns wegen dem Info-Grundlagenmodul gewechselt. Allerdings_
+> _hängt das auch von dir und deinem Talent ab. Das Tempo ist rasant. Jede Art_
+> _von Vorerfahrung hilft dir eigentlich sehr. Also wenn du noch Zeit hast vorm_
+> _Studienbeginn, schnapp dir ein gutes Buch zur gelehrten Sprache, und fange_
+> _schonmal bissl an kleine Sachen zu programmieren._ (Foreneintrag)
 >
-> Ich habe es grade irgendwie selbst gelöst, aber keine Ahnung warum es
-> funktioniert hat. _(Foreneintrag)_
+> _Ich habe es grade irgendwie selbst gelöst, aber keine Ahnung warum es_
+> _funktioniert hat. _(Foreneintrag)_
 
 Herausforderungen:
 
@@ -234,19 +231,21 @@ Herausforderungen:
 * Penible Beachtung der Syntax
 * Ungewohnte Arbeitsmittel
 
-# Wie können Sie zum Gelingen der Veranstaltung beitragen?
+## Wie können Sie zum Gelingen der Veranstaltung beitragen?
 
 * Stellen Sie Fragen, seinen Sie kommunikativ!
+
+> Hinweis auf OPAL Forum!
+
 * Organisieren Sie sich in Arbeitsgruppen!
-* Experimentieren Sie mit verschiedenen Entwicklungsumgebung um "Ihren Editor"
-  zu finden
+
+> Hinweis auf Repl.it
+
 * Machen Sie Verbesserungsvorschläge für die Vorlesungsfolien!
 
-![Atom IDE Screenshot](./img/screenShotAtom.png)<!-- width="100%" -->
+Link auf den GitHub: https://github.com/SebastianZug/VL_ProzeduraleProgrammierung/
 
-Link auf den GitHub: https://github.com/liaScript/CCourse
+## Und wenn Sie dann immer noch programmieren wollen ...
 
-# Und wenn Sie dann immer noch programmieren wollen ...
-
-![WALL-E](./img/BAF_bots.png)<!--
+![WALL-E](./images/00_Readme/BAF_bots.png)<!--
 style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
