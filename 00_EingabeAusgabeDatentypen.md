@@ -299,7 +299,7 @@ char s[] = "Eine kurze Zeichenkette";
 > **Achtung:** Anders als bei einigen anderen Programmiersprachen unterscheidet
 > C zwischen den verschiedenen Anführungsstrichen.
 
-![C logo](img/ASCII_Zeichensatz.jpeg)<!--
+![C logo](./images/00_EinAusgabeDatentypen/ASCII_Zeichensatz.jpeg)<!--
 style=" width: 80%;
         max-width: 600px;
         min-width: 400px;
@@ -395,7 +395,7 @@ ganzzahlinen Datentypen sind in `limits.h` definiert, z.B.
 > einer Berechnung für den gültigen Zahlenbereich zu groß ist, um noch richtig
 > interpretiert werden zu können.
 
-![instruction-set](./img/2Komplement.png)<!--
+![instruction-set](./images/00_EinAusgabeDatentypen/2Komplement.png)<!--
 style=" width: 80%;
         max-width: 500px;
         min-width: 250px;
@@ -810,7 +810,7 @@ int main(void) {
 
 **Warnings mit PellesC**
 
-![PellesC Nützlichkeit von Warnings](img/PellesCWarnings.jpeg)<!--
+![PellesC Nützlichkeit von Warnings](./images/00_EinAusgabeDatentypen/PellesCWarnings.jpeg)<!--
 style=" width: 100%;
         max-width: 800px;
         min-width: 400px;
@@ -841,7 +841,7 @@ style=" width: 100%;
 **Zeilennummern**
 
 {{2}}
-![PellesCLineNumbers.jpeg](img/PelleCLineNumbers.jpeg)<!--
+![PellesCLineNumbers.jpeg](./images/00_EinAusgabeDatentypen/PelleCLineNumbers.jpeg)<!--
 style=" width: 100%;
         max-width: 800px;
         min-width: 400px;
@@ -856,7 +856,7 @@ style=" width: 100%;
 Ausgabefunktionen wurden bisher genutzt, um den Status unserer Programme zu
 dokumentieren. Nun soll dieser Mechanismus systematisiert und erweitert werden.
 
-![EVA-Prinzip](img/EVA-Prinzip.png)<!--
+![EVA-Prinzip](./images/00_EinAusgabeDatentypen/EVA-Prinzip.png)<!--
 style=" width: 100%;
         max-width: 600px;
         min-width: 400px;
