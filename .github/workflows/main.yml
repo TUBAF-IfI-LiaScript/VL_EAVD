@@ -1,23 +1,41 @@
-# This is a basic workflow to help you get started with Actions
+# GitHub Action, die aus den LiaScript-Materialien des Wintersemester 2020/21 ein
+# Skript generiert
 
 name: GeneratePdf
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches:
+      - master
 
 jobs:
   convert_via_pandoc:
     runs-on: ubuntu-18.04
+    container:
+      image: docker://mirisbowring/texlive_ctan_full:2019
     steps:
-      - uses: actions/checkout@v2
-      - uses: docker://pandoc/latex:1.9
-        with: 
-          args: "--latex-engine=xelatex --output course.pdf *.md"
+      - name: Check out current repository
+        uses: actions/checkout@v2
+        with:
+          ref: master
+        # Ausführen des Parsers, der bestimmte Elemente im LiaCode entfernt
+      - name: Run preprocessing
+        run : |
+          mkdir output
+          python3 .github/workflows/preprocessing.py
+        # Installation der notwendigen Pandoc tools
+      - name: Install pandoc
+        run: |
+          sudo apt install pandoc
+      # Generierungsprozess
+      - name: Run pandoc markdown to tex
+        run: |
+          pandoc --toc --top-level-division=chapter -V linkcolor:blue --pdf-engine=xelatex -f markdown -t latex -o output/script.tex *.mdx
+      - name: Run pandoc markdown to pdf
+        run: |
+          pandoc --toc --top-level-division=chapter -V linkcolor:blue --pdf-engine=xelatex -o output/script.pdf *.mdx
+      # Speichern als Artifact
       - uses: actions/upload-artifact@master
         with:
-          name: course.pdf
+          name: output
+          path: output
