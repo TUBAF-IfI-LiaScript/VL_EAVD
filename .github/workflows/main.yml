@@ -30,7 +30,7 @@ jobs:
       # Generierungsprozess
       - name: Run pandoc markdown to tex
         run: |
-          pandoc --toc --top-level-division=chapter -V linkcolor:blue --pdf-engine=xelatex -f markdown -t latex -o output/script.tex *.mdx
+          pandoc --toc --top-level-division=chapter -V linkcolor:blue --pdf-engine=xelatex --listings -f markdown -t latex -o output/script.tex *.mdx
       - name: Run pandoc markdown to pdf
         run: |
           pandoc --toc --top-level-division=chapter -V linkcolor:blue --pdf-engine=xelatex --listings -o output/script.pdf *.mdx
