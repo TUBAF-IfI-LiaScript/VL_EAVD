@@ -2,7 +2,7 @@ import glob, os
 import shutil
 import re
 
-blackList = ["{{", "******", "@Rextester", "@Tau". "@LIA.eval"]
+blackList = ["{{", "******", "@Rextester", "@Tau", "@LIA.eval"]
 
 for file in glob.glob("*.md"):
     if file != "README.md":
