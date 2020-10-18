@@ -6,7 +6,7 @@ version:  1.0.1
 language: de
 narrator: Deutsch Female
 
-comment: C-Kurs für Nicht-Informatiker
+comment: Einführung in die Programmierung für Nicht-Informatiker
 logo: ./img/LogoCodeExample.png
 
 import: https://github.com/liascript/CodeRunner
@@ -15,9 +15,6 @@ import: https://github.com/liascript/CodeRunner
 
 # Vorlesung Prozedurale Programmierung
 
-See the interactive version at
-[https://LiaScript.github.io](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/VL_ProzeduraleProgrammierung/master/README.md)
-
 Der vorliegende C-Kurs wird seit dem Wintersemester 2018/19 an der TU Bergakademie
 Freiberg für die Veranstaltung "Prozedurale Programmierung" genutzt und auf der Basis von LiaScript realisiert. Die
 Veranstaltung richtet sich an Nicht-Informatiker aus verschiedenen
@@ -25,6 +22,8 @@ ingenieurwissenschaftlichen Disziplinen mit keinen oder geringen
 Programmierkenntnissen. Kern der Lösung ist die Möglichkeit Code direkt in der
 Webseite auszuführen und auch Änderungen vorzunehmen, die dann in einem
 "Versionssystem light" verfügbar sind.
+
+Die interaktive Version dieses Kurses ist unter [LiaScript](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/VL_ProzeduraleProgrammierung/master/README.md) einzusehen.
 
 
 ## Zielstellung
@@ -108,7 +107,7 @@ Die roten Punkte stellen die Verteilung der Wochenendmessungen der vergangenen W
 
 Die Übungen vertiefen das erlernte anhand praktischer Programmieraufgaben. Dabei werden zunächst die Grundlagen aus C und C++ vermittelt und dann im Januar kleinere Experimente mit einem Mikrocontroller realisiert.
 
-> **Ist jemand noch nicht für die Übungen eingeschrieben?**
+> Ist jemand noch nicht für die Übungen eingeschrieben?
 
 **Zeitaufwand und Engagement**
 
