@@ -2,7 +2,7 @@ import glob, os
 import shutil
 import re
 
-blackList = ["{{", "******", "@Rextester", "@Tau"]
+blackList = ["{{", "******", "@Rextester", "@Tau". "@LIA.eval"]
 
 for file in glob.glob("*.md"):
     if file != "README.md":
@@ -21,7 +21,7 @@ for file in glob.glob("*.mdx"):
 
     with open(file, "w") as outfile:
         if file.endswith("00_EingabeAusgabeDatentypen.mdx"):  # insert metadata for pandoc in first md file
-            title = "**C# Kurs TU Freiberg**"
+            title = "**Procedurale Programmierung - TU Freiberg**"
             outfile.write(f"---\ntitle: |\n  {title}\n  https://github.com/SebastianZug/VL_Softwareentwicklung/\nauthor:\n")
             with open(".github/workflows/authors.txt", "r") as authors:  # read in authors and write them into the yaml code
                 for line in authors:
