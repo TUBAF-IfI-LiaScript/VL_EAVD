@@ -432,7 +432,7 @@ Ganzzahlüberläufe in der fehlerhaften Bestimmung der Größe eines
 Puffers oder in der Adressierung eines Feldes können es einem Angreifer
 ermöglichen den Stack zu überschreiben.
 
-####Fließkommazahlen
+#### Fließkommazahlen
 
 Fließkommazahlen sind Zahlen mit Nachkommastellen (reelle Zahlen).
 Im Gegensatz zu Ganzzahlen gibt es bei den Fließkommazahlen keinen Unterschied
@@ -530,6 +530,8 @@ der selben Architektur durchaus variieren!
 
 Zahlenliterale können in C mehr als Ziffern umfassen!
 
+| Gruppe                | zulässige Zeichen                     |
+| --------------------- | --------------------------------------|
 |*decimal-digits*       |`0` `1` `2` `3` `4` `5` `6` `7` `8` `9`|
 |*octal-prefix*         |`0`                                    |
 |*octal-digits*         |`0` `1` `2` `3` `4` `5` `6` `7`        |

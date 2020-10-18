@@ -33,7 +33,7 @@ jobs:
           pandoc --toc --top-level-division=chapter -V linkcolor:blue --pdf-engine=xelatex -f markdown -t latex -o output/script.tex *.mdx
       - name: Run pandoc markdown to pdf
         run: |
-          pandoc --toc --top-level-division=chapter -V linkcolor:blue --pdf-engine=xelatex -o output/script.pdf *.mdx
+          pandoc --toc --top-level-division=chapter -V linkcolor:blue --pdf-engine=xelatex --listings -o output/script.pdf *.mdx
       # Speichern als Artifact
       - uses: actions/upload-artifact@master
         with:
