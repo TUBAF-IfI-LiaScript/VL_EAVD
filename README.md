@@ -23,8 +23,7 @@ Programmierkenntnissen. Kern der Lösung ist die Möglichkeit Code direkt in der
 Webseite auszuführen und auch Änderungen vorzunehmen, die dann in einem
 "Versionssystem light" verfügbar sind.
 
-Die interaktive Version dieses Kurses ist unter [LiaScript](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/VL_ProzeduraleProgrammierung/master/README.md) einzusehen.
-
+Die interaktive Version dieses Kurses ist unter [LiaScript](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/VL_ProzeduraleProgrammierung/master/README.md) einz
 
 ## Zielstellung
 
@@ -92,7 +91,24 @@ Die roten Punkte stellen die Verteilung der Wochenendmessungen der vergangenen W
 
 > Lust auf mehr?
 
-## Organisation
+> Interaktive Session: Wer von Ihnen hat bereits Programmiererfahrung?
+
+## Strukurierung der Veranstaltung
+
+| Nr. | Datum      | Inhalt                            | Link |
+|:--- | ---------- | --------------------------------- | ---- |
+| 0   | 20.10.2020 | Einführung                        |      |
+| 1   |            | Eingabe/Ausgabe, Datentypen       |      |
+| 2   |            | Operatoren                        |      |
+| 3   |            | Kontrollstrukturen                |      |
+| 4   |            | Funktionen & Zeiger               |      |
+| 5   |            | Komplexe Datentypen               |      |
+| 6   |            | Objektorientierter Programmierung |      |
+| 7   |            | Klassen                           |      |
+| 8   |            | Vererbung                         |      |
+
+
+## Organisatorisches
 
 **Dozenten**
 
@@ -116,11 +132,9 @@ Der Zeitaufwand beträgt 180h und setzt sich zusammen aus 60h Präsenzzeit und
 Lehrveranstaltungen, die eigenständige Lösung von Übungsaufgaben sowie die
 Prüfungsvorbereitung.
 
-Sie müssen, insbesondere wenn Sie noch keine Programmiererfahrung haben, ggf. deutlich mehr Zeit in den Kurs investieren. Dies macht gemeinsam mehr Spass als allein!
+Sie müssen, insbesondere wenn Sie noch keine Programmiererfahrung haben, ggf. deutlich mehr Zeit in den Kurs investieren. Dies macht gemeinsam mehr Spaß als allein!
 
-> Interaktive Session: Wer von Ihnen hat bereits Programmiererfahrung?
-
-**Vorlesungsmaterialien**
+### Vorlesungsmaterialien
 
 Die Vorlesungsunterlagen selbst sind unter
 
@@ -133,31 +147,7 @@ verfügbar. Diese können entweder in der Markdown-Syntax oder als interaktives 
 + der Inhalt wird sich ggf. anhand Ihrer Verbesserungsvorschläge verändern
 + die Dokumente enthalten eine Vielzahl von ausführbarem Code.
 
-
-```cpp                     HelloWorld.c
-#include <stdio.h>
-
-int main() {
-	printf("Hello World\n");
-	return 0;
-}
-```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
-
-> Manchmal muss man sehr genau hinschauen, um zu verstehen, warum ein Programm nicht funktioniert. Versuchen Sie es!
-
-```cpp                     ErroneousHelloWorld.c
-#include <stdio.h>
-
-imt main() {
-	printf("Hello World\n'');
-	printf("Wo liegt der Fehler?")
-	return 0;
-}
-```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
-
-## Literatur
+### Literatur
 
 **Online Kurse**
 
@@ -179,20 +169,7 @@ imt main() {
 * Kernighan B.W., Ritchie D.M., _"Programmieren in C"_, Hanser Verlag
 * Prinz P., Crawford T., _"C in a Nutshell"_, O'Reilly
 * Wolf J., _"Grundkurs C"_, Rheinwerk Computing
-
-## Vorlesungsinhalte
-
-| Nr. | Datum      | Inhalt                            | Link |
-|:--- | ---------- | --------------------------------- | ---- |
-| 0   | 20.10.2020 | Einführung                        |      |
-| 1   |            | Eingabe/Ausgabe, Datentypen       |      |
-| 2   |            | Operatoren                        |      |
-| 3   |            | Kontrollstrukturen                |      |
-| 4   |            | Funktionen & Zeiger               |      |
-| 5   |            | Komplexe Datentypen               |      |
-| 6   |            | Objektorientierter Programmierung |      |
-| 7   |            | Klassen                           |      |
-| 8   |            | Vererbung                         |      |
+* Theis T., _"C++ für Einsteiger und Umsteiger"_, Rheinwerk Computing
 
 
 ## ... und wozu brauche ich das überhaupt?
@@ -201,10 +178,10 @@ imt main() {
 *******************************************************************************
 
 **Antwort A:**
-Das Studium vermittelt ein Weltbild und keine eng zugeschnitte Sicht.
+Das Studium vermittelt ein Weltbild und keine eng zugeschnittene Sicht.
 
 **Antwort B:**
-Die Fähigkeit in Algorithmen zu denken ist eine Grundlage wissenschaftlichen
+Die Fähigkeit in Algorithmen zu denken, ist eine Grundlage wissenschaftlichen
 Arbeitens.
 
 **Antwort C:**
@@ -246,5 +223,9 @@ Link auf den GitHub: https://github.com/SebastianZug/VL_ProzeduraleProgrammierun
 
 ## Und wenn Sie dann immer noch programmieren wollen ...
 
-![WALL-E](./images/00_Readme/BAF_bots.png)<!--
+Dann wartet das TUFbots-Team auf Sie ...
+
+![WALL-E](./images/00_Readme/RoboCup.jpeg)<!--
 style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
+
+Quelle: _Meisterschaft der Maschinen: RoboCup@Work_, Heise Verlag
