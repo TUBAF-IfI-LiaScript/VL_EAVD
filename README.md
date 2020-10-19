@@ -79,6 +79,8 @@ void loop() {
 }
 ```
 
+![Diagramme](./images/00_Readme/Wetterstation.png)<!-- width="70%" -->
+
 Wenn wir noch einen Schritt weitergehen können wir die Daten auch an einen Server übergeben. Dieser übernimmt die Aufbereitung und Visualisierung.
 
 <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/856893/charts/7?bgcolor=%23ffffff&color=%23d62020&days=3&dynamic=true&type=line"></iframe>
