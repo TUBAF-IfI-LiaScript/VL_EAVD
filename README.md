@@ -15,7 +15,7 @@ import: https://github.com/liascript/CodeRunner
 
 # Vorlesung Prozedurale Programmierung
 
-Der vorliegende C-Kurs wird seit dem Wintersemester 2018/19 an der TU Bergakademie
+Der vorliegende C-Kurs wird seit dem Wintersemester 2020/21 an der TU Bergakademie
 Freiberg für die Veranstaltung "Prozedurale Programmierung" genutzt und auf der Basis von LiaScript realisiert. Die
 Veranstaltung richtet sich an Nicht-Informatiker aus verschiedenen
 ingenieurwissenschaftlichen Disziplinen mit keinen oder geringen
