@@ -23,7 +23,7 @@ Programmierkenntnissen. Kern der Lösung ist die Möglichkeit Code direkt in der
 Webseite auszuführen und auch Änderungen vorzunehmen, die dann in einem
 "Versionssystem light" verfügbar sind.
 
-Die interaktive Version dieses Kurses ist unter [LiaScript](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/VL_ProzeduraleProgrammierung/master/README.md) einz
+Die interaktive Version dieses Kurses ist unter [LiaScript](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/VL_ProzeduraleProgrammierung/master/README.md) einzusehen.
 
 ## Zielstellung
 

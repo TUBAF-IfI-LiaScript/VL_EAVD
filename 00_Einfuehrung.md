@@ -13,56 +13,67 @@ import: https://github.com/liascript/CodeRunner
 
 -->
 
-# Einführung
+# Einführung 
 
+Die interaktive Version des Kurses ist unter diesem [Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/VL_ProzeduraleProgrammierung/master/00_Einfuehrung.md#1) zu finden. 
+
+-------------------------------------------------------------------------------
+
+##  Wie arbeitet ein Rechner eigentlich?
+
+{{0-1}}
 Programme sind Anweisungslisten, die vom Menschen erdacht, auf einem Rechner zur
 Ausführung kommen. Eine zentrale Hürde ist dabei die Kluft zwischen menschlicher
 Vorstellungskraft und Logik, die **implizite Annahmen und Erfahrungen**
 einschließt und der **"stupiden" Abarbeitung von Befehlsfolgen** in einem
 Rechner.
 
+{{0-1}}
 Programmiersprachen bemühen sich diese Lücke zu schließen und werden dabei von
 einer Vielzahl von Tools begleitet, diesen **Transformationsprozess**
 unterstützen sollen.
 
+{{0-1}}
 Um das Verständnis für diesen Vorgang zu entwickeln werden zunächst die Vorgänge
 in einem Rechner bei der Abarbeitung von Programmen beleuchtet, um dann die
 Realisierung eines Programmes mit C zu adressieren.
 
+{{0-1}}
 ![instruction-set](./images/00_Einfuehrung/Programmiersprache_Umfeld.png)<!-- width="100%" -->
 
+{{1-2}}
 Quelle: [Programmiervorgang und Begriffe(Autor VÖRBY)](https://commons.wikimedia.org/wiki/File:Programmiersprache_Umfeld.png)
 
-
-##  Wie arbeitet ein Rechner eigentlich?
-
+{{1-2}}
 Beispiel: Intel 4004-Architektur (1971)
 
+{{1-2}}
 ![intel](https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png)<!-- style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
 
+{{1-2}}
 Quelle: [Intel 4004 (Autor Appaloosa)](https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png)
 
-{{1}}
+{{2}}
 Jeder Rechner hat einen spezifischen Satz von Befehlen, die durch "0" und "1"
 ausgedrückt werden, die er überhaupt abarbeiten kann.
 
-{{1}}
+{{2}}
 Speicherauszug den Intel 4004:
 
-{{1}}
+{{2}}
 | Adresse | Speicherinhalt | OpCode     | Mnemonik  |
 |:--------|:---------------|:-----------|:----------|
 | 0010    | 1101 0101      | 1101 DDDD  | LD $5     |
 | 0012    | 1111 0010      | 1111 0010  | IAC       |
 
-{{2}}
+{{3}}
 Unterstützung für die Interpretation aus dem Nutzerhandbuch, dass das Instruction
 set beschreibt:
 
-{{2}}
+{{3}}
 ![instruction-set](./images/00_Einfuehrung/4004_Instruction_set.png)<!-- width="100%" -->
 
-{{2}}
+{{3}}
 Quelle: [Intel 4004 Assembler](http://e4004.szyc.org/asm.html)
 
 ### Programmierung
