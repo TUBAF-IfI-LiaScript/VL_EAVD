@@ -230,4 +230,4 @@ Dann wartet das TUFbots-Team auf Sie ...
 ![WALL-E](./images/00_Readme/RoboCup.jpeg)<!--
 style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
 
-Quelle: _Meisterschaft der Maschinen: RoboCup@Work_, Heise Verlag
+Quelle: _Team RobOTTO_, OVGU Magdeburg
