@@ -11,6 +11,7 @@ logo: ./img/LogoCodeExample.png
 
 import: https://github.com/liascript/CodeRunner
 
+
 -->
 
 # Grundlagen der Sprache C
@@ -34,7 +35,7 @@ Hier geht es zur interaktiven Version des Kurses [LiaScript]()
 >Variablen erklären. Deshalb wird im folgenden immer wieder auf einzelne Aspekte
 > vorgegriffen. Nach der Vorlesung sollte sich dann aber ein Gesamtbild ergeben.
 
-## 0. Zeichensätze
+## Zeichensätze
 
 Sie können in einem C-Programm folgende Zeichen verwenden:
 
@@ -64,7 +65,7 @@ Sie können in einem C-Programm folgende Zeichen verwenden:
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 
-## 1. Variablen
+## Variablen
 
 > *Ein Rechner ist eigentlich ziemlich dumm, dass aber viele Millionen mal pro*
 > *Sekunde*
@@ -102,7 +103,7 @@ int main(void) {
 Ein Programm manipuliert Daten, die in Variablen organisiert werden.
 
 {{1}}
-Eine Variable ist somit ein **abstrakter Behälter** für Inhalte, welche im
+Eine Variable ist ein **abstrakter Behälter** für Inhalte, welche im
 Verlauf eines Rechenprozesses benutzt werden. Im Normalfall wird eine Variable
 im Quelltext durch einen Namen bezeichnet, der die Adresse im Speicher
 repräsentiert. Alle Variablen müssen vor Gebrauch vereinbart werden.
@@ -150,37 +151,29 @@ beachten:
 | `3thName`       | nicht zulässig (Ziffer als erstes Zeichen)     |
 | `x y`           | nicht zulässig (Leerzeichen im Variablennamen) |
 
-Das ganze kann dann noch in entsprechenden Notationen verpackt werden, um einem
-Wildwuchs an Bezeichnern vorzubeugen.
+```cpp                     QuadraticEquation.c
+#include<stdio.h>
 
-| Bezeichnung   | denkbare Variablennamen                            |
-|:--------------|:---------------------------------------------------|
-| CamelCase     | `youLikeCamelCase`, `humanDetectionSuccessfull`    |
-| underscores   | `I_hate_Camel_Case`, `human_detection_successfull` |
+int main(void) {
+  int return = 5;
+  printf("Unsere Variable hat den Wert %d \n", x);
+	return 0;
+}
+```
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
-{{1}}
-Verschiedene Konvention geht noch einen Schritt weiter und verknüpft Datentypen
-(an erster Stelle) und Funktion mit dem Namen (hier abgewandelte
-*ungarische Notation*).
+> Vergeben Sie die Variablennamen mit Sorgfalt. Für jemanden der Ihren Code liest, sind diese wichtige Informationsquellen!
+> [Link](https://wiki.c2.com/?BadVariableNames)
 
-{{1}}
-| Präfix | Datentyp                      | Beispiel     |
-|:-------|:------------------------------|:-------------|
-| n      | Integer                       | `nSize`      |
-| b      | Boolean                       | `bBusy`      |
-| sz     | null-terminierter String      | `szLastName` |
-| p      | Zeiger                        | `pMemory`    |
-| a      | Array                         | `aCounter`   |
-| ch     | char                          | `chName`     |
-| dw     | Double Word, 32 Bit, unsigned | `dwNumber`   |
-| w      | Word, 16 Bit, unsigned        | `wNumber`    |
+Neben der Namensgebung selbst unterstützt auch eine entsprechende Notationen die Lesbarkeit. In Programmen sollte ein Format konsistent verwendet werden.
 
-{{1}}
-> *Encoding the type of a function into the name (so-called Hungarian notation)*
-> *is brain damaged – the compiler knows the types anyway and can check those,*
-> *and it only confuses the programmer.*
->
-> Linus Torvalds
+| Bezeichnung            | denkbare Variablennamen                            |
+|:---------------------- |:-------------------------------------------------- |
+| CamelCase (upperCamel) | `YouLikeCamelCase`, `HumanDetectionSuccessfull`    |
+|           (lowerCamel) | `youLikeCamelCase`, `humanDetectionSuccessfull`    |
+| underscores            | `I_hate_Camel_Case`, `human_detection_successfull` |
+
+In der Vergangenheit wurden die Konventionen (zum Beispiel durch Microsoft "Ungarische Notation") verpflichtend durchgesetzt. Heute dienen eher die generellen Richtlinien des Clean Code in Bezug auf die Namensgebung.
 
 ### Datentypen
 
@@ -205,16 +198,6 @@ auf die Daten extrahieren?
 
 {{2}}
 | Adresse | Speicherinhalt | Zahlenwert | Zahlenwert | Zahlenwert   |
-|         |                |  (Byte)    | (2 Byte)   | (4 Byte)     |
-| 0010    | 0000 1100      | 12         |            |              |
-| 0011    | 1111 1101      | 253 (-3)   | 3325       |              |
-| 0012    | 0001 0000      | 16         |            |              |
-| 0013    | 1000 0000      | 128 (-128) | 4224       | 217911424    |
-
-
-<!-- hidden = "true" -->
-| Adresse | Speicherinhalt | Zahlenwert | Zahlenwert | Zahlenwert   |
-|:--------|:---------------|:-----------|:-----------|:-------------|
 |         |                |  (Byte)    | (2 Byte)   | (4 Byte)     |
 | 0010    | 0000 1100      | 12         |            |              |
 | 0011    | 1111 1101      | 253 (-3)   | 3325       |              |
@@ -413,14 +396,13 @@ Quelle: [Arithmetischer Überlauf (Autor: WissensDürster)](https://de.wikipedia
 
 int main(){
   short a = 30000;
-  short c;
-  unsigned short d;
-  //unsigned c;
+  unsigned short d;   //      0 bis 65535
+  signed short c;     // -32768 bis 32767
   printf("unsigned short - Wertebereich von %d bis %d\n", 0, USHRT_MAX);
   printf("short - Wertebereich von %d bis %d\n", SHRT_MIN, SHRT_MAX);
-  c = 3 * a;
+  c = 3000 + a;
   printf("c=%d\n", c);
-  d = 3 * a;
+  d = 3000 + a;
   printf("c=%d\n", d);
 }
 ```
@@ -486,6 +468,9 @@ int main(void) {
 ```
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
+{{2}}
+Potenzen von 2 (zum Beispiel $2^{-3}=0.125$) können im Unterschied zu `0.1` präzise im Speicher abgebildet werden. Können Sie erklären?
+
 
 #### Datentyp `void`
 
@@ -511,20 +496,6 @@ void funktion(void) {
 	//Anweisungen
 }
 ```
-
-#### Spezifische Datentypen
-
-Ab C99 umfasst die Standard Bibliothek das header file `stdint.h`, das
-Ganzzahldatentypen mit exakten bzw. spezifizierten Datenbreiten einführt. Dabei
-können die individuellen Realisierungen für verschiedene Compiler auf ein und
-der selben Architektur durchaus variieren!
-
-| signed         | unsigned        | Bedeutung                            |
-|:---------------|:----------------|:-------------------------------------|
-| `intN_t`       | `uintN_t`       | exakte Breite von N Bits (`uint8_t`) |
-| `int_leastN_t` | `uint_leastN_t` | garantierte Mindestbreite            |
-| `int_fastN_t`  | `uint_fastN_t`  | fokussiert die Ausführungszeit       |
-
 
 ### Wertspezifikation
 
@@ -559,6 +530,8 @@ Zahlenliterale können in C mehr als Ziffern umfassen!
 |            | `123e-2`      |               | `0xC.68p+2`  |
 |            | `1.23F`       |               |              |
 
+> Erkennen Sie jetzt die Bedeutung der Compilerfehlermeldung `error: invalid suffix "abc" on integer constant` aus dem ersten Beispiel der Vorlesung?
+
 {{1}}
 `Variable = (Vorzeichen)(Zahlensystem)[Wert](Typ);`
 
@@ -590,6 +563,7 @@ int main(void)
 }
 ```
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+
 
 ### Adressen
 
@@ -758,7 +732,7 @@ int main(void) {
 	return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.evalWithDebug(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 {{1}}
 **Redeklaration**
@@ -806,54 +780,30 @@ int main(void) {
 	return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.evalWithDebug(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
-## 2. Compiler
+## Compiler
 
-**Warnings mit PellesC**
-
-![PellesC Nützlichkeit von Warnings](./images/01_EinAusgabeDatentypen/PellesCWarnings.jpeg)<!--
-style=" width: 100%;
-        max-width: 800px;
-        min-width: 400px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;"
--->
-
+**Warnings**
 
 > **Hinweis:** Unterschiedliche Compiler verwenden unterschieldliche
 > Konfigurationen und generieren unterschiedliche Ergebnisse!
 
-{{1}}
-| Name            | Bezeichnung                                  |
-|:----------------|:---------------------------------------------|
-| Gnu C Compiler  | Linux "Standard" C Compiler (auch in cygwin) |
-|                 |[Dokumentation](https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html) |
-|
-|[Erläuterung zu den Warning Konfigurationen](https://kristerw.blogspot.com/2017/09/useful-gcc-warning-options-not-enabled.html) |
-| LLC (in PellesC) | `Local C Compiler` or `Little C Compiler`   |
-|
-|[Dokumentation](https://sites.google.com/site/lccretargetablecompiler/lccmanpage) |
-| Microsoft Compiler | enthalten im Microsoft Studio              |
-|
-|[Dokumentation](https://msdn.microsoft.com/de-de/library/19z1t1wy.aspx) |
+| Name               | Bezeichnung                                                                                                                     |
+|:------------------ |:------------------------------------------------------------------------------------------------------------------------------- |
+| Gnu C Compiler     | Linux "Standard" C Compiler (auch in cygwin)                                                                                    |
+|                    | [Dokumentation](https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html)                                                         |
+|                    | [Erläuterung zu den Warning Konfigurationen](https://kristerw.blogspot.com/2017/09/useful-gcc-warning-options-not-enabled.html) |
+| Microsoft Compiler | enthalten im Microsoft Studio                                                                                                   |
+|                    | [Dokumentation](https://msdn.microsoft.com/de-de/library/19z1t1wy.aspx)                                                         |
 
-{{2}}
+> Repli.it unterstützt automatisch keine Warnings diese müssen Sie ggf. manuell angeben.
+
 **Zeilennummern**
 
-{{2}}
-![PellesCLineNumbers.jpeg](./images/01_EinAusgabeDatentypen/PelleCLineNumbers.jpeg)<!--
-style=" width: 100%;
-        max-width: 800px;
-        min-width: 400px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;"
--->
+> Aktivieren Sie in Ihrem Editor in jedem Fall die Zeilennummern!
 
-
-## 3. Input-/ Output Operationen
+## Input-/ Output Operationen
 
 Ausgabefunktionen wurden bisher genutzt, um den Status unserer Programme zu
 dokumentieren. Nun soll dieser Mechanismus systematisiert und erweitert werden.
@@ -893,8 +843,8 @@ repäsentiert.
 #include <stdio.h>
 
 int main(){
-  //       ______________________________
-  //       |                            |
+  //       _________________________________
+  //       |                               |
   printf("%i plus %2.2f ist gleich %s.\n", 3, 2.0, "Fuenf");
   //      <------------------------>
   //        String mit Referenzen
@@ -945,7 +895,7 @@ int main(){
   return 0;
 }
 ```
-@Rextester.C
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 #### Formatierungsflags
 
@@ -1021,7 +971,7 @@ int main(){
 Die Funktion `getchar()` liest Zeichen für Zeichen aus einem Puffer. Dies
 geschieht aber erst, wenn die Enter-Taste gedrückt wird.
 
-```cpp                     GetChar.c
+```c    GetChar.c
 #include <stdio.h>
 
 int main(){
@@ -1032,10 +982,7 @@ int main(){
 	return 0;
 }
 ```
-``` text                  stdin
-T
-```
-@Rextester.C(false,`@input(1)`)
+@LIA.evalWithDebug(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 Problem: Es lassen sich immer nur einzelne Zeichen erfassen, die durch
 Enter-Taste bestätigt wurden. Als flexiblere Lösung lässt sich `scanf` anwenden.
@@ -1049,7 +996,7 @@ Format-String der `scanf`-Anweisung kann folgendes enthalten:
 * length modifier (`hh` `h` `l` `ll`)
 * conversion specifier
 
-```cpp                     scanf_getNumbers.c
+```c    Scanf.c
 #include <stdio.h>
 
 int main(){
@@ -1058,14 +1005,12 @@ int main(){
   char b;
   printf("Bitte folgende Werte eingeben %%c %%f %%d: ");
   int n=scanf("%c %f %d", &b, &a, &i);
-  printf("\n%c %f %d %d\n", b, a, i, n);
+  printf("\n%c %f %d\n", b, a, i);
   return 0;
 }
 ```
-``` text                  stdin
-A -234.243240 2345
-```
-@Rextester.C(false,`@input(1)`)
+@LIA.evalWithDebug(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+
 
 ## Ausblick
 
