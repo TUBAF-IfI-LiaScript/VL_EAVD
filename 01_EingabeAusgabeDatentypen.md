@@ -16,6 +16,8 @@ import: https://github.com/liascript/CodeRunner
 
 # Grundlagen der Sprache C
 
+Die interaktive Version des Kurses ist unter diesem [Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/VL_ProzeduraleProgrammierung/master/01_EingabeAusgabeDatentypen.md#1) zu finden.
+
 **Fragen an die heutige Veranstaltung ...**
 
 * Durch welche Parameter ist eine Variable definiert?
@@ -28,8 +30,6 @@ import: https://github.com/liascript/CodeRunner
   sich damit angeben lassen.
 * Ist `printf` ein Schlüsselwort der Programmiersprache C?
 * Welche Beschränkung hat `getchar`
-
-Hier geht es zur interaktiven Version des Kurses [LiaScript]()
 
 > **Vorwarnung:** Man kann Variablen nicht ohne Ausgaben und Ausgaben nicht ohne
 >Variablen erklären. Deshalb wird im folgenden immer wieder auf einzelne Aspekte
