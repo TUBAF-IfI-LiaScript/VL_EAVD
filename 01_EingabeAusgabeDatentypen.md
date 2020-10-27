@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.1
+version:  1.0.2
 language: de
 narrator: Deutsch Female
 
@@ -58,7 +58,6 @@ Sie können in einem C-Programm folgende Zeichen verwenden:
 
   int main() {
       printf("Einen schönen Tag für Sie!");
-      //printf("Einen sch\x94nen Tag f\x81r Sie!");
       return 0;
   }
   ```
@@ -155,7 +154,7 @@ beachten:
 #include<stdio.h>
 
 int main(void) {
-  int return = 5;
+  int int = 5;
   printf("Unsere Variable hat den Wert %d \n", x);
 	return 0;
 }
@@ -291,13 +290,6 @@ style=" width: 80%;
         margin-right: auto;"
 -->
 Quelle: [ASCII-Tabelle](http://www.chip.de/webapps/ASCII-Tabelle_50073950.html)
-
-    --{{1}}--
-Erweiterung erfährt `char` mit der Überarbeitung des C-Standards 1994. Hier
-wurde das Konzept eines breiten Zeichens (engl. *wide character*) eingeführt,
-das auch Zeichensätze aufnehmen kann, die mehr als 1 Byte für die Codierung
-eines Zeichen benötigen (beispielsweise Unicode-Zeichen). Siehe `wchar_t` oder
-`wprintf`.
 
 #### Sonderfall `Bool`
 Seit dem C99 Standard existiert ein spezieller Datentyp `_Bool` für binäre
