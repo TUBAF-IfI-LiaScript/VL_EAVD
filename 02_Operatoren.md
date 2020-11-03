@@ -726,3 +726,34 @@ int main(){
 }
 ```
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+
+## ... und mal praktisch
+
+Folgender Code nutzt die heute besprochenen Operatoren um die Eingaben von zwei
+Buttons auf eine LED abzubilden. Nur wenn beide Taster gedrückt werden, beleuchte das rote Licht für 3 Sekunden.
+
+```cpp
+int buttonAState;
+int buttonBState;
+
+void setup(){
+  pinMode(USER_BUTTON_A, INPUT);
+  pinMode(USER_BUTTON_B, INPUT);
+  pinMode(RGB_R, OUTPUT);
+ }
+
+void loop() {
+  buttonAState = digitalRead(USER_BUTTON_A);
+  buttonBState = digitalRead(USER_BUTTON_B);
+  if ( !buttonAState && !buttonBState){
+    digitalWrite(RGB_R, HIGH);
+    delay(3000);
+  }
+  else
+  {
+    digitalWrite(RGB_R, LOW);
+  }
+}
+```
+
+Wie würden Sie den Code so erweitern, dass die LED bei einem einzelnen Tastendruck für 1 und bei beiden synchron betätigten Tastern für 5 Sekunden aktiv wird?
