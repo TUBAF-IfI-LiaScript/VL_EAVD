@@ -49,7 +49,7 @@ int main(){
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 
-## 2. Operatoren
+## Überblick
 
 > Ein Ausdruck ist eine Kombination aus Variablen, Konstanten, Operatoren und
 > Rückgabewerten von Funktionen. Die Auswertung eines Ausdrucks ergibt einen
@@ -103,7 +103,7 @@ a = b++;   // Postfix
 * Bedingungsoperator
 
 
-### Zuweisungsoperator
+## Zuweisungsoperator
 
 Der Zuweisungsoperator `=` ist von seiner mathematischen Bedeutung zu trennen -
 einer Variablen wird ein Wert zugeordnet. Damit macht dann auch `x=x+1` Sinn.
@@ -161,7 +161,7 @@ int main(){
 ```
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
-### Inkrement und Dekrement
+## Inkrement und Dekrement
 
 Mit den `++` und `--` -Operatoren kann ein L-Wert um eins erhöht bzw. um
 eins vermindert werden. Man bezeichnet die Erhöhung um eins auch als Inkrement,
@@ -191,7 +191,7 @@ werden. Siehe die Diskussion unter
 [stackoverflow](https://stackoverflow.com/questions/24886/is-there-a-performance-difference-between-i-and-i-in-c)
 und Scott Meyer "More Effective C++".
 
-### Arithmetische Operatoren
+## Arithmetische Operatoren
 
 | Operator | Bedeutung                    | Ganzzahlen   | Gleitkommazahlen |
 |:--------:|:-----------------------------|:-------------|:-----------|
@@ -307,7 +307,7 @@ int main() {
 > **Achtung:** Verlieren Sie bei langen Berechnungsketten nicht den Überblick!
 > Insbesondere die verkürzte Schreibweise forciert dies.
 
-### Vergleichsoperatoren
+## Vergleichsoperatoren
 
 Kern der Logik sind Aussagen, die wahr oder falsch sein können.
 
@@ -340,7 +340,7 @@ int main(){
 
 Warum wird dafür nicht der `_Bool` Datentyp verwendet?
 
-### Logische Operatoren
+## Logische Operatoren
 
     {{0-1}}
 ********************************************************************************
@@ -415,7 +415,7 @@ int main(){
 
 ********************************************************************************
 
-### Bit-Operationen
+## Bit-Operationen
 
 Bitoperatoren verknüpfen logische Aussagen oder manipulieren einzelne Bits in
 binären Zahlendarstellungen.
@@ -521,7 +521,7 @@ int main() {
 |          | Sofern eine Übereinstimmung an einer Stelle auftritt, ergibt sich die zugehörige Ganzzahl als Ergebnis. |  |
 
 
-### Shift Operatoren
+## Shift Operatoren
 
 Die Operatoren `<<` und `>>` dienen dazu, den Inhalt einer Variablen bitweise um
 einige Stellen nach links bzw. nach rechts zu verschieben.
@@ -553,7 +553,7 @@ int Bit_Test(BYTE val, BYTE bit) {
 }
 ```
 
-### Bedingungsoperator
+## Bedingungsoperator
 
 Der Bedingungsoperator liefert in Abhängigkeit von der Gültigkeit einer
 logischen Aussage einen von zwei möglichen Ergebniswerten zurück. Folglich hat
@@ -610,7 +610,7 @@ int main(){
 
 ********************************************************************************
 
-### `sizeof` - Operator
+## `sizeof` - Operator
 
 Der Operator `sizeof` ermittelt die Größe eines Datentyps (in Byte) zur
 Kompiliertzeit.
@@ -630,7 +630,7 @@ return 0;
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 
-### Vorrangregeln
+## Vorrangregeln
 
 Konsequenterweise bildet auch die Programmiersprache C eigene Vorrangregeln ab,
 die grundlegende mathematische Definitionen "Punktrechnung vor Strichrechnung"
