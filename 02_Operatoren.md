@@ -406,7 +406,7 @@ int main(){
   _Bool b = false;
   _Bool c = false;
 
-  _Bool f = (a and b and !c) or (a and !c or !c);
+  _Bool f = (a and b and !c) or (a and !b and !c);
   printf("Ergebnis der boolschen Funktion: %d", f);
   return 0;
 }
