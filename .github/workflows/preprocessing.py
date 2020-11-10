@@ -20,9 +20,9 @@ for file in glob.glob("*.mdx"):
         filtered.append(line)
 
     with open(file, "w") as outfile:
-        if file.endswith("00_EingabeAusgabeDatentypen.mdx"):  # insert metadata for pandoc in first md file
+        if file.endswith("00_Einfuehrung.mdx"):  # insert metadata for pandoc in first md file
             title = "**Procedurale Programmierung - TU Freiberg**"
-            outfile.write(f"---\ntitle: |\n  {title}\n  https://github.com/SebastianZug/VL_Softwareentwicklung/\nauthor:\n")
+            outfile.write(f"---\ntitle: |\n  {title}\n  https://github.com/SebastianZug/VL_ProzeduraleProgrammierung/\nauthor:\n")
             with open(".github/workflows/authors.txt", "r") as authors:  # read in authors and write them into the yaml code
                 for line in authors:
                     name = line.strip()

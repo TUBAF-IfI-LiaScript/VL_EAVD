@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.1.2
 language: de
 narrator: Deutsch Female
 
@@ -406,7 +406,7 @@ int main(){
   _Bool b = false;
   _Bool c = false;
 
-  _Bool f = (a and b and !c) or (a and !c or !c);
+  _Bool f = (a and b and !c) or (a and !b and !c);
   printf("Ergebnis der boolschen Funktion: %d", f);
   return 0;
 }
