@@ -29,7 +29,7 @@ Die interaktive Version des Kurses ist unter diesem [Link](https://liascript.git
 </div>
 
 ```cpp       ButtonLogic.cpp
-#include "iso646.h"
+//#include "iso646.h"
 
 void setup() {
   Serial.begin(115200);
@@ -54,8 +54,7 @@ void loop() {
   bool b = digitalRead(3);
   bool c = digitalRead(4);
 
-  //if (((!a) && (!b) && (c)) || ((!a) && (b) && (!c)) || ((a) && (!b) && (!c))) {
-  if (a ^ b ^ c){
+  if (((!a) && (!b) && (c)) || ((!a) && (b) && (!c)) || ((a) && (!b) && (!c))) {
     digitalWrite(13, HIGH);
 
   }
