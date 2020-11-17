@@ -229,7 +229,7 @@ int main(void)
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 {{2}}
-<iframe width="800" height="500" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=%23include%20%3Cstdio.h%3E%0A%23include%20%3Cstdlib.h%3E%0A%0Aint%20main%28void%29%0A%7B%0A%20%20int%20a%20%3D%2015%3B%0A%20%20int%20*%20ptr_a%20%3D%20%26a%3B%0A%20%20printf%28%22Wert%20von%20a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%25d%5Cn%22,%20a%29%3B%0A%20%20printf%28%22Pointer%20ptr_a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%25p%5Cn%22,%20ptr_a%29%3B%0A%20%20printf%28%22Wert%20hinter%20dem%20Pointer%20ptr_a%20%20%25d%5Cn%22,%20*ptr_a%29%3B%0A%20%20*ptr_a%20%3D%2010%3B%0A%20%20printf%28%22Wert%20von%20a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%25d%5Cn%22,%20a%29%3B%0A%20%20printf%28%22Wert%20hinter%20dem%20Pointer%20ptr_a%20%20%25d%5Cn%22,%20*ptr_a%29%3B%0A%20%20return%20EXIT_SUCCESS%3B%0A%7D&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+<iframe width="800" height="500" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Cstdio.h%3E%0A%23include%20%3Cstdlib.h%3E%0A%0Aint%20main%28void%29%0A%7B%0A%20%20int%20a%20%3D%2015%3B%0A%20%20int%20*%20ptr_a%20%3D%20%26a%3B%0A%20%20printf%28%22Wert%20von%20a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%25d%5Cn%22,%20a%29%3B%0A%20%20printf%28%22Pointer%20ptr_a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%25p%5Cn%22,%20ptr_a%29%3B%0A%20%20printf%28%22Wert%20hinter%20dem%20Pointer%20ptr_a%20%20%25d%5Cn%22,%20*ptr_a%29%3B%0A%20%20*ptr_a%20%3D%2010%3B%0A%20%20printf%28%22Wert%20von%20a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%25d%5Cn%22,%20a%29%3B%0A%20%20printf%28%22Wert%20hinter%20dem%20Pointer%20ptr_a%20%20%25d%5Cn%22,%20*ptr_a%29%3B%0A%20%20return%20EXIT_SUCCESS%3B%0A%7D&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
 
 ### Fehlerquellen
 
@@ -249,7 +249,7 @@ int main(void)
   return EXIT_SUCCESS;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.evalWithDebug(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 {{1}}
 Fehlender Dereferenzierungsoperator beim Zugriff
@@ -292,7 +292,7 @@ int main(void)
   return EXIT_SUCCESS;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.evalWithDebug(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 
 ## Arrays
@@ -354,7 +354,7 @@ int main(void) {
 ```
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
-<iframe width="800" height="500" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=%23include%20%3Cstdio.h%3E%0A%0Aint%20main%28void%29%20%7B%0A%20%20int%20a%5B3%5D%3B%20%20%20%20%20%20%20//%20Array%20aus%203%20int%20Werten%0A%20%20a%5B0%5D%20%3D%20-2%3B%0A%20%20a%5B1%5D%20%3D%205%3B%0A%20%20a%5B2%5D%20%3D%2099%3B%0A%20%20for%20%28int%20i%3D0%3B%20i%3C3%3B%20i%2B%2B%29%0A%20%20%20%20printf%28%22%25d%20%22,%20a%5Bi%5D%29%3B%0A%20%20printf%28%22%5CnNur%20zur%20Info%20%25ld%22,%20sizeof%28a%29%29%3B%0A%20%20printf%28%22%5CnZahl%20der%20Elemente%20%25ld%22,%20sizeof%28a%29%20/%20sizeof%28int%29%29%3B%0A%20%20printf%28%22%5CnAnwendung%20des%20Adressoperators%20auf%20das%20Array%20%25d%22,%20*a%29%3B%0A%20%20return%200%3B%0A%7D&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+<iframe width="800" height="500" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Cstdio.h%3E%0A%0Aint%20main%28void%29%20%7B%0A%20%20int%20a%5B3%5D%3B%20%20%20%20%20%20%20//%20Array%20aus%203%20int%20Werten%0A%20%20a%5B0%5D%20%3D%20-2%3B%0A%20%20a%5B1%5D%20%3D%205%3B%0A%20%20a%5B2%5D%20%3D%2099%3B%0A%20%20for%20%28int%20i%3D0%3B%20i%3C3%3B%20i%2B%2B%29%0A%20%20%20%20printf%28%22%25d%20%22,%20a%5Bi%5D%29%3B%0A%20%20printf%28%22%5CnNur%20zur%20Info%20%25ld%22,%20sizeof%28a%29%29%3B%0A%20%20printf%28%22%5CnZahl%20der%20Elemente%20%25ld%22,%20sizeof%28a%29%20/%20sizeof%28int%29%29%3B%0A%20%20printf%28%22%5CnAnwendung%20des%20Adressoperators%20auf%20das%20Array%20%25d%22,%20*a%29%3B%0A%20%20return%200%3B%0A%7D&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
 
 
 {{1}}
@@ -823,4 +823,4 @@ int main(void)
 
 Schauen wir uns das Ganze noch in der Ausführung mit Pythontutor an!
 
-<iframe width="800" height="500" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=%23include%20%3Cstdio.h%3E%0A%23include%20%3Cstdlib.h%3E%0A%0A%23define%20ZIELWERT%2018%0A%0Aint%20main%28void%29%0A%7B%0A%20%20int%20a%5B%5D%20%3D%20%7B1,%202,%205,%207,%209,%2010,%2012,%2013,%2016,%2017,%2018,%2021,%2025%7D%3B%0A%20%20int%20*ptr_left%20%3D%20a%3B%0A%20%20int%20*ptr_right%20%3D%20%28int%20*%29%28%26a%20%2B%201%29%20-%201%3B%0A%20%20printf%28%22Value%20left%20%253d%20right%20%25d%5Cn-----------------------%5Cn%22,%20*ptr_left,%20*%20ptr_right%29%3B%0A%20%20do%7B%0A%20%20%20%20printf%28%22Value%20left%20%253d%20right%20%25d%22,%20*ptr_left,%20*%20ptr_right%29%3B%0A%20%20%20%20if%20%28*ptr_right%20%2B%20*ptr_left%20%3D%3D%20ZIELWERT%29%7B%0A%20%20%20%20%20%20%20printf%28%22%20-%3E%20TREFFER%22%29%3B%0A%20%20%20%20%7D%0A%20%20%20%20printf%28%22%5Cn%22%29%3B%0A%20%20%20%20if%20%28*ptr_right%20%2B%20*ptr_left%20%3E%3D%20ZIELWERT%29%20ptr_right--%3B%0A%20%20%20%20else%20ptr_left%2B%2B%3B%0A%20%20%7Dwhile%20%28ptr_right%20!%3D%20ptr_left%29%3B%0A%20%20return%20EXIT_SUCCESS%3B%0A%7D&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+<iframe width="800" height="500" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Cstdio.h%3E%0A%23include%20%3Cstdlib.h%3E%0A%0A%23define%20ZIELWERT%2018%0A%0Aint%20main%28void%29%0A%7B%0A%20%20int%20a%5B%5D%20%3D%20%7B1,%202,%205,%207,%209,%2010,%2012,%2013,%2016,%2017,%2018,%2021,%2025%7D%3B%0A%20%20int%20*ptr_left%20%3D%20a%3B%0A%20%20int%20*ptr_right%20%3D%20%28int%20*%29%28%26a%20%2B%201%29%20-%201%3B%0A%20%20printf%28%22Value%20left%20%253d%20right%20%25d%5Cn-----------------------%5Cn%22,%20*ptr_left,%20*%20ptr_right%29%3B%0A%20%20do%7B%0A%20%20%20%20printf%28%22Value%20left%20%253d%20right%20%25d%22,%20*ptr_left,%20*%20ptr_right%29%3B%0A%20%20%20%20if%20%28*ptr_right%20%2B%20*ptr_left%20%3D%3D%20ZIELWERT%29%7B%0A%20%20%20%20%20%20%20printf%28%22%20-%3E%20TREFFER%22%29%3B%0A%20%20%20%20%7D%0A%20%20%20%20printf%28%22%5Cn%22%29%3B%0A%20%20%20%20if%20%28*ptr_right%20%2B%20*ptr_left%20%3E%3D%20ZIELWERT%29%20ptr_right--%3B%0A%20%20%20%20else%20ptr_left%2B%2B%3B%0A%20%20%7Dwhile%20%28ptr_right%20!%3D%20ptr_left%29%3B%0A%20%20return%20EXIT_SUCCESS%3B%0A%7D&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
