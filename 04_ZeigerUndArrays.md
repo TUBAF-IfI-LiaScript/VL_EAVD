@@ -127,7 +127,7 @@ gewünschten Zeigernamen. Der Datentyp eines Zeigers besteht wiederum aus dem
 Datentyp des Werts auf den gezeigt wird sowie aus einem Asterisk. Ein Datentyp
 eines Zeigers wäre also z. B. `double*`.
 
-``` c
+```c
 /* kann eine Adresse aufnehmen, die auf einen Wert vom Typ Integer zeigt */
 int* zeiger1;
 /* das Leerzeichen kann sich vor oder nach dem Stern befinden */
@@ -152,7 +152,7 @@ Der Zeiger kann initialisiert werden durch die Zuweisung:
 * eines weiteren Zeigers oder
 * des Wertes von `NULL`.
 
-``` c                      PointerExamples.c
+```c                      PointerExamples.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -198,7 +198,7 @@ implementierungsabhängig vorgegeben und vom Compilerhersteller passend
 implementiert, z. B.
 
 {{1}}
-``` c
+```c
 #define NULL 0
 #define NULL 0L
 #define NULL (void *) 0
@@ -209,7 +209,7 @@ Und umgekehrt, wie erhalten wir den Wert, auf den der Pointer zeigt? Hierfür
 benötigen wir den *Inhaltsoperator* `*`.
 
 {{2}}
-``` c                   DereferencingPointers.c
+```c                   DereferencingPointers.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -235,7 +235,7 @@ int main(void)
 
 Fehlender Adressoperator bei der Zuweisung
 
-``` c               PointerFailuresI.c
+```c               PointerFailuresI.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -255,7 +255,7 @@ int main(void)
 Fehlender Dereferenzierungsoperator beim Zugriff
 
 {{1}}
-``` c          PointerFailuresII.c
+```c          PointerFailuresII.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -275,7 +275,7 @@ int main(void)
 Uninitialierte Pointer zeigen "irgendwo ins nirgendwo"!
 
 {{2}}
-``` c                  PointerFailuresIII.c
+```c                  PointerFailuresIII.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -556,7 +556,7 @@ int main(void) {
   printf("->%s<-\n", b);
   const char c[] = "Noch eine \0Moeglichkeit";
   printf("->%s<-\n", c);
-  char d[] = { 80, 114, 111, 122, 80, 114, 111, 103, 32, 50, 48, 49, 57, 0  };
+  char d[] = { 80, 114, 111, 122, 80, 114, 111, 103, 32, 50, 48,  50, 48,  0  };
   printf("->%s<-\n", d);
   return 0;
 }
@@ -716,7 +716,7 @@ int main(void)
 Was bedeutet das im Umkehrschluss? Eine falsche Deklaration bewirkt ein
 falsches "Bewegungsmuster" über dem Speicher.
 
-``` c               WrongMath.c
+```c               WrongMath.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -743,7 +743,7 @@ Pointer können natürlich nicht nur manipuliert sondern auch verglichen werden.
 Dabei sei noch mal darauf verwiesen, dass dabei die Adressen und nicht die
 Werte evaluiert werden.
 
-``` c                  PointerComp.c
+```c                  PointerComp.c
 #include <stdio.h>
 #include <stdlib.h>
 
