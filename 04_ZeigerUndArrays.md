@@ -325,7 +325,6 @@ int a[3][5];
 | `a[1][0]` | `a[1][1]` | `a[1][2]` | `a[1][3]` | `a[1][4]` |
 | `a[2][0]` | `a[2][1]` | `a[2][2]` | `a[2][3]` | `a[2][4]` |
 
-
 > **Achtung 1:** Im hier beschriebenen Format muss zum Zeitpunkt der Übersetzung
 > die Größe des Arrays (Anzahl\_der\_Elemente) bekannt sein.
 
@@ -359,17 +358,22 @@ int main(void) {
 
 
 {{1}}
-Wie können Arrays noch initialisiert werden?
+Wie können Arrays noch initialisiert werden:
+
+{{1}}
++ vollständig (alle Elemente werden mit einem spezifischen Wert belegt)
++ anteilig (einzelne Elemente werden mit spezfischen Werten gefüllt, der rest mit 0)
 
 {{1}}
 ```cpp                     ArrayExample.c
 #include <stdio.h>
 
 int main(void) {
-  int a[] = {5, 2, 2, 5, 6};   // Alternative Form der Initialisierung
+  int a[] = {5, 2, 2, 5, 6};
   float b[5] = {1.0};
+  int c[5] = {[2] = 5, [1] = 2, [4] = 9}; // ISO C99
   for (int i=0; i<5; i++){
-    printf("%d  %f\n", a[i], b[i]);
+    printf("%5d %f %5d\n", a[i], b[i], c[i]);
   }
   return 0;
 }
@@ -399,8 +403,7 @@ int main(void) {
 #include <stdio.h>
 
 int main(void) {
-  int a[3];
-  a[0] = -2; a[1] = 5; a[2] = 99;
+  int a[] = {-2, 5, 99};
   for (int i=0; i<=3; i++)
     printf("%d ", a[i]);
   return 0;
@@ -460,8 +463,8 @@ int Matrix[4][4] = {1,2,3,4,5,6,7,8};
 Initialisierung eines n-dimensionalen Arrays:
 
 {{1}}
-![Matrix](img/2DArray.jpg)<!--
-style=" width: 90%;
+![Matrix](./images/04_ZeigerUndArrays/2DArray.jpg)<!--
+style=" width: 60%;
         max-width: 800px;
         min-width: 400px;
         display: block;
@@ -494,24 +497,22 @@ int main(void) {
   return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+
 
 {{2}}
 Quelle: [C-Kurs](http://www.c-howto.de/tutorial/arrays-felder/zweidimensionale-felder/)
 
-
-
 ### Anwendung eines zweidimesionalen Arrays
 
-Addition zweier Matrizen
+Elementwese Addition zweier Matrizen
 
 ```cpp       Addition.c
 #include <stdio.h>
 
 int main(void)
 {
-    int A[2][3]={{1,2,3},{4,5,6}};
-    int B[2][3]={{10,20,30},{40,50,60}};
+  int A[2][3]={{1,2,3},{4,5,6}};
+  int B[2][3]={{10,20,30},{40,50,60}};
 	int C[2][3];
 	int i,j;
 	for (i=0;i<2;i++)
@@ -545,8 +546,9 @@ int main(void) {
   //////////////////////////////////////////////////////////////////////////////
 
   char a[] = "Ich bin ein char Array!";  // Der Kompiler fügt das \0 automatisch ein!
-  if (a[23] == '\0')
+  if (a[23] == '\0'){
     printf("char Array Abschluss in a gefunden!");
+  }
 
   printf("->%s<-\n", a);
   const char b[] = { 'H', 'a', 'l', 'l', 'o', ' ',
@@ -585,7 +587,20 @@ int main(void) {
 Schreiben Sie ein Programm, dass in einem Text groß geschriebene Buchstaben
 durch klein geschriebene ersetzt und umgekehrt.
 
+![Matrix](./images/01_EinAusgabeDatentypen/ASCII_Zeichensatz.jpeg)<!--
+style=" width: 60%;
+        max-width: 800px;
+        min-width: 400px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;"
+-->
+
+
 Da Variablen des Datentyps `char` genau ein Byte benötigen, liefert `sizeof`-Operator im folgenden Beispiel die Anzahl der Elemente des Arrays.
+
+
+
 
 ```cpp                     ArrayExample.c
 #include <stdio.h>
@@ -734,7 +749,7 @@ int main(void)
 
 *******************************************************************
 
-     {{1-2}}
+     {{2-3}}
 *******************************************************************
 
 Pointer können natürlich nicht nur manipuliert sondern auch verglichen werden.
