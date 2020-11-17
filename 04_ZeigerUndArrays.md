@@ -596,10 +596,7 @@ style=" width: 60%;
         margin-right: auto;"
 -->
 
-
 Da Variablen des Datentyps `char` genau ein Byte benötigen, liefert `sizeof`-Operator im folgenden Beispiel die Anzahl der Elemente des Arrays.
-
-
 
 
 ```cpp                     ArrayExample.c
@@ -622,16 +619,6 @@ int main() {
 ```
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
-{{1}}
-Des Weiteren verwendet das Programm die ASCII-Codierung der Zeichen.
-
-{{1}}
-![ASCII](img/ASCII_Zeichensatz.jpeg)<!--
-style="width: 100%;
-       max-width: 600px;
-       display: block;
-       margin-left: auto;
-       margin-right: auto;" -->
 
 ### Fehlerquellen
 
