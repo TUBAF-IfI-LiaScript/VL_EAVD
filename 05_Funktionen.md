@@ -18,21 +18,59 @@ import: https://github.com/liascript/CodeRunner
 
 Die interaktive Version des Kurses ist unter diesem [Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/VL_ProzeduraleProgrammierung/master/05_Funktionen.md#1) zu finden.
 
+--------------------------------------------------------------------------------
+
 **Wie weit waren wir gekommen?**
 
-<iframe width="800" height="500" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=%23include%20%3Cstdio.h%3E%0A%23include%20%3Cmath.h%3E%0A%0A%23define%20VALUECOUNT%2017%0A%0Aint%20main%28void%29%20%7B%0A%20%20int%20a%20%5B%5D%20%3D%20%7B1,2,3,3,4,2,3,4,5,6,7,8,9,1,2,3,4%7D%3B%0A%0A%20%20int%20summe_I%20%3D%200%3B%0A%20%20for%20%28int%20i%3D0%3B%20i%3CVALUECOUNT%3B%20i%2B%2B%29%7B%0A%20%20%20%20summe_I%20%2B%3D%20a%5Bi%5D%3B%0A%20%20%7D%0A%20%20%0A%20%20int%20summe_II%20%3D%200%3B%0A%20%20//int*%20prt_b%20%3D%20NULL%3B%0A%20%20int%20*ptr_ende%20%3D%20%28int%20*%29%28%26a%20%2B%201%29%20-%201%3B%0A%20%20for%20%28int*%20prt_b%20%3D%20a%3B%20prt_b%3C%3Dptr_ende%3B%20prt_b%2B%2B%29%7B%0A%20%20%20%20summe_II%20%2B%3D%20*prt_b%3B%0A%20%20%7D%0A%20%20%0A%20%20printf%28%22Die%20Summe%20betraegt%20%25d%20%25d%5Cn%22,%20summe_I,%20summe_II%29%3B%0A%0A%20%20return%200%3B%0A%7D&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=76&heapPrimitives=nevernest&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+```cpp   AdressierungVonArrays.c
+#include <stdio.h>
+#include <math.h>
+
+#define VALUECOUNT 17
+
+int main(void) {
+  int a [] = {1,2,3,3,4,2,3,4,5,6,7,8,9,1,2,3,4};
+
+  int summe_I = 0;
+  for (int i=0; i<VALUECOUNT; i++){
+    summe_I += a[i];
+  }
+
+  int summe_II = 0;
+  //int* prt_b = NULL;
+  int *ptr_ende = (int *)(&a + 1) - 1;
+  for (int* prt_b = a; prt_b<=ptr_ende; prt_b++){
+    summe_II += *prt_b;
+  }
+
+  printf("Die Summe betraegt %d %d\n", summe_I, summe_II);
+
+  return 0;
+}
+```
+@LIA.eval(`["main.c"]`, `gcc main.c -o a.out -lm`, `./a.out`)
+
+
+Ausführung in der PythonTutor Umgebung [Link](http://pythontutor.com/visualize.html#code=%23include%20%3Cstdio.h%3E%0A%23include%20%3Cmath.h%3E%0A%0A%23define%20VALUECOUNT%2017%0A%0Aint%20main%28void%29%20%7B%0A%20%20int%20a%20%5B%5D%20%3D%20%7B1,2,3,3,4,2,3,4,5,6,7,8,9,1,2,3,4%7D%3B%0A%0A%20%20int%20summe_I%20%3D%200%3B%0A%20%20for%20%28int%20i%3D0%3B%20i%3CVALUECOUNT%3B%20i%2B%2B%29%7B%0A%20%20%20%20summe_I%20%2B%3D%20a%5Bi%5D%3B%0A%20%20%7D%0A%20%20%0A%20%20int%20summe_II%20%3D%200%3B%0A%20%20//int*%20prt_b%20%3D%20NULL%3B%0A%20%20int%20*ptr_ende%20%3D%20%28int%20*%29%28%26a%20%2B%201%29%20-%201%3B%0A%20%20for%20%28int*%20prt_b%20%3D%20a%3B%20prt_b%3C%3Dptr_ende%3B%20prt_b%2B%2B%29%7B%0A%20%20%20%20summe_II%20%2B%3D%20*prt_b%3B%0A%20%20%7D%0A%20%20%0A%20%20printf%28%22Die%20Summe%20betraegt%20%25d%20%25d%5Cn%22,%20summe_I,%20summe_II%29%3B%0A%0A%20%20return%200%3B%0A%7D&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D&textReferences=false)
 
 
 >  Zur Erinnerung ... an die Schritte zur Realisierung einer Variablen
+
 > * Deklaration ist nur die Vergabe eines Namens und eines Typs für die Variable.
+
 > * Definition ist die Reservierung des Speicherplatzes.
+
 > * Initialisierung ist die Zuweisung eines ersten Wertes.
+
+--------------------------------------------------------------------------------
 
 **Inhalt der heutigen Veranstaltung**
 
 * Strukturierung von Code anhand von Funktionen und Prozeduren
 * Konfiguration von Parametern und Rückgabewerten
 * Verwendung von Funktionen beim Entwurf von Software
+
+--------------------------------------------------------------------------------
 
 **Fragen an die heutige Veranstaltung ...**
 
@@ -83,7 +121,8 @@ int main(void) {
   return 0;
 }
 ```
-@Rextester.eval(@C, false, ,`-Wall -std=gnu99 -O2 -o a.out source_file.c -lm`)
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out -lm`, `./a.out`)
+
 
 Ihre Aufgabe besteht nun darin ein neues Programm zu schreiben, das Ihre
 Implementierung der Mittelwertbestimmung integriert. Wie gehen Sie vor? Was sind
@@ -295,7 +334,7 @@ int main(void){
     return 0;
 }
 ```
-@Rextester.eval(@C, false, ,`-Wall -std=gnu99 -O2 -o a.out source_file.c -lm`)
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 
 ### Fehler
@@ -428,7 +467,7 @@ int foo(void){         // <- Defintion der Funktion
    return 3;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.evalWithDebug(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 
 Damit der Compiler überhaupt von einer Funktion Kenntnis nimmt, muss diese vor
@@ -440,7 +479,7 @@ die Funktion erst nach dem Aufruf definiert. Hier erfolgt eine automatische
 Eine explizite Deklaration zeigt folgendes Beispiel:
 
 {{1}}
-```cpp
+```cpp     explicite.c
 #include <stdio.h>
 
 // Deklarationsteil
@@ -514,43 +553,13 @@ eingehend diskutiert.
 
 ### Herausforderung komplexer Parametersätze und Rückgabewerte
 
-Eine weitere Möglichkeit mehrere Werte zu übergeben bieten die zusammengesetzen
+Eine weitere Möglichkeit mehrere Werte zu übergeben bieten die zusammengesetzten
 Datentypen `struct`s und arrays.
 
-```cpp          Student.c
-#include <stdio.h>
-#include <string.h>
-
-struct datensatz{
-  char name[20];
-  int alter;
-  int note;
-};
-
-// Definitionsteil
-struct datensatz initDatensatz(char name[], int alter, int note){
-   struct datensatz student;
-   strcpy(student.name, name);
-   student.alter = alter;
-   student.note = note;
-   return student;
-}
-
-int main(void) {
-   struct datensatz eintrag = initDatensatz("Micky Maus", 50, 1);
-   printf("Name %s \nAlter %d \nNote %d\n", eintrag.name, eintrag.alter, eintrag.note);
-   return 0;
-}
-```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
-
-
-{{1}}
 An die Funktion übergebene Arrays werden nicht wie bei *call-by-value* kopiert, sondern als Zeiger übergeben (*call-by-reference*) und können
 demzufolge in der Funktion verändert werden. Übergeben wird an die Funktion
 die Anfangsadresse des Arrays.
 
-{{1}}
 ```cpp       ByReference.c
 #include <stdio.h>
 
@@ -608,7 +617,7 @@ static inline void ausgabeBruch(int z, int n) {
 ```
 
 `inline`-Funktion wird vom Compiler direkt an der Stelle eingefügt, wo der Aufruf
-stattfinden soll. Gegebenfalls ist die Ausführung der `inline`-Funktion schneller,
+stattfinden soll. Gegebenenfalls ist die Ausführung der `inline`-Funktion schneller,
 da die mit dem Aufruf verbundenen Sicherung der Rücksprungadresse, der Sprung zur
 Funktion und der Rücksprung nach Ausführung entfallen. Das Schlüsselwort `inline`
 ist für den Compiler allerdings nur ein Hinweis und kein Befehl.
