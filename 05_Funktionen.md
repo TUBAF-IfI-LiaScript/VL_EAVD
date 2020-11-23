@@ -341,7 +341,7 @@ int main(void){
 
 **Rückgabewert ohne Rückgabedefintion**
 
-```cpp
+```cpp   return.c
 void foo()
 {
 	/* Code */
@@ -353,13 +353,13 @@ int main(void)
   return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.evalWithDebug(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 {{1}}
 **Erwartung eines Rückgabewertes**
 
 {{1}}
-```cpp
+```cpp   returnII.c
 #include <stdio.h>
 
 void foo(){
@@ -371,14 +371,14 @@ int main(void) {
   return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.evalWithDebug(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 
 {{2}}
 **Implizite Convertierungen**
 
 {{2}}
-```cpp
+```cpp     conversion.c
 #include <stdio.h>
 
 float foo(){
@@ -391,22 +391,14 @@ int main(void) {
   return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.evalWithDebug(`["main.c"]`, `gcc -Wall -Wconversion main.c -o a.out`, `./a.out`)
 
-{{2}}
-``` bash @output
-▶ gcc -Wconversion experiments.c
-experiments.c: In function ‘main’:
-experiments.c:9:11: warning: conversion to ‘int’ from ‘float’ may alter its value [-Wfloat-conversion]
-   int i = foo();
-           ^
-```
 
 {{3}}
 **Parameterübergabe ohne entsprechende Spezifikation**
 
 {{3}}
-```cpp
+```cpp    paramters.c
 #include <stdio.h>
 
 int foo(void){       // <- Die Funktion erwartet explizit keine Parameter
@@ -418,14 +410,14 @@ int main(void) {
   return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.evalWithDebug(`["main.c"]`, `gcc -Wall -Wconversion main.c -o a.out`, `./a.out`)
 
 
 {{4}}
 **Anweisungen nach dem return-Schlüsselwort**
 
 {{4}}
-```cpp
+```cpp    codeOrder.c
 int foo()
 {
 	return 5;
@@ -437,7 +429,7 @@ int foo()
 **Falsche Reihenfolgen der Parameter**
 
 {{5}}
-```cpp
+```cpp     conversion.c
 #include <stdio.h>
 
 void foo(int index, float wert){
@@ -451,7 +443,7 @@ int main(void) {
   return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.evalWithDebug(`["main.c"]`, `gcc -Wall -Wconversion main.c -o a.out`, `./a.out`)
 
 ### Funktionsdeklaration
 
