@@ -82,4 +82,4 @@ int main() {
 }
 ```
 
-![Resultat](/images/06_ZusammengesetzteDatentypen/excelLib.png)
+![Resultat](./images/06_ZusammengesetzteDatentypen/excelLib.png)
