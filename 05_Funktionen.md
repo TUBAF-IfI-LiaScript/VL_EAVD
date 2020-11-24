@@ -98,24 +98,28 @@ Ausführung in der PythonTutor Umgebung [Link](http://pythontutor.com/visualize.
 
 int main(void) {
   int a [] = {1,2,3,3,4,2,3,4,5,6,7,8,9,1,2,3,4};
+
+  // Ergebnis Histogramm
   int hist[10] = {0,0,0,0,0,0,0,0,0,0};
+  // Ergebnis Mittelwert
+  int summe = 0;
+  // Ergebnis Standardabweichung
+  float abweichung = 0;
   for (int i=0; i<VALUECOUNT; i++){
     hist[a[i]]++;
-  }
-  for (int i=0; i<10; i++){
-     printf("%d - %d\n", i, hist[i]);
-  }
-  int summe = 0;
-  for (int i=0; i<VALUECOUNT; i++){
     summe += a[i];
   }
   float mittelwert = summe / (float)VALUECOUNT;
-  printf("Die Summe betraegt %d, der Mittelwert %3.1f\n", summe, mittelwert);
-  float abweichung = 0;
   for (int i=0; i<VALUECOUNT; i++){
-    //abweichung += pow((a[i]-mittelwert),2.);
-    abweichung += (a[i]-mittelwert)*(a[i]-mittelwert);
+    abweichung += pow((a[i]-mittelwert),2.);
   }
+  // Ausgabe
+  for (int i=0; i<10; i++){
+     printf("%d - %d\n", i, hist[i]);
+  }
+  // Ausgabe Mittelwert
+  printf("Die Summe betraegt %d, der Mittelwert %3.1f\n", summe, mittelwert);
+  // Ausgabe Standardabweichung
   float std = sqrt(abweichung / VALUECOUNT);
   printf("Die Standardabweichung der Grundgesamtheit betraegt %5.2f\n", std);
   return 0;
@@ -123,10 +127,11 @@ int main(void) {
 ```
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out -lm`, `./a.out`)
 
-
 Ihre Aufgabe besteht nun darin ein neues Programm zu schreiben, das Ihre
 Implementierung der Mittelwertbestimmung integriert. Wie gehen Sie vor? Was sind
 die Herausforderungen dabei?
+
+> Stellen Sie das Programm so um, dass es aus einzelnen Bereichen besteht und überlegen Sie, welche Variablen wo gebraucht werden.
 
 {{1}}
 **Prozedurale Programmierung Ideen und Konzepte**
@@ -191,7 +196,7 @@ int main(void) {
   int a[] = {3,4,5,6,2,3,2,5,6,7,8,10};
   // b = f_Mittelwert(a) ...
   // c = f_Standardabweichung(a) ...
-  // d = f_Standardabweichung(a) ...
+  // d = f_Histogramm(a) ...
   // f_Ausgabe(a, b, c, d) ...
   return 0;
 }
@@ -334,7 +339,7 @@ int main(void){
     return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out -lm`, `./a.out`)
 
 
 ### Fehler
@@ -451,11 +456,12 @@ int main(void) {
 #include <stdio.h>
 
 int main(void) {
-  int i = foo();   // <- Aufruf der Funktion
+  int i = foo();       // <- Aufruf der Funktion
+  printf("i=%d\n", i);
   return 0;
 }
 
-int foo(void){         // <- Defintion der Funktion
+int foo(void){         // <- Definition der Funktion
    return 3;
 }
 ```
@@ -474,20 +480,19 @@ Eine explizite Deklaration zeigt folgendes Beispiel:
 ```cpp     explicite.c
 #include <stdio.h>
 
-// Deklarationsteil
-float berechneFlaeche(float breite, float hoehe); // <- Semikolon am Ende!!!
+int foo(void);         // Explizite Einführung der Funktion foo()
 
-int main() {
-   printf("Ergebnis %4.1f[m^2]\n", berechneFlaeche(23.2, 4.0));
-   return 0;
+int main(void) {
+  int i = foo();       // <- Aufruf der Funktion
+  printf("i=%d\n", i);
+  return 0;
 }
 
-// Definitionsteil
-float berechneFlaeche(float breite, float hoehe){
-   return breite * hoehe;
+int foo(void){         // <- Definition der Funktion foo()
+   return 3;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.evalWithDebug(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 {{2}}
 Das Ganze wird dann relevant, wenn Funktionen aus anderen Quellcodedateien
@@ -540,42 +545,182 @@ Bei einer Übergabe als Referenz wirken sich Änderungen an den Parametern auf d
 ursprünglichen Werte aus. *Call-by-reference* wird unbedigt notwendig, wenn eine
 Funktion mehrere Rückgabewerte hat.
 
-Die *call-by-reference*-Parameterübergabe wird in der nächsten Vorlesung
-eingehend diskutiert.
+Mit Hilfe des Zeigers wird in C die "call-by-reference"- Parameterübergabe
+realisiert. In der Liste der formalen Parameter wird ein Zeiger eines
+passenden Typs definiert. Beim Funktionsaufruf wird als Argument statt
+Variable eine Adresse übergeben. Beachten Sie, dass für den Zugriff auf den Inhalt des Zeigers (einer Adresse) der Inhaltsoperator `*` benötigt wird.
 
-### Herausforderung komplexer Parametersätze und Rückgabewerte
-
-Eine weitere Möglichkeit mehrere Werte zu übergeben bieten die zusammengesetzten
-Datentypen `struct`s und arrays.
-
-An die Funktion übergebene Arrays werden nicht wie bei *call-by-value* kopiert, sondern als Zeiger übergeben (*call-by-reference*) und können
-demzufolge in der Funktion verändert werden. Übergeben wird an die Funktion
-die Anfangsadresse des Arrays.
-
-```cpp       ByReference.c
+``` c                    ParameterI.c
 #include <stdio.h>
+#include <stdlib.h>
 
-void pluseins(int feld[])
-{
-	int i;
-	for (i=0;i<10;i++) {
-    feld[i]++;
-    printf("%d ", feld[i]);
-  }
+void inkrementieren(int *variable){
+  (*variable)++;
 }
 
-int main(void)
-{
-    int feld[10];
-  	int i;
-	  for (i=0;i<10;i++) feld[i]=i;
-
-    pluseins(feld);
-    //oder pluseins(&feld[0]);
-    return 0;
+int main(void) {
+  int a=0;
+  inkrementieren(&a);
+  printf("a = %d\n", a);
+  inkrementieren(&a);
+  printf("a = %d\n", a);
+  return EXIT_SUCCESS;
 }
 ```
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+
+
+Die Adresse einer Variable wird mit dem Adressenoperator `&`
+ermittelt. Weiterhin kann an den Zeiger-Parameter eine Array-Variable
+übergeben werden.
+
+``` c                   ParameterII.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+double sinussatz(double *lookup_sin, int angle, double opositeSide){
+  printf("Größe des Arrays %ld\n", sizeof(*lookup_sin));
+  return opositeSide*lookup_sin[angle];
+}
+
+int main(void) {
+  double sin_values[360] = {0};
+  for(int i=0; i<360; i++) {
+    sin_values[i] = sin(i*M_PI/180);
+  }
+  printf("Größe des Arrays %ld\n", sizeof(sin_values));
+  printf("Result =  %lf \n",sinussatz(sin_values, 30, 20));
+  return EXIT_SUCCESS;
+}
+```
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out -lm`, `./a.out`)
+
+Der Vorteil der Verwendung der Zeiger als Parameter besteht darin, dass
+in der Funktion mehrere Variablen auf eine elegante Weise verändert
+werden können. Die Funktion hat somit quasi mehrere Ergebnisse.
+
+``` c     ParameterIII.c
+#include <stdio.h>
+#include <stdlib.h>
+
+void tauschen(char *anna, char *hanna){
+  char aux=*anna;
+  *anna=*hanna;
+  *hanna=aux;
+}
+
+int main(void) {
+  char anna='A',hanna='H';
+  printf("%c und %c\n", anna,hanna);
+  tauschen(&anna,&hanna);
+  printf("%c und %c\n", anna,hanna);;
+  return EXIT_SUCCESS;
+}
+```
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+
+### Zeiger als Rückgabewerte
+
+Analog zur Bereitstellung von Parametern entsprechend dem "call-by-reference"
+Konzept können auch Rückgabewerte als Pointer vorgesehen sein. Allerdings
+sollen Sie dabei aufpassen ...
+
+```c                         returnPointer.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int * doCalc(int *wert) {
+  int a = *wert + 5;
+  return &a;
+}
+
+int main(void) {
+  int b = 5;
+  printf("Irgendwas stimmt nicht %d", * doCalc(&b) );
+  return EXIT_SUCCESS;
+}
+```
+@LIA.evalWithDebug(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+
+Mit dem Beenden der Funktion werden deren lokale Variablen vom Stack gelöscht.
+Um diese Situation zu handhaben können Sie zwei Lösungsansätze realisieren.
+
+**Variante 1**  Sie übergeben den Rückgabewert in der Parameterliste.
+
+```c          PointerAsParameter.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+void kreisflaeche(double durchmesser, double *flaeche) {
+  *flaeche = M_PI * pow(durchmesser / 2, 2);
+  // Hier steht kein return !
+}
+
+int main(void) {
+  double wert = 5.0;
+  double flaeche = 0;
+  kreisflaeche(wert, &flaeche);
+  printf("Die Kreisfläche beträgt für d=%3.1lf[m] %3.1lf[m²] \n", wert, flaeche);
+  return EXIT_SUCCESS;
+}
+```
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out -lm`, `./a.out`)
+
+{{1}}
+**Variante 2** Rückgabezeiger adressiert mit `static` bezeichnete Variable. Aber Achtung, diese Lösung funktioniert nicht bei rekursiven Aufrufen.
+
+{{1}}
+``` c                             PointerInsteadOfReturnI.c
+#include <stdio.h>
+#include <stdlib.h>
+
+int* cumsum(int wert) {
+  static int sum = 0;
+  sum += wert;
+  return &sum;
+}
+
+int main(void) {
+  int wert = 2;
+  int *sum;
+  sum=cumsum(wert);
+  sum=cumsum(wert);
+  printf("Die Summe ist : %d\n", *sum);
+  sum=cumsum(wert);
+  printf("Die Summe ist : %d\n", *sum);
+  return EXIT_SUCCESS;
+}
+```
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+
+{{2}}
+**Variante 3** Für den Rückgabezeiger wird der Speicherplatz mit `malloc` dynamisch angelegt (dazu später mehr).
+
+{{2}}
+``` c                        PointerInsteadOfReturnII.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+double* kreisflaeche(double durchmesser) {
+  double *flaeche=(double*)malloc(sizeof(double));
+  *flaeche = M_PI * pow(durchmesser / 2, 2);
+  return flaeche;
+}
+
+int main(void) {
+  double wert = 5.0;
+  double *flaeche;
+  flaeche=kreisflaeche(wert);
+  printf("Die Kreisfläche beträgt für d=%3.1lf[m] %3.1lf[m²] \n", wert, *flaeche);
+  return EXIT_SUCCESS;
+}
+```
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out -lm`, `./a.out`)
+
 
 ### `main`-Funktion
 
@@ -690,4 +835,24 @@ int main() {
 
 ## Beispiel des Tages
 
-Todo
+Eine Funktion, die sich selbst aufruft, wird als rekursive Funktion bezeichnet. Den Aufruf selbst nennt man Rekursion. Als Beispiel dient die  Fakultäts-Funktion `n!`, die sich rekursiv als $n(n-1)!$ definieren lässt (wobei $0! = 1$).
+
+```cpp                fakultaet.c
+#include <stdio.h>
+
+int fakultaet (int a){
+  if (a == 0)
+    return 1;
+  else
+    return (a * fakultaet(a-1));
+}
+
+int main(){
+  int eingabe;
+  printf("Ganze Zahl eingeben: ");
+  scanf("%d",&eingabe);
+  printf("Fakultaet der Zahl: %d\n",fakultaet(eingabe));
+  return 0;
+}
+```
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
