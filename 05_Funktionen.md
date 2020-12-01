@@ -550,7 +550,7 @@ realisiert. In der Liste der formalen Parameter wird ein Zeiger eines
 passenden Typs definiert. Beim Funktionsaufruf wird als Argument statt
 Variable eine Adresse übergeben. Beachten Sie, dass für den Zugriff auf den Inhalt des Zeigers (einer Adresse) der Inhaltsoperator `*` benötigt wird.
 
-``` c                    ParameterI.c
+```c                    ParameterI.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -574,7 +574,7 @@ Die Adresse einer Variable wird mit dem Adressenoperator `&`
 ermittelt. Weiterhin kann an den Zeiger-Parameter eine Array-Variable
 übergeben werden.
 
-``` c                   ParameterII.c
+```c                   ParameterII.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -600,7 +600,7 @@ Der Vorteil der Verwendung der Zeiger als Parameter besteht darin, dass
 in der Funktion mehrere Variablen auf eine elegante Weise verändert
 werden können. Die Funktion hat somit quasi mehrere Ergebnisse.
 
-``` c     ParameterIII.c
+```c     ParameterIII.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -673,7 +673,7 @@ int main(void) {
 **Variante 2** Rückgabezeiger adressiert mit `static` bezeichnete Variable. Aber Achtung, diese Lösung funktioniert nicht bei rekursiven Aufrufen.
 
 {{1}}
-``` c                             PointerInsteadOfReturnI.c
+```c                             PointerInsteadOfReturnI.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -700,7 +700,7 @@ int main(void) {
 **Variante 3** Für den Rückgabezeiger wird der Speicherplatz mit `malloc` dynamisch angelegt (dazu später mehr).
 
 {{2}}
-``` c                        PointerInsteadOfReturnII.c
+```c                        PointerInsteadOfReturnII.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
