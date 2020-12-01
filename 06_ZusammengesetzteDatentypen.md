@@ -32,7 +32,7 @@ void get10Values(int max, int * array){
 
 void count(int * array, int * o, int * e){
   for (int i=0; i<10; i++){
-    switch(array[i]%2 )
+    switch(array[i]%2)
     {
       case 0 :
           (*o)++;
@@ -54,13 +54,15 @@ int main(void) {
   count(values, &o, &e);
   printf("\nResults %d, %d", o, e);
   return 0;
-  }
+}
 ```
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 **Inhalt der heutigen Veranstaltung**
 
-* Abbildung zusammengesetzter Datentypen in
+* Nutzung von Präkompiler-Direktiven
+* Definition eigener Typen
+* Abbildung zusammengesetzter Datentypen in C
 
 **Fragen an die heutige Veranstaltung ...**
 
@@ -79,13 +81,13 @@ Da sich der C-Präprozessor nicht auf die Beschreibung der Sprache C stützt, so
 Der C-Präprozessor realisiert dabei die
 
 + Zusammenfassung von Strings
-+ Löcschung von Zeilenumbrüchen und Kommentaren (Ersetzung durch Leerzeichen)
++ Löschung von Zeilenumbrüchen und Kommentaren (Ersetzung durch Leerzeichen)
 + Whitespace-Zeichen zwischen Tokens werden gelöscht.
 + Kopieren der Header- und Quelldateien in den Quelltext kopieren (`#include`)
 + Einbinden von Konstanten (`#define`)
 + Extrahieren von Codebereichen mit einer bedingten Kompilierung (`#ifdef`, `#elseif`, ...)
 
-Letztgeannten 3 Abläufe werden durch den Entwickler spezifiziert. Dazu bedient er
+Letztgenannte 3 Abläufe werden durch den Entwickler spezifiziert. Dazu bedient er
 sich sogenannter Direktiven. Sie beginnen mit # und müssen nicht mit einem Semikolon abgeschlossen werden. Eventuell vorkommende Sonderzeichen in den Parametern müssen nicht escaped werden.
 
 ```c
@@ -96,14 +98,14 @@ sich sogenannter Direktiven. Sie beginnen mit # und müssen nicht mit einem Semi
 
 Include-Direktiven kennen Sie bereits aus unseren Beispielprogrammen. Damit binden
 wir Standardbibliotheken oder eigenen Source-Datei ein.
-Es gibt zwei Arten der #include-Direktive, nämlich
+Es gibt zwei Arten der `#include`-Direktive, nämlich
 
 ```c
 #include <Datei.h>
 #include "Datei.h"
 ```
 
-Die erste Anweisung sucht die Datei im Standard-Includeverzeichnis des Compilers, die zweite Anweisung sucht die Datei zuerst im Verzeichnis, in der sich die aktuelle Sourcedatei befindet; sollte dort keine Datei mit diesem Namen vorhanden sein, sucht sie ebenfalls im Standard-Includeverzeichnis.
+Die erste Anweisung sucht die Datei im Standard-Include-Verzeichnis des Compilers, die zweite Anweisung sucht die Datei zuerst im Verzeichnis, in der sich die aktuelle Sourcedatei befindet; sollte dort keine Datei mit diesem Namen vorhanden sein, sucht sie ebenfalls im Standard-Include-Verzeichnis.
 
 Mit dem Präprozessoraufruf werden die Inhalte der Header-Files in unseren Code
 kopiert. Dieser wird dadurch um ein vielfaches größer, umfasst nun aber alle
@@ -157,7 +159,6 @@ zu definieren, einen konkreten Wert zuzuordnen oder aber
 ```c
 #define SYMBOL
 #define KONSTANTE Wert
-#define ERDBESCHLEUNIGUNG (9.80665)
 #define MAKRO(Parameter ...) Ausdruck
 ```
 
@@ -247,7 +248,9 @@ und "Grün". Im Schachspiel sind nur die Figuren "Bauer", "Pferd", "Springer",
 
 Nun, dass können wir doch wunderbar mit unseren Präprozessordirektiven umsetzen!
 
-```cpp
+```cpp     Motivation.c
+#include <stdio.h>
+
 #define MONDAY     1
 #define TUESDAY    2
 #define WEDNESDAY  3
@@ -256,12 +259,15 @@ Nun, dass können wir doch wunderbar mit unseren Präprozessordirektiven umsetze
 #define SATURDAY   6
 #define SUNDAY     7
 
-void printDay(int day);
+int main(void) {
+  int day  = SATURDAY;
+  printf("Wochentag: %d\n", day);
+  return 0;
+}
 ```
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 Allerdings ist das Ganze recht unflexibel und der Evaluation des Compilers entzogen.
-
-> **Merke:** Vermeiden Sie Macros soweit wie möglich!
 
 Die Definition eines Aufzählungsdatentyps `enum` hat die Form wie im folgenden
 Beispiel:
@@ -269,10 +275,11 @@ Beispiel:
 ```cpp     Motivation.c
 #include <stdio.h>
 
+enum card {KARO, HERZ, PIK, KREUZ};            // Beispiel der Farben beim Skat
+// const int kreuz=0, pik=1, karo=2, herz=3;   // Analoge Anweisung
+
 int main(void) {
-  enum { karo, herz, pik, kreuz};                // Beispiel der Farben beim Skat
-  // const int kreuz=0, pik=1, karo=2, herz=3;   // Analoge Anweisung
-  int karte = karo;
+  enum card karte = KARO;
   printf("Wert der Karte: %d\n", karte);
   return 0;
 }
@@ -287,10 +294,11 @@ die bestimmte Wertigkeiten reflektieren.
 ```cpp    enum.c
 #include <stdio.h>
 
+// Beispiel der Farben beim Skat
+enum card {KARO=9, HERZ=10, PIK=11, KREUZ=12};
+
 int main(void) {
-       // Beispiel der Farben beim Skat
-  enum { karo=9, herz=10, pik=11, kreuz=12};
-  int karte = karo;
+  enum card karte = KARO;
   printf("Wert der Karte: %d\n", karte);
   return 0;
 }
@@ -303,11 +311,12 @@ zum Beispiel Konfigurationen möglich wie
 
 {{1}}
 ```cpp
-enum { karo=9, herz=10, pik=11, kreuz=12};
-enum { karo=9, herz, pik, kreuz};            // Gleiches Resultat
-enum { karo=9, herz, pik=123, kreuz};        // implizit kreuz = 124
+enum { KARO=9, HERZ=10, PIK=11, KREUZ=12};
+enum { KARO=9, HERZ, PIK, KREUZ};            // Gleiches Resultat
+enum { KARO=9, HERZ, PIK=123, KREUZ};        // implizit kreuz = 124
 ```
 
+{{2}}
 ```cpp    enumApp.c
 #include <stdio.h>
 
@@ -526,7 +535,33 @@ int main() {
 
 ### Arrays und Funktionen
 
-Beispiel Kopieroperation
+Wie erfolgt die Übergabe von `struct`s an Funktionen?
+
+```cpp                           structExample.c
+#include <stdio.h>
+
+enum MONAT {Januar, Februar, Maerz, April, Mai};
+
+struct datum
+{
+    int tag;
+    enum MONAT monat;
+    int jahr;
+};
+
+int vergleich(????){
+
+}
+
+int main() {
+  struct datum person_1 = {10, Januar, 2013};
+  struct datum person_2 = {10, Maerz, 1956};
+  if (vergleich(person_1, person_2)){
+    printf("Person 1 ist nach Person 2 geboren");
+  }
+}
+```
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 
 ### Arrays von Strukturen
@@ -534,7 +569,7 @@ Beispiel Kopieroperation
 Natürlich lassen sich die beiden erweiterten Datenformate auf der Basis von
 `struct` und Arrays miteinander kombinieren.
 
-```cpp
+```cpp      ArrayOfStruct.c
 #include <stdio.h>
 #include <string.h>
 
