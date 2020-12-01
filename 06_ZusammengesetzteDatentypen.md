@@ -121,7 +121,7 @@ int main(void) {
 }
 ```
 
-``` bash @output
+```
 ▶ gcc experiments.c -E -o experiments_pre.txt
 ```
 
