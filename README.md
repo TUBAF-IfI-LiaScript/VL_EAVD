@@ -97,17 +97,20 @@ Die roten Punkte stellen die Verteilung der Wochenendmessungen der vergangenen W
 
 ## Strukurierung der Veranstaltung
 
-| Nr. | Datum      | Inhalt                            | Link |
-|:--- | ---------- | --------------------------------- | ---- |
-| 0   | 20.10.2020 | Einführung                        |      |
-| 1   |            | Eingabe/Ausgabe, Datentypen       |      |
-| 2   |            | Operatoren                        |      |
-| 3   |            | Kontrollstrukturen                |      |
-| 4   |            | Funktionen & Zeiger               |      |
-| 5   |            | Komplexe Datentypen               |      |
-| 6   |            | Objektorientierter Programmierung |      |
-| 7   |            | Klassen                           |      |
-| 8   |            | Vererbung                         |      |
+| Nr.  | Datum      | Inhalt                           | Link |
+|:---- | ---------- | -------------------------------- | ---- |
+| 0    | 20.10.2020 | Einführung                       |      |
+| 1    | 27.10.2020 | Eingabe/Ausgabe, Datentypen      |      |
+| 2    | 03.11.2020 | Operatoren                       |      |
+| 3    | 10.11.2020 | Kontrollstrukturen               |      |
+| 4    | 17.11.2020 | Zeiger & Arrays                  |      |
+| 5    | 24.11.2020 | Funktionen                       |      |
+| 6    | 01.12.2020 | Komplexe Datentypen              |      |
+| 7    | 08.12.2020 | Standardalgorithmen              |      |
+| 8    | 15.12.2020 | Objektorientierte Programmierung |      |
+| 9    | 21.12.2020 | Vererbung                        |      |
+| 10   | 12.01.2021 |                                  |      |
+| .... |            |                                  |      |
 
 
 ## Organisatorisches
