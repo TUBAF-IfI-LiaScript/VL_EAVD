@@ -27,7 +27,7 @@ Das folgende Beispiel wiederholt die Verwendung von `typedef` und `stuct` innerh
 style="width: 80%; max-width: 460px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
-                  .-- 5s --. .-- 2s --. .-- 5s --.
+                  .-- 3s --. .-- 1s --. .-- 3s --.
                   |        | |        | |        |
                   |        v |        v |        v
                  .-.       .-.        .-.       .-.
@@ -35,7 +35,7 @@ style="width: 80%; max-width: 460px; display: block; margin-left: auto; margin-r
                  '-'       '-'        '-'       '-'
                   ^                              |
                   |                              |
-                  .------------- 2s -------------.
+                  .------------- 1s -------------.
 
                  RED  RED/YELLOW     GREEN     YELLOW
 ````
@@ -44,6 +44,7 @@ style="width: 80%; max-width: 460px; display: block; margin-left: auto; margin-r
   <wokwi-led color="red"    pin="13" port="B" label="13"></wokwi-led>
   <wokwi-led color="yellow" pin="12" port="B" label="13"></wokwi-led>
   <wokwi-led color="green"  pin="11" port="B" label="13"></wokwi-led>
+  <span id="simulation-time"></span>
 </div>
 
 ```cpp       TrafficLights.cpp
@@ -62,9 +63,9 @@ ampel_state_t state_table[4] = {
 //  |   next  |  A_yellow       |
 //  |    |    |   |    A_green  |
 //----------------------------------------------
-{   0,   1,   1,  0,    0,      5},
+{   0,   1,   1,  0,    0,      3},
 {   1,   2,   1,  1,    0,      1 },
-{   2,   3,   0,  0,    1,      5},
+{   2,   3,   0,  0,    1,      3},
 {   3,   0,   0,  1,    0,      1,}
 };
 
@@ -94,7 +95,9 @@ void loop() {
 
 **Inhalt der heutigen Veranstaltung**
 
-*
+* Zusammenfassender Überblick zum bisher gelernten
+* Darstellung von Basisalgorithmen in C
+* Realisierung von deren Implementierung in der Standardbibliothek
 
 **Fragen an die heutige Veranstaltung ...**
 
@@ -104,12 +107,63 @@ void loop() {
 * Was bedeutet der Begriff der Komplexität eines Algorithmus?
 * Welchem fundamentalen Konzept der Informatik unterliegen der Quicksort Algorithmus und die binäre Suche?
 
+## Rekursion
+
+Die Rekursion ist ein Aufruf einer Funktionen aus sich selbst heraus. Da bei einem Aufruf sich die Funktion wieder selbst aufruft, benötigt die Funktion wie bei den Schleifen eine Abbruchbedingung, damit die Selbstaufrufe nicht endlos sind.
+
+```cpp      Rekursion1.c
+#include<stdio.h>
+
+printLines(int x) {
+	if(x > 0) {
+		printf("\nZeile Nr. %d", x);
+		printLines(x-1);
+	}
+}
+
+int main() {
+	printLines(5);
+	return 0;
+}
+```
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+
+Dieses Programm ist langsamer als eine konventionelle Darstellung in einer Schleife, weil mit dem Aufruf jeder Funktion ein eigener Speicherplatz zum Anlegen von Parametern, lokalen Variablen, Rückgabewerten und Rücksprungadressen belegt wird.
+
+Gleichzeitig steigt aber die Lesbarkeit und Kompaktheit des Codes! 
+
+```cpp      Rekursion2.c
+#include<stdio.h>
+
+int fakultaet(int x) {
+	if(x > 1) {
+		return x * fakultaet(x-1);
+	}else {
+		return 1;
+	}
+}
+
+int main() {
+	int a = 6;
+	printf("Fakultaet von %d ist %d\n", a, fakultaet(a));
+	return 0;
+}
+```
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+
+
 ## Algorithmusbegriff
 
+                   {{0-4}}
+********************************************************************************
 
-{{1}}
 Ein Algorithmus gibt eine strukturierte Vorgehensweise vor, um ein Problem zu lösen. Er implementiert Einzelschritte zur Abbildung von Eingabedaten auf Ausgabedaten.
 Algorithmen bilden die Grundlage der Programmierung und sind **unabhängig** von einer konkreten Programmiersprache. Algorithmen werden nicht nur maschinell durch einen Rechner ausgeführt sondern können auch von Menschen in „natürlicher“ Sprache formuliert und abgearbeitet werden.
+
+********************************************************************************
+
+                  {{1-4}}
+********************************************************************************
 
 1. Beispiel - Nassi-Shneiderman-Diagramm - Prüfung von Mineralen
 
@@ -117,13 +171,28 @@ Algorithmen bilden die Grundlage der Programmierung und sind **unabhängig** von
 
 [^1]: Anton Kubala, https://wiki.zum.de/wiki/Hauptseite
 
+********************************************************************************
+
+                  {{2-4}}
+********************************************************************************
+
  2. Beispiel - Funktionsdarstellung - Berechnung der Position
 
 $$ s(t) = \int_{0}^{t} v(t) dt + s_0 $$
 
+********************************************************************************
+
+                  {{3-4}}
+********************************************************************************
+
  3. Beispiel - Verbale Darstellung - Rezept
 
 *"Nehmen Sie ... Schneiden Sie ... Lassen Sie alles gut abkühlen ..."*
+
+********************************************************************************
+
+                  {{4-5}}
+********************************************************************************
 
 Algorithmen umfassen Sequenzen (Kompositionen), Wiederholungen (Iterationen) und Verzweigungen (Selektionen) von Handlungsanweisungen.
 und besitzen die folgenden charakteristischen Eigenschaften:
@@ -137,9 +206,17 @@ und besitzen die folgenden charakteristischen Eigenschaften:
 
 Der erste für einen Computer gedachte Algorithmus (zur Berechnung von Bernoullizahlen) wurde 1843 von Ada Lovelace in ihren Notizen zu Charles Babbages Analytical Engine festgehalten. Sie gilt deshalb als die erste Programmiererin. Weil Charles Babbage seine Analytical Engine nicht vollenden konnte, wurde Ada Lovelaces Algorithmus allerdings nie darauf implementiert.
 
-_"„Die Grenzen der Arithmetik wurden in dem Augenblick überschritten, in dem die Idee zur Verwendung der [Programmier]Karten entstand, und die Analytical Engine hat keine Gemeinsamkeit mit schlichten Rechenmaschinen. Sie ist einmalig, und die Möglichkeiten, die sie andeutet, sind höchst interessant.“_
+*"„Die Grenzen der Arithmetik wurden in dem Augenblick überschritten, in dem die Idee zur Verwendung der [Programmier]Karten entstand, und die Analytical Engine hat keine Gemeinsamkeit mit schlichten Rechenmaschinen. Sie ist einmalig, und die Möglichkeiten, die sie andeutet, sind höchst interessant.“*
+
+********************************************************************************
 
 ## Suche des Maximums
+<!--
+  comment: Compare3ValuesWithMacro.cpp
+  ..............................................................................
+      1. Ersetzen Sie das Makros durch eine Funktionen!
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-->
 
 Bestimmen Sie aus drei Zahlenwerten den größten und geben Sie diesen aus $max(n_0, n_1, n_2)$.
 
@@ -170,14 +247,14 @@ int main(void) {
 
 Welche Verbesserungsmöglichkeit sehen Sie für diesen Lösungsansatz?
 
-| Aspekt         | Kritik                                                                |
-|:-------------- |:--------------------------------------------------------------------- |
-| Userinterface  | Es erfolgt keine Prüfung der Eingaben!                                |
-| Userinterface  | Das Ausgabeformat ist "unschön".                                      |
-| Softwaredesign | Die Funktion kann nur für 3 Werte verwendet werden.                   |
-| Softwaredesign | Die Ausgabe erfolgt in 3 sehr ähnlichen Aufrufen.                     |
+| Aspekt               | Kritik                                                                |
+|:-------------------- |:--------------------------------------------------------------------- |
+| Userinterface        | Es erfolgt keine Prüfung der Eingaben!                                |
+| Design               | Die Ausgabe erfolgt in 3 sehr ähnlichen Aufrufen.                     |
+| Algorithmus          | Es werden 6 Vergleichsoperationen und 3 logische Operationen genutzt. |
+| Wiederverwendbarkeit | Die Funktion implementiert die Suche für genau 3 Eingaben.            |
 
-Eine Lösung, die die genannten Kritikpunkte adressiert könnte wie folgt
+Eine Lösung, die die ersten 3 genannten Kritikpunkte adressiert, könnte wie folgt
 entworfen werden:
 
 ```cpp                       Compare3Values.c
@@ -320,7 +397,7 @@ Bewerten Sie diese und entwerfen Sie ggf. eine alternative Implementierung.
               {{0-1}}
 ********************************************************************************
 
-Lassen Sie uns die Idee der Max-Funktion nutzen, um das Array insgesammt zu
+Lassen Sie uns die Idee der Max-Funktion nutzen, um das Array insgesamt zu
 sortieren. Dazu wird in einer Schleife (Zeile 42) der maximale Wert bestimmt,
 wobei dessen Eintrag aus dem bestehenden Array mit einer -1 überschrieben
 wird.
@@ -459,9 +536,9 @@ int main(void) {
 
 Worin unterscheidet sich dieser Ansatz von dem vorhergehenden?
 
-Um das erste (und größte) Element $n$ ganz nach rechts zu bewegen, werden n − 1
-Vertauschungen vorgenommen, für das nächstfolgende n-2 usw. Für die Gesamtanzahl
-muss also die Summe über k von 1 bis n-1 gebildet werden. Mit der Summenformel
+Um das erste (und größte) Element $n$ ganz nach rechts zu bewegen, werden $n − 1$
+Vertauschungen vorgenommen, für das nächstfolgende $n-2$ usw. Für die Gesamtanzahl
+muss also die Summe über $k$ von 1 bis n-1 gebildet werden. Mit der Summenformel
 von Gauss kann gezeigt werden, dass im Falle der umgekehrt sortierten Liste werden maximal $\frac{n\cdot (n-1)}{2}$ Vertauschungen zuführen sind.
 
 Welches Optimierungspotential sehen Sie?
@@ -486,7 +563,7 @@ Quicksort ist ein rekursiver Sortieralgorithmus, der die zu sortierende Liste in
 
 Die Buchstabenfolge „einbeispiel“ soll alphabetisch sortiert werden.
 
-Ausgangssituation nach Initialisierung von i und j, das Element rechts (l) ist das Pivotelement:
+Ausgangssituation nach Initialisierung von i und j, das Element rechts ("l") ist das Pivotelement:
 
 ```
   e i n b e i s p i e l
@@ -605,7 +682,28 @@ Die C-Standardbibliothek umfasst in der `stdlib.h` eine Implementierung von quic
 ********************************************************************************
 
 ## Suchen
-
+<!--
+  comment: Search.cpp
+  ..............................................................................
+      1. Ersetzen Sie die Konventionelle Suche durch eine rekursive Baumsuche!
+      ```cpp
+      int binsearch (int *ptr, int links, int rechts, int wert) {
+          if (links > rechts) {
+              return -1;
+          }
+          int mitte = (rechts+links)/2;
+          if (ptr[mitte] == wert) {
+              return mitte;
+          }
+          if (wert < ptr[mitte]) {
+              return binsearch(ptr, links, mitte - 1, wert);
+          } else {
+              return binsearch(ptr, mitte + 1, rechts, wert);
+          }
+      }
+      ```
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-->
 Suchen beschreibt die Identifikation von bestimmten Mustern in Daten. Das Spektrum kann dabei von einzelne Zahlenwerten oder Buchstaben bis hin zu komplexen zusammengesetzten Datentypen reichen.
 
 Wie würden Sie vorgehen, um in einer sortierten List einen bestimmten Eintrag zu
@@ -656,19 +754,11 @@ void printArray(int *ptr){
 }
 
 // Rekursive Suche
-int binsearch (int *ptr, int links, int rechts, int wert) {
-    if (links > rechts) {
-        return -1;
-    }
-    int mitte = (rechts+links)/2;
-    if (ptr[mitte] == wert) {
-        return mitte;
-    }
-    if (wert < ptr[mitte]) {
-        return binsearch(ptr, links, mitte - 1, wert);
-    } else {
-        return binsearch(ptr, mitte + 1, rechts, wert);
-    }
+int search (int *ptr, int pattern) {
+  for (int i = 0; i< SAMPLES; i++){
+    if (ptr[i] == pattern) return i;
+  }
+  return -1;
 }
 
 int main (void) {
@@ -677,11 +767,12 @@ int main (void) {
   bubble(samples);
   printArray(samples);
   int pattern = 36;
-  int index = binsearch (samples, 0, SAMPLES-1, pattern);
+  int index = search (samples, pattern);
+  //int index = binsearch (samples, 0, SAMPLES-1, pattern);
   if (-1==index){
-    printf("Nicht gefunden!");
+    printf("\nPattern %d nicht gefunden!", pattern);
   }else{
-    printf("Index von %d ist %d",pattern, index);
+    printf("\nIndex von %d ist %d",pattern, index);
   }
   return(EXIT_SUCCESS);
 }
@@ -702,7 +793,7 @@ Gleichheit vor.
 
 ```c
 void qsort(
-   void *array,        // Anfangsadresse des Vektors
+   void *array,        // Anfangsadresse des Arrays
    size_t n,           // Anzahl der Elemente zum Sortieren
    size_t size,        // Größe des Datentyps, der sortiert wird
    int (*vergleich_func)(const void*, const void*)   );
@@ -778,14 +869,14 @@ int main (void) {
 ## Beispiel des Tages
 
 Schätzen Sie die Größe der Kreiszahl $\pi$ mittels Monte-Carlo-Simulation ab.
-Nutzen Sie dafür den Ansatz, dass bei der projektion von $n$ gleichverteilten
+Nutzen Sie dafür den Ansatz, dass bei der Projektion von $n$ gleichverteilten
 Paaren $(x,y)$ $\pi$ über den Anteil zwischen denjenigen Paaren innerhalb eines
 Quadranten unter dem Einheitskreis und denjenigen außerhalb bestimmt werden
 kann.
 
 Die Fläche des Quadrates ist $4$, der Flächenanteil des Kreises beträgt $1^2\cdot\pi$. Somit gilt
 
-$$\pi \approx \frac{count_{in}}{count_{out}}\cdot 4$$
+$$\pi \approx \frac{count_{in}}{count_{all}}\cdot 4$$
 
 ```cpp                          Integral.c
 #include <stdio.h>
@@ -816,47 +907,4 @@ int main(void) {
   return EXIT_SUCCESS;
 }
 ```
-```js -Visualization
-var i = 0;
-var Lines = data.Result.split("\n");
-var n = new Array(Lines.length).fill(0);
-var pi_est = new Array(Lines.length).fill(0);
-var pi = new Array(Lines.length).fill(0);
-
-for (i=0; i<Lines.length; i++){
-  var values = Lines[i].split(', ');
-  n[i] = parseInt(values[0], 10);
-  pi[i] = parseFloat(values[1]);
-  pi_est[i] = parseFloat(values[2]);
-}
-
-var layout = {
-     xaxis: {
-          title: {
-              text: 'Number of samples',
-                 }
-    },
-    showlegend: true,
-    legend: { x: 1, xanchor: 'right', y: 1},
-    tracetoggle: false,
-};
-
-var trace1 = {
-  x: n,
-  y: pi_est,
-  name: 'Annaeherung von Pi',
-  mode: 'markers'
-};
-
-var trace2 = {
-  x: n,
-  y: pi,
-  name: 'Pi',
-  mode: 'line'
-};
-
-Plotly.newPlot('visualizationPi', [trace1, trace2], layout);
-console.log("Aus Maus")
-```@Rextester._eval_(@uid, @C,`@0`,`@1`,`-Wall -std=gnu99 -O2 -o a.out source_file.c`,`@input(1)`)
-
-<div id="visualizationPi"></div>
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
