@@ -380,7 +380,7 @@ int maxValue(int *ptr, int *count){
   for (int i = 0; i< SAMPLES; i++){
       if (ptr[i] > max) {
         max = ptr[i];
-        *count = 0;
+        *count = 1;
       }
       if (ptr[i] == max) {
         (*count)++;
