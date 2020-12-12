@@ -672,14 +672,16 @@ class Datum
 
 ### Aufteilung in Dateien
 
-```c     -Datum.h
+```cpp     -Datum.h
 #ifndef DATUM_H_INCLUDED
 #define DATUM_H_INCLUDED
 /* ^^ these are the include guards */
 
+#include <iostream>
+
 class Datum
 {
-  private:
+  public:
     int tag;
     int monat;
     int jahr;
@@ -692,7 +694,7 @@ class Datum
 
 #endif
 ```
-```c     -Person.h
+```cpp     -Person.h
 #ifndef PERSON_H_INCLUDED
 #define PERSON_H_INCLUDED
 
@@ -711,7 +713,7 @@ class Person{
 
 #endif
 ```
-```c     -Person.cpp
+```cpp     -Person.cpp
 #include "Person.h"
 
 void Person::print(){
@@ -732,7 +734,7 @@ int Person::zumGeburtstagAnrufen() {
 }
 
 ```
-```c     +main.cpp
+```cpp     +main.cpp
 #include <iostream>
 #include <string>
 #include "Person.h"
