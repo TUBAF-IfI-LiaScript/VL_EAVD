@@ -754,4 +754,4 @@ int main() {
   GeburtstagsCheck(meineFreunde, 2);
 }
 ```
-@LIA.eval(`["Datum.h", "Person.h", "Person.cpp", "main.cpp"]`, `gcc -Wall main.cpp Person.cpp Datum.h -o a.out`, `./a.out`)
+@LIA.eval(`["Datum.h", "Person.h", "Person.cpp", "main.cpp"]`, `g++ -Wall main.cpp Person.cpp Datum.h -o a.out`, `./a.out`)
