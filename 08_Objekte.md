@@ -693,7 +693,7 @@ class Datum
 
 #endif
 ```
-```c     -Person.h
+```cpp     -Person.h
 #ifndef PERSON_H_INCLUDED
 #define PERSON_H_INCLUDED
 
@@ -712,7 +712,7 @@ class Person{
 
 #endif
 ```
-```c     -Person.cpp
+```cpp     -Person.cpp
 #include "Person.h"
 
 void Person::print(){
@@ -733,7 +733,7 @@ int Person::zumGeburtstagAnrufen() {
 }
 
 ```
-```c     +main.cpp
+```cpp     +main.cpp
 #include <iostream>
 #include <string>
 #include "Person.h"
