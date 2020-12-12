@@ -584,7 +584,7 @@ class Datum{
     }
 };
 
-class Freund{
+class Person{
   public:
     Datum geburtstag;
     std::string name;
@@ -609,7 +609,7 @@ class Freund{
 
 int main()
 {
-  Freund freundA = {.geburtstag = {1, 2, 2020}, .name = "Peter"};
+  Person freundA = {.geburtstag = {1, 2, 2020}, .name = "Peter"};
   freundA.print();
   if (freundA.zumGeburtstagAnrufen() == 1){
       std::cout << "Zum Geburtstag gratuliert!" <<std::endl;
@@ -641,10 +641,18 @@ class Datum
       int monat;
       int jahr;
     public:
-      void setTag(int _tag){tag=_tag;}
-      void setMonat(int _monat){monat=_monat;}
-      void setJahr(int _jahr){jahr=_jahr;}
-      int getTag(){return tag;}
+      void setTag(int _tag){
+        tag=_tag;
+      }
+      void setMonat(int _monat){
+        monat=_monat;
+      }
+      void setJahr(int _jahr){
+        jahr=_jahr;
+      }
+      int getTag(){
+        return tag;
+      }
       //analog monat und jahr
       void ausgabe()
       {
@@ -685,55 +693,65 @@ class Datum
 #endif
 ```
 ```c     -Person.h
-#include <stdio.h>
-#include "Datum.h"
-
 #ifndef PERSON_H_INCLUDED
 #define PERSON_H_INCLUDED
 
-struct Person
-{
-    char name[25];
-    struct Datum Geburtstag;
-    int telefonnummer;
-};
+#include <iostream>
+#include <string>
+#include "Datum.h"
 
-void printPerson(struct Person freundA);
+class Person{
+  public:
+    Datum geburtstag;
+    std::string name;
+
+    void print();
+    int zumGeburtstagAnrufen();
+};
 
 #endif
 ```
-```c     -Person.c
+```c     -Person.cpp
 #include "Person.h"
 
-void printPerson(struct Person freundA){
-  printf("%s - %d.%d.%d\n",freundA.name,
-                           freundA.Geburtstag.tag,
-                           freundA.Geburtstag.monat,
-                           freundA.Geburtstag.jahr);
+void Person::print(){
+    std::cout << name << ": ";
+    geburtstag.print();
+    std::cout <<std::endl;
+}
+
+int Person::zumGeburtstagAnrufen() {
+   time_t t = time(NULL);
+   tm* tPtr = localtime(&t);
+   if ((geburtstag.tag == tPtr->tm_mday) &&
+       (geburtstag.monat == (tPtr->tm_mon + 1))) {
+      std::cout << "\"Weil heute Dein ... \"" <<std::endl;
+      return 1;
+   }
+   else return -1;
 }
 
 ```
-```c     +main.c
+```c     +main.cpp
+#include <iostream>
+#include <string>
 #include "Person.h"
 
-void printFreundeskreis(struct Person liste [], int size){
+void GeburtstagsCheck(Person liste [], int size){
   printf("Meinen Freunde: \n");
   for (int i = 0; i < size; i++){
-    printPerson(liste[i]);
+    liste[i].zumGeburtstagAnrufen();
   }
 }
 
 int main() {
-  struct Person A = {"Peter", {1, 1, 2010}, 1234};
-  struct Person B = {.name = "Paul",
-              .Geburtstag = {10, 1, 2013},
-              .telefonnummer = 56756 };
-  printPerson(A);
+  Person freundA = {.geburtstag = {.tag = 1, .monat = 2, .jahr = 2020}, .name = "Peter"};
+  Person freundB = {.geburtstag = {10, 1, 2013}, .name = "Paul"};
 
-  struct Person meineFreunde[2] = {0};
-  meineFreunde[0] = A;
-  meineFreunde[1] = B;
-  printFreundeskreis(meineFreunde, 2);
+  Person meineFreunde[2];
+  meineFreunde[0] = freundA;
+  meineFreunde[1] = freundB;
+  GeburtstagsCheck(meineFreunde, 2);
 }
 ```
-@LIA.eval(`["Datum.h", "Person.h", "Person.c", "main.c"]`, `gcc -Wall main.c Person.c Datum.h -o a.out`, `./a.out`)
+@LIA.eval(`["Datum.h", "Person.h", "Person.cpp", "main.cpp"]`, `gcc -Wall main.cpp Person.cpp Datum.h -o a.out`, `./a.out`)
