@@ -673,18 +673,19 @@ class Datum
 ### Aufteilung in Dateien
 
 ```c     -Datum.h
+#include <iostream>
+
 #ifndef DATUM_H_INCLUDED
 #define DATUM_H_INCLUDED
 /* ^^ these are the include guards */
 
 class Datum
 {
-  private:
+  public:
     int tag;
     int monat;
     int jahr;
 
-  public:
     void print(){
         std::cout << tag << "." << monat <<"." << jahr <<std::endl;
     }
@@ -740,7 +741,12 @@ int Person::zumGeburtstagAnrufen() {
 void GeburtstagsCheck(Person liste [], int size){
   printf("Meinen Freunde: \n");
   for (int i = 0; i < size; i++){
-    liste[i].zumGeburtstagAnrufen();
+    if (liste[i].zumGeburtstagAnrufen() == 1){
+        std::cout << "Zum Geburtstag gratuliert!" <<std::endl;
+    }
+    else{
+        std::cout << liste[i].name << " hat heute nicht Geburtstag" <<std::endl;
+    }
   }
 }
 
@@ -754,4 +760,4 @@ int main() {
   GeburtstagsCheck(meineFreunde, 2);
 }
 ```
-@LIA.eval(`["Datum.h", "Person.h", "Person.cpp", "main.cpp"]`, `gcc -Wall main.cpp Person.cpp Datum.h -o a.out`, `./a.out`)
+@LIA.eval(`["Datum.h", "Person.h", "Person.cpp", "main.cpp"]`, `g++ -Wall main.cpp Person.cpp Datum.h -o a.out`, `./a.out`)
