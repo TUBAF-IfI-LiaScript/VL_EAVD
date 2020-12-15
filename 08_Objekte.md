@@ -51,8 +51,6 @@ Nehmen wir an, dass Sie einen Code entwickeln, der unterschiedliche Implementier
 ```cpp                 ZusammengesetzteDatenstrukturen.c
 #include <stdio.h>
 
-#define ARRAYSIZE 5
-
 struct Datum
 {
     int tag;
@@ -70,7 +68,6 @@ int bestimmeWochentag(struct Datum Tag){
   return 1;
 }
 
-
 struct Person
 {
     char name[25];
@@ -87,7 +84,7 @@ void printFreund(Freund freundA){
                            freundA.geburtstag.jahr);
 }
 
-int zumGeburtstagAnrufen(Freund freund){
+int zumGeburtstagAnrufen(Freund freund, struct Datum heute){
   //
   return 1;
 }
@@ -98,8 +95,6 @@ void printFreundeskreis(Freund liste[], int size){
     printFreund(liste[i]);
   }
 }
-
-
 
 int main() {
   Freund A = {"Peter", 1,1,2010, 1234};
@@ -131,7 +126,7 @@ Wir zerlegen unser Projekt in einzelne Dateien! Diese können wir einfach in and
 | `struct Datum`       | `int berechneZeitDiff(struct Datum TagA, struct Datum TagB)`  |
 |                      | `int bestimmeWochentag(struct Datum Tag)`                     |
 |                      | ...                                                           |
-| `struct Person`      | `int zusammenFeiern(freund FreundA, freund FreundA)`          |
+| `struct Person`      | `int printFreund(freund FreundA)`          |
 |                      | `int zumGeburtstagAnrufen(freund Freund)`                     |
 |                      | ...                                                           |
 | `FreundeskreisListe` | `void printFreundeskreis(FreundeskreisListe liste, int size)` |
@@ -251,7 +246,7 @@ void printFreund(Freund freundA){
                            freundA.geburtstag.jahr);
 }
 
-int zumGeburtstagAnrufen(Freund freund){
+int zumGeburtstagAnrufen(Freund freundm, struct Datum heute){
   //
   return 1;
 }
@@ -303,14 +298,16 @@ Analog zu C ist C++ eine von der ISO genormte Programmiersprache. Sie wurde ab 1
 C++ erweitert die Abstraktionsmöglichkeiten erlaubt aber trotzdem eine
 maschinennahe Programmierung. Der Standard definiert auch eine Standardbibliothek, zu der wiederum verschiedene Implementierungen existieren.
 
-| Jahr | Entwicklung                                         |
-|:-----|:----------------------------------------------------|
+| Jahr | Entwicklung                                                                                                                                  |
+|:---- |:-------------------------------------------------------------------------------------------------------------------------------------------- |
+| 197? | Anfang der 70er Jahre entsteht die Programmiersprache C                                                                                      |
+| ...        |                                                                                                                                         |
 | 1979 | „C with Classes“ -  Klassenkonzept mit Datenkapselung, abgeleitete Klassen, ein strenges Typsystem, Inline-Funktionen und Standard-Argumente |
-| 1983 | "C++" - Überladen von Funktionsnamen und Operatoren, virtuelle Funktionen, Referenzen, Konstanten, eine änderbare Freispeicherverwaltung |
-| 1985 | Referenzversion                                     |
-| 1989 | Version 2.0 - Mehrfachvererbung, abstrakte Klassen, statische Elementfunktionen, konstante Elementfunktionen|
-| 1998  | ISO/IEC 14882:1998 oder C++98                      |
-| ...   | Kontinuierliche Erweiterungen C++11, C++20, ...    |
+| 1983 | "C++" - Überladen von Funktionsnamen und Operatoren, virtuelle Funktionen, Referenzen, Konstanten, eine änderbare Freispeicherverwaltung     |
+| 1985 | Referenzversion                                                                                                                              |
+| 1989 | Version 2.0 - Mehrfachvererbung, abstrakte Klassen, statische Elementfunktionen, konstante Elementfunktionen                                 |
+| 1998 | ISO/IEC 14882:1998 oder C++98                                                                                                                |
+| ...  | Kontinuierliche Erweiterungen C++11, C++20, ...                                                                                              |
 
 ### Konzeptionelle Unterschiede
 
@@ -373,7 +370,7 @@ Mehr zu `iostream` unter
 
 C++ implementiert einen separaten `string`-Datentyp (Klasse), die ein deutliche komfortableren Umgang mit Texten erlaubt. Beim Anlegen eines muss nicht angegeben werden, wie viele Zeichen reserviert werden sollen. Zudem könenn Strings einfach zuweisen und vergleichen werden, wie es für andere Datentypen üblich ist. Die C `const char *` Mechanismen funktionieren aber auch hier.
 
-```cpp   iostream.cpp
+```cpp   string.cpp
 #include <iostream>
 #include <string>
 
@@ -402,7 +399,7 @@ rv++; //unterscheidet sich in Gebrauch nicht von einer Variable
 
 Zeiger (Wiederholung)
 
-```cpp
+```cpp   pointer.cpp
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -424,7 +421,7 @@ int main(void) {
 
 Referenzen
 
-```
+```cpp references.cpp
 #include <iostream>
 
 void tauschen(char &anna, char &hanna){
@@ -672,6 +669,8 @@ class Datum
 
 ### Aufteilung in Dateien
 
+Natürlich können wir die Konzepte der Modularisierung auch unter C++ umsetzen. Unser kleines Beispiel umfasst dann 2 Klassen, die von einer `main.cpp` aufgerufen werden.
+
 ```c     -Datum.h
 #include <iostream>
 
@@ -761,3 +760,33 @@ int main() {
 }
 ```
 @LIA.eval(`["Datum.h", "Person.h", "Person.cpp", "main.cpp"]`, `g++ -Wall main.cpp Person.cpp Datum.h -o a.out`, `./a.out`)
+
+## Beispiel des Tages
+
+> **Aufgabe: ** Erweitern Sie das Beispiel um zusätzliche Funktionen, wie die Berechnung des Umfanges. Überwachen Sie die Eingaben der Höhe und der Breite. Sofern diese negativ sind, sollte die Eingabe zurückgewiesen werden.
+
+```cpp   Rectangle
+#include <iostream>
+using namespace std;
+
+class Rectangle {
+  private:
+    int width, height;
+  public:
+    void set_values (int,int);          // Deklaration
+    int area() {return width*height;}   // Deklaration und Defintion
+};
+
+void Rectangle::set_values (int x, int y) {
+  width = x;
+  height = y;
+}
+
+int main () {
+  Rectangle rect;
+  rect.set_values (3,4);
+  cout << "area: " << rect.area();
+  return 0;
+}
+```
+@LIA.eval(`["main.c"]`, `g++ -Wall main.c -o a.out `, `./a.out`)
