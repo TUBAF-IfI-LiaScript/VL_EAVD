@@ -22,7 +22,6 @@ Die interaktive Version des Kurses ist unter diesem [Link](https://liascript.git
 
 ```cpp   Rectangle
 #include <iostream>
-using namespace std;
 
 class Rectangle {
   private:
@@ -40,7 +39,7 @@ void Rectangle::set_values (int x, int y) {
 int main () {
   Rectangle rect;
   rect.set_values (3,4);
-  cout << "area: " << rect.area();
+  std::cout << "area: " << rect.area();
   return 0;
 }
 ```
@@ -316,8 +315,6 @@ int main()
 ```
 @LIA.eval(`["main.c"]`, `g++ -Wall main.c -o a.out`, `./a.out`)
 
-Für Methoden zeigt sich d
-
 ```cpp                     ostream.cpp
 #include <iostream>
 #include <fstream>
@@ -371,7 +368,7 @@ int main()
 
 > **Merke: ** Der Rückgabedatentyp trägt nicht zur Unterscheidung der Methoden bei. Unterscheidet sich die Signatur nur in diesem Punkt, "meckert" der Compiler.
 
-## Konstruktoren
+## Initalisierung/Zerstören eines Objektes
 
 Die Klasse spezifiziert unter anderem (!) welche Daten in den Instanzen/Objekten zusammenfasst werden. Wie aber erfolgt die Initialisierung? Bisher haben wir die Daten bei der Erzeugung der Instanz übergeben.
 
@@ -389,19 +386,19 @@ class Student{
 
 // Implementierung der Methode
 void Student::ausgabeMethode(std::ostream& os){
-    os << name << " " << ort << " " << alter;
+    os << name << " " << ort << " " << alter << "\n";
 }
 
 int main()
 {
   Student bernhard {"Cotta", 25, "Zillbach"};
-  bernhard.ausgabe();
+  bernhard.ausgabeMethode(std::cout);
 
   Student alexander { .name = "Humboldt" , .ort = "Berlin"  };
-  alexander.ausgabe();
+  alexander.ausgabeMethode(std::cout);
 
   Student unbekannt;
-  unbekannt.ausgabe();
+  unbekannt.ausgabeMethode(std::cout);
 
   return EXIT_SUCCESS;
 }
@@ -462,7 +459,7 @@ Beim Aufruf `Student bernhard {"Cotta", 25, "Zillbach"};` erzeugt der Compiler e
 
 Entfernen Sie den Kommentar in Zeile 11 und der Compiler macht Sie darauf aufmerksam.
 
-```cpp                     struct.cpp
+```cpp                     defaultConstructor.cpp
 #include <iostream>
 
 class Student{
@@ -471,20 +468,20 @@ class Student{
     int alter;
     std::string ort;
 
-    void ausgabeMethode(std::ostream& os); // Deklaration der Methode
+    void ausgabeMethode(std::ostream& os){
+        os << name << " " << ort << " " << alter;
+    }
 
     //Student();
 };
 
 // Implementierung der Methode
-void Student::ausgabeMethode(std::ostream& os){
-    os << name << " " << ort << " " << alter;
-}
+
 
 int main()
 {
   Student bernhard {"Cotta", 25, "Zillbach"};
-  bernhard.ausgabe();
+  bernhard.ausgabeMethode(std::cout);
   return EXIT_SUCCESS;
 }
 ```
@@ -511,9 +508,7 @@ Die zuvor beschriebene Methodenüberladung kann auch auf die Konstruktoren angew
 + ohne spezfische Vorgabe wird der Standardinitialisierungswert verwendt (Ganzzahlen 0, Gleitkomma 0.0, Strings "")
 + die Vorgabe eines indivduellen Default-Wertes (vgl. Zeile 5)
 
-### asdfas
-
-```cpp                     struct.cpp
+```cpp                     constructor.cpp
 #include <iostream>
 
 class Student{
@@ -522,9 +517,10 @@ class Student{
     int alter;
     std::string ort; // = "Freiberg"
 
-    void ausgabe(){
-        std::cout << name << " " << ort << " " << alter  << std::endl;
+    void ausgabeMethode(std::ostream& os){
+        os << name << " " << ort << " " << alter << "\ņ";
     }
+
     Student(std::string name, int alter, std::string ort): name(name), alter(alter), ort(ort)
     {
     }
@@ -537,10 +533,10 @@ class Student{
 int main()
 {
   Student bernhard {"Cotta", 25, "Zillbach"};
-  bernhard.ausgabe();
+  bernhard.ausgabeMethode(std::cout);
 
   Student alexander = Student("Humboldt");
-  alexander.ausgabe();
+  alexander.ausgabeMethode(std::cout);
 
   return EXIT_SUCCESS;
 }
@@ -562,13 +558,14 @@ Student(int a, std::string o): Student ("unknown", a, o) {};
 ```cpp                     Destructor.cpp
 #include <iostream>
 
-struct Student{
-  std::string name;
-  int alter;
-  std::string ort;
+class Student{
+  public:
+    std::string name;
+    int alter;
+    std::string ort;
 
-  Student(std::string n, int a, std::string o);
-  ~Student();
+    Student(std::string n, int a, std::string o);
+    ~Student();
 };
 
 Student::Student(std::string n, int a, std::string o): name{n}, alter{a}, ort{o} {}
@@ -595,12 +592,18 @@ Destruktoren werden aufgerufen, wenn eines der folgenden Ereignisse eintritt:
 
 Einen Destruktor explizit aufzurufen, ist selten notwendig (oder gar eine gute Idee!).
 
-### Anwendung
+## Anwendung
 
-1. Ansteuern einer mehrfarbigen LED - [Link](https://microsoft.github.io/azure-iot-developer-kit/docs/apis/led/)
+1. Ansteuern einer mehrfarbigen LED
+
+    Die Auflistung der Memberfunktionen der entsprechenden Klasse finden Sie unter [Link](https://microsoft.github.io/azure-iot-developer-kit/docs/apis/led/)
 
 2. Ansteuern eines Displays
 
+     [Link](https://microsoft.github.io/azure-iot-developer-kit/docs/apis/display/)
 
+      Ein Tool für die Konvertierung von BMP zur Darstellung auf dem Display ist unter http://javl.github.io/image2cpp/ verfügbar.
 
-http://javl.github.io/image2cpp/
+## Fröhliche Weihnachten
+
+Die Arbeitsgruppe Softwareentwicklung und Robotik wünscht Ihnen ein besinnliches Weihnachtsfest 2020!
