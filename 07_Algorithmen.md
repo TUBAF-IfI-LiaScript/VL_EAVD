@@ -130,7 +130,7 @@ int main() {
 
 Dieses Programm ist langsamer als eine konventionelle Darstellung in einer Schleife, weil mit dem Aufruf jeder Funktion ein eigener Speicherplatz zum Anlegen von Parametern, lokalen Variablen, Rückgabewerten und Rücksprungadressen belegt wird.
 
-Gleichzeitig steigt aber die Lesbarkeit und Kompaktheit des Codes! 
+Gleichzeitig steigt aber die Lesbarkeit und Kompaktheit des Codes!
 
 ```cpp      Rekursion2.c
 #include<stdio.h>
@@ -822,7 +822,7 @@ Analog zu `qsort()` wird ein Funktionspointer *compar() der den Vergleich des
 #include <time.h>
 
 #define MAXVALUE 100
-#define MINVALUE 5
+#define MINVALUE 85
 #define SAMPLES 20
 
 // Generieren der Zufallszahlen
@@ -853,11 +853,13 @@ int main (void) {
   generateRandomArray(samples);
   qsort(samples, SAMPLES, sizeof(int), cmpfunc);
   printArray(samples);
-  int pattern = 36;
+  int pattern = 90;
   int *item;
   item = (int*) bsearch (&pattern, samples, SAMPLES, sizeof(int), cmpfunc);
   if( item != NULL ) {
-    printf("Index von %d ist %d", pattern, *item);
+    printf("%d an der Speicherstelle %p gefunden!\n", pattern, item);
+    printf("Das Array beginnt im Speicher bei %p\n", samples);
+    printf("Der Index von %d beträgt folglich %d\n", pattern, item - samples);
   }else{
     printf("%d nicht gefunden!", pattern);
   }
@@ -865,6 +867,8 @@ int main (void) {
 }
 ```
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+
+`bsearch` evaluiert die Existenz eines Eintrages, dabei ist es wichtig, den Rückgabewert auf den richtigen Typ des Eintrages zu casten.
 
 ## Beispiel des Tages
 
