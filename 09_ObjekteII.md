@@ -598,11 +598,11 @@ Einen Destruktor explizit aufzurufen, ist selten notwendig (oder gar eine gute I
 
     Die Auflistung der Memberfunktionen der entsprechenden Klasse finden Sie unter [Link](https://microsoft.github.io/azure-iot-developer-kit/docs/apis/led/)
 
-2. Ansteuern eines Displays
+2. Abfragen eines Sensors
 
-     [Link](https://microsoft.github.io/azure-iot-developer-kit/docs/apis/display/)
+    Die Auflistung der Memberfunktionen der entsprechenden Klassen finden Sie unter [Link](https://microsoft.github.io/azure-iot-developer-kit/docs/apis/)
 
-      Ein Tool für die Konvertierung von BMP zur Darstellung auf dem Display ist unter http://javl.github.io/image2cpp/ verfügbar.
+Der Beispielcode für die Anwendungen ist in den `examples` Ordnern des Projektes enthalten.
 
 ## Fröhliche Weihnachten
 
