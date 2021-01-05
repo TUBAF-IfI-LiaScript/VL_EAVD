@@ -382,7 +382,7 @@ int maxValue(int *ptr, int *count){
         max = ptr[i];
         *count = 1;
       }
-      if (ptr[i] == max) {
+      else if (ptr[i] == max) {
         (*count)++;
       }
   }
