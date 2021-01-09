@@ -382,7 +382,7 @@ int maxValue(int *ptr, int *count){
         max = ptr[i];
         *count = 1;
       }
-      else if (ptr[i] == max) {
+      if (ptr[i] == max) {
         (*count)++;
       }
   }
@@ -391,6 +391,27 @@ int maxValue(int *ptr, int *count){
 ```
 
 Bewerten Sie diese und entwerfen Sie ggf. eine alternative Implementierung.
+
+Für alle, die mit dem Knobeln fertig sind, hier noch eine kurze Auflösung. Dadurch, dass beim 
+Auftreten eines neuen Maximums in der ersten Verzweigung max dem neuen Wert zugeordnet wird,
+rutschen wir automatisch auch in die zweite Verzweigung, wodurch der Wert von max immer eins
+größer sein wird, als wir wollen. Eine Lösung von vielen für diese Problematik ist folgende:
+
+```cpp
+int maxValue(int *ptr, int *count){
+  int max = 0;
+  for (int i = 0; i< SAMPLES; i++){
+      if (ptr[i] > max) {
+        max = ptr[i];
+        *count = 1;
+      }
+      else if (ptr[i] == max) {
+        (*count)++;
+      }
+  }
+  return max;
+}
+```
 
 ## Sortieren
 
