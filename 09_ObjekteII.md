@@ -289,7 +289,7 @@ Beachten Sie einen zweiten Effekt im oben genannten Beispiel! Wenn Sie die Zeile
 
 C++ eröffnet mit dem Überladen von Funktionen neue Möglichkeiten. Dieser Mechanismus lässt sich auf Funktionen und Methoden anwenden.
 
-```c                     overwrite.c
+```c                     overwrite.cpp
 #include <stdio.h>
 
 int Divide(int dividend, int divisor){
