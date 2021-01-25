@@ -26,7 +26,7 @@ Screen.init();
 void loop()
 {
   accelgyroSensor.getXAxes(xAxesData);
-  //Serial.printf("Accelerometer X Axes: x=%d, y=%d, z=%d\n", xAxesData[0], xAxesData[1], xAxesData[2]);
-  Serial.printf("%d %d %d\n", xAxesData[0], xAxesData[1], xAxesData[2]);
+  Serial.printf("X_Axes:%d, Y_Axes:%d, Z_Axes:%d\n", xAxesData[0], xAxesData[1], xAxesData[2]);
+  //Serial.printf("%d %d %d\n", xAxesData[0], xAxesData[1], xAxesData[2]);
   delay(50);
 }
