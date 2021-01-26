@@ -45,7 +45,8 @@ void loop() {
 
 * Worin liegen die Unterschiede zwischen der Behandlung von Zeichenketten mit `char`-Arrays und spezifischen `String`-Klassen?
 * Warum ist die Konfiguration der Baud-Rate beim Seriellen Datenaustausch mit dem Mikrocontroller so wichtig?
-* Welc
+* Wie kann die Formatierung von Zeichenketten effektiv umgesetzt werden?
+* Wie können wir die Daten im Nachgang weiter verarbeiten?
 
 ## Grundlagen
 
