@@ -223,11 +223,19 @@ Eine gute Übersicht zur Arbeit mit C-Strings im Kontext des Arduino ist unter [
 
 **Zeichenkette - Variante 2 - string Klasse**
 
-```cpp       avrlibc.cpp
+Die Dokumentation der abgespeckten Version der C++ String Klasse für Arduino findet sich unter [Link](https://arduinogetstarted.com/de/reference/arduino-string-object).
+
+```cpp       string.cpp
 
 void setup() {
   Serial.begin(9600); // opens serial port, sets data rate to 9600 bps
 
+  String wochentag = "Dienstag";
+  int tag = 26;
+  int monat = 1;
+  int jahr = 2021;
+  String zeile = "Heute ist " + wochentag + " der " + String(tag,DEC) + "." + String(monat,DEC) + "." + String(jahr,DEC) + "\n";
+  Serial.println(zeile);
 }
 
 void loop() {
@@ -235,28 +243,54 @@ void loop() {
 ```
 @AVR8js.sketch
 
+> **Merke:** Die Möglichkeit dynamisch Speicher für die Darstellung der Zeichenketten anzufordern ist auf kleinen Controllern sehr aufwändig zu realisieren! In der Regel ist insbesondere bei den 8Bit Controllern davon abzuraten!
 
+**printf mit dem Arduino**
 
+Mit der Funktion `sprintf` kann man eine Zeichenkette in einem char-Array formatiert ablegen. Zuvor muss man jedoch ein entsprechendes Array mit der maximalen Anzahl von Zeichen reservieren. Darauf lassen sich dann die Formatierungsvorgaben, die wir im C-Kontext kennengelernt haben anwenden.
 
+> **Achtung:** Die Funktionalität durch unseren Simulator ist etwas beschränkt und nur einzelne Platzhalter wie %d werden unterstützt. Evaluieren Sie Ihren Code lieber in einer realen Entwicklungsumgebung.
 
-printf mit dem Arduino
+```cpp       avrlibc.cpp
+void setup() {
+  Serial.begin(9600); // opens serial port, sets data rate to 9600 bps
+
+  char buffer[30];
+  //formatieren des Textes und ablegen in dem Array
+  sprintf(buffer, "Der Wert der Variable ist %d", 5);
+  Serial.println(buffer);
+}
+
+void loop() {
+}
+```
+@AVR8js.sketch
+
+Der Funktion `snprintf` wird zusätzlich die Länge des Ziel Arrays übergeben, dieses sorgt für mehr Sicherheit beim Schreiben der Daten.
 
 
 ### Schreiben mit der Seriellen Schnittstelle
 
+Für das Schreiben auf der Seriellen Schnittstelle stehen drei Funktionen bereit `println`, `print` und `write`. Diese können mit zusätzlichen Parametern versehen werden, um eine eingeschränkte Formatierung vorzunehmen.
+
 ```cpp       UARTWrite.cpp
 void setup() {
   Serial.begin(9600);
+  Serial.println("Los geht's!");
+  Serial.println(5);
+  Serial.println(5, BIN);
+  Serial.println(5.34543, 2);
+  Serial.println("Fertig!");
 }
 
 void loop() {
-
 }
 ```
 @AVR8js.sketch
 
-
 ### Lesen von der Seriellen Schnittstelle
+
+Die Umkehr der Kommunikationsrichtung ermöglicht es, Daten an den Mikrocontroller zu senden und damit bestimmte Einstellungen vorzunehmen.
 
 <div>
   <wokwi-led color="red" pin="13" port="B" label="13"></wokwi-led>
