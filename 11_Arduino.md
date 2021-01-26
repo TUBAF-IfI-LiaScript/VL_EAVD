@@ -519,6 +519,12 @@ Bringen wir einen magnetorresistives Objekt in die Nähe des Sensors, so kann er
 
 ![Bild](./images/11_Arduino/MagnetSensorWithScrewDriver.png)<!-- style="width: 55%; max-width: 1000px" -->
 
+Für unser Pendel sieht der Verlauf dann entsprechend wie folgt aus:
+
+![Bild](./images/11_Arduino/VerlaufMagnetSensor.png)<!-- style="width: 55%; max-width: 1000px" -->
+
+Eine Lösung für die Extraktion der Periodendauer finden Sie in unserem Vorlesungsverzeichnis [Link](https://github.com/SebastianZug/VL_ProzeduraleProgrammierung/blob/master/examples/11_Arduino/MagnetometerPendel/MagnetometerPendel.ino). Gelingt es Ihnen eine bessere Lösung zu entwickeln?
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
