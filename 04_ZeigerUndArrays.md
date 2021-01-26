@@ -545,7 +545,7 @@ int main(void) {
   printf("Diese Form eines Strings haben wir bereits mehrfach benutzt!\n");
   //////////////////////////////////////////////////////////////////////////////
 
-  char a[] = "Ich bin ein char Array!";  // Der Kompiler fügt das \0 automatisch ein!
+  char a[] = "Ich bin ein char Array!";  // Der Compiler fügt das \0 automatisch ein!
   if (a[23] == '\0'){
     printf("char Array Abschluss in a gefunden!");
   }
