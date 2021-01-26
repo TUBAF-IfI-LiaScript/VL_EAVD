@@ -21,15 +21,31 @@ Die interaktive Version des Kurses ist unter diesem [Link](https://liascript.git
 
 **Wie weit waren wir gekommen?**
 
+```cpp       uart.cpp
 
+int thisByte = 33;
+
+void setup() {
+  Serial.begin(9600); // opens serial port, sets data rate to 9600 bps
+  Serial.println("Hello World");
+}
+
+void loop() {
+}
+```
+@AVR8js.sketch
 
 **Inhalt der heutigen Veranstaltung**
 
-*
+* Verständnis für die Funktionsweise der seriellen Kommunikation auf dem Mikrocontroller
+* Wiederholung und Vertiefung der Nutzung von `char` Arrays
+* Diskussion der Klasse `string`
 
 **Fragen an die heutige Veranstaltung ...**
 
-*
+* Worin liegen die Unterschiede zwischen der Behandlung von Zeichenketten mit `char`-Arrays und spezifischen `String`-Klassen?
+* Warum ist die Konfiguration der Baud-Rate beim Seriellen Datenaustausch mit dem Mikrocontroller so wichtig?
+* Welc
 
 ## Grundlagen
 
@@ -106,9 +122,13 @@ void loop() {
 
 ## Serielle Schnittstelle in der Arduino API
 
-Hardware vs Software Serial
+Die Serielle Kommunikation kann sowohl mittels "echter" Hardwareimplementierungen vorgenommen werden als auch in Software emuliert werden. In diesem Fall spricht man von "SoftSerial"-Verbindungen.
 
-```
+Unser MXChip hat insgesamt 2 Serielle Schnittellen in Hardware implementiert. Ein davon nutzen wir für die Kommunikation mit dem Controller, die andere steht zur freien Verfügung.
+
+Die Klasse `HardwareSerial.h` umfasst für einfache Controller folgende Member:
+
+```c++  HardwareSerial.h
 #define SERIAL_5N1 0x00
 #define SERIAL_6N1 0x02
 #define SERIAL_7N1 0x04
@@ -141,34 +161,82 @@ class HardwareSerial : public Stream
 #endif
 ```
 
-Damit ergeben sich
+Damit ergeben sich die API der Schnittstelle:
 
 https://www.arduino.cc/reference/en/language/functions/communication/serial/
 
-Die wichtigsten Memeberfunktionen der Klasse `HardwareSerial` ist dabei.
-
-| Memberfunktionen    | Bedeutung                                               |
-| ------------------- | ------------------------------------------------------- |
-| `if(Serial)`        | Wurde die Schnittstelle ordnungsgemäß initialisiert?    |
-| `available()`       | Rückgabe der Zahl der verfügbaren Bytes im Lesespeicher |
-| `begin()`           | Definition der Baudrate und des Datenformates.          |
-| `end()`             | Schließen der Schnittstelle                             |
-| `flush()`           |                                                         |
-| `parseFloat()`      |                                                         |
-| `parseInt()`        |                                                         |
-| `print()`           |                                                         |
-| `println()`         |                                                         |
-| `read()`            |                                                         |
-| `readBytes()`       |                                                         |
-| `readBytesUntil()`  |                                                         |
-| `readString()`      |                                                         |
-| `readStringUntil()` | Lesen einer Folge von `char` bis zu einem Terminatorzeichen, dass als Parameter übergeben wird `\n` - neue Zeile, `\t` - Tabulator                                                         |
-| `write()`           | Schreiben eines einzelnen Zeichens                                                        |
+| Memberfunktionen    | Bedeutung                                                                                                                          |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `if(Serial)`        | Wurde die Schnittstelle ordnungsgemäß initialisiert?                                                                               |
+| `available()`       | Rückgabe der Zahl der verfügbaren Bytes im Lesespeicher                                                                            |
+| `begin()`           | Definition der Baudrate und des Datenformates.                                                                                     |
+| `end()`             | Schließen der Schnittstelle                                                                                                        |
+| `flush()`           |                                                                                                                                    |
+| `parseFloat()`      | Erfassen eines Gleitkommazahlenwertes (4.23423) aus den Daten der Schnittstelle                                                    |
+| `parseInt()`        |                                                                                                                                    |
+| `print()`           |                                                                                                                                    |
+| `println()`         |                                                                                                                                    |
+| `read()`            |      Lesen eines einzelnen Zeichens                                                                                                                              |
+| `readBytes()`       |                                                                                                                                    |
+| `readBytesUntil()`  |                                                                                                                                    |
+| `readString()`      |                                                                                                                                    |
+| `readStringUntil()` | Lesen einer Folge von `char` bis zu einem Terminatorzeichen, dass als Parameter übergeben wird `\n` - neue Zeile, `\t` - Tabulator |
+| `write()`           | Schreiben eines einzelnen Zeichens                                                                                                 |
 
 
 Für die Nutzung der seriellen Kommunikation ist die Arbeit mit Strings oder char-Arrays unumgänglich. An dieser Stelle wollen wir diese nochmals wiederholen.
 
 > **Merke:** Das `std::cout` Konzept wurde für die Arduino-Bibliotheken nicht implementiert.
+
+**Zeichenkette - Variante 1 - char Arrays**
+
+```cpp       avrlibc.cpp
+
+void setup() {
+  Serial.begin(9600); // opens serial port, sets data rate to 9600 bps
+  char a[] = "Ich bin ein char Array!";  // Der Compiler fügt das \0 automatisch ein!
+  if (a[23] == '\0'){
+    Serial.println("char Array Abschluss in a gefunden!");
+  }
+
+  Serial.println(a);
+  const char b[] = { 'H', 'a', 'l', 'l', 'o', ' ',
+                     'F', 'r', 'e', 'i', 'b', 'e', 'r', 'g', '\0' };
+  Serial.println(b);
+  const char c[] = "Noch eine \0Moeglichkeit";
+  Serial.println(c);
+  char d[] = { 80, 114, 111, 122, 80, 114, 111, 103, 32, 50, 48,  50, 48,  0  };
+  Serial.println(d);
+
+  // Kopierfunktionen
+  char e[] = "012345678901234567890123456789";
+  strcpy(e, "Das ist ein neuer Text");
+  Serial.println(e);
+}
+
+void loop() {
+}
+```
+@AVR8js.sketch
+
+Eine gute Übersicht zur Arbeit mit C-Strings im Kontext des Arduino ist unter [Link](https://www.tutorialspoint.com/arduino/arduino_strings.htm) zu finden.
+
+**Zeichenkette - Variante 2 - string Klasse**
+
+```cpp       avrlibc.cpp
+
+void setup() {
+  Serial.begin(9600); // opens serial port, sets data rate to 9600 bps
+
+}
+
+void loop() {
+}
+```
+@AVR8js.sketch
+
+
+
 
 
 printf mit dem Arduino
