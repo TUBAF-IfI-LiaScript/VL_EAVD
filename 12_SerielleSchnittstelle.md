@@ -511,18 +511,18 @@ void loop() {
 
 Wie können wir hier etwas strukturieren, so dass eine bessere Wiederverwendbarkeit gegeben ist? Welche Funktionen sind für die Überprüfung denn erforderlich?
 
-Lassen Sie uns eine Parser-Klasse entwerfen, die alle notwendigen Funktionen umfasst, die wir für die Analyse eines Textes brauchen.
+Lassen Sie uns eine Parser-Klasse entwerfen, die alle notwendigen Funktionen umfasst, die wir für die Analyse eines Textes brauchen. Wir gehen dabei davon aus, dass in der Klasse die Zeichenfolge als Membervariable vorliegt und lediglich die Parameter der Prüfung übergeben werden müssen.
 
-|     | Name                                                  | Bedeutung                                                            |
-| --- | ----------------------------------------------------- | -------------------------------------------------------------------- |
-| 1.  | testSingleSignOnWhiteSpace(index)                     | Existiert ein Leerzeichen an der vorgegebenen Stelle?                |
-| 2.  | testSingleSignOnNumber(index)                         | Existiert ein Zahlenwert ...                                         |
-| 3.  | testSingleSignOnAlpha(index)                          | Existiert ein Buchstabe ...                                          |
-| 4.  | compareSingleSign(index, sign)                        | Ist das Zeichen an der Stelle `index` gleich `sign`?                 |
-| 5.  | compareSingleSignWithArray(sign, signs, sizeofsigns) | Gehört das Zeichen an der Stelle von `index` zum Array von  `signs`? |
-| 6.  | testSubstringOnNumber(start, end)                     | Beinhaltet der Substring von `start` bis `end` nur Zahlen?           |
-| 7.  | testSubstringOnAlpha(start, end)                      | einhaltet der Substring von `start` bis `end` nur Buchstaben?        |
-| 8.    |  ...                                                      |                                                                      |
+|     | Name                                                     | Bedeutung                                                            |
+| --- | -------------------------------------------------------- | -------------------------------------------------------------------- |
+| 1.  | testSingleElementOnWhiteSpace(index)                     | Existiert ein Leerzeichen an der vorgegebenen Stelle?                |
+| 2.  | testSingleElementOnNumber(index)                         | Existiert ein Zahlenwert ...                                         |
+| 3.  | testSingleElementOnAlpha(index)                          | Existiert ein Buchstabe ...                                          |
+| 4.  | compareSingleElement(index, sign)                        | Ist das Zeichen an der Stelle `index` gleich `sign`?                 |
+| 5.  | compareSingleElementWithArray(index, signs, sizeofsigns) | Gehört das Zeichen an der Stelle von `index` zum Array von  `signs`? |
+| 6.  | testSubstringOnNumber(start, end)                        | Beinhaltet der Substring von `start` bis `end` nur Zahlen?           |
+| 7.  | testSubstringOnAlpha(start, end)                         | einhaltet der Substring von `start` bis `end` nur Buchstaben?        |
+| 8.  | ...                                                      |                                                                      |
 
 Lassen Sie uns zwei Klassen entwerfen, die eine `Parser` umfasst generisch die zuvor genannten Methoden, die andere `FitnessParser` ist spezifisch auf unsere Fragestellung zugeschnitten. Damit kapseln wir die Daten und Methoden in einer wiederverwendbaren Klasse und erhöhen die Lesbarkeit des Codes.
 
@@ -542,20 +542,20 @@ class Parser{
     };
 
     // Test 1
-    bool testSingleSignOnWhiteSpace(int index){
+    bool testSingleElementOnWhiteSpace(int index){
       return isWhitespace(this->rawString[index]);
     }
 
     // Test 2
-    bool compareSingleSign(int index, char sign){
+    bool compareSingleElement(int index, char sign){
       return (this->rawString[index] == sign);
     }  
 
     // Test 5
-    bool compareSingleSignWithArray(char sign, char signs[], int size){
+    bool compareSingleElementWithArray(int index, char signs[], int size){
       bool result = false;
       for (int i = 0; i < size; i++)
-        if (compareSingleSign(sign, signs[i])) result=true;
+        if (compareSingleElement(index, signs[i])) result=true;
       return result;
     }
 
@@ -568,11 +568,11 @@ class FitnessParser: public Parser {
     FitnessParser(String string, int evaluations): Parser(string, evaluations) {};
 
     void evaluate() {
-      evaluationResults[0] = testSingleSignOnWhiteSpace(1);
+      evaluationResults[0] = testSingleElementOnWhiteSpace(1);
 
       char gender []= {'M', 'W', 'D'};
       int size = (int)( sizeof(gender) / sizeof(gender[0]));
-      evaluationResults[1] = compareSingleSignWithArray(0, gender, size);
+      evaluationResults[1] = compareSingleElementWithArray(0, gender, size);
     }
 
     void printResults(){
