@@ -17,7 +17,7 @@ import: https://github.com/liascript/CodeRunner
 
 # Zeitverhalten und Interrupts
 
-Die interaktive Version des Kurses ist unter diesem [Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/VL_ProzeduraleProgrammierung/master/12_Arduino_Interrupts.md#1) zu finden.
+Die interaktive Version des Kurses ist unter diesem [Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/VL_ProzeduraleProgrammierung/master/13_Arduino_Interrupts.md#1) zu finden.
 
 **Wie weit waren wir gekommen?**
 
