@@ -499,9 +499,9 @@ void setup() {
   else Serial.println("Ungültige Geschlechtsangabe!");
 
   // sind all Monatszeichen Zahlenwerte?
-  String month = rawString.substring(2,4);
+  String month = rawString.substring(2,3);
   if (isDigit(month[0]) && isDigit(month[1])) Serial.println("Gültiger Monat!");
-  else Serial.println("Gültiger Monat!");
+  else Serial.println("Ungültiger Monat!");
 }
 
 void loop() {
@@ -519,7 +519,7 @@ Lassen Sie uns eine Parser-Klasse entwerfen, die alle notwendigen Funktionen umf
 | 2.  | testSingleSignOnNumber(index)                         | Existiert ein Zahlenwert ...                                         |
 | 3.  | testSingleSignOnAlpha(index)                          | Existiert ein Buchstabe ...                                          |
 | 4.  | compareSingleSign(index, sign)                        | Ist das Zeichen an der Stelle `index` gleich `sign`?                 |
-| 5.  | compareSingleSignWithArray(index, signs, sizeofsigns) | Gehört das Zeichen an der Stelle von `index` zum Array von  `signs`? |
+| 5.  | compareSingleSignWithArray(sign, signs, sizeofsigns) | Gehört das Zeichen an der Stelle von `index` zum Array von  `signs`? |
 | 6.  | testSubstringOnNumber(start, end)                     | Beinhaltet der Substring von `start` bis `end` nur Zahlen?           |
 | 7.  | testSubstringOnAlpha(start, end)                      | einhaltet der Substring von `start` bis `end` nur Buchstaben?        |
 | 8.    |  ...                                                      |                                                                      |
@@ -552,10 +552,10 @@ class Parser{
     }  
 
     // Test 5
-    bool compareSingleSignWithArray(int index, char signs[], int size){
+    bool compareSingleSignWithArray(char sign, char signs[], int size){
       bool result = false;
       for (int i = 0; i < size; i++)
-        if (compareSingleSign(0, signs[i])) result=true;
+        if (compareSingleSign(sign, signs[i])) result=true;
       return result;
     }
 
