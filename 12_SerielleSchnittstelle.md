@@ -420,21 +420,31 @@ void loop() {
 In realistischen Projekten ergibt sich eine Flut von Debug-Nachrichten mit unterschiedlicher Kritikalität. Dafür kann man Klassen von Nachrichten einführen und diese entsprechend filtern.
 
 ```cpp       DebuggingII.cpp
-#define DEBUG_ERROR true
-#define DEBUG_ERROR_SERIAL if(DEBUG_ERROR)Serial
+#ifndef DEBUGMESSAGES_H
+#define DEBUGMESSAGES_H
 
-#define DEBUG_WARNING true
-#define DEBUG_WARNING_SERIAL if(DEBUG_WARNING)Serial
-
-#define DEBUG_INFORMATION false
-#define DEBUG_INFORMATION_SERIAL if(DEBUG_INFORMATION)Serial
+  #ifdef _DEBUG
+		#define DEBUG_PRINT(val) Serial.print("DEBUG: " + String(val))
+		#define DEBUG_PRINTLN(val) Serial.println("DEBUG: " + String(val))
+	#else
+		// Empty macros bodies if debugging is not needed
+		#define DEBUG_PRINT(val)
+		#define DEBUG_PRINTLN(val)
+	#endif
+  #ifdef _INFO
+		#define INFO_PRINT(val) Serial.print("DEBUG: " + String(val))
+		#define INFO_PRINTLN(val) Serial.println("DEBUG: " + String(val))
+	#else
+		// Empty macros bodies if debugging is not needed
+		#define INFO_PRINT(val)
+		#define INFO_PRINTLN(val)
+	#endif
+#endif
 
 void setup() {
   Serial.begin(9600);
-  DEBUG_ERROR_SERIAL.println("This is an error message");
-  DEBUG_WARNING_SERIAL.println("This is a warning message");
-  DEBUG_INFORMATION_SERIAL.print("The state of pin 5 is ");
-  DEBUG_INFORMATION_SERIAL.println(digitalRead(5) ? "HIGH" : "LOW");
+  DEBUG_PRINTLN("This is an error message");
+  INFO_PRINTLN("The state of pin 5 is ");
   Serial.println("This is standard program output");
 }
 
