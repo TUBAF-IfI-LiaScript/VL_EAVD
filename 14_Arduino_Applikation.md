@@ -17,7 +17,7 @@ import: https://github.com/liascript/CodeRunner
 
 # Anwendungsentwicklung und Beispiele
 
-Die interaktive Version des Kurses ist unter diesem [Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/VL_ProzeduraleProgrammierung/master/10_Vererbung.md#1) zu finden.
+Die interaktive Version des Kurses ist unter diesem [Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/VL_ProzeduraleProgrammierung/master/14_Arduino_Applikation.md#1) zu finden.
 
 **Wie weit waren wir gekommen?**
 
@@ -346,6 +346,11 @@ möglich.
 
 > **Merke:** Wir haben die Dokumentation unseres Code völlig außer Acht gelassen.
 
-> **Merke:** Unsere "Tests" haben in kurzen Zeitintervallen unter den Bedingungen unseres Labors stattgefunden. Entsprechend wenig aussagekräftig sind diese. 
+> **Merke:** Unsere "Tests" haben in kurzen Zeitintervallen unter den Bedingungen unseres Labors stattgefunden. Entsprechend wenig aussagekräftig sind diese.
 
 > **Merke:** Unser Aufbau hat den Status einer "Fliegenden Installation". Nun wäre eine Platinen und Gehäuseentwicklung notwendig.
+
+
+## Geschafft!
+
+Vielen Dank für Ihre aktive Teilnahme an der Veranstaltung und viel Erfolg bei der Klausur!
