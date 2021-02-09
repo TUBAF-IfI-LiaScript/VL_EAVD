@@ -32,7 +32,7 @@ Die interaktive Version des Kurses ist unter diesem [Link](https://liascript.git
 
 **Fragen an die heutige Veranstaltung ...**
 
-* Warum ist die Wahl de
+* Warum ist der Schritt von einem Programm in eine reale Anwendung so herausfordernd?
 
 ## Korrektur der Darstellung aus der letzten Vorlesung
 
