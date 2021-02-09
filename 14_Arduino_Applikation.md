@@ -333,6 +333,14 @@ void loop() {
 }
 ```
 
+![TimingDiagramm](./images/14_Example/MeanFilter.png)<!--style="width: 50%; max-width: 800px;"-->
+
+
+> **Frage:** Welche Wirkung hat die Vergrößerung des Fensters?
+
+
+### Auslieferung und Wartung
+
 Erweiterungen wären in Form:
 
 + der Displayansteuerung
@@ -340,9 +348,6 @@ Erweiterungen wären in Form:
 + ...
 
 möglich.
-
-
-### Auslieferung und Wartung
 
 > **Merke:** Wir haben die Dokumentation unseres Code völlig außer Acht gelassen.
 
