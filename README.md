@@ -30,6 +30,9 @@ Die interaktive Version dieses Kurses ist unter [LiaScript](https://LiaScript.gi
 
 ## Zielstellung der Veranstaltung
 
+![Gif einer Fahrradtour über eine Berg](https://media.giphy.com/media/3oKIP9M5hm5YxsG58I/giphy.gif)<!--style="width: 100%; max-width: 80vh;"-->
+
+
 ### Überblick
 
 Zunächst ein Blick ins Modulhandbuch ...
@@ -147,9 +150,14 @@ Die roten Punkte stellen die Verteilung der Wochenendmessungen der vergangenen W
 
 ********************************************************************************
 
-### Ausgangspunkt
+## Ausgangspunkt
 
-> Wer von Ihnen hat bereits Programmiererfahrung?
+> Wer von Ihnen hat bereits Programmiererfahrung? In welche Kategorie würden Sie sich selbst einordnen:
+>
+> 1. Ich habe noch nie eine Zeile Code geschrieben
+> 2. In der Schule habe ich zumindest Grundlagen gehört und mit JavaScript, Python, usw. kleine Programme geschrieben.
+> 3. Ich habe mich neben der Schule mit Programmierprojekten beschäftigt.
+> 4. Ich beherrsche mehrere Sprachen und bin leidenschaftlicher Programmierer
 
 ## Strukurierung der Veranstaltung
 

@@ -1,3 +1,25 @@
+---
+title: |
+  **Prozedurale Programmierung - TU Freiberg**
+  https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/
+author:
+  - andre-dietrich
+  - JayTee42
+  - SebastianZug
+  - galinarudollf
+  - DkPepper
+  - Lalelele
+  - Lorcc
+papersize:
+  - a4
+geometry:
+  - margin=2cm
+header-includes:
+  - \usepackage{titling}
+  - \pretitle{\begin{center}
+    \includegraphics[width=2cm]{images/Logo_TU_Freiberg.png}\LARGE\\}
+  - \posttitle{\end{center}}
+---
 <!--
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
@@ -13,7 +35,6 @@ import: https://github.com/liascript/CodeRunner
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/00_Einfuehrung.md)
 
 
 # Einführung
@@ -27,66 +48,51 @@ import: https://github.com/liascript/CodeRunner
 | **Link auf Repository: ** | [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/00_Einfuehrung.md) |
 | **Autoren**               | @author                                                                                                                                                                                                |
 
-![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
 
 ##  Wie arbeitet ein Rechner eigentlich?
 
-{{0-1}}
 Programme sind Anweisungslisten, die vom Menschen erdacht, auf einem Rechner zur
 Ausführung kommen. Eine zentrale Hürde ist dabei die Kluft zwischen menschlicher
 Vorstellungskraft und Logik, die **implizite Annahmen und Erfahrungen**
 einschließt und der **"stupiden" Abarbeitung von Befehlsfolgen** in einem
 Rechner.
 
-{{0-1}}
 Programmiersprachen bemühen sich diese Lücke zu schließen und werden dabei von
 einer Vielzahl von Tools begleitet, diesen **Transformationsprozess**
 unterstützen sollen.
 
-{{0-1}}
 Um das Verständnis für diesen Vorgang zu entwickeln werden zunächst die Vorgänge
 in einem Rechner bei der Abarbeitung von Programmen beleuchtet, um dann die
 Realisierung eines Programmes mit C zu adressieren.
 
-{{0-1}}
 ![instruction-set](./images/00_Einfuehrung/Programmiersprache_Umfeld.png)<!-- width="100%" -->
 
-{{1-2}}
 Quelle: [Programmiervorgang und Begriffe(Autor VÖRBY)](https://commons.wikimedia.org/wiki/File:Programmiersprache_Umfeld.png)
 
-{{1-2}}
 Beispiel: Intel 4004-Architektur (1971)
 
-{{1-2}}
 ![intel](./images/00_Einfuehrung/4004_arch.svg.png)<!-- style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
 
-{{1-2}}
 Quelle: [Intel 4004 (Autor Appaloosa)](https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png)
 
-{{2}}
 Jeder Rechner hat einen spezifischen Satz von Befehlen, die durch "0" und "1"
 ausgedrückt werden, die er überhaupt abarbeiten kann.
 
-{{2}}
 Speicherauszug den Intel 4004:
 
-{{2}}
 <!-- data-type="none" -->
 | Adresse | Speicherinhalt | OpCode     | Mnemonik  |
 |:--------|:---------------|:-----------|:----------|
 | 0010    | 1101 0101      | 1101 DDDD  | LD $5     |
 | 0012    | 1111 0010      | 1111 0010  | IAC       |
 
-{{3}}
 Unterstützung für die Interpretation aus dem Nutzerhandbuch, dass das Instruction
 set beschreibt:
 
-{{3}}
 ![instruction-set](./images/00_Einfuehrung/4004_Instruction_set.png)<!-- width="100%" -->
 
-{{3}}
 Quelle: [Intel 4004 Assembler](http://e4004.szyc.org/asm.html)
 
 ### Programmierung
@@ -104,7 +110,7 @@ Hardware abgestimmt ist
 
 **Beispiel**
 
-```asm @output
+```asm
  Assembler Code    |  Fortran
                    |
  .START ST         |  A:=2;
@@ -119,25 +125,20 @@ Hardware abgestimmt ist
  .END              |
 ```
 
-{{1}}
 > Eine höhere Programmiersprache ist eine Programmiersprache zur Abfassung eines
 > Computerprogramms, die in **Abstraktion und Komplexität** von der Ebene der
 > Maschinensprachen deutlich entfernt ist. Die Befehle müssen durch
 > **Interpreter oder Compiler** in Maschinensprache übersetzt werden.
 
-{{2}}
 > Ein **Compiler** (auch Kompiler; von englisch für zusammentragen bzw.
 > lateinisch compilare ‚aufhäufen‘) ist ein Computerprogramm, das Quellcodes
 > einer bestimmten Programmiersprache in eine Form übersetzt, die von einem
 > Computer (direkter) ausgeführt werden kann.
 
-{{2}}
 Stufen des Compile-Vorganges:
 
-{{2}}
 ![instruction-set](./images/00_Einfuehrung/compilerElements.png)<!-- width="80%" -->
 
-{{2}}
 Quelle: [Stufen der Compilierung](https://medium.com/@vietkieutie/what-happens-when-you-type-gcc-main-c-2a136896ade3)
 
 
@@ -147,7 +148,6 @@ Quelle: [Stufen der Compilierung](https://medium.com/@vietkieutie/what-happens-w
   geringer Programmgröße
 * Imperative Programmiersprache
 
-                                 {{1}}
   > **imperative (befehlsorientierte) Programmiersprachen**: Ein Programm
   > besteht aus einer Folge von Befehlen an den Computer. Das Programm
   > beschreibt den Lösungsweg für ein Problem (C, Python, Java, LabView,
@@ -161,14 +161,12 @@ Quelle: [Stufen der Compilierung](https://medium.com/@vietkieutie/what-happens-w
 
 * Wenige Schlüsselwörter als Sprachumfang
 
-                                  {{2}}
   > **Schlüsselwort** Reserviertes Wort, das der Compiler verwendet, um ein
   > Programm zu parsen (z.B. if, def oder while). Schlüsselwörter dürfen nicht
   > als Name für eine Variable gewählt werden
 
 * Große Mächtigkeit
 
-                                  {{3}}
   > Je "höher" und komfortabler die Sprache, desto mehr ist der Programmierer
   > daran gebunden, die in ihr vorgesehenen Wege zu beschreiten.
 
@@ -181,7 +179,7 @@ Quelle: [Brian_Kernighan, Programming in C: A Tutorial  1974](http://www.lysator
 ### "Hello World"
 
 
-```cpp                     HelloWorld.c
+```cpp
 // That's my first C program
 // Karl Klammer, Oct. 2018
 
@@ -192,7 +190,6 @@ int main(void) {     // alternativ "int main()"
 	return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 | Zeile | Bedeutung                                                                                   |
 |:----- |:------------------------------------------------------------------------------------------- |
@@ -206,7 +203,7 @@ int main(void) {     // alternativ "int main()"
 
 ### Ein Wort zu den Formalien
 
-```cpp                     HelloWorld.c
+```cpp
 // Karl Klammer
 // Print Hello World drei mal
 
@@ -220,16 +217,13 @@ int main() {
 	return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 
-```cpp                     BadHelloWorld.c
+```cpp
 #include <stdio.h>
 int main() {int zahl; for (zahl=0; zahl<3;  zahl++){ printf("Hello World! ");} return 0;}
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
-                                  {{1}}
 * Das *systematische Einrücken* verbessert die Lesbarkeit und senkt damit die
   Fehleranfälligkeit Ihres Codes!
 * Wählen sie *selbsterklärende Variablen- und Funktionsnamen*!
@@ -333,7 +327,7 @@ try {
 
 ### Was tun, wenn es schief geht?
 
-```cpp                     ErroneousHelloWorld.c
+```cpp
 #include<stdio.h>
 
 int main() {
@@ -343,7 +337,6 @@ int main() {
 	return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 Methodisches Vorgehen:
 
@@ -357,7 +350,7 @@ Methodisches Vorgehen:
 
 **Beispiel 1**
 
-```cpp                     Error.c
+```cpp
 #include <stdio.h>
 
 int mani() {
@@ -365,11 +358,10 @@ int mani() {
     return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 **Beispiel 2**
 
-```cpp                     Error.c
+```cpp
 #include <stdio.h>
 
 int main()
@@ -377,11 +369,10 @@ int main()
     return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 > Manchmal muss man sehr genau hinschauen, um zu verstehen, warum ein Programm nicht funktioniert. Versuchen Sie es!
 
-```cpp                     ErroneousHelloWorld.c
+```cpp
 #include <stdio.h>
 
 imt main() {
@@ -390,7 +381,6 @@ imt main() {
 	return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 
 ### Und wenn das Kompilieren gut geht?
@@ -398,7 +388,7 @@ imt main() {
 ... dann bedeutet es noch immer nicht, dass Ihr Programm wie erwartet
 funktioniert.
 
-```cpp                     ErroneousHelloWorld.c
+```cpp
 #include <stdio.h>
 
 int main() {
@@ -409,4 +399,3 @@ int main() {
 	return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)

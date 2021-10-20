@@ -39,13 +39,13 @@ void loop() {
   while(digitalRead(echoPin) == HIGH);
 
   distance = calcDist(micros()-start, temperature);
-  //if ((oldDistance - distance) < 10) valid = 50;
-  //else valid = 0;
+  if ((oldDistance - distance) < 10) valid = 50;
+  else valid = 0;
   
   oldDistance = distance;
   Serial.print("distance:");
-  Serial.println(distance,2);
-  //Serial.print(" valid:");
-  //Serial.println(valid);
+  Serial.print(distance,2);
+  Serial.print(" valid:");
+  Serial.println(valid);
   delay(50);
 }

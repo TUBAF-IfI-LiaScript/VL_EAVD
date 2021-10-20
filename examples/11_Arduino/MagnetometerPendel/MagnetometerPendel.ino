@@ -32,10 +32,10 @@ void loop(){
       //Serial.printf("%d, ", (millis()-myTime));
     }
     // Step I - Overview
-    Serial.printf("%d, %d, %d\n", axes[0], axes[1], axes[2]);
+    //Serial.printf("%d, %d, %d\n", axes[0], axes[1], axes[2]);
     
     // Step II - Individual Channel Selection
-    //Serial.printf("%d, %d, %d\n", range[0], range[1], axes[2]);
+    Serial.printf("%d, %d, %d\n", range[0], range[1], axes[2]);
 
     // Step III - State machine
     //if (phase > 1)

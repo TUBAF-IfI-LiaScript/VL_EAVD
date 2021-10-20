@@ -2,7 +2,8 @@ import glob, os
 import shutil
 import re
 
-blackList = ["{{", "******", "@Rextester", "@Tau", "@LIA.eval"]
+blackList = ["{{", "******", "@Rextester", "@Tau", "@LIA.eval",
+             "![](https://media.giphy.com/", "[![LiaScript](https://raw.githubusercontent.com/"]
 
 for file in glob.glob("*.md"):
     if file != "README.md":
@@ -21,8 +22,8 @@ for file in glob.glob("*.mdx"):
 
     with open(file, "w") as outfile:
         if file.endswith("00_Einfuehrung.mdx"):  # insert metadata for pandoc in first md file
-            title = "**Procedurale Programmierung - TU Freiberg**"
-            outfile.write(f"---\ntitle: |\n  {title}\n  https://github.com/SebastianZug/VL_ProzeduraleProgrammierung/\nauthor:\n")
+            title = "**Prozedurale Programmierung - TU Freiberg**"
+            outfile.write(f"---\ntitle: |\n  {title}\n  https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/\nauthor:\n")
             with open(".github/workflows/authors.txt", "r") as authors:  # read in authors and write them into the yaml code
                 for line in authors:
                     name = line.strip()
