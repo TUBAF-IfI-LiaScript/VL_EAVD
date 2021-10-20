@@ -9,7 +9,7 @@ narrator: Deutsch Female
 comment: Einführung in die Programmierung für Nicht-Informatiker
 logo: ./img/LogoCodeExample.png
 
-import: https://github.com/liascript/CodeRunner
+import: https://github.com/LiaTemplates/AVR8js/main/README.md#10
 
 -->
 
@@ -82,18 +82,23 @@ Mit einiger Erfahrung in C (und C++) lassen sich einfache Mess- und Regelungstec
 sehr einfach automatisieren. Ein Startpunkt dafür ist das Arduino Projekt, dass sowohl eine
 entsprechende Hardware, wie auch eine Programmierumgebung bereitstellt.
 
-```cpp        ArduinoHelloWorld.ino
-void setup() {      // Konfiguration
+<div>
+<wokwi-led color="red" pin="13" port="B"></wokwi-led>
+</div>
+
+```cpp helloWorldinArduino.cpp
+void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
 }
 
-void loop() {       // Ausführung
+void loop() {
   digitalWrite(LED_BUILTIN, HIGH);
   delay(1000);
   digitalWrite(LED_BUILTIN, LOW);
   delay(1000);
 }
 ```
+@AVR8js.sketch
 
 ********************************************************************************
 
