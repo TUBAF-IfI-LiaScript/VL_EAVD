@@ -13,9 +13,12 @@ import: https://github.com/liascript/CodeRunner
 
 -->
 
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/00_Einfuehrung.md)
+
+
 # Vorlesung Prozedurale Programmierung
 
-Der vorliegende C-Kurs wird seit dem Wintersemester 2020/21 an der TU Bergakademie
+Der vorliegende C-Kurs wird seit dem Wintersemester 2021/22 an der TU Bergakademie
 Freiberg für die Veranstaltung "Prozedurale Programmierung" genutzt und auf der Basis von LiaScript realisiert. Die
 Veranstaltung richtet sich an Nicht-Informatiker aus verschiedenen
 ingenieurwissenschaftlichen Disziplinen mit keinen oder geringen
@@ -23,11 +26,39 @@ Programmierkenntnissen. Kern der Lösung ist die Möglichkeit Code direkt in der
 Webseite auszuführen und auch Änderungen vorzunehmen, die dann in einem
 "Versionssystem light" verfügbar sind.
 
-Die interaktive Version dieses Kurses ist unter [LiaScript](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/VL_ProzeduraleProgrammierung/master/README.md) einzusehen.
+Die interaktive Version dieses Kurses ist unter [LiaScript](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/README.md) einzusehen.
 
-## Zielstellung
+## Zielstellung der Veranstaltung
 
-Welche Fähigkeiten sollen in diesem Kurs vermittelt werden? Wir möchten Sie in die Lage versetzen einfache Messaufgaben mit einem Mikrocontroller zu realisieren. Der Schwerpunkt liegt dabei auf der Einführung allgemeiner Programmierkonzepte unter C und C++ und weniger auf der hardwarenahen Programmierung. Dabei bauen wir auf der Hardware und der Tool-Chain des Arduino Projektes auf.
+### Überblick
+
+Zunächst ein Blick ins Modulhandbuch ...
+
+> Qualifikationsziele:
+>
+> + Studierende sollen verstehen, was Algorithmen sind und welche Eigenschaften sie haben,
+> + in der Lage sein, praktische Probleme mit wohl strukturierten Algorithmen zu beschreiben,
+> + die Syntax und Semantik einer prozeduralen Programmiersprache beherrschen, um Algorithmen von einem Computer erfolgreich ausführen zu lassen,
+> + Datenstrukturen und algorithmische Konzepte kennen und über Wissen ausgewählter Standardalgorithmen verfügen.
+
+> Inhalte: Grundlegende Prinzipien und Eigenschaften von Algorithmen und deren prozedurale Programmierung:
+>
+> + Datentypen und Variablen
+> + Zeiger und Felder
+> + Anweisungen
+> + Ausdrücke
+> + Operatoren
+> + Kontrollstrukturen
+> + Blöcke und Funktionen
+> + Strukturen
+> + Typnamen und Namensräume
+> + ...
+
+Und ein wenig weniger abstrakt?
+
+**Wir möchten Sie in die Lage versetzen einfache Messaufgaben mit einem Mikrocontroller zu realisieren.**
+
+Der Schwerpunkt liegt dabei auf der Einführung allgemeiner Programmierkonzepte unter C und C++ und weniger auf der hardwarenahen Programmierung. Dabei bauen wir auf der Hardware und der Tool-Chain des Arduino Projektes auf.
 
 Dabei lernen Sie die Grundlagen
 
@@ -36,6 +67,11 @@ Dabei lernen Sie die Grundlagen
 + die Anwendung dieser beiden Ansätze für eigene kleine Messaufgaben
 
 kennen.
+
+### Beispiele
+
+                 {{0-1}}
+********************************************************************************
 
 **Beispiele 1 - Blinkende LED**
 
@@ -56,10 +92,28 @@ void loop() {       // Ausführung
 }
 ```
 
+********************************************************************************
 
-**Beispiel 2 - Ein bisschen realistischer bitte!**
+                  {{1-2}}
+********************************************************************************
 
-... gut, dass ist noch nicht sonderlich beeindruckend. Vielleicht lässt folgende
+**Beispiele 2 - Blinkende LED**
+
+Reales System - Blinken, wenn der Knoten bewegt wird.
+
+```cpp        MovementTracker.ino
+
+```
+
+********************************************************************************
+
+
+                   {{2-3}}
+********************************************************************************
+
+**Beispiel 3 - Ein bisschen realistischer bitte!**
+
+... gut, dass ist noch nicht sonderlich gut verwendbar. Vielleicht lässt folgende
 Anwendung das Potential etwas deutlicher werden. Lassen Sie uns annehmen, wir
 wollen die Lichtsituation an einem bestimmten Punkt vermessen. Dazu verwenden
 wir einen Sensor, der mit einem Controller verbunden ist und senden die
@@ -91,44 +145,49 @@ Hier lassen sich dann die eigentlichen "Untersuchungen" realisieren und zum Beis
 
 Die roten Punkte stellen die Verteilung der Wochenendmessungen der vergangenen Woche dar, während die blauen Kreuze die Wochentage illustrieren. Dunkelheit wird durch einen Wert nahe 1023 ausgedrückt, während helle Messituationen durch kleine Werte dargestellt werden.
 
-> Lust auf mehr?
+********************************************************************************
 
-> Interaktive Session: Wer von Ihnen hat bereits Programmiererfahrung?
+### Ausgangspunkt
+
+> Wer von Ihnen hat bereits Programmiererfahrung?
 
 ## Strukurierung der Veranstaltung
 
-| Nr.  | Datum      | Inhalt                                  |
-|:---- | ---------- | --------------------------------------- |
-| 0    | 20.10.2020 | Einführung                              |
-| 1    | 27.10.2020 | Eingabe/Ausgabe, Datentypen             |
-| 2    | 03.11.2020 | Operatoren                              |
-| 3    | 10.11.2020 | Kontrollstrukturen                      |
-| 4    | 17.11.2020 | Zeiger & Arrays                         |
-| 5    | 24.11.2020 | Funktionen                              |
-| 6    | 01.12.2020 | Komplexe Datentypen                     |
-| 7    | 08.12.2020 | Standardalgorithmen                     |
-| 8    | 15.12.2020 | Objektorientierte Programmierung (OOP)  |
-| 9    | 21.12.2020 | Konstruktoren und Überladung            |
-| 10   | 12.01.2021 | Operatoren und Vererbung                |
-| 11   | 19.01.2021 | Anwendung der Vererbung                 |
-| 12   | 26.01.2021 | Einführung API Mikrocontroller          |
-| 13   | 02.02.2021 |                                         |
-| 14   | 09.02.2021 |                                         |
+| Nr. | Datum      | Inhalt                                 |
+|:--- | ---------- | -------------------------------------- |
+| 0   | 20.10.2020 | Motivation                             |
+| 1   | 27.10.2020 | Eingabe/Ausgabe, Datentypen            |
+| 2   | 03.11.2020 | Operatoren                             |
+| 3   | 10.11.2020 | Kontrollstrukturen                     |
+| 4   | 17.11.2020 | _Feiertag_                             |
+| 5   | 24.11.2020 | Zeiger & Arrays                        |
+| 6   | 01.12.2020 | Funktionen                             |
+| 7   | 08.12.2020 | Komplexe Datentypen                    |
+| 8   | 15.12.2020 | Standardalgorithmen                    |
+| 9   | 22.12.2020 | Objektorientierte Programmierung (OOP) |
+| 10  | 12.01.2021 | Vererbung                              |
+| 11  | 19.01.2021 | Einführung in die Arduino-Welt         |
+| 12  | 26.01.2021 | Schnittstellen und Ausgaben            |
+| 13  | 02.02.2021 | Interrupts                             |
+| 14  | 09.02.2021 | Anwendungsbeispiele                    |
 
 ## Organisatorisches
 
 **Dozenten**
 
-| Name            | Email                                                  |
-|:--------------- |:------------------------------------------------------ |
-| Sebastian Zug   | sebastian.zug@informatik.tu-freiberg.de                |
-| Galina Rudolf   | galina.rudolf@informatik.tu-freiberg.de                |
-| Nico Sonack     | nico.sonack@student.tu-freiberg.de                     |
-| Baldur Paulwitz | baldur-heinrich-eckart.paulwitz@student.tu-freiberg.de |
+| Name          | Email                                   |
+|:------------- |:--------------------------------------- |
+| Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de |
+| Galina Rudolf | galina.rudolf@informatik.tu-freiberg.de |
+| Nico Sonack   | nico.sonack@student.tu-freiberg.de      |
+| Felix Busch   | Felix.Busch@student.tu-freiberg.de      |
 
 **Übungen**
 
-Die Übungen vertiefen das erlernte anhand praktischer Programmieraufgaben. Dabei werden zunächst die Grundlagen aus C und C++ vermittelt und dann im Januar kleinere Experimente mit einem Mikrocontroller realisiert.
+Die Übungen vertiefen das erlernte anhand praktischer Programmieraufgaben:
+
+1. Dabei werden zunächst die Grundlagen aus C und C++ vermittelt (bis Dezember)
+2. Ab Januar werden kleinere Experimente mit einem Mikrocontroller realisiert.
 
 > Ist jemand noch nicht für die Übungen eingeschrieben?
 
@@ -205,7 +264,7 @@ selbst anzugehen.
 > _Studienbeginn, schnapp dir ein gutes Buch zur gelehrten Sprache, und fange_
 > _schonmal bissl an kleine Sachen zu programmieren._ (Foreneintrag)
 >
-> _Ich habe es grade irgendwie selbst gelöst, aber keine Ahnung warum es_
+> _Ich habe es gerade irgendwie selbst gelöst, aber keine Ahnung warum es_
 > _funktioniert hat. _(Foreneintrag)_
 
 Herausforderungen:
@@ -226,13 +285,9 @@ Herausforderungen:
 
 * Machen Sie Verbesserungsvorschläge für die Vorlesungsfolien!
 
-Link auf den GitHub: https://github.com/SebastianZug/VL_ProzeduraleProgrammierung/
+Link auf den GitHub: [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung)
 
-## Und wenn Sie dann immer noch programmieren wollen ...
+## Und wenn Sie sofort loslegen wollen ...
 
-Dann wartet das TUFbots-Team auf Sie ...
-
-![WALL-E](./images/00_Readme/RoboCup.jpeg)<!--
-style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
-
-Quelle: _Team RobOTTO_, OVGU Magdeburg
+1. Sprechen Sie uns gern wegen "Bastelbedarf" für ein eigenes Projekt an!
+2. Bringen Sie sich in eines der studentischen Teams ein.
