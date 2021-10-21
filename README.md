@@ -198,21 +198,21 @@ Die roten Punkte stellen die Verteilung der Wochenendmessungen der vergangenen W
 
 | Nr. | Datum      | Inhalt                                 |
 |:--- | ---------- | -------------------------------------- |
-| 0   | 20.10.2020 | Motivation                             |
-| 1   | 27.10.2020 | Eingabe/Ausgabe, Datentypen            |
-| 2   | 03.11.2020 | Operatoren                             |
-| 3   | 10.11.2020 | Kontrollstrukturen                     |
-| 4   | 17.11.2020 | _Feiertag_                             |
-| 5   | 24.11.2020 | Zeiger & Arrays                        |
-| 6   | 01.12.2020 | Funktionen                             |
-| 7   | 08.12.2020 | Komplexe Datentypen                    |
-| 8   | 15.12.2020 | Standardalgorithmen                    |
-| 9   | 22.12.2020 | Objektorientierte Programmierung (OOP) |
-| 10  | 12.01.2021 | Vererbung                              |
-| 11  | 19.01.2021 | Einführung in die Arduino-Welt         |
-| 12  | 26.01.2021 | Schnittstellen und Ausgaben            |
-| 13  | 02.02.2021 | Interrupts                             |
-| 14  | 09.02.2021 | Anwendungsbeispiele                    |
+| 0   | 20.10.2021 | Motivation                             |
+| 1   | 27.10.2021 | Eingabe/Ausgabe, Datentypen            |
+| 2   | 03.11.2021 | Operatoren                             |
+| 3   | 10.11.2021 | Kontrollstrukturen                     |
+| 4   | 17.11.2021 | _Feiertag_                             |
+| 5   | 24.11.2021 | Zeiger & Arrays                        |
+| 6   | 01.12.2021 | Funktionen                             |
+| 7   | 08.12.2021 | Komplexe Datentypen                    |
+| 8   | 15.12.2021 | Standardalgorithmen                    |
+| 9   | 22.12.2021 | Objektorientierte Programmierung (OOP) |
+| 10  | 12.01.2022 | Vererbung                              |
+| 11  | 19.01.2022 | Einführung in die Arduino-Welt         |
+| 12  | 26.01.2022 | Schnittstellen und Ausgaben            |
+| 13  | 02.02.2022 | Interrupts                             |
+| 14  | 09.02.2022 | Anwendungsbeispiele                    |
 
 ## Organisatorisches
 
