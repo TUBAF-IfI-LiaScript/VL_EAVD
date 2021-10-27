@@ -10,6 +10,7 @@ comment: Einführung in die Programmierung für Nicht-Informatiker
 logo: ./img/LogoCodeExample.png
 
 import: https://github.com/liascript/CodeRunner
+        https://github.com/LiaTemplates/Pyodide
 
 -->
 
@@ -23,7 +24,7 @@ import: https://github.com/liascript/CodeRunner
 | **Veranstaltung:**        | `Vorlesung Prozedurale Programmierung`                                                                                                                                                                 |
 | **Semester**              | `Wintersemester 2021/22`                                                                                                                                                                               |
 | **Hochschule:**           | `Technische Universität Freiberg`                                                                                                                                                                      |
-| **Inhalte:**              | `Motivation der Vorlesung / Organisation der Veranstaltung`                                                                                                                                            |
+| **Inhalte:**              | `Vorstellung des Arbeitsprozesses`                                                                                                                                            |
 | **Link auf Repository: ** | [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/00_Einfuehrung.md) |
 | **Autoren**               | @author                                                                                                                                                                                                |
 
@@ -51,19 +52,17 @@ in einem Rechner bei der Abarbeitung von Programmen beleuchtet, um dann die
 Realisierung eines Programmes mit C zu adressieren.
 
 {{0-1}}
-![instruction-set](./images/00_Einfuehrung/Programmiersprache_Umfeld.png)<!-- width="100%" -->
+![instruction-set](./images/00_Einfuehrung/Programmiersprache_Umfeld.png "Erzeugung von Programmcode [^Programmerstellung]")<!-- width="80%" -->
 
-{{1-2}}
-Quelle: [Programmiervorgang und Begriffe(Autor VÖRBY)](https://commons.wikimedia.org/wiki/File:Programmiersprache_Umfeld.png)
+[^Programmerstellung]: Programmiervorgang und Begriffe(Autor VÖRBY, https://commons.wikimedia.org/wiki/File:Programmiersprache_Umfeld.png
 
 {{1-2}}
 Beispiel: Intel 4004-Architektur (1971)
 
 {{1-2}}
-![intel](./images/00_Einfuehrung/4004_arch.svg.png)<!-- style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
+![intel](./images/00_Einfuehrung/4004_arch.svg.png"Intel 4004 Architekturdarstellung [^Intel4004]")<!-- style="width: 80%; display: block; margin-left: auto; margin-right: auto;"-->
 
-{{1-2}}
-Quelle: [Intel 4004 (Autor Appaloosa)](https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png)
+[^Intel4004]: Autor Appaloosa, Intel 4004, https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png
 
 {{2}}
 Jeder Rechner hat einen spezifischen Satz von Befehlen, die durch "0" und "1"
@@ -80,8 +79,7 @@ Speicherauszug den Intel 4004:
 | 0012    | 1111 0010      | 1111 0010  | IAC       |
 
 {{3}}
-Unterstützung für die Interpretation aus dem Nutzerhandbuch, dass das Instruction
-set beschreibt:
+Unterstützung für die Interpretation aus dem Nutzerhandbuch, dass das _Instruction Set_ beschreibt:
 
 {{3}}
 ![instruction-set](./images/00_Einfuehrung/4004_Instruction_set.png)<!-- width="100%" -->
@@ -135,10 +133,9 @@ Hardware abgestimmt ist
 Stufen des Compile-Vorganges:
 
 {{2}}
-![instruction-set](./images/00_Einfuehrung/compilerElements.png)<!-- width="80%" -->
+![instruction-set](./images/00_Einfuehrung/compilerElements.png "Stufen der Compilierung [^Compiliation]")<!-- width="80%" -->
 
-{{2}}
-Quelle: [Stufen der Compilierung](https://medium.com/@vietkieutie/what-happens-when-you-type-gcc-main-c-2a136896ade3)
+[^Compiliation]: Jimmy Thong, Oct 13, 2016, What happens when you type GCC main.c, https://medium.com/@vietkieutie/what-happens-when-you-type-gcc-main-c-2a136896ade3
 
 
 ### Einordnung von C und C++
@@ -410,3 +407,35 @@ int main() {
 }
 ```
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+
+
+## Warum dann C?
+
+Zwei Varianten der Umsetzung ... C vs. Python
+
+```cpp                     HelloWorld.c
+#include <stdio.h>
+
+int main() {
+  char zahl;
+  for (int zahl=0; zahl<3; zahl++){
+	    printf("%d Hello World\n", zahl);
+  }
+	return 0;
+}
+```
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+
+```py                      HelloWorld.py
+import sys
+
+for i in range(3):
+	print(i, "Hello World")
+
+#sys.exit()
+```
+@Pyodide.eval
+
+## Und wo kommt der Begriff des Algorithmus vor?
+
+... Nehmen wir mal an ...
