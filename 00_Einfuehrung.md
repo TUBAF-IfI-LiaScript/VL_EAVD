@@ -32,6 +32,13 @@ import: https://github.com/liascript/CodeRunner
 
 ---------------------------------------------------------------------
 
+**Fragen an die heutige Veranstaltung ...**
+
+* Welche Aufgabe erfüllt eine Programmiersprache?
+* Erklären Sie die Begriffe Compiler, Editor, Programm, Hochsprache!
+
+---------------------------------------------------------------------
+
 ##  Wie arbeitet ein Rechner eigentlich?
 
 {{0-1}}
