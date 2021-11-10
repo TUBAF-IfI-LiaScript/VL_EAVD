@@ -749,7 +749,7 @@ Bildschirm. Über den Rückgabewert liefert `printf` die Anzahl der ausgegebenen
 Zeichen. Wenn bei der Ausgabe ein Fehler aufgetreten ist, wird ein negativer
 Wert zurückgegeben.
 
-Als erstes Argument von `printf` sind **nur Strings** erlaubt. Bei folgender
+Als erstes Argument von `printf` sind **nur Zeichenkette** erlaubt. Bei folgender
 Zeile gibt der Compiler beim Übersetzen deshalb eine Warnung oder einen Fehler
 aus:
 
@@ -758,8 +758,8 @@ printf(55);      // Falsch
 printf("55");    // Korrekt
 ```
 
-Dabei kann der String um entsprechende Parameter erweitert werden. Jeder
-Parameter nach dem String wird durch einen Platzhalter in dem selben
+Dabei kann die Zeichenkette um entsprechende Parameter erweitert werden. Jeder
+Parameter nach der Zeichenkette wird durch einen Platzhalter in dem selben
 repäsentiert.
 
 ```cpp                             printf_example.c
