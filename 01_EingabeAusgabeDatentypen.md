@@ -378,12 +378,14 @@ Quelle: [Arithmetischer Überlauf (Autor: WissensDürster)](https://de.wikipedia
 
 int main(){
   short a = 30000;
-  unsigned short d;   //      0 bis 65535
+
   signed short c;     // -32768 bis 32767
   printf("unsigned short - Wertebereich von %d bis %d\n", 0, USHRT_MAX);
-  printf("short - Wertebereich von %d bis %d\n", SHRT_MIN, SHRT_MAX);
-  c = 3000 + a;
+  c = 3000 + a;      // ÜBERLAUF!
   printf("c=%d\n", c);
+
+  unsigned short d;   //      0 bis 65535
+  printf("short - Wertebereich von %d bis %d\n", SHRT_MIN, SHRT_MAX);
   d = 3000 + a;
   printf("d=%d\n", d);
 }
