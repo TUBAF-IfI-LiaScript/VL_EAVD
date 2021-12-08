@@ -48,19 +48,23 @@ import: https://github.com/liascript/CodeRunner
 
 ## Feedback von Ihrer Seite
 
+---------------------------------------------------------------------
+
 Die Geschwindigkeit der Lehrveranstaltung ist
 
-[( )] Zu langsam
-[( )] Genau richtig
-[( )] Zu schnell
+[(A)] Zu langsam
+[(B)] Genau richtig
+[(C)] Zu schnell
 
+---------------------------------------------------------------------
 
 Ich ...
 
-[( )] ... bin ich hier, weil ich hier sein muss.
-[( )] ... sehe durchaus die Anwendbarkeit des vermittelten Inhalts, Begeisterung kommt aber keine auf
-[( )] ... habe Spaß am Programmieren.
+[(A)] ... bin ich hier, weil ich hier sein muss.
+[(B)] ... sehe durchaus die Anwendbarkeit des vermittelten Inhalts, Begeisterung kommt aber keine auf
+[(C)] ... habe Spaß am Programmieren.
 
+---------------------------------------------------------------------
 
 ## Motivation
 
@@ -426,6 +430,40 @@ int main(void) {
 }
 ```
 @LIA.evalWithDebug(`["main.c"]`, `gcc -Wall -Wconversion main.c -o a.out`, `./a.out`)
+
+
+### asdfas
+
+```cpp     conversion.c
+#include <stdio.h>
+#include <stdlib.h>
+
+void printSizeOf(int intArray[]);
+void printLength(int intArray[]);
+
+int main(int argc, char* argv[])
+{
+    int array[] = { 0, 1, 2, 3, 4, 5, 6 };
+
+    printf("sizeof of array: %d\n", (int) sizeof(array));
+    printSizeOf(array);
+
+    printf("Length of array: %d\n", (int)( sizeof(array) / sizeof(array[0]) ));
+    printLength(array);
+}
+
+void printSizeOf(int intArray[])
+{
+    printf("sizeof of parameter: %d\n", (int) sizeof(intArray));
+}
+
+void printLength(int intArray[])
+{
+    printf("Length of parameter: %d\n", (int)( sizeof(intArray) / sizeof(intArray[0]) ));
+}
+```
+@LIA.evalWithDebug(`["main.c"]`, `gcc -Wall -Wconversion main.c -o a.out`, `./a.out`)
+
 
 ### Funktionsdeklaration
 
