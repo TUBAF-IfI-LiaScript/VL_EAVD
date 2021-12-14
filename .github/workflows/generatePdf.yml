@@ -39,7 +39,7 @@ jobs:
           
       # Move script to folder
       - name: Copy resulting pdf to separate repository folder
-      - run: |
+        run: |
              mv ./output/script.pdf ./script/script.pdf
              
       # Commit script file
