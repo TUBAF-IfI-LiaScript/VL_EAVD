@@ -36,3 +36,21 @@ jobs:
         with:
           name: output
           path: output
+          
+      # Move script to folder
+      - name: Copy resulting pdf to separate repository folder
+      - run: |
+             mv ./output/script.pdf ./script/script.pdf
+             
+      # Commit script file
+      - name: Commit pdf
+        run: |
+             git config --local user.email "action@github.com"
+             git config --local user.name "GitHub Action"
+             git add ./script/script.pdf
+             git commit -m "Add new pdf version of script" || echo "No changes to commit"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+             github_token: ${{ secrets.GITHUB_TOKEN }}
+             branch: main
