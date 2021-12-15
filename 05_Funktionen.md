@@ -14,7 +14,7 @@ import: https://github.com/liascript/CodeRunner
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/04_ZeigerUndArrays.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/05_Funktionen.md)
 
 # Funktionen
 
@@ -24,7 +24,7 @@ import: https://github.com/liascript/CodeRunner
 | **Semester**              | `Wintersemester 2021/22`                                                                                                                                                                                                         |
 | **Hochschule:**           | `Technische Universität Freiberg`                                                                                                                                                                                                |
 | **Inhalte:**              | `Motivation, Definition und Verwendung von Funktionen in C-Programmen`                                                                                                                                                                                               |
-| **Link auf Repository: ** | [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/04_ZeigerUndArrays.md](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/04_ZeigerUndArrays.md) |
+| **Link auf Repository: ** | [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/05_Funktionen.md](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/05_Funktionen.md) |
 | **Autoren**               | @author                                                                                                                                                                                                                          |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
