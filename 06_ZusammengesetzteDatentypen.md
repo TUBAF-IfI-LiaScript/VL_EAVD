@@ -541,7 +541,7 @@ int main() {
 ```
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
-### Arrays und Funktionen
+### Structs und Funktionen
 
 Wie erfolgt die Übergabe von `struct`s an Funktionen?
 
