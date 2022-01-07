@@ -372,7 +372,7 @@ float foo(){
 }
 
 int main(void) {
-  int i = foo()
+  int i = foo();
   printf("%d\n",i);
   return 0;
 }

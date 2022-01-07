@@ -379,13 +379,16 @@ Quelle: [Arithmetischer Überlauf (Autor: WissensDürster)](https://de.wikipedia
 int main(){
   short a = 30000;
 
+  printf("Berechnung von 30000+3000 mit:\n\n");
+
   signed short c;     // -32768 bis 32767
-  printf("unsigned short - Wertebereich von %d bis %d\n", 0, USHRT_MAX);
+  printf("(signed) short c - Wertebereich von %d bis %d\n", SHRT_MIN, SHRT_MAX);
   c = 3000 + a;      // ÜBERLAUF!
   printf("c=%d\n", c);
 
   unsigned short d;   //      0 bis 65535
-  printf("short - Wertebereich von %d bis %d\n", SHRT_MIN, SHRT_MAX);
+  printf("unsigned short d - Wertebereich von %d bis %d\n", 0, USHRT_MAX);
+
   d = 3000 + a;
   printf("d=%d\n", d);
 }

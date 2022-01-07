@@ -119,7 +119,7 @@ Dabei sind einschränkende Konvertierungskonfigurationen kritisch zu sehen:
 
 * Bei der Umwandlung von höherwertigen Datentypen in niederwertigere Datentypen
   kann es zu Informationsverlust kommen.
-* Der Verleich von `signed`- und `unsigned`-Typen kann zum falschen Ergebnis
+* Der Vergleich von `signed`- und `unsigned`-Typen kann zum falschen Ergebnis
   führen. So kann beispielsweise `-1 > 1U` wahr sein.
 
 ```cpp                     NumberFormats.c

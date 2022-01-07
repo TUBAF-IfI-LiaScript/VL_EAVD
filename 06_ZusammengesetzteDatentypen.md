@@ -469,7 +469,7 @@ struct Student
 Und wie erzeuge ich Variablen dieses erweiterten Types, wie werden diese
 initialisiert und wie kann ich auf die einzelnen Komponenten zugreifen?
 
-Der Bespiel zeigt, dass die Definition der Variable unmittelbar nach der
+Das Beispiel zeigt, dass die Definition der Variable unmittelbar nach der
 `struct`-Definition oder mit einer gesonderten Anweisung mit einer vollständigen,
 partiellen Initialisierung bzw. ohne Initialisierung erfolgen kann.
 
