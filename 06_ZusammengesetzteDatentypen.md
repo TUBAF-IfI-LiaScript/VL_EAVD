@@ -664,3 +664,94 @@ int main() {
 ```
 
 ![Resultat](./images/06_ZusammengesetzteDatentypen/excelLib.png)
+
+## Quizze
+
+#1 Enums
+========
+
+```c
+enum Days {
+  MONDAY,
+  TUESDAY,
+  WEDNESDAY = 5,
+  THURSDAY,
+  FRIDAY,
+  SATURDAY = 10,
+  SUNDAY
+};
+```
+
+Welche Nummerierung hat das Enum?
+
+- [( )] `0, 1, 5, 3, 4, 10, 6`
+- [(X)] `0, 1, 5, 6, 7, 10, 11`
+- [( )] `0, 1, 5, 2, 3, 10, 4`
+
+#2 Structs
+==========
+
+Variante 1:
+
+```c
+#include <stdio.h>
+
+struct Date* getDate() {
+    struct Date {
+        int day;
+        char month[10];
+        int year;
+    } date = {20, "September", 2002};
+
+    return &date;
+}
+
+int main(void) {
+    struct Date* date = getDate(&date);
+
+    printf("%d.%s.%d\n", date->day, date->month, date->year);
+
+    return 0;
+}
+```
+
+Variante 2:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+struct Date {
+    int day;
+    char month[10];
+    int year;
+};
+
+void getDate(struct Date* date) {
+    date->day = 20;
+    strcpy(date->month, "September");
+    date->year = 2002;
+}
+
+int main(void) {
+    struct Date date;
+    getDate(&date);
+
+    printf("%d.%s.%d\n", date.day, date.month, date.year);
+
+    return 0;
+}
+```
+
+
+Welche Variante gibt das Datum aus?
+
+- [( )] Variante 1
+- [(X)] Variante 2
+**********************
+
+Wie hier zu sehen ist, sollte im Normalfall die Definition eines `struct` global geschehen (Variablen dieser aber weiterhin lokal definieren).
+
+In Variante 1 existiert `Date` nur innerhalb von `getDate()`.
+
+**********************

@@ -952,3 +952,127 @@ int main() {
 }
 ```
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+
+## Quizze
+
+#1 If-Statement
+===============
+
+```c
+char text1[] = "abc";
+char text2[] = "123";
+char text3[] = "ABC";
+int num1 = 1, num2 = 2;
+double d1 = num1 / (double) num2;
+double d2 = num1 / num2;
+
+if (d2 < num1) {
+  if (num1 == d1) {
+    printf("%s", text1);
+  } else {
+    printf("%s", text3);
+  }
+} else {
+  printf("%s", text2);
+}
+
+printf("%s", text2);
+```
+
+Was wird ausgegeben?
+
+[[ABC123]]
+[[?]] Zur Erinnerung: Division von Ganzzahlen streicht Dezimalstellen
+[[?]] So lange kein `\n` oder Leerzzeichen geschrieben wurde, schreibt printf in der gleichen Zeile.
+[[?]] Nach einem If-Statement werden wie normal Befehle ausgeführt
+
+#2 Switch-Statement
+===================
+
+```c
+char buchstabe = 'n';
+
+switch (buchstabe) {
+  case 'a':
+  case 'b':
+  case 'c':
+    printf("ABC");
+    break;
+  case 'n':
+  case 'm':
+    printf("123");
+  case 'x':
+    printf("abc");
+    break;
+  case 'z':
+    printf("xyz");
+    break;
+  default:
+    printf("XYZ");
+    break;
+}
+```
+
+Was wird ausgegeben?
+
+[[123abc]]
+[[?]] Ohne `break;` fällt das Statement durch folgende `case` durch bis ein `break;` kommt (fall through). Dabei werden dazwischenstehende Befehle ausgeführt.
+
+#3 Schleifen
+============
+
+for-Schleifen
+-------------
+
+```c
+int result = 10;
+
+for (int i = 1; i <= result; i++) {
+  result--;
+}
+```
+
+Was enthält `result` am Ende?
+
+[[5]]
+[[?]] Mit jedem Schleifendurchlauf wird `i` um 1 erhöht.
+[[?]] `result` wird immer um 1 gesenkt
+
+while-Schleife
+--------------
+
+```c
+int result = 10;
+
+while (0) {
+  result++;
+}
+```
+
+Was enthält `result` am Ende?
+
+[[10]]
+*******************
+
+Eine "falsche" Schleifenbedingung bricht eine Schleife ab und im Fall einer while- und for-Schleife verhindert es auch den Eintritt
+
+*******************
+
+do while-Schleife
+-----------------
+```c
+int result = 10;
+
+do {
+  result++;
+} while (0);
+```
+
+Was enthält `result` am Ende?
+
+[[11]]
+*******************
+
+Eine do while-Schleife wird mindestens einmal durchgeführt.
+
+*******************

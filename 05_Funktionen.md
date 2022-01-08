@@ -870,3 +870,50 @@ int main(){
 }
 ```
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+
+## Quizze
+
+#1 Einfache Funktion
+====================
+
+```c
+void berechneSumme(int a, double b) {
+  return a + b;
+}
+
+int main() {
+  double Summe;
+  Summe = berechneSumme(30, 15.6);
+
+  return 0;
+}
+```
+
+Was steht am Ende in Summe?
+
+- [( )] `45.6`
+- [(X)] Das Programm kompiliert nicht.
+- [( )] Das Programm kompiliert, aber in `Summe` steht `0`.
+
+#2 Rückgabe mehrerer Variablen
+==============================
+
+```c
+void berechnungen(int a, double b, double* arr) {
+  arr[0] = a + b;
+  arr[1] = a - b;
+}
+
+int main() {
+  double Ergebnisse[] = {0, 0};
+  berechnungen(30, 15.6, Ergebnisse);
+
+  return 0;
+}
+```
+
+Was steht am Ende in Ergebnisse?
+
+- [(X)] `{45.6, 14.4}`
+- [( )] Das Programm kompiliert nicht.
+- [( )] Das Programm kompiliert, aber in `Ergebnisse` steht `{0, 0}`.
