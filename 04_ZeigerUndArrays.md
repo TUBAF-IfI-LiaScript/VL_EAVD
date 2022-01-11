@@ -856,7 +856,7 @@ printf("%p\n", num_ptr);
 printf("%d\n", *num_ptr /*4*/);
 ```
 
-Was bedeuten die `&` und `*` Operatoren in den obrigen Fällen?
+Was bedeuten die `&` und `*` Operatoren an den mit Kommentaren markierten Stellen?
 
 Stelle 1:
 
@@ -900,7 +900,7 @@ Was wird ausgegeben?
 [[5]]
 *******************
 
-Die Schreibweise `array[x]` ist gleichbedeutend mit `*(array+x)`, da `array` allein einen Pointer an die erste Arraystelle darstellt.
+Mit `array[9]` und `*(array+9)` wird das gleiche Array-Element angesprochen, da `array` einen Pointer auf das 0.te Array-Element darstellt.
 
 *******************
 
@@ -918,4 +918,4 @@ printf("%s", str);
 Was wird ausgegeben?
 
 [[Hello]]
-[[?]] `'\0'`, zeigen das Ende eines Strings an.
+[[?]] Zeichen `'\0'` schließt eine Zeichenkette ab.
