@@ -892,10 +892,10 @@ int main() {
 Was steht am Ende in Summe?
 
 - [( )] `45.6`
-- [(X)] Das Programm kompiliert nicht.
-- [( )] Das Programm kompiliert, aber in `Summe` steht `0`.
+- [(X)] Der Kompiliervorgang wird mit einem Fehler abgebrochen.
+- [( )] Das Programm wird erfolgreich kompiliert, aber die Variable `Summe` erhält den Wert `0`.
 
-#2 Rückgabe mehrerer Variablen
+#2 Rückgabe mehrerer Werte mit einem Array
 ==============================
 
 ```c
@@ -915,5 +915,5 @@ int main() {
 Was steht am Ende in Ergebnisse?
 
 - [(X)] `{45.6, 14.4}`
-- [( )] Das Programm kompiliert nicht.
-- [( )] Das Programm kompiliert, aber in `Ergebnisse` steht `{0, 0}`.
+- [( )] Der Kompiliervorgang wird mit einem Fehler abgebrochen.
+- [( )] Das Programm wird erfolgreich kompiliert, aber die Variable `Ergebnisse` erhält die Werte `{0, 0}`.
