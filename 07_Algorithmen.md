@@ -64,8 +64,8 @@ style="width: 80%; max-width: 460px; display: block; margin-left: auto; margin-r
 
 <div>
   <wokwi-led color="red"    pin="13" port="B" label="13"></wokwi-led>
-  <wokwi-led color="yellow" pin="12" port="B" label="13"></wokwi-led>
-  <wokwi-led color="green"  pin="11" port="B" label="13"></wokwi-led>
+  <wokwi-led color="yellow" pin="12" port="B" label="12"></wokwi-led>
+  <wokwi-led color="green"  pin="11" port="B" label="11"></wokwi-led>
   <span id="simulation-time"></span>
 </div>
 
@@ -91,9 +91,10 @@ ampel_state_t state_table[4] = {
 {   3,   0,   0,  1,    0,      1,}
 };
 
-const int greenPin = 13;
+const int redPin = 13;
 const int yellowPin = 12;
-const int redPin = 11;
+const int greenPin = 11;
+
 int state = 0;
 
 void setup() {
