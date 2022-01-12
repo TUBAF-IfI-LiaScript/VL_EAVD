@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "main.h"
 
 int main(void) {
   int i = foo();       // <- Aufruf der Funktion
@@ -6,6 +7,6 @@ int main(void) {
   return 0;
 }
 
-//int foo(void){         // <- Definition der Funktion
-//   return 3;
-//}
+int foo(void){         // <- Definition der Funktion
+  return 3;
+}
