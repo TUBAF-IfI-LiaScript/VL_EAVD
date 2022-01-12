@@ -939,15 +939,15 @@ int main(){
 
 ## Quizze
 
-#1 include
+#1 include-Anweisungen
 ==========
 
-Was bewirkt `#include <stdio.h>`?
+Was bewirkt in eienem C-Programm die Anweisung `#include <stdio.h>`?
 
-- [( )] Ermöglicht das Verwenden von Variablen.
-- [( )] Zeigt an, dass es sich um ein C-Programm mit Eingabe und Ausgabe handelt.
+- [( )] Ermöglicht das generelle Verwenden von Variablen.
+- [( )] Zeigt an, dass es sich im C-Programm ausschließlich um Eingabe und Ausgabe handelt.
 - [(x)] Importiert Eingabe- und Ausgabefunktionen (wie `printf()` oder `scanf()`).
-- [( )] Ist C-Konvention
+- [( )] Ist eine C-Konvention und darf in keinem Programm fehlen.
 *****************************************
 
 `#include` importiert Funktionen und andere Definitionen aus Headerdateien (Dateiendung `.h`).
@@ -957,7 +957,7 @@ Was bewirkt `#include <stdio.h>`?
 #2 Variablen
 ============
 
-Wähle Code-Schnipsel mit Fehlern aus:
+Wählen Sie die fehlerhaften Anweisungen aus:
 
 - [[X]] `double a = 1,6135;`
 - [[x]] `double a = 0.4747`
@@ -966,17 +966,17 @@ Wähle Code-Schnipsel mit Fehlern aus:
 - [[ ]] `char b = '7';`
 - [[x]] `char b = '74';`
 
-#3 printf & scanf
+#3 printf- und scanf-Anweisungen
 =====================
 
-Wähle richtige Code-Schnipsel aus:
+Wählen Sie die korrekten Code-Blöcke aus:
 
 - [[X]] `printf("26 + 16 = %d", 26+16);`
 - [[ ]] `printf("18.9 + 23.1 = %d", 18.9+23.1);`
 - [[x]] `printf("18.9 + 23.1 = %lf", 18.9+23.1);`
 - [[ ]] `int num; scanf("%d", num);`
 - [[ ]] `double num; scanf("%lf", &num)`
-- [[X]] `char character; scanf("%c", %character);`
+- [[X]] `char character; scanf("%c", &character);`
 
 ## Ausblick
 
