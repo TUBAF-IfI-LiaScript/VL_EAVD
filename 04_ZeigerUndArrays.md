@@ -311,7 +311,7 @@ int main(void)
 
 Bisher umfassten unsere Variablen einzelne Skalare. Arrays erweitern das
 Spektrum um Folgen von Werten, die in n-Dimensionen aufgestellt werden können.
-Array ist eine geordnete Folge von Werten des gleichen Datyps.
+Array ist eine geordnete Folge von Werten des gleichen Datentyps.
 Die Deklaration erfolgt in folgender Anweisung:
 
 ```text
@@ -692,7 +692,7 @@ int main(void) {
 Die Zeigerarithmetik erlaubt:
 
 * Ganzzahl-Additionen
-* Ganzzahl-Substraktionen
+* Ganzzahl-Subtraktionen
 * Inkrementierungen `ptr_i--;`
 * Dekrementierungen `ptr_i++;`
 
@@ -785,7 +785,7 @@ int main(void)
 
 ## Beispiel der Woche
 
-Gegeben ist ein Array, dass eine sortierte Reihung von Ganzzahlen umfasst.
+Gegeben ist ein Array, das eine sortierte Reihung von Ganzzahlen umfasst.
 Geben Sie alle Paare von Einträgen zurück, die in der Summe 18 ergeben.
 
 Die intuitive Lösung entwirft einen kreuzweisen Vergleich aller sinnvollen Kombinationen
