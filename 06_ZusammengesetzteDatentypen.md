@@ -682,7 +682,7 @@ enum Days {
 };
 ```
 
-Welche Nummerierung hat das Enum?
+Welche ganze Zahlen werden den Enum-Werten reihenach zugeordnet?
 
 - [( )] `0, 1, 5, 3, 4, 10, 6`
 - [(X)] `0, 1, 5, 6, 7, 10, 11`
@@ -691,23 +691,25 @@ Welche Nummerierung hat das Enum?
 #2 Structs
 ==========
 
+Gegeben sind zwei Varianten des Programms zum Erzeugen und der Ausgabe eines Datums. 
+
 Variante 1:
 
 ```c
 #include <stdio.h>
 
-struct Date* getDate() {
+struct Date getDate() {
     struct Date {
         int day;
         char month[10];
         int year;
     } date = {20, "September", 2002};
 
-    return &date;
+    return date;
 }
 
 int main(void) {
-    struct Date* date = getDate(&date);
+    struct Date date = getDate();
 
     printf("%d.%s.%d\n", date->day, date->month, date->year);
 
@@ -727,7 +729,7 @@ struct Date {
     int year;
 };
 
-void getDate(struct Date* date) {
+void changeDate(struct Date* date) {
     date->day = 20;
     strcpy(date->month, "September");
     date->year = 2002;
@@ -735,7 +737,7 @@ void getDate(struct Date* date) {
 
 int main(void) {
     struct Date date;
-    getDate(&date);
+    changeDate(&date);
 
     printf("%d.%s.%d\n", date.day, date.month, date.year);
 
@@ -744,14 +746,13 @@ int main(void) {
 ```
 
 
-Welche Variante gibt das Datum aus?
+Welche Variante würde fehlerfrei funktionieren?
 
 - [( )] Variante 1
 - [(X)] Variante 2
 **********************
+Üblcherweise soll die `struct` global definiert werden (Variablen davon aber weiterhin lokal).
 
-Wie hier zu sehen ist, sollte im Normalfall die Definition eines `struct` global geschehen (Variablen dieser aber weiterhin lokal definieren).
-
-In Variante 1 existiert `Date` nur innerhalb von `getDate()`.
+In der Variante 1 existiert `struct Date` nur innerhalb der Funktion `getDate()`.
 
 **********************
