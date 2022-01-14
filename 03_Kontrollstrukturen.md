@@ -982,9 +982,9 @@ printf("%s", text2);
 Was wird ausgegeben?
 
 [[ABC123]]
-[[?]] Zur Erinnerung: Division von Ganzzahlen streicht Dezimalstellen
-[[?]] So lange kein `\n` oder Leerzzeichen geschrieben wurde, schreibt printf in der gleichen Zeile.
-[[?]] Nach einem If-Statement werden wie normal Befehle ausgeführt
+[[?]] Zur Erinnerung: im Ergebnis der Division mit Ganzzahlen entsteht ebenfalls eine ganze Zahl.
+[[?]] So lange kein `\n` oder andere Trennzeichen ausgegeben werden, gibt printf alles als eine Zeichenkette aus.
+[[?]] die nicht im If-Statement enthaltene letzte Anweisung wird auf jeden Fall ausgeführt.
 
 #2 Switch-Statement
 ===================
@@ -1016,7 +1016,7 @@ switch (buchstabe) {
 Was wird ausgegeben?
 
 [[123abc]]
-[[?]] Ohne `break;` fällt das Statement durch folgende `case` durch bis ein `break;` kommt (fall through). Dabei werden dazwischenstehende Befehle ausgeführt.
+[[?]] Ohne `break;` fällt das Statement durch alle folgende `case` durch bis ein `break;` kommt (fall through). Dabei werden dazwischenstehende Befehle ausgeführt.
 
 #3 Schleifen
 ============
@@ -1032,11 +1032,11 @@ for (int i = 1; i <= result; i++) {
 }
 ```
 
-Was enthält `result` am Ende?
+Was enthält `result`, wenn die Schleife zu Ende ist?
 
 [[5]]
 [[?]] Mit jedem Schleifendurchlauf wird `i` um 1 erhöht.
-[[?]] `result` wird immer um 1 gesenkt
+[[?]] `result` wird in jedem Schleifendurchlauf um 1 gesenkt.
 
 while-Schleife
 --------------
@@ -1049,12 +1049,12 @@ while (0) {
 }
 ```
 
-Was enthält `result` am Ende?
+Was enthält `result`, wenn die Schleife zu Ende ist?
 
 [[10]]
 *******************
 
-Eine "falsche" Schleifenbedingung bricht eine Schleife ab und im Fall einer while- und for-Schleife verhindert es auch den Eintritt
+Im Fall einer while- und for-Schleife kann mit einer entsprechend formulierten Bedingung sogar der generelle Eintritt in die Schleife verhindert werden.
 
 *******************
 
@@ -1067,12 +1067,11 @@ do {
   result++;
 } while (0);
 ```
-
-Was enthält `result` am Ende?
+Was enthält `result`, wenn die Schleife zu Ende ist?
 
 [[11]]
 *******************
 
-Eine do while-Schleife wird mindestens einmal durchgeführt.
+Eine do-while-Schleife wird mindestens einmal durchgeführt.
 
 *******************
