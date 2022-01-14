@@ -983,7 +983,7 @@ Was wird ausgegeben?
 
 [[ABC123]]
 [[?]] Zur Erinnerung: im Ergebnis der Division mit Ganzzahlen entsteht ebenfalls eine ganze Zahl.
-[[?]] So lange kein `\n` oder andere Trennzeichen ausgegeben werden, gibt printf alles als eine Zeichenkette aus.
+[[?]] So lange kein `\n` ausgegeben wird, gibt printf alles in der gleichen Zeile aus.
 [[?]] die nicht im If-Statement enthaltene letzte Anweisung wird auf jeden Fall ausgeführt.
 
 #2 Switch-Statement
