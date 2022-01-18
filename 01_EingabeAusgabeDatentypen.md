@@ -979,16 +979,3 @@ Wählen Sie die korrekten Code-Blöcke aus:
 - [[ ]] `double num; scanf("%lf", &num)`
 - [[X]] `char character; scanf("%c", &character);`
 <!--END_SKIP_IN_PDF-->
-
-## Ausblick
-
-```cpp                     GoodBy.c
-#include<stdio.h>
-
-int main() {
-  printf("... \t bis \n\t\t zum \n\t\t\t");
-  printf("naechsten \n\t\t\t\t\t mal! \n");
-	return 0;
-}
-```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
