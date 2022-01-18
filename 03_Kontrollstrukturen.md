@@ -953,6 +953,7 @@ int main() {
 ```
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
+<!--START_SKIP_IN_PDF-->
 ## Quizze
 
 #1 If-Statement
@@ -1075,3 +1076,4 @@ Was enthält `result`, wenn die Schleife zu Ende ist?
 Eine do-while-Schleife wird mindestens einmal durchgeführt.
 
 *******************
+<!--END_SKIP_IN_PDF-->

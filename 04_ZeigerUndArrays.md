@@ -840,6 +840,7 @@ Schauen wir uns das Ganze noch in der Ausführung mit Pythontutor an!
 
 <iframe width="800" height="500" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Cstdio.h%3E%0A%23include%20%3Cstdlib.h%3E%0A%0A%23define%20ZIELWERT%2018%0A%0Aint%20main%28void%29%0A%7B%0A%20%20int%20a%5B%5D%20%3D%20%7B1,%202,%205,%207,%209,%2010,%2012,%2013,%2016,%2017,%2018,%2021,%2025%7D%3B%0A%20%20int%20*ptr_left%20%3D%20a%3B%0A%20%20int%20*ptr_right%20%3D%20%28int%20*%29%28%26a%20%2B%201%29%20-%201%3B%0A%20%20printf%28%22Value%20left%20%253d%20right%20%25d%5Cn-----------------------%5Cn%22,%20*ptr_left,%20*%20ptr_right%29%3B%0A%20%20do%7B%0A%20%20%20%20printf%28%22Value%20left%20%253d%20right%20%25d%22,%20*ptr_left,%20*%20ptr_right%29%3B%0A%20%20%20%20if%20%28*ptr_right%20%2B%20*ptr_left%20%3D%3D%20ZIELWERT%29%7B%0A%20%20%20%20%20%20%20printf%28%22%20-%3E%20TREFFER%22%29%3B%0A%20%20%20%20%7D%0A%20%20%20%20printf%28%22%5Cn%22%29%3B%0A%20%20%20%20if%20%28*ptr_right%20%2B%20*ptr_left%20%3E%3D%20ZIELWERT%29%20ptr_right--%3B%0A%20%20%20%20else%20ptr_left%2B%2B%3B%0A%20%20%7Dwhile%20%28ptr_right%20!%3D%20ptr_left%29%3B%0A%20%20return%20EXIT_SUCCESS%3B%0A%7D&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
 
+<!--START_SKIP_IN_PDF-->
 ## Quizze
 
 #1 Pointer
@@ -919,3 +920,4 @@ Was wird ausgegeben?
 
 [[Hello]]
 [[?]] Zeichen `'\0'` schließt eine Zeichenkette ab.
+<!--END_SKIP_IN_PDF-->
