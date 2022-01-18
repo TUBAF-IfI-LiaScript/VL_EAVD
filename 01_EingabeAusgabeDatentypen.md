@@ -940,8 +940,8 @@ int main(){
 <!--START_SKIP_IN_PDF-->
 ## Quizze
 
-#1 include-Anweisungen
-==========
+include-Anweisungen
+--------------------
 
 Was bewirkt in eienem C-Programm die Anweisung `#include <stdio.h>`?
 
@@ -955,8 +955,8 @@ Was bewirkt in eienem C-Programm die Anweisung `#include <stdio.h>`?
 
 *****************************************
 
-#2 Variablen
-============
+Variablen
+--------------------
 
 Wählen Sie die fehlerhaften Anweisungen aus:
 
@@ -967,8 +967,8 @@ Wählen Sie die fehlerhaften Anweisungen aus:
 - [[ ]] `char b = '7';`
 - [[x]] `char b = '74';`
 
-#3 printf- und scanf-Anweisungen
-=====================
+printf- und scanf-Anweisungen
+--------------------
 
 Wählen Sie die korrekten Code-Blöcke aus:
 

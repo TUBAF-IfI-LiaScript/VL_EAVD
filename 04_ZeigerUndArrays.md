@@ -843,8 +843,8 @@ Schauen wir uns das Ganze noch in der Ausführung mit Pythontutor an!
 <!--START_SKIP_IN_PDF-->
 ## Quizze
 
-#1 Pointer
-==========
+Pointer
+----------------------
 
 ```c
 int num;
@@ -859,32 +859,38 @@ printf("%d\n", *num_ptr /*4*/);
 
 Was bedeuten die `&` und `*` Operatoren an den mit Kommentaren markierten Stellen?
 
-Stelle 1:
+Stelle `*1*`:
 
 - [[ ]] Erstellung eines Pointers
 - [[X]] Erhalte Speicheradresse einer Variable
 - [[ ]] Erhalte Wert, welcher an einer Speicheradresse liegt
 
-Stelle 2:
+--------------------------------
+
+Stelle `*2*`:
 
 - [[X]] Erstellung eines Pointers
 - [[ ]] Erhalte Speicheradresse einer Variable
 - [[ ]] Erhalte Wert, welcher an einer Speicheradresse liegt
 
-Stelle 3:
+--------------------------------
+
+Stelle `*3*`:
 
 - [[ ]] Erstellung eines Pointers
 - [[X]] Erhalte Speicheradresse einer Variable
 - [[ ]] Erhalte Wert, welcher an einer Speicheradresse liegt
 
-Stelle 4:
+--------------------------------
+
+Stelle `*4*`:
 
 - [[ ]] Erstellung eines Pointers
 - [[ ]] Erhalte Speicheradresse einer Variable
 - [[X]] Erhalte Wert, welcher an einer Speicheradresse liegt
 
-#2 Arrays
-=========
+Arrays
+--------------------
 
 ```c
 int arr[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -905,8 +911,8 @@ Mit `array[9]` und `*(array+9)` wird das gleiche Array-Element angesprochen, da 
 
 *******************
 
-#3 Strings
-==========
+Strings
+--------------------
 
 ```c
 char str[] = "Hello World";

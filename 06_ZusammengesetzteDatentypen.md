@@ -668,8 +668,8 @@ int main() {
 <!--START_SKIP_IN_PDF-->
 ## Quizze
 
-#1 Enums
-========
+Enums
+--------------------------------
 
 ```c
 enum Days {
@@ -689,10 +689,10 @@ Welche ganze Zahlen werden den Enum-Werten reihenach zugeordnet?
 - [(X)] `0, 1, 5, 6, 7, 10, 11`
 - [( )] `0, 1, 5, 2, 3, 10, 4`
 
-#2 Structs
-==========
+Structs
+--------------------------------
 
-Gegeben sind zwei Varianten des Programms zum Erzeugen und der Ausgabe eines Datums. 
+Gegeben sind zwei Varianten des Programms zum Erzeugen und der Ausgabe eines Datums.
 
 Variante 1:
 
@@ -752,7 +752,7 @@ Welche Variante würde fehlerfrei funktionieren?
 - [( )] Variante 1
 - [(X)] Variante 2
 **********************
-Üblcherweise soll die `struct` global definiert werden (Variablen davon aber weiterhin lokal).
+Üblcherweise soll das `struct` als Datentyp global definiert werden (Variablen davon aber weiterhin lokal).
 
 In der Variante 1 existiert `struct Date` nur innerhalb der Funktion `getDate()`.
 
