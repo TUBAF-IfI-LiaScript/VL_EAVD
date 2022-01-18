@@ -119,7 +119,7 @@ Dabei sind einschränkende Konvertierungskonfigurationen kritisch zu sehen:
 
 * Bei der Umwandlung von höherwertigen Datentypen in niederwertigere Datentypen
   kann es zu Informationsverlust kommen.
-* Der Verleich von `signed`- und `unsigned`-Typen kann zum falschen Ergebnis
+* Der Vergleich von `signed`- und `unsigned`-Typen kann zum falschen Ergebnis
   führen. So kann beispielsweise `-1 > 1U` wahr sein.
 
 ```cpp                     NumberFormats.c
@@ -952,3 +952,126 @@ int main() {
 }
 ```
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+
+## Quizze
+
+#1 If-Statement
+===============
+
+```c
+char text1[] = "abc";
+char text2[] = "123";
+char text3[] = "ABC";
+int num1 = 1, num2 = 2;
+double d1 = num1 / (double) num2;
+double d2 = num1 / num2;
+
+if (d2 < num1) {
+  if (num1 == d1) {
+    printf("%s", text1);
+  } else {
+    printf("%s", text3);
+  }
+} else {
+  printf("%s", text2);
+}
+
+printf("%s", text2);
+```
+
+Was wird ausgegeben?
+
+[[ABC123]]
+[[?]] Zur Erinnerung: im Ergebnis der Division mit Ganzzahlen entsteht ebenfalls eine ganze Zahl.
+[[?]] So lange kein `\n` ausgegeben wird, gibt printf alles in der gleichen Zeile aus.
+[[?]] die nicht im If-Statement enthaltene letzte Anweisung wird auf jeden Fall ausgeführt.
+
+#2 Switch-Statement
+===================
+
+```c
+char buchstabe = 'n';
+
+switch (buchstabe) {
+  case 'a':
+  case 'b':
+  case 'c':
+    printf("ABC");
+    break;
+  case 'n':
+  case 'm':
+    printf("123");
+  case 'x':
+    printf("abc");
+    break;
+  case 'z':
+    printf("xyz");
+    break;
+  default:
+    printf("XYZ");
+    break;
+}
+```
+
+Was wird ausgegeben?
+
+[[123abc]]
+[[?]] Ohne `break;` fällt das Statement durch alle folgende `case` durch bis ein `break;` kommt (fall through). Dabei werden dazwischenstehende Befehle ausgeführt.
+
+#3 Schleifen
+============
+
+for-Schleifen
+-------------
+
+```c
+int result = 10;
+
+for (int i = 1; i <= result; i++) {
+  result--;
+}
+```
+
+Was enthält `result`, wenn die Schleife zu Ende ist?
+
+[[5]]
+[[?]] Mit jedem Schleifendurchlauf wird `i` um 1 erhöht.
+[[?]] `result` wird in jedem Schleifendurchlauf um 1 gesenkt.
+
+while-Schleife
+--------------
+
+```c
+int result = 10;
+
+while (0) {
+  result++;
+}
+```
+
+Was enthält `result`, wenn die Schleife zu Ende ist?
+
+[[10]]
+*******************
+
+Im Fall einer while- und for-Schleife kann mit einer entsprechend formulierten Bedingung sogar der generelle Eintritt in die Schleife verhindert werden.
+
+*******************
+
+do while-Schleife
+-----------------
+```c
+int result = 10;
+
+do {
+  result++;
+} while (0);
+```
+Was enthält `result`, wenn die Schleife zu Ende ist?
+
+[[11]]
+*******************
+
+Eine do-while-Schleife wird mindestens einmal durchgeführt.
+
+*******************
