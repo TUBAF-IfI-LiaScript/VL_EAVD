@@ -937,6 +937,7 @@ int main(){
 ```
 @LIA.evalWithDebug(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
+<!--START_SKIP_IN_PDF-->
 ## Quizze
 
 #1 include-Anweisungen
@@ -977,6 +978,7 @@ Wählen Sie die korrekten Code-Blöcke aus:
 - [[ ]] `int num; scanf("%d", num);`
 - [[ ]] `double num; scanf("%lf", &num)`
 - [[X]] `char character; scanf("%c", &character);`
+<!--END_SKIP_IN_PDF-->
 
 ## Ausblick
 
