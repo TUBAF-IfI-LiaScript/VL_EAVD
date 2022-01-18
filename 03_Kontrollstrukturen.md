@@ -955,8 +955,8 @@ int main() {
 
 ## Quizze
 
-#1 If-Statement
-===============
+If-Statement
+--------------------
 
 ```c
 char text1[] = "abc";
@@ -986,8 +986,8 @@ Was wird ausgegeben?
 [[?]] So lange kein `\n` ausgegeben wird, gibt printf alles in der gleichen Zeile aus.
 [[?]] die nicht im If-Statement enthaltene letzte Anweisung wird auf jeden Fall ausgeführt.
 
-#2 Switch-Statement
-===================
+Switch-Statement
+--------------------
 
 ```c
 char buchstabe = 'n';
@@ -1018,8 +1018,8 @@ Was wird ausgegeben?
 [[123abc]]
 [[?]] Ohne `break;` fällt das Statement durch alle folgende `case` durch bis ein `break;` kommt (fall through). Dabei werden dazwischenstehende Befehle ausgeführt.
 
-#3 Schleifen
-============
+Schleifen
+--------------------
 
 for-Schleifen
 -------------

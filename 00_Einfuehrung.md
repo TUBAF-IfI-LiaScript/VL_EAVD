@@ -443,6 +443,15 @@ for i in range(3):
 ```
 @Pyodide.eval
 
-## Und wo kommt der Begriff des Algorithmus vor?
+## Ausblick
 
-... Nehmen wir mal an ...
+```cpp                     GoodBy.c
+#include<stdio.h>
+
+int main() {
+  printf("... \t bis \n\t\t zum \n\t\t\t");
+  printf("naechsten \n\t\t\t\t\t mal! \n");
+	return 0;
+}
+```
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)

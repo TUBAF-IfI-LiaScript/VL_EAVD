@@ -803,8 +803,9 @@ Wie würden Sie den Code so erweitern, dass die LED bei einem einzelnen Tastendr
 
 ## Quizze
 
-#1 Berechnungen
-===============
+Berechnungen
+--------------------
+
 ```c
 int summe = 14 / 3 * 3 - (3 + 21 / 7);
 ```
@@ -828,8 +829,8 @@ Welchen Wert hat jetzt die Variable `summe`?
 [[?]] Klammern werden zuerst ausgewertet
 [[?]] Es wird von links nach rechts unter Einhaltung der Operatoren-Priorität ausgewertet
 
-#2 Vergleiche und Logische Operationen
-======================================
+Vergleiche und Logische Operationen
+--------------------
 
 ```c
 int ergebnis = (40 <= 14) || ((40 > 1) && (50 != 24));

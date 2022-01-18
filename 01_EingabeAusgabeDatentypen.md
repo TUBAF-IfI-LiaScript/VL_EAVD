@@ -939,8 +939,8 @@ int main(){
 
 ## Quizze
 
-#1 include-Anweisungen
-==========
+include-Anweisungen
+--------------------
 
 Was bewirkt in eienem C-Programm die Anweisung `#include <stdio.h>`?
 
@@ -954,8 +954,8 @@ Was bewirkt in eienem C-Programm die Anweisung `#include <stdio.h>`?
 
 *****************************************
 
-#2 Variablen
-============
+Variablen
+--------------------
 
 Wählen Sie die fehlerhaften Anweisungen aus:
 
@@ -966,8 +966,8 @@ Wählen Sie die fehlerhaften Anweisungen aus:
 - [[ ]] `char b = '7';`
 - [[x]] `char b = '74';`
 
-#3 printf- und scanf-Anweisungen
-=====================
+printf- und scanf-Anweisungen
+--------------------
 
 Wählen Sie die korrekten Code-Blöcke aus:
 
@@ -977,16 +977,3 @@ Wählen Sie die korrekten Code-Blöcke aus:
 - [[ ]] `int num; scanf("%d", num);`
 - [[ ]] `double num; scanf("%lf", &num)`
 - [[X]] `char character; scanf("%c", &character);`
-
-## Ausblick
-
-```cpp                     GoodBy.c
-#include<stdio.h>
-
-int main() {
-  printf("... \t bis \n\t\t zum \n\t\t\t");
-  printf("naechsten \n\t\t\t\t\t mal! \n");
-	return 0;
-}
-```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)

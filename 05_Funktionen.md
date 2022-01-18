@@ -873,8 +873,8 @@ int main(){
 
 ## Quizze
 
-#1 Einfache Funktion
-====================
+Einfache Funktion
+--------------------------------
 
 ```c
 void berechneSumme(int a, double b) {
@@ -895,8 +895,8 @@ Was steht am Ende in Summe?
 - [(X)] Der Kompiliervorgang wird mit einem Fehler abgebrochen.
 - [( )] Das Programm wird erfolgreich kompiliert, aber die Variable `Summe` erhält den Wert `0`.
 
-#2 Rückgabe mehrerer Werte mit einem Array
-==============================
+Rückgabe mehrerer Werte mit einem Array
+--------------------------------
 
 ```c
 void berechnungen(int a, double b, double* arr) {
