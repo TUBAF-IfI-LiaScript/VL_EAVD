@@ -379,13 +379,16 @@ Quelle: [Arithmetischer Überlauf (Autor: WissensDürster)](https://de.wikipedia
 int main(){
   short a = 30000;
 
+  printf("Berechnung von 30000+3000 mit:\n\n");
+
   signed short c;     // -32768 bis 32767
-  printf("unsigned short - Wertebereich von %d bis %d\n", 0, USHRT_MAX);
+  printf("(signed) short c - Wertebereich von %d bis %d\n", SHRT_MIN, SHRT_MAX);
   c = 3000 + a;      // ÜBERLAUF!
   printf("c=%d\n", c);
 
   unsigned short d;   //      0 bis 65535
-  printf("short - Wertebereich von %d bis %d\n", SHRT_MIN, SHRT_MAX);
+  printf("unsigned short d - Wertebereich von %d bis %d\n", 0, USHRT_MAX);
+
   d = 3000 + a;
   printf("d=%d\n", d);
 }
@@ -934,6 +937,46 @@ int main(){
 ```
 @LIA.evalWithDebug(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
+## Quizze
+
+#1 include-Anweisungen
+==========
+
+Was bewirkt in eienem C-Programm die Anweisung `#include <stdio.h>`?
+
+- [( )] Ermöglicht das generelle Verwenden von Variablen.
+- [( )] Zeigt an, dass es sich im C-Programm ausschließlich um Eingabe und Ausgabe handelt.
+- [(x)] Importiert Eingabe- und Ausgabefunktionen (wie `printf()` oder `scanf()`).
+- [( )] Ist eine C-Konvention und darf in keinem Programm fehlen.
+*****************************************
+
+`#include` importiert Funktionen und andere Definitionen aus Headerdateien (Dateiendung `.h`).
+
+*****************************************
+
+#2 Variablen
+============
+
+Wählen Sie die fehlerhaften Anweisungen aus:
+
+- [[X]] `double a = 1,6135;`
+- [[x]] `double a = 0.4747`
+- [[ ]] `double a = 0.896;`
+- [[X]] `char b = "c";`
+- [[ ]] `char b = '7';`
+- [[x]] `char b = '74';`
+
+#3 printf- und scanf-Anweisungen
+=====================
+
+Wählen Sie die korrekten Code-Blöcke aus:
+
+- [[X]] `printf("26 + 16 = %d", 26+16);`
+- [[ ]] `printf("18.9 + 23.1 = %d", 18.9+23.1);`
+- [[x]] `printf("18.9 + 23.1 = %lf", 18.9+23.1);`
+- [[ ]] `int num; scanf("%d", num);`
+- [[ ]] `double num; scanf("%lf", &num)`
+- [[X]] `char character; scanf("%c", &character);`
 
 ## Ausblick
 

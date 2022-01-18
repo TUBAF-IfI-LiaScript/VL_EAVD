@@ -800,3 +800,56 @@ void loop() {
 @AVR8js.sketch
 
 Wie würden Sie den Code so erweitern, dass die LED bei einem einzelnen Tastendruck (A ODER B) für 1 und bei beiden synchron betätigten Tastern für 5 Sekunden aktiv wird?
+
+## Quizze
+
+#1 Berechnungen
+===============
+```c
+int summe = 14 / 3 * 3 - (3 + 21 / 7);
+```
+
+Welchen Wert hat die Variable `summe`?
+
+[[6]]
+[[?]] Division mit Ganzzahlen ignoriert Dezimalstellen (rundet ab)
+[[?]] Klammern werden zuerst ausgewertet
+[[?]] Es wird von links nach rechts unter Einhaltung der Operatoren-Priorität ausgewertet
+
+---
+
+```c
+int summe = 14 / 3.0 * 3 - (3 + 21 / 7);
+```
+
+Welchen Wert hat jetzt die Variable `summe`?
+
+[[8]]
+[[?]] Klammern werden zuerst ausgewertet
+[[?]] Es wird von links nach rechts unter Einhaltung der Operatoren-Priorität ausgewertet
+
+#2 Vergleiche und Logische Operationen
+======================================
+
+```c
+int ergebnis = (40 <= 14) || ((40 > 1) && (50 != 24));
+```
+
+Welchen Wert hat jetzt die Variable `ergebnis`?
+
+- [( )] 0 (falsch)
+- [(x)] 1 (wahr)
+[[?]] Es wird von links nach rechts unter Einhaltung der Operatoren-Priorität ausgewertet
+
+---
+
+```c
+int ergebnis = !(40 <= 14) || (40 > 1 && !(50 != 24));
+```
+
+Was steht nun in `ergebnis`?
+
+- [( )] 0 (falsch)
+- [(X)] 1 (wahr)
+[[?]] Klammern werden zuerst ausgewertet
+[[?]] Es wird von links nach rechts unter Einhaltung der Operatoren-Priorität ausgewertet

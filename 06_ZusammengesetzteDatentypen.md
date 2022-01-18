@@ -469,7 +469,7 @@ struct Student
 Und wie erzeuge ich Variablen dieses erweiterten Types, wie werden diese
 initialisiert und wie kann ich auf die einzelnen Komponenten zugreifen?
 
-Der Bespiel zeigt, dass die Definition der Variable unmittelbar nach der
+Das Beispiel zeigt, dass die Definition der Variable unmittelbar nach der
 `struct`-Definition oder mit einer gesonderten Anweisung mit einer vollständigen,
 partiellen Initialisierung bzw. ohne Initialisierung erfolgen kann.
 
@@ -664,3 +664,95 @@ int main() {
 ```
 
 ![Resultat](./images/06_ZusammengesetzteDatentypen/excelLib.png)
+
+## Quizze
+
+#1 Enums
+========
+
+```c
+enum Days {
+  MONDAY,
+  TUESDAY,
+  WEDNESDAY = 5,
+  THURSDAY,
+  FRIDAY,
+  SATURDAY = 10,
+  SUNDAY
+};
+```
+
+Welche ganze Zahlen werden den Enum-Werten reihenach zugeordnet?
+
+- [( )] `0, 1, 5, 3, 4, 10, 6`
+- [(X)] `0, 1, 5, 6, 7, 10, 11`
+- [( )] `0, 1, 5, 2, 3, 10, 4`
+
+#2 Structs
+==========
+
+Gegeben sind zwei Varianten des Programms zum Erzeugen und der Ausgabe eines Datums. 
+
+Variante 1:
+
+```c
+#include <stdio.h>
+
+struct Date getDate() {
+    struct Date {
+        int day;
+        char month[10];
+        int year;
+    } date = {20, "September", 2002};
+
+    return date;
+}
+
+int main(void) {
+    struct Date date = getDate();
+
+    printf("%d.%s.%d\n", date->day, date->month, date->year);
+
+    return 0;
+}
+```
+
+Variante 2:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+struct Date {
+    int day;
+    char month[10];
+    int year;
+};
+
+void changeDate(struct Date* date) {
+    date->day = 20;
+    strcpy(date->month, "September");
+    date->year = 2002;
+}
+
+int main(void) {
+    struct Date date;
+    changeDate(&date);
+
+    printf("%d.%s.%d\n", date.day, date.month, date.year);
+
+    return 0;
+}
+```
+
+
+Welche Variante würde fehlerfrei funktionieren?
+
+- [( )] Variante 1
+- [(X)] Variante 2
+**********************
+Üblcherweise soll die `struct` global definiert werden (Variablen davon aber weiterhin lokal).
+
+In der Variante 1 existiert `struct Date` nur innerhalb der Funktion `getDate()`.
+
+**********************

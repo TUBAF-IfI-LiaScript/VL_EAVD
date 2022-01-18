@@ -372,7 +372,7 @@ float foo(){
 }
 
 int main(void) {
-  int i = foo()
+  int i = foo();
   printf("%d\n",i);
   return 0;
 }
@@ -870,3 +870,50 @@ int main(){
 }
 ```
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+
+## Quizze
+
+#1 Einfache Funktion
+====================
+
+```c
+void berechneSumme(int a, double b) {
+  return a + b;
+}
+
+int main() {
+  double Summe;
+  Summe = berechneSumme(30, 15.6);
+
+  return 0;
+}
+```
+
+Was steht am Ende in Summe?
+
+- [( )] `45.6`
+- [(X)] Der Kompiliervorgang wird mit einem Fehler abgebrochen.
+- [( )] Das Programm wird erfolgreich kompiliert, aber die Variable `Summe` erhält den Wert `0`.
+
+#2 Rückgabe mehrerer Werte mit einem Array
+==============================
+
+```c
+void berechnungen(int a, double b, double* arr) {
+  arr[0] = a + b;
+  arr[1] = a - b;
+}
+
+int main() {
+  double Ergebnisse[] = {0, 0};
+  berechnungen(30, 15.6, Ergebnisse);
+
+  return 0;
+}
+```
+
+Was steht am Ende in Ergebnisse?
+
+- [(X)] `{45.6, 14.4}`
+- [( )] Der Kompiliervorgang wird mit einem Fehler abgebrochen.
+- [( )] Das Programm wird erfolgreich kompiliert, aber die Variable `Ergebnisse` erhält die Werte `{0, 0}`.
