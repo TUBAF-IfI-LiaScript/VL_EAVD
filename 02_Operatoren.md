@@ -801,6 +801,7 @@ void loop() {
 
 Wie würden Sie den Code so erweitern, dass die LED bei einem einzelnen Tastendruck (A ODER B) für 1 und bei beiden synchron betätigten Tastern für 5 Sekunden aktiv wird?
 
+<!--START_SKIP_IN_PDF-->
 ## Quizze
 
 Berechnungen
@@ -854,3 +855,4 @@ Was steht nun in `ergebnis`?
 - [(X)] 1 (wahr)
 [[?]] Klammern werden zuerst ausgewertet
 [[?]] Es wird von links nach rechts unter Einhaltung der Operatoren-Priorität ausgewertet
+<!--END_SKIP_IN_PDF-->
