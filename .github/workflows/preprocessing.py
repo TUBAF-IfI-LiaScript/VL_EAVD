@@ -4,6 +4,7 @@ import re
 
 blackList = ["{{", "******", "@Rextester", "@Tau", "@LIA.eval",
              "![](https://media.giphy.com/", "[![LiaScript](https://raw.githubusercontent.com/"]
+skipLines = False
 
 for file in glob.glob("*.md"):
     if file != "README.md":
@@ -13,6 +14,12 @@ for file in glob.glob("*.mdx"):
     content = open(file, 'r').readlines()
     filtered = []
     for line in content:
+        if line.strip() == "<!--START_SKIP_IN_PDF-->":
+            skipLines = True
+        if line.strip() == "<!--END_SKIP_IN_PDF-->":
+            skipLines = False
+        if skipLines:
+            continue
         if any(entry in line for entry in blackList):
             continue
         result = re.search( r'```\S+', line)

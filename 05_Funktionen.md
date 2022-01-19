@@ -871,6 +871,7 @@ int main(){
 ```
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
+<!--START_SKIP_IN_PDF-->
 ## Quizze
 
 Einfache Funktion
@@ -917,3 +918,4 @@ Was steht am Ende in Ergebnisse?
 - [(X)] `{45.6, 14.4}`
 - [( )] Der Kompiliervorgang wird mit einem Fehler abgebrochen.
 - [( )] Das Programm wird erfolgreich kompiliert, aber die Variable `Ergebnisse` erhält die Werte `{0, 0}`.
+<!--END_SKIP_IN_PDF-->

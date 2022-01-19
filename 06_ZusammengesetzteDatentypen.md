@@ -665,6 +665,7 @@ int main() {
 
 ![Resultat](./images/06_ZusammengesetzteDatentypen/excelLib.png)
 
+<!--START_SKIP_IN_PDF-->
 ## Quizze
 
 Enums
@@ -756,3 +757,4 @@ Welche Variante würde fehlerfrei funktionieren?
 In der Variante 1 existiert `struct Date` nur innerhalb der Funktion `getDate()`.
 
 **********************
+<!--END_SKIP_IN_PDF-->
