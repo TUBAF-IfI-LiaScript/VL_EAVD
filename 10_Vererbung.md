@@ -717,3 +717,85 @@ void loop() {
 }
 ```
 @AVR8js.sketch
+
+<!--START_SKIP_IN_PDF-->
+## Quizze
+
+Klassen-Member nach Vererbung
+--------------------------------
+
+```cpp
+class Class1
+{
+    public:
+        int number1;
+    protected:
+        int number2;
+    private:
+        int number3;
+};
+
+class Class2 : protected Class1 { public: int number4; };
+class Class3 : public Class2 {};
+class Class4 : private Class3 { public: int number5;
+                                protected: int number6;};
+class Class5 : public Class4 {};
+```
+
+Welche Felder sind in `Class5` enthalten und welches Zugriffsattribut haben sie?
+
+- [[number1] [number2] [number3] [number4] [number4] [number5] [number6]]
+- [   [ ]       [ ]       [ ]       [ ]       [ ]       [X]       [ ]   ] public
+- [   [ ]       [ ]       [ ]       [ ]       [ ]       [ ]       [X]   ] protected
+- [   [ ]       [ ]       [ ]       [ ]       [ ]       [ ]       [ ]   ] private
+- [   [X]       [X]       [X]       [X]       [X]       [ ]       [ ]   ] nicht vorhanden
+
+Überschreiben von Methoden und Polymorphie
+--------------------------------
+
+```cpp
+#include <iostream>
+#include <vector>
+
+class Class1
+{
+    public:
+        virtual void test() { std::cout << "1"; }
+};
+
+class Class2 : public Class1
+{
+    public:
+        void test() override { std::cout << "2"; }
+};
+
+class Class3 : public Class1
+{
+    public:
+        void test() override { std::cout << "3"; }
+};
+
+int main()
+{
+    std::vector<Class1*> v = {new Class1, new Class2, new Class3};
+
+    for (Class1* c : v)
+    {
+        c->test();
+    }
+
+    return EXIT_SUCCESS;
+}
+```
+
+Wie wird die Ausgabe im Terminal aussehen?
+
+- [( )] 111
+- [(x)] 123
+*****
+Das Überschreiben der Methode `test()` wird realisiert indem die `virtual` Basismethode mit Hilfe des `override`-Keywords in einer abgeleiteten Klasse ersetzt wird.  
+Polymorphie ermöglicht es wie hier zum Beispiel sowohl Objekte der Basisklasse, als auch Objekte der abgeleiteten Klassen in einem Vektor anzulegen und durch diese zu iterieren. Auch wenn diese nun unter dem Namen der Basisklasse (hier `Class1`) vereint sind werden die Überschriebenen Methoden bei dem jeweiligen Methodenaufruf benutzt.
+
+*****
+
+<!--END_SKIP_IN_PDF-->
