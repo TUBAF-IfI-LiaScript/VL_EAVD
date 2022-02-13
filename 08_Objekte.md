@@ -730,3 +730,68 @@ int main () {
 }
 ```
 @LIA.eval(`["main.c"]`, `g++ -Wall main.c -o a.out `, `./a.out`)
+
+<!--START_SKIP_IN_PDF-->
+## Quizze
+
+Zugriffsattribute
+--------------------------------
+
+```cpp
+class Person
+{
+    public:
+        std::string name;
+    protected:
+        int age;
+    private:
+        CreditCardInfo myCreditCard;
+};
+
+// Von Person abgeleitete Klasse (Ohne Einschränkungen)
+class SpecialPerson : public Person { /*Code*/ }
+
+void function1() { /*Code*/ }
+
+int main() { /*Code*/ }
+```
+
+Von wo aus lassen sich die Felder der Klasse `Person` jeweils aufrufen.
+
+- [[class Person] (class Animal) [function1()] [main()]]
+- [     [X]            [X]            [X]         [x]  ] name
+- [     [X]            [x]            [ ]         [ ]  ] age
+- [     [X]            [ ]            [ ]         [ ]  ] private
+
+Objektdefinition in anderen Objekten
+--------------------------------
+
+```cpp
+class Person
+{
+    public:
+        struct Birthday
+        {
+            int day;
+            int month;
+            int year;
+        } birthday;
+};
+```
+
+Die oben gegebenen Klasse `Person` enthält ein `public struct Birthday`.  
+Wie verhält sich dieses gegenüber dem Rest des Programmes?
+
+- [( )] Nur die mit der Struktur erstellte Variable `birthday` kann den Typ `Birthday` erhalten.
+- [( )] Nur die Klasse `Person` kann Variablen mit der Struktur `Birthday` erstellen.
+- [(x)] Sowohl die Klasse `Person` und von ihr abgeleitete Klassen können Variablen mit der Struktur `Birthday` erstellen.
+- [( )] Variablen der Struktur `Birthday` können überall erstellt werden.
+**********************
+
+Hier darf man sich nicht von dem `public`-Attribut täuschen lassen.  
+Wie auch bei Funktionen gilt die Definition der Struktur zunächst nur in der Klasse selber.  
+Auf Grund der Vererbung von Membern (ausführlicher in `10 - Vererbung.md`) kann die Definition auch in abgeleiteten Klassen verwendet werden.
+
+**********************
+
+<!--END_SKIP_IN_PDF-->
