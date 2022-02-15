@@ -616,15 +616,15 @@ Der Beispielcode für die Anwendungen ist in den `examples` Ordnern des Projekte
 <!--START_SKIP_IN_PDF-->
 ## Quizze
 
-Methodenüberladung
+Konstruktoren
 --------------------------------
 
 ```cpp
 class Class1
 {
-    public:
         int number1;
         int number2;
+    public:
         Class1() { this->number1 = 0; this->number2 = 0; }
         Class1(int num1) { this->number1 = num1; this->number2 = 0; }
         Class1(int num1, int num2) { this->number1 = num1; this->number2 = num2; }
@@ -632,9 +632,9 @@ class Class1
 
 class Class2
 {
-    public:
         int number1;
         int number2;
+    public:        
         Class2() : number1(0), number2(0) {}
         Class2(int num1) : number1(num1), number2(0) {}
         Class2(int num1, int num2) : number1(num1), number2(num2) {}
@@ -642,21 +642,21 @@ class Class2
 
 class Class3
 {
-    public:
         int number1;
         int number2;
+     public:
         Class3(int num1 = 0, int num2 = 0) { this->number1 = num1; this->number2 = num2; }
 };
 ```
 
-Welche der oben gezeigten Klassen besitzen das gleiche Verhalten beim Konstruktoraufruf?
+Welche der oben definierten Klassen besitzen das gleiche Verhalten beim Konstruktoraufruf?
 
-- [( )] `Class1` und `Class2`
-- [( )] `Class2` und `Class3`
-- [( )] `Class1` und `Class3`
+- [( )] nur `Class1` und `Class2`
+- [( )] nur `Class2` und `Class3`
+- [( )] nur `Class1` und `Class3`
 - [(x)] Alle
 
-new-Keyword
+new-Operator
 --------------------------------
 
 ```cpp
@@ -675,7 +675,7 @@ std::vector<int> fractionToDouble(std::vector<int> nums)
 }
 ```
 
-Was muss man in die Zeile mit `/* ? */` schreiben um zu garantieren, dass das Programm immer stabil läuft.
+Was muss man in die Zeile mit `/* ? */` schreiben um zu garantieren, dass im Programm keine Speicherlecks entstehen.
 
 [[delete cc;]]
 
