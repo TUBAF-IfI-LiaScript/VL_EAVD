@@ -735,20 +735,29 @@ class Class1
         int number3;
 };
 
-class Class2 : protected Class1 { public: int number4; };
+class Class2 : protected Class1 
+{ 
+    public: 
+        int number4; 
+};
 class Class3 : public Class2 {};
-class Class4 : private Class3 { public: int number5;
-                                protected: int number6;};
+class Class4 : private Class3 
+{ 
+     public: 
+         int number5;
+     protected: 
+         int number6;
+};
 class Class5 : public Class4 {};
 ```
 
-Welche Felder sind in `Class5` enthalten und welches Zugriffsattribut haben sie?
+Welche Felder sind in `Class5` zugänglich und falls ja welches Zugriffsattribut besitzen sie?
 
 - [[number1] [number2] [number3] [number4] [number4] [number5] [number6]]
 - [   [ ]       [ ]       [ ]       [ ]       [ ]       [X]       [ ]   ] public
 - [   [ ]       [ ]       [ ]       [ ]       [ ]       [ ]       [X]   ] protected
 - [   [ ]       [ ]       [ ]       [ ]       [ ]       [ ]       [ ]   ] private
-- [   [X]       [X]       [X]       [X]       [X]       [ ]       [ ]   ] nicht vorhanden
+- [   [X]       [X]       [X]       [X]       [X]       [ ]       [ ]   ] nicht zugänglich
 
 Überschreiben von Methoden und Polymorphie
 --------------------------------
@@ -760,18 +769,21 @@ Welche Felder sind in `Class5` enthalten und welches Zugriffsattribut haben sie?
 class Class1
 {
     public:
+        void showLabel(){ std::cout<<"Class1"<<" ";}
         virtual void test() { std::cout << "1"; }
 };
 
 class Class2 : public Class1
 {
     public:
+        void showLabel(){ std::cout<<"Class2"<<" ";}
         void test() override { std::cout << "2"; }
 };
 
 class Class3 : public Class1
 {
     public:
+        void showLabel(){ std::cout<<"Class3"<<" ";}
         void test() override { std::cout << "3"; }
 };
 
@@ -779,10 +791,8 @@ int main()
 {
     std::vector<Class1*> v = {new Class1, new Class2, new Class3};
 
-    for (Class1* c : v)
-    {
-        c->test();
-    }
+    for (Class1* c : v) c->showLabel();
+    for (Class1* c : v) c->test();
 
     return EXIT_SUCCESS;
 }
@@ -790,11 +800,12 @@ int main()
 
 Wie wird die Ausgabe im Terminal aussehen?
 
-- [( )] 111
-- [(x)] 123
-*****
-Das Überschreiben der Methode `test()` wird realisiert indem die `virtual` Basismethode mit Hilfe des `override`-Keywords in einer abgeleiteten Klasse ersetzt wird.  
-Polymorphie ermöglicht es wie hier zum Beispiel sowohl Objekte der Basisklasse, als auch Objekte der abgeleiteten Klassen in einem Vektor anzulegen und durch diese zu iterieren. Auch wenn diese nun unter dem Namen der Basisklasse (hier `Class1`) vereint sind werden die Überschriebenen Methoden bei dem jeweiligen Methodenaufruf benutzt.
+- [( )] Class1 Class1 Class1 111
+- [(x)] Class1 Class1 Class1 123
+- [( )] Class1 Class2 Class3 123
+*****  
+Polymorphie ermöglicht sowohl Objekte der Basisklasse, als auch Objekte der abgeleiteten Klassen in einem mit der Basisklasse parametrisierten Vektor zu speichern. 
+Bei den `virtuel`-Methoden (hier `test`) anders als bei den nicht virtuellen Methoden (hier `showLabel`) erfolgt der Aufruf nicht der Methode der Basisklasse sondern einer zu dem tatsächlich gespeicherten Objekt passenden Methode.
 
 *****
 
