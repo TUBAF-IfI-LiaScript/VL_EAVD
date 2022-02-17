@@ -748,7 +748,6 @@ class Person
         CreditCardInfo myCreditCard;
 };
 
-// Von Person abgeleitete Klasse (Ohne Einschränkungen)
 class SpecialPerson : public Person { /*Code*/ }
 
 void function1() { /*Code*/ }
@@ -756,9 +755,9 @@ void function1() { /*Code*/ }
 int main() { /*Code*/ }
 ```
 
-Von wo aus lassen sich die Felder der Klasse `Person` jeweils aufrufen.
+Geben Sie bitte an, ausgehend aus den gegebenen Definitionen der Klassen `Person` und `SpecialPerson`, wo der Zugriff auf die Felder der Klasse `Person` möglich ist.
 
-- [[class Person] (class Animal) [function1()] [main()]]
+- [[class Person] (class SpecialPerson) [function1()] [main()]]
 - [     [X]            [X]            [X]         [x]  ] name
 - [     [X]            [x]            [ ]         [ ]  ] age
 - [     [X]            [ ]            [ ]         [ ]  ] private
@@ -779,18 +778,15 @@ class Person
 };
 ```
 
-Die oben gegebenen Klasse `Person` enthält ein `public struct Birthday`.  
-Wie verhält sich dieses gegenüber dem Rest des Programmes?
+Die oben gegebene Klasse `Person` enthält die Definitionen der Struktur `public struct Birthday` und der Variable  `birthday`.  
+Geben Sie bitte an, welche der folgenden Aussagen korrekt sind.
 
-- [( )] Nur die mit der Struktur erstellte Variable `birthday` kann den Typ `Birthday` erhalten.
-- [( )] Nur die Klasse `Person` kann Variablen mit der Struktur `Birthday` erstellen.
-- [(x)] Sowohl die Klasse `Person` und von ihr abgeleitete Klassen können Variablen mit der Struktur `Birthday` erstellen.
-- [( )] Variablen der Struktur `Birthday` können überall erstellt werden.
+- [( )] Es können generell keine weiteren Variablen außer der Variable `birthday` den Typ `Birthday` erhalten.
+- [( )] Die Verwendung der Struktur `Birthday` für die Definition der Variablen ist nur in der Klasse `Person` möglich.
+- [(x)] Die Variablen vom Typ `Birthday` können sowohl in der Klasse `Person` als auch in den abgeleiteten Klassen erstellt werden.
+- [(x)] Aufgrund der Definition als `public` kann die Struktur in beliebigen Klassen und Methoden als `Person::Birthday` verwendet werden.
 **********************
 
-Hier darf man sich nicht von dem `public`-Attribut täuschen lassen.  
-Wie auch bei Funktionen gilt die Definition der Struktur zunächst nur in der Klasse selber.  
-Auf Grund der Vererbung von Membern (ausführlicher in `10 - Vererbung.md`) kann die Definition auch in abgeleiteten Klassen verwendet werden.
 
 **********************
 
