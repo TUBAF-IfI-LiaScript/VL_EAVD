@@ -938,3 +938,105 @@ int main(void) {
 @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 Das korrekte Ergebnis lautet $3.1415926535...$
+
+<!--START_SKIP_IN_PDF-->
+## Quizze
+
+Rekursion und Schleifen
+--------------------------------
+```c
+unsigned long int pow1(int base, int exponent) {
+    if (exponent == 1)
+        return base;
+    return pow1(base, exponent-1) * base;
+}
+
+unsigned long int pow2(int base, int exponent) {
+    if (exponent == 0)
+        return 1;
+    return pow2(base, exponent-1) * base;
+}
+
+unsigned long int pow3(int base, int exponent) {
+    unsigned long int product = base;
+
+    for (int i = 1; i < exponent; i++) {
+        product *= base;
+    }
+
+    return product;
+}
+```
+
+Mit welchen von den hier gegebenen Funktionen lässt sich eine Potenz berechnen?
+
+- [[X]] pow1
+- [[X]] pow2
+- [[x]] pow3
+
+Algorithmusbegriff
+--------------------------------
+
+```c
+int task1(int num) {
+    int product = 1;
+    int temp = num;
+
+    while (product <= num * num)
+        product *= temp;
+        temp++;
+
+    return product;
+}
+
+int task2(int num) {
+    srand((unsigned) time(NULL));
+    int randomNum = rand();
+
+    if (randomNum < 255)
+        return num * num;
+    else
+        return num + num;
+}
+
+int task3() {
+    int sum = 0;
+
+    while (1)
+        sum++;
+
+    return sum;
+}
+
+int task4() {
+    int goal = 10;
+    int temp;
+    int returnValue = 0;
+
+    scanf("%d", &temp);
+
+    do {
+        printf("Number: %d\n", temp);
+        if (temp < goal) {
+            returnValue += temp;
+            temp++;
+        } else if (temp > goal) {
+            returnValue += temp;
+            temp--;
+        }
+    } while (temp != goal);
+
+    printf("Number: %d\n", temp);
+
+    return returnValue;
+}
+```
+
+Welche der gegebenen Funktionen beschreiben **keine derminierenden** Algorithmen?
+
+- [[ ]] task1
+- [[X]] task2
+- [[x]] task3
+- [[ ]] task3
+
+<!--END_SKIP_IN_PDF-->

@@ -717,3 +717,96 @@ void loop() {
 }
 ```
 @AVR8js.sketch
+
+<!--START_SKIP_IN_PDF-->
+## Quizze
+
+Klassen-Member nach Vererbung
+--------------------------------
+
+```cpp
+class Class1
+{
+    public:
+        int number1;
+    protected:
+        int number2;
+    private:
+        int number3;
+};
+
+class Class2 : protected Class1 
+{ 
+    public: 
+        int number4; 
+};
+class Class3 : public Class2 {};
+class Class4 : private Class3 
+{ 
+     public: 
+         int number5;
+     protected: 
+         int number6;
+};
+class Class5 : public Class4 {};
+```
+
+Welche Felder sind in `Class5` zugänglich und falls ja welches Zugriffsattribut besitzen sie?
+
+- [[number1] [number2] [number3] [number4] [number4] [number5] [number6]]
+- [   [ ]       [ ]       [ ]       [ ]       [ ]       [X]       [ ]   ] public
+- [   [ ]       [ ]       [ ]       [ ]       [ ]       [ ]       [X]   ] protected
+- [   [ ]       [ ]       [ ]       [ ]       [ ]       [ ]       [ ]   ] private
+- [   [X]       [X]       [X]       [X]       [X]       [ ]       [ ]   ] nicht zugänglich
+
+Überschreiben von Methoden und Polymorphie
+--------------------------------
+
+```cpp
+#include <iostream>
+#include <vector>
+
+class Class1
+{
+    public:
+        void showLabel(){ std::cout<<"Class1"<<" ";}
+        virtual void test() { std::cout << "1"; }
+};
+
+class Class2 : public Class1
+{
+    public:
+        void showLabel(){ std::cout<<"Class2"<<" ";}
+        void test() override { std::cout << "2"; }
+};
+
+class Class3 : public Class1
+{
+    public:
+        void showLabel(){ std::cout<<"Class3"<<" ";}
+        void test() override { std::cout << "3"; }
+};
+
+int main()
+{
+    std::vector<Class1*> v = {new Class1, new Class2, new Class3};
+
+    for (Class1* c : v) c->showLabel();
+    for (Class1* c : v) c->test();
+
+    return EXIT_SUCCESS;
+}
+```
+
+Wie wird die Ausgabe im Terminal aussehen?
+
+- [( )] Class1 Class1 Class1 111
+- [(x)] Class1 Class1 Class1 123
+- [( )] Class1 Class2 Class3 123
+*****  
+Polymorphie ermöglicht sowohl Objekte der Basisklasse, als auch Objekte der abgeleiteten Klassen in einem mit der Basisklasse parametrisierten Vektor zu speichern. 
+Bei den `virtuel`-Methoden (hier `test`) anders als bei den nicht virtuellen Methoden (hier `showLabel`) erfolgt der Aufruf nicht der Methode der Basisklasse sondern einer zu dem tatsächlich gespeicherten Objekt passenden Methode.
+
+*****
+
+<!--END_SKIP_IN_PDF-->

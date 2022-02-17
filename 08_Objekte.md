@@ -730,3 +730,64 @@ int main () {
 }
 ```
 @LIA.eval(`["main.c"]`, `g++ -Wall main.c -o a.out `, `./a.out`)
+
+<!--START_SKIP_IN_PDF-->
+## Quizze
+
+Zugriffsattribute
+--------------------------------
+
+```cpp
+class Person
+{
+    public:
+        std::string name;
+    protected:
+        int age;
+    private:
+        CreditCardInfo myCreditCard;
+};
+
+class SpecialPerson : public Person { /*Code*/ }
+
+void function1() { /*Code*/ }
+
+int main() { /*Code*/ }
+```
+
+Geben Sie bitte an, ausgehend aus den gegebenen Definitionen der Klassen `Person` und `SpecialPerson`, wo der Zugriff auf die Felder der Klasse `Person` möglich ist.
+
+- [[class Person] (class SpecialPerson) [function1()] [main()]]
+- [     [X]            [X]            [X]         [x]  ] name
+- [     [X]            [x]            [ ]         [ ]  ] age
+- [     [X]            [ ]            [ ]         [ ]  ] private
+
+Objektdefinition in anderen Objekten
+--------------------------------
+
+```cpp
+class Person
+{
+    public:
+        struct Birthday
+        {
+            int day;
+            int month;
+            int year;
+        } birthday;
+};
+```
+
+Die oben gegebene Klasse `Person` enthält die Definitionen der Struktur `public struct Birthday` und der Variable  `birthday`.  
+Geben Sie bitte an, welche der folgenden Aussagen korrekt sind.
+
+- [( )] Es können generell keine weiteren Variablen außer der Variable `birthday` den Typ `Birthday` erhalten.
+- [( )] Die Verwendung der Struktur `Birthday` für die Definition der Variablen ist nur in der Klasse `Person` möglich.
+- [(x)] Die Variablen vom Typ `Birthday` können sowohl in der Klasse `Person` als auch in den abgeleiteten Klassen erstellt werden.
+- [(x)] Aufgrund der Definition als `public` kann die Struktur in beliebigen Klassen und Methoden als `Person::Birthday` verwendet werden.
+**********************
+
+
+**********************
+
+<!--END_SKIP_IN_PDF-->
