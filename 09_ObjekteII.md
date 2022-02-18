@@ -612,3 +612,71 @@ Einen Destruktor explizit aufzurufen, ist selten notwendig (oder gar eine gute I
     Die Auflistung der Memberfunktionen der entsprechenden Klassen finden Sie unter [Link](https://microsoft.github.io/azure-iot-developer-kit/docs/apis/)
 
 Der Beispielcode für die Anwendungen ist in den `examples` Ordnern des Projektes enthalten.
+
+<!--START_SKIP_IN_PDF-->
+## Quizze
+
+Konstruktoren
+--------------------------------
+
+```cpp
+class Class1
+{
+        int number1;
+        int number2;
+    public:
+        Class1() { this->number1 = 0; this->number2 = 0; }
+        Class1(int num1) { this->number1 = num1; this->number2 = 0; }
+        Class1(int num1, int num2) { this->number1 = num1; this->number2 = num2; }
+};
+
+class Class2
+{
+        int number1;
+        int number2;
+    public:        
+        Class2() : number1(0), number2(0) {}
+        Class2(int num1) : number1(num1), number2(0) {}
+        Class2(int num1, int num2) : number1(num1), number2(num2) {}
+};
+
+class Class3
+{
+        int number1;
+        int number2;
+     public:
+        Class3(int num1 = 0, int num2 = 0) { this->number1 = num1; this->number2 = num2; }
+};
+```
+
+Welche der oben definierten Klassen besitzen das gleiche Verhalten beim Konstruktoraufruf?
+
+- [( )] nur `Class1` und `Class2`
+- [( )] nur `Class2` und `Class3`
+- [( )] nur `Class1` und `Class3`
+- [(x)] Alle
+
+new-Operator
+--------------------------------
+
+```cpp
+#include <vector>
+
+std::vector<int> fractionToDouble(std::vector<int> nums)
+{
+    std::vector<int> newNums;
+    for (int n : nums)
+    {
+        CalcClass* cc = new CalcClass(n);
+        newNums.push_back(cc->calc()); // Hängt dem Vekor den Rückgabewert von calc() an.
+        /* ? */
+    }
+    return newNums;
+}
+```
+
+Was muss man in die Zeile mit `/* ? */` schreiben um zu garantieren, dass im Programm keine Speicherlecks entstehen.
+
+[[delete cc;]]
+
+<!--END_SKIP_IN_PDF-->
