@@ -15,18 +15,18 @@ import: https://github.com/liascript/CodeRunner
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/11_Arduino.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/11_Microcontroller.md)
 
 # Softwareentwicklung mit Arduino
 
-| Parameter                 | Kursinformationen                                                                                                                                                                                                                |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**        | `Vorlesung Prozedurale Programmierung`                                                                                                                                                                                           |
-| **Semester**              | `Wintersemester 2021/22`                                                                                                                                                                                                         |
-| **Hochschule:**           | `Technische Universität Freiberg`                                                                                                                                                                                                |
-| **Inhalte:**              | `Grundzüge der Vererbung in C++`                                                                                                                                                                                               |
-| **Link auf Repository: ** | [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/11_Arduino.md](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/11_Arduino.md) |
-| **Autoren**               | @author                                                                                                                                                                                                                          |
+| Parameter                | Kursinformationen                                                                                                                                                                              |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Veranstaltung:**       | `Vorlesung Prozedurale Programmierung`                                                                                                                                                         |
+| **Semester**             | `Wintersemester 2021/22`                                                                                                                                                                       |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                              |
+| **Inhalte:**             | `Grundzüge der Vererbung in C++`                                                                                                                                                               |
+| **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/11_Arduino.md](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/11_Arduino.md) |
+| **Autoren**              | @author                                                                                                                                                                                        |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
