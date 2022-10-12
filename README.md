@@ -279,22 +279,24 @@ Wer sind _wir_?
 | Prof. Dr. Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de | Vorlesungen                              |
 | Dr. Galina Rudolf       | galina.rudolf@informatik.tu-freiberg.de | Vorlesungen und Koordination der Übungen |
 | Nico Sonack             | nico.sonack@student.tu-freiberg.de      | Tutor                                    |
-| Felix Busch             | Felix.Busch@student.tu-freiberg.de      | Tutor                                    |
+| Florian Richter         | Flo.Richter@informatik.tu-freiberg.de   |                                   |
+| Robert Lösch            | Robert.Loesch@informatik.tu-freiberg.de |                                     |
+| Maximilian Petry        | Maximilian.Petry@student.tu-freiberg.de | Tutor                                    |
 
 ### Strukurierung der Veranstaltung
 
 | Nr. | Datum      |        | Inhalt                                       |
 |:----|------------|--------|----------------------------------------------|
-| 0   | 18.10.2021 |        | Motivation, Organisation                     |
-| 1   | 25.10.2021 | C++    | C++ Programmstrukturen / Entwicklungsprozess |
-| 2   | 01.11.2021 | C++    | Datentypen / Ein- und Ausgabe                |
-| 3   | 07.11.2021 | C++    | Kontrolstrukturen                            |
-| 4   | 15.11.2021 | C++    | Zeiger und Arrays                            |
-| 5   | 22.11.2021 | C++    | Funktionen                                   |
-| 6   | 29.11.2021 | C++    | Zusammengesetzte Datentypen                  |
-| 7   | 06.12.2021 | C++    | Objekte                                      |
-| 8   | 13.12.2021 | C++    | Vererbung                                    |
-| 9   | 20.12.2021 | C++    | Anwendung auf dem Mikrocontroller            |
+| 0   | 18.10.2022 |        | _Dies Academicus_                            |
+| 1   | 25.10.2022 | C++    | Motivation, Organisation                     |
+| 2   | 01.11.2022 | C++    | C++ Programmstrukturen / Entwicklungsprozess |
+| 3   | 07.11.2022 | C++    | Datentypen / Ein- und Ausgabe                |
+| 4   | 15.11.2022 | C++    | Kontrolstrukturen                            |
+| 5   | 22.11.2022 | C++    | Zeiger und Arrays                            |
+| 6   | 29.11.2022 | C++    | Funktionen                                   |
+| 7   | 06.12.2022 | C++    | Objekte                                      |
+| 8   | 13.12.2022 | C++    | Vererbung                                    |
+| 9   | 20.12.2022 | C++    | Anwendung auf dem Mikrocontroller            |
 | 10  | 10.01.2022 | Python | Python Grundlagen                            |
 | 11  | 17.01.2022 | Python | Objekte                                      |
 | 12  | 24.01.2022 | Python | Visualisierung                               |
