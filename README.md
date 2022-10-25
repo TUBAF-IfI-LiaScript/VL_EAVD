@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 
@@ -257,18 +257,16 @@ void loop() {
 ```
 @AVR8js.sketch
 
-
-
 *******************************************************************************
 
 ### Wo stehen Sie?
 
 > Wer von Ihnen hat bereits Programmiererfahrung? Was würden Sie auf die Frage antworten, wieviele Codezeilen Sie bereits geschrieben haben?
 
-- [(Keine einzige Zeile)] 
-- [(20 Zeilen in der Schule)] 
-- [(n Zeilen in eigenen Programmierprojekten)] 
-- [(n Zeilen in Open Source Projekten)] 
+- [(keine)] Keine einzige Zeile
+- [(20 Zeilen)] 20 Zeilen in der Schule
+- [(n Zeilen )] n Zeilen in eigenen Programmierprojekten
+- [(sehr viele)] sehr viele Zeilen in Open Source Projekten
 
 ## Organisatorisches
 
