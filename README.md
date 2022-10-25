@@ -58,7 +58,11 @@ Programmierkenntnissen.
 > + Typnamen und Namensräume
 > + ...
 
-### Und warum das Ganze?
+### Konkrete Anwendungsszenarien
+
+                             {{0-1}}
+********************************************************************************
+
 
 | Allgemein                                                                           | Beispiel                                                                                          |
 |-------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
@@ -70,27 +74,36 @@ Programmierkenntnissen.
 
 > **Merke:** Wissenschaftliches Arbeiten ist im Bereich der Natur- und Ingenieurwissenschaften ohne den Rechner (fast) nicht denkbar.
 
-### Beispiel 
+********************************************************************************
 
-> **Hypothese:** Am Wochenende scheint die Sonne häufiger als unter der Woche.
+                             {{1-4}}
+********************************************************************************
 
-{{0-1}}
+Beispiel 
+-------------
+
+
+> **1. Hypothese:** Am Wochenende scheint die Sonne häufiger als unter der Woche.
+
+> **2. Konzeption eines Experimentes:**  ...
+
 > **Frage:** Wie würden Sie vorgehen?
 
+********************************************************************************
 
-                             {{1-3}}
+                             {{2-4}}
 *******************************************************************************
 
-**Phase 1: Datenerhebung**
+> **3. Durchführung des Experimentes**
 
 ![Diagramme](./images/00_Readme/Wetterstation.png)<!-- width="70%" -->
 
 *******************************************************************************
 
-                             {{2-3}}
+                             {{3-4}}
 *******************************************************************************
 
-**Phase 2: Datenvisualisierung / Auswertung**
+>  **4. Filterung und Interpretation der erlangten Daten**
 
 Das Diagramm zeigt die Darstellung der Lichtintensität über den Stunden eines Tages für eine Woche. Blau sind die Wochentage markiert, rot der Samstag und der Sonntag.
 
@@ -118,7 +131,7 @@ Das Diagramm zeigt die Darstellung der Lichtintensität über den Stunden eines 
 
   _Wir vermitteln Grundkenntnisse in den Programmiersprachen C++ und Python._
 
-{{1-2}}
+{{1-3}}
 > _Zwischenfrage:_ Welche Argumente vermuten Sie hinter der Entscheidung zwei Programmiersprachen in die Vorlesung aufzunehmen?
 
                       {{2-3}}
@@ -183,7 +196,7 @@ Die Programmiersprache Python offeriert eine Vielzahl von Paketen für unterschi
 - numpy
 ```
 
-``` python @PyScript.repl PlotDistribution.py
+```python @PyScript.repl 
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -204,31 +217,18 @@ fig1
 
 *******************************************************************************
 
-### ... und wozu brauche ich das überhaupt?
-
-**Antwort A:**
-Das Studium vermittelt ein Weltbild und keine eng zugeschnittene Sicht.
-
-**Antwort B:**
-Die Fähigkeit in Algorithmen zu denken, ist eine Grundlage wissenschaftlichen
-Arbeitens.
-
-**Antwort C:**
-Am Ende steht Ihnen das Rüstzeug zur Verfügung kleine Messaufgaben
-selbst anzugehen.
-
 ### "Python ist ja nett aber C++ ist ..."
 
 Foreneinträge aus Veranstaltungen anderer Hochschulen:
 
-> _Viele haben bei uns wegen dem Info-Grundlagenmodul gewechselt. Allerdings_
+> _"Viele haben bei uns wegen dem Info-Grundlagenmodul gewechselt. Allerdings_
 > _hängt das auch von dir und deinem Talent ab. Das Tempo ist rasant. Jede Art_
 > _von Vorerfahrung hilft dir eigentlich sehr. Also wenn du noch Zeit hast vorm_
 > _Studienbeginn, schnapp dir ein gutes Buch zur gelehrten Sprache, und fange_
-> _schonmal bissl an kleine Sachen zu programmieren._ 
+> _schonmal bissl an kleine Sachen zu programmieren."_ 
 >
-> _Ich habe es gerade irgendwie selbst gelöst, aber keine Ahnung warum es_
-> _funktioniert hat._
+> _"Ich habe es gerade irgendwie selbst gelöst, aber keine Ahnung warum es_
+> _funktioniert hat."_
 
 > **Frage:** Was sind die besonderen Herausforderungen bei der Programmierarbeit?
 

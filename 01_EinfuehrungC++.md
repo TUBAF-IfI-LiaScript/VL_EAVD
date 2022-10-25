@@ -20,11 +20,11 @@ import: https://github.com/liascript/CodeRunner
 # Einführung
 
 | Parameter                 | Kursinformationen                                                                                                                                                                                      |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**        | `Vorlesung Prozedurale Programmierung`                                                                                                                                                                 |
-| **Semester**              | `Wintersemester 2021/22`                                                                                                                                                                               |
+|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Veranstaltung:**        | `Vorlesung Prozedurale Programmierung / Einführung in die Informatik`                                                                                                                                  |
+| **Semester**              | `Wintersemester 2022/23`                                                                                                                                                                               |
 | **Hochschule:**           | `Technische Universität Freiberg`                                                                                                                                                                      |
-| **Inhalte:**              | `Vorstellung des Arbeitsprozesses`                                                                                                                                            |
+| **Inhalte:**              | `Vorstellung des Arbeitsprozesses`                                                                                                                                                                     |
 | **Link auf Repository: ** | [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/00_Einfuehrung.md) |
 | **Autoren**               | @author                                                                                                                                                                                                |
 
@@ -59,7 +59,7 @@ in einem Rechner bei der Abarbeitung von Programmen beleuchtet, um dann die
 Realisierung eines Programmes mit C zu adressieren.
 
 {{0-1}}
-![instruction-set](./images/00_Einfuehrung/Programmiersprache_Umfeld.png "Erzeugung von Programmcode [^Programmerstellung]")<!-- width="80%" -->
+![instruction-set](./images/01_Einfuehrung/Programmiersprache_Umfeld.png "Erzeugung von Programmcode [^Programmerstellung]")<!-- width="80%" -->
 
 [^Programmerstellung]: Programmiervorgang und Begriffe(Autor VÖRBY, https://commons.wikimedia.org/wiki/File:Programmiersprache_Umfeld.png
 
@@ -67,7 +67,7 @@ Realisierung eines Programmes mit C zu adressieren.
 Beispiel: Intel 4004-Architektur (1971)
 
 {{1-2}}
-![intel](./images/00_Einfuehrung/4004_arch.svg.png"Intel 4004 Architekturdarstellung [^Intel4004]")<!-- style="width: 80%; display: block; margin-left: auto; margin-right: auto;"-->
+![intel](./images/01_Einfuehrung/4004_arch.svg.png"Intel 4004 Architekturdarstellung [^Intel4004]")<!-- style="width: 80%; display: block; margin-left: auto; margin-right: auto;"-->
 
 [^Intel4004]: Autor Appaloosa, Intel 4004, https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png
 
@@ -80,10 +80,10 @@ Speicherauszug den Intel 4004:
 
 {{2}}
 <!-- data-type="none" -->
-| Adresse | Speicherinhalt | OpCode     | Mnemonik  |
-|:--------|:---------------|:-----------|:----------|
-| 0010    | 1101 0101      | 1101 DDDD  | LD $5     |
-| 0012    | 1111 0010      | 1111 0010  | IAC       |
+| Adresse | Speicherinhalt | OpCode    | Mnemonik |
+|:--------|:---------------|:----------|:---------|
+| 0010    | 1101 0101      | 1101 DDDD | LD $5    |
+| 0012    | 1111 0010      | 1111 0010 | IAC      |
 
 {{3}}
 Unterstützung für die Interpretation aus dem Nutzerhandbuch, dass das _Instruction Set_ beschreibt:
@@ -98,31 +98,15 @@ Quelle: [Intel 4004 Assembler](http://e4004.szyc.org/asm.html)
 
 Möchte man so Programme schreiben?
 
-**Vorteil:** ggf. sehr effizienter Code (Größe, Ausführungsdauer), der gut auf die
-Hardware abgestimmt ist
+**Vorteil:** 
+
++ ggf. sehr effizienter Code (Größe, Ausführungsdauer), der gut auf die Hardware abgestimmt ist
 
 **Nachteile:**
 
 * systemspezifische Realisierung
 * geringer Abstraktionsgrad, bereits einfache Konstrukte benötigen viele Codezeilen
 * weitgehende semantische Analysen möglich
-
-**Beispiel**
-
-```asm @output
- Assembler Code    |  Fortran
-                   |
- .START ST         |  A:=2;
- ST: MOV R1, #2    |  FOR I:=1 TO 20 LOOP
-     MOV R2, #1    |      A:=A*I;
- M1: CMP R2, #20   |  END LOOP;
-     BGT M2        |  PRINT(A);
-     MUL R1, R2    |
-     INI R2        |
-     JMP M1        |
- M2: JSR PRINT     |
- .END              |
-```
 
 {{1}}
 > Eine höhere Programmiersprache ist eine Programmiersprache zur Abfassung eines
@@ -140,7 +124,7 @@ Hardware abgestimmt ist
 Stufen des Compile-Vorganges:
 
 {{2}}
-![instruction-set](./images/00_Einfuehrung/compilerElements.png "Stufen der Compilierung [^Compiliation]")<!-- width="80%" -->
+![instruction-set](./images/01_Einfuehrung/compilerElements.png "Stufen der Compilierung [^Compiliation]")<!-- width="80%" -->
 
 [^Compiliation]: Jimmy Thong, Oct 13, 2016, What happens when you type GCC main.c, https://medium.com/@vietkieutie/what-happens-when-you-type-gcc-main-c-2a136896ade3
 
@@ -176,7 +160,7 @@ Stufen des Compile-Vorganges:
   > Je "höher" und komfortabler die Sprache, desto mehr ist der Programmierer
   > daran gebunden, die in ihr vorgesehenen Wege zu beschreiten.
 
-## Erstes C Programm
+## Erstes C++ Programm
 
 ![instruction-set](./images/00_Einfuehrung/helloWorldFromRitchie.png)<!-- width="90%" -->
 
@@ -187,25 +171,25 @@ Quelle: [Brian_Kernighan, Programming in C: A Tutorial  1974](http://www.lysator
 
 ```cpp                     HelloWorld.c
 // That's my first C program
-// Karl Klammer, Oct. 2018
+// Karl Klammer, Oct. 2022
 
-#include<stdio.h>
+#include <iostream>
 
-int main(void) {     // alternativ "int main()"
-	printf("Hello World");
-	return 0;
+int main() {
+    std::cout << "Hello World!";
+    return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
-| Zeile | Bedeutung                                                                                   |
-|:----- |:------------------------------------------------------------------------------------------- |
-| 1 - 2 | Kommentar (wird vom Präprozessor entfernt)                                                  |
-| 4     | Voraussetzung für das Einbinden von Befehlen der Standardbibliothek hier `printf()`         |
-| 6     | Einsprungstelle für den Beginn des Programmes                                               |
-| 6 - 9 | Ausführungsblock der `main`-Funktion                                                        |
-| 7     | Anwendung einer Funktion ... `name(Parameterliste)` ... hier zur Ausgabe auf dem Bildschirm |
-| 8     | Definition eines Rückgabewertes für das Betriebssystem                                      |
+| Zeile | Bedeutung                                                                             |
+|:------|:--------------------------------------------------------------------------------------|
+| 1 - 2 | Kommentar (wird vom Präprozessor entfernt)                                            |
+| 4     | Voraussetzung für das Einbinden von Befehlen der Standardbibliothek hier `std:cout()` |
+| 6     | Einsprungstelle für den Beginn des Programmes                                         |
+| 6 - 9 | Ausführungsblock der `main`-Funktion                                                  |
+| 7     | Anwendung eines Operators `<<` hier zur Ausgabe auf dem Bildschirm                    |
+| 8     | Definition eines Rückgabewertes für das Betriebssystem                                |
 
 
 ### Ein Wort zu den Formalien
@@ -214,24 +198,24 @@ int main(void) {     // alternativ "int main()"
 // Karl Klammer
 // Print Hello World drei mal
 
-#include <stdio.h>
+#include <iostream>
 
 int main() {
   int zahl;
   for (zahl=0; zahl<3;  zahl++){
-	    printf("Hello World! ");
+	    std::cout << "Hello World! ";
   }
 	return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
 
 ```cpp                     BadHelloWorld.c
-#include <stdio.h>
-int main() {int zahl; for (zahl=0; zahl<3;  zahl++){ printf("Hello World! ");} return 0;}
+#include <iostream>
+int main() {int zahl; for (zahl=0; zahl<3;  zahl++){ std::cout << "Hello World! ";} return 0;}
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
                                   {{1}}
 * Das *systematische Einrücken* verbessert die Lesbarkeit und senkt damit die
@@ -306,7 +290,7 @@ int main(){
 
 ```cpp
 x = x + 1;  /* increment the value of x */
-printf("Hello World\n"); // displays Hello world
+std::cout << "Hello World! "; // displays Hello world
 ```
 
 "... over-commenting your code can be as bad as under-commenting it"
@@ -322,7 +306,7 @@ Quelle: [C Code Style Guidelines](https://www.cs.swarthmore.edu/~newhall/unixhel
 // sometimes I believe compiler ignores all my comments
 
 // Magic. Do not touch.
-
+Hello World !Hello World !Hello World !Hello World !Hello World !Hello World !Hello World !Hello World !Hello Wor
 // I am not responsible of this code.
 
 try {
@@ -337,17 +321,20 @@ try {
 
 ### Was tun, wenn es schief geht?
 
-```cpp                     ErroneousHelloWorld.c
-#include<stdio.h>
+```cpp                     ErroneousHelloWorld.cpp
+// Karl Klammer
+// Print Hello World drei mal
+
+#include <iostream>
 
 int main() {
   for (zahl=0; zahl<3;  zahl++){
-	    printf("Hello World ! ")
+	    std::cout << "Hello World! "
   }
 	return 0;
-}
+
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
 Methodisches Vorgehen:
 
@@ -357,44 +344,44 @@ Methodisches Vorgehen:
 * Systematische Evaluation der Thesen
 * Seien Sie im Austausch mit anderen (Kommilitonen, Forenbesucher, usw.) konkret
 
-### Compilermessages
+### Compilerfehlermeldungen
 
 **Beispiel 1**
 
-```cpp                     Error.c
-#include <stdio.h>
+```cpp                     Error.cpp
+#include <iostream>
 
 int mani() {
-    printf("Hello World");
+    std::cout << "Hello World!";
     return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
 **Beispiel 2**
 
-```cpp                     Error.c
-#include <stdio.h>
+```cpp                     Error.cpp
+#include <iostream>
 
 int main()
-    printf("Hello World");
+    std::cout << "Hello World!";
     return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
 > Manchmal muss man sehr genau hinschauen, um zu verstehen, warum ein Programm nicht funktioniert. Versuchen Sie es!
 
 ```cpp                     ErroneousHelloWorld.c
-#include <stdio.h>
+#include <iostream>
 
 imt main() {
-	printf("Hello World\n'');
-	printf("Wo liegt der Fehler?")
+	std::cout << "Hello World!'';
+	std::cout << "Wo liegt der Fehler?";
 	return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
 
 ### Und wenn das Kompilieren gut geht?
@@ -402,56 +389,52 @@ imt main() {
 ... dann bedeutet es noch immer nicht, dass Ihr Programm wie erwartet
 funktioniert.
 
-```cpp                     ErroneousHelloWorld.c
-#include <stdio.h>
+```cpp                     ErroneousHelloWorld.cpp
+#include <iostream>
 
 int main() {
   char zahl;
   for (zahl=250; zahl<256; zahl++){
-	    printf("Hello World !");
+	    std::cout << "Hello World!";
   }
 	return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
 
-## Warum dann C?
+## Warum dann C++?
 
-Zwei Varianten der Umsetzung ... C vs. Python
+Zwei Varianten der Umsetzung ... C++ vs. Python
 
-```cpp                     HelloWorld.c
-#include <stdio.h>
+```cpp                     HelloWorld.cpp
+#include <iostream>
 
 int main() {
   char zahl;
   for (int zahl=0; zahl<3; zahl++){
-	    printf("%d Hello World\n", zahl);
+	    std::cout << "Hello World! " << zahl << "\n";
   }
 	return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
-```py                      HelloWorld.py
-import sys
-
+```python
 for i in range(3):
-	print(i, "Hello World")
-
-#sys.exit()
+  print("Hallo World ", i)
 ```
-@Pyodide.eval
+@LIA.eval(`["main.py"]`, `python3 -m compileall .`, `python3 main.py`)
 
 ## Ausblick
 
-```cpp                     GoodBy.c
-#include<stdio.h>
+```cpp                     GoodBy.cpp
+#include <iostream>
 
 int main() {
-  printf("... \t bis \n\t\t zum \n\t\t\t");
-  printf("naechsten \n\t\t\t\t\t mal! \n");
+  std::cout << "... \t bis \n\t\t zum \n\t\t\t";
+  std::cout << "naechsten \n\t\t\t\t\t mal! \n";
 	return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
