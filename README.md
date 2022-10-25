@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.1
+version:  1.0.2
 language: de
 narrator: Deutsch Female
 
@@ -265,10 +265,10 @@ void loop() {
 
 > Wer von Ihnen hat bereits Programmiererfahrung? In welche Kategorie würden Sie sich selbst einordnen:
 
-- [( )] Ich habe noch nie eine Zeile Code geschrieben
-- [( )] In der Schule habe ich zumindest Grundlagen gehört und mit JavaScript, Python, usw. kleine Programme geschrieben.
-- [( )] Ich habe mich neben der Schule mit Programmierprojekten beschäftigt.
-- [(X)] Ich beherrsche mehrere Sprachen und bin leidenschaftlicher Programmierer
+- [(Keine einzige Zeile)] 
+- [(20 Zeilen in der Schule)] 
+- [(n Zeilen in eigenen Programmierprojekten)] 
+- [(n Zeilen in Open Source Projekten)] 
 
 ## Organisatorisches
 
