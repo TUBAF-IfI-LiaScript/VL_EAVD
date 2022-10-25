@@ -64,12 +64,12 @@ Programmierkenntnissen.
 ********************************************************************************
 
 
-| Allgemein                                                                           | Beispiel                                                                                          |
-|-------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| 1. Erstellen einer Hypothese                                                        | _Der freie Fall ist eine beschleunigte Bewegung._                                                 |
+| Allgemein                                                                           | Beispiel                                                                                                                                    |
+|-------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| 1. Erstellen einer Hypothese                                                        | _Der freie Fall ist eine beschleunigte Bewegung._                                                                                           |
 | 2. Entwurf eines Experimentes für die systematische Untersuchung  der Fragestellung | _Wir lassen eine Kugel aus verschiedenen Höhen fallen und messen die Fallzeit bis zum Aufschlag. Wir ignorieren Einflüsse der Luftreibung._ |
-| 3. Durchführung des Experimentes                                                    | _?_                                                                                               |
-| 4. Bewertung der erlangten Daten                                                    | _?_                                                                                               |
+| 3. Durchführung des Experimentes                                                    | _?_                                                                                                                                         |
+| 4. Bewertung der erlangten Daten                                                    | _?_                                                                                                                                         |
 
 
 > **Merke:** Wissenschaftliches Arbeiten ist im Bereich der Natur- und Ingenieurwissenschaften ohne den Rechner (fast) nicht denkbar.
@@ -137,12 +137,12 @@ Das Diagramm zeigt die Darstellung der Lichtintensität über den Stunden eines 
                       {{2-3}}
 *****************************************************************************
 
-|                      | Phase 1           | Phase 2                 |
-| -------------------- | ----------------- | ----------------------- |
-| Programmiersprache   | C++               | Python                  |
-| Framework / Packages | Arduino           | pandas/numpy/matplotlib |
-| Ziel                 | Datenerhebung     | Datenauswertung         |
-| Plattform            | Mikrocontroller   | PC, Mobiltelefon        |
+|                      | Phase 1              | Phase 2                 |
+|----------------------|----------------------|-------------------------|
+| Programmiersprache   | C++                  | Python                  |
+| Framework / Packages | Arduino              | pandas/numpy/matplotlib |
+| Ziel                 | Datenerhebung        | Datenauswertung         |
+| Plattform            | (PC) Mikrocontroller | PC                      |
 
 *****************************************************************************
 
@@ -279,8 +279,8 @@ Wer sind _wir_?
 | Prof. Dr. Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de | Vorlesungen                              |
 | Dr. Galina Rudolf       | galina.rudolf@informatik.tu-freiberg.de | Vorlesungen und Koordination der Übungen |
 | Nico Sonack             | nico.sonack@student.tu-freiberg.de      | Tutor                                    |
-| Florian Richter         | Flo.Richter@informatik.tu-freiberg.de   |                                   |
-| Robert Lösch            | Robert.Loesch@informatik.tu-freiberg.de |                                     |
+| Florian Richter         | Flo.Richter@informatik.tu-freiberg.de   |                                          |
+| Robert Lösch            | Robert.Loesch@informatik.tu-freiberg.de |                                          |
 | Maximilian Petry        | Maximilian.Petry@student.tu-freiberg.de | Tutor                                    |
 
 ### Strukurierung der Veranstaltung
