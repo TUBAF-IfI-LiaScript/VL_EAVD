@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.0.3
 language: de
 narrator: Deutsch Female
 
@@ -263,7 +263,7 @@ void loop() {
 
 ### Wo stehen Sie?
 
-> Wer von Ihnen hat bereits Programmiererfahrung? In welche Kategorie würden Sie sich selbst einordnen:
+> Wer von Ihnen hat bereits Programmiererfahrung? Was würden Sie auf die Frage antworten, wieviele Codezeilen Sie bereits geschrieben haben?
 
 - [(Keine einzige Zeile)] 
 - [(20 Zeilen in der Schule)] 
