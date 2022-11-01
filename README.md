@@ -295,11 +295,11 @@ Wer sind _wir_?
 | 7   | 06.12.2022 | C++    | Objekte                                      |
 | 8   | 13.12.2022 | C++    | Vererbung                                    |
 | 9   | 20.12.2022 | C++    | Anwendung auf dem Mikrocontroller            |
-| 10  | 10.01.2022 | Python | Python Grundlagen                            |
-| 11  | 17.01.2022 | Python | Objekte                                      |
-| 12  | 24.01.2022 | Python | Visualisierung                               |
-| 13  | 31.01.2022 | Python | Datenanalyse                                 |
-| 14  | 07.02.2022 | Python | Übergreifende Anwendungen                    |
+| 10  | 10.01.2023 | Python | Python Grundlagen                            |
+| 11  | 17.01.2023 | Python | Objekte                                      |
+| 12  | 24.01.2023 | Python | Visualisierung                               |
+| 13  | 31.01.2023 | Python | Datenanalyse                                 |
+| 14  | 07.02.2023 | Python | Übergreifende Anwendungen                    |
 
 > **Achtung:** C++ wird zunächst ohne die spezifische Verwendung des Mikrocontrollers verwendet. Vielmehr erfolgt die Programmierung auf dem Desktoprechner. Wenn wir die Grundlagen erarbeitet haben, wechseln wir die Hardware einfach aus.
 
