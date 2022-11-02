@@ -480,7 +480,7 @@ imt main() {
   int i = 5;
   int j = 4;
   i = i + j + 2;
-	std::cout << "Hello World! ";
+	std::cout << "Hello World ";
   std::cout << i << "!";
 	return 0;
 }
