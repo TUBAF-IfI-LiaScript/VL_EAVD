@@ -19,11 +19,11 @@ import: https://github.com/liascript/CodeRunner
 # Grundlagen der Sprache C
 
 | Parameter                 | Kursinformationen                                                                                                                                                                                                                |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**        | `Einführung in das wissenschaftliche Programmieren`                                                                                                                                                                                           |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Veranstaltung:**        | `Einführung in das wissenschaftliche Programmieren`                                                                                                                                                                              |
 | **Semester**              | `Wintersemester 2022/23`                                                                                                                                                                                                         |
 | **Hochschule:**           | `Technische Universität Freiberg`                                                                                                                                                                                                |
-| **Inhalte:**              | `Ein- und Ausgabe / Variablen`                                                                                                                                                                                               |
+| **Inhalte:**              | `Ein- und Ausgabe / Variablen`                                                                                                                                                                                                   |
 | **Link auf Repository: ** | [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/01_EingabeAusgabeDatentypen.md](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/01_EingabeAusgabeDatentypen.md) |
 | **Autoren**               | @author                                                                                                                                                                                                                          |
 
@@ -50,34 +50,31 @@ import: https://github.com/liascript/CodeRunner
 
 ---------------------------------------------------------------------
 
+## Variablen
 
-```cpp                     GoodBy.cpp
-#include <iostream>
+Lassen sie uns den Rechner als Rechner benutzen ... und die Lösungen einer quadratischen Gleichung bestimmen:
 
-int main() {
-  std::cout << "... \t bis \n\t\t zum \n\t\t\t";
-  std::cout << "naechsten \n\t\t\t\t\t mal! \n";
-	return 0;
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
-
-Unbefriedigende Lösung, jede neue Berechnung muss in den Source-Code integriert
-und dieser dann kompiliert werden. Ein Taschenrechner wäre die bessere Lösung!
+$$
+y=3x^2 + 4x + 8
+$$
 
 ```cpp                     QuadraticEquation.cpp
 #include<iostream>
 
 int main() {
-  int x;
-  x = 5;
-  std::cout <<"f("<<x<<") = "<<3*x*x + 4*x + 8<<" \n";
-  x = 9;
+  // Variante 1 - ganz schlecht
+  std::cout <<"f("<<x<<") = "<<3*5*5 + 4*5 + 8<<" \n";
+
+  // Variante 2 - besser
+  int x = 9;
   std::cout <<"f("<<x<<") = "<<3*x*x + 4*x + 8<<" \n";
 	return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+Unbefriedigende Lösung, jede neue Berechnung muss in den Source-Code integriert
+und dieser dann kompiliert werden. Ein Taschenrechner wäre die bessere Lösung!
 
                                     {{1}}
 ******************************************************************
@@ -153,9 +150,9 @@ int main() {
 Neben der Namensgebung selbst unterstützt auch eine entsprechende Notationen die Lesbarkeit. In Programmen sollte ein Format konsistent verwendet werden.
 
 | Bezeichnung            | denkbare Variablennamen                            |
-|:---------------------- |:-------------------------------------------------- |
+|:-----------------------|:---------------------------------------------------|
 | CamelCase (upperCamel) | `YouLikeCamelCase`, `HumanDetectionSuccessfull`    |
-|           (lowerCamel) | `youLikeCamelCase`, `humanDetectionSuccessfull`    |
+| (lowerCamel)           | `youLikeCamelCase`, `humanDetectionSuccessfull`    |
 | underscores            | `I_hate_Camel_Case`, `human_detection_successfull` |
 
 In der Vergangenheit wurden die Konventionen (zum Beispiel durch Microsoft "Ungarische Notation") verpflichtend durchgesetzt. Heute dienen eher die generellen Richtlinien des Clean Code in Bezug auf die Namensgebung.
@@ -211,14 +208,14 @@ Ganzzahlen sind Zahlen ohne Nachkommastellen mit und ohne Vorzeichen. In C/C++ g
 es folgende Typen für Ganzzahlen:
 
 <!-- data-type="none" -->
-| Schlüsselwort    | Benutzung                       | Mindestgröße       |
-|:-----------------|:--------------------------------|:-------------------|
-| `char`           | 1 Byte bzw. 1 Zeichen           | 1 Byte (min/max)   |
-| `short int`      | Ganzahl (ggf. mit Vorzeichen)   | 2 Byte             |
-| `int`            | Ganzahl (ggf. mit Vorzeichen)   | "natürliche Größe" |
-| `long int`       | Ganzahl (ggf. mit Vorzeichen)   |                    |
-| `long long int`  | Ganzahl (ggf. mit Vorzeichen)   |                    |
-| `bool`           | boolsche Variable               | 1 Byte              |
+| Schlüsselwort   | Benutzung                     | Mindestgröße       |
+|:----------------|:------------------------------|:-------------------|
+| `char`          | 1 Byte bzw. 1 Zeichen         | 1 Byte (min/max)   |
+| `short int`     | Ganzahl (ggf. mit Vorzeichen) | 2 Byte             |
+| `int`           | Ganzahl (ggf. mit Vorzeichen) | "natürliche Größe" |
+| `long int`      | Ganzahl (ggf. mit Vorzeichen) |                    |
+| `long long int` | Ganzahl (ggf. mit Vorzeichen) |                    |
+| `bool`          | boolsche Variable             | 1 Byte             |
 
 ``` cpp
 signed char <= short <= int <= long <= long long
@@ -227,12 +224,12 @@ signed char <= short <= int <= long <= long long
 Gängige Zuschnitte für `char` oder `int`
 
 <!-- data-type="none" -->
-| Schlüsselwort    | Wertebereich               |
-|:-----------------|:---------------------------|
-| `signed char`    | -128 bis 127               |
-| `char`           | 0 bis 255 (0xFF)           |
-| `signed int`     | 32768 bis 32767            |
-| `int`            | 65536 (0xFFFF)             |
+| Schlüsselwort | Wertebereich     |
+|:--------------|:-----------------|
+| `signed char` | -128 bis 127     |
+| `char`        | 0 bis 255 (0xFF) |
+| `signed int`  | 32768 bis 32767  |
+| `int`         | 65536 (0xFFFF)   |
 
 Wenn die Typ-Spezifizierer (`long` oder `short`) vorhanden sind kann auf die
 `int` Typangabe verzichtet werden.
@@ -335,16 +332,16 @@ ganzzahlinen Datentypen sind in `limits.h` definiert, z.B.
 
 {{1}}
 <!-- data-type="none" -->
-| Makro    | Wert                   |
-|:---------|:-----------------------|
-|CHAR_MIN  |-128                    |
-|CHAR_MAX  |+127                    |
-|SHRT_MIN  |-32768                  |
-|SHRT_MAX  |+32767                  |
-|INT_MIN   |-2147483648             |
-|INT_MAX   |+2147483647             |
-|LONG_MIN  |-9223372036854775808    |
-|LONG_MAX  |+9223372036854775807    |
+| Makro    | Wert                 |
+|:---------|:---------------------|
+| CHAR_MIN | -128                 |
+| CHAR_MAX | +127                 |
+| SHRT_MIN | -32768               |
+| SHRT_MAX | +32767               |
+| INT_MIN  | -2147483648          |
+| INT_MAX  | +2147483647          |
+| LONG_MIN | -9223372036854775808 |
+| LONG_MAX | +9223372036854775807 |
 
 
 #### Was passiert bei der Überschreitung des Wertebereiches
@@ -404,11 +401,11 @@ sind in C/C++ immer vorzeichenbehaftet.
 In C/C++ gibt es zur Darstellung reeller Zahlen folgende Typen:
 
 <!-- data-type="none" -->
-| Schlüsselwort    | Mindestgröße            |
-|:-----------------|:------------------------|
-| `float`          | 4 Byte                  |
-| `double`         | 8 Byte                  |
-| `long double`    | je nach Implementierung |
+| Schlüsselwort | Mindestgröße            |
+|:--------------|:------------------------|
+| `float`       | 4 Byte                  |
+| `double`      | 8 Byte                  |
+| `long double` | je nach Implementierung |
 
 ``` c++
 float <= double <=  long double
@@ -422,10 +419,10 @@ Zur Darstellung von Fließkommazahlen sagt der C/C++-Standard nichts aus. Zur
 konkreten Realisierung ist die Headerdatei `float.h` auszuwerten.
 
 <!-- data-type="none" -->
-|                        |`float`           |`double`                |
-|:-----------------------|:-----------------|------------------------|
-| kleinste positive Zahl |1.1754943508e-38  |2.2250738585072014E-308 |
-| Wertebereich           |±3.4028234664e+38 |±1.7976931348623157E+308|
+|                        | `float`           | `double`                 |
+|:-----------------------|:------------------|--------------------------|
+| kleinste positive Zahl | 1.1754943508e-38  | 2.2250738585072014E-308  |
+| Wertebereich           | ±3.4028234664e+38 | ±1.7976931348623157E+308 |
 
 {{1}}
 > **Achtung:** Fließkommazahlen bringen einen weiteren Faktor mit
@@ -485,34 +482,34 @@ void funktion(void) {
 Zahlenliterale können in C/C++ mehr als Ziffern umfassen!
 
 <!-- data-type="none" -->
-| Gruppe                | zulässige Zeichen                     |
-| --------------------- | --------------------------------------|
-|*decimal-digits*       |`0` `1` `2` `3` `4` `5` `6` `7` `8` `9`|
-|*octal-prefix*         |`0`                                    |
-|*octal-digits*         |`0` `1` `2` `3` `4` `5` `6` `7`        |
-|*hexadecimal-prefix*   |`0x` `0X`                              |
-|*hexadecimal-digits*   |`0` `1` `2` `3` `4` `5` `6` `7` `8` `9`|
-|                       |`a` `b` `c` `d` `e` `f`                |
-|                       |`A` `B` `C` `D` `E` `F`                |
-|*unsigned-suffix*      |`u` `U`                                |
-|*long-suffix*          |`l` `L`                                |
-|*long-long-suffix*     |`ll` `LL`                              |
-|*fractional-constant*  |`.`                                    |
-|*exponent-part*        |`e` `E`                                |
-|*binary-exponent-part* |`p` `P`                                |
-|*sign*                 |`+` `-`                                |
-|*floating-suffix*      |`f` `l` `F` `L`                        |
+| Gruppe                 | zulässige Zeichen                       |
+|------------------------|-----------------------------------------|
+| *decimal-digits*       | `0` `1` `2` `3` `4` `5` `6` `7` `8` `9` |
+| *octal-prefix*         | `0`                                     |
+| *octal-digits*         | `0` `1` `2` `3` `4` `5` `6` `7`         |
+| *hexadecimal-prefix*   | `0x` `0X`                               |
+| *hexadecimal-digits*   | `0` `1` `2` `3` `4` `5` `6` `7` `8` `9` |
+|                        | `a` `b` `c` `d` `e` `f`                 |
+|                        | `A` `B` `C` `D` `E` `F`                 |
+| *unsigned-suffix*      | `u` `U`                                 |
+| *long-suffix*          | `l` `L`                                 |
+| *long-long-suffix*     | `ll` `LL`                               |
+| *fractional-constant*  | `.`                                     |
+| *exponent-part*        | `e` `E`                                 |
+| *binary-exponent-part* | `p` `P`                                 |
+| *sign*                 | `+` `-`                                 |
+| *floating-suffix*      | `f` `l` `F` `L`                         |
 
 
 <!-- data-type="none" -->
-|  Zahlentyp | Dezimal       | Oktal         | Hexadezimal  |
-|:-----------|:--------------|---------------|--------------|
-| Eingabe    | x             | x             | x            |
-| Ausgabe    | x             | x             | x            |
-| Beispiel   | `12`          | `011`         | `0x12`       |
-|            | `0.123`       |               | `0X1a`       |
-|            | `123e-2`      |               | `0xC.68p+2`  |
-|            | `1.23F`       |               |              |
+| Zahlentyp | Dezimal  | Oktal | Hexadezimal |
+|:----------|:---------|-------|-------------|
+| Eingabe   | x        | x     | x           |
+| Ausgabe   | x        | x     | x           |
+| Beispiel  | `12`     | `011` | `0x12`      |
+|           | `0.123`  |       | `0X1a`      |
+|           | `123e-2` |       | `0xC.68p+2` |
+|           | `1.23F`  |       |             |
 
 > Erkennen Sie jetzt die Bedeutung der Compilerfehlermeldung `error: invalid suffix "abc" on integer constant` aus dem ersten Beispiel der Vorlesung?
 
@@ -520,16 +517,16 @@ Zahlenliterale können in C/C++ mehr als Ziffern umfassen!
 `Variable = (Vorzeichen)(Zahlensystem)[Wert](Typ);`
 
 {{1}}
-| Literal      | Bedeutung                              |
-|:-------------|:---------------------------------------|
-| 12           | Ganzzahl vom Typ `int`                 |
-| -234L        | Ganzzahl vom Typ `signed long`         |
-| 100000000000 | Ganzzahl vom Typ `long`                |
-| 011          | Ganzzahl also oktale Zahl (Wert $9_d$) |
-| 0x12         | Ganzzahl ($18_d$)                      |
-| 1.23F        | Fließkommazahl vom Typ `float`         |
-| 0.132        | Fließkommazahl vom Typ `double`        |
-| 123e-2       | Fließkommazahl vom Typ `double`        |
+| Literal      | Bedeutung                                    |
+|:-------------|:---------------------------------------------|
+| 12           | Ganzzahl vom Typ `int`                       |
+| -234L        | Ganzzahl vom Typ `signed long`               |
+| 100000000000 | Ganzzahl vom Typ `long`                      |
+| 011          | Ganzzahl also oktale Zahl (Wert $9_d$)       |
+| 0x12         | Ganzzahl ($18_d$)                            |
+| 1.23F        | Fließkommazahl vom Typ `float`               |
+| 0.132        | Fließkommazahl vom Typ `double`              |
+| 123e-2       | Fließkommazahl vom Typ `double`              |
 | 0xC.68p+2    | hexadizimale Fließkommazahl vom Typ `double` |
 
 {{1}}
@@ -655,17 +652,11 @@ Fall kein Speicherplatz reserviert wurde, handelt es sich um keine Definition.
 ```cpp                     MissingInitialisation.cpp
 #include<iostream>
 
-void foo() {
-  int a;     // <- Fehlende Initialisierung
-  std::cout<<"a="<<a<<"\n";
-}
-
 int main(void) {
   int x = 5;
   std::cout<<"x="<<x<<"\n";
   int y;     // <- Fehlende Initialisierung
   std::cout<<"y="<<y<<"\n";
-  foo();
 	return 0;
 }
 ```
@@ -719,7 +710,7 @@ int main(void) {
 ```
 @LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-**Ein- und Ausgabe**
+## Ein- und Ausgabe
 
 Ausgabefunktionen wurden bisher genutzt, um den Status unserer Programme zu
 dokumentieren. Nun soll dieser Mechanismus systematisiert und erweitert werden.
@@ -761,6 +752,7 @@ int main(void) {
   return 0;
 }
 ```
+@LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
 ### Ausgabe
 
@@ -776,17 +768,18 @@ Welche Formatierungmöglichkeiten bietet der Ausgabeoperator noch?
 
 Mit Hilfe von in `<iomanip>` definierten Manipulatoren können besondere Ausgabeformatierungen erreicht werden.
 
-| Manipulator         | Bedeutung                      |
-|:--------------------|:-------------------------------|  
-| setbase(int B)      | Basis 8, 10 oder 16 definieren |
-| setfill(char c)     | Füllzeichen festlegen |
-| setprecision(int n) | Flisskommaprezession |
-| setw(int w)         | Breite setzen |
+| Manipulator           | Bedeutung                      |
+|:----------------------|:-------------------------------|
+| `setbase(int B)`      | Basis 8, 10 oder 16 definieren |
+| `setfill(char c)`     | Füllzeichen festlegen          |
+| `setprecision(int n)` | Flieskommaprezession           |
+| `setw(int w)`         | Breite setzen                  |
 
 
-```cpp                             manipulatoren1.c
+```cpp        manipulatoren1.c
 #include <iostream>
 #include <iomanip>
+
 int main(){
   std::cout<<std::setbase(16)<< std::fixed<<55<<std::endl;
   std::cout<<std::setbase(10)<< std::fixed<<55<<std::endl;
@@ -811,8 +804,8 @@ nicht benutzte Stellen mit dem Zeichen 0 aufgefüllt, `endl` bewirkt die Ausgabe
 #include <iomanip>
 int main(){
 
-  std::cout<<std::right<< std::fixed<<std::setw(5)<<55<<std::endl;
-  std::cout<<std::right<< std::fixed<<std::setfill('0')<<std::setw(5)<<55<<std::endl;
+  std::cout<<std::right<< std::setw(5)<<55<<std::endl;
+  std::cout<<std::right<< std::setfill('0')<<std::setw(5)<<55<<std::endl;
   std::cout<<std::left<< std::fixed<<std::setw(5)<<55<<std::endl;
   std::cout<<std::setw(5)<<"Zu klein gedacht: "<<234534535<<std::endl;
   return 0;
@@ -826,10 +819,10 @@ int main(){
 #include <iostream>
 #include <iomanip>
 #include <math.h>
-using namespace std;
+
 int main() {
   for (int i = 12; i > 1; i -=3) {
-    cout << setprecision(i) << fixed << M_PI << endl;
+    std::cout << std::setprecision(i) << std::fixed << M_PI << std::endl;
   }
 }
 ```
@@ -850,6 +843,7 @@ int main() {
 ```cpp  esc_sequences.c
 #include <iostream>
 using namespace std;
+
 int main(){
   cout << "123456789\r";
   cout << "ABCD\n\n";
@@ -870,17 +864,34 @@ auch hier eine Hintereinanderschaltung von Operatoren möglich ist.
 ```cpp    istream.cpp
 #include <iostream>
 
-int main(){
-  int i;
-  float a;
+int main()
+{
   char b;
-  std::cout<<"Bitte Werte eingeben : ";
+  float a;
+  int i;
+  std::cout<<"Bitte Werte eingeben [char float int] : ";
   std::cin>>b>>a>>i;
-  std::cout<<b<<" "<<a<<" "<<i;
+  std::cout<<"char - " <<b<< " float - "<<a<<" int - "<<i;
   return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-<!--START_SKIP_IN_PDF-->
-## Quizze
+### Beispiel der Woche
+
+Implementieren Sie einen programmierbaren Taschenrechner für quadaratische Funktionen.
+
+```cpp                     QuadraticEquation.cpp
+#include<iostream>
+
+int main() {
+  // Variante 1 - ganz schlecht
+  std::cout <<"f("<<x<<") = "<<3*5*5 + 4*5 + 8<<" \n";
+
+  // Variante 2 - besser
+  int x = 9;
+  std::cout <<"f("<<x<<") = "<<3*x*x + 4*x + 8<<" \n";
+	return 0;
+}
+```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
