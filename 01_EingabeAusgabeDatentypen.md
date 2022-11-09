@@ -228,7 +228,7 @@ Gängige Zuschnitte für `char` oder `int`
 |:--------------|:-----------------|
 | `signed char` | -128 bis 127     |
 | `char`        | 0 bis 255 (0xFF) |
-| `signed int`  | 32768 bis 32767  |
+| `signed int`  | -32768 bis 32767 |
 | `int`         | 65536 (0xFFFF)   |
 
 Wenn die Typ-Spezifizierer (`long` oder `short`) vorhanden sind kann auf die
@@ -637,7 +637,7 @@ Zusammenhang nochmals behandelt.
 extern int a;      // Deklaration
 int i;             // Definition + Deklaration
 int a,b,c;
-i = 5;             // Initialisierung
+int i = 5;         // Definition + Deklaration + Initialisierung
 ```
 
 Das Schlüsselwort `extern` in obigem Beispiel besagt, dass die Definition der
