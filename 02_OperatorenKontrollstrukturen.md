@@ -10,22 +10,23 @@ comment: Einführung in die Programmierung für Nicht-Informatiker
 logo: ./img/LogoCodeExample.png
 
 import: https://github.com/liascript/CodeRunner
+        https://github.com/LiaTemplates/AVR8js/main/README.md#10
 
 
 -->
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/02_Operatoren.md)
 
-# Operatoren
+# Operatoren & Kontrollstrukturen
 
-| Parameter                 | Kursinformationen                                                                                                                                                                                                                |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**        | `Einführung in das wissenschaftliche Programmieren`                                                                                                                                                                                           |
-| **Semester**              | `Wintersemester 2022/23`                                                                                                                                                                                                         |
-| **Hochschule:**           | `Technische Universität Freiberg`                                                                                                                                                                                                |
-| **Inhalte:**              | `Operatoren / Kontrollstrukturen`                                                                                                                                                                                               |
+| Parameter                 | Kursinformationen                                                                                                                                                                                    |
+|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Veranstaltung:**        | `Einführung in das wissenschaftliche Programmieren`                                                                                                                                                  |
+| **Semester**              | `Wintersemester 2022/23`                                                                                                                                                                             |
+| **Hochschule:**           | `Technische Universität Freiberg`                                                                                                                                                                    |
+| **Inhalte:**              | `Operatoren / Kontrollstrukturen`                                                                                                                                                                    |
 | **Link auf Repository: ** | [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/02_Operatoren.md](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/02_Operatoren.md) |
-| **Autoren**               | @author                                                                                                                                                                                                                          |
+| **Autoren**               | @author                                                                                                                                                                                              |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
@@ -37,9 +38,6 @@ import: https://github.com/liascript/CodeRunner
 * Welche unterschiedliche Bedeutung haben `x++` und `++x`?
 * Erläutern Sie den Begriff unärer, binärer und tertiärer Operator.
 * Unterscheiden Sie Zuweisung und Anweisung.
-* Was bedeutet rechtsassoziativ und linksassoziativ?
-* Welche Fallstricke lauern bei expliziter und impliziter Typumwandlung?
-* Wann sollte man eine explizite Umwandlung vornehmen?
 * Wie lassen sich Kontrollflüsse grafisch darstellen?
 * Welche Konfigurationen erlaubt die `for`-Schleife?
 * In welchen Funktionen (Verzweigungen, Schleifen) ist Ihnen das Schlüsselwort
@@ -50,33 +48,36 @@ import: https://github.com/liascript/CodeRunner
 ---------------------------------------------------------------------
 
 
-## Operatoren-Überblick
+## Operatoren 
+
+Unterscheidungsmerkmale
+=============================
 
 > Ein Ausdruck ist eine Kombination aus Variablen, Konstanten, Operatoren und
 > Rückgabewerten von Funktionen. Die Auswertung eines Ausdrucks ergibt einen
 > Wert.
+
+       {{0-1}}
+******************************************************************************
 
 **Zahl der beteiligten Operationen**
 
 Man unterscheidet in der Sprache C/C++ *unäre*, *binäre* und *ternäre* Operatoren
 
 <!-- data-type="none" -->
-| Operator           | Operanden | Beispiel                |
-|:-------------------|:---------:|:------------------------|
-| Unäre Operatoren   |     1     | `&` Adressoperator      |
-|                    |           | `sizeof` Größenoperator |
-| Binäre Operatoren  |     2     | `+`, `-`, `%`           |
-| Ternäre Operatoren |     3     | `?` Bedingungsoperator  |
+| Operator           | Operanden | Beispiel                | Anwendung              |
+|:-------------------|:---------:|:------------------------|------------------------|
+| Unäre Operatoren   |     1     | `&` Adressoperator      | `sizeof(b);`           |
+|                    |           | `sizeof` Größenoperator | `b=-a;`                |
+| Binäre Operatoren  |     2     | `+`, `-`, `%`           | `b=a-2;`               |
+| Ternäre Operatoren |     3     | `?` Bedingungsoperator  | `b=(3 > 4 ? 0 : 1 ); ` |
 
 Es gibt auch Operatoren, die, je nachdem wo sie stehen, entweder unär oder binär
 sind. Ein Beispiel dafür ist der `-`-Operator.
 
-```cpp
-b = -a; // ein Vorzeichen (unär)
-b = a-2; // arithmetische Operation (binär)
-```
+******************************************************************************
 
-       {{1}}
+       {{1-2}}
 ******************************************************************************
 
 **Position**
@@ -96,19 +97,9 @@ a = b++;   // Postfix
 ```
 ******************************************************************************
 
-       {{2}}
-******************************************************************************
-**Assoziativität**
-
-| Linksassoziativ                  | Rechtsassoziativ                 |
-| -------------------------------- | -------------------------------- |
-| Auswertung von links nach rechts | Auswertung von rechts nach links |
-
-
+       {{2-3}}
 ******************************************************************************
 
-       {{3}}
-******************************************************************************
 **Funktion des Operators**
 
 * Zuweisung
@@ -117,9 +108,13 @@ a = b++;   // Postfix
 * Bit-Operationen
 * Bedingungsoperator
 
+Weitere Unterscheidungsmerkmale ergeben sich zum Beispiel aus der [Assoziativität der Operatoren](https://de.wikipedia.org/wiki/Operatorassoziativit%C3%A4t).
+
+> __Achtung:__ Die nachvollgende Aufzählung erhebt nicht den Anspruch auf Vollständigkeit! Es werden bei weitem nicht alle Varianten der Operatoren dargestellt - vielmehr liegt der Fokus auf den für die Erreichung der didaktischen Ziele notwendigen Grundlagen.
+
 ******************************************************************************
 
-## Zuweisungsoperator
+### Zuweisungsoperator
 
 Der Zuweisungsoperator `=` ist von seiner mathematischen Bedeutung zu trennen -
 einer Variablen wird ein Wert zugeordnet. Damit macht dann auch `x=x+1` Sinn.
@@ -131,7 +126,7 @@ using namespace std;
 int main() {
    int zahl1 = 10;
    int zahl2 = 20;
-   int ergeb;
+   int ergeb = 0;
    // Zuweisung des Ausdrucks 'zahl1 + zahl2'
    ergeb = zahl1 + zahl2;
 
@@ -139,48 +134,13 @@ int main() {
    return 0;
 }
 ```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+@LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-Die Zuweisungsoperation ist rechtsassoziativ. Der Ausdruck wird von rechts nach
-links ausgewertet.
-
-```cpp                     AssociationDirection.cpp
-#include <iostream>
-using namespace std;
-
-int main() {
-  int a, b;
-  a = 5;
-  a = b = a + 1;   // kein guter Stil!
-  cout<<"a = "<<a<<", b = "<<b<<"\n";
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-{{1}}
 > **Achtung:** Verwechseln Sie nicht den Zuweisungsoperator `=` mit dem
 > Vergleichsoperator `==`. Der Compiler kann die Fehlerhaftigkeit kaum erkennen
 > und generiert Code, der ein entsprechendes Fehlverhalten zeigt.
 
-{{1}}
-```cpp                            EqualSign.cpp
-#include <iostream>
-using namespace std;
-
-int main(){
-  int x, y;
-  x = 15;             // Zuweisungsoperator
-  y = x = x + 5;
-  cout<<"x="<<x<<" und y="<<y<<"\n";
-
-  y = x == 20;        // Gleichheitsoperator
-  cout<<"x="<<x<<" und y="<<y<<"\n";
-  return 0;
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-## Inkrement und Dekrement
+### Inkrement und Dekrement
 
 Mit den `++` und `--` -Operatoren kann ein L-Wert um eins erhöht bzw. um
 eins vermindert werden. Man bezeichnet die Erhöhung um eins auch als Inkrement,
@@ -204,38 +164,15 @@ int main(){
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
 
-## Arithmetische Operatoren
+### Arithmetische Operatoren
 
-| Operator | Bedeutung                    | Ganzzahlen   | Gleitkommazahlen |
-|:--------:|:-----------------------------|:-------------|:-----------|
-| `+`      | Additon                      | x            | x          |
-| `-`      | Subtraktion                  | x            | x          |
-| `*`      | Multiplikation               | x            | x          |
-| `/`      | Division                     | x            | x          |
-| `%`      | Modulo (Rest einer Division) | x            |            |
-
-```cpp                            calcExamples.c
-#include <iostream>
-using namespace std;
-
-int main(){
-  int zahl1,zahl2;
-  int ergeb;
-  zahl1=10;
-  zahl2=20;
-  cout<<"Zahl 1= "<<zahl1<<"\n";
-  cout<<"Zahl 2= "<<zahl2<<"\n";
-
-  // Moeglichkeit 1: zuerst Berechnung, dann Ausgabe
-  ergeb=zahl1+zahl2;
-  cout<<"Summe der Zahlen:"<<ergeb<<"\n";
-  // Moeglichkeit 2: Berechnung direkt für die Ausgabe
-  cout<<zahl1<<" - "<<zahl2<<" = "<<zahl1-zahl2<<"\n";
-  return 0;
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
+| Operator | Bedeutung                    | Ganzzahlen | Gleitkommazahlen |
+|:--------:|:-----------------------------|:-----------|:-----------------|
+|   `+`    | Addition                     | x          | x                |
+|   `-`    | Subtraktion                  | x          | x                |
+|   `*`    | Multiplikation               | x          | x                |
+|   `/`    | Division                     | x          | x                |
+|   `%`    | Modulo (Rest einer Division) | x          |                  |
 
 {{1}}
 > **Achtung:** Divisionsoperationen werden für Ganzzahlen und Gleitkommazahlen
@@ -285,43 +222,7 @@ int main(){
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-
-{{3}}
-Die arithmetischen Operatoren lassen sich in verkürzter Schreibweise wie folgt
-darstellen:
-
-{{3}}
-| Operation | Bedeutung                    |
-|:---------:|:-----------------------------|
-|   `+=`    | `a+=b` äquivalent zu `a=a+b` |
-|   `-=`    | `a-=b` äquivalent zu `a=a-b` |
-|   `*=`    | `a*=b` äquivalent zu `a=a*b` |
-|   `/=`    | `a/=b` äquivalent zu `a=a/b` |
-|   `%=`    | `a%=b` äquivalent zu `a=a%b` |
-
-{{3}}
-```cpp             shortenedOperators.cpp
-#include <iostream>
-using namespace std;
-
-int main() {
-   int x=2, y=4, z=6;
-   cout<<"x="<<x<<" y="<<y<<" z="<<z<<"\n";
-
-   cout<<"x = x+y ="<<(x+=y)<<"\n";
-   cout<<"z = z+y ="<<(z+=y)<<"\n";
-   cout<<"z = z+x ="<<(z+=x)<<"\n";
-   cout<<"x="<<x<<" y="<<y<<" z="<<z<<"\n";
-   return 0;
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-{{3}}
-> **Achtung:** Verlieren Sie bei langen Berechnungsketten nicht den Überblick!
-> Insbesondere die verkürzte Schreibweise forciert dies.
-
-## Vergleichsoperatoren
+### Vergleichsoperatoren
 
 Kern der Logik sind Aussagen, die wahr oder falsch sein können.
 
@@ -342,8 +243,8 @@ using namespace std;
 int main(){
   int x = 15;
   cout<<"x = "<<x<<" \n";
-  cout<<"Aussage x > 5 ist "<< (x>5) << " \n";
-  cout<<"Aussage x == 5 ist "<< (x==-15) << " \n";
+  cout<<boolalpha<<"Aussage x > 5 ist "<< (x>5) << " \n";
+  cout<<boolalpha<<"Aussage x == 5 ist "<< (x==-15) << " \n";
   return 0;
 }
 ```
@@ -354,8 +255,9 @@ int main(){
 > `int` simuliert. Aus der Gründen der Kompatibilität wird `bool` überall,
 > wo wie hier nicht ausdrücklich `bool` verlangt wird in `int` (Werte `0` und `1`) umgewandelt.
 
+> Mit dem `boolalpha` Parameter kann man `cout` überreden zumindest `true` und `false` auszugeben.
 
-## Logische Operatoren
+### Logische Operatoren
 
     {{0-1}}
 ********************************************************************************
@@ -366,11 +268,11 @@ Und wie lassen sich logische Aussagen verknüpfen? Nehmen wir an, dass wir aus d
 |:---------:|:----------|
 |   `&&`    | UND       |
 |   `||`    | ODER      |
-|   `!`     | NICHT     |
+|    `!`    | NICHT     |
 
 Das ODER wird durch senkrechte Striche repräsentiert (Altgr+`<` Taste) und nicht durch große `I`!
 
-Wir wollen (willkürlich) festlegen, dass für die Temperatur ein Wert zwischen -10 und -20 Grad toleriert wird und die Luftfeuchte mit 40 bis 60 Prozent.
+Nehmen wir an, sie wollen Messdaten evaluieren. Ihr Sensor funktioniert nur dann wenn die Temperatur ein Wert zwischen -10 und -20 Grad annimmt und die Luftfeuchte zwischen 40 bis 60 Prozent beträgt.
 
 ```cpp                                       Logic.cpp
 #include <iostream>
@@ -393,46 +295,10 @@ int main(){
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 ********************************************************************************
 
-    {{1-2}}
-********************************************************************************
 Anmerkung: C++ bietet für logische Operatoren und Bit-Operatoren Synonyme  `and`, `or`, `xor`.
 Die Synonyme sind Schlüsselwörter, wenn Compiler-Einstellungen /permissive- oder /Za (Spracherweiterungen deaktivieren) angegeben werden. Sie sind keine Schlüsselwörter, wenn Microsoft-Erweiterungen aktiviert sind. Die Verwendung der Synonyme kann die Lesbarkeit deutlich erhöhen.
-********************************************************************************
 
-## Bit-Operationen
-
-Bitoperatoren verknüpfen logische Aussagen oder manipulieren einzelne Bits in
-binären Zahlendarstellungen.
-
-| Operation   | Bedeutung            |
-|:------------|:---------------------|
-| `&`, `&=`   | bitweises und        |
-| `|`, `|=`   | bitweises oder       |
-| `^`, `^=`   | bitweises xor        |
-| `~`         | bitweises Komplement |
-
-## Shift Operatoren
-
-Die Operatoren `<<` und `>>` dienen dazu, den Inhalt einer Variablen bitweise um
-einige Stellen nach links bzw. nach rechts zu verschieben.
-
-## Bedingungsoperator
-
-Der Bedingungsoperator liefert in Abhängigkeit von der Gültigkeit einer
-logischen Aussage einen von zwei möglichen Ergebniswerten zurück. Folglich hat
-er drei Operanden:
-
-* die Bedingung
-* den Wert für eine gültige Aussage
-* den Wert für eine falsche Aussage
-
-```cpp
-bedingung ? wert_wenn_wahr : wert_wenn_falsch
-```
-
-Die damit formulierbaren Anweisungen sind äquivalent zu `if`-Statements.
-
-## `sizeof` - Operator
+### `sizeof` - Operator
 
 Der Operator `sizeof` ermittelt die Größe eines Datentyps (in Byte) zur
 Kompiliertzeit.
@@ -552,168 +418,6 @@ void loop() {
 ```
 @AVR8js.sketch
 
-Wie würden Sie den Code so erweitern, dass die LED bei einem einzelnen Tastendruck (A ODER B) für 1 und bei beiden synchron betätigten Tastern für 5 Sekunden aktiv wird?
-
-## Cast-Operatoren
-
-> *Casting* beschreibt die Konvertierung eines Datentypen in einen anderen. Dies
-> kann entweder automatisch durch den Compiler vorgenommen oder durch den
-> Programmierer angefordert werden.
-
-Im erst genannten Fall spricht man von
-
-* impliziten Typumwandlung, im zweiten von
-* expliziter Typumwandlung.
-
-Es wird bei Methoden vorausgesetzt, dass der Compiler eine Typumwandlung auch
-wirklich unterstützt. Eine Typumwandlung kann einschränkend oder erweiternd
-sein!
-
-### Implizite Datentypumwandlung
-
-Operanden dürfen in C/C++ eine Variable mit unterschiedlichen Datentyp verknüpfen.
-Die implizite Typumwandlung generiert einen gemeinsamen Datentyp, der in einer
-Rangfolge am weitesten oben steht. Das Ergebnis ist ebenfalls von diesem Typ.
-
-1. `char` -> `short` -> `int` -> `long` -> `long long` / `float` -> `double` -> `long double`
-2. Die Rangfolge bei ganzzahligen Typen ist unabhängig vom Vorzeichen.
-
-
-Dabei sind einschränkende Konvertierungskonfigurationen kritisch zu sehen:
-
-* Bei der Umwandlung von höherwertigen Datentypen in niederwertigere Datentypen
-  kann es zu Informationsverlust kommen.
-* Der Vergleich von `signed`- und `unsigned`-Typen kann zum falschen Ergebnis
-  führen. So kann beispielsweise `-1 > 1U` wahr sein.
-
-```cpp                     NumberFormats.cpp
-#include <iostream>
-using namespace std;
-
-int main()
-{
-  int i = -1;
-  unsigned int limit = 200;
-
-  if ( i > limit ){
-    cout<<" i > limit!!! \n";
-  }
-  else{
-    cout<<"Kein Problem!\n";
-  }
-  return 0;
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-{{1}}
-**Konvertierung zum `int`-Typ**
-
-{{1}}
-Beim Konvertieren des Wertes von einem in das andere `int`-Typ
-
-{{1}}
-* bleibt der Wert unverändert, wenn die Darstellung im Zieltyp möglich ist,
-* anderenfalls ist das Ergebnis implementierungabhängig bzw. führt zu einer
-  Fehlermeldung
-
-{{2}}
-**Vermischen von Ganzzahl und Gleitkommawerten**
-
-{{2}}
-* Die Division zweier `int`-Werte gibt immer nur einen Ganzzahlanteil zurück.
-  Hier findet keine automatische Konvertierung in eine Gleitpunktzahl statt.
-* Bei der Umwandlung von ganz großen Zahlen (beispielsweise `long long`) in
-  einen Gleitpunkttyp kann es passieren, dass die Zahl nicht mehr darzustellbar ist.
-
-{{2}}
-```cpp                     NumberFormats.cpp
-#include <iostream>
-using namespace std;
-
-int main()
-{
-  float f=3.14;
-  int i=f;
-  cout<<"float value = "<<f<<"/ Integer-Anteil "<<i<<"\n";
-  return 0;
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-{{3}}
-> **Achtung:** Implizite Typumwandlungen bergen erhebliche Risiken in sich!
-
-{{3}}
-```cpp                     Overflow.cpp
-#include <iostream>
-using namespace std;
-
-int main()
-{
-  float f = -3.14;
-  unsigned int i = f;
-  cout<<"float value = "<<f<<" / Integer-Anteil "<<i<<" \n";
-  return 0;
-  }
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-
-### Explizite Datentypumwandlung
-
-Anders als bei der impliziten Typumwandlung wird bei der expliziten
-Typumwandlung der Zieldatentyp konkret im Code angegeben.
-
-Neben der klassischen C-Typumwandlung stellt C++-Standard vier verschiedene Cast-Operatoren bereit:
-
-+ reinterpret_cast
-+ const_cast
-+ static_cast
-+ dynamic_cast
-
-```cpp
-(Zieltyp) ausdruck;
-reinterpret_cast<Typ>(ausdruck)
-const_cast<Typ>(ausdruck)
-static_cast<Typ>(ausdruck)
-dynamic_cast<Typ*>(ausdruck)
-```
-
-```cpp                    VolumeSphere.cpp
-#include <iostream>
-using namespace std;
-
-int main()
-{
-  int i = 3;
-  int j = 4;
-  cout<<"int i / int j   = "<<i/j<<" \n";
-  cout<<"float(i / j)    = "<<(float)(i/j)<<" \n";
-  cout<<"float(i / j)    = "<<(float)i/j<<" \n";
-  return 0;
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-```cpp   
-const char* str = "hello";
-int i = static_cast<int>(str);//error C2440: 'static_cast' : cannot
-                              // convert from 'const char *' to 'int'
-int j = (int)str; // C-style cast. Did the programmer really intend
-                  // to do this?
-int k = reinterpret_cast<int>(str);// Programming intent is clear.
-                                   // However, it is not 64-bit safe.
-```
-
-`reinterpret_cast`, `static_cast` und `const_cast` bewirken dasselbe wie `(Zieltyp)ausdruck`.
-static_cast wird verwendet für Umwandlungen, die nur zur Kompilierzeit überprüft werden und
-eine entsprechende Fehlermeldung ausgeben, falls das nicht möglich ist.
-const_cast gilt der Umwandlung zwischen konstanten und nicht konstanten Daten.
-dynamic_cast wird für sichere, zur Laufzeit zu prüfende Umwandlungen von Zeigern auf eine Basisklasse von einer abgeleiteten Klasse verwendet.
-
-[https://learn.microsoft.com/de-de/cpp/cpp/type-conversions-and-type-safety-modern-cpp](https://learn.microsoft.com/de-de/cpp/cpp/type-conversions-and-type-safety-modern-cpp?view=msvc-170)
-
 # Kontrollfluss
 
 Bisher haben wir Programme entworfen, die eine sequenzielle Abfolge von
@@ -743,13 +447,7 @@ Diese Einschränkung wollen wir nun mit Hilfe weiterer Anweisungen überwinden:
 
 Verzweigungen entfalten mehrere mögliche Pfade für die Ausführung des Programms.
 
-Darstellungsbeispiele für mehrstufige Verzweigungen (`switch`)
-
-![Modelle](https://www.plantuml.com/plantuml/png/SoWkIImgAStDuG8pk3BJ53IIy_DICaioy_CK73KLIZ9IynGqAbEBDRaK5An2KYjA50ojkL9pYbDHbJfXLMfa3MGMb-GNOD7XZ5M7CJR3NR0gDO4eLT38oo_9oCnBHyY0X86IGErfN63R7O1ia2S1)<!-- width="60%" -->
-
-![instruction-set](./images/03_Kontrollfluss/NassiMehrfAusw1.png "Nassi-Shneiderman-Diagramm [^1]")
-
-[^1]: [Nassi-Shneiderman-Diagramm (Autor Renzsorf)](https://de.wikipedia.org/wiki/Nassi-Shneiderman-Diagramm)
+![Modelle](https://www.plantuml.com/plantuml/png/SoWkIImgAStDuG8pk3BJ53IIy_DICaioy_CK73KLIZ9IynGqAbEBDRaK5An2KYjA50ojkL9pYbDHbJfXLMfa3MGMb-GNOD7XZ5M7CJR3NR0gDO4eLT38oo_9oCnBHyY0X86IGErfN63R7O1ia2S1 "Darstellungsbeispiele für mehrstufige Verzweigungen (`switch`)")<!-- width="60%" -->
 
 #### `if`-Anweisungen
 
@@ -798,8 +496,8 @@ else
 ```
 
 > **Merke**: An diesem Beispiel wird deutlich, dass die Klammern für die
-> Zuordnung elementar wichtig sind. Die letzte Anweisung gehört NICHT zum zweite
-> `else` Zweig sondern zum ersten!
+> Zuordnung elementar wichtig sind. Die letzte Anweisung gehört NICHT zum zweiten
+> `else` Zweig und auch nicht zum ersten. Diese Anweisung wird immer ausgeführt!
 
 ************************************************************************
 
@@ -810,13 +508,13 @@ else
 Die Bedingungen können als logische UND arithmetische Ausdrücke
 formuliert werden.
 
-| Ausdruck     | Bedeutung                                       |
-| ------------ | ----------------------------------------------- |
-| `if (a)`     | `if (a != 0)`                                   |
-| `if (!a)`    | `if (a == 0)`                                   |
-| `if (a > b)` | `if (!(a <= b))`                                |
-| `if ((a-b))` | `ìf (a != b)`                                   |
-| `if (a || b)` | $a>0$ oder $b>0$                               |
+| Ausdruck      | Bedeutung        |
+|---------------|------------------|
+| `if (a != 0)`     | $a\neq 0$ |
+| `if (a == 0)`     | $a = 0$ |
+| `if (!(a <= b))`  | $\overline{(a \leq b)}$ oder $a > b$ |
+| `ìf (a != b)`     | $a\neq b$ |
+| `if (a || b)` | $a>0$ oder $b>0$ |
 
 ************************************************************************
 
@@ -833,10 +531,7 @@ formuliert werden.
 
 ************************************************************************
 
-       {{4}}
-************************************************************************
-
-**Beispiel**
+#### Beispiel
 
 Nehmen wir an, dass wir einen kleinen Roboter aus einem Labyrinth fahren lassen
 wollen. Dazu gehen wir davon aus, dass er bereits an einer Wand steht. Dieser soll er mit der "Linke-Hand-Regel" folgen. Dabei wird von einem einfach zusammenhängenden Labyrith ausgegangen.
@@ -853,28 +548,25 @@ style=" width: 80%;
 -->
 
 | Fall | Bedeutung                                                                                                                         |
-| ---- | --------------------------------------------------------------------------------------------------------------------------------- |
+|------|-----------------------------------------------------------------------------------------------------------------------------------|
 | 1.   | Die Wand knickt nach links weg. Unabhängig von WG und WR folgt der Robter diesem Verlauf.                                         |
 | 2.   | Der Roboter folgt der linksseitigen Wand.                                                                                         |
 | 3.   | Die Wand blockiert die Fahrt. Der Roboter dreht sich nach rechts, damit liegt diese Wandelement nun wieder zu seiner linken Hand. |
 | 4.   | Der Roboter folgt dem Verlauf nach einer Drehung um 180 Grad.                                                                     |
 
 <!-- data-type="none" -->
-| WL  | WG  | WR  | Fall | Verhalten                  |
-|:--- |:--- |:--- | ---- |:-------------------------- |
-| 0   | 0   | 0   | 1    | Drehung Links, Vorwärts    |
-| 0   | 0   | 1   | 1    | Drehung Links, Vorwärts    |
-| 0   | 1   | 0   | 1    | Drehung Links, Vorwärts    |
-| 0   | 1   | 1   | 1    | Drehung Links, Vorwärts    |
-| 1   | 0   | 0   | 2    | Vorwärts                   |
-| 1   | 0   | 1   | 2    | Vorwärts                   |
-| 1   | 1   | 0   | 3    | Drehung Rechts, Vorwärts   |
-| 1   | 1   | 1   | 4    | Drehung 180 Grad           |
+| WL | WG | WR | Fall | Verhalten                |
+|:---|:---|:---|------|:-------------------------|
+| 0  | 0  | 0  | 1    | Drehung Links, Vorwärts  |
+| 0  | 0  | 1  | 1    | Drehung Links, Vorwärts  |
+| 0  | 1  | 0  | 1    | Drehung Links, Vorwärts  |
+| 0  | 1  | 1  | 1    | Drehung Links, Vorwärts  |
+| 1  | 0  | 0  | 2    | Vorwärts                 |
+| 1  | 0  | 1  | 2    | Vorwärts                 |
+| 1  | 1  | 0  | 3    | Drehung Rechts, Vorwärts |
+| 1  | 1  | 1  | 4    | Drehung 180 Grad         |
 
-************************************************************************
 
-{{5}}
-************************************************************************
 ```cpp                     IfExample.c
 #include <iostream>
 using namespace std;
@@ -895,9 +587,8 @@ int main(){
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-**Sehen Sie mögliche Vereinfachungen des Codes?**
+> Sehen Sie mögliche Vereinfachungen des Codes?**
 
-************************************************************************
 
 #### Zwischenfrage
 
@@ -928,6 +619,11 @@ int main()
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
+- [(`Test ist bestanden`)] `Test ist bestanden`
+- [(`Alle Zusatzpunkte geholt`)] `Alle Zusatzpunkte geholt`
+- [(`Leider durchgefallen!`)] `Leider durchgefallen!`
+- [(`Test ist bestanden!+Alle Zusatzpunkte geholt!`)] `Test ist bestanden!+Alle Zusatzpunkte geholt!`
+- [(`Test ist bestanden!+Respektable Leistung`)] `Test ist bestanden!+Respektable Leistung`
 
 #### `switch`-Anweisungen
 
@@ -1343,53 +1039,6 @@ int main(){
 {{2}}
 Durch `return`- Anweisung wird das Verlassen einer Funktion veranlasst (genaues
 in der Vorlesung zu Funktionen).
-
-### GoTo or not GoTo?
-
-`Goto` erlaubt es Sprungmarken (Labels) zu definieren und bei der Anweisung, die
-diese referenziert, die Ausführung fortzusetzen. Konsequenterweise ist damit aber
-eine nahezu beliebige Auflösung der Ordnung des Codes möglich.
-
->  *Use of `goto` statement is highly discouraged in any programming language*
->  *because it makes difficult to trace the control flow of a program, making*
->  *the program hard to understand and hard to modify. Any program that uses a*
-> * `goto` can be rewritten to avoid them.*
->
-> [Tutorialspoint](https://www.tutorialspoint.com/cprogramming/c_goto_statement.html)
-
-```cpp                     gotoExample.cpp
-#include <iostream>
-using namespace std;
-
-int main(){
-	int i=0;
-  label:
-       cout<< i <<" ";
-       i++;
-       if (i <= 10) goto label;
-	return 0;
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-Ein wichtiger Fehler, der häufig immer mit goto in Verbindung gebracht wird, hat
-aber eigentlich nichts damit zu tun
-[Apple-SSL Bug](http://www.spiegel.de/netzwelt/web/goto-fail-apples-furchtbarer-fehler-a-955154.html)
-
-
-## Darstellung von Algorithmen
-
-* Nassi-Shneiderman-Diagramme
-* [Flußdiagramme](https://de.wikipedia.org/wiki/Programmablaufplan)
-
-Beispiel - Wechseln der Räder
-
-![Programmablaufplan.png](https://www.plantuml.com/plantuml/png/LL2_JeSm4Dxx5ETlWe74mOc6oAIBamukBYTSxKKev7gD2G_cvCQBMQk6S5Fx_VdwzVgeA9hcoPI30MWPEhYn1lAmW-gPWv88iQC0EB-4E_IoKNgxhK5znggmr0RA2As4-dV9KK-35qolMJJjdv62FQX7744nnS6VuCE1OMCwazmqzlGIV7YU22hkkkjSXsCfywkXCB8pnGSFoUaeQNY7LVOlzn_QNkwJ4lnyIAykraHTLjDdOzx7Dm00)<!--
-style="width: 50%;
-       max-width: 330px;
-       display: block;
-       margin-left: auto;
-       margin-right: auto;" -->
 
 ## Beispiel des Tages
 
