@@ -710,6 +710,95 @@ int main(void) {
 ```
 @LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
+### Quiz
+
+#### Variablennamen
+
+> Welche dieser Variablennamen sind grundsätzlich zulässig?
+- [[X]] geschwindigkeit
+- [[X]] speed
+- [[ ]] speed of robot
+- [[X]] sp33d
+- [[ ]] 1Speed
+- [[X]] speed\_of\_triangle
+- [[X]] _speed
+- [[ ]] speed.forwards
+- [[ ]] int
+- [[X]] speedOfRobot
+- [[?]] Die Sprache ist irrelevant.
+- [[?]] Variablennamen dürfen nicht mit Zahlen beginnen.
+- [[?]] Variablennamen dürfen mit Unterstrichen beginnen.
+- [[?]] Variablennamen dürfen keine Schlüsselwörter sein.
+- [[?]] Variablennamen dürfen keine Punkte oder Leerzeichen enthalten.
+
+#### Datentypen
+
+> Ordnen Sie die Datentypen die korrekten Zahlentypen zu.
+- [[Ganzzahl] (Fließkommazahl)]
+- [    (X)           ( )      ]  int
+- [    ( )           (X)      ]  float
+- [    ( )           (X)      ]  double
+- [    (X)           ( )      ]  bool
+- [    (X)           ( )      ]  char
+
+#### Boolean
+
+> Welche Werte kann `bool` annehmen?
+
+    [(X)] 0 und 1
+    [( )] 0 bis 1
+
+#### Fließkommazahlen
+
+> Welche dieser Zahlen kann präzise im Speicher abgebildet werden?
+- [( )] 0.3
+- [(X)] 0.125
+- [( )] 0.111
+- [( )] 0.783
+- [( )] 0.420
+- [[?]] Die Zahl muss eine Zweierpotenz sein.
+
+#### Adressen
+
+> Mit welchem Symbol kann auf die Speicheradresse einer Variable zugegriffen werden?
+  [[&]]
+
+#### Globale und lokale Variablen
+
+> Wählen Sie aus, welche Variablen global und welche lokal sind.
+
+```cpp
+#include<iostream>
+
+int w = 5;
+
+int main(void)
+{
+  int v = 1;
+  {
+    int v;
+    v = 2;
+    std::cout<<v<<"\n";
+    std::cout<<w<<"\n";
+  }
+  std::cout<<v<<"\n";
+  return 0;
+}
+```
+
+- [(Global) (Lokal)]
+- [    ( )           (X)      ]  v
+- [    (X)           ( )      ]  w
+
+#### Definition, Deklaration und Initialisierung
+
+> Wählen Sie aus in welchen Fällen eine Deklaration, Definition oder Initialisierung vorliegt.
+
+- [[Deklaration] [Definition] [Initialisierung] ]
+- [    [X]           [X]              [ ]       ]  int i;
+- [    [X]           [X]              [X]       ]  int i = 99;
+- [    [X]           [X]              [ ]       ]  double d;
+
 ## Ein- und Ausgabe
 
 Ausgabefunktionen wurden bisher genutzt, um den Status unserer Programme zu
