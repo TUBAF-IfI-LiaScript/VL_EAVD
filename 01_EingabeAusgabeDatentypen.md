@@ -984,3 +984,36 @@ int main() {
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+### Quiz
+
+#### Ausgabe
+> Wie lautet der Ausgabeoperator?
+[[<<]]
+
+#### Feldbreite
+> Wie legen Sie die Breite einer Ausgabe auf 10 Zeichen fest? (ohne std:: oder ;)
+[[setw(10)]]
+
+#### Präzision
+> Welcher Ausdruck begrenzt eine Ausgabe auf 2 Stellen nach em Komma? (ohne std:: oder ;)
+[[setprecision(2)]]
+
+#### Escape-Sequenzen
+> Wie lautet die Escape-Sequenz für BACKSPACE?
+[[\b]]
+
+> Wie lautet die Escape-Sequenz für NEWLINE?
+[[\n]]
+
+> Wie lautet die Escape-Sequenz für HORIZONTAL TAB?
+[[\t]]
+
+> Wie lautet die Escape-Sequenz für SINGLE QUOTATION MARK?
+[[\']]
+
+> Wie lautet die Escape-Sequenz für DOUBLE QUOTATION MARK?
+[[\"]]
+
+> Wie lautet die Escape-Sequenz für CARRIAGE RETURN?
+[[\r]]
