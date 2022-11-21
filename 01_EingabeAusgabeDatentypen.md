@@ -719,7 +719,7 @@ int main(void) {
 - [[X]] speed
 - [[ ]] speed of robot
 - [[X]] sp33d
-- [[ ]] 1Speed
+- [[ ]] 99Speed
 - [[X]] speed\_of\_triangle
 - [[X]] _speed
 - [[ ]] speed.forwards
