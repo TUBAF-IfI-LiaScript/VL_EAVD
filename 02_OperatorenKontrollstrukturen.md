@@ -383,6 +383,7 @@ Buttons auf eine LED abzubilden. Nur wenn beide Taster gedrückt werden, beleuch
   <wokwi-pushbutton color="red"   pin="11" ></wokwi-pushbutton>
   <span id="simulation-time"></span>
 </div>
+
 ```cpp    ButtonSynch.cpp
 const int button_A_pin = 10;
 const int button_B_pin = 11;
@@ -417,6 +418,96 @@ void loop() {
 }
 ```
 @AVR8js.sketch
+
+## Quiz
+### Operatoren
+
+> Ordnen Sie die Operatoren den richtigen Bezeichnungen zu.
+- [(Unär)           (Binär)       (Ternär)]
+- [    (X)           ( )            ( )   ]  `b=-a;`
+- [    ( )           (X)            ( )   ]  `b=a-1;`
+- [    (X)           ( )            ( )   ]  `sizeof()`
+- [    ( )           ( )            (X)   ]  `?`
+- [    ( )           (X)            ( )   ]  `+`
+- [    ( )           (X)            ( )   ]  `%`
+
+{{1}}
+> Ordnen Sie die Operatoren den richtigen Bezeichnungen zu.
+- [(Infix)           (Präfix)       (Postfix) ]
+- [    (X)           ( )            ( )       ]  `a=b+c;`
+- [    ( )           (X)            ( )       ]  `a=++b;`
+- [    ( )           ( )            (X)       ]  `a=b++;`
+- [    (X)           ( )            ( )       ]  `a=a%3;`
+- [    ( )           (X)            ( )       ]  `a=&b;`
+
+#### Zuweisungs- und Vergleichsoperatoren
+> Ordnen Sie die Operatoren den richtigen Bezeichnungen zu.
+- [(Zuweisungsoperator)           (Vergleichsoperator)]
+- [    ( )                         (X)                ]  `>=`
+- [    ( )                         (X)                ]  `<=`
+- [    ( )                         (X)                ]  `==`
+- [    ( )                         (X)                ]  `<`
+- [    ( )                         (X)                ]  `>`
+- [    (X)                         ( )                ]  `=`
+- [    ( )                         (X)                ]  `!=`
+
+#### Inkrement und Dekrement
+> Verkürzen Sie `x=x+1;` möglichst weit.
+[[x++;]]
+[[?]] `++` wird benutzt um Variablen zu Inkrementieren.
+[[?]] `;` nicht vergessen.
+<script>
+let input = "@input".trim().toLowerCase()
+
+input == "x++;" || input == "++x;"
+</script>
+
+> Verkürzen Sie `x=x-1;` möglichst weit.
+[[x--;]]
+[[?]] `-` wird benutzt um Variablen zu Dekrementieren.
+[[?]] `;` nicht vergessen.
+<script>
+let input = "@input".trim().toLowerCase()
+
+input == "x--;" || input == "--x;"
+</script>
+
+#### Arithmetische Operatoren
+> Welche dieser Operatoren können **nur** mit Ganzzahlen verwendet werden?
+[[ ]] `+`
+[[ ]] `/`
+[[ ]] `-`
+[[X]] `%`
+[[ ]] `*`
+
+
+#### Logische Operatoren
+
+> Wofür steht der logische Operator `&&`?
+[[und]]
+<script>
+let input = "@input".trim().toLowerCase()
+
+input == "und" || input == "UND" || input == "Und"
+</script>
+
+> Wofür steht der logische Operator `||`?
+[[oder]]
+<script>
+let input = "@input".trim().toLowerCase()
+
+input == "oder" || input == "ODER" || input == "Oder"
+</script>
+
+> Wofür steht der logische Operator `!`?
+[[nicht]]
+<script>
+let input = "@input".trim().toLowerCase()
+
+input == "nicht" || input == "NICHT" || input == "Nicht"
+</script>
+
+
 
 # Kontrollfluss
 
@@ -513,7 +604,7 @@ formuliert werden.
 | `if (a != 0)`     | $a\neq 0$ |
 | `if (a == 0)`     | $a = 0$ |
 | `if (!(a <= b))`  | $\overline{(a \leq b)}$ oder $a > b$ |
-| `ìf (a != b)`     | $a\neq b$ |
+| `if (a != b)`     | $a\neq b$ |
 | `if (a || b)` | $a>0$ oder $b>0$ |
 
 ************************************************************************
@@ -1039,6 +1130,95 @@ int main(){
 {{2}}
 Durch `return`- Anweisung wird das Verlassen einer Funktion veranlasst (genaues
 in der Vorlesung zu Funktionen).
+
+## Quiz
+### `if`-Anweisungen
+> Was gibt dieses Programm aus?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+	int a = 44;
+  int b = 3;
+
+  if(a == 44 && a == b){
+    cout << "1234";
+  }
+  else{
+    if(a >= b || a == 10){
+      cout << "5678";
+    }
+    else{
+      cout << "9";
+    }
+  }
+	return 0;
+}
+```
+[[5678]]
+
+### `switch`-Anweisungen
+> Für welche Zahlen ist eine `switch`-Anweisung geeignet?
+[(X)] Ganzzahlen
+[( )] Gleitkommazahlen
+
+
+> Was gibt dieses Programm aus?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+  int b = 6;
+	int a = b;
+
+  switch(a) {
+    case 4:
+      cout << "4";
+      break;
+    case 5:
+    case 6:
+    case 7:
+      cout << "5 bis 7";
+    case 3:
+      cout << "3";
+      break;
+    case 0:
+      cout << "0";
+    default: cout<<"Keine Kategorie!";}
+	return 0;
+}
+```
+[[5 bis 7]]
+
+> Was gibt dieses Programm aus?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+  int b = 9;
+	int a = b;
+
+  switch(a) {
+    case 4:
+      cout << "4";
+      break;
+    case 5:
+    case 6:
+    case 7:
+      cout << "5 bis 7";
+    case 3:
+      cout << "3";
+      break;
+    case 0:
+      cout << "0";
+    default: cout<<"Keine Kategorie!";}
+	return 0;
+}
+```
+[[Keine Kategorie!]]
 
 ## Beispiel des Tages
 
