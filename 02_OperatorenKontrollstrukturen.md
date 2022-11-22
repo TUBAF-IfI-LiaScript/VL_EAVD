@@ -419,68 +419,6 @@ void loop() {
 ```
 @AVR8js.sketch
 
-## Quiz
-### Operatoren
-
-> Ordnen Sie die Operatoren den richtigen Bezeichnungen zu.
-- [(Unär)           (Binär)       (Ternär)]
-- [    (X)           ( )            ( )   ]  `b=-a;`
-- [    ( )           (X)            ( )   ]  `b=a-1;`
-- [    (X)           ( )            ( )   ]  `sizeof()`
-- [    ( )           ( )            (X)   ]  `?`
-- [    ( )           (X)            ( )   ]  `+`
-- [    ( )           (X)            ( )   ]  `%`
-
-{{1}}
-> Ordnen Sie die Operatoren den richtigen Bezeichnungen zu.
-- [(Infix)           (Präfix)       (Postfix) ]
-- [    (X)           ( )            ( )       ]  `a=b+c;`
-- [    ( )           (X)            ( )       ]  `a=++b;`
-- [    ( )           ( )            (X)       ]  `a=b++;`
-- [    (X)           ( )            ( )       ]  `a=a%3;`
-- [    ( )           (X)            ( )       ]  `a=&b;`
-
-#### Zuweisungs- und Vergleichsoperatoren
-> Ordnen Sie die Operatoren den richtigen Bezeichnungen zu.
-- [(Zuweisungsoperator)           (Vergleichsoperator)]
-- [    ( )                         (X)                ]  `>=`
-- [    ( )                         (X)                ]  `<=`
-- [    ( )                         (X)                ]  `==`
-- [    ( )                         (X)                ]  `<`
-- [    ( )                         (X)                ]  `>`
-- [    (X)                         ( )                ]  `=`
-- [    ( )                         (X)                ]  `!=`
-
-#### Inkrement und Dekrement
-> Verkürzen Sie `x=x+1;` möglichst weit.
-[[x++;]]
-[[?]] `++` wird benutzt um Variablen zu Inkrementieren.
-[[?]] `;` nicht vergessen.
-<script>
-let input = "@input".trim().toLowerCase()
-
-input == "x++;" || input == "++x;"
-</script>
-
-> Verkürzen Sie `x=x-1;` möglichst weit.
-[[x--;]]
-[[?]] `-` wird benutzt um Variablen zu Dekrementieren.
-[[?]] `;` nicht vergessen.
-<script>
-let input = "@input".trim().toLowerCase()
-
-input == "x--;" || input == "--x;"
-</script>
-
-#### Arithmetische Operatoren
-> Welche dieser Operatoren können **nur** mit Ganzzahlen verwendet werden?
-[[ ]] `+`
-[[ ]] `/`
-[[ ]] `-`
-[[X]] `%`
-[[ ]] `*`
-
-
 #### Logische Operatoren
 
 > Wofür steht der logische Operator `&&`?
@@ -1131,7 +1069,108 @@ int main(){
 Durch `return`- Anweisung wird das Verlassen einer Funktion veranlasst (genaues
 in der Vorlesung zu Funktionen).
 
-## Quiz
+## Beispiel des Tages
+
+Das Codebeispiel des Tages führt die Berechnung eines sogenannten magischen
+Quadrates vor.
+
+Das Lösungsbeispiel stammt von der Webseite https://rosettacode.org, die für das
+Problem [magic square](https://rosettacode.org/wiki/Magic_squares_of_odd_order#C) und
+viele andere "Standardprobleme" Lösungen in unterschiedlichen Sprachen präsentiert.
+Sehr lesenswerte Sammlung!
+
+```cpp                     magicSquare.cpp
+#include <iostream>
+using namespace std;
+
+int f(int n, int x, int y)
+{
+  return (x + y*2 + 1) % n;
+}
+
+int main() {
+  int i, j, n;
+
+  //Input must be odd and not less than 3.
+  n = 5;
+  if (n < 3 || (n % 2) == 0) return 2;
+
+  for (i = 0; i < n; i++) {
+    for (j = 0; j < n; j++){
+      cout<<f(n, n - j - 1, i)*n + f(n, j, i) + 1<<"\t";
+      //fflush(stdout);
+    }
+    cout<<"\n";
+  }
+  cout<<"\nMagic Constant: "<<(n*n+1)/2*n<<".\n";
+
+  return 0;
+}
+```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+# Quiz
+## Operatoren
+
+> Ordnen Sie die Operatoren den richtigen Bezeichnungen zu.
+- [(Unär)           (Binär)       (Ternär)]
+- [    (X)           ( )            ( )   ]  `b=-a;`
+- [    ( )           (X)            ( )   ]  `b=a-1;`
+- [    (X)           ( )            ( )   ]  `sizeof()`
+- [    ( )           ( )            (X)   ]  `?`
+- [    ( )           (X)            ( )   ]  `+`
+- [    ( )           (X)            ( )   ]  `%`
+
+{{1}}
+> Ordnen Sie die Operatoren den richtigen Bezeichnungen zu.
+- [(Infix)           (Präfix)       (Postfix) ]
+- [    (X)           ( )            ( )       ]  `a=b+c;`
+- [    ( )           (X)            ( )       ]  `a=++b;`
+- [    ( )           ( )            (X)       ]  `a=b++;`
+- [    (X)           ( )            ( )       ]  `a=a%3;`
+- [    ( )           (X)            ( )       ]  `a=&b;`
+
+### Zuweisungs- und Vergleichsoperatoren
+> Ordnen Sie die Operatoren den richtigen Bezeichnungen zu.
+- [(Zuweisungsoperator)           (Vergleichsoperator)]
+- [    ( )                         (X)                ]  `>=`
+- [    ( )                         (X)                ]  `<=`
+- [    ( )                         (X)                ]  `==`
+- [    ( )                         (X)                ]  `<`
+- [    ( )                         (X)                ]  `>`
+- [    (X)                         ( )                ]  `=`
+- [    ( )                         (X)                ]  `!=`
+
+### Inkrement und Dekrement
+> Verkürzen Sie `x=x+1;` möglichst weit.
+[[x++;]]
+[[?]] `++` wird benutzt um Variablen zu Inkrementieren.
+[[?]] `;` nicht vergessen.
+<script>
+let input = "@input".trim().toLowerCase()
+
+input == "x++;" || input == "++x;"
+</script>
+
+> Verkürzen Sie `x=x-1;` möglichst weit.
+[[x--;]]
+[[?]] `-` wird benutzt um Variablen zu Dekrementieren.
+[[?]] `;` nicht vergessen.
+<script>
+let input = "@input".trim().toLowerCase()
+
+input == "x--;" || input == "--x;"
+</script>
+
+### Arithmetische Operatoren
+> Welche dieser Operatoren können **nur** mit Ganzzahlen verwendet werden?
+[[ ]] `+`
+[[ ]] `/`
+[[ ]] `-`
+[[X]] `%`
+[[ ]] `*`
+
+## Verzweigungen
 ### `if`-Anweisungen
 > Was gibt dieses Programm aus?
 ```cpp
@@ -1220,7 +1259,7 @@ int main(){
 ```
 [[Keine Kategorie!]]
 
-### Schleifen
+## Schleifen
 
 > Welche Art von Schleife ist hier dargestellt?
 ``` ascii
@@ -1238,7 +1277,7 @@ int main(){
 ```
 [( )] `for`-Schleife
 [(X)] `while`-Schleife
-[( )] `do while`-Schleife
+[( )] `do-while`-Schleife
 
 {{1}}
 > Welche Art von Schleife ist hier dargestellt?
@@ -1259,44 +1298,151 @@ int main(){
 {{1}}
 [(X)] `for`-Schleife
 [( )] `while`-Schleife
-[( )] `do while`-Schleife
+[( )] `do-while`-Schleife
 
-## Beispiel des Tages
+{{2}}
+> Welche Art von Schleife ist hier dargestellt?
+{{2}}
+``` ascii
+.-----------.-----------------------------------------------------------.
+|           |                                                           |
+|           |       Anweisungsblock 1                                   |
+|           |                                                           |
+|           |                                                           |
+|           '-----------------------------------------------------------.
+|                                                                       |
+|                                                                       |
+|  solange Bedingung wahr                                               |
+|                                                                       |
+'-----------------------------------------------------------------------'
+```
+{{2}}
+[( )] `for`-Schleife
+[( )] `while`-Schleife
+[(X)] `do-while`-Schleife
 
-Das Codebeispiel des Tages führt die Berechnung eines sogenannten magischen
-Quadrates vor.
+### `for`-Schleife
 
-Das Lösungsbeispiel stammt von der Webseite https://rosettacode.org, die für das
-Problem [magic square](https://rosettacode.org/wiki/Magic_squares_of_odd_order#C) und
-viele andere "Standardprobleme" Lösungen in unterschiedlichen Sprachen präsentiert.
-Sehr lesenswerte Sammlung!
-
-```cpp                     magicSquare.cpp
+> Kopieren Sie das `for (i = [_____]; i < [_____]; [_____])` in die Antwort und ersetzen Sie `[_____]`, dass die Zahlen 4 bis 15 nacheinander in aufsteigender Reihenfolge ausgegeben werden.
+```cpp
 #include <iostream>
 using namespace std;
 
-int f(int n, int x, int y)
-{
-  return (x + y*2 + 1) % n;
+int main(){
+	int i;
+  for (i = [_____]; i < [_____]; [_____])
+    cout << i << endl;
+
+	return 0;
 }
+```
+[[for (i = 4; i < 16; i++)]]
 
-int main() {
-  int i, j, n;
+> Welchen Wert hat `i` nach der Schleife?
+[[16]]
 
-  //Input must be odd and not less than 3.
-  n = 5;
-  if (n < 3 || (n % 2) == 0) return 2;
+### `while`-Schleife
 
-  for (i = 0; i < n; i++) {
-    for (j = 0; j < n; j++){
-      cout<<f(n, n - j - 1, i)*n + f(n, j, i) + 1<<"\t";
-      //fflush(stdout);
-    }
-    cout<<"\n";
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+	int i = 16;
+  while (i > 4)
+  {
+    i = i / 2;
+    cout << i << " ";
   }
-  cout<<"\nMagic Constant: "<<(n*n+1)/2*n<<".\n";
 
+  cout << "ende";
+	return 0;
+}
+```
+[[8 4 ende]]
+
+{{1}}
+> Welcher Wert wird für die Variable `zaehler` ausgegeben wenn folgende Eingaben einzeln getätigt werden? `X` `X` `A` `X` `Y` `X` `Y`
+{{1}}
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+  char c;
+  int zaehler = 0;
+  cin >> c;
+  while(c != 'Y')
+  {
+    if(c == 'X')
+      zaehler++;
+      cin >> c;
+  }
+  cout << zaehler;
   return 0;
 }
 ```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+{{1}}
+[[3]]
+
+### `do-while`-Schleife
+
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+	int i = 16;
+  do {
+    i = i / 2;
+    cout << i << " ";
+  } while (i < 4);
+
+  cout << "ende";
+	return 0;
+}
+```
+[[8 ende]]
+
+## Kontrolliertes Verlassen von Anweisungen
+
+> Wie lautet die Ausgabe dieses Programms?
+```cpp                     breakForLoop.cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+	int i;
+  for (i = 1; i<10; i++){
+      if (i > 5) break;
+      cout<<i<<" ";
+  }
+  cout<<"ende";
+	return 0;
+}
+```
+[[1 2 3 4 5 ende]]
+[[?]] `break` sorgt für der Abbruch der Schleife.
+
+{{1}}
+> Wie lautet die Ausgabe dieses Programms?
+{{1}}
+```cpp                     breakForLoop.cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+	int i;
+  for (i = 1; i<10; i++){
+      if (i < 5) continue;
+      cout<<i<<" ";
+  }
+  cout<<"ende";
+	return 0;
+}
+```
+{{1}}
+[[5 6 7 8 9 ende]]
+[[?]] `continue` sorgt dafür, dass dieser Durchlauf der Schleife übersprungen wird.
