@@ -716,6 +716,7 @@ int main(void) {
 
 > Welche dieser Variablennamen sind grundsätzlich zulässig?
 - [[X]] geschwindigkeit
+- [[X]] hasjdLASJdssa
 - [[X]] speed
 - [[ ]] speed of robot
 - [[X]] sp33d
@@ -725,7 +726,6 @@ int main(void) {
 - [[ ]] speed.forwards
 - [[ ]] int
 - [[X]] speedOfRobot
-- [[?]] Die Sprache ist irrelevant.
 - [[?]] Variablennamen dürfen nicht mit Zahlen beginnen.
 - [[?]] Variablennamen dürfen mit Unterstrichen beginnen.
 - [[?]] Variablennamen dürfen keine Schlüsselwörter sein.
@@ -743,7 +743,7 @@ int main(void) {
 
 #### Boolean
 
-> Welche Werte kann `bool` annehmen?
+> Welche Werte können `bool`-Variablen zugewiesen werden?
 
     [(X)] 0 und 1
     [( )] 0 bis 1

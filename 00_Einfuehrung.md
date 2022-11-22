@@ -477,14 +477,15 @@ int main() {                        // main-function
 
 ```cpp                    1.cpp
 #include <iostream>
-int main() { std::cout << "Hello World! "; return 0;}
+int main() {int a = 0; std::cout << "Hello World!" << a; return 0;}
 ```
 
 ```cpp                    2.cpp
 #include <iostream>
 
 int main() {
-	std::cout << "Hello World!";
+  int a = 0;
+	std::cout << "Hello World!" << a;
 	return 0;
 }
 ```
@@ -493,8 +494,9 @@ int main() {
 #include  	                 <iostream>
 
 int main()     {
-	std::cout    <<                  "Hello World!"           ;
-	return            0     ;
+  int               a      =            0;
+	std::cout    <<                  "Hello World!"     <<  a    ;
+	return            0           ;
                                                                               }
 ```
 
