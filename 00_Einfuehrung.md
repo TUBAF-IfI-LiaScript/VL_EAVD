@@ -443,67 +443,6 @@ int main() {
 
 > **Hinweis:** Die Datentypen werden wir in der nächsten Woche besprechen.
 
-### Quiz
-#### Einbinden von Bibliotheken
-
-> Wie müssen Bibliotheken in C++ eingebunden werden?
-
-- [( )] using iostream
-- [( )] import iostream
-- [(X)] #include \<iostream>
-
-#### Kommentare 
-
-> Sind diese Kommentare angebracht?
-
-```cpp
-#include <iostream>                 // I always forget this xD
-
-int main() {                        // main-function
-  char zahl;                        // I have homework due tomorrow :(
-  for (zahl=250; zahl<256; zahl++){ // I really have no idea what this even does but whatever... LOL
-	    std::cout << "Hello World!";  // Prints "Hello World!" in console
-  }
-	return 0;
-}
-```
-
-- [( )] Ja
-- [(X)] Nein
-
-#### Konventionen und Formalien
-
-> Wählen Sie alle Programme aus, die den üblichen Formalien entsprechen.
-
-```cpp                    1.cpp
-#include <iostream>
-int main() {int a = 0; std::cout << "Hello World!" << a; return 0;}
-```
-
-```cpp                    2.cpp
-#include <iostream>
-
-int main() {
-  int a = 0;
-	std::cout << "Hello World!" << a;
-	return 0;
-}
-```
-
-```cpp                    3.cpp
-#include  	                 <iostream>
-
-int main()     {
-  int               a      =            0;
-	std::cout    <<                  "Hello World!"     <<  a    ;
-	return            0           ;
-                                                                              }
-```
-
-- [[ ]] 1.cpp
-- [[X]] 2.cpp
-- [[ ]] 3.cpp
-
 ## Warum dann C++?
 
 Zwei Varianten der Umsetzung ... C++ vs. Python
@@ -583,3 +522,64 @@ void loop() {
 @AVR8js.sketch
 
 ********************************************************************************************
+
+## Quiz
+### Einbinden von Bibliotheken
+
+> Wie müssen Bibliotheken in C++ eingebunden werden?
+
+- [( )] using iostream
+- [( )] import iostream
+- [(X)] #include \<iostream>
+
+### Kommentare 
+
+> Sind diese Kommentare angebracht?
+
+```cpp
+#include <iostream>                 // I always forget this xD
+
+int main() {                        // main-function
+  char zahl;                        // I have homework due tomorrow :(
+  for (zahl=250; zahl<256; zahl++){ // I really have no idea what this even does but whatever... LOL
+	    std::cout << "Hello World!";  // Prints "Hello World!" in console
+  }
+	return 0;
+}
+```
+
+- [( )] Ja
+- [(X)] Nein
+
+### Konventionen und Formalien
+
+> Wählen Sie alle Programme aus, die den üblichen Formalien entsprechen.
+
+```cpp                    1.cpp
+#include <iostream>
+int main() {int a = 0; std::cout << "Hello World!" << a; return 0;}
+```
+
+```cpp                    2.cpp
+#include <iostream>
+
+int main() {
+  int a = 0;
+	std::cout << "Hello World!" << a;
+	return 0;
+}
+```
+
+```cpp                    3.cpp
+#include  	                 <iostream>
+
+int main()     {
+  int               a      =            0;
+	std::cout    <<                  "Hello World!"     <<  a    ;
+	return            0           ;
+                                                                              }
+```
+
+- [[ ]] 1.cpp
+- [[X]] 2.cpp
+- [[ ]] 3.cpp
