@@ -1220,6 +1220,47 @@ int main(){
 ```
 [[Keine Kategorie!]]
 
+### Schleifen
+
+> Welche Art von Schleife ist hier dargestellt?
+``` ascii
+.-----------------------------------------------------------------------.
+|                                                                       |
+|  solange Bedingung wahr                                               |
+|                                                                       |
+|                                                                       |
+|           .-----------------------------------------------------------.
+|           |                                                           |
+|           |       Anweisungsblock 1                                   |
+|           |                                                           |
+|           |                                                           |
+'-----------'-----------------------------------------------------------'
+```
+[( )] `for`-Schleife
+[(X)] `while`-Schleife
+[( )] `do while`-Schleife
+
+{{1}}
+> Welche Art von Schleife ist hier dargestellt?
+{{1}}
+``` ascii
+.-----------------------------------------------------------------------.
+|                                                                       |
+|  zähle [Variable] von [Startwert] bis [Endwert] mit [Schrittweite]    |
+|                                                                       |
+|                                                                       |
+|           .-----------------------------------------------------------.
+|           |                                                           |
+|           |       Anweisungsblock 1                                   |
+|           |                                                           |
+|           |                                                           |
+'-----------'-----------------------------------------------------------'
+```
+{{1}}
+[(X)] `for`-Schleife
+[( )] `while`-Schleife
+[( )] `do while`-Schleife
+
 ## Beispiel des Tages
 
 Das Codebeispiel des Tages führt die Berechnung eines sogenannten magischen
