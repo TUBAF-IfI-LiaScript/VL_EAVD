@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.0.3
 language: de
 narrator: Deutsch Female
 
@@ -10,6 +10,7 @@ comment: Einführung in die Programmierung für Nicht-Informatiker
 logo: ./img/LogoCodeExample.png
 
 import: https://github.com/liascript/CodeRunner
+        https://github.com/LiaTemplates/AVR8js/main/README.md#10
 
 
 -->
@@ -47,10 +48,8 @@ import: https://github.com/liascript/CodeRunner
 
 <div>
   <wokwi-pushbutton color="green" pin="2"  port="D"></wokwi-pushbutton>
-  <wokwi-pushbutton color="red" pin="3"  port="D"></wokwi-pushbutton>
   <wokwi-led color="red"   pin="13" port="B" label="13"></wokwi-led>
 </div>
-
 ```cpp       ButtonLogic.cpp
 void setup() {
   pinMode(2, INPUT);
@@ -156,7 +155,6 @@ int main(void) {
     }
   return 0;
 }
-}
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
@@ -246,7 +244,7 @@ int Matrix[4][4] = {1,2,3,4,5,6,7,8};
 Initialisierung eines n-dimensionalen Arrays:
 
 {{1}}
-![Matrix](./images/04_ZeigerUndArrays/2DArray.jpg)<!--
+![Matrix](./images/04_ZeigerUndArrays/2DArray.jpg "Darstellung der Matrixinhalte für das nachfolgende Codebeispiel [^1]")<!--
 style=" width: 60%;
         max-width: 800px;
         min-width: 400px;
@@ -283,8 +281,7 @@ int main(void) {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-{{2}}
-Quelle: [C-Kurs](http://www.c-howto.de/tutorial/arrays-felder/zweidimensionale-felder/)
+[^1]: Quelle: [C-Kurs](http://www.c-howto.de/tutorial/arrays-felder/zweidimensionale-felder/)
 
 ### Anwendung eines zweidimesionalen Arrays
 
@@ -314,16 +311,14 @@ int main(void)
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-[Multiplikation zweier Matrizen](https://www.codewithc.com/c-program-for-gauss-elimination-method/)
+> Weiteres Beispiel: Lösung eines Gleichungssystem mit dem Gausschen Elimnationsverfahren [Link](https://www.codewithc.com/c-program-for-gauss-elimination-method/)
 
 
-### Strings/Zeichenketten
+## Sonderfall Zeichenketten / Strings
 
 Folgen von Zeichen, die sogenannten *Strings* werden in C/C++ durch Arrays mit
 Elementen vom Datentyp `char` repräsentiert. Die Zeichenfolgen werden mit
 `\0` abgeschlossen.
-
-> **Merke:** C++ stellt mit dem Header `<string>` ebenfalls einen Standartdatentyp `string` mit zahlreichen Funktionen zur Verfügung.
 
 ```cpp                                         stringarray.cpp
 #include <iostream>
@@ -351,103 +346,32 @@ int main(void) {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-{{1}}
-Wie kopiere ich die Inhalte in einem Array?
+C++ implementiert einen separaten string-Datentyp (Klasse), die ein deutliche komfortableren Umgang mit Texten erlaubt. Beim Anlegen eines solchen muss nicht angegeben werden, wie viele Zeichen reserviert werden sollen. Zudem könenn Strings einfach zuweisen und vergleichen werden, wie es für andere Datentypen üblich ist. Die C const char * Mechanismen funktionieren aber auch hier.
 
-{{1}}
-```cpp                     arrayStrCopy1.cpp
-#include <iostream>
-using namespace std;
-
-#include <string.h>       // notwendig für strcpy
-
-int main(void) {
-  char a[] = "012345678901234567890123456789";
-  strcpy(a, "Das ist ein neuer Text");
-  cout<<a<<"\n";
-  return 0;
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-{{1}}
-```cpp                     arrayStrCopy2.cpp
+```cpp                                         stringarray.cpp
 #include <iostream>
 #include <string>
 using namespace std;
 
 int main(void) {
-  char a[]="012345678901234567890123456789";
-  string b="Das ist ein neuer Text";
-  size_t length = b.copy(a,b.size(),0);
-  a[length]='\0';
-  cout<<a<<"\n";
-  return 0;
+  string hanna = "Hanna";
+  string anna = "Anna";
+  string alleBeide = anna + " + " + hanna;
+  cout<<"Hallo: "<<alleBeide<<std::endl;
+
+  int res = anna.compare(hanna);
+
+	if (res == 0)
+		cout << "\nBoth the input strings are equal." << endl;
+	else if(res < 0)
+		cout << "String 1 is smaller as compared to String 2\n.";
+		else
+		cout<<"String 1 is greater as compared to String 2\n.";
+
+  return EXIT_SUCCESS;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-### Anwendung von Zeichenketten
-
-Schreiben Sie ein Programm, dass in einem Text groß geschriebene Buchstaben
-durch klein geschriebene ersetzt und umgekehrt.
-
-![Matrix](./images/01_EinAusgabeDatentypen/ASCII_Zeichensatz.jpeg)<!--
-style=" width: 60%;
-        max-width: 800px;
-        min-width: 400px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;"
--->
-
-Da Variablen des Datentyps `char` genau ein Byte benötigen, liefert `sizeof`-Operator im folgenden Beispiel die Anzahl der Elemente des Arrays.
-
-
-```cpp                     ArrayExample.cpp
-#include <iostream>
-using namespace std;
-
-int main() {
-  char a[] = "Das ist ein beispielhafter Text.";
-  char b[sizeof a];
-  for (int i=0; i< sizeof a; i++){
-    b[i] = a[i];
-    if ((a[i]>=65) && (a[i]<=90))
-        b[i] = a[i] + 32;
-    if ((a[i]>=97) && (a[i]<=122))
-        b[i] = a[i] - 32;
-  }
-  cout<<a<<"\n";
-  cout<<b<<"\n";
-  return 0;
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-
-### Fehlerquellen
-
-Bitte unterscheiden Sie die Initialisierungsphase von normalen Zuweisungen,
-bei denen Sie nur auf einzelne Elemente zugreifen können.
-
-```cpp                     arrayInitVsAssignment.cpp
-#include <iostream>
-using namespace std;
-
-#include <string.h>       // notwendig für strcpy
-
-int main(void) {
-  char a[] = "Das ist der Originaltext";
-  a = "Das ist ein neuer Text";  // Compiler Error
-  //strcpy(a, "Das ist ein neuer Text");
-  a[0]='X';
-  cout<<a<<"\n";
-  return 0;
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
 
 ## Grundkonzept Zeiger
 
@@ -773,7 +697,7 @@ Geben Sie alle Paare von Einträgen zurück, die in der Summe 18 ergeben.
 Die intuitive Lösung entwirft einen kreuzweisen Vergleich aller sinnvollen Kombinationen
 der $n$ Einträge im Array. Dafür müssen wir $(n-1)^2 /2$ Kombinationen bilden.
 
-<!-- data-type="none" style="table-layout: fixed; max-width:950px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:1050px;"-->
 |     | 1   | 2   | 5   | 7   | 9   | 10  | 12  | 13  | 16  | 17  | 18  | 21  | 25  |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1   | x   |     |     |     |     |     |     |     |     | 18  |     |     |     |
@@ -812,9 +736,7 @@ int main(void)
     if (a[i_right] + a[i_left] >= ZIELWERT) i_right--;
     else i_left++;
   }while (i_right != i_left);
-  return 0;
+  return 0;s
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-<!--START_SKIP_IN_PDF-->
