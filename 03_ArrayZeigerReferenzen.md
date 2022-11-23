@@ -859,7 +859,6 @@ int main(){
 [( )] `chars`
 [( )] Referenzen
 [(X)] Speicheraddressen
-[( )] Kommt auf die Uhrzeit an
 
 ### Definition
 
