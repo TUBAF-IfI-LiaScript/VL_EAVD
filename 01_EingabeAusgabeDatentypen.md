@@ -855,6 +855,88 @@ int main(){
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
+{{1}}
+Beispiele
+
+> Newline erschafft eine neue Zeile in der weitergeschrieben wird.
+```cpp  newline.c
+#include <iostream>
+using namespace std;
+
+int main(){
+  cout << "Dieser Text steht in der 1. Zeile.\nDieser Text steht in der 2. Zeile.";
+  return 0;
+}
+```
+```
+Dieser Text steht in der 1. Zeile.
+Dieser text steht in der 2. Zeile.
+```
+
+> Backspace setzt den Cursor um eins zurück und ermöglicht es das Symbol zu überschreiben.
+```cpp  backspace.c
+#include <iostream>
+using namespace std;
+
+int main(){
+  cout << "Dieser Text steht in der 9\b1. Zeile.\nDieser Text steht in der 2. Zeile.";
+  return 0;
+}
+```
+```
+Dieser Text steht in der 1. Zeile.
+Dieser text steht in der 2. Zeile.
+```
+
+> Carriage return setzt den Cursor auf den Anfang der Zeile zurück und ermöglicht es Text zu überschreiben.
+```cpp  carriagereturn.c
+#include <iostream>
+using namespace std;
+
+int main(){
+  cout << "Dieser Text steht in der 9\b2. Zeile. Dies steht noch am Ende.\rDieser Text steht in der 1. Zeile.";
+  return 0;
+}
+```
+```
+Dieser Text steht in der 1. Zeile. Dies steht noch am Ende.
+```
+
+> Horizontal tab erzeugt einen Tabulator. Damit ist eine saubere Formattierung möglich.
+```cpp  horizontaltab.c
+#include <iostream>
+using namespace std;
+
+int main(){
+  cout << "Name\tAlter\n";
+  cout << "Peter\t18\n";
+  cout << "Frank\t25\n";
+  cout << "Xi\t22\n";
+  return 0;
+}
+```
+```
+Name  Alter
+Peter 18
+Frank 25
+Xi    22
+```
+
+> Escape characters ermöglichen auch das Ausgeben von escape characters und Anführungszeichen.
+```cpp  backslash.c
+#include <iostream>
+using namespace std;
+
+int main(){
+  cout << "A\\\B und \"C\" und \'D\'\n";
+  return 0;
+}
+```
+```
+A\B und "C" und 'D'
+```
+
+
 ### Eingabe
 
 Für die Eingabe stellt iostream den Eingabeoperator `>>` zur Verfügung.
@@ -895,3 +977,132 @@ int main() {
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+## Quiz
+
+### Variablennamen
+
+> Welche dieser Variablennamen sind grundsätzlich zulässig?
+- [[X]] geschwindigkeit
+- [[X]] hasjdLASJdssa
+- [[X]] speed
+- [[ ]] speed of robot
+- [[X]] sp33d
+- [[ ]] 99Speed
+- [[X]] speed\_of\_triangle
+- [[X]] _speed
+- [[ ]] speed.forwards
+- [[ ]] int
+- [[X]] speedOfRobot
+- [[?]] Variablennamen dürfen nicht mit Zahlen beginnen.
+- [[?]] Variablennamen dürfen mit Unterstrichen beginnen.
+- [[?]] Variablennamen dürfen keine Schlüsselwörter sein.
+- [[?]] Variablennamen dürfen keine Punkte oder Leerzeichen enthalten.
+
+### Datentypen
+
+> Ordnen Sie die Datentypen die korrekten Zahlentypen zu.
+- [[Ganzzahl] (Fließkommazahl)]
+- [    (X)           ( )      ]  int
+- [    ( )           (X)      ]  float
+- [    ( )           (X)      ]  double
+- [    (X)           ( )      ]  bool
+- [    (X)           ( )      ]  char
+
+### Boolean
+
+> Welche Werte können `bool`-Variablen zugewiesen werden?
+
+    [(X)] 0 und 1
+    [( )] 0 bis 1
+
+### Fließkommazahlen
+
+> Welche dieser Zahlen kann präzise im Speicher abgebildet werden?
+- [( )] 0.3
+- [(X)] 0.125
+- [( )] 0.111
+- [( )] 0.783
+- [( )] 0.420
+- [[?]] Die Zahl muss eine Zweierpotenz sein.
+
+### Adressen
+
+> Mit welchem Symbol kann auf die Speicheradresse einer Variable zugegriffen werden?
+  [[&]]
+
+### Globale und lokale Variablen
+
+> Wählen Sie aus, welche Variablen global und welche lokal sind.
+
+```cpp
+#include<iostream>
+
+int w = 5;
+
+int main(void)
+{
+  int v = 1;
+  {
+    int v;
+    v = 2;
+    std::cout<<v<<"\n";
+    std::cout<<w<<"\n";
+  }
+  std::cout<<v<<"\n";
+  return 0;
+}
+```
+
+- [(Global) (Lokal)]
+- [    ( )           (X)      ]  v
+- [    (X)           ( )      ]  w
+
+### Definition, Deklaration und Initialisierung
+
+> Wählen Sie aus in welchen Fällen eine Deklaration, Definition oder Initialisierung vorliegt.
+
+- [[Deklaration] [Definition] [Initialisierung] ]
+- [    [X]           [X]              [ ]       ]  int i;
+- [    [X]           [X]              [X]       ]  int i = 99;
+- [    [X]           [X]              [ ]       ]  double d;
+
+### Aus- und Eingabe
+> Wie lautet der Ausgabeoperator?
+[[<<]]
+
+> Wie lautet der Eingabeoperator?
+[[>>]]
+
+### Feldbreite
+> Wie legen Sie die Breite einer Ausgabe auf 10 Zeichen fest? (ohne std:: oder ;)
+[[setw(10)]]
+
+### Präzision
+> Welcher Ausdruck begrenzt eine Ausgabe auf 2 Stellen nach em Komma? (ohne std:: oder ;)
+[[setprecision(2)]]
+
+### Escape-Sequenzen
+> Wie lautet die Escape-Sequenz für BACKSPACE?
+[[\b]]
+[[?]] Backspace löscht das letzte Symbol vor dem Cursor und funktioniert wie die Rücktaste auf der Tastatur.
+
+> Wie lautet die Escape-Sequenz für NEWLINE?
+[[\n]]
+[[?]] Newline sorgt für einen Zeilenumbruch.
+
+> Wie lautet die Escape-Sequenz für HORIZONTAL TAB?
+[[\t]]
+[[?]] Horizontal tab fügt einen Tab in der Zeile ein und funktioniert wie das Tabulatorzeichen.
+
+> Wie lautet die Escape-Sequenz für SINGLE QUOTATION MARK?
+[[\']]
+[[?]] Single quotation mark fügt einfache Anführungszeichen (') ein.
+
+> Wie lautet die Escape-Sequenz für DOUBLE QUOTATION MARK?
+[[\"]]
+[[?]] Double quotation mark fügt doppelte Anführungszeichen (") ein.
+
+> Wie lautet die Escape-Sequenz für CARRIAGE RETURN?
+[[\r]]
+[[?]] Carriage return setzt den Cursor an den Anfang der Ausgabezeile zurück und ermöglicht das Überschreiben von Text.
