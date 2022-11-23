@@ -606,7 +606,7 @@ int main(void)
 ### Dynamische Datenobjekte
 
 C++ bietet die Möglichkeit den Speicherplatz für eine Variable zur Laufzeit zur Verfügung zu stellen.
-Mit `new`-Operator wird der Speichrerplatz bereit gestellt und mit `delete`-Operator (`delete[]`) wieder freigegeben.
+Mit `new`-Operator wird der Speicherplatz bereit gestellt und mit `delete`-Operator (`delete[]`) wieder freigegeben.
 
 `new` erkennt die benötigte Speichermenge am angegebenen Datentyp und reserviert für die Variable auf dem Heap die entsperechde Byte-Menge.
 
@@ -740,3 +740,248 @@ int main(void)
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+# Quiz
+## Arrays
+
+> Erstellen Sie ein eindimensionales Array namens `arr`, das 7 Elemente vom Typ `int` enthält.
+[[int arr[7];]]
+
+> Erstellen Sie ein zweidimensionales Array namens `arr`, das 3*4 Elemente vom Typ `int` enthält.
+[[int arr[3][4];]]
+
+### Zugriff
+
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(void) {
+  float b[5] = {1.0, 4.8, 1.2, 42.0, 99.0};
+  cout << b[2];
+
+  return 0;
+}
+```
+[[1.2]]
+
+{{1}}
+************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+  int a[5] = {5, 8};
+  cout << a[2];
+  return 0;
+}
+```
+[[0]]
+************************************************************************
+
+### Mehrdimensionale Arrays
+
+> Es existiert ein Array `int A[2][5];`. Setzen Sie `[_____]` gleich 1.
+|            | Spalten   |           |           |           |           |
+| ---------- | --------- | --------- | --------- | --------- | --------- |
+| **Zeilen** | `a[0][0]` | `a[0][1]` | ...       |           |           |
+|            |           |           | `[_____]`   |           |           |
+[[A[1][2] = 1;]]
+<script>
+let input = "@input".trim()
+
+input == "A[1][2] = 1;" || input == "A[1][2]= 1;" || input == "A[1][2] =1;" || input == "A[1][2]=1;"
+</script>
+
+{{1}}
+************************************************************************
+> Durch was muss `[_____]` ersetzt werden damit die Zahl `19` aus `m[4][5]` ausgegeben wird?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+  int m[4][5] = { {1,2,3,4,5},
+                  {6,7,8,9,10},
+                  {11,12,13,14,15},
+                  {16,17,18,19,20}};
+  cout << [_____]
+  return 0;
+}
+```
+[[m[3][3];]]
+************************************************************************
+
+{{2}}
+************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+  int A[2][3]={{1,2,3},{4,5,6}};
+  int B[2][3]={{10,20,30},{40,50,60}};
+
+	cout << A[1][0] + B[0][1];
+  return 0;
+}
+```
+[[24]]
+************************************************************************
+
+## Zeichenketten
+
+> Durch welche Sequenz werden Zeichenketten abgeschlossen?
+[[\0]]
+
+{{1}}
+************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+  char c[] = "Peter wohnt irgendwo\0 in Freiberg.";
+  cout << c;
+}
+```
+[[Peter wohnt irgendwo]]
+************************************************************************
+
+## Zeiger
+
+> Worauf zeigen Zeiger?
+[( )] `chars`
+[( )] Referenzen
+[(X)] Speicheraddressen
+[( )] Kommt auf die Uhrzeit an
+
+### Definition
+
+> Welche der folgenden Definitionen sind möglich?
+[[X]] int* z1;
+[[X]] float * z2;
+[[X]] char *z3;
+[[X]] int \*z4, \*z5;
+[[ ]] int z6*;
+[[X]] int *z7, i;
+
+### Initialisierung
+
+> Durch welches Zeichen werden Addressen ermittelt?
+[[&]]
+
+{{1}}
+************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+  int a = 15;
+  int *ptr_a = &a;
+  cout << *ptr_a;
+
+  return 0;
+}
+```
+[( )] Die Addresse von `a`
+[(X)] 15
+[( )] `NULL`
+************************************************************************
+
+### Dynamische Datenobjekte
+
+> Wie häufig kann `delete` auf ein Objekt angewendet werden?
+[( )] 0
+[(X)] 1
+[( )] 42
+[( )] Beliebig oft
+
+{{1}}
+************************************************************************
+> Wie lautet die Aussage dieses Programms?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+	int a = 10;
+  int *ptr_a = &a;
+  cout << ptr_a;
+  delete ptr_a;
+  return 0;
+}
+```
+[( )] 10
+[( )] Die Addresse von `a`
+[( )] Die Addresse des Zeigers `*ptr_a`
+[(X)] Es gibt einen Error
+************************************************************************
+
+## Referenz
+
+> Welche der im Beispiel benutzten Variablen ist eine Referenz?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+	int a = 10;
+  int &b = a;
+  int *c = b;
+  cout << c;
+  return 0;
+}
+```
+[( )] a
+[(X)] b
+[( )] c
+
+{{1}}
+************************************************************************
+> Hier ist ein Programm mit Ausgabe vorgegeben. Was müsste statt `[_____]` ausgegeben werden?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(void)
+{
+  int  a = 1;
+  int &r = a;
+
+  cout << "a: " << &a << " r: " << &r << endl;
+}
+```
+```
+a: [_____] r: 0x7ffdddd212fc
+```
+[[0x7ffdddd212fc]]
+************************************************************************
+
+{{2}}
+************************************************************************
+> Hier ist ein Programm mit Ausgabe vorgegeben. Was müsste statt `[_____]` ausgegeben werden?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(void)
+{
+  int  a = 1;
+  int &r = a;
+
+  cout << "a: " << a << " r: " << r << endl;
+}
+```
+```
+a: 1 r: [_____]
+```
+[[1]]
+************************************************************************
