@@ -10,6 +10,7 @@ comment: Einführung in die Programmierung für Nicht-Informatiker
 logo: ./img/LogoCodeExample.png
 
 import: https://github.com/liascript/CodeRunner
+        https://github.com/LiaTemplates/AVR8js/main/README.md#10
 
 
 -->
@@ -41,9 +42,24 @@ import: https://github.com/liascript/CodeRunner
 
 ---------------------------------------------------------------------
 
+## Einschub - Klausurhinweise
+
+> + Während der Klausur können Sie "alle Hilfsmittel aus Papier" verwenden!
+
+> + Im OPAL finden sich Klausurbeispiele.
+
+__Beispielhafte Klausuraufgabe aus dem vergangenen Jahr__
+
+_Die Zustimmung (in Prozent) für die Verwendung der künstlichen Intelligenz im Pflegebereich unter der Bevölkerung von Mauritius und Réunion soll vergleichend betrachtet werden. Die Ergebnisse der Umfragen für die Jahre 2010 bis 2020 (je ein Wert pro Jahr) in zwei Arrays erfasst werden (je ein Array pro Insel) und in einem Programm ausgewertet werden._
+
++ _Für beide Inseln soll aus den in Arrays erfassten Werten je ein Mittelwert berechnet werden. Schreiben Sie dazu eine Funktion, die ein Array übergeben bekommt und einen Mittelwert als ein Ergebnis an die main-Funktion zurück liefert. Rufen Sie die Funktion in der main-Funktion für jedes beider Arrays auf und geben Sie die Mittelwerte in der main-Funktion aus._
++ _Schreiben Sie eine weitere Funktion, die die korrespondierenden Werte beider Arrays miteinander vergleicht. Geben Sie für jedes Jahr aus, auf welcher Insel die Zustimmung größer war, bei den gleichen Werte ist eine entsprechende Meldung auszugeben. Rufen Sie die Funktion in der main-Funktion auf._
++ _In der main()-Funktion sind die Werte von der Console einzulesen und in die Arrays zu speichern._
+
+
 ## Motivation
 
-**Einführungsbeispiel**
+Erklären Sie die Idee hinter folgendem Code.
 
 ```cpp                          onBlock.cpp
 #include <iostream>
@@ -89,49 +105,39 @@ die Herausforderungen dabei?
 
 > Stellen Sie das Programm so um, dass es aus einzelnen Bereichen besteht und überlegen Sie, welche Variablen wo gebraucht werden.
 
-{{1}}
-**Prozedurale Programmierung Ideen und Konzepte**
+### Prozedurale Programmierung Ideen und Konzepte
 
-{{1}}
 *Bessere Lesbarkeit*
 
-{{1}}
 Der Quellcode eines Programms kann schnell mehrere tausend Zeilen umfassen. Beim
 Linux Kernel sind es sogar über 15 Millionen Zeilen und Windows, das ebenfalls
 zum Großteil in C geschrieben wurde, umfasst schätzungsweise auch mehrere
 Millionen Zeilen. Um dennoch die Lesbarkeit des Programms zu gewährleisten, ist
 die Modularisierung unerlässlich.
 
-{{1}}
 *Wiederverwendbarkeit*
 
-{{1}}
 In fast jedem Programm tauchen die gleichen Problemstellungen mehrmals auf. Oft
 gilt dies auch für unterschiedliche Applikationen. Da nur Parameter und
 Rückgabetyp für die Benutzung einer Funktion bekannt sein müssen, erleichtert
 dies die Wiederverwendbarkeit. Um die Implementierungsdetails muss sich der
 Entwickler dann nicht mehr kümmern.
 
-{{1}}
 *Wartbarkeit*
 
-{{1}}
 Fehler lassen sich durch die Modularisierung leichter finden und beheben.
 Darüber hinaus ist es leichter, weitere Funktionalitäten hinzuzufügen oder zu
 ändern.
 
-{{1}}
 In allen 3 Aspekten ist der Vorteil in der Kapselung der Funktionalität zu
 suchen.
 
-{{2}}
-**Wie würden wir das vorhergehende Beispiel umstellen?**
+### Anwendung
 
-{{2}}
 Funktionen sind Unterprogramme, die ein Ausgangsproblem in kleine,
 möglicherweise wiederverwendbare Codeelemente zerlegen.
 
-{{2}}
+
 ```cpp                          standardabweichung.cpp
 #include <iostream>
 
@@ -158,10 +164,8 @@ int main(void) {
 }
 ```
 
-{{3}}
 **Wie findet sich diese Idee in großen Projekten wieder?**
 
-{{3}}
 > **Write Short Functions**
 >
 >*Prefer small and focused functions.*
@@ -184,6 +188,11 @@ int main(void) {
 >
 >[Google Style Guide für C++ Projekte](https://google.github.io/styleguide/cppguide.html#Write_Short_Functions)
 
+
+## C++ Funktionen 
+
+![](https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif)
+
 ### Funktionsdefinition
 
 ```
@@ -193,31 +202,29 @@ Rückgabedatentyp Funktionsname([Parameterliste]) {
 }
 ```
 
-* Rückgabedatentyp - Welchen Datentyp hat der Rückgabewert?
+* __Rückgabedatentyp__ - Welchen Datentyp hat der Rückgabewert?
 
   Eine Funktion ohne Rückgabewert wird vom Programmierer als `void`
   deklariert. Sollten Sie keinen Rückgabetyp angeben, so wird
   automatisch eine Funktion mit Rückgabewert vom Datentyp `int` erzeugt.
 
-* Funktionsname - Dieser Bestandteil der Funktionsdefinition ist
+* __Funktionsname__ - Dieser Bestandteil der Funktionsdefinition ist
   eine eindeutige Bezeichnung, die für den Aufruf der Funktion
   verwendet wird.
 
   Es gelten die gleichen Regeln für die Namensvergabe wie für
   Variablen.
 
-* Parameterliste - Parameter sind Variablen (oder Pointer bzw. Referenzen darauf) die durch
+* __Parameterliste__ - Parameter sind Variablen (oder Pointer bzw. Referenzen darauf) die durch
   einen Datentyp und einen Namen spezifiziert werden. Mehrere Parameter
   werden durch Kommas getrennt.
 
   Parameterliste ist optional, die Klammern jedoch nicht.  Alternative zur
   fehlenden Parameterliste ist die Liste aus einen Parameter vom Datentyp `void` ohne Angabe des Namen.
 
-* Anweisungsblock - Der Anweisungsblock umfasst die im Rahmen der
+* __Anweisungsblock__ - Der Anweisungsblock umfasst die im Rahmen der
   Funktion auszuführenden Anweisungen und Deklarationen. Er wird
   durch geschweifte Klammern gekapselt.
-
-Die Funktionsdefinition wird für jede Funktion genau einmal benötigt.
 
 Für die Funktionen gelten die gleichen Gültigkeits- und Sichtbarkeitsregeln wie für die Variablen.
 
@@ -254,7 +261,7 @@ int mittelwert(int * array){
 > ausgeführt, wenn sie aufgerufen wird. Vor dem Aufruf muss die Funktion
 > definiert oder deklariert werden.
 
-Der Funktionsaufruf einer Funktionen mit dem Rückgabewert ist meistens Teil
+Der Funktionsaufruf einer Funktionen mit dem Rückgabewert kann Teil
 einer Anweisung, z.B. einer Zuweisung oder einer Ausgabeanweisung.
 
 ```cpp                              callAFunction.cpp
@@ -262,36 +269,53 @@ einer Anweisung, z.B. einer Zuweisung oder einer Ausgabeanweisung.
 #include <cmath>
 using namespace std;
 
-void Info(){
+void info(){
     cout<<"Dieses Programm rundet Zahlenwerte.\n";
     cout<<"-----------------------------------\n";
 }
 
 int runden(float a){
-    if ((a - (int)a)<0.5)
-       return ((int) a);
+    if (a < 0)
+       return (int)(a - 0.5);
     else
-       return (((int) a) + 1);
+       return (int)(a + 0.5);
 }
 
 float rundenf(float a, int nachkomma){
     float shifted= a* pow(10, nachkomma);
-    if ((shifted - (int)shifted)<0.5)
-       return ((float)(int)shifted * pow(10, -nachkomma));
+    int result=0;
+    if (shifted < 0)
+    	  result = int(shifted -0.5);
     else
-       return ((float)((int)shifted + 1) * pow(10, -nachkomma));
+    		result = int(shifted +0.5);
+    return (float)result * pow(10, -nachkomma);
 }
 
 int main(void){
-    Info();
-    float input = 8.4535;
+    info();
+    float input = -8.4565;
     cout<<"Eingabewert "<<input<<" - Ausgabewert "<<runden(input)<<"\n";
-    cout<<"Eingabewert "<<input<<" - Ausgabewert "<<rundenf(input,2)<<"\n";
+    cout<<"Eingabewert "<<input<<" - Ausgabewert "<<rundenf(input,1)<<"\n";
     return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out -lm`, `./a.out`)
 
+Die Funktion `runden` nutzt die Funktionalität des Cast-Operators `int` aus.
+
++ Wenn N eine positive Zahl ist, wird 0.5 addiert 
+
+  + $15.2 + 0.5 = 15.7$ `int(15.7) = 15` 
+  + $15.7 + 0.5 = 16.2$ `int(16.2) = 16` 
+
++ Wenn N eine negative Zahl ist, wird 0.5 subtrahiert 
+
+  + $-15.2 - 0.5 = -15.7$ `int(-15.7) = -15` 
+  + $-15.7 - 0.5 = -16.2$ `int(-16.2) = -16` 
+
+> Welche Verbesserungsmöglichkeit sehen Sie bei dem Programm? Tipp: Wie können wir den redundanten Code eleminieren?
+
+> __Hinweis:__ C++ unterstützt gleiche Codenahmen bei unterschiedlichen Parametern. Der Compiler "sucht sich" die passende Funktion aus. Der Mechanismus wird als _Funktionsüberladung_ bezeichnet. 
 
 ### Fehler
 
@@ -318,6 +342,7 @@ int main(void)
 {{1}}
 ```cpp   returnII.cpp
 #include <iostream>
+using namespace std;
 
 void foo(){
    cout<<"Ausgabe";
@@ -403,37 +428,6 @@ int main(void) {
 @LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall -Wconversion main.cpp -o a.out`, `./a.out`)
 
 
-### asdfas
-
-```cpp     conversion.c
-#include <iostream>
-#include <cstdlib>
-using namespace std;
-
-void printSizeOf(int intArray[])
-{
-    cout<<"sizeof of parameter: "<<sizeof(intArray)<<"\n";
-}
-
-void printLength(int intArray[])
-{
-    cout<<"Length of parameter: "<<sizeof(intArray) / sizeof(intArray[0])<<"\n";
-}
-
-int main()
-{
-    int array[] = { 0, 1, 2, 3, 4, 5, 6 };
-
-    cout<<"sizeof of array: "<<sizeof(array)<<"\n";
-    printSizeOf(array);
-
-    cout<<"Length of array: "<< sizeof(array) / sizeof(array[0])<<"\n";
-    printLength(array);
-}
-```
-@LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall -Wconversion main.cpp -o a.out`, `./a.out`)
-
-
 ### Funktionsdeklaration
 
 ```cpp  experiments.cpp
@@ -455,8 +449,7 @@ int foo(void){         // <- Definition der Funktion
 
 Damit der Compiler überhaupt von einer Funktion Kenntnis nimmt, muss diese vor
 ihrem Aufruf bekannt gegeben werden. Im vorangegangenen Beispiel wird die
-die Funktion erst nach dem Aufruf definiert. Hier erfolgt eine automatische
-(implizite) Deklaration. Der Complier zeigt dies aber durch ein *Warning* an.
+die Funktion erst nach dem Aufruf definiert. Der Complier zeigt dies an.
 
 {{1}}
 Eine explizite Deklaration zeigt folgendes Beispiel:
@@ -496,7 +489,7 @@ Bisher wurden Funktionen betrachtet, die skalare Werte als Parameter erhilten
 und ebenfalls einen skalaren Wert als einen Rückgabewert lieferten. Allerdings
 ist diese Möglichkeit sehr einschränkend.
 
-Es wird in vielen Programmiersprachen, darunter in C/C++, zwei Arten der
+Es wird in vielen Programmiersprachen, darunter in C/C++, zwei Konzepte der
 Parameterübergabe realisiert.
 
 **call-by-value**
@@ -715,6 +708,38 @@ int main(void) {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out -lm`, `./a.out`)
 
+### Besonderheit Arrays
+
+```cpp     conversion.c
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+void printSizeOf(int intArray[])
+{
+    cout<<"sizeof of parameter: "<<sizeof(intArray)<<"\n";
+}
+
+void printLength(int intArray[])
+{
+    cout<<"Length of parameter: "<<sizeof(intArray) / sizeof(intArray[0])<<"\n";
+}
+
+int main()
+{
+    int array[] = { 0, 1, 2, 3, 4, 5, 6 };
+
+    cout<<"sizeof of array: "<<sizeof(array)<<"\n";
+    printSizeOf(array);
+
+    cout<<"Length of array: "<< sizeof(array) / sizeof(array[0])<<"\n";
+    printLength(array);
+}
+```
+@LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall -Wconversion main.cpp -o a.out`, `./a.out`)
+
+
+
 
 ### `main`-Funktion
 
@@ -737,7 +762,9 @@ int main(int argc, char *argv[]) {
 
 Die Bezeichner `argc` und `argv` sind traditionell, können aber beliebig gewählt werden.
 `argc` ist die Anzahl der Argumente, die von den Benutzern des Programms in der Kommandozeile angegeben werden. Der argc-Parameter ist immer größer als oder gleich 1.
-`argv` ist ein Array von Befehlszeilenargumenten, wobei argv[0] das Programm selbst und argv[argc] immer NULL ist.
+`argv` ist ein Array von Befehlszeilenargumenten, wobei `argv[0]` das Programm selbst und `argv[argc]` immer NULL ist.
+
+Im Beispiel wird die kompilierte Version von mainArgumente.cpp intern mit `./a.out 1 2 3 aus die Maus` aufgerufen.
 
 ```cpp                        mainArgumente.cpp
 #include <iostream>
@@ -751,46 +778,72 @@ int main(int argc, char *argv[]) {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out -lm`, `./a.out 1 2 3 aus die Maus`)
 
-### `inline`-Funktionen
-
-Der `inline`-Funktion wird das Schlüsselwort `inline` vorangestellt, z.B.:
-
-```cpp
-inline void ausgabeBruch(int z, int n) {
-   std::cout<<z<<" / "<<n<<"\n";
-}
-```
-
-`inline`-Funktion wird vom Compiler direkt an der Stelle eingefügt, wo der Aufruf
-stattfinden soll. Gegebenenfalls ist die Ausführung der `inline`-Funktion schneller,
-da die mit dem Aufruf verbundenen Sicherung der Rücksprungadresse, der Sprung zur
-Funktion und der Rücksprung nach Ausführung entfallen. Das Schlüsselwort `inline`
-ist für den Compiler allerdings nur ein Hinweis und kein Befehl.
-
-
 ## Beispiel des Tages
 
-Eine Funktion, die sich selbst aufruft, wird als rekursive Funktion bezeichnet. Den Aufruf selbst nennt man Rekursion. Als Beispiel dient die  Fakultäts-Funktion `n!`, die sich rekursiv als $n(n-1)!$ definieren lässt (wobei $0! = 1$).
+Wie werden Funktionen im realen Programmierbetrieb angewendet? Werfen Sie einen Blick auf die Dokumentation unseres Mikrocontrollers. 
 
-```cpp                fakultaet.cpp
-#include <iostream>
-using namespace std;
+https://microsoft.github.io/azure-iot-developer-kit/docs/apis/display/
 
-int fakultaet (int a){
-  if (a == 0)
-    return 1;
-  else
-    return (a * fakultaet(a-1));
+Dort finden Sie einzelne Funktionen, die der Display Klasse (wird in der nächsten Woche behandelt) zugordnet sind.+
+
++
++
++
+
+
+```cpp                ArduinoDisplay.cpp
+#include <OledDisplay.h>
+
+                                  // Aus Platzgründen entfernt
+unsigned char BMP[] = {0,0,0,0,0,0,0,0,0,0,0, ..... 0,0,0,0,0,0,0,0};
+
+void setup(){
+    Screen.init();
 }
-
-int main(){
-  int eingabe;
-  cout<<"Ganze Zahl eingeben: ";
-  cin>>eingabe;
-  cout<<"Fakultaet der Zahl: "<<fakultaet(eingabe)<<"\n";
-  return 0;
+void loop(){
+    // print a string to the screen with wrapped = false
+    Screen.print("This is OLEDDisplay Testing", false);
+    delay(1000);
+    // print a string to the screen with wrapped = true
+    Screen.print("This is a very small display including only 4 lines", true);
+    delay(1000);
+    for(int i =0; i<=3; i++)
+    {
+        char buf[100];
+        sprintf(buf, "This is row %d", i);
+        Screen.print(i, buf);
+    }
+    delay(1000);
+    // draw a bitmap to the screen
+    Screen.draw(0, 0, 128, 8, BMP);
+    delay(1000);
+    // clean screen ready for next loop
+    Screen.clean();
 }
 ```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-<!--START_SKIP_IN_PDF-->
+> Aufgabe: Wie könnten wir den Code abwandeln, um eine Laufschrift umzusetzen?
+
+{{1}}
+```cpp BuggyCode.cpp
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
+  Serial.begin(9600);
+	String text = "Das ist ein Test";
+	Serial.println(text);
+	String output = "";
+	int signs_per_line = 5;
+	for (int i=0; i<text.length(); i++){
+		 if (i <= text.length()-signs_per_line)
+				output = text.substring(i, i+signs_per_line);
+		 else
+        output = text.substring(i, text.length()) +
+                 text.substring(0, signs_per_line-(text.length()-i));
+		 Serial.println(output);
+	}
+}
+
+void loop() {
+}
+```
+@AVR8js.sketch
