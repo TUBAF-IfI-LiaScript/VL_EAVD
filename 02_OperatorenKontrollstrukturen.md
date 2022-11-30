@@ -1114,8 +1114,8 @@ int main() {
 
 > Ordnen Sie die Operatoren den richtigen Bezeichnungen zu.
 - [(Unär)           (Binär)       (Ternär)]
-- [    (X)           ( )            ( )   ]  `b=-a;`
-- [    ( )           (X)            ( )   ]  `b=a-1;`
+- [    (X)           ( )            ( )   ]  `-` in der Anweisung `b=-a;`
+- [    ( )           (X)            ( )   ]  `-` in der Anweisung `b=a-1;`
 - [    (X)           ( )            ( )   ]  `sizeof()`
 - [    ( )           ( )            (X)   ]  `?`
 - [    ( )           (X)            ( )   ]  `+`
@@ -1200,7 +1200,7 @@ int main(){
 [[5678]]
 
 ### `switch`-Anweisungen
-> Für welche Zahlen ist eine `switch`-Anweisung geeignet?
+> Welche Zahlen dürfen zwischen den runden Klammern nach dem Schlüsselwort `switch` stehen?
 [(X)] Ganzzahlen
 [( )] Gleitkommazahlen
 
@@ -1330,20 +1330,24 @@ int main(){
 
 ### `for`-Schleife
 
-> Kopieren Sie das `for (i = [_____]; i < [_____]; [_____])` in die Antwort und ersetzen Sie `[_____]`, dass die Zahlen 4 bis 15 nacheinander in aufsteigender Reihenfolge ausgegeben werden.
+> Dieses Programm soll die Zahlen 4 bis 15 einzeln in aufsteigender Reihenfolge ausgeben. Beantworten Sie die unten aufgeführten Fragen.
 ```cpp
 #include <iostream>
 using namespace std;
 
 int main(){
 	int i;
-  for (i = [_____]; i < [_____]; [_____])
+  for (i = [_____]; i < [_____]; i++)
     cout << i << endl;
 
 	return 0;
 }
 ```
-[[for (i = 4; i < 16; i++)]]
+> Mit welchem Wert wird `i` initialisiert?
+[[4]]
+
+> Welcher Wert muss in der Abbruchbedingung der Schleife stehen?
+[[16]]
 
 > Welchen Wert hat `i` nach der Schleife?
 [[16]]
