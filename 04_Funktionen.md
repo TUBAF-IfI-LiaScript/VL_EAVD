@@ -847,3 +847,117 @@ void loop() {
 }
 ```
 @AVR8js.sketch
+
+# Quiz
+## Funktionen
+### Funktionsdefinition
+> Wechen Rückgabewert liefert eine als `void` deklatierte Funktion?
+[( )] Es können alle Arten von Rückgabewerten zurückgegeben werden.
+[(X)] Es wird kein Wert zurückgegeben.
+
+{{1}}
+************************************************************************
+> Welcher Datentyp wird automatisch als Rückgabewert ausgewählt, wenn Sie keinen Rückgabetyp angeben?
+[( )] `void`
+[(X)] `int`
+[( )] `float`
+[( )] `double`
+[( )] `char`
+[( )] `boolean`
+************************************************************************
+
+{{2}}
+************************************************************************
+> Müssen Funktionen immer Parameterlisten enthalten?
+[( )] Ja
+[(X)] Nein
+************************************************************************
+
+### Aufruf von Fuktionen
+> Wodurch muss `[_____]` ersetzt werden, damit die Funktion `divi` ermittelt, ob `a` ein Teiler von `b` ist? Die Lösung ist ohne Leerzeichen einzugeben.
+```cpp
+#include <iostream>
+using namespace std;
+
+bool divi(int x, int y){
+  if(x%y == 0)
+    return true;
+  else
+    return false;
+}
+
+int main() {
+  int a = 11;
+  int b = 1001;
+  bool bdiv = [_____]
+  if(bdiv == 1)
+    cout <<  a << " ist ein Teiler von " << b << "." << endl;
+  else
+    cout <<  a << " ist kein Teiler von " << b << "." << endl;
+}
+```
+[[divi(b,a);]]
+
+### Fehler
+> ist dieses Programm fehlerfrei?
+```cpp
+#include <iostream>
+using namespace std;
+
+int foo(){
+   return 42;
+}
+
+int main(void) {
+  int i = foo();
+  return 0;
+}
+```
+[(X)] Ja
+[( )] Nein
+
+{{1}}
+************************************************************************
+> Ist dieses Programm fehlerfrei?
+```cpp
+#include <iostream>
+using namespace std;
+
+void foo(){
+   return 42;
+}
+
+int main(void) {
+  foo();
+  return 0;
+}
+```
+[( )] Ja
+[(X)] Nein
+************************************************************************
+
+{{2}}
+************************************************************************
+> Welche Fehler liegen bei diesem Programm vor?
+```cpp
+#include <iostream>
+using namespace std;
+
+void foo(int index, float wert){
+  cout<<"Index   -  Wert\n";
+  cout<<index<<"   - "<<wert<<"\n\n";
+  return index;
+}
+
+int main(void) {
+  float f = foo(6.5, 4);
+  return 0;
+}
+```
+[[X]] Falsche Reihenfolge der Parameter
+[[X]] Rückgabewert ohne Rückgabedefinition
+[[ ]] Anweisung nach dem `return` Schlüsselwort
+[[X]] Falscher Rückgabewert
+************************************************************************
+
+### Funktionsdeklaration
