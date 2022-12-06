@@ -383,6 +383,7 @@ Buttons auf eine LED abzubilden. Nur wenn beide Taster gedrückt werden, beleuch
   <wokwi-pushbutton color="red"   pin="11" ></wokwi-pushbutton>
   <span id="simulation-time"></span>
 </div>
+
 ```cpp    ButtonSynch.cpp
 const int button_A_pin = 10;
 const int button_B_pin = 11;
@@ -417,6 +418,34 @@ void loop() {
 }
 ```
 @AVR8js.sketch
+
+#### Logische Operatoren
+
+> Wofür steht der logische Operator `&&`?
+[[und]]
+<script>
+let input = "@input".trim().toLowerCase()
+
+input == "und" || input == "UND" || input == "Und"
+</script>
+
+> Wofür steht der logische Operator `||`?
+[[oder]]
+<script>
+let input = "@input".trim().toLowerCase()
+
+input == "oder" || input == "ODER" || input == "Oder"
+</script>
+
+> Wofür steht der logische Operator `!`?
+[[nicht]]
+<script>
+let input = "@input".trim().toLowerCase()
+
+input == "nicht" || input == "NICHT" || input == "Nicht"
+</script>
+
+
 
 # Kontrollfluss
 
@@ -513,7 +542,7 @@ formuliert werden.
 | `if (a != 0)`     | $a\neq 0$ |
 | `if (a == 0)`     | $a = 0$ |
 | `if (!(a <= b))`  | $\overline{(a \leq b)}$ oder $a > b$ |
-| `ìf (a != b)`     | $a\neq b$ |
+| `if (a != b)`     | $a\neq b$ |
 | `if (a || b)` | $a>0$ oder $b>0$ |
 
 ************************************************************************
@@ -1079,3 +1108,352 @@ int main() {
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+# Quiz
+## Operatoren
+
+> Ordnen Sie die Operatoren den richtigen Bezeichnungen zu.
+- [(Unär)           (Binär)       (Ternär)]
+- [    (X)           ( )            ( )   ]  `-` in der Anweisung `b=-a;`
+- [    ( )           (X)            ( )   ]  `-` in der Anweisung `b=a-1;`
+- [    (X)           ( )            ( )   ]  `sizeof()`
+- [    ( )           ( )            (X)   ]  `?`
+- [    ( )           (X)            ( )   ]  `+`
+- [    ( )           (X)            ( )   ]  `%`
+
+{{1}}
+************************************************************************
+> Ordnen Sie die Operatoren den richtigen Bezeichnungen zu.
+- [(Infix)           (Präfix)       (Postfix) ]
+- [    (X)           ( )            ( )       ]  `a=b+c;`
+- [    ( )           (X)            ( )       ]  `a=++b;`
+- [    ( )           ( )            (X)       ]  `a=b++;`
+- [    (X)           ( )            ( )       ]  `a=a%3;`
+- [    ( )           (X)            ( )       ]  `a=&b;`
+************************************************************************
+
+### Zuweisungs- und Vergleichsoperatoren
+> Ordnen Sie die Operatoren den richtigen Bezeichnungen zu.
+- [(Zuweisungsoperator)           (Vergleichsoperator)]
+- [    ( )                         (X)                ]  `>=`
+- [    ( )                         (X)                ]  `<=`
+- [    ( )                         (X)                ]  `==`
+- [    ( )                         (X)                ]  `<`
+- [    ( )                         (X)                ]  `>`
+- [    (X)                         ( )                ]  `=`
+- [    ( )                         (X)                ]  `!=`
+
+### Inkrement und Dekrement
+> Verkürzen Sie `x=x+1;` möglichst weit.
+[[x++;]]
+[[?]] `++` wird benutzt um Variablen zu Inkrementieren.
+[[?]] `;` nicht vergessen.
+<script>
+let input = "@input".trim().toLowerCase()
+
+input == "x++;" || input == "++x;"
+</script>
+
+> Verkürzen Sie `x=x-1;` möglichst weit.
+[[x--;]]
+[[?]] `-` wird benutzt um Variablen zu Dekrementieren.
+[[?]] `;` nicht vergessen.
+<script>
+let input = "@input".trim().toLowerCase()
+
+input == "x--;" || input == "--x;"
+</script>
+
+### Arithmetische Operatoren
+> Welche dieser Operatoren können **nur** mit Ganzzahlen verwendet werden?
+[[ ]] `+`
+[[ ]] `/`
+[[ ]] `-`
+[[X]] `%`
+[[ ]] `*`
+
+## Verzweigungen
+### `if`-Anweisungen
+> Was gibt dieses Programm aus?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+	int a = 44;
+  int b = 3;
+
+  if(a == 44 && a == b){
+    cout << "1234";
+  }
+  else{
+    if(a >= b || a == 10){
+      cout << "5678";
+    }
+    else{
+      cout << "9";
+    }
+  }
+	return 0;
+}
+```
+[[5678]]
+
+### `switch`-Anweisungen
+> Welche Zahlen dürfen zwischen den runden Klammern nach dem Schlüsselwort `switch` stehen?
+[(X)] Ganzzahlen
+[( )] Gleitkommazahlen
+
+{{1}}
+************************************************************************
+> Was gibt dieses Programm aus?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+  int b = 6;
+	int a = b;
+
+  switch(a) {
+    case 4:
+      cout << "4";
+      break;
+    case 5:
+    case 6:
+    case 7:
+      cout << "5 bis 7";
+    case 3:
+      cout << "3";
+      break;
+    case 0:
+      cout << "0";
+    default: cout<<"Keine Kategorie!";}
+	return 0;
+}
+```
+[[5 bis 7]]
+************************************************************************
+
+{{2}}
+************************************************************************
+> Was gibt dieses Programm aus?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+  int b = 9;
+	int a = b;
+
+  switch(a) {
+    case 4:
+      cout << "4";
+      break;
+    case 5:
+    case 6:
+    case 7:
+      cout << "5 bis 7";
+    case 3:
+      cout << "3";
+      break;
+    case 0:
+      cout << "0";
+    default: cout<<"Keine Kategorie!";}
+	return 0;
+}
+```
+[[Keine Kategorie!]]
+************************************************************************
+
+## Schleifen
+
+> Welche Art von Schleife ist hier dargestellt?
+``` ascii
++-----------------------------------------------------------------------+
+|                                                                       |
+|  solange Bedingung wahr                                               |
+|                                                                       |
+|                                                                       |
+|           +-----------------------------------------------------------+
+|           |                                                           |
+|           |       Anweisungsblock 1                                   |
+|           |                                                           |
+|           |                                                           |
++-----------+-----------------------------------------------------------+
+```
+[( )] `for`-Schleife
+[(X)] `while`-Schleife
+[( )] `do-while`-Schleife
+
+{{1}}
+************************************************************************
+> Welche Art von Schleife ist hier dargestellt?
+``` ascii
++-----------------------------------------------------------------------+
+|                                                                       |
+|  zähle [Variable] von [Startwert] bis [Endwert] mit [Schrittweite]    |
+|                                                                       |
+|                                                                       |
+|           +-----------------------------------------------------------+
+|           |                                                           |
+|           |       Anweisungsblock 1                                   |
+|           |                                                           |
+|           |                                                           |
++-----------+-----------------------------------------------------------+
+```
+[(X)] `for`-Schleife
+[( )] `while`-Schleife
+[( )] `do-while`-Schleife
+************************************************************************
+
+{{2}}
+************************************************************************
+> Welche Art von Schleife ist hier dargestellt?
+``` ascii
++-----------+-----------------------------------------------------------+
+|           |                                                           |
+|           |       Anweisungsblock 1                                   |
+|           |                                                           |
+|           |                                                           |
+|           +-----------------------------------------------------------+
+|                                                                       |
+|                                                                       |
+|  solange Bedingung wahr                                               |
+|                                                                       |
++-----------------------------------------------------------------------+
+```
+[( )] `for`-Schleife
+[( )] `while`-Schleife
+[(X)] `do-while`-Schleife
+************************************************************************
+
+### `for`-Schleife
+
+> Dieses Programm soll die Zahlen 4 bis 15 einzeln in aufsteigender Reihenfolge ausgeben. Beantworten Sie die unten aufgeführten Fragen.
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+	int i;
+  for (i = [_____]; i < [_____]; i++)
+    cout << i << endl;
+
+	return 0;
+}
+```
+> Mit welchem Wert wird `i` initialisiert?
+[[4]]
+
+> Welcher Wert muss in der Abbruchbedingung der Schleife stehen?
+[[16]]
+
+> Welchen Wert hat `i` nach der Schleife?
+[[16]]
+
+### `while`-Schleife
+
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+	int i = 16;
+  while (i > 4)
+  {
+    i = i / 2;
+    cout << i << " ";
+  }
+
+  cout << "ende";
+	return 0;
+}
+```
+[[8 4 ende]]
+
+{{1}}
+************************************************************************
+> Welcher Wert wird für die Variable `zaehler` ausgegeben wenn folgende Eingaben einzeln getätigt werden? `X` `X` `A` `X` `Y` `X` `Y`
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+  char c;
+  int zaehler = 0;
+  cin >> c;
+  while(c != 'Y')
+  {
+    if(c == 'X')
+      zaehler++;
+      cin >> c;
+  }
+  cout << zaehler;
+  return 0;
+}
+```
+[[3]]
+************************************************************************
+
+### `do-while`-Schleife
+
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+	int i = 16;
+  do {
+    i = i / 2;
+    cout << i << " ";
+  } while (i < 4);
+
+  cout << "ende";
+	return 0;
+}
+```
+[[8 ende]]
+
+## Kontrolliertes Verlassen von Anweisungen
+
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+	int i;
+  for (i = 1; i<10; i++){
+      if (i > 5) break;
+      cout<<i<<" ";
+  }
+  cout<<"ende";
+	return 0;
+}
+```
+[[1 2 3 4 5 ende]]
+[[?]] `break` sorgt für der Abbruch der Schleife.
+
+{{1}}
+************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```cpp                     breakForLoop.cpp
+#include <iostream>
+using namespace std;
+
+int main(){
+	int i;
+  for (i = 1; i<10; i++){
+      if (i < 5) continue;
+      cout<<i<<" ";
+  }
+  cout<<"ende";
+	return 0;
+}
+```
+[[5 6 7 8 9 ende]]
+[[?]] `continue` sorgt dafür, dass dieser Durchlauf der Schleife übersprungen wird.
+************************************************************************
