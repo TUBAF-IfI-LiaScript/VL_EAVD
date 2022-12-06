@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 
@@ -667,6 +667,60 @@ class Student{
     int alter;
     std::string ort;
 
+    void printCertificate(Seminar sem){
+      std::string comment = " nicht bestanden";
+      if (sem.passed)
+        comment = " bestanden!";
+      std::cout << "\n" << name << " hat das Seminar " << sem.name  
+                <<  comment;
+    }
+
+    void printCertificate(Lecture lect){
+      std::cout << "\n" << name << " hat in der Vorlesung " <<
+                   lect.name << " die Note " << lect.mark << " erreicht";
+    }
+};
+
+int main()
+{
+  Student bernhard {"Cotta", 25, "Zillbach"};
+  Seminar roboticSeminar {"Robotik-Seminar", false};
+  Lecture ProzProg {"Prozedurale Programmierung", 1.3};
+
+  bernhard.printCertificate(roboticSeminar);
+  bernhard.printCertificate(ProzProg);
+
+  return 0;
+}
+```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+> **Achtung:** Im Beispiel erfolgt die Ausgabe nicht auf die Console, sondern in ein ostream-Objekt, dessen Referenz an die print-Methoden als Parameter übergeben wird. Das ermöglicht eine flexible Ausgabe, z.B. in eine Datei, auf den Drucker etc.
+
+## Ein Wort zur Ausgabe
+
+```cpp                     ostream.cpp
+#include <iostream>
+#include <fstream>
+
+class Seminar{
+  public:
+    std::string name;
+    bool passed;
+};
+
+class Lecture{
+  public:
+    std::string name;
+    float mark;
+};
+
+class Student{
+  public:
+    std::string name;  // "-"
+    int alter;
+    std::string ort;
+
     void printCertificate(std::ostream& os, Seminar sem);
     void printCertificate(std::ostream& os, Lecture sem);
 };
@@ -695,9 +749,6 @@ int main()
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-> **Achtung:** Im Beispiel erfolgt die Ausgabe nicht auf die Console, sondern in ein ostream-Objekt, dessen Referenz an die print-Methoden als Parameter übergeben wird. Das ermöglicht eine flexible Ausgabe, z.B. in eine Datei, auf den Drucker etc.
-
 
 ## Initalisierung/Zerstören eines Objektes
 
@@ -964,5 +1015,3 @@ int main () {
     Die Auflistung der Memberfunktionen der entsprechenden Klassen finden Sie unter [Link](https://microsoft.github.io/azure-iot-developer-kit/docs/apis/)
 
 Der Beispielcode für die Anwendungen ist in den `examples` Ordnern des Projektes enthalten.
-
-<!--START_SKIP_IN_PDF-->
