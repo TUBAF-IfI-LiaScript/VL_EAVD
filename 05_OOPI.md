@@ -18,14 +18,14 @@ import: https://github.com/liascript/CodeRunner
 
 # Objektorientierte Programmierung mit C++
 
-| Parameter                 | Kursinformationen                                                                                                                                                                                                                |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**        | `Prozedurale Programmierung / Einführung in die Informatik`                                                                                                                                                                                           |
-| **Semester**              | `Wintersemester 2022/23`                                                                                                                                                                                                         |
-| **Hochschule:**           | `Technische Universität Freiberg`                                                                                                                                                                                                |
-| **Inhalte:**              | `Klassen und Objekte`                                                                                                                                                                                               |
+| Parameter                 | Kursinformationen                                                                                                                                                                              |
+|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Veranstaltung:**        | `Prozedurale Programmierung / Einführung in die Informatik`                                                                                                                                    |
+| **Semester**              | `Wintersemester 2022/23`                                                                                                                                                                       |
+| **Hochschule:**           | `Technische Universität Freiberg`                                                                                                                                                              |
+| **Inhalte:**              | `Klassen und Objekte`                                                                                                                                                                          |
 | **Link auf Repository: ** | [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/04_Funktionen.md](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/05_OOPI.md) |
-| **Autoren**               | @author                                                                                                                                                                                                                          |
+| **Autoren**               | @author                                                                                                                                                                                        |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
@@ -43,28 +43,29 @@ import: https://github.com/liascript/CodeRunner
 
 ## Motivation
 
+                             {{0-2}}
+**************************************************************************
+
 > Aufgabe: Statistische Untersuchung der Gehaltsentwicklung in Abhängigkeit vom Alter.
 
-Welche Daten werden dazu gebraucht und wie werden sie verarbeitet?
+Welche zwei Elemente machen eine solche Untersuchung aus?
 
-Daten:
+| Daten        | Funktionen      |
+|--------------|-----------------|
+| Name         | Alter bestimmen |
+| Geburtsdatum | Daten ausgeben  |
+| Gehalt       |                 |
+| ...          |                 |
 
-+ Name
-+ Geburtsdatum
-+ Gehalt
-+ ...
-
-Funktionen:
-
-+ Alter bestimmen
-+ Daten ausgeben
-+ ...
+Wir entwerfen also eine ganze Sammlung von Funktionen wie zum Beispiel für `alterbestimmen()`:
 
 ```cpp
-int alterbestimmen(int tag, int monat, int jahr, int akt_tag, int akt_monat, int akt_jahr)
+int alterbestimmen(int tag, int monat, int jahr,
+                   int akt_tag, int akt_monat, int akt_jahr)
 {
   //TODO
 }
+
 int main(){
   int tag, monat, jahr;
   int akt_tag, akt_monat, akt_jahr;
@@ -72,30 +73,64 @@ int main(){
 }
 ```
 
+> Was gefällt ihnen an diesem Ansatz nicht?
+
+**************************************************************************
+
+                              {{1-2}}
+**************************************************************************
+
 + lange Parameterliste bei der Funktionen
 + viele Variablen
 + der inhaltliche Zusammenhang der Daten schwer zu erkennen
 
+**************************************************************************
 
-Kann das verbessert werden? Z.B. die Daten in einer Variable (in OOP-Welt einem Objekt) vereinigen?
+                             {{2-4}}
+**************************************************************************
+
+> Lösungsansatz 1: Wir fassen die Daten zusammen in einer übergreifenden Datenstruktur `struct`.
+
+Ein struct vereint unterschiedliche Aspekte eines Datensets in einer Variablen.
 
 ```cpp
-struct Datum{
+struct Datum{           // hier wird ein neuer Datentyp definiert
     int tag, monat, jahr;
-}
+};
+
 int alterbestimmen(Datum geb_datum, Datum akt_datum)
 {
   //TODO
+  return 0;
 }
-int main(){
-  Datum geburtstdatum;
-  Datum akt_datum;
-  int alter=alterbestimmen(geburtstdatum,akt_datum);
+
+int main(){       
+  Datum geburtsdatum;
+  Datum akt_datum;       // ... und hier wird eine Variable des 
+                         // Typs angelegt 
+  geburtsdatum.tag = 5;  // ... und "befüllt"
+  geburtsdatum.monat = 10;
+  geburtsdatum.jahr = 1923;
+  int alter=alterbestimmen(geburtsdatum, akt_datum);
 }
 ```
-Mit `struct Datum` wäre ein Datentyp definiert, `Datum geburtstdatum;` definiert eine Variable (besser gesagt ein Objekt).
 
-Sind noch weitere Optimierungen möglich?
+Mit `struct Datum` wurde ein Datentyp definiert, `Datum geburtstdatum;` definiert eine Variable (besser gesagt ein Objekt).
+
+> Was gefällt ihnen an diesem Ansatz nicht?
+
+**************************************************************************
+
+                             {{3-4}}
+**************************************************************************
+
++ die Funktionen sind von dem neuen Datentyp abhängig gehören aber trotzdem nicht zusammen
++ es fehlt eine Überprüfung der Einträge für die Gültigkeit unserer Datumsangaben
+
+**************************************************************************
+
+                             {{4-5}}
+**************************************************************************
 
 Die objektorientierte Programmierung (OOP) ist ein Programmierparadigma, das auf dem Konzept der "Objekte" basiert, die Daten und Code enthalten können: Daten in Form von Feldern (oft als Attribute oder Eigenschaften bekannt) und Code in Form von Prozeduren (oft als Methoden bekannt).
 
@@ -138,8 +173,13 @@ Ein Merkmal von Objekten ist, dass die eigenen Prozeduren eines Objekts auf die 
 
 Ein OOP-Computerprogramm kombiniert Objekt und lässt sie interagieren. Viele der am weitesten verbreiteten Programmiersprachen (wie C++, Java, Python usw.) sind Multi-Paradigma-Sprachen und unterstützen mehr oder weniger objektorientierte Programmierung, typischerweise in Kombination mit imperativer, prozeduraler Programmierung.
 
+**************************************************************************
+
+                             {{5-6}}
+**************************************************************************
+
 <!--
-style="width: 90%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
+style="width: 90%; max-width: 960px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
 main                        Farm                           Animal
@@ -158,28 +198,28 @@ Wir erzeugen ausgehend von unserem Bauplan verschiedene Instanzen / Objekte vom 
 
 > **Merke: ** Unter einer Klasse versteht man in der objektorientierten Programmierung ein abstraktes Modell bzw. einen Bauplan für eine Reihe von ähnlichen Objekten.
 
+**************************************************************************
+
 ## C++ - Entwicklung
 
-C++ eine von der ISO genormte Programmiersprache. Sie wurde ab 1979 von Bjarne Stroustrup  bei AT&T als Erweiterung der Programmiersprache C entwickelt. Bezeichnenderweise trug C++ zunächst den Namen "C with classes".
+C++ eine von der ISO genormte Programmiersprache. Sie wurde ab 1979 von Bjarne Stroustrup  bei AT&T als Erweiterung der Programmiersprache C entwickelt. Bezeichnenderweise trug C++ zunächst den Namen "__C with classes__".
 C++ erweitert die Abstraktionsmöglichkeiten erlaubt aber trotzdem eine
 maschinennahe Programmierung. Der Standard definiert auch eine Standardbibliothek, zu der wiederum verschiedene Implementierungen existieren.
 
 | Jahr | Entwicklung                                                                                                                                  |
-|:---- |:-------------------------------------------------------------------------------------------------------------------------------------------- |
+|:-----|:---------------------------------------------------------------------------------------------------------------------------------------------|
 | 197? | Anfang der 70er Jahre entsteht die Programmiersprache C                                                                                      |
-| ...        |                                                                                                                                         |
+| ...  |                                                                                                                                              |
 | 1979 | „C with Classes“ -  Klassenkonzept mit Datenkapselung, abgeleitete Klassen, ein strenges Typsystem, Inline-Funktionen und Standard-Argumente |
 | 1983 | "C++" - Überladen von Funktionsnamen und Operatoren, virtuelle Funktionen, Referenzen, Konstanten, eine änderbare Freispeicherverwaltung     |
 | 1985 | Referenzversion                                                                                                                              |
 | 1989 | Version 2.0 - Mehrfachvererbung, abstrakte Klassen, statische Elementfunktionen, konstante Elementfunktionen                                 |
 | 1998 | ISO/IEC 14882:1998 oder C++98                                                                                                                |
-| ...  | Kontinuierliche Erweiterungen C++11, C++20, ...
+| ...  | Kontinuierliche Erweiterungen C++11, C++20, ...                                                                                              |
 
 C++ kombiniert die Effizienz von C mit den Abstraktionsmöglichkeiten der objektorientierten Programmierung. C++ Compiler können C Code überwiegend kompilieren, umgekehrt funktioniert das nicht.
 
-C++ ermöglicht sowohl die effiziente und maschinennahe Programmierung als auch eine Programmierung auf hohem Abstraktionsniveau. Der Standard definiert auch eine Standardbibliothek, zu der verschiedene Implementierungen existieren. Entsprechend findet C++ sowohl auf der Systemprogrammierungsebene, wie auch der Anwendungsentwicklung Anwendung.
-
-## Bekannte Klassen und Objekte
+## ... das kennen wir doch schon
 
 **Ein- und Ausgabe**
 
@@ -203,7 +243,6 @@ Die Streams lassen sich nicht nur für die Standard Ein- und Ausgabe verwenden, 
 Mehr zu `iostream` unter
 [https://www.c-plusplus.net/forum/topic/152915/ein-und-ausgabe-in-c-io-streams](https://www.c-plusplus.net/forum/topic/152915/ein-und-ausgabe-in-c-io-streams)
 
-
 **Klasse string**
 
 C++ implementiert eine separate Klasse `string`-Datentyp (Klasse). In Programmen müssen nur Objekte dieser Klasse angelegt werden. Beim Anlegen eines Objektes muss nicht angegeben werden, wie viele Zeichen darin enthalten werden sollen, eine einfache Zuweisung reicht aus.
@@ -224,12 +263,25 @@ int main(void) {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out `, `./a.out`)
 
+**Arduino Klassen**
+
+Die Implementierungen für unseren Mikrocontroller sind auch Objektorientiert. Klassen repräsentieren unserer Hardwarekomponenten und sorgen für deren einfache Verwendung.
+
+```cpp                ArduinoDisplay.cpp
+#include <OledDisplay.h>
+...
+Screen.init();
+Screen.print("This is a very small display including only 4 lines", true);
+Screen.draw(0, 0, 128, 8, BMP);
+Screen.clean();
+...
+```
+
 ## Definieren von Klassen und Objekten
 
-Eine Klasse wird in C++ mit dem Schlüsselwort `class` definiert und enthält Daten  (member variables, Attribute) und Funktionen (member functions, Methoden).
+Eine Klasse wird in C++ mit dem Schlüsselwort `class` definiert und enthält Daten (member variables, Attribute) und Funktionen (member functions, Methoden).
 
-Klassen verschmelzen Daten und Methoden
-in einem "Objekt" und deklarieren den individuellen Zugriff. Die wichtigste Eigenschaft einer Klasse ist, dass es sich um einen Typ handelt!
+Klassen verschmelzen Daten und Methoden in einem "Objekt" und deklarieren den individuellen Zugriff. Die wichtigste Eigenschaft einer Klasse ist, dass es sich um einen Typ handelt!
 
 ```cpp
 class class_name {
@@ -242,9 +294,14 @@ class class_name {
 
 class_name instance_name;
 ```
-Wenn `class_name`  ein gültiger Bezeichner für die Klasse ist, ist `instance_name` eine optionale Liste von Namen für Objekte dieser Klasse. Der Hauptteil der Deklaration kann _member_ enthalten, die entweder Daten- oder Funktionsdeklarationen sein können und jeweils einem Zugriffsbezeichner `access_specifier`.
 
-Ein Zugriffsbezeichner ist eines der folgenden drei Schlüsselwörter: `private`, `public` oder `protected`. Diese Bezeichner ändern die Zugriffsrechte für die *member*, die ihnen nachfolgen:
+| Bezeichnung        | Bedeutung                                 |
+|--------------------|-------------------------------------------|
+| `class_name`       | Bezeichner für die Klasse - Typ           |
+| `instance_name`    | Objekte der Klasse `class_name` - Instanz |
+| `access_specifier` | Zugriffsberechtigung                      |
+
+Der Hauptteil der Deklaration kann _member_ enthalten, die entweder Daten- oder Funktionsdeklarationen sein können und jeweils einem Zugriffsbezeichner . Ein Zugriffsbezeichner ist eines der folgenden drei Schlüsselwörter: `private`, `public` oder `protected`. Diese Bezeichner ändern die Zugriffsrechte für die *member*, die ihnen nachfolgen:
 
 + `private` *member* einer Klasse sind nur von anderen *members* derselben Klasse (oder von ihren "Freunden") aus zugänglich.
 + `protected`  *member*  sind von anderen  *member*  derselben Klasse (oder von ihren "Freunden") aus zugänglich, aber auch von Mitgliedern ihrer abgeleiteten Klassen.
@@ -252,13 +309,9 @@ Ein Zugriffsbezeichner ist eines der folgenden drei Schlüsselwörter: `private`
 
 Standardmäßig sind alle Members in der Klasse `private`!
 
-> Für Definition eines Typs kann auch der Schlüsselwort `struct` verwendet werden.
-
 > **Merke:** Klassen und Strukturen unterscheiden sich unter C++ durch die Default-Zugriffsrechte und die Möglichkeit der Vererbung. Anders als bei `class` sind die _member_ von `struct` per Default _public_ . Die Veränderung der Zugriffsrechte über die oben genannten Zugriffsbezeichner ist aber ebenfalls möglich.
 
 > Im Folgenden fokussieren die Ausführungen Klassen, eine analoge Anwendung mit Strukturen ist aber zumeist möglich.
-
-
 
 ```cpp      ClassExample.cpp
 #include <iostream>
@@ -297,7 +350,6 @@ Und wie können wir weitere Methoden zu unserer Klasse hinzufügen?
 
 ```cpp      AdditionalMethod.cpp
 #include <iostream>
-#include <ctime>
 
 class Datum{
   public:
@@ -384,7 +436,7 @@ class Person{
 
 int main()
 {
-  Person freundA = {.geburtstag = {1, 2, 2020}, .name = "Peter"};
+  Person freundA = {.geburtstag = {1, 12, 2022}, .name = "Peter"};
   freundA.print();
   if (freundA.zumGeburtstagAnrufen() == 1){
       std::cout << "Zum Geburtstag gratuliert!" <<std::endl;
@@ -509,7 +561,6 @@ int main()
 
 Diesen Ansatz kann man weiter treiben und die Aufteilung auf einzelne Dateien realisieren.
 
-
 ### Modularisierung unter C++
 
 Der Konzept der Modularisierung lässt sich unter C++ durch die Aufteilung der Klassen auf verschiedene Dateien umsetzen. Unser kleines Beispiel umfasst Klassen, die von einer `main.cpp` aufgerufen werden.
@@ -559,8 +610,8 @@ class Student{
 
 void Student::ausgabeMethode(){
     std::cout << name << " " << ort << " ";
-    geburstdatum.ausgabeMethode();
-    cout << std::endl;
+    geburtsdatum.ausgabeMethode();
+    std::cout << std::endl;
 }
 
 ```
@@ -571,22 +622,20 @@ void Student::ausgabeMethode(){
 int main()
 {
   Datum datum{1,1,2000};
-  Student bernhard {"Cotta", 25, "Zillbach"};
+  Student bernhard {"Cotta", datum, "Zillbach"};
   bernhard.ausgabeMethode();
   return 0;
 }
 ```
-@LIA.eval(`["Student.h", "Student.cpp", "main.cpp"]`, `g++ -Wall main.cpp Student.cpp -o a.out`, `./a.out`)
+@LIA.eval(`["Datum.h", "Student.h", "Student.cpp", "main.cpp"]`, `g++ -Wall main.cpp Student.cpp -o a.out`, `./a.out`)
+
+```bash
+g++ -Wall main.cpp Student.cpp -o a.out
+```
 
 Definitionen der Klassen erfolgen in den Header-Dateien (.h), wobei für die meisten member-Funktionen nur die Deklarationen angegeben werden. In den Implementierungdateien (.cpp) werden die Klassendefinitionen mit include-Anweisungen bekannt gemacht und die noch nicht implementierten member-Funktionen implementiert.
 
 > **Achtung:** Die außerhalb der Klasse implementierte Funktionen erhalten einen Namen, der den Klassenname einschließt.
-
-Die inline-Funktionen können direkt in der Klasse implementiert werden. Der Code einer inline-Funktion wird vom Compiler an der Stelle eingefügt, wo der Aufruf stattfindet. Die inline-Funktionen sollten aber möglichst klein gehalten werden. In der Klasse definierte Funktionen sind alle inline, d.h. umfangreiche Funktionen sollen sinnvollerweise außerhalb der Klasse definiert werden und in der Klasse nur deklariert. Die außerhalb der Klasse implementierten inline-Funktionen sind mit dem Schlüsselwort `inline` zu versehen.
-
-```cpp
-inline int Datum::getTag(){return tag;}
-```
 
 ### Überladung von Methoden
 
@@ -702,11 +751,11 @@ Kombinationen  initialisieren:
 **Elementinitialisierung beim Aufruf:**
 
 | Umsetzung                                                                             | Beispiel                                      |
-|:------------------------------------------------------------------------------------- |:--------------------------------------------- |
+|:--------------------------------------------------------------------------------------|:----------------------------------------------|
 | vollständige Liste in absteigender Folge (uniforme Initialisierung)                   | `Student Bernhard {"Cotta", 25, "Zillbach"};` |
 | unvollständige Liste (die fehlenden Werte werden durch Standard Defaultwerte ersetzt) | `Student Bernhard {"Cotta", 25};`             |
-| vollständig leere Liste, die zum Setzen von Defaultwerten führt                                                                                      | `Student Bernhard {};`                        |
-| Aggregierende Initialisierung (C++20)                                                                                      |   `Student alexander = { .ort = "unknown"}; `                                             |
+| vollständig leere Liste, die zum Setzen von Defaultwerten führt                       | `Student Bernhard {};`                        |
+| Aggregierende Initialisierung (C++20)                                                 | `Student alexander = { .ort = "unknown"}; `   |
 
 Wie können wir aber:
 
