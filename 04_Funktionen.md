@@ -485,7 +485,7 @@ extern float berechneFlaeche(float breite, float hoehe);
 
 ### Parameterübergabe und Rückgabewerte
 
-Bisher wurden Funktionen betrachtet, die skalare Werte als Parameter erhilten
+Bisher wurden Funktionen betrachtet, die skalare Werte als Parameter erhielten
 und ebenfalls einen skalaren Wert als einen Rückgabewert lieferten. Allerdings
 ist diese Möglichkeit sehr einschränkend.
 
@@ -604,7 +604,7 @@ int main(void) {
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out -lm`, `./a.out`)
 
 Statt Zeiger kann die Notation als Array undefinierter (definierter) Größe verwendet werden.
-Unabhängig von der Notation entspricht die Größe des übergebenen Arrays der Difinition in der
+Unabhängig von der Notation entspricht die Größe des übergebenen Arrays der Definition in der
 aufrufenden Funktion (hier main-Funktion).
 
 Auch bei der Verwendung von Zeigern und Referenzen werden keine Kopien von Paramern angelegt, sondern die
@@ -961,3 +961,98 @@ int main(void) {
 ************************************************************************
 
 ### Funktionsdeklaration
+> Wodurch muss `[_____]` ersetzt werden, um die Funktion `hw` explizit zu deklarieren?
+```cpp
+#include <iostream>
+using namespace std;
+
+[_____]
+
+int main(void) {
+  hw();
+  return 0;
+}
+
+void hw(void) {
+  cout << "Hello World!" << endl;
+  return;
+}
+```
+[[void hw();]]
+
+{{1}}
+************************************************************************
+> Welche dieser Varianten ist die korrekte Art und Weise Funktionen aus anderen Quellcodedateien einzufügen?
+[(X)] `extern int x(int y, bool z);`
+[( )] `import int x(int y, bool z);`
+[( )] `using int x(int y, bool z);`
+************************************************************************
+
+### Parameterübergabe und Rückgabewerte
+> Ordnen Sie die Eigenschaften den entsprechenden Arten der Parameterübergabe zu.
+- [[*call-by-value*] [*call-by-reference*]]
+- [    ( )           (X)      ]  Ermöglicht mehrere Rückgabewerte
+- [    (X)           ( )      ]  Arbeitet mit einer Kopie der Variablen
+- [    (X)           ( )      ]  Beeinflusst nicht den tatsächlichen Wert von Variablen in der `main`
+- [    ( )           (X)      ]  Beeinflusst den tatsächlichen Wert von Variablen in der `main`
+
+
+{{1}}
+************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+using namespace std;
+
+void f_a(int &variable){
+  variable++;
+}
+
+void f_b(int variable){
+  variable--;
+}
+
+void f_c(int &variable){
+  variable = 18;
+}
+
+int main(void) {
+  int a = 0;
+  f_a(a);
+  f_c(a);
+  f_b(a);
+  f_b(a);
+  f_a(a);
+  cout << a;
+  return 0;
+}
+```
+[[19]]
+************************************************************************
+
+{{2}}
+************************************************************************
+> Womit werden Array-Parameter übergeben?
+[( )] Referenz
+[(X)] Zeiger
+************************************************************************
+
+### Zeiger und Referenzen als Rückgabewerte
+> Generiert dieses Programm einen Fehler?
+```cpp
+#include <iostream>
+using namespace std;
+
+int& doCalc(int &wert) {
+  int a = wert++;
+  return a;
+}
+
+int main(void) {
+  int b = 0;
+  cout << doCalc(b);
+  return 0;
+}
+```
+[(X)] Ja
+[( )] Nein
