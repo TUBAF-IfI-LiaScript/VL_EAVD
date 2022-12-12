@@ -45,7 +45,7 @@ import: https://github.com/liascript/CodeRunner
 
 > Unter einer Klasse (auch Objekttyp genannt) versteht man in der objektorientierten Programmierung ein abstraktes Modell bzw. einen Bauplan für eine Reihe von ähnlichen Objekten. 
 
-![Prinzipdarstellung](./images/06_OOPII/KlasseObjektBeispiel.png "Von Binz - Own Creation, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=62707688")
+![Prinzipdarstellung](images/06_OOPII/KlasseObjektBeispiel.png "Von Binz - Own Creation, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=62707688 ")
 
 > Und was bedeutet das angewandt auf unsere Vision mit dem Mikrocontroller Daten zu erheben?
 
