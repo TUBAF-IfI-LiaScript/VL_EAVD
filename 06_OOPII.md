@@ -10,7 +10,8 @@ comment: Einführung in die Programmierung für Nicht-Informatiker
 logo: ./img/LogoCodeExample.png
 
 import: https://github.com/liascript/CodeRunner
-
+        https://github.com/LiaTemplates/AVR8js/main/README.md#10
+        https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
 
 -->
 
@@ -40,7 +41,13 @@ import: https://github.com/liascript/CodeRunner
 
 ---------------------------------------------------------------------
 
-**Wie weit waren wir gekommen?**
+## Rückblick
+
+> Unter einer Klasse (auch Objekttyp genannt) versteht man in der objektorientierten Programmierung ein abstraktes Modell bzw. einen Bauplan für eine Reihe von ähnlichen Objekten. 
+
+![Prinzipdarstellung](./images/06_OOPII/KlasseObjektBeispiel.png "Von Binz - Own Creation, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=62707688")
+
+> Und was bedeutet das angewandt auf unsere Vision mit dem Mikrocontroller Daten zu erheben?
 
 ```text @plantUML.png
 @startuml
@@ -82,8 +89,8 @@ Motivation
 Folgendes Beispiel illustriert den erreichten Status unserer C++ Implementierungen. Unsere Klasse `Student` besteht aus:
 
 + 3 Membervariablen (Zeile 5-7)
-+ 3 Konstruktoren (Zeile 9-11)
-+ 1 Memeberfunktion (Zeile 13)
++ 2 Konstruktoren (Zeile 9-10)
++ 1 Memeberfunktion (Zeile 12)
 
 Alle sind als `public` markiert.
 
@@ -96,7 +103,6 @@ class Student{
     int alter;
     std::string ort;
 
-    Student(const Student&);
     Student(std::string n);
     Student(std::string n, int a, std::string o);
 
@@ -106,12 +112,6 @@ class Student{
 Student::Student(std::string n): name(n), alter(8), ort("Freiberg"){}
 
 Student::Student(std::string n, int a, std::string o): name(n), alter(a), ort(o) {}
-
-Student::Student(const Student& other){
-  this->name = other.name;
-  this->alter = other.alter;
-  this->ort = other.ort;
-}
 
 void Student::ausgabeMethode(std::ostream& os){
     os << name << " " << ort << " " << alter << "\n";
@@ -127,8 +127,7 @@ int main()
   Student bernhard {"Cotta", 18, "Zillbach"};
   bernhard.ausgabeMethode(std::cout);
 
-  Student NochMalBernhard = Student(bernhard);
-  NochMalBernhard.ausgabeMethode(std::cout);
+  Student nochmalBernhrd {"Cotta", 18, "Zillbach"};
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
@@ -143,7 +142,7 @@ int main()
 
 
 {{1}}
-> Was ist der Nachteil unserer Lösung?
+> __Frage:__ Was ist der Nachteil unserer Lösung?
 
 ### Konzept
 
@@ -259,24 +258,16 @@ class Student{
     int alter;
     std::string ort;
 
-    Student(const Student&);
     Student(std::string n);
     Student(std::string n, int a, std::string o);
 
     void ausgabeMethode(std::ostream& os); // Deklaration der Methode
-
     bool operator==(const Student&);
 };
 
-Student::Student(const Student& other){
-  this->name = other.name;
-  this->alter = other.alter;
-  this->ort = other.ort;
-}
+Student::Student(std::string n): name(n), alter(8), ort("Freiberg"){}
 
-Student::Student(std::string n): name{n}, alter{18}, ort{"Freiberg"}{}
-
-Student::Student(std::string n, int a, std::string o): name{n}, alter{a}, ort{o} {}
+Student::Student(std::string n, int a, std::string o): name(n), alter(a), ort(o) {}
 
 void Student::ausgabeMethode(std::ostream& os){
     os << name << " " << ort << " " << alter << "\n";
@@ -298,7 +289,7 @@ int main()
   Student bernhard {"Cotta", 18, "Zillbach"};
   bernhard.ausgabeMethode(std::cout);
 
-  Student NochMalBernhard = Student(bernhard);
+  Student NochMalBernhard {"Cotta", 18, "Zillbach"};
   NochMalBernhard.ausgabeMethode(std::cout);
 
   if (bernhard == NochMalBernhard){
@@ -309,6 +300,7 @@ int main()
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
 
 Eine besondere Form der Operatorüberladung ist der `<<`, mit dem die Ausgabe auf ein Streamobjekt realsiert werden kann.
 
@@ -716,6 +708,3 @@ void loop() {
 }
 ```
 @AVR8js.sketch
-
-
-<!--START_SKIP_IN_PDF-->
