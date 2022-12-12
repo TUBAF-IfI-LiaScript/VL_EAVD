@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.0.3
 language: de
 narrator: Deutsch Female
 
@@ -674,8 +674,16 @@ Zuständen modelliert. Welche Methoden sollten zusätzlich in die Klasse aufgeno
 
 ```cpp       TrafficLight.cpp
 class Ampel {
+private:
+    int redPin, yellowPin, greenPin;
+    int state = 0;
+	
 public:
-    Ampel(int red, int yellow, int green): redPin{red}, yellowPin{yellow}, greenPin{green} {};
+    Ampel(int red, int yellow, int green): redPin{red}, yellowPin{yellow}, greenPin{green} {
+    	  pinMode(red, OUTPUT);
+        pinMode(yellow, OUTPUT);
+        pinMode(green, OUTPUT);
+    };
     void activateRed() {
       digitalWrite(redPin, HIGH);
     }
@@ -688,16 +696,9 @@ public:
       digitalWrite(yellowPin, LOW);
       digitalWrite(greenPin, HIGH);
     }
-
-private:
-    int redPin, yellowPin, greenPin;
-    int state = 0;
 };
 
 void setup() {
-  pinMode(11, OUTPUT);
-  pinMode(12, OUTPUT);
-  pinMode(13, OUTPUT);
   Ampel trafficLight = Ampel(13, 12, 11);
   trafficLight.activateRed();
   trafficLight.startOnePeriod(1000);
