@@ -452,7 +452,7 @@ int main()
 
 ### Datenkapselung
 
-Als Datenkapselung bezeichnet man das Verbergen von Implementierungsdetails einer Klasse. Auf die interne Daten kann nicht direkt zugegriffen werden, sondern nur über definierte Schnittstelle, die durch  `public`-Methoden repräsentiert wird.
+Als Datenkapselung bezeichnet man das Verbergen von Implementierungsdetails einer Klasse. Auf die internen Daten kann nicht direkt zugegriffen werden, sondern nur über definierte Schnittstellen, die durch `public`-Methoden repräsentiert wird.
 
 + get- und set-Methoden
 + andere Methoden
@@ -1015,3 +1015,112 @@ int main () {
     Die Auflistung der Memberfunktionen der entsprechenden Klassen finden Sie unter [Link](https://microsoft.github.io/azure-iot-developer-kit/docs/apis/)
 
 Der Beispielcode für die Anwendungen ist in den `examples` Ordnern des Projektes enthalten.
+
+# Quiz
+## Definieren von Klassen und Objekten
+### Grundlegend
+> Welches Schlüsselwort wird benutzt um eine Klasse zu definieren?
+[[class]]
+
+{{1}}
+**************************************************************************
+> Muss `[_____]` im unten aufgeführten Beispiel wirklich durch ein Semikolon ersetzt werden?
+```cpp
+class class_name {
+  access_specifier_1:
+    member1;
+  access_specifier_2:
+    member2;
+  ...
+}[_____]
+
+class_name instance_name;
+```
+[(X)] Ja
+[( )] Nein
+**************************************************************************
+
+{{2}}
+**************************************************************************
+> Welche der folgenden Zugriffsbezeichner existieren bei Klassen?
+[[ ]] void
+[[X]] private
+[[ ]] general
+[[ ]] open
+[[X]] public
+[[X]] protected
+[[ ]] encrypted
+**************************************************************************
+
+{{3}}
+**************************************************************************
+> Welcher Zugriffsbezeichner gilt standardmäßig für alle Member einer Klasse?
+[(X)] private
+[( )] protected
+[( )] public
+**************************************************************************
+
+{{4}}
+**************************************************************************
+> Wodurch muss `[_____]` ersetzt werden um die Methode `print` des Objektes `Lieblingsauto` aufzurufen? 
+```cpp
+#include <iostream>
+#include <string>
+
+class Auto
+{
+  public:
+    std::string Hersteller;
+    int Kilometerstand;
+    int PS;
+
+    void print(){
+        std::cout << Hersteller << " - " << PS <<" PS - " << Kilometerstand << " Kilometer" << std::endl;
+    }
+};
+
+int main()
+{
+  Auto Lieblingsauto;
+  Lieblingsauto.Hersteller = "Hyundai";
+  Lieblingsauto.Kilometerstand = 49564;
+  Lieblingsauto.PS = 76;
+  [_____]
+}
+```
+[[Lieblingsauto.print();]]
+**************************************************************************
+
+### Datenkapselung
+> Wodurch muss `[_____]` ersetzt werden um den Kilometerstand vom Objekt `Lieblingsauto` auf 40000 zu setzen?
+
+```cpp
+#include <iostream>
+#include <string>
+
+class Auto
+{
+  private:
+    std::string Hersteller;
+    int Kilometerstand;
+    int PS;
+  
+  public:
+    void set_Hersteller(std::string _Hersteller){
+        Hersteller = _Hersteller;
+    }
+    void set_Kilometerstand(int _Kilometerstand){
+        Kilometerstand = _Kilometerstand;
+    }
+    void set_PS(int _PS){
+        PS = _PS;
+    }
+};
+
+int main()
+{
+  Auto Lieblingsauto;
+  [_____]
+}
+```
+[[Lieblingsauto.set_Kilometerstand(40000);]]
