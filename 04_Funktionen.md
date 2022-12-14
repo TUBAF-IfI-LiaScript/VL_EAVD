@@ -874,7 +874,7 @@ void loop() {
 ************************************************************************
 
 ### Aufruf von Fuktionen
-> Wodurch muss `[_____]` ersetzt werden, damit die Funktion `divi` ermittelt, ob `a` ein Teiler von `b` ist? Die Lösung ist ohne Leerzeichen einzugeben.
+> Wodurch muss `[_____]` ersetzt werden damit die Funktion `divi` ermittelt ob `a` ein Teiler von `b` ist? Die Lösung ist ohne Leerzeichen einzugeben.
 ```cpp
 #include <iostream>
 using namespace std;
@@ -1056,3 +1056,60 @@ int main(void) {
 ```
 [(X)] Ja
 [( )] Nein
+
+{{1}}
+************************************************************************
+> Wodurch muss `[_____]` ersetzt werden, um den Speicherplatz für einen Rückgabezeiger dynamisch mit `new` anzulegen?
+```cpp
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+double* kugelvolumen(double durchmesser) {
+  double *volumen = [_____]
+  *volumen = (4.0/3.0) * M_PI * pow(durchmesser / 2, 3);
+  return volumen;
+}
+
+int main(void) {
+  double wert = 5.0;
+  double *volumen;
+  volumen = kugelvolumen(wert);
+  cout << "Das Kugelvolumen beträgt für d=" << wert << "[m] " << *volumen << "[m³] \n";
+  delete volumen;
+  return 0;
+}
+```
+[[new double;]]
+************************************************************************
+
+### `main`-Funktion
+> Beurteilen Sie ob folgende Aussagen wahr oder falsch sind.
+- [[Wahr]        [Falsch]]
+- [(X)           ( )     ]  In jedem Programm darf es nur eine (1) `main`-Fuktion geben.
+- [( )           (X)     ]  Solange alle Funktionen `void` zurückgeben darf es auch mehrere `main`-Funktionen geben.
+- [( )           (X)     ]  `argc` kann alle ganzzahligen positiven Werte ab 0 annehmen.
+- [( )           (X)     ]  `argc` ist ein Array von Befehlszeilenargumenten.
+- [(X)           ( )     ]  `argv` ist ein Array von Befehlszeilenargumenten.
+- [(X)           ( )     ]  `argv[0]` ist das Programm selbst.
+
+{{1}}
+************************************************************************
+> Was ist `argv[argc]`?
+[[NULL]]
+************************************************************************
+
+{{2}}
+************************************************************************
+> Wie lautet die Ausgabe dieses Programms wenn die kompilierte Version des Programms intern mit `./a.out 3 2 1 Maus im Haus` aufgerufen wird?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(int argc, char *argv[]) {
+  cout << argv[4];
+  return 0;
+}
+```
+[[Maus]]
+************************************************************************
