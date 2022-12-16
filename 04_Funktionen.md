@@ -868,7 +868,7 @@ void loop() {
 
 {{2}}
 ************************************************************************
-> Müssen Funktionen immer Parameterlisten enthalten?
+> Muss die Parameterliste einer Funktionen wenigstens einen Parameter enthalten?
 [( )] Ja
 [(X)] Nein
 ************************************************************************
@@ -954,14 +954,13 @@ int main(void) {
   return 0;
 }
 ```
-[[X]] Falsche Reihenfolge der Parameter
-[[X]] Rückgabewert ohne Rückgabedefinition
+[[X]] Datentypen der Parameter beim Aufruf und der Defintion stimmen nicht überein
+[[X]] Rückgabewert ohne Definition des Rückgabetyps
 [[ ]] Anweisung nach dem `return` Schlüsselwort
-[[X]] Falscher Rückgabewert
 ************************************************************************
 
 ### Funktionsdeklaration
-> Wodurch muss `[_____]` ersetzt werden, um die Funktion `hw` explizit zu deklarieren?
+> Ersetzen Sie `[_____]` durch eine explizite Deklaration der Funktion `hw`.
 ```cpp
 #include <iostream>
 using namespace std;
@@ -982,7 +981,7 @@ void hw(void) {
 
 {{1}}
 ************************************************************************
-> Welche dieser Varianten ist die korrekte Art und Weise Funktionen aus anderen Quellcodedateien einzufügen?
+> Mit welcher dieser Anweisungen kann eine Funktion aus einer anderen Quellcodedatei einzufügt werden?
 [(X)] `extern int x(int y, bool z);`
 [( )] `import int x(int y, bool z);`
 [( )] `using int x(int y, bool z);`
@@ -1038,7 +1037,7 @@ int main(void) {
 ************************************************************************
 
 ### Zeiger und Referenzen als Rückgabewerte
-> Generiert dieses Programm einen Fehler?
+> Wo liegt der Fehler im folgenden Programm?
 ```cpp
 #include <iostream>
 using namespace std;
@@ -1054,12 +1053,12 @@ int main(void) {
   return 0;
 }
 ```
-[(X)] Ja
-[( )] Nein
+[(X)] Die mit `return` übergebene Referenz zeigt außerhalb der Funktion `doCalc` auf einen nicht existierenden Speicherplatz
+[( )] Referenzen dürfen nicht für die Rückgabe mit `return` verwendet werden
 
 {{1}}
 ************************************************************************
-> Wodurch muss `[_____]` ersetzt werden, um den Speicherplatz für einen Rückgabezeiger dynamisch mit `new` anzulegen?
+> Für die Variable `volumen` soll der Speicherplatz dynamisch zur Verfügung gestellt werden. Ersetzen Sie `[_____]` um die notwendige Ergängung der Anweisung.
 ```cpp
 #include <iostream>
 #include <cmath>
@@ -1088,7 +1087,7 @@ int main(void) {
 - [[Wahr]        [Falsch]]
 - [(X)           ( )     ]  In jedem Programm darf es nur eine (1) `main`-Fuktion geben.
 - [( )           (X)     ]  Solange alle Funktionen `void` zurückgeben darf es auch mehrere `main`-Funktionen geben.
-- [( )           (X)     ]  `argc` kann alle ganzzahligen positiven Werte ab 0 annehmen.
+- [( )           (X)     ]  `argc` wird als erstes Argument in der Befehlszeile übergeben und kann alle ganzzahligen positiven Werte grösser 0 annehmen.
 - [( )           (X)     ]  `argc` ist ein Array von Befehlszeilenargumenten.
 - [(X)           ( )     ]  `argv` ist ein Array von Befehlszeilenargumenten.
 - [(X)           ( )     ]  `argv[0]` ist das Programm selbst.
@@ -1096,7 +1095,8 @@ int main(void) {
 {{1}}
 ************************************************************************
 > Was ist `argv[argc]`?
-[[NULL]]
+[(X)] NULL-Zeiger
+[( )] Das letzte Argument im der Befehlszeile
 ************************************************************************
 
 {{2}}
