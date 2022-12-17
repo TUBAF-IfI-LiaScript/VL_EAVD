@@ -1096,7 +1096,7 @@ int main(void) {
 ************************************************************************
 > Was ist `argv[argc]`?
 [(X)] NULL-Zeiger
-[( )] Das letzte Argument im der Befehlszeile
+[( )] Das letzte Argument in der Befehlszeile
 ************************************************************************
 
 {{2}}
