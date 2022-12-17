@@ -839,7 +839,7 @@ class_name instance_name (...);
 
 Beim Aufruf `Student bernhard {"Cotta", 25, "Zillbach"};` erzeugt der Compiler eine Methode `Student::Student(std::string, int, std::string)`, die die Initialisierungsparameter entgegennimmt und diese der Reihenfolge nach an die Membervariablen übergibt. Sobald wir nur einen explizten Konstruktor integrieren, weist der Compiler diese Verantwortung von sich.
 
-Entfernen Sie den Kommentar in Zeile 11 und der Compiler macht Sie darauf aufmerksam.
+Entfernen Sie den Kommentar in Zeile 13 und der Compiler macht Sie darauf aufmerksam.
 
 ```cpp                     defaultConstructor.cpp
 #include <iostream>
@@ -888,7 +888,7 @@ Student(std::string name, int alter, std::string ort):
 Die zuvor beschriebene Methodenüberladung kann auch auf die Konstruktoren angewandt werden. Entsprechend stehen dann eigene Aufrufmethoden für verschiedene Datenkonfigurationen zur Verfügung. In diesem Fall können wir auf drei verschiedenen Wegen Default-Werte setzen:
 
 + ohne spezfische Vorgabe wird der Standardinitialisierungswert verwendt (Ganzzahlen 0, Gleitkomma 0.0, Strings "")
-+ die Vorgabe eines indivduellen Default-Wertes (vgl. Zeile 5)
++ die Vorgabe eines indivduellen Default-Wertes (vgl. Zeile 7)
 
 ```cpp                     constructor.cpp
 #include <iostream>
@@ -897,10 +897,10 @@ class Student{
   public:
     std::string name;
     int alter;
-    std::string ort; // = "Freiberg"
+    std::string ort; // = "Freiberg";
 
     void ausgabeMethode(std::ostream& os){
-        os << name << " " << ort << " " << alter << "\ņ";
+        os << name << " " << ort << " " << alter << "\n";
     }
 
     Student(std::string name, int alter, std::string ort): name(name), alter(alter), ort(ort)
@@ -1124,3 +1124,161 @@ int main()
 }
 ```
 [[Lieblingsauto.set_Kilometerstand(40000);]]
+
+### Memberfunktion
+> Wodurch muss `[_____]` ersetzt werden um die Methode `ausgabeMethode` der Klasse `Auto` zu implementieren? Geben Sie die Antwort ohne Leerzeichen ein.
+```cpp
+#include <iostream>
+
+class Auto
+{
+  public:
+    std::string Hersteller;
+    int Kilometerstand;
+    int PS;
+
+    void ausgabeMethode();
+};
+
+// Implementierung der Methode
+void [_____]{
+    std::cout << Hersteller << " - " << Kilometerstand << " km " << PS << " PS" << std::endl;
+}
+
+int main()
+{
+  Auto beispielauto {"Tesla", 25000, 283};
+  beispielauto.ausgabeMethode();
+  return 0;
+}
+```
+[[Auto::ausgabeMethode()]]
+
+### Modularisierung unter C++
+> Im Programm `main.cpp` soll die selbstgeschriebene Datei `Auto.h` verwendet werden. Welche Dateien werden dafür benötigt?
+[[ ]] `main.h`
+[[X]] `main.cpp`
+[[X]] `Auto.h`
+[[X]] `Auto.cpp`
+
+{{1}}
+**************************************************************************
+> Im Programm `main.cpp` soll die selbstgeschriebene Datei `Auto.h` verwendet werden. Alle benötigten Dateien liegen im selben Ordner. Wodurch muss `[_____]` ersetzt werden um `Auto.h` einzubinden?
+```cpp
+#include <iostream>
+#include [_____]
+
+int main()
+{
+  Auto beispielauto{"Tesla", 25000, 283};
+  beispielauto.ausgabeMethode();
+  return 0;
+}
+```
+[["Auto.h"]]
+**************************************************************************
+
+### Überladung von Methoden
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+
+class Force
+{
+  public:
+    double Newton(double mass){
+      double F = mass * 9.81;
+      return F;
+    };
+
+    double Newton(double mass, double acc){
+      double F = mass * acc;
+      return F;
+    };
+};
+
+int main()
+{
+  Force Kraft;
+  double G = Kraft.Newton(10);
+  double F = Kraft.Newton(10, 10);
+  double R = G + F;
+  std::cout << R << std::endl;
+}
+```
+[[198.1]]
+
+## Initialisierung/Zerstören eines Objektes
+### Konstruktoren
+> Wie lautet die Ausgabe dieses Programms?
+
+```cpp
+#include <iostream>
+
+class Student{
+  public:
+    std::string name;
+    int alter;
+    std::string lieblingstier = "Dikdik";
+
+    void ausgabeMethode(std::ostream& os){
+        os << name << " " << lieblingstier << " " << alter;
+    }
+
+    Student(std::string name, int alter, std::string lieblingstier): name(name), alter(alter), lieblingstier(lieblingstier)
+    {
+    }
+
+    Student(std::string name): name(name)
+    {
+    }
+};
+
+int main()
+{
+  Student alexander = Student("Humboldt");
+  alexander.alter = 19;
+  alexander.ausgabeMethode(std::cout);
+
+  return 0;
+}
+```
+[[Humboldt Dikdik 19]]
+
+{{1}}
+**************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+
+class Student{
+  public:
+    std::string name;
+    int alter;
+    std::string lieblingstier = "Dikdik";
+
+    void ausgabeMethode(std::ostream& os){
+        os << name << " " << lieblingstier << " " << alter;
+    }
+
+    Student(std::string name, int alter, std::string lieblingstier): name(name), alter(alter), lieblingstier(lieblingstier)
+    {
+    }
+
+    Student(std::string name): name(name)
+    {
+    }
+};
+
+int main()
+{
+  Student alexander = Student("Humboldt", 23, "Einhorn");
+  alexander.ausgabeMethode(std::cout);
+
+  return 0;
+}
+```
+[[Humboldt Einhorn 23]]
+**************************************************************************
+
+### Destruktoren
