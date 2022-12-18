@@ -871,3 +871,11 @@ int main() {
 ```
 [[Peters Auto muss in die Werkstatt.]]
 **************************************************************************
+
+### Vererbungsattribute
+> Wann ist der zugriff auf welche Klassen möglich?
+[[`private`]  [`protected`] [`public`]]
+[( )          ( )           (X)       ] Zugriff ist immer möglich.
+[(X)          ( )           ( )       ] Zugriff ist nur innerhalb der Basisklasse möglich.
+[( )          (X)           ( )       ] Zugriff ist in der Basisklasse und in erbenden Klassen möglich.
+
