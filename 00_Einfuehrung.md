@@ -523,6 +523,8 @@ void loop() {
 
 ********************************************************************************************
 
+<!--START_SKIP_IN_PDF-->
+
 ## Quiz
 ### Einbinden von Bibliotheken
 
@@ -583,3 +585,5 @@ int main()     {
 - [[ ]] 1.cpp
 - [[X]] 2.cpp
 - [[ ]] 3.cpp
+
+<!--END_SKIP_IN_PDF-->

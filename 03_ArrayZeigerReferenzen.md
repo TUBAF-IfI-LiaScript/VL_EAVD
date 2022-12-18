@@ -741,6 +741,8 @@ int main(void)
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
+<!--START_SKIP_IN_PDF-->
+
 # Quiz
 ## Arrays
 
@@ -984,3 +986,5 @@ a: 1 r: [_____]
 ```
 [[1]]
 ************************************************************************
+
+<!--END_SKIP_IN_PDF-->

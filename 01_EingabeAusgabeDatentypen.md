@@ -978,6 +978,8 @@ int main() {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
+<!--START_SKIP_IN_PDF-->
+
 ## Quiz
 
 ### Variablennamen
@@ -1106,3 +1108,5 @@ int main(void)
 > Wie lautet die Escape-Sequenz für CARRIAGE RETURN?
 [[\r]]
 [[?]] Carriage return setzt den Cursor an den Anfang der Ausgabezeile zurück und ermöglicht das Überschreiben von Text.
+
+<!--END_SKIP_IN_PDF-->

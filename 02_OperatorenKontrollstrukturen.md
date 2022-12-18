@@ -1109,6 +1109,8 @@ int main() {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
+<!--START_SKIP_IN_PDF-->
+
 # Quiz
 ## Operatoren
 
@@ -1457,3 +1459,5 @@ int main(){
 [[5 6 7 8 9 ende]]
 [[?]] `continue` sorgt dafür, dass dieser Durchlauf der Schleife übersprungen wird.
 ************************************************************************
+
+<!--END_SKIP_IN_PDF-->
