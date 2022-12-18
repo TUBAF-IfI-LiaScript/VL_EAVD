@@ -1062,7 +1062,7 @@ class_name instance_name;
 
 {{4}}
 **************************************************************************
-> Wodurch muss `[_____]` ersetzt werden um die Methode `print` des Objektes `Lieblingsauto` aufzurufen? 
+> Wodurch muss `[_____]` ersetzt werden um die Methode `print` des Objektes `Beispielauto` aufzurufen? 
 ```cpp
 #include <iostream>
 #include <string>
@@ -1081,18 +1081,18 @@ class Auto
 
 int main()
 {
-  Auto Lieblingsauto;
-  Lieblingsauto.Hersteller = "Hyundai";
-  Lieblingsauto.Kilometerstand = 49564;
-  Lieblingsauto.PS = 76;
+  Auto Beispielauto;
+  Beispielauto.Hersteller = "Hyundai";
+  Beispielauto.Kilometerstand = 49564;
+  Beispielauto.PS = 76;
   [_____]
 }
 ```
-[[Lieblingsauto.print();]]
+[[Beispielauto.print();]]
 **************************************************************************
 
 ### Datenkapselung
-> Wodurch muss `[_____]` ersetzt werden um den Kilometerstand vom Objekt `Lieblingsauto` auf 40000 zu setzen?
+> Wodurch muss `[_____]` ersetzt werden um den Kilometerstand vom Objekt `Beispielauto` auf 40000 zu setzen?
 
 ```cpp
 #include <iostream>
@@ -1119,11 +1119,11 @@ class Auto
 
 int main()
 {
-  Auto Lieblingsauto;
+  Auto Beispielauto;
   [_____]
 }
 ```
-[[Lieblingsauto.set_Kilometerstand(40000);]]
+[[Beispielauto.set_Kilometerstand(40000);]]
 
 ### Memberfunktion
 > Wodurch muss `[_____]` ersetzt werden um die Methode `ausgabeMethode` der Klasse `Auto` zu implementieren? Geben Sie die Antwort ohne Leerzeichen ein.
@@ -1170,8 +1170,8 @@ int main()
 
 int main()
 {
-  Auto beispielauto{"Tesla", 25000, 283};
-  beispielauto.ausgabeMethode();
+  Auto Beispielauto{"Tesla", 25000, 283};
+  Beispielauto.ausgabeMethode();
   return 0;
 }
 ```
@@ -1282,3 +1282,28 @@ int main()
 **************************************************************************
 
 ### Destruktoren
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+#include <string>
+
+class Auto
+{
+  public:
+    std::string Hersteller;
+    int Kilometerstand;
+    int PS;
+
+    ~Auto(){
+      std::cout << "!";
+    }
+};
+
+int main()
+{
+  Auto Beispielauto{"Hyundai", 25000, 76};
+  std::cout << Beispielauto.Hersteller << " ";
+  std::cout << Beispielauto.Kilometerstand << " " << Beispielauto.PS;
+}
+```
+[[Hyundai 25000 76!]]
