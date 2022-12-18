@@ -90,7 +90,7 @@ Folgendes Beispiel illustriert den erreichten Status unserer C++ Implementierung
 
 + 3 Membervariablen (Zeile 5-7)
 + 2 Konstruktoren (Zeile 9-10)
-+ 1 Memeberfunktion (Zeile 12)
++ 1 Memberfunktion (Zeile 12)
 
 Alle sind als `public` markiert.
 
@@ -146,7 +146,7 @@ int main()
 
 ### Konzept
 
-Das Überladen von Operatoren erlaubt die flexible klassenspezifische Nutzung von Arithmetischen- und Vergleichs-Symbolen wie  `+`, `-`, `*`, `==`. Damit kann deren Bedeutung für selbstdefinierter Klassen  mit einer neuen Bedeutung versehen werden. Ausnahmen bilden   spezieller Operatoren, die nicht überladen werden dürfen (  ?: ,  :: ,  . ,  .* , typeid , sizeof und die Cast-Operatoren).
+Das Überladen von Operatoren erlaubt die flexible klassenspezifische Nutzung von Arithmetischen- und Vergleichs-Symbolen wie  `+`, `-`, `*`, `==`. Damit kann deren Bedeutung für selbstdefinierte Klassen mit einer neuen Bedeutung versehen werden. Ausnahmen bilden spezielle Operatoren, die nicht überladen werden dürfen (  ?: ,  :: ,  . ,  .* , typeid , sizeof und die Cast-Operatoren).
 
 ```
 Matrix a, b;
@@ -709,3 +709,165 @@ void loop() {
 }
 ```
 @AVR8js.sketch
+
+# Quiz
+## Operatorenüberladung
+### Konzept
+# Quiz
+## Operatorenüberladung
+### Konzept
+> Welches Schlüsselwort wird bei der Operatorüberladung verwendet?
+[[operator]]
+
+{{1}}
+**************************************************************************
+> Für welche Operatoren sollten Methoden und für welche Funktionen zum Einsatz kommen?
+[[Methode]  [Funktion]]
+[(X)        ( )       ] `++`
+[( )        (X)       ] `+`
+[( )        (X)       ] `*`
+[( )        (X)       ] `%`
+[(X)        ( )       ] `--`
+[(X)        ( )       ] `+=`
+**************************************************************************
+
+{{2}}
+**************************************************************************
+> Wie lautet die Ausgabe dieses Programms? (Hinweise können über das Feld mit der Glühbirne angezeigt werden.)
+```cpp
+#include<iostream>
+
+class Vektor {
+  public:
+	  int x = 0, y = 0;
+
+    Vektor(int x, int y);
+	
+	  Vektor operator+(const Vektor& vek_tmp);
+
+	  void printVektor(){
+      std::cout << x << ", " << y;
+      }
+};
+
+Vektor::Vektor(int x, int y): x(x), y(y) {}
+
+Vektor Vektor::operator+(const Vektor& vek_tmp){
+		  Vektor vek_loe(0, 0);
+		  vek_loe.x = this->x + vek_tmp.x;
+		  vek_loe.y = this->y + vek_tmp.y;
+		  return vek_loe;
+	  }
+
+int main(){
+	Vektor v1(4, 7), v2(10, 9);
+	Vektor v3 = v1 + v2;
+	v3.printVektor();
+}
+```
+[[14, 16]]
+[[?]] In diesem Beispiel sollen zwei zweidimensionale Vektoren addiert werden. Im nächsten Tipp steht eine genauere Erklärung der Operatorüberladung hier im Beispiel. 
+[[?]] `this->x` und `this->y` in der Überladung sind die x- und y-Komponente des Vektors vor dem Operator in der `main`-Funktion (also `v1`). Diese müssen nicht übergeben werden. Der Vektor, der hinter dem Operator in der `main`-Funktion 27 steht (`v2`), muss übergeben werden. `vek_tmp.x` und `vek_tmp.x` sind die Komponenten des Vektors `v2` hinter dem Operator. Beide Anteile werden jeweils addiert und ein neuer Vektor `vek_loe`, der der Lösungsvektor sein soll, zurückgegeben.
+**************************************************************************
+
+### Anwendung
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+
+class Ort{
+  public:
+    std::string name;
+    std::string bundesland;
+    int einwohner;
+
+    Ort(const Ort&);
+    Ort(std::string n);
+    Ort(std::string n, std::string b, int e);
+
+    void ausgabeMethode(std::ostream& os);
+};
+
+Ort::Ort(std::string n, std::string b, int e): name{n}, bundesland{b}, einwohner{e} {}
+
+std::ostream& operator<<(std::ostream& os, const Ort& ort)
+{
+    os << ort.name << ", " << ort.bundesland << ", " << ort.einwohner;
+    return os;
+}
+
+int main()
+{
+  Ort Freiberg = Ort("Freiberg", "Sachsen" , 41823);
+  std::cout << Freiberg;
+}
+```
+[[Freiberg, Sachsen, 41823]]
+
+## Vererbung
+> Erbt die erbende Klasse immer alle Attribute und Methoden der Basisklasse?
+[(X)] Ja
+[( )] Nein
+
+### Implementierung in C++
+> Wodurch muss `[_____]` ersetzt werden um eine Klasse `Flugzeug` zu erstellen, die von der Klasse `Fortbewegungsmittel` erbt?
+```cpp
+#include <iostream>
+
+class Fortbewegungsmittel{
+  public:
+    int aktuellePosition[2];
+    std::string Zulassungsnummer;
+    bool Fuehrerscheinpflichtig
+};
+
+[_____]{
+  public:
+    int Flughoehe;
+    void fliegen();
+};
+```
+[[class Flugzeug: public Fahrzeug]]
+<script>
+let input = "@input".trim()
+
+input == "class Flugzeug: public Fahrzeug" || input == "class Flugzeug:public Fahrzeug"
+</script>
+
+{{1}}
+**************************************************************************
+> Ist es möglich Vererbungen zu verketten?
+[(X)] Ja
+[( )] Nein
+**************************************************************************
+
+{{2}}
+**************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+
+class Fahrzeug {
+  public:
+    Fahrzeug(): name{"Fahrzeug"}{};
+    Fahrzeug(std::string _name): name{_name}{};
+    void kaputt() {
+      std::cout << name << " muss in die Werkstatt." << std::endl ;
+    }
+    std::string name;
+};
+
+class Auto: public Fahrzeug {
+  public:
+    Auto(std::string name, int ps): Fahrzeug(name), ps{ps} {};
+    int ps = 0;
+};
+
+int main() {
+  Auto auto1 = Auto("Peters Auto", 100);
+  auto1.kaputt();
+  return 0;
+} 
+```
+[[Peters Auto muss in die Werkstatt.]]
+**************************************************************************
