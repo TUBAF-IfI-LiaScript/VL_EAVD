@@ -614,7 +614,7 @@ int main(){
 
 ### Überschreiben von Methoden der Basisklasse
 
-Die grundsätzlicher Idee bezieht sich auf die Implementierung "eigener" Methoden gleicher Signatur in den abgeleiteten Klassen. Diese implementieren dann das spezifische Verhalten der jeweiligen Objekte.
+Die grundsätzliche Idee bezieht sich auf die Implementierung "eigener" Methoden gleicher Signatur in den abgeleiteten Klassen. Diese implementieren dann das spezifische Verhalten der jeweiligen Objekte.
 
 ```cpp                     Inheritance.cpp
 #include <iostream>
@@ -879,3 +879,44 @@ int main() {
 [(X)          ( )           ( )       ] Zugriff ist nur innerhalb der Basisklasse möglich.
 [( )          (X)           ( )       ] Zugriff ist in der Basisklasse und in erbenden Klassen möglich.
 
+### Polymorphie
+```cpp
+#include <iostream>
+
+class Fahrzeug {
+  public:
+    Fahrzeug(): name{"Fahrzeug"}{};
+    Fahrzeug(std::string _name): name{_name}{};
+    void kaputt() {
+      std::cout << name << "Das Fahrzeug muss in die Werkstatt." << std::endl ;
+    }
+    std::string name;
+};
+
+class Auto: public Fahrzeug {
+  public:
+    Auto(std::string name, int ps): Fahrzeug(name), ps{ps} {};
+    void kaputt() {
+      std::cout << name << "Das Auto muss in die Werkstatt." << std::endl ;
+    }
+    int ps = 0;
+};
+
+class Flugzeug: public Fahrzeug {
+  public:
+    Auto(std::string name, int sitzplaetze): Fahrzeug(name), sitzplaetze{sitzplaetze} {};
+    void kaputt() {
+      std::cout << name << "Das Flugzeug muss in die Werkstatt." << std::endl ;
+    }
+    int sitzplaetze = 0;
+};
+
+int main() {
+  Auto auto1 = Auto("Peters Auto", 100);
+  Flugzeug flug1 = Flugzeug("Martins Auto", 5);
+  flug1.kaputt();
+  return 0;
+} 
+```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+[[Das Flugzeug muss in die Werkstatt.]]
