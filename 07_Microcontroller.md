@@ -16,7 +16,7 @@ import: https://github.com/liascript/CodeRunner
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/11_Microcontroller.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/07_Microcontroller.md)
 
 # Softwareentwicklung für Microcontroller
 
@@ -26,7 +26,7 @@ import: https://github.com/liascript/CodeRunner
 | **Semester**             | `Wintersemester 2022/23`                                                                                                                                                                       |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                              |
 | **Inhalte:**             | `Anwendung von C++ auf bei der  Mikrocontrollerprogrammierung`                                                                                                                                                    |
-| **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/11_Arduino.md](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/11_Arduino.md) |
+| **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/07_Microcontroller.md](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/07_Microcontroller.md) |
 | **Autoren**              | @author                                                                                                                                                                                        |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
