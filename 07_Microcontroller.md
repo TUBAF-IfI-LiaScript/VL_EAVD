@@ -16,7 +16,7 @@ import: https://github.com/liascript/CodeRunner
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/11_Microcontroller.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/07_Microcontroller.md)
 
 # Softwareentwicklung für Microcontroller
 
@@ -26,7 +26,7 @@ import: https://github.com/liascript/CodeRunner
 | **Semester**             | `Wintersemester 2022/23`                                                                                                                                                                       |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                              |
 | **Inhalte:**             | `Anwendung von C++ auf bei der  Mikrocontrollerprogrammierung`                                                                                                                                                    |
-| **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/11_Arduino.md](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/11_Arduino.md) |
+| **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/07_Microcontroller.md](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/07_Microcontroller.md) |
 | **Autoren**              | @author                                                                                                                                                                                        |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
@@ -36,10 +36,10 @@ import: https://github.com/liascript/CodeRunner
 
 **Fragen an die heutige Veranstaltung ...**
 
-* Unterscheiden Sie zwischen der "erstmaligen Belegung" mittels Initialisierungsliste und Zuweisungen im Konstruktor!
-* In welchem Speicherbereich werden die dynamisch erzeugten Objekte angelegt?
-* Was unterscheidet die Verwendung von Variablen auf dem Stack und dem Heap?
-* Warum braucht man ohnehin dynamische Objekte?
+* Was ist die Besonderheit bei der Softwareentwicklung für eingebettete Systeme?
+* Welche Randbedingungen bestimmen einen Messprozess?
+* Warum brauchen wir eine neue Implementierung für die textuelle Ausgabe und können nicht unsere `cout` Konzepte weiter nutzen?
+* Auf welchen "Standardisierungen" baut das Arduino Projekt auf?
 
 ---------------------------------------------------------------------
 
@@ -193,14 +193,17 @@ Dabei zeigt sich aber auch der Vorteil der Hochsprachen C und C++, die grundsät
 
 ### Besonderheiten
 
-> Standardbibliothek nicht vollständig umgesetzt 
+> Die C++ Standardbibliothek ist für _kleine_ eingebetteten Systeme nicht vollständig umgesetzt!
 
++ Container 
++ Ausnahmen
++ ...
 
 ## Arduino Konzept
 
 Das Arduino-Projekt wurde am _Interaction Design Institute Ivrea_ (IDII) in Ivrea, Italien, ins Leben gerufen. Ausgangspunkt war die Suche nach einem preiswerten, einfach zu handhabenen Mikrocontroller der insbesondere für die Ausbildung von Nicht-Informatikern geeignet ist. Das anfängliche Arduino-Kernteam bestand aus Massimo Banzi, David Cuartielles, Tom Igoe, Gianluca Martino und David Mellis.
 
-Nach der Fertigstellung der Plattform wurden leichtere und preiswertere Versionen in der Open-Source-Community verbreitet. Mitte 2011 wurde geschätzt, dass über 300.000 offizielle Arduinos kommerziell produziert worden waren, zwischenzeitlich wurden mehrere Millionen produziert.
+Nach der Fertigstellung der Plattform wurden leichtere und preiswertere Versionen in der Open-Source-Community verbreitet. Bereits Mitte 2011 wurde geschätzt, dass über 300.000 offizielle Arduinos kommerziell produziert worden waren, zwischenzeitlich wurden mehrere Millionen produziert.
 
 ### Hardware
 
@@ -256,11 +259,11 @@ Darüber hinaus existiert eine Vielzahl von Bibliotheken, die die Arbeit mit ver
 
 ### Entwicklungsumgebung
 
-Die Entwicklungsumgebung fasst grundsätzliche Entwicklungswerkzeuge zusammen und richtet sich an Einsteiger.
+Die Arduino-Entwicklungsumgebung fasst grundsätzliche Entwicklungswerkzeuge zusammen und richtet sich an Einsteiger.
 
 ![Bild](./images/07_Arduino/IDE_Screenshot.png)<!-- style="width: 75%; max-width: 1000px" -->
 
-> Wir verwenden die Visual Studio Code Umgebung für die Entwicklung von Mikrocontroller Code.
+> Zwischenzeitlich liegt eine Version 2.0 vor, die ein deutlich größeres Leistungspektrum mitbring. In den Übungen verwenden die Visual Studio Code Umgebung für die Entwicklung von Mikrocontroller Code.
 
 ### Wo ist unser main()?
 
@@ -359,7 +362,7 @@ void loop() {
 
 > **Aufgabe:** Erweitern Sie das Programm, so dass mit 'AN' und 'AUS' die Aktivierung umgesetzt werden kann. Gehen Sie davon aus, dass der Nutzer auch kleine Buchstaben verwenden kann. (Hilfen [String Klasse](https://www.arduino.cc/reference/de/language/variables/data-types/stringobject/), [Arduino Reference](https://arduinogetstarted.com/de/reference/serial-readstringuntil))
 
-## Seriellen Daten in der Arduino IDE
+### Seriellen Daten in der Arduino IDE
 
 Der in der Arduino IDE eingebettete Serial Monitor ist eine Möglichkeit die über die Serielle Schnittstelle empfangenen Daten auszulesen. Mit der richtigen Konfiguration von
 

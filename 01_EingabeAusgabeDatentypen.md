@@ -63,9 +63,9 @@ $$
 
 int main() {
   // Variante 1 - ganz schlecht
-  std::cout <<"f("<<x<<") = "<<3*5*5 + 4*5 + 8<<" \n";
+  std::cout <<"f("<<5<<") = "<<3*5*5 + 4*5 + 8<<" \n";
 
-  // Variante 2 - besser
+  // Variante 2 - Nutzung von Variablen
   int x = 9;
   std::cout <<"f("<<x<<") = "<<3*x*x + 4*x + 8<<" \n";
 	return 0;
