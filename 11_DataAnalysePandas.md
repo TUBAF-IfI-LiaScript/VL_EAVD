@@ -40,12 +40,29 @@ import: https://github.com/liascript/CodeRunner
 
 ## Motivation
 
+
+## Pandas Grundlagen
+
 ```python
 import pandas as pd
 import numpy as np
 
 s = pd.Series(np.random.randn(5), index=["a", "b", "c", "d", "e"])
 print(s)
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+
+## Visualisierung mit pandas 
+
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+s = pd.Series(np.random.randn(5), index=["a", "b", "c", "d", "e"])
+s.plot.bar()
+plt.savefig('foo.png')
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
