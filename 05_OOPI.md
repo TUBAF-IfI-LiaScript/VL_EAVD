@@ -1042,7 +1042,7 @@ class_name instance_name;
 
 {{2}}
 **************************************************************************
-> Welche der folgenden Zugriffsbezeichner existieren bei Klassen?
+> Welche der folgenden Schlüsselwörter regeln die Zugriffsrechte bei Klassen und Klassen-Member?
 [[ ]] void
 [[X]] private
 [[ ]] general
@@ -1062,7 +1062,7 @@ class_name instance_name;
 
 {{4}}
 **************************************************************************
-> Wodurch muss `[_____]` ersetzt werden um die Methode `print` des Objektes `Beispielauto` aufzurufen? 
+> Ersetzen Sie `[_____]` durch den Aufruf der Methode `print` des Objektes `Beispielauto`? 
 ```cpp
 #include <iostream>
 #include <string>
@@ -1126,7 +1126,7 @@ int main()
 [[Beispielauto.set_Kilometerstand(40000);]]
 
 ### Memberfunktion
-> Wodurch muss `[_____]` ersetzt werden um die Methode `ausgabeMethode` der Klasse `Auto` zu implementieren? Geben Sie die Antwort ohne Leerzeichen ein.
+> Vervollständigen Sie die Implementierung der Methode `ausgabeMethode` in dem Sie `[_____]` durch noch fehlenden Teil ersetzen. Geben Sie die Antwort ohne Leerzeichen ein.
 ```cpp
 #include <iostream>
 
@@ -1155,7 +1155,7 @@ int main()
 [[Auto::ausgabeMethode()]]
 
 ### Modularisierung unter C++
-> Im Programm `main.cpp` soll die selbstgeschriebene Datei `Auto.h` verwendet werden. Welche Dateien werden dafür benötigt?
+> Im Programm `main.cpp` soll die in der Datei `Auto.h` deklarierte Klasse `Auto` verwendet werden. Welche Dateien werden dafür benötigt?
 [[ ]] `main.h`
 [[X]] `main.cpp`
 [[X]] `Auto.h`
@@ -1163,7 +1163,7 @@ int main()
 
 {{1}}
 **************************************************************************
-> Im Programm `main.cpp` soll die selbstgeschriebene Datei `Auto.h` verwendet werden. Alle benötigten Dateien liegen im selben Ordner. Wodurch muss `[_____]` ersetzt werden um `Auto.h` einzubinden?
+> Im folgenden Programm soll die in der Datei `Auto.h` deklarierte Klasse `Auto` verwendet werden. Wodurch muss `[_____]` ersetzt werden um das zu ermöglichen? Es kann davon ausgegangen werden, dass alle benötigten Dateien im selben Ordner liegen. 
 ```cpp
 #include <iostream>
 #include [_____]
@@ -1229,7 +1229,7 @@ class Student{
     {
     }
 
-    Student(std::string name): name(name)
+    Student(std::string name): name(name),alter(0)
     {
     }
 };
@@ -1265,7 +1265,7 @@ class Student{
     {
     }
 
-    Student(std::string name): name(name)
+    Student(std::string name): name(name),alter(0)
     {
     }
 };
