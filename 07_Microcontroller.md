@@ -226,6 +226,7 @@ Jedes Arduino-Programm umfasst zwei zentrale Funktionen - `setup` und `loop`. Er
   <wokwi-led color="red" pin="13" port="B" label="13"></wokwi-led>
   <span id="simulation-time"></span>
 </div>
+
 ```cpp       HelloWorld.cpp
 # define LED_PIN 13                 // Pin number attached to LED.
 //const int led_pin_red = 13;
@@ -273,6 +274,7 @@ Die Arduino-Entwicklungsumgebung fasst grundsätzliche Entwicklungswerkzeuge zus
   <wokwi-led color="red" pin="13" port="B" label="13"></wokwi-led>
   <span id="simulation-time"></span>
 </div>
+
 ```cpp       HelloWorld.cpp
 # define LED_PIN 13                 // Pin number attached to LED.
 
@@ -336,6 +338,7 @@ Die Umkehr der Kommunikationsrichtung ermöglicht es, Daten an den Mikrocontroll
   <wokwi-led color="red" pin="13" port="B" label="13"></wokwi-led>
   <span id="simulation-time"></span>
 </div>
+
 ```cpp       ControlLED.cpp
 int incomingByte = 0; // for incoming serial data
 
@@ -522,3 +525,101 @@ plt.ylabel("Häufigkeit")
 
 fig  # notwendig für die Ausgabe in LiaScript sonst plt.show()
 ```
+# Quiz
+## Microcontroller als Datensammler
+### Sensoren und Aktoren
+> Was sind Sensoren bei einem Arduino?
+[(X)] Bauteile, die externe Eingaben erfassen und an den Arduino weiterleiten
+[( )] Bauteile, die dem Arduino Anweisungen geben
+[( )] Bauteile, die Daten vom Arduino empfangen
+
+### Arduino Konzept
+#### Hardware
+> Wodurch kann ein Arduino erweitert werden um den Funktionsumfang zu erhöhen?
+[( )] Sword
+[(X)] Shield
+[( )] Linux
+
+#### Programmierung
+> Was sind die Hauptbestandteile eines Arduino-Programms?
+[( )] Hauptfunktion, Header-Dateien und Bibliotheken
+[( )] Hauptfunktion, Hauptschleife und Unterfunktionen
+[(X)] Hauptfunktion, Hauptschleife, Setup-Funktion und Loop-Funktion
+
+## Serielle Schnittstelle
+### Schreiben
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+void setup() {
+  Serial.begin(9600);
+  Serial.print("a");
+  Serial.print("b");
+  Serial.print(2, BIN);
+  Serial.println(3.1415, 2);
+}
+
+void loop() {
+}
+```
+[[ab103.14]]
+
+### Lesen
+> Ändern Sie folgendes Programm so ab, dass die LED nach der Eingabe eines `L` eine Sekunde lang an ist und dann wieder erlischt.
+<div>
+  <wokwi-led color="red" pin="13" port="B" label="13"></wokwi-led>
+  <span id="simulation-time"></span>
+</div>
+
+```cpp       ControlLED.cpp
+int incomingByte = 0; // for incoming serial data
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(13, OUTPUT);   // LED Pin als Output
+}
+
+void loop() {
+  // any data received?
+  if (Serial.available() > 0) {
+    // read the incoming byte:
+    incomingByte = Serial.read();
+
+    // say what you got:
+    Serial.print("I received: ");
+    Serial.println(incomingByte, DEC);
+  }
+}
+```
+@AVR8js.sketch
+
+{{1}}
+************************************************************************
+> Mögliche Lösung:
+```cpp
+int incomingByte = 0; // for incoming serial data
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(13, OUTPUT);   // LED Pin als Output
+}
+
+void loop() {
+  // any data received?
+  if (Serial.available() > 0) {
+    // read the incoming byte:
+    incomingByte = Serial.read();
+
+    Serial.print("I received: ");
+    Serial.println(incomingByte, DEC);
+
+    // if the incoming byte is 'L', turn the LED on:
+    if (incomingByte == 'L') {
+      digitalWrite(13, HIGH);
+      delay(1000);  // wait for 1 second
+      digitalWrite(13, LOW);  // turn the LED off
+    }
+
+  }
+}
+```
+************************************************************************
