@@ -713,9 +713,6 @@ void loop() {
 # Quiz
 ## Operatorenüberladung
 ### Konzept
-# Quiz
-## Operatorenüberladung
-### Konzept
 > Welches Schlüsselwort wird bei der Operatorüberladung verwendet?
 [[operator]]
 
