@@ -917,3 +917,52 @@ int main() {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 [[Das Flugzeug muss in die Werkstatt.]]
+
+{{1}}
+**************************************************************************
+> Was ist Polymorphie?
+[( )] Eine Technik, die es ermöglicht, bestehende Methoden für neue Klassen zu verwenden
+[(X)] Eine Technik, die es ermöglicht, bestehende Methoden zu überschreiben
+[( )] Eine Technik, die es ermöglicht, bestehende Klassen zu ändern
+**************************************************************************
+
+{{2}}
+**************************************************************************
+> Wann ist Polymorphie sinnvoll?
+[( )] Immer, wenn man neue Klassen definiert
+[(X)] Wenn man bestehende Methoden für neue Klassen verwenden möchte
+[( )] Wenn man Methoden der Basisklasse überschreiben möchte
+**************************************************************************
+
+{{3}}
+**************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+
+```cpp
+#include <iostream>
+
+class Basisklasse {
+  public:
+    virtual void ausgabe() {
+      std::cout << "Ausgabe1";
+    }
+};
+
+class Ableitungsklasse : public Basisklasse {
+  public:
+    void ausgabe() {
+      std::cout << "Ausgabe2";
+    }
+};
+
+int main() {
+  Basisklasse b = Basisklasse();
+  b.ausgabe();
+
+  Ableitungsklasse a = Ableitungsklasse();
+  a.ausgabe();
+  return 0;
+}
+```
+[[Ausgabe1Ausgabe2]]
+**************************************************************************
