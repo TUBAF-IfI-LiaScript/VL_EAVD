@@ -1,7 +1,7 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Galina Rudolf
-email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
+author:   Sebastian Zug & André Dietrich & Galina Rudolf & Florian Richter
+email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de & Flo.Richter@informatik.tu-freiberg.de
 version:  1.0.5
 language: de
 narrator: Deutsch Female
@@ -26,14 +26,17 @@ import: https://github.com/liascript/CodeRunner
 | **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/08_PythonGrundlagen.md](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/08_PythonGrundlagen.md) |
 | **Autoren**              | @author                                                                                                                                                                                        |
 
-![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 --------------------------------------------------------------------
 
 
 **Fragen an die heutige Veranstaltung ...**
 
-* 
+* Warum sollte man andere Programmiersprachen als C++ in Betracht ziehen?
+* Welche Vorteile hat die Sprache **Python**?
+* Wie unterscheidet sich der Syntax von C++?
+
+**Beispiel-Literatur:** [Schnellstart Python - Ein Einstieg ins Programmieren für MINT-Studierende](https://link.springer.com/book/10.1007/978-3-658-26133-7) (kostenloses E-Book für TUBAF-Studenten)
 
 ---------------------------------------------------------------------
 
@@ -99,20 +102,87 @@ style="width: 100%; min-width: 620px; max-width: 920px;"
 
 > Wir entkoppeln damit die Datenerzeugung und Auswertung! Welche Programmiersprache benutzen wir aber für die Auswertung? Warum nicht einfach weiter C++?
 
-Vorteile Python aufzählen
+Python erleichtert die schnelle Entwicklung von Scripten zur Datenauswertung.
 
-...
+- Schnelles Ausprobieren durch:
+
+  - Einfache Syntax
+  - Interpreter statt Compiler
+  - Interaktivmodus
+  - Keine Deklarierung von Datentypen
+  - Automatisches Speichermanagement
+
+- Plattformunabhängigkeit
+- Einfache Erweiterbarkeit und viele frei verfügbare Module
 
 ## Python Historie 
 
 
 ## Elemente der Programmiersprache 
+Welche Programmierparadigmen unterstützt Python?
 
+* Imperativ?
+* Prozedural?
+* Objektorientiert?
 
 ```python
 for i in range(10):
   print("Hallo Welt", i)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+---------------------------------------------------------------------
+Welche Programmierparadigmen unterstützt Python? -> **Alle 3** :-P
+
+* Imperativ ✔️
+* Prozedural ✔️
+* Objektorientiert ✔️
+
+```python
+for i in range(10):
+  print("Hallo Welt", i)
+```
+
+```python
+def hallo():
+     for i in range(10):
+          print("Hallo Welt", i)
+```
+
+```python
+class Hallo:
+     def __init__(self):
+          for i in range(10):
+               print("Hallo Welt", i)
+```
+
+## Beispiele für den Einsatz von Python
+
+## Entwicklungsumgebungen
+
+**Wie installiere ich bei mir Python?**
+
+Unter Linux und MacOS kann Python z.B. über die Kommandozeile bzw. Paketmanager installiert werden. Für Windows empfiehlt sich die Installation der Anaconda Distribution (auch für Linux und Mac verfügbar).
+
+> Für Python gibt es viele verschiedene Entwicklungsumgebungen. In den Übungen nutzen wir aber weiterhin Visual Studio Code.
+
+Anaconda nutzt als Standard-Editor **Spyder** (**S**cientific **PY**thon **D**evelopment **E**nvi**R**onment). Beliebt sind auch interaktive **Jupyter**-Dokumente (Notebooks).
+
+![Spyder IDE](./images/08_Python/spyder.png "Spyder Editor")
+![Interaktive Jupyter-Notebooks](./images/08_Python/jupyter.png "Jupyter Notebook")
+
+## Zuweisungen und Datentypen
+
+## Ein- und Ausgabe
+
+## Kleines Beispiel
+
+## Selektion mit if
+
+## While und For-Schleifen
+
+## Und do-while???
+
+## Funktionen
 
 ## Beispiel der Woche
