@@ -172,10 +172,161 @@ Anaconda nutzt als Standard-Editor **Spyder** (**S**cientific **PY**thon **D**ev
 ![Interaktive Jupyter-Notebooks](./images/08_Python/jupyter.png "Jupyter Notebook")
 
 ## Zuweisungen und Datentypen
+> Python nutzt eine dynamische Typisierung, d.h. eine Variable wird erst zur Laufzeit mit Typ des
+zugewiesenen Werts assoziiert. Sie kann auch mit einem beliebigen neuen Datentypen überschrieben werden.
 
-## Ein- und Ausgabe
+```python
+a = 1
+a += 3
+type(a)
+
+a = "hello"
+type(a)
+
+# Python kann ohne Hilfsvariable, 2 Variablen tauschen:
+x, y = 3.0, -2.0
+x, y = y, x
+print(x, y)
+
+# a = b
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+## Namenswahl für Variablen
+> Namen von Variablen, Funktionen, Klassen,... bestehen aus Buchstaben, Ziffern, Underscore (_)
+
+- Ziffer darf nicht am Anfang stehen
+- Ab Python 3 sind auch Buchstaben außerhalb des ASCII-Bereichs erlaubt
+
+  - Buchstaben aus Alphabeten fast aller Sprachen, z.B. ä, ö, ü, θ, π, ラ
+  - nicht erlaubt sind Sonderzeichen wie €, $, @,§ sowie Emojis
+  - guter Stil ist aber, trotzdem nur Zeichen aus ASCII-Bereich zu verwenden!
+
+- lesbare aber nicht zu lange Namen
+
+  - z.B. sum, value
+
+- Hilfsvariablen, die man nur über kurze Strecken braucht, eher kurz:
+
+  - z.B. i, j, x 
+
+- mit Kleinbuchstaben beginnen, Worttrennung durch "_" oder Großbuchstaben, z.B.
+
+  - input_text („Snake Case“), empfohlen in Style Guide for Python Code
+  - inputText („Camel Case“)
+
+- Variablen, die man im ganzen Programm braucht, eher länger:
+
+  - z.B. input_text
+
+Reservierte Bezeichner:
+=======================
+||||||
+| False | await | else | import | pass |
+| None | break | except | in | raise |
+| True | class | finally | is | return |
+| and | continue | for | lambda | try |
+| as | def | from | nonlocal | while |
+| assert | del | global | not | with |
+| async | elif | if | or | yield |
+
+Siehe auch Python Tutorial zum Thema Coding Style:
+
+* https://docs.python.org/3/tutorial/controlflow.html#intermezzo-coding-style
+* https://peps.python.org/pep-0008/
+
+## Ausgabe
+> Die **print**-Funktion ist unser Äquivalent zu std::cout aus C++. Beliebig viele Konstanten und Variablen können als Parameter übergeben werden. Die uns bereits bekannten Sonderzeichen **\t** (Tabulator) und **\n** (Neue Zeile) können wie gewohnt eingebaut werden.
+
+```python
+x = 3.141
+y = x**2
+print("5 * 5 =", 25)
+print("x \t=\t", x, "\nx² \t=\t", y)
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+Die erweiterte Formatierung von Ausgaben ist Teil der nächsten Vorlesung.
+
+## Eingabe
+> Ergebnis der **input**-Funktion ist immer ein **String**. Für die Verarbeitung als Zahl ist immer eine **Typenkonvertierung** erforderlich.
+
+**Falsch:**<!-- style="color:red" -->
+
+```python
+""" 
+Liefert einen Fehler, da x ein String ist
+"""
+x = input("x eingeben:")
+y = x**2
+print("y = ", y)
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+**Richtig:**<!-- style="color:darkgreen" -->
+
+```python
+x = float( input("x eingeben:") )
+y = x**2
+print("y = ", y)
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+## Zusätzliche Module einbinden
+> Mit **import** lassen sich Module einbinden. Ähnlich zu C++ sind die Bestandteile des Moduls in einen Namensraum gekapselt.
+
+```cpp
+#include <cmath>
+
+x = std::sin(M_PI)
+```
+
+```python
+import math
+
+x = math.sin(math.pi)
+print(x)
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+Bei Bedarf lassen sich alle oder einzelne Komponenten in den eigenen Namensraum importieren:
+
+```python
+from math import *       # Einfach, aber sollte wenn möglich vermieden werden
+from math import sin,cos
+```
+
+Eine Umbennung ist alternativ auch möglich:
+
+```python
+import math as m
+print(m.pi)
+```
 
 ## Kleines Beispiel
+
+## Listen
+> **In Python ist alles ein Objekt!** Z.B. auch elementare Datentypen, wie **Integer**.
+
+Der Aufruf von Methoden funktioniert wie in C++. Der Datentyp **list** verfügt über mehrere spezielle Methoden:
+
+* reverse(), sort(), extend(), append(), remove(), ...
+
+```python
+liste = [4,2,3,1]
+liste.reverse()
+print(liste)
+
+liste.sort()
+print(liste)
+
+liste.extend([5,6])
+print(liste)
+
+liste.remove(3)
+print(liste)
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 ## Selektion mit if
 

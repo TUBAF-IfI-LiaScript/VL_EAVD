@@ -37,6 +37,12 @@ import: https://github.com/liascript/CodeRunner
 
 ---------------------------------------------------------------------
 
+## Formatierte Ausgabe mit f-Strings
+
+## eval
+
+## Typ-Hinweise für Variablen
+
 ## Objektorientierung in Python 
 
 ## Beispiel der Woche
