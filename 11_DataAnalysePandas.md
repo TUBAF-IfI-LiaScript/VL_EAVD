@@ -14,7 +14,7 @@ import: https://github.com/liascript/CodeRunner
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/11_DataAnalysePandas.md.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/11_DataAnalysePandas.md)
 
 # Daten- und Zeitreihenanalysen
 
@@ -42,6 +42,7 @@ import: https://github.com/liascript/CodeRunner
 
 ```python
 import pandas as pd
+import numpy as np
 
 s = pd.Series(np.random.randn(5), index=["a", "b", "c", "d", "e"])
 print(s)
