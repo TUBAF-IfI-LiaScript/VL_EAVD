@@ -236,7 +236,7 @@ Siehe auch Python Tutorial zum Thema Coding Style:
 * https://peps.python.org/pep-0008/
 
 ## Ausgabe
-> Die **print**-Funktion ist unser Äquivalent zu std::cout aus C++. Beliebig viele Konstanten und Variablen können als Parameter übergeben werden. Die uns bereits bekannten Sonderzeichen **\t** (Tabulator) und **\n** (Neue Zeile) können wie gewohnt eingebaut werden.
+> Die **print**-Funktion ist unser Äquivalent zu std::cout aus C++. Beliebig viele Konstanten und Variablen können als Parameter übergeben werden. Die uns bereits bekannten Sonderzeichen **\\t** (Tabulator) und **\\n** (Neue Zeile) können wie gewohnt eingebaut werden.
 
 ```python
 x = 3.141
