@@ -37,6 +37,10 @@ import: https://github.com/liascript/CodeRunner
 
 ---------------------------------------------------------------------
 
+## Tupel oder Liste?
+
+## Dictionaries
+
 ## Formatierte Ausgabe mit f-Strings
 
 ## eval
