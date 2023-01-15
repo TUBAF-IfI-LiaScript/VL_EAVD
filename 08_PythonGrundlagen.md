@@ -10,6 +10,7 @@ comment: Einführung in die Programmierung für Nicht-Informatiker
 logo: ./img/LogoCodeExample.png
 
 import: https://github.com/liascript/CodeRunner
+        https://github.com/LiaTemplates/AVR8js/main/README.md#10
 
 -->
 
@@ -596,6 +597,10 @@ while b < 100:
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 ### For-Schleife
+
+                                 {{0-1}}
+***************************************************************************
+
 > For-Schleifen erlauben auch in Python eine Wiederholung mit festgelegten Start- und Endwerten. Die Syntax unterscheidet sich aber von C++. Das Schlüsselwort **in** ist ein fester Bestandteil und wird gefolgt von einer **Sequenz**.
 
 ```python
@@ -604,8 +609,6 @@ for <variable> in <sequenz>:
 ```
 
 Die Schreibweise ermöglicht ein sehr einfaches Abarbeiten von Listen und anderen indizierbaren Datenstrukturen:
-
-**Sequenz** = Liste, String, Tupel oder **range**
 
 {{1}}
 <section>
@@ -622,16 +625,16 @@ for i in [5,7,9]:
 for i in [3.4,7.9,6.78]:
   print(i, end=",")
 
-for i in ('x','y','z'):
-  print(i, end=",")
-
-for i in {0:"a", 1:"b"}:  # Was ist das??
-  print(i, end=",")
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 </section>
 
-### Die range()-Funktion
+***************************************************************************
+
+                                 {{1-2}}
+***************************************************************************
+
+
 > Die **range**-Funktion kann mit 1, 2 oder 3 Parametern aufgerufen werden. Sie wird hauptsächlich für for-Schleifen benötigt. **Wichtig:** der Endwert ist in der Menge **nicht** enthalten!
 
 * **Signatur:** range([start,] stop[, step])
@@ -648,8 +651,6 @@ print( list(x) )
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
-{{1}}
-<section>
 Beispiele mit der range-Funktion:
 
 ```python
@@ -666,10 +667,27 @@ for x in range(20,-1,-2):
 print("\n")
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
-</section>
 
-### List Comprehension
+***************************************************************************
+
+### Schleifen oder List Comprehension
 > **List Comprehension** oder Listen-Abstraktion ermöglicht eine sehr kurze Schreibweise bei der Arbeit mit Listen. Es erinenrt etwas an mathematische Mengendefinitionen, wie \{ x² \| x ∈ ℕ ^ x < 20 }.
+
+```python
+square = [x**2 for x in range(20)]
+print( square )
+
+# alternative Darstellung mit einer Schleife
+square = []
+for x in range(20):
+  square.append(x**2)
+print( square )
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+_List Comprehensions_ werden oft als "pythonischer" beschrieben als loops ( oder `map()`). Sie sind auch aussagekräftiger als Schleifen, was bedeutet, dass sie einfacher zu lesen und zu verstehen sind. Schleifen entwickeln einen Iterationsprozess, während Sie sich mit einem _List Comprehensions_ stattdessen auf das konzentrieren, was Sie in die Liste umsetzen wollen.
+
+Beispiele:
 
 ```python
 square = [x**2 for x in range(20)]
@@ -687,6 +705,7 @@ cities = ["Dresden", "Freiberg", "Leipzig", "Frankenberg"]
 print( [c.upper() if c != "Freiberg" else c.upper()+" (Sachs)" for c in cities if c[0] == "F"] )
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
 
 ### Und do-while???
 > Eine Nichtabweisschleife oder do-while-Schleife existiert in Python **nicht**! Aber wir könne mit einer while-Schleife jede andere Schleifenart nachbilden.
@@ -747,149 +766,134 @@ while True:
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 </section>
 
-## Eigene Funktionen
-Wiederholung:
-========================
-> Funktionen sind Unterprogramme, die ein Ausgangsproblem in kleine, möglicherweise wiederverwendbare Codeelemente zerlegen.
+## Formatierte Ausgabe
 
-**Bessere Lesbarkeit**
+                                    {{0-1}}
+****************************************************************************************
 
-Der Quellcode eines Programms kann schnell mehrere tausend Zeilen umfassen. Beim
-Linux Kernel sind es sogar über 15 Millionen Zeilen und Windows, das ebenfalls
-zum Großteil in C geschrieben wurde, umfasst schätzungsweise auch mehrere
-Millionen Zeilen. Um dennoch die Lesbarkeit des Programms zu gewährleisten, ist
-die Modularisierung unerlässlich.
+Bislang haben wir uns mit dem "einfachen" `print` Mechanismus für einzelne Ausgabe zufrieden gegeben. Um aber gut lesbaren Code zu schreiben genügt dies nicht.
 
-**Wiederverwendbarkeit**
+Wir erinnern uns an die von uns verwendenten C++ und Arduino-bezogenen Ausgabeformate ...
 
-In fast jedem Programm tauchen die gleichen Problemstellungen mehrmals auf. Oft
-gilt dies auch für unterschiedliche Applikationen. Da nur Parameter und
-Rückgabetyp für die Benutzung einer Funktion bekannt sein müssen, erleichtert
-dies die Wiederverwendbarkeit. Um die Implementierungsdetails muss sich der
-Entwickler dann nicht mehr kümmern.
+```cpp        c++output.cpp
+#include <iostream>
+#include <iomanip>
 
-**Wartbarkeit**
-
-Fehler lassen sich durch die Modularisierung leichter finden und beheben.
-Darüber hinaus ist es leichter, weitere Funktionalitäten hinzuzufügen oder zu
-ändern.
-
-In allen 3 Aspekten ist der Vorteil in der Kapselung der Funktionalität zu
-suchen.
-
-{{1}}
-<section>
-Syntax:
-========================
-
-> Funktionsdefinition starten immer mit dem Schlüsselwort **def**. Typen für Parameter oder Rückgabewerte müssen nicht angegeben werden! Optional ist dies dennoch möglich (Teil der nächsten Vorlesung). Es gelten die üblichen Einrückungsregeln.
-
-```python
-def funktionsname(arg1, arg2, ...):
-  <anweisungen>
+int main(){
+  std::cout<<std::setbase(16)<< std::fixed<<55<<std::endl;
+  std::cout<<std::setbase(10)<< std::fixed<<55<<std::endl;
+  int a = 15;
+  std::cout<<std::setbase(10)<< std::fixed<<55 + a <<std::endl;
+  return 0;
+}
 ```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-```python
-def exec_menu():
-  print("-"*15)
-  print(" 1: Daten eingeben\n 2: Summe ausgeben\n 3: Daten löschen\n 4: Beenden")
-  opt = int(input("Wählen Sie eine Programmfunktion:"))
+
+```cpp       ArduinoSerial.cpp
+void setup() {
+    Serial.begin(9600);
+
+    // Variante 1: print / println Methoden von Serial
+    Serial.println("Das ist ein Test");
+
+    float gleitkommaZahl = 3.123456;
+    Serial.print(gleitkommaZahl, 4); //liefert 3.1234
+    Serial.print(" ");
+    Serial.println(gleitkommaZahl, 6); //liefert 3.123456
+
+    Serial.print(15, BIN); //liefert den Wert 1111
+    Serial.print(" ");
+    Serial.print(15, HEX); //liefert den Wert f
+    Serial.print(" ");
+    Serial.println(15, OCT); //liefert den Wert 17
+
+    // Variante 2: sprintf Formatierte Ausgabe
+    int zahl = 65;
+    char buffer[100];
+    sprintf(buffer, "Dezimal %05i Dezimal %5i Hexadezimal %x Character %c", zahl, zahl , zahl, zahl);
+    Serial.println(buffer); 
+}
+
+void loop() {
+}
 ```
-</section>
+@AVR8js.sketch
 
-### Parameterübergabe
-> Die Parameter im Funktionskopf sind lokale Variablen innerhalb der Funktion.
+> Die für den Arduino gezeigte Variante mit `sprintf` oder ``printf` funktioniert natürlich auch unter C++ generell. Aus didaktischen Gründen wurde aber die `cout` Variante vorrangig genutzt. 
 
-Beachten Sie folgendes Beispiel:
+****************************************************************************************
 
-```python
-def halbiere(zahl):
-  zahl = zahl / 2
-  return zahl
+                                    {{1-2}}
+****************************************************************************************
 
-zahl = 5
-print( halbiere(zahl) )
-print( zahl )
-```
-@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
-Der Parameter *zahl* der Funktion ist eine lokale Variable. Die Zuweisung eines neuen Wertes ändert nicht die gleichnamige Variable außerhalb der Funktion! Sind die als Parameter übergebenen Objekte unveränderbar (z.B. Zahlen, Strings, Tupel), dann haben Veränderungen innerhalb der Funktion keine Auswirkungen auf Objekte außerhalb.
+Die Ausgabe in Python ist außerordentlich konfigurierbar. Man unterscheidet zwischen 
 
-{{1}}
-<section>
-> Veränderbare Objekte (z.B. Listen), können in der Funktion modifiziert werden. D.h. die Veränderungen sind auch außerhalb der Funktion wirksam!
+1. der `printf` motivierten Ausgabe mit dem String modulo operator (`%`)  und 
+2. den `f-strings`.
 
-```python
-def verdopple(liste):
-  liste.extend(liste)
-  return liste
+`printf` folgt dem Muster `%[flags][width][.precision]type` für die Spezifikation der Ausgabe. Die zugehörige Verwendung unter Python stellt sich wie folgt dar:
 
-liste = [5,10,15]
-print( verdopple(liste) )
-print( liste )
+```python     prinf.py
+print("Total students : %3d, Fak. 3 : %2d" % (80, 65))
+print("Total students : %-5d, Fak. 3 : %05d" % 80, 65)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
-|||
-| Unveränderbare Objekte (immutable): | int, float, string, bool, decimal, complex, tuple, range, frozenset, bytes |
-| Veränderbare Objekte (mutable): | list, dictionary, set, Nutzerdefinierte Objekte |
 
-</section>
-
-### Returnwerte
-> Mit **return** kann **ein** Rückgabewert festgelegt und die Funktion beendet werden. Der Rückgabewert kann auch ein Tupel, eine Liste oder ein beliebiges anderes Objekt sein. Tupel können später wieder in einzelne Variablen augetrennt werden.
+ `f-strings` integrieren eigenen Code direkt in die Ausgabe - dies reicht von der einfachen Benennung einer Variablen, über Operationen mit Variablen bis hin zu Bedingungen und Funktionsaufrufen.
 
 ```python
-def sumAndMultiplyTo(n):
-  sum = 0
-  prod = 1
-  for i in range(1,n+1):
-    sum = sum + i
-    prod = prod * i
-  return sum,prod
+num1 = 83
+num2 = 9
+print(f"The product of {num1} and {num2} is {num1 * num2}.")
 
-result = sumAndMultiplyTo(10)
-print( type(result) )
-print(result)
-
-x,y = sumAndMultiplyTo(10)
-print(x, y)
+print(f"{num1} and {num2} are equal - {True if num1 == num2 else False}.")
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+****************************************************************************************
+
 
 ## Beispiel der Woche
-Quadratwurzel mit Newton-Verfahren
-==================================
-Wir nutzen das Newton-Verfahren zur näherungsweisen Berechnung einer Nullstelle. Gesucht wird die Quadratwurzel einer Zahl *a*.
 
-Funktion $f(x) = x^2 - a$, so dass für die Nullstelle gilt: $x^2 = a$
+Gegeben sei eine Liste der Studiengangsbezeichnungen für die Studierenden dieser Vorlesung. Leiten Sie aus der Liste ab
 
-1. In jedem Schritt berechnen wir $x_{n+1} = x_n - f(x_n)/f'(x_n)$.
-2. Für unseren Fall: $x_{n+1} = \frac{1}{2} (x_n + \frac{a}{x_n})$
-3. Wir beenden die Iteration, wenn $|x_{n+1} - x_n| < \varepsilon$
+1. Wie viele Studierende eingeschrieben sind?
+2. Wie viele Studiengänge in der Veranstaltung präsent sind?
+3. Wie viele Studierende zu den Studiengängen gehören?
 
 ```python
-def square_root(a, output=False, eps=0.00000001):
-  xn = a
-  while True:
-    if output: print(xn)
+# Angabe der Studiengänge der eingeschriebenen Teilnehmer in der 
+# Veranstaltung
+topics = [
+  "S-UWE", "S-WIW", "S-GÖ", "S-VT", "S-GÖ", "S-BAF", "S-VT",
+  "S-WWT", "S-NT", "S-WIW", "S-ET", "S-WWT", "S-MB", "S-WIW",
+  "S-FWK", "F1-INF", "S-WIW", "S-BWL", "S-WIW", "S-MAG",
+  "F2-ANCH", "S-MAG", "S-WWT", "S-NT", "S-ACW", "S-GTB",
+  "S-WIW", "F2-ANCH", "S-GTB", "S-GÖ", "S-GBG", "S-GM",
+  "S-MAG", "S-GTB", "S-WIW", "S-WIW", "S-FWK", "S-WIW",
+  "S-MAG", "S-GBG", "S-GÖ", "S-BAF", "S-BAF", "S-NT", "S-GÖ",
+  "S-WWT", "S-GBG", "S-WWT", "S-GBG", "S-ERW", "S-WWT",
+  "S-WIW", "S-NT", "S-WIW", "S-GÖ", "S-WIW", "S-GM",
+  "S-GBG", "F1-INF", "S-WIW", "S-WWT", "S-ACW", "S-WIW",
+   "S-WWT", "S-ACW", "S-INA", "S-FWK", "S-GTB", "S-WIW",
+   "S-MORE", "S-WIW", "S-GÖ", "S-BWL", "S-CH", "S-WIW",
+   "F2-ANCH", "S-WIW", "S-ACW", "S-ET", "S-ET", "S-GÖ",
+   "S-GÖ"
+]
 
-    # x = xn - (xn**2 - a) / (2*xn)
-    # oder:
-    x = (xn + a/xn) / 2
+# zu 1
+print(len(topics))                          # Länge der Liste
 
-    if abs(x-xn) < eps:
-      break
-    xn = x
+# zu 2
+print(len(set(topics)))                     # Anzahl individueller Einträge
+                                            # als Größe des Sets
 
-  return x
-
-if __name__ == "__main__":
-  x = float( input("Enter value for x:") )
-  output = input("Show all outputs (y/n)?")
-
-  result = square_root(x, output=='y')
-  print("sqrt(",x,") =", result)
-
+# zu 3
+print({i:topics.count(i) for i in topics})  # Auftretenshäufigkeit als 
+                                            # "List" Comprehension
+                                            # Dictonary der Einträge
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
