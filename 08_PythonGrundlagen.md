@@ -1171,18 +1171,64 @@ for x in "Hallo":
 
 {{2}}
 ************************************************************************
+> Was gibt die `range`-Funktion zurück?
+[( )] Den Abstand zwischen zwei Punkten
+[( )] Eine Liste von integern über die mit einer `for`-Schleife iteriert werden kann
+[(X)] Ein `range`-Objekt, bestehend aus integern über die mit einer `for`-Schleife iteriert werden kann
+************************************************************************
+
+{{3}}
+************************************************************************
+> Welche Parameter der `range`-Funktion sind optional?
+[[X]] start
+[[ ]] stop
+[[X]] step
+************************************************************************
+
+{{4}}
+************************************************************************
 > Wie lautet die Ausgabe dieses Programms?
 ```python
-for x in "Hallo":
-  print(x, end="o")
+for x in range(4):
+  print(x, end=",")
 ```
-[[Hoaololooo]]
+[[0,1,2,3,]]
+************************************************************************
+
+{{5}}
+************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```python
+for x in range(1,5):
+  print(x, end=",")
+```
+[[1,2,3,4,]]
+************************************************************************
+
+{{6}}
+************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```python
+for x in range(5,-1,-1):
+  print(x, end=",")
+```
+[[5,4,3,2,1,0,]]
 ************************************************************************
 
 ### Schleifen oder List Comprehension
 > Wie lautet die Ausgabe dieses Programms? Bitte geben Sie die Lösung ohne eckige Klammern oder Leerzeichen an.
 ```python
-square = [x*2 for x in range(5)]
-print(square)
+a = [x*2 for x in range(5)]
+print(a)
 ```
 [[0,2,4,6,8]]
+
+{{1}}
+************************************************************************
+> Wie lautet die Ausgabe dieses Programms? Bitte geben Sie die Lösung ohne eckige Klammern oder Leerzeichen an.
+```python
+a = [0,1,2,3,4]
+print([x*2 if x <= 2 else x for x in a])
+```
+[[0,2,4,3,4]]
+************************************************************************
