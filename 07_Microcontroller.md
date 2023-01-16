@@ -592,9 +592,8 @@ void loop() {
 ```
 @AVR8js.sketch
 
-{{1}}
-************************************************************************
-> Mögliche Lösung:
+#### Mögliche Lösung
+> Mögliche Lösung der Aufgabe:
 ```cpp
 int incomingByte = 0; // for incoming serial data
 
@@ -622,4 +621,3 @@ void loop() {
   }
 }
 ```
-************************************************************************
