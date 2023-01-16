@@ -807,15 +807,15 @@ int main()
 [( )] Nein
 
 ### Implementierung in C++
-> Wodurch muss `[_____]` ersetzt werden um eine Klasse `Flugzeug` zu erstellen, die von der Klasse `Fortbewegungsmittel` erbt?
+> Wodurch muss `[_____]` ersetzt werden um eine Klasse `Flugzeug` zu erstellen, die von der Klasse `Fahrzeug` erbt?
 ```cpp
 #include <iostream>
 
-class Fortbewegungsmittel{
+class Fahrzeug{
   public:
     int aktuellePosition[2];
     std::string Zulassungsnummer;
-    bool Fuehrerscheinpflichtig
+    bool Fuehrerscheinpflichtig;
 };
 
 [_____]{
@@ -849,7 +849,7 @@ class Fahrzeug {
     Fahrzeug(): name{"Fahrzeug"}{};
     Fahrzeug(std::string _name): name{_name}{};
     void kaputt() {
-      std::cout << name << " muss in die Werkstatt." << std::endl ;
+      std::cout << name << " muss in die Werkstatt.";
     }
     std::string name;
 };
@@ -877,64 +877,20 @@ int main() {
 [( )          (X)           ( )       ] Zugriff ist in der Basisklasse und in erbenden Klassen möglich.
 
 ### Polymorphie
-```cpp
-#include <iostream>
-
-class Fahrzeug {
-  public:
-    Fahrzeug(): name{"Fahrzeug"}{};
-    Fahrzeug(std::string _name): name{_name}{};
-    void kaputt() {
-      std::cout << name << "Das Fahrzeug muss in die Werkstatt." << std::endl ;
-    }
-    std::string name;
-};
-
-class Auto: public Fahrzeug {
-  public:
-    Auto(std::string name, int ps): Fahrzeug(name), ps{ps} {};
-    void kaputt() {
-      std::cout << name << "Das Auto muss in die Werkstatt." << std::endl ;
-    }
-    int ps = 0;
-};
-
-class Flugzeug: public Fahrzeug {
-  public:
-    Auto(std::string name, int sitzplaetze): Fahrzeug(name), sitzplaetze{sitzplaetze} {};
-    void kaputt() {
-      std::cout << name << "Das Flugzeug muss in die Werkstatt." << std::endl ;
-    }
-    int sitzplaetze = 0;
-};
-
-int main() {
-  Auto auto1 = Auto("Peters Auto", 100);
-  Flugzeug flug1 = Flugzeug("Martins Auto", 5);
-  flug1.kaputt();
-  return 0;
-} 
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-[[Das Flugzeug muss in die Werkstatt.]]
-
-{{1}}
-**************************************************************************
 > Was ist Polymorphie?
 [( )] Eine Technik, die es ermöglicht, bestehende Methoden für neue Klassen zu verwenden
 [(X)] Eine Technik, die es ermöglicht, bestehende Methoden zu überschreiben
 [( )] Eine Technik, die es ermöglicht, bestehende Klassen zu ändern
-**************************************************************************
 
-{{2}}
+{{1}}
 **************************************************************************
 > Wann ist Polymorphie sinnvoll?
 [( )] Immer, wenn man neue Klassen definiert
 [(X)] Wenn man bestehende Methoden für neue Klassen verwenden möchte
-[( )] Wenn man Methoden der Basisklasse überschreiben möchte
+[( )] Wenn man Methoden der Basisklasse löschen möchte
 **************************************************************************
 
-{{3}}
+{{2}}
 **************************************************************************
 > Wie lautet die Ausgabe dieses Programms?
 
@@ -943,7 +899,7 @@ int main() {
 
 class Basisklasse {
   public:
-    virtual void ausgabe() {
+    void ausgabe() {
       std::cout << "Ausgabe1";
     }
 };
