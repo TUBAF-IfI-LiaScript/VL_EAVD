@@ -241,7 +241,7 @@ print(x, y)
 
 {{1}}
 <section>
-> Verkürzte Schreibweisen für Rechenoperationen, wie **+=** **-=** ***=** und **/=** existieren. Ein **++** oder **--** gibt es in Python aber nicht.
+> Verkürzte Schreibweisen für Rechenoperationen, wie **+=**, **-=**, ***=** und **/=** existieren. Ein **++** oder **--** gibt es in Python aber nicht.
 
 ```python
 x = 10
@@ -897,3 +897,69 @@ print({i:topics.count(i) for i in topics})  # Auftretenshäufigkeit als
                                             # Dictonary der Einträge
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+# Quiz
+## Elemente der Programmiersprache
+> Welche Programmierparadigmen unterstützt Python?
+[[X]] Imperativ
+[[X]] Prozedural
+[[X]] Objektorientiert
+
+### Zuweisung und Datentypen
+> Der Variable `d` soll erstmalig der Wert `3.14` zugewiesen werden. Welche Umsetzung ist korrekt?
+[( )] `float d = 3.14;`
+[( )] `float d = 3.14`
+[( )] `d = 3.14;`
+[(X)] `d = 3.14`
+[( )] `int d = 3.14;`
+
+{{1}}
+************************************************************************
+> Sie haben der Variable `d` soeben erfolgreich `3.14` zugewiesen. Ist es möglich der Variable `d` nun einen Wert von einem anderen Datentyp zuzuweisen?
+[(X)] Ja
+[( )] Nein
+************************************************************************
+
+{{2}}
+************************************************************************
+> Wie können die Werte von den Variablen `x` und `y` in einer Zeile getauscht werden? Geben Sie die Lösung ohne Leerzeichen an.
+[[x,y=y,x]]
+<script>
+let input = "@input".trim().toLowerCase()
+
+input == "x,y=y,x" || input == "y,x=x,y"
+</script>
+************************************************************************
+
+{{3}}
+************************************************************************
+> Welche der folgenden Rechenoperationen existieren in Python?
+[[ ]] `++`
+[[X]] `+`
+[[X]] `-`
+[[X]] `/`
+[[X]] `+=`
+[[X]] `*=`
+[[ ]] `--`
+************************************************************************
+
+### Standard Datentypen
+> Welche dieser beispielhaft angegebenen Datentypen existieren in Python?
+[[X]] tupel
+[[X]] dictionary
+[[X]] set
+[[X]] list
+[[X]] None
+[[X]] float
+[[X]] int
+[[X]] string
+[[X]] complex
+
+### Ausgabe
+> Mit welcher Funktion kann Text in Python in der Konsole ausgegeben werden?
+[[print]]
+<script>
+let input = "@input".trim()
+
+input == "print" || input == "print()" || input == "print ()"
+</script>
