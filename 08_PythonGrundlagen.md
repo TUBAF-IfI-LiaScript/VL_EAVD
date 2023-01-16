@@ -925,7 +925,7 @@ print({i:topics.count(i) for i in topics})  # Auftretenshäufigkeit als
 > Wie können die Werte von den Variablen `x` und `y` in einer Zeile getauscht werden? Geben Sie die Lösung ohne Leerzeichen an.
 [[x,y=y,x]]
 <script>
-let input = "@input".trim().toLowerCase()
+let input = "@input".trim()
 
 input == "x,y=y,x" || input == "y,x=x,y"
 </script>
@@ -963,3 +963,226 @@ let input = "@input".trim()
 
 input == "print" || input == "print()" || input == "print ()"
 </script>
+
+{{1}}
+************************************************************************
+> Mit welchem Parameter kann der standardmäßige Zeilenumbruch ersetzt werden?
+[[end]]
+<script>
+let input = "@input".trim()
+
+input == "end" || input == "end=" || input == "end ="
+</script>
+************************************************************************
+
+### Eingabe
+> Mit welcher Funktion kann Text in Python in der Konsole eingegeben werden?
+[[input]]
+<script>
+let input = "@input".trim()
+
+input == "input" || input == "input()" || input == "input ()"
+</script>
+
+{{1}}
+************************************************************************
+> Liefert dieses Programm einen Fehler?
+```python
+x = input("x eingeben:")
+y = x**2
+print("y = ", y)
+```
+[(X)] Ja
+[( )] Nein
+************************************************************************
+
+### Zusätzliche Module einbinden
+> Mit welchem Schlagwort werden Module in Python eingebunden?
+- [( )] `using`
+- [(X)] `import`
+- [( )] `#include`
+
+{{1}}
+************************************************************************
+> Wodurch muss `[_____]` ersetzt werden, um `Pi` aus dem eingebundenen Modul `math` auszugeben?
+```python
+import math as m
+
+print([_____].pi)
+```
+[[m]]
+************************************************************************
+
+{{2}}
+************************************************************************
+> Wodurch muss `[_____]` ersetzt werden um `Pi` aus dem eingebundenen Modul `math` auszugeben?
+```python
+from math import *
+
+print([_____])
+```
+[[pi]]
+************************************************************************
+
+### Listen
+> Wodurch muss `[_____]` ersetzt werden um die Länge der Liste `l` auszugeben?
+```python
+l = ['r', 6, 8.0]
+print([_____](l))
+```
+[[len]]
+
+{{1}}
+************************************************************************
+> Wie lautet die Ausgabe dieses Programms? Geben Sie die Antwort ohne eckige Klammern oder Leerzeichen an.
+```python
+liste = [1, 7]
+
+liste.append(2)
+liste.sort()
+liste.reverse()
+liste.extend([5,6])
+liste.remove(1)
+
+print(liste)
+```
+[[7,2,5,6]]
+************************************************************************
+
+### Listen-Indizierung
+> Wie lautet die Ausgabe dieses Programms?
+```python
+data = ['a', 'b', 'c', 'd', 'e', 'f']
+print(data[2])
+```
+[[c]]
+
+{{1}}
+************************************************************************
+> Wie lautet die Ausgabe dieses Programms? Geben Sie die Antwort ohne eckige Klammern oder Leerzeichen an.
+```python
+data = ['a', 'b', 'c', 'd', 'e', 'f']
+l = []
+l.extend(data[-2])
+l.extend(data[3:])
+l.extend(data[-4:])
+l.extend(data[::2])
+print(l)
+```
+[[e,d,e,f,c,d,e,f,a,c,e]]
+************************************************************************
+
+## Kontrollstrukturen
+### Selektion mit `if`
+> Wie viele `elif` Zweige darf es maximal in einer `if`-Anweisung geben?
+[( )] 0
+[( )] 1
+[(X)] beliebig
+
+{{1}}
+************************************************************************
+> Wie viele `else` Zweige darf es maximal in einer `if`-Anweisung geben?
+[( )] 0
+[(X)] 1
+[( )] beliebig
+************************************************************************
+
+{{2}}
+************************************************************************
+> Wodurch müssen die `[_____]` ersetzt werden?
+```python
+a = 3.4
+if a > 9[_____]
+  print('A')
+else[_____]
+  print('B')
+
+print('C')
+```
+[[:]]
+************************************************************************
+
+{{3}}
+************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```python
+a = 3.4
+if a > 9:
+  print('A')
+elif a > 2:
+  print('B')
+else:
+  print('C')
+```
+[[B]]
+************************************************************************
+
+{{4}}
+************************************************************************
+> Worauf muss bei verschachtelten `if`-Anweisungen besonders geachtet werden?
+[( )] Auf den Datentyp der Variablen
+[( )] Es muss immer ein `else` Zweig existieren
+[(X)] Auf die richtige Einrückung
+************************************************************************
+
+{{5}}
+************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```python
+a = 3.4
+if a > 9:
+  print('A')
+elif a > 2:
+  if a < 3:
+    print('B')
+  else:
+    print('C')
+else:
+  print('D')
+```
+[[C]]
+************************************************************************
+
+### `while`-Schleife
+> Wodurch muss `[_____]` ersetzt werden?
+```python
+while True[_____]
+  print('Und nochmal...')
+```
+[[:]]
+
+### `for`-Schleife
+> Wie lautet die Ausgabe dieses Programms?
+```python
+for x in [7, 8, 9]:
+  print(x, end=",")
+```
+[[7,8,9,]]
+
+{{1}}
+************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```python
+for x in "Hallo":
+  print(x, end="o")
+```
+[[Hoaololooo]]
+************************************************************************
+
+{{2}}
+************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```python
+for x in "Hallo":
+  print(x, end="o")
+```
+[[Hoaololooo]]
+************************************************************************
+
+### Schleifen oder List Comprehension
+> Wie lautet die Ausgabe dieses Programms? Bitte geben Sie die Lösung ohne eckige Klammern oder Leerzeichen an.
+```python
+square = [x*2 for x in range(5)]
+print(square)
+```
+[[0,2,4,6,8]]
