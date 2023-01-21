@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf & Florian Richter
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de & Flo.Richter@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 
@@ -831,18 +831,19 @@ void loop() {
 Die Ausgabe in Python ist außerordentlich konfigurierbar. Man unterscheidet zwischen 
 
 1. der `printf` motivierten Ausgabe mit dem String modulo operator (`%`)  und 
-2. den `f-strings`.
+2. den Ausgaben mit `format()`
+3. den `f-strings`.
 
-`printf` folgt dem Muster `%[flags][width][.precision]type` für die Spezifikation der Ausgabe. Die zugehörige Verwendung unter Python stellt sich wie folgt dar:
+`print` folgt dem Muster `%[flags][width][.precision]type` für die Spezifikation der Ausgabe. Die zugehörige Verwendung unter Python stellt sich wie folgt dar:
 
 ```python     prinf.py
 print("Total students : %3d, Fak. 3 : %2d" % (80, 65))
-print("Total students : %-5d, Fak. 3 : %05d" % 80, 65)
+print("Total students : %-5d, Fak. 3 : %05d" % (80, 65))
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 
- `f-strings` integrieren eigenen Code direkt in die Ausgabe - dies reicht von der einfachen Benennung einer Variablen, über Operationen mit Variablen bis hin zu Bedingungen und Funktionsaufrufen.
+`f-strings` integrieren eigenen Code direkt in die Ausgabe - dies reicht von der einfachen Benennung einer Variablen, über Operationen mit Variablen bis hin zu Bedingungen und Funktionsaufrufen.
 
 ```python
 num1 = 83
@@ -854,46 +855,3 @@ print(f"{num1} and {num2} are equal - {True if num1 == num2 else False}.")
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 ****************************************************************************************
-
-
-## Beispiel der Woche
-
-Gegeben sei eine Liste der Studiengangsbezeichnungen für die Studierenden dieser Vorlesung. Leiten Sie aus der Liste ab
-
-1. Wie viele Studierende eingeschrieben sind?
-2. Wie viele Studiengänge in der Veranstaltung präsent sind?
-3. Wie viele Studierende zu den Studiengängen gehören?
-
-```python
-# Angabe der Studiengänge der eingeschriebenen Teilnehmer in der 
-# Veranstaltung
-topics = [
-  "S-UWE", "S-WIW", "S-GÖ", "S-VT", "S-GÖ", "S-BAF", "S-VT",
-  "S-WWT", "S-NT", "S-WIW", "S-ET", "S-WWT", "S-MB", "S-WIW",
-  "S-FWK", "F1-INF", "S-WIW", "S-BWL", "S-WIW", "S-MAG",
-  "F2-ANCH", "S-MAG", "S-WWT", "S-NT", "S-ACW", "S-GTB",
-  "S-WIW", "F2-ANCH", "S-GTB", "S-GÖ", "S-GBG", "S-GM",
-  "S-MAG", "S-GTB", "S-WIW", "S-WIW", "S-FWK", "S-WIW",
-  "S-MAG", "S-GBG", "S-GÖ", "S-BAF", "S-BAF", "S-NT", "S-GÖ",
-  "S-WWT", "S-GBG", "S-WWT", "S-GBG", "S-ERW", "S-WWT",
-  "S-WIW", "S-NT", "S-WIW", "S-GÖ", "S-WIW", "S-GM",
-  "S-GBG", "F1-INF", "S-WIW", "S-WWT", "S-ACW", "S-WIW",
-   "S-WWT", "S-ACW", "S-INA", "S-FWK", "S-GTB", "S-WIW",
-   "S-MORE", "S-WIW", "S-GÖ", "S-BWL", "S-CH", "S-WIW",
-   "F2-ANCH", "S-WIW", "S-ACW", "S-ET", "S-ET", "S-GÖ",
-   "S-GÖ"
-]
-
-# zu 1
-print(len(topics))                          # Länge der Liste
-
-# zu 2
-print(len(set(topics)))                     # Anzahl individueller Einträge
-                                            # als Größe des Sets
-
-# zu 3
-print({i:topics.count(i) for i in topics})  # Auftretenshäufigkeit als 
-                                            # "List" Comprehension
-                                            # Dictonary der Einträge
-```
-@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
