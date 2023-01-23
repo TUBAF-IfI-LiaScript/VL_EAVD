@@ -10,18 +10,17 @@ comment: Einführung in die Programmierung für Nicht-Informatiker
 logo: ./img/LogoCodeExample.png
 
 import: https://github.com/liascript/CodeRunner
-        https://raw.githubusercontent.com/liaTemplates/PyScript/main/README.md
 
 -->
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/10_Datenvisualisierung.md)
 
-# Visualisierung mit Python
+# Objektorientierung / Visualisierung mit Python
 
 | Parameter                | Kursinformationen                                                                                                                                                                              |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Veranstaltung:**       | `Prozedurale Programmierung / Einführung in die Informatik`                                                                                                                                    |
-| **Semester**             | `Wintersemester 2022/23`                                                                                                                                                                       |
+| **Veranstaltung:**       | `Prozedurale Programmierung / Einführung in die Informatik`                                                                                                                                                      |
+| **Semester**             | `Wintersemester 2022/23`                                                                                                                                                                                         |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                              |
 | **Inhalte:**             | `Visualisierung mit Python`                                                                                                                                                    |
 | **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/10_Datenvisualisierung.md](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/10_Datenvisualisierung.md) |
@@ -34,22 +33,399 @@ import: https://github.com/liascript/CodeRunner
 
 **Fragen an die heutige Veranstaltung ...**
 
-* 
+* Wie lassen 
 
 ---------------------------------------------------------------------
 
-## Installation von Python-Paketen 
-
 ## Objektorientierung in Python 
 
-## Motivation
+> Klassen werden verwendet, um benutzerdefinierte Datenstrukturen zu erstellen und definieren Funktionen, sogenannte Methoden, die das Verhalten und die Aktionen identifizieren, die ein aus der Klasse erstelltes Objekt mit seinen Daten ausführen kann.
 
-``` python @PyScript.env
-- matplotlib
-- numpy
+Eine kurze Auffrischung Ihrer Erinnerungen zur objektorientierter Programmierung in C++ ...
+
+```cpp                     Comparison.cpp
+#include <iostream>
+
+class Rectangle {
+  private:
+    float width, height;
+  public:
+    Rectangle(int w, int h){
+        if ((w > 0) & (h > 0)) {
+                this->width = w;
+                this->height = h;
+        }else{
+                this->width = w;
+                this->height = h;
+        }
+    }
+    float area() {return width*height;}
+    Rectangle operator+=(Rectangle offset) {
+       float ratio = (offset.area() + this->area()) / this->area();
+       this->width = ratio *  this->width;
+       return *this;
+    }
+};
+
+int main () {
+  Rectangle rect_a(3,4);
+  Rectangle rect_b(1,3);
+  std::cout << "Fläche a : " << rect_a.area() << "\n";
+  std::cout << "Fläche b : " << rect_b.area() << "\n";
+  rect_a += rect_b;
+  std::cout << "Summe    : " << rect_a.area();
+
+  return 0;
+}
+```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+| Zeile | Bedeutung                                                                     |
+| ----: | ----------------------------------------------------------------------------- |
+|  3-22 | Definition der Klasse `Rectangle` (Schablone für Daten, Methoden, Operatoren) |
+|     5 | Gekapselte Daten der Klasse, diese sind "von Außen" nicht sichtbar            |
+|     7 | Konstruktor mit Evaluation der übergebenen Parameter                          |
+|    16 | Methode über den Daten der Klasse                                             |
+|    17 | Individueller Operator `+` mit einer spezifischen Bedeutung                   |
+| 25-28 | Generierung von Objekten mittels Konstruktoraufruf und Parameterübergabe      |
+
+Objektorientierte Programmierung (OOP) ist ein Paradigma, das über die Ideen der Prozeduralen Programmierung hinaus geht. Es definiert Objekte und deren Verhalten. Dabei baut es auf 3 zentralen Grundprinzipien auf:
+
+1. __Kapselung__ Objekte kapseln ihre Daten, Operatoren, Methoden usw. sofern diese nicht als "öffentlich" deklariert sind. 
+
+> _Was intern passiert bleibt intern!_
+
+2. __Vererbung__ Objekte können "Fähigkeiten" an andere, speziellere Objekte weitergeben. 
+
+> _Von wem hat er das denn wohl?_
+
+3. __Polymorphismus__ Objekte werden durch Kapselung und Vererbung  austauschbar! 
+
+> _Was bist denn Du für einer?_
+
+Vorteile der objektorientierten Programmierung
+
+- höhere Wartbarkeit durch Abstraktion 
+- Wiederverwendbarkeit von Code (je mehr desto kleiner und allgemeiner die Objekte gehalten sind)
+- schlanker und übersichtlicher Code durch Vererbung
+
+Warum also nicht immer objektorientiert entwickeln?
+
+OOP verführt ggf. dazu, das eigentliche Problem durch eine aufwändigen Entwurf unnötig zu verkomplizieren. Dabei ist die Entwicklung der Gesamtstruktur eines komplexen Softwareprojektes aus n Objekten eine Kunst und braucht viel Übung! Erst, wenn man entsprechende Regeln kennt und sinnvoll anwendet, zeigen sich die Vorteile des Paradigmas.
+
+### ... und in Python?
+
+> **In Python ist alles ein Objekt!**
+
+```python
+import inspect
+
+i=5
+
+for name, data in inspect.getmembers(i):
+    if name == '__builtins__':
+        continue
+    print(f'{name} - {repr(data)}')
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+### Klassen in Python
+
+Alle Klassendefinitionen beginnen mit dem Schlüsselwort `class`, gefolgt vom Namen der Klasse und einem Doppelpunkt. Jeder Code, der unterhalb der Klassendefinition eingerückt ist, wird als Teil des Klassenhauptteils betrachtet.
+
+Analog zu C++ nutzt Python für die Interaktion mit den Klassenelementen ein _dot notation_.
+
+```python    OOPclass.py
+import inspect
+
+class Dog:    # Schlüsselwort "class"
+    family = "Canidae"
+    name = "Bello"
+    age = 5
+
+i = Dog()
+print(i.species)
+i.name = "Russel"
+print(i.name)
+
+for name, data in inspect.getmembers(i):
+    if name == '__builtins__':
+        continue
+    print(f'{name} - {repr(data)}')
+
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+> Aufgabe: Erläutern Sie die Ausgabe folgenden Codes. Wie müssen wir das Ergebnis interpretieren?
+
+```python    OOPclass.py
+import inspect
+
+class Dog:  
+    family = "Canidae"
+    name = "Bello"
+    age = 5
+
+i = Dog()
+j = Dog()
+
+print(i == j)
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+### OOP Grundelemente in Python
+
+> Frage: Für welche Aufgaben ist der Konstruktor in einer Klasse verantwortlich?
+
+```python    OOPclass.py
+class Dog:
+    family = "Canidae"
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+i = Dog("Rex", 5)
+print(i.name, i.family, i.age)
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+Instanzmethoden sind Funktionen, die innerhalb einer Klasse definiert sind und nur von einer Instanz dieser Klasse aufgerufen werden können. Genau wie bei `__init__()` ist der erste Parameter einer Instanzmethode immer self.
+
+```python    OOPclass.py
+class Dog:
+    family = "Canidae"
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def makeSound(self):     # : nicht vergessen!
+        print(f"{self.name} says Wuff")
+
+i = Dog("Rex", 5)
+i.makeSound()
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+> Aufgabe: Schreiben Sie eine Methode, so dass eine Instanz von Dog in Abhängigkeit von ihrem Alter schläft. Recherchieren Sie dazu unter `python delay` die notwendigen Methoden der `time` Klasse.
+
+Wie Sie bereits bie der Inspektion der  `list`, `int` aber auch der `Dog` Klassen gesehen haben, existiert eine Zahl von vordefinierten Funktionen - die sogenannten _dunder Methods_. Das Wort _dunder_ leitet sich von _double underscore_ ab. 
+
+| Methode      | Typ                  | implementiert                              |
+| ------------ | -------------------- | ------------------------------------------ |
+| `__init__()` | Konstruktor          |                                            |
+| `__str__()`  | Methode              | Generiert einen String aus den Objektdaten |
+| ...          |                      |                                            |
+| `__add__()`  | Operator Obj + Obj   | Arithmetische Operation                    |
+| ...          |                      |                                            |
+| `__eq__()`   | Operator  Obj == Obj | Logische Operation                         |
+| `__lt__()`   | Operator  Obj <= Obj |                                            |
+| ...          |                      |                                            |
+
+Eine gute Einführung und detailierte Erklärung liefert [Link](https://mathspp.com/blog/pydonts/dunder-methods)
+
+```python    OOPclass.py
+class Dog:
+    family = "Canidae"
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+i = Dog("Rex", 5)
+print(i)
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+### Vererbung
+
+> Was stört Sie an folgendem Codebeispiel?
+
+```python    RedundandCode.py
+class Student:
+  def __init__(self, fname, lname):
+    self.firstname = fname
+    self.lastname = lname
+
+  def printname(self):
+    print("Student -", self.firstname, self.lastname)
+
+
+class StaffMember:
+  def __init__(self, fname, lname):
+    self.firstname = fname
+    self.lastname = lname
+
+  def printname(self):
+    print(self.firstname, self.lastname)
+
+Humboldt = Student("Alexander", "Humboldt")
+Cotta = StaffMember("Prof. - " "Bernhard", "von-Cotta")
+
+Humboldt.printname()
+Cotta.printname()
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+Vererbung überträgt das Verhalten einer Basisklasse auf eine abgeleitete Klasse. Dadurch wird redundanter Code gespart.
+
+```python    Inheritance.py
+class Person:
+  def __init__(self, fname, lname):
+    self.firstname = fname
+    self.lastname = lname
+
+class Student(Person):
+   pass
+
+class StaffMember(Person):
+   pass
+
+Humboldt = Student("Alexander", "Humboldt")
+Cotta = StaffMember("Prof. - " "Bernhard", "von-Cotta")
+
+Humboldt.printname()
+Cotta.printname()
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+### Python und C++ mit Blick auf OOP Konzepte
+
++ Das Konzept der Überladung wird in Python nicht nativ unterstützt!
+
+```python    OOPclass.py
+class Dog:  
+  family = "Canidae"
+  def __init__(self, *args):
+    if len(args)>0:
+      if isinstance(args[0], str):
+        self.name = args[0]
+      else:
+        print("Der Datentyp passt nicht für die Variable Name!")
+    else:
+      self.name = "-"
+
+i = Dog()
+print(i.name, i.family)
+j = Dog("Fido")
+print(j.name, j.family)
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+### OOP Beispiel
+
+Nehmen wir an, dass wir eine Liste von Vorname erzeugen wollen. Dabei soll sichergestellt werden, dass diese unabhängig von den Eingaben der Bediener vergleichbar sind. Zudem sollen fehlerhafte Eingaben, die zum Beispiel Zahlen enthalten erkannt und gefiltert werden.
+
+```python    newListClass.py
+class NameList(list):
+  def __init__(self):
+    super().__init__()
+
+  def append(self, item):
+    if isinstance(item, str):
+      if item.isalpha():
+        super().append(item.lower())
+      else:
+        print("Wrong data type!")
+
+  def uniques(self):
+    return set(self)
+
+A = NameList()
+A.append("Jannes")
+A.append("linda")
+A.append("Moritz")
+A.append("MORITZ")
+print(A)
+print(A.uniques())
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+Dafür schreiben wir eine abgeleitet Listenklasse mit einer eigenen Implementierung von `append()`.
+
+> __Aufgabe__ Erweitern Sie die Implementierung auf die `extend()` Methode der Listen.
+
+## Datenvisualisierung
+
+In der vergangenen Woche haben wir Ihre Zugehörigkeit zu verschiedenen Studiengängen eingelesen und analysiert [Link L09](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/09_PythonVertiefung.md#6).
+
+Auf die Frage hin, welche Häufigkeiten dabei auftraten, beantwortete unser Skript mit einem Dictonary:
+
+```bash
+{'S-UWE': 1, 'S-WIW': 18, 'S-GÖ': 9, 'S-VT': 2, 'S-BAF': 3, 'S-WWT': 8, 'S-NT': 4, 
+ 'S-ET': 3, 'S-MB': 1, 'S-FWK': 3, 'F1-INF': 2, 'S-BWL': 2, 'S-MAG': 4, 'F2-ANCH': 3, 
+ 'S-ACW': 4, 'S-GTB': 4, 'S-GBG': 5, 'S-GM': 2, 'S-ERW': 1, 'S-INA': 1, 'S-MORE': 1,
+  'S-CH': 1}
 ```
 
-``` python @PyScript.repl
+<!--
+data-title="Teilnehmende Studierende pro Studiengang"
+data-show
+-->
+| Studiengang | Anzahl |
+| ----------- | ------ |
+| 'S-UWE'     | 1      |
+| 'S-WIW'     | 18     |
+| 'S-GÖ'      | 9      |
+| 'S-VT'      | 2      |
+| 'S-BAF'     | 3      |
+| 'S-WWT'     | 8      |
+| 'S-NT'      | 4      |
+| 'S-ET'      | 3      |
+| 'S-MB'      | 1      |
+| 'S-FWK'     | 3      |
+| 'F1-INF'    | 2      |
+| 'S-BWL'     | 2      |
+| 'S-MAG'     | 4      |
+| 'F2-ANCH'   | 3      |
+| 'S-ACW'     | 4      |
+| 'S-GTB'     | 4      |
+| 'S-GBG'     | 5      |
+| 'S-GM'      | 2      |
+| 'S-ERW'     | 1      |
+| 'S-INA'     | 1      |
+| 'S-MORE'    | 1      |
+| 'S-CH'      | 1      |
+
+
+Die textbasierte Ausgabe ist nur gering geeignet, um einen raschen Überblick zu erlangen. Entsprechend suchen wir nach einer grafischen Ausgabemöglichkeit für unsere Python Skripte.
+
+### Python Visualisierungstools
+
+Python stellt eine Vielzahl von Paketen für die Visualisierung von Dateninhalten bereit. Diese zielen auf unterschiedliche Visionen oder Features:
+
++ einfache Verwendbarkeit
++ große Bandbreite von Diagrammarten und Adaptionsmöglichkeiten
++ interaktive Diagramme 
++ Vielzahl von Exportschnittstellen
+
+| Package    | Link                                | Besonderheiten                                             |
+| ---------- | ----------------------------------- | ---------------------------------------------------------- |
+| plotly     | [Link](https://plotly.com/)         | Fokus auf interaktive Diagramme eingebettetet in Webseiten |
+| seaborn    | [Link](https://seaborn.pydata.org/) | Leistungsfähige Darstelung von statistischen Daten         |
+| matplotlib | [Link](https://matplotlib.org/)     |                                                            |
+| ...        |                                     |                                                            |
+
+### Matplotlib Grundlagen
+
+```python      Beispiel.py
+import matplotlib.pyplot as plt
+
+a = [5,6,7,9,12]
+b =[x**2 for x in a]
+plt.plot(a, b)
+plt.show()
+
+#plt.show()  # notwendig für die Ausgabe in LiaScript sonst plt.show()
+plt.savefig('foo.png')
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+
+!?[MatplotlibTutorial](https://www.youtube.com/watch?v=UO98lJQ3QGI)
+
+
+## Beispiel der Woche
+
+```python      Beispiel.py
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -78,7 +454,6 @@ axs[1].set_ylabel('Coherence')
 fig.tight_layout()
 
 #plt.show()
-fig  # notwendig für die Ausgabe in LiaScript sonst plt.show()
+plt.savefig('foo.png')
 ```
-
-## Beispiel der Woche
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
