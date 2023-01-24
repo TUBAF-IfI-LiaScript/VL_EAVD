@@ -33,9 +33,22 @@ import: https://github.com/liascript/CodeRunner
 
 **Fragen an die heutige Veranstaltung ...**
 
-* Wie lassen 
+* Wie lassen sich die Konzepte der OOP in Python ausdrücken?
+* Welche spezifischen Einschränkungen gibt es dabei?
+* Welche Grundkonzepte stehen hinter der Programmierung von Grafiken?
+* Wie geht man bei der Erschließung von unbekannten Methoden sinnvoll vor?
 
 ---------------------------------------------------------------------
+
+Organisatorisches
+========================
+
++ Wer von Ihnen ist Hörerinnen und Hörer der Vorlesung _Einführung in die Informatik_?
+
++ Bitte bringen Sie sofern möglich Ihre Notebooks zu den Übungen mit. Installieren Sie darauf bereits Python mittels [Anaconda](https://www.anaconda.com/products/distribution).
+
++ In der letzten Übung wird eine Zusammenfassung der behandelten Inhalte angeboten. Dabei wird insbesondere auf die Objektorientierung unter C++ eingegangen.
+
 
 ## Objektorientierung in Python 
 
@@ -235,6 +248,27 @@ print(i)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
+### Kapselung 
+
+Python nutzt zwei führende Unterstriche, um Methoden und Variablen als _private_ zu markieren.
+
+```python    private.py
+class A:
+	def method_public(self):
+		print("This is a public method")
+
+	def __method_private(self):
+		print("This is a private method")
+
+obj = A()
+obj.method_public()
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+Auf private Methoden einer Klasse kann weder außerhalb der Klasse noch von irgendeiner Basisklasse aus zugegriffen werden kann. 
+
+> Wie können wir die private Methode überhaupt aufrufen?
+
 ### Vererbung
 
 > Was stört Sie an folgendem Codebeispiel?
@@ -258,7 +292,7 @@ class StaffMember:
     print(self.firstname, self.lastname)
 
 Humboldt = Student("Alexander", "Humboldt")
-Cotta = StaffMember("Prof. - " "Bernhard", "von-Cotta")
+Cotta = StaffMember("Bernhard", "von-Cotta")
 
 Humboldt.printname()
 Cotta.printname()
@@ -307,6 +341,22 @@ i = Dog()
 print(i.name, i.family)
 j = Dog("Fido")
 print(j.name, j.family)
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
++ Private ist nicht wirklich private 
+
+```python    NameMangling.py
+class A:
+	def fun(self):
+		print("This is a public method")
+
+	def __fun(self):
+		print("This is a private method")
+
+obj = A()
+obj.fun()
+obj._A__fun()   # <- Name Mangling  "_classname__function"
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
@@ -410,17 +460,78 @@ Python stellt eine Vielzahl von Paketen für die Visualisierung von Dateninhalte
 import matplotlib.pyplot as plt
 
 a = [5,6,7,9,12]
-b =[x**2 for x in a]
+b =[x**2 for x in a]   # List Comprehension
 plt.plot(a, b)
 plt.show()
 
-#plt.show()  # notwendig für die Ausgabe in LiaScript sonst plt.show()
-plt.savefig('foo.png')
+#plt.show()  
+plt.savefig('foo.png') # notwendig für die Ausgabe in LiaScript
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+| Anpassung                      | API                                                                                      |                                                   |
+| ------------------------------ | ---------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| Linientyp der Datendarstellung | [pyplot.plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html)     | `plt.plot(a, b, 'ro:')`                           |
+| Achsenlabel hinzufügen         | [pyplot.xlabel](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.xlabel.html) | `plt.xlabel('my data', fontsize=14, color='red')` |
+| Titel einfügen                 |  [pyplot.title](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.title.html)                                                                                       | `plt.title(r'$\sigma_i=15$')`                     |
+| Gitter einfügen                |  [pyplot.grid](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.grid.html)                                                                                        | `plt.grid()`                                      |
+| Legende                        |  [pyplot.legend](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html)                                                                                        | `plt.plot(a, b, 'ro:', label="Data")`             |
+|                                |                                                                                          | `plt.legend()`                                    |
+| Speichern                      |  [pyplot.savefig](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html)                                                                                        | `plt.savefig('foo.png') `                         |
+
+![Matplot](https://miro.medium.com/max/720/1*OAFEIg9w1XHyZk0xBud14A.webp "Tutorial von Rizky Maulana Nurhidayat auf [medium](https://towardsdatascience.com/visualizations-with-matplotlib-part-1-c9651008b6b8)")
+
+Weiter Tutorials sind zum
+!?[MatplotlibTutorial](https://www.youtube.com/watch?v=UO98lJQ3QGI )
+
+
+### Matplotlib Beispiele
+
+```python      MultipleDiagrams.py
+import numpy as np
+import matplotlib.pyplot as plt
+
+N = 21
+x = np.linspace(0, 10, 11)
+y = [3.9, 4.4, 10.8, 10.3, 11.2, 13.1, 14.1,  9.9, 13.9, 15.1, 12.5]
+
+# fit a linear curve an estimate its y-values and their error.
+a, b = np.polyfit(x, y, deg=1)
+y_est = a * x + b
+y_err = x.std() * np.sqrt(1/len(x) +
+                          (x - x.mean())**2 / np.sum((x - x.mean())**2))
+
+fig, ax = plt.subplots()
+ax.plot(x, y_est, '-')
+ax.fill_between(x, y_est - y_err, y_est + y_err, alpha=0.2)
+ax.plot(x, y, 'o', color='tab:brown')
+
+#plt.show()  
+plt.savefig('foo.png') # notwendig für die Ausgabe in LiaScript
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 
-!?[MatplotlibTutorial](https://www.youtube.com/watch?v=UO98lJQ3QGI)
+```python      MultipleDiagrams.py
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(t):
+    return np.exp(-t) * np.cos(2*np.pi*t)
+
+t1 = np.arange(0.0, 5.0, 0.1)
+t2 = np.arange(0.0, 5.0, 0.02)
+
+plt.figure()
+plt.subplot(211)
+plt.plot(t1, f(t1), 'bo', t2, f(t2), 'k')
+
+plt.subplot(212)
+plt.plot(t2, np.cos(2*np.pi*t2), 'r--')
+#plt.show()  
+plt.savefig('foo.png') # notwendig für die Ausgabe in LiaScript
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 
 ## Beispiel der Woche
