@@ -15,7 +15,7 @@ import: https://github.com/liascript/CodeRunner
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/11_DatenAnalyse.md)
 
-# Daten- und Zeitreihenanalysen
+# Datenalyse mit Python
 
 | Parameter                | Kursinformationen                                                                                                                                                                              |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -33,12 +33,19 @@ import: https://github.com/liascript/CodeRunner
 
 **Fragen an die heutige Veranstaltung ...**
 
-* 
+* Welche Datenformate sind für den Daten Austausch zwischen Mikrocontroller und Python Script üblich?
+* Wie unterstützt das `pandas` Paket die wissenschaftliche Analyse von Datensätzen?
+* Wie ändert sich der Analyseprozess verglichen mit der Verwendung einer Tabellenkalkulation?
 
 ---------------------------------------------------------------------
 
 Organisatorisches
 ========================
+
+Praktische Zusatzaufgabe für die Hörerinnen und Hörer der Einführung in die Informatik
+
++ 
+
 
 
 
@@ -179,10 +186,12 @@ timestamp;X;Y;Z
 ```python readCSV.py
 import csv
 
+# Einlesen der Daten
 with open('data.csv', mode='r') as csv_file:
     csv_reader = csv.DictReader(csv_file, delimiter=';',)
     list_of_dict = list(csv_reader)
 
+# "Analyse" und Ausgabe
 print(f"{len(list_of_dict)} Datensätze gelesen!")
 for row in list_of_dict:
 	print(row)
@@ -197,13 +206,9 @@ for row in list_of_dict:
 
 Der Name leitet sich von dem Begriff "_panel data_" ab, einem Begriff aus der Ökonometrie für Datensätze, die Beobachtungen über mehrere Zeiträume für dieselben Personen enthalten.
 
-+ __Skalierbarkeit__ - Pandas ist nur durch die Hardware begrenzt und kann größere Datenmengen verarbeiten. Excel ist aktuell auf 1.048.576 Zeilen und 16.384 Spalten beschränkt.
-+ __Geschwindigkeit__ - Pandas arbeitet viel schneller als eine Tabellenkaklulation, was sich besonders bei der Arbeit mit größeren Datenmengen bemerkbar macht.
-+ __Automatisierung__ - Viele der Aufgaben, die mit Pandas durchgeführt werden können, sind extrem einfach zu automatisieren, wodurch die Anzahl der langweiligen und sich wiederholenden Aufgaben, die täglich durchgeführt werden müssen, reduziert wird.
-+ __Interpretierbarkeit__ - Eine Codesequenz aus Pandas ist übersichtlich und einfach zu interpretieren, da Tabellenkalkulationen Berechnungen pro Zelle ausführen, sind Fehler schwieriger zu identifizieren und zu beheben.
-+ __Erweiterte Funktionen__ - Die Durchführung erweiterter statistischer Analysen und die Erstellung komplexer Visualisierungen ist sehr einfach.
-
 Der Code zum Paket kann unter [Link](https://github.com/pandas-dev/pandas) eingesehen und bearbeitet werden.
+
+> __Achtung:__ Mit der Verwendung von pandas ändert sich unser Blick auf den Code. Bislang haben wir Prozedural oder Objektorientiert programmiert. Jetzt ändert sich unser Blick - wir denken in Datenstrukturen und wenden Methoden darauf an.
 
 ## Pandas Grundlagen
 
@@ -266,11 +271,31 @@ print(df_2)
 
 ### Arbeit mit Dataframes 
 
-indizierung 
+Welche Aufgaben lassen sich nun mit Hilfe von Pandas über den Daten realsieren?
+
+Indizierung 
+----------------
+
+```text data.csv 
+timestamp;X;Y;Z
+09:28:52.419; -7; -8; 1016
+09:28:52.430; -9; -8; 1017
+09:28:52.441; -9; -8; 1017
+09:28:52.452; -9; -8; 1017
+```
+```python readCSV.py
+import pandas as pd
+
+df = pd.read_csv('data.csv', header = 1)  
+print(df)
+```
+@LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
 
 filterung 
 
 säuberung von Daten 
+
+Nutzung (description, groupby)
 
 ### Visualisierung mit pandas 
 
@@ -290,7 +315,14 @@ plt.savefig('foo.png')
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 
-## Noch mal der Blick auf Excel 
+## Noch immer von Excel überzeugt?
+
++ __Skalierbarkeit__ - Pandas ist nur durch die Hardware begrenzt und kann größere Datenmengen verarbeiten. Excel ist aktuell auf 1.048.576 Zeilen und 16.384 Spalten beschränkt.
++ __Geschwindigkeit__ - Pandas arbeitet viel schneller als eine Tabellenkaklulation, was sich besonders bei der Arbeit mit größeren Datenmengen bemerkbar macht.
++ __Automatisierung__ - Viele der Aufgaben, die mit Pandas durchgeführt werden können, sind extrem einfach zu automatisieren, wodurch die Anzahl der langweiligen und sich wiederholenden Aufgaben, die täglich durchgeführt werden müssen, reduziert wird.
++ __Interpretierbarkeit__ - Eine Codesequenz aus Pandas ist übersichtlich und einfach zu interpretieren, da Tabellenkalkulationen Berechnungen pro Zelle ausführen, sind Fehler schwieriger zu identifizieren und zu beheben.
++ __Erweiterte Funktionen__ - Die Durchführung erweiterter statistischer Analysen und die Erstellung komplexer Visualisierungen ist sehr einfach.
+
 
 | pandas      | Tabellenkalkulation |
 | ----------- | ------------------- |
@@ -308,19 +340,65 @@ df.to_excel("./myExcelFile.xlsx")
 
 ```
 
-## Beipspiel der Woche
+## Beispiel der Woche
 
-```text data.csv 
-timestamp;X;Y;Z
-09:28:52.419; -7; -8; 1016
-09:28:52.430; -9; -8; 1017
-09:28:52.441; -9; -8; 1017
-09:28:52.452; -9; -8; 1017
-```
+Der Deutsche Wetterdienst bietet auf seinen [Webseiten](https://www.dwd.de/DE/leistungen/cdc/cdc_ueberblick-klimadaten.html) eine vielzahl von historischen Datensätzen. Wir wollen unsere Pandas Kenntnisse nutzen, um uns darin zu orientieren und dann "Licht in den Nebel bringen".
+
+Die historischen Aufzeichnungen zu verschiedenen Stationen in Deutschland finden sich in der [Datenbank](https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/weather_phenomena/historical/). 
+
+> Aufgabe 1: Finden Sie die Stationsnummern von sächsischen Stationen in der Übersicht der Wetterstationen. 
+
+Den [Originaldatensatz](https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/weather_phenomena/historical/wetter_tageswerte_Beschreibung_Stationen.txt) des deutschen Wetterdienstes können wir nicht verwenden - dieser ist als csv nicht ohne größeren Aufwand zu lesen. Daher wurde diese Datei aus didaktischen Gründen angepasst und liegt im Repository unter der angegebenen URL bereit.
+
 ```python readCSV.py
 import pandas as pd
 
-df = pd.read_csv('data.csv', header = 1)  
-print(df)
+url="https://raw.githubusercontent.com/" + \
+    "TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/" + \
+    "master/examples/11_DatenAnalyse/" + \
+    "Wetterdaten/wetter_tageswerte_Beschreibung_Stationen.txt"
+
+df=pd.read_csv(url, sep=';', header = 0)  
+#df=pd.read_csv("wetter_tageswerte_Beschreibung_Stationen.txt", sep=';', header = 0)  
+df['Bundesland'] = df['Bundesland'].str.strip()
+df['Stationsname'] = df['Stationsname'].str.strip()
+df_sachsen = df[df.Bundesland  == "Sachsen"]
+print(df_sachsen)
 ```
-@LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+Leider reicht der Freiberger Datensatz nur über wenige Jahre. Wir entscheiden uns für die weitere Untersuchung für die Daten aus Görlitz.
+
+> Aufgabe 2: Laden Sie den Görlitzer Datensatz in einen Dataframe und zählen Sie die Nebeltage. Visualisieren Sie das Ergebnis.
+
+Der avisierte Datensatz für die Station "1684" [heruntergeladen](https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/weather_phenomena/historical/). Die Datei `wetter_tageswerte_01684_18800101_20181231_hist.zip` liefert als gepackter Ordner mehrere Datensets. Neben der eigentlichen Datendatei werden auch Stationskerndaten und Erhebungstechnik dokumentiert. 
+
+```python readCSV.py
+import pandas as pd
+import matplotlib.pyplot as plt
+
+url="https://raw.githubusercontent.com/" + \
+    "TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/" + \
+    "master/examples/11_DatenAnalyse/" + \
+    "Wetterdaten/" + \
+    "wetter_tageswerte_01684_18800101_20181231_hist/" + \
+    "produkt_wetter_tag_18800101_20181231_01684.txt"
+
+df=pd.read_csv(url, sep=';', header = 0)  
+
+df["JAHR"]=df["MESS_DATUM"]/10000
+df["JAHR"] = df["JAHR"].astype('int')
+
+ax = plt.axes()
+df[df.NEBEL!=-999].groupby("JAHR").NEBEL.sum().plot.bar(ax=ax)
+ax.xaxis.set_major_locator(plt.MaxNLocator(20))
+plt.ylabel("Häufigkeit von Nebelbeobachtungen")
+plt.title("Nebeltage über Görlitz")
+plt.grid()
+
+#plt.show()  
+plt.savefig('foo.png') # notwendig für die Ausgabe in LiaScript
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+> Aufgabe: Evaluieren Sie, welche Parameter sich in den vergangenen Jahren signifikant verändert haben.
