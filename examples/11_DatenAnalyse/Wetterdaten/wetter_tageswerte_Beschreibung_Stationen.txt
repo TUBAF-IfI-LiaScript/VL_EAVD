@@ -1,4 +1,4 @@
-Stations_ID; Von_Datum; Bis_Datum; Stationshoehe; geoBreite; geoLaenge; Stationsname; Bundesland
+Stations_ID;Von_Datum;Bis_Datum;Stationshoehe;geoBreite;geoLaenge;Stationsname;Bundesland
 00001; 19490101; 19860630;            478;     47.8413;    8.8493; Aach                                  ;Baden-Württemberg                                                                                 
 00003; 18910101; 20110331;            202;     50.7827;    6.0941; Aachen                                ;Nordrhein-Westfalen                                                                               
 00044; 19710301; 20111231;             44;     52.9336;    8.2370; Großenkneten                          ;Niedersachsen                                                                                     
