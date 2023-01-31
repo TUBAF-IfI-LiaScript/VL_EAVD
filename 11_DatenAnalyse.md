@@ -15,7 +15,7 @@ import: https://github.com/liascript/CodeRunner
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/11_DatenAnalyse.md)
 
-# Datenalyse mit Python
+# Datenanalyse mit Python
 
 | Parameter                | Kursinformationen                                                                                                                                                                              |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -44,10 +44,25 @@ Organisatorisches
 
 Praktische Zusatzaufgabe für die Hörerinnen und Hörer der Einführung in die Informatik
 
-+ 
++ Entwickeln Sie eine Forschungsfrage, die sie mit Hilfe der in der Vorlesung vermittelten Programmierkenntnisse evaluieren wollen. Das Thema darf sich gern aus Ihrem Fachgebiet ergeben.
 
+   + Reine Datenanalyse mit Python 
 
+   + Messdatenerhebung mit dem Mikrocontroller 
 
+   + Kombination aus Mikrocontrolleranwendung und Python Datenanalyse 
+
++ Fassen Sie Ihre Ergebnisse in einem kurzen Bericht zusammen. Dieser sollte  
+
+   + die Forschungsfrage motivieren 
+
+   + die Lösungsidee skizzieren 
+
+   + den Code enthalten 
+
+   + das Ergebnis dokumentieren 
+
++ Senden Sie uns das Dokument bis spätestens 31. März.
 
 
 ## Motivation
@@ -214,11 +229,11 @@ Der Code zum Paket kann unter [Link](https://github.com/pandas-dev/pandas) einge
 
 Pandas kennt zwei grundsätzliche Datentypen [Series]() und [DataFrame]()
 
-|     | Pandas Series                                                                                     | Pandas DataFrame                                                                                      |
-| --- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Format    | Eindimensional                                                                                    | Zweidimensional                                                                                       |                                                                                                       
-| Datentypen    | Homogen - Reihenelemente müssen vom gleichen Datentyp sein.                                       | Heterogen - DataFrame-Elemente können unterschiedliche Datentypen haben.                              |
-| Zahl der Einträge    | Größenunveränderlich - Einmal erstellt, kann die Größe nicht geändert werden. | Größenveränderlich - Elemente können in einem bestehenden DataFrame gelöscht oder hinzugefügt werden. |
+|                   | Pandas Series                                                                 | Pandas DataFrame                                                                                      |
+| ----------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Format            | Eindimensional                                                                | Zweidimensional                                                                                       |
+| Datentypen        | Homogen - Reihenelemente müssen vom gleichen Datentyp sein.                   | Heterogen - DataFrame-Elemente können unterschiedliche Datentypen haben.                              |
+| Zahl der Einträge | Größenunveränderlich - Einmal erstellt, kann die Größe nicht geändert werden. | Größenveränderlich - Elemente können in einem bestehenden DataFrame gelöscht oder hinzugefügt werden. |
 
 Wir betrachten zunächst die grundsätzliche Arbeitsweise für Series Daten.
 
@@ -276,44 +291,214 @@ Welche Aufgaben lassen sich nun mit Hilfe von Pandas über den Daten realsieren?
 Indizierung 
 ----------------
 
-```text data.csv 
+```text -data.csv 
 timestamp;X;Y;Z
-09:28:52.419; -7; -8; 1016
+09:28:52.353; -8; -9; 1016
+09:28:52.364; -9; -8; 1017
+09:28:52.375; -9; -8; 1017
+09:28:52.386; -8; -8; 1016
+09:28:52.397; -9; -8; 1017
+09:28:52.408; -9; -8; 1018
+09:28:52.419; -9; -8; 1016
 09:28:52.430; -9; -8; 1017
 09:28:52.441; -9; -8; 1017
 09:28:52.452; -9; -8; 1017
 ```
-```python readCSV.py
+```python index.py
 import pandas as pd
 
-df = pd.read_csv('data.csv', header = 1)  
+df = pd.read_csv('data.csv', header = 0, sep=";")  
 print(df)
 ```
 @LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
 
-filterung 
+Filtern 
+----------------
 
-säuberung von Daten 
+```text -data.csv 
+timestamp;X;Y;Z
+09:28:52.353; -8; -9; 1016
+09:28:52.364; -9; -8; 1017
+09:28:52.375; -9; -8; 1017
+09:28:52.386; -8; -8; 1016
+09:28:52.397; -9; -8; 1017
+09:28:52.408; -9; -8; 1018
+09:28:52.419; -9; -8; 1016
+09:28:52.430; -9; -8; 1017
+09:28:52.441; -9; -8; 1017
+09:28:52.452; -9; -8; 1017
+```
+```python filter.py
+import pandas as pd
 
-Nutzung (description, groupby)
+df = pd.read_csv('data.csv', header = 0, sep=";")  
+print(df)
+```
+@LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
+
+
+Statistische Beschreibung 
+----------------
+
+```text -data.csv 
+timestamp;X;Y;Z
+09:28:52.353; -8; -9; 1016
+09:28:52.364; -9; -8; 1017
+09:28:52.375; -9; -8; 1017
+09:28:52.386; -8; -8; 1016
+09:28:52.397; -9; -8; 1017
+09:28:52.408; -9; -8; 1018
+09:28:52.419; -9; -8; 1016
+09:28:52.430; -9; -8; 1017
+09:28:52.441; -9; -8; 1017
+09:28:52.452; -9; -8; 1017
+```
+```python describe.py
+import pandas as pd
+
+df = pd.read_csv('data.csv', header = 0, sep=";")  
+print(df.describe())
+```
+@LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
+
+
+Nutzung
+----------------
+
+```text -data.csv 
+timestamp;X;Y;Z
+09:28:52.353; -8; -9; 1016
+09:28:52.364; -9; -8; 1017
+09:28:52.375; -9; -8; 1017
+09:28:52.386; -8; -8; 1016
+09:28:52.397; -9; -8; 1017
+09:28:52.408; -9; -8; 1018
+09:28:52.419; -9; -8; 1016
+09:28:52.430; -9; -8; 1017
+09:28:52.441; -9; -8; 1017
+09:28:52.452; -9; -8; 1017
+```
+```python describe.py
+import pandas as pd
+
+df = pd.read_csv('data.csv', header = 0, sep=";")  
+print(df)
+```
+@LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
+
+
 
 ### Visualisierung mit pandas 
 
-Zeitlicher verlauf
-Scatterplot 
-Histogram
+                            {{0-1}}
+**********************************************************************************************
 
-```python
+Pandas ist unmittelbar mit der schon bekannten Bibliothek matplotlib verknüpft. Damit können wir unsere bereits bekannten Methoden nahtlos nutzen.
+
+![](https://raw.githubusercontent.com/PatrikHlobil/Pandas-Bokeh/master/docs/Images/Startimage.gif)
+
+_Beispiele der Visualisierung von Pandas 'PatrikHlobil' [Link](https://github.com/PatrikHlobil/Pandas-Bokeh/raw/master/docs/Images/Startimage.gif)_
+
+
+```text -data.csv 
+timestamp;X;Y;Z
+09:28:52.353; -8; -9; 1016
+09:28:52.364; -9; -8; 1017
+09:28:52.375; -9; -8; 1017
+09:28:52.386; -8; -8; 1016
+09:28:52.397; -9; -8; 1017
+09:28:52.408; -9; -8; 1018
+09:28:52.419; -9; -8; 1016
+09:28:52.430; -9; -8; 1017
+09:28:52.441; -9; -8; 1017
+09:28:52.452; -9; -8; 1017
+09:28:52.463; -16; -2; 1006
+09:28:52.474; -69; -160; 1057
+09:28:52.485; 58; 136; 984
+09:28:52.496; -10; -10; 1019
+09:28:52.507; -11; -6; 1012
+09:28:52.518; -5; 0; 1016
+09:28:52.528; -9; -15; 1013
+09:28:52.539; -9; -8; 1018
+09:28:52.551; -8; -9; 1016
+09:28:52.562; -8; -9; 1019
+09:28:52.572; -8; -8; 1015
+09:28:52.583; -8; -8; 1015
+09:28:52.595; -9; -7; 1017
+09:28:52.606; -9; -8; 1016
+09:28:52.617; -8; -9; 1016
+09:28:52.628; -7; -9; 1018
+```
+```python readCSV.py
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 
-s = pd.Series(np.random.randn(5), index=["a", "b", "c", "d", "e"])
-s.plot.bar()
+df = pd.read_csv('data.csv', header = 0, sep=";")  
+df.plot()
 plt.savefig('foo.png')
 ```
-@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+@LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
 
+| Anpassung                      | API                                                                                      |                                                   |
+| ------------------------------ | ---------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| Linientyp der Datendarstellung | [pyplot.plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html)     | `plt.plot(a, b, 'ro:')`                           |
+| Achsenlabel hinzufügen         | [pyplot.xlabel](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.xlabel.html) | `plt.xlabel('my data', fontsize=14, color='red')` |
+| Titel einfügen                 |  [pyplot.title](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.title.html)                                                                                       | `plt.title(r'$\sigma_i=15$')`                     |
+| Gitter einfügen                |  [pyplot.grid](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.grid.html)                                                                                        | `plt.grid()`                                      |
+| Legende                        |  [pyplot.legend](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html)                                                                                        | `plt.plot(a, b, 'ro:', label="Data")`             |
+|                                |                                                                                          | `plt.legend()`                                    |
+| Speichern                      |  [pyplot.savefig](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html)                                                                                        | `plt.savefig('foo.png') `                         |
+
+> Merke: Mit dem zusätzlichen Parameter `styple='o:'` können Sie die Konfiguration der Darstellung anpassen.
+
+**********************************************************************************************
+
+                            {{1-2}}
+**********************************************************************************************
+
+> Aufgabe 1:  Weisen Sie grafisch nach, dass es einen starken Zusammenhang zwischen den 3 Beschleunigungsdaten gibt! 
+> Aufgabe 2: Geben Sie die Daten einer Achse in einem Histogramm aus! Schreiben Sie als Text den maximalen und den Minimalen Wert in die Mitte des Diagrams.
+
+```text -data.csv 
+timestamp;X;Y;Z
+09:28:52.353; -8; -9; 1016
+09:28:52.364; -9; -8; 1017
+09:28:52.375; -9; -8; 1017
+09:28:52.386; -8; -8; 1016
+09:28:52.397; -9; -8; 1017
+09:28:52.408; -9; -8; 1018
+09:28:52.419; -9; -8; 1016
+09:28:52.430; -9; -8; 1017
+09:28:52.441; -9; -8; 1017
+09:28:52.452; -9; -8; 1017
+09:28:52.463; -16; -2; 1006
+09:28:52.474; -69; -160; 1057
+09:28:52.485; 58; 136; 984
+09:28:52.496; -10; -10; 1019
+09:28:52.507; -11; -6; 1012
+09:28:52.518; -5; 0; 1016
+09:28:52.528; -9; -15; 1013
+09:28:52.539; -9; -8; 1018
+09:28:52.551; -8; -9; 1016
+09:28:52.562; -8; -9; 1019
+09:28:52.572; -8; -8; 1015
+09:28:52.583; -8; -8; 1015
+09:28:52.595; -9; -7; 1017
+09:28:52.606; -9; -8; 1016
+09:28:52.617; -8; -9; 1016
+09:28:52.628; -7; -9; 1018
+```
+```python ScatterPlot.py
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('data.csv', header = 0, sep=";")  
+# Hier sind sie gefragt ...
+plt.savefig('foo.png')
+```
+@LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
+
+**********************************************************************************************
 
 ## Noch immer von Excel überzeugt?
 
@@ -334,10 +519,11 @@ plt.savefig('foo.png')
 
 
 ```python 
+# Einlesen einer Excel Datei in Pandas
 df = pd.read_excel("./myExcelFile.xlsx", index_col=0)
 
+# Schreiben einer Excel Datei aus Pandas
 df.to_excel("./myExcelFile.xlsx")
-
 ```
 
 ## Beispiel der Woche
@@ -350,7 +536,7 @@ Die historischen Aufzeichnungen zu verschiedenen Stationen in Deutschland finden
 
 Den [Originaldatensatz](https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/weather_phenomena/historical/wetter_tageswerte_Beschreibung_Stationen.txt) des deutschen Wetterdienstes können wir nicht verwenden - dieser ist als csv nicht ohne größeren Aufwand zu lesen. Daher wurde diese Datei aus didaktischen Gründen angepasst und liegt im Repository unter der angegebenen URL bereit.
 
-```python readCSV.py
+```python findweatherstations.py
 import pandas as pd
 
 url="https://raw.githubusercontent.com/" + \
@@ -373,7 +559,7 @@ Leider reicht der Freiberger Datensatz nur über wenige Jahre. Wir entscheiden u
 
 Der avisierte Datensatz für die Station "1684" [heruntergeladen](https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/weather_phenomena/historical/). Die Datei `wetter_tageswerte_01684_18800101_20181231_hist.zip` liefert als gepackter Ordner mehrere Datensets. Neben der eigentlichen Datendatei werden auch Stationskerndaten und Erhebungstechnik dokumentiert. 
 
-```python readCSV.py
+```python extractFogObservations.py
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -389,8 +575,12 @@ df=pd.read_csv(url, sep=';', header = 0)
 df["JAHR"]=df["MESS_DATUM"]/10000
 df["JAHR"] = df["JAHR"].astype('int')
 
+df_fog = df[df.NEBEL!=-999]
+
+print(f"{df_fog.NEBEL.count()} Tage im Datensatz, {df_fog.NEBEL.sum()} mit Nebel.")
+
 ax = plt.axes()
-df[df.NEBEL!=-999].groupby("JAHR").NEBEL.sum().plot.bar(ax=ax)
+df_fog.groupby("JAHR").NEBEL.sum().plot.bar(ax=ax)
 ax.xaxis.set_major_locator(plt.MaxNLocator(20))
 plt.ylabel("Häufigkeit von Nebelbeobachtungen")
 plt.title("Nebeltage über Görlitz")
