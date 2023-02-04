@@ -16,4 +16,4 @@ df_filtered.rename(columns = {'field1':'Temperature',
 df_filtered.head(5)
 
 # Speichern als neue csv Datei
-df_filtered.to_csv("distanceMeasurements_filtered.csv")
+df_filtered.to_csv("distanceMeasurements_filtered.csv", index= False)
