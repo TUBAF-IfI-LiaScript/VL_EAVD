@@ -31,6 +31,15 @@ import: https://github.com/liascript/CodeRunner
 --------------------------------------------------------------------
 
 
+**Organisatorisches**
+
+Konsultationsangebote der Tutoren und Mitarbeiter ()
+
+* Mittwoch, 8.02.2023, 17:45 (Rammler Bau)
+* weitere Termine nach Abstimmung in den Übungsgruppen sowie im Übungsordner im Git
+
+---------------------------------------------------------------------
+
 **Fragen an die heutige Veranstaltung ...**
 
 * In welche strukturellen Einheiten lässt sich die Verarbeitungskette ?
@@ -114,10 +123,10 @@ __Fragekomplex 1:__ Welche Temperaturentwicklung konnte beobachtet werden?
 import pandas as pd
 import matplotlib.pyplot as plt
 
-url="https://raw.githubusercontent.com/" + \
-    "TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/" + \
-    "master/examples/12_Anwendungen/" + \
-    "Datenset/distanceMeasurements_filtered.csv"
+url="https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/"+ \
+    "VL_ProzeduraleProgrammierung/master/examples/"+ \
+    "12_Anwendungen/US_experiment/Datenset/"+ \
+    "distanceMeasurements_filtered.csv"
 
 df=pd.read_csv(url, sep=',', header = 0)  
 # Einfügen einer "echten" Zeitspalte
@@ -157,10 +166,10 @@ abschätzen. Dabei ist zu beachten, dass die Zeitmessung in $ns$ erfolgte. Im Er
 ```python evaluateDataSet.py
 import pandas as pd
 
-url="https://raw.githubusercontent.com/" + \
-    "TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/" + \
-    "master/examples/12_Anwendungen/" + \
-    "Datenset/distanceMeasurements_filtered.csv"
+url="https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/"+ \
+    "VL_ProzeduraleProgrammierung/master/examples/"+ \
+    "12_Anwendungen/US_experiment/Datenset/"+ \
+    "distanceMeasurements_filtered.csv"
 
 df=pd.read_csv(url, sep=',', header = 0)  
 df["US_speed"] = (331.3 + (0.606 * df["Temperature"])) / 1000 / 1000 * 100
@@ -272,9 +281,9 @@ _Die Klasse Akte enthält als Datenfelder die Angaben zum Aktenzeichen und der L
 ```cpp          Aufgabe2.cpp
 class Akte
 {
-private:
-std::string aktenzeichen;
-int laufzeit;
+  private:
+  std::string aktenzeichen;
+  int laufzeit;
 };
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
@@ -295,46 +304,47 @@ int main() {
 }
 ```
 
-_Die Funktion ausgabe beider Klassen soll alle in einem Objekt gespeicherten Angaben auf dem Standard-Output ausgeben. In der Klasse `AkteX` sollen allerdings sowohl die Funktion `ausgabe` als auch die Funktion `getAktencode` statt des gespeicherten Wertes dessen Quersumme ausgeben bzw. liefern._
-_Hinweis: bei den Objekten der Klasse `sdt:string` ist (anders als bei `char[]`) die Zuweisung mit `=Operator` möglich._
++ _Die Funktion `ausgabe()` beider Klassen soll alle in einem Objekt gespeicherten Angaben auf dem Standard-Output ausgeben. 
++ In der Klasse `AkteX` sollen allerdings sowohl die Funktion `ausgabe` als auch die Funktion `getAktencode` statt des gespeicherten Wertes dessen Quersumme ausgeben bzw. liefern._
++ _Hinweis: bei den Objekten der Klasse `sdt:string` ist (anders als bei `char[]`) die Zuweisung mit `=Operator` möglich._
 
 ### A3: Kurze Fragestellungen
 
 1. Markieren Sie alle Ganzzahldatentypen in folgender Aufstellung.
 
-- [(X)] std:string
-- [(X)] short
-- [( )] float
-- [( )] bool
+   - [( )] std:string
+   - [(X)] short
+   - [( )] float
+   - [( )] bool
 
 2. Welchen Inhalt gibt das folgenden Codefragment aus?
 
-```cpp
-char text [] = "Dieser lange Text ergibt keinen Sinn";
-for (int i=0;i<4;i=i+2) std::cout<<text[i];
-std::cout<<text[5];
-```
-
- [[&]]
+   ```cpp
+   char text [] = "Dieser lange Text ergibt keinen Sinn";
+   for (int i=0;i<4;i=i+2) std::cout<<text[i];
+   std::cout<<text[5];
+   ```
+   
+   [[Der]]
 
 3. Schreiben Sie den Code in 2) als Python code.
 
-```python
-text = "Dieser lange Text ergibt keinen Sinn"
-
-```
-@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
-
+   ```python
+   text = "Dieser lange Text ergibt keinen Sinn"
+   
+   ```
+   @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 4. Welches Konzept nutzt C++ um die Member einer Klasse vor dem Zugriff aus der anderen Klassen zu schützen.
 
- [[Kapslung]]
+   [[Kapselung]]
 
-e) Mit Hilfe welcher Methoden werden C++-Objekte erstellt?
+5. Mit Hilfe welcher Methoden werden C++-Objekte erstellt?
 
-- [( )] Destruktoren
-- [(X)] Konstruktoren
-- [( )] private Methoden
+   - [( )] Destruktoren
+   - [(X)] Konstruktoren
+   - [( )] private Methoden
+   - [( )] `new`
 
 ## Fragebögen
 
