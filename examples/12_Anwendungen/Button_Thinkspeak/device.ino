@@ -1,4 +1,4 @@
-#include "customHeaders\ThingSpeakTUBAF.h"
+#include "ThingSpeakTUBAF.h"
 
 #define BUTTON_A_IS_PRESSED ((GPIOA->IDR & GPIO_PIN_4) == 0)
 #define BUTTON_B_IS_PRESSED ((GPIOA->IDR & GPIO_PIN_10) == 0)

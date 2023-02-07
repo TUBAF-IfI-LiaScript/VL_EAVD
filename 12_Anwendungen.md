@@ -304,8 +304,8 @@ int main() {
 }
 ```
 
-+ _Die Funktion `ausgabe()` beider Klassen soll alle in einem Objekt gespeicherten Angaben auf dem Standard-Output ausgeben. 
-+ In der Klasse `AkteX` sollen allerdings sowohl die Funktion `ausgabe` als auch die Funktion `getAktencode` statt des gespeicherten Wertes dessen Quersumme ausgeben bzw. liefern._
++ _Die Funktion `ausgabe()` beider Klassen soll alle in einem Objekt gespeicherten Angaben auf dem Standard-Output ausgeben._ 
++ _In der Klasse `AkteX` sollen allerdings sowohl die Funktion `ausgabe` als auch die Funktion `getAktencode` statt des gespeicherten Wertes dessen Quersumme ausgeben bzw. liefern._
 + _Hinweis: bei den Objekten der Klasse `sdt:string` ist (anders als bei `char[]`) die Zuweisung mit `=Operator` möglich._
 
 ### A3: Kurze Fragestellungen
