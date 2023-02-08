@@ -217,7 +217,7 @@ fig1
 
 *******************************************************************************
 
-### "Python ist ja nett aber C++ ist ..."
+### "Python ist ja nett, aber C++ ist ..."
 
 Foreneinträge aus Veranstaltungen anderer Hochschulen:
 
