@@ -933,7 +933,7 @@ input == "x,y=y,x" || input == "y,x=x,y"
 
 {{3}}
 ************************************************************************
-> Welche der folgenden Rechenoperationen existieren in Python?
+> Welche der folgenden Operatoren existieren in Python?
 [[ ]] `++`
 [[X]] `+`
 [[X]] `-`
@@ -956,7 +956,7 @@ input == "x,y=y,x" || input == "y,x=x,y"
 [[X]] complex
 
 ### Ausgabe
-> Mit welcher Funktion kann Text in Python in der Konsole ausgegeben werden?
+> Mit welcher Funktion können Konstanten und Variablen in Python in der Konsole ausgegeben werden?
 [[print]]
 <script>
 let input = "@input".trim()
@@ -966,7 +966,7 @@ input == "print" || input == "print()" || input == "print ()"
 
 {{1}}
 ************************************************************************
-> Mit welchem Parameter kann der standardmäßige Zeilenumbruch ersetzt werden?
+> Mit welchem Parameter kann der standardmäßige Zeilenumbruch nach der Ausgabe mit `print` durch andere Zeichen ersetzt werden?
 [[end]]
 <script>
 let input = "@input".trim()
@@ -976,7 +976,7 @@ input == "end" || input == "end=" || input == "end ="
 ************************************************************************
 
 ### Eingabe
-> Mit welcher Funktion kann Text in Python in der Konsole eingegeben werden?
+> Mit welcher Funktion können String-Variablen in Python in der Konsole eingegeben werden?
 [[input]]
 <script>
 let input = "@input".trim()
@@ -997,7 +997,7 @@ print("y = ", y)
 ************************************************************************
 
 ### Zusätzliche Module einbinden
-> Mit welchem Schlagwort werden Module in Python eingebunden?
+> Mit welchem Schlüsselwort werden Module in Python eingebunden?
 - [( )] `using`
 - [(X)] `import`
 - [( )] `#include`
@@ -1077,14 +1077,14 @@ print(l)
 > Wie viele `elif` Zweige darf es maximal in einer `if`-Anweisung geben?
 [( )] 0
 [( )] 1
-[(X)] beliebig
+[(X)] beliebig viele
 
 {{1}}
 ************************************************************************
 > Wie viele `else` Zweige darf es maximal in einer `if`-Anweisung geben?
 [( )] 0
 [(X)] 1
-[( )] beliebig
+[( )] beliebig viele
 ************************************************************************
 
 {{2}}
@@ -1119,10 +1119,10 @@ else:
 
 {{4}}
 ************************************************************************
-> Worauf muss bei verschachtelten `if`-Anweisungen besonders geachtet werden?
-[( )] Auf den Datentyp der Variablen
-[( )] Es muss immer ein `else` Zweig existieren
-[(X)] Auf die richtige Einrückung
+> Worauf muss bei verschachtelten `if`-Anweisungengen geachtet werden?
+[( )] Die innere Anweisung muss in eckigen Klammern stehen
+[( )] Alle beteiligten Anweisungen müssen einen `else`-Zweig enthalten
+[(X)] Auf die richtige Einrückung aller Zweige der inneren Anweisung
 ************************************************************************
 
 {{5}}
@@ -1173,8 +1173,8 @@ for x in "Hallo":
 ************************************************************************
 > Was gibt die `range`-Funktion zurück?
 [( )] Den Abstand zwischen zwei Punkten
-[( )] Eine Liste von integern über die mit einer `for`-Schleife iteriert werden kann
-[(X)] Ein `range`-Objekt, bestehend aus integern über die mit einer `for`-Schleife iteriert werden kann
+[( )] Eine Liste von Integer-Werten
+[(X)] Ein in die Liste von Integer-Werten konvertierbares `range`-Objekt
 ************************************************************************
 
 {{3}}
