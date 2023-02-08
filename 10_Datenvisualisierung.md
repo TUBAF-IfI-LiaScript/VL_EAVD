@@ -479,7 +479,7 @@ plt.savefig('foo.png') # notwendig für die Ausgabe in LiaScript
 |                                |                                                                                          | `plt.legend()`                                    |
 | Speichern                      |  [pyplot.savefig](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html)                                                                                        | `plt.savefig('foo.png') `                         |
 
-![Matplot](images/10_Datenvisualisierung/UbersichtGrafiken.png "Tutorial von Rizky Maulana Nurhidayat auf [medium](https://towardsdatascience.com/visualizations-with-matplotlib-part-1-c9651008b6b8)")
+![Matplot](./images/10_Datenvisualisierung/UbersichtGrafiken.png "Tutorial von Rizky Maulana Nurhidayat auf [medium](https://towardsdatascience.com/visualizations-with-matplotlib-part-1-c9651008b6b8)")
 
 Weiter Tutorials sind zum Beispiel unter 
 
