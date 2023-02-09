@@ -529,9 +529,9 @@ fig  # notwendig für die Ausgabe in LiaScript sonst plt.show()
 ## Microcontroller als Datensammler
 ### Sensoren und Aktoren
 > Was sind Sensoren bei einem Arduino?
-[(X)] Bauteile, die externe Eingaben erfassen und an den Arduino weiterleiten
-[( )] Bauteile, die dem Arduino Anweisungen geben
-[( )] Bauteile, die Daten vom Arduino empfangen
+[(X)] Bauteile, die Umgebungsparameter als Messgrößen erfassen
+[( )] Bauteile, die das Arduino-Board durch Anweisungen steuern
+[( )] Bauteile, die Daten vom Arduino-Board empfangen
 
 ### Arduino Konzept
 #### Hardware
@@ -542,9 +542,9 @@ fig  # notwendig für die Ausgabe in LiaScript sonst plt.show()
 
 #### Programmierung
 > Was sind die Hauptbestandteile eines Arduino-Programms?
-[( )] Hauptfunktion, Header-Dateien und Bibliotheken
-[( )] Hauptfunktion, Hauptschleife und Unterfunktionen
-[(X)] Hauptfunktion, Hauptschleife, Setup-Funktion und Loop-Funktion
+[( )] `main`-Funktion
+[( )] `main`- und `init`-Funktion
+[(X)] `setup`- und `loop`-Funktion
 
 ## Serielle Schnittstelle
 ### Schreiben
