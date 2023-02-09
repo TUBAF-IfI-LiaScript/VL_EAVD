@@ -718,7 +718,7 @@ void loop() {
 
 {{1}}
 **************************************************************************
-> Für welche Operatoren sollten Methoden und für welche Funktionen zum Einsatz kommen?
+> Für welche Operatoren sollten die Methoden einer Klasse und für welche die globalen Funktionen bevorzugt zum Einsatz kommen?
 [[Methode]  [Funktion]]
 [(X)        ( )       ] `++`
 [( )        (X)       ] `+`
@@ -763,8 +763,8 @@ int main(){
 }
 ```
 [[14, 16]]
-[[?]] In diesem Beispiel sollen zwei zweidimensionale Vektoren addiert werden. Im nächsten Tipp steht eine genauere Erklärung der Operatorüberladung hier im Beispiel. 
-[[?]] `this->x` und `this->y` in der Überladung sind die x- und y-Komponente des Vektors vor dem Operator in der `main`-Funktion (also `v1`). Diese müssen nicht übergeben werden. Der Vektor, der hinter dem Operator in der `main`-Funktion 27 steht (`v2`), muss übergeben werden. `vek_tmp.x` und `vek_tmp.x` sind die Komponenten des Vektors `v2` hinter dem Operator. Beide Anteile werden jeweils addiert und ein neuer Vektor `vek_loe`, der der Lösungsvektor sein soll, zurückgegeben.
+[[?]] In diesem Beispiel sollen zwei Vektoren addiert werden. Im nächsten Tipp steht eine genauere Erklärung der Operatorüberladung anhand dieses Beispiels. 
+[[?]] `this->x` und `this->y` sind die Datenfelder des Objektes vor dem Operator (in der `main`-Funktion des Vektors `v1`). Der Vektor `v2`, der hinter dem Operator in der `main`-Funktion steht, wird an die Methode übergeben. `vek_tmp.x` und `vek_tmp.x` sind hier die Datenfelder des Vektors `v2`. Der neue Vektor `vek_loe` entsteht infolge der Addition und wird zurückgegeben.
 **************************************************************************
 
 ### Anwendung
@@ -781,8 +781,6 @@ class Ort{
     Ort(const Ort&);
     Ort(std::string n);
     Ort(std::string n, std::string b, int e);
-
-    void ausgabeMethode(std::ostream& os);
 };
 
 Ort::Ort(std::string n, std::string b, int e): name{n}, bundesland{b}, einwohner{e} {}
@@ -807,7 +805,7 @@ int main()
 [( )] Nein
 
 ### Implementierung in C++
-> Wodurch muss `[_____]` ersetzt werden um eine Klasse `Flugzeug` zu erstellen, die von der Klasse `Fahrzeug` erbt?
+> Wodurch muss `[_____]` ersetzt werden um eine Klasse `Flugzeug` zu definieren, die von der Klasse `Fahrzeug` erbt?
 ```cpp
 #include <iostream>
 
@@ -833,7 +831,7 @@ input == "class Flugzeug: public Fahrzeug" || input == "class Flugzeug:public Fa
 
 {{1}}
 **************************************************************************
-> Ist es möglich Vererbungen zu verketten?
+> Kann eine abgeleitete Klasse als Basis-Klasse für eine weitere Klasse verwendet werden?
 [(X)] Ja
 [( )] Nein
 **************************************************************************
@@ -848,7 +846,7 @@ class Fahrzeug {
   public:
     Fahrzeug(): name{"Fahrzeug"}{};
     Fahrzeug(std::string _name): name{_name}{};
-    void kaputt() {
+    void defekt() {
       std::cout << name << " muss in die Werkstatt.";
     }
     std::string name;
@@ -862,7 +860,7 @@ class Auto: public Fahrzeug {
 
 int main() {
   Auto auto1 = Auto("Peters Auto", 100);
-  auto1.kaputt();
+  auto1.defekt();
   return 0;
 } 
 ```
@@ -870,24 +868,24 @@ int main() {
 **************************************************************************
 
 ### Vererbungsattribute
-> Wann ist der zugriff auf welche Klassen möglich?
+> Welche Zugriffspezifizierer sind für die Mitglieder einer Basisklasse zu verwenden damit die folgenden Aussagen zutreffen? 
 [[`private`]  [`protected`] [`public`]]
-[( )          ( )           (X)       ] Zugriff ist immer möglich.
+[( )          ( )           (X)       ] Zugriff ist aus einer beliebigen Klasse möglich.
 [(X)          ( )           ( )       ] Zugriff ist nur innerhalb der Basisklasse möglich.
 [( )          (X)           ( )       ] Zugriff ist in der Basisklasse und in erbenden Klassen möglich.
 
 ### Polymorphie
 > Was ist Polymorphie?
-[( )] Eine Technik, die es ermöglicht, bestehende Methoden für neue Klassen zu verwenden
+[( )] Eine Technik, die es verhindert, bestehende Methoden in den ableiteten Klassen aufzurufen
 [(X)] Eine Technik, die es ermöglicht, bestehende Methoden zu überschreiben
-[( )] Eine Technik, die es ermöglicht, bestehende Klassen zu ändern
+[( )] Eine Technik, die es ermöglicht, Datenfelder einer Klasse in den abgeleiteten Klassen zu überschreiben
 
 {{1}}
 **************************************************************************
-> Wann ist Polymorphie sinnvoll?
-[( )] Immer, wenn man neue Klassen definiert
-[(X)] Wenn man bestehende Methoden für neue Klassen verwenden möchte
-[( )] Wenn man Methoden der Basisklasse löschen möchte
+> Welche Aussagen treffen im Bezug auf Polymorphie zu?
+[( )] Polymorphie soll beim Erstellen einer abgeleiteten Klasse immer durch Vergabe eines anderen Namens umgangen werden.
+[(X)] Polymorphie ermöglicht die Methoden der Basisklase in der abgeleiteten Klasse mit einer anderen Funktionalität zu versehen.
+[( )] Polymorphie wird verwendet um die Methoden der Basisklasse zu löschen.
 **************************************************************************
 
 {{2}}
