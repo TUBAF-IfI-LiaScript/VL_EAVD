@@ -516,3 +516,42 @@ let input = "@input"
 input == "6, 7" || input == "6,7"
 </script>
 ********************************************************************
+
+{{2}}
+********************************************************************
+> Wie lautet die Ausgabe dieser Funktion? (Bitte geben Sie die Antwort ohne geschweifte Klammern an)
+```python
+a = {1,2,3,4}
+b = {7,4,6,7}
+
+print(b & a)
+```
+[[4]]
+********************************************************************
+
+{{3}}
+********************************************************************
+> Wie lautet die Ausgabe dieser Funktion? (Bitte geben Sie die Antwort ohne geschweifte Klammern an)
+```python
+a = {1,2,3,4}
+b = {7,4,6,7}
+
+print(b < a)
+```
+[( )] True
+[(X)] False
+********************************************************************
+
+{{4}}
+********************************************************************
+> Wie lautet die Ausgabe dieser Funktion? (Bitte geben Sie die Antwort ohne geschweifte Klammern oder Leerzeichen an)
+```python
+a = {1,2,3,4}
+b = {7,4,6,7}
+
+print(b | a)
+```
+[[1,2,3,4,6,7]]
+********************************************************************
+
+## Eigene Funktionen
