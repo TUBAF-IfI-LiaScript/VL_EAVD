@@ -41,7 +41,7 @@ import: https://github.com/liascript/CodeRunner
 
 ## Weitere Datentypen 
 
-Sie haben bereits Listen (`list`), `range` Objekte und Text (``string`) als Datenstruktur kennengelernt - im Weiteren existieren daneben vier weitere Sequenzdatentypen: byte sequences (`bytes` objects), byte arrays (`bytearray` objects) und `tuples`.
+Sie haben bereits Listen (`list`), `range` Objekte und Text (`string`) als Datenstruktur kennengelernt - im Weiteren existieren daneben vier weitere Sequenzdatentypen: byte sequences (`bytes` objects), byte arrays (`bytearray` objects) und `tuples`.
 Dazu kommen `dictionaries` und `sets` als Containertypen. 
 
 | Datentyp    | Besonderheit                                    | Syntax                  |
@@ -434,3 +434,85 @@ if __name__ == "__main__":
 
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+# Quiz
+## Weitere Datentypen
+### Tupel oder Liste?
+> Welche Vorteile hat der Datentyp `Tupel` gegenüber dem Datentyp `Liste`?
+[[ ]] `Tupel` sind einfacher zu erstellen.
+[[X]] Iterationen über `Tupel` sind schneller als Iterationen über `Listen`
+[[ ]] `Tupel` können mehr Elemente enthalten
+[[X]] `Tupel`benötigen weniger Speicherbedarf
+
+{{1}}
+********************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```python
+a = (9, 2)
+print(a[0])
+```
+[(X)] 9
+[( )] 7
+[( )] 2
+[( )] Das Programm endet mit einem Error
+********************************************************************
+
+{{2}}
+********************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```python
+a = (9, 2)
+a[0] = 7
+print(a[0])
+```
+[( )] 9
+[( )] 7
+[( )] 2
+[(X)] Das Programm endet mit einem Error
+********************************************************************
+
+### Dictionaries
+> Wie lautet die Ausgabe dieses Programms?
+```python
+# Hier werden Klausurnoten von Schülern gespeichert
+grades = {"Peter": 1.0,
+          "Franz": 3.0,
+          "Max": 1.7,
+          "Jonas": 2.3}
+
+examples = {"Kurt": 1.3,
+            "Bernd": 3.3}
+
+examples["Michi"] = 2.0
+
+grades.update(examples)
+print(grades)
+
+```
+[(X)] 2.0
+[( )] Das Programm endet mit einem Error
+
+### Sets
+> Wie viele Elemente befinden sich im Set `st`?
+```python
+st = {"Franz", "Peter", "Franz", "Michi", "Peter"}
+print(st)
+```
+[[3]]
+
+{{1}}
+********************************************************************
+> Wie lautet die Ausgabe dieser Funktion? (Bitte geben Sie die Antwort ohne geschweifte Klammern an)
+```python
+a = {1,2,3,4}
+b = {7,4,6,7}
+
+print(b - a)
+```
+[[6, 7]]
+<script>
+let input = "@input"
+
+input == "6, 7" || input == "6,7"
+</script>
+********************************************************************
