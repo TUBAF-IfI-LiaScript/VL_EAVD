@@ -555,3 +555,52 @@ print(b | a)
 ********************************************************************
 
 ## Eigene Funktionen
+### Syntax
+> Mit welchem Schlüsselwort starten Funktionsdefinitionen in Python?
+[[def]]
+
+### Parameterübergabe
+> Wie lautet die Ausgabe dieses Programms auf 2 Nachkommastellen gerundet?
+```python
+from math import pi
+
+def to_rad(num):
+  rad = num * (pi / 180)
+  return rad
+
+deg = 90
+print(to_rad(deg))
+```
+[[1.57]]
+
+### Returnwerte
+> Wie lautet die Ausgabe dieses Programms? Bitte geben Sie die Antwort ohne Klammern an.
+```python
+def get_min_max(a):
+    return (min(a), max(a))
+
+a = (10, 47, 18, 1, 33, 20)
+result = get_min_max(a)
+print(result)
+```
+[[1, 47]]
+<script>
+let input = "@input"
+
+input == "1, 47" || input == "1,47"
+</script>
+
+{{1}}
+********************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```python
+def modify_number(a):
+    a = -1
+    return
+
+a = 42
+modify_number(a)
+print(a)
+```
+[[42]]
+********************************************************************
