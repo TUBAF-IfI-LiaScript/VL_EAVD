@@ -592,3 +592,7 @@ plt.savefig('foo.png') # notwendig für die Ausgabe in LiaScript
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 > Aufgabe: Evaluieren Sie, welche Parameter sich in den vergangenen Jahren signifikant verändert haben.
+
+# Quiz
+## CSV-Dateien
+> 
