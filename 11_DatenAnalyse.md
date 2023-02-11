@@ -210,6 +210,8 @@ with open('data.csv', mode='r') as csv_file:
 print(f"{len(list_of_dict)} Datensätze gelesen!")
 for row in list_of_dict:
 	print(row)
+
+csv_file.close()
 ```
 @LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
 
@@ -595,4 +597,44 @@ plt.savefig('foo.png') # notwendig für die Ausgabe in LiaScript
 
 # Quiz
 ## CSV-Dateien
-> 
+> Wofür steht *CSV*?
+[( )] *Common System Variables*
+[( )] *Colorful Systematic Visualization*
+[(X)] *Comma-separated values*
+[( )] *Critical Signal Version*
+
+> In welchem Datenformat werden die Inhalte einer *CSV* angelegt?
+[( )] `integer`
+[( )] `float`
+[(X)] `string`
+
+### Python nativ
+> Wie lautet die Ausgabe dieses Programms?
+```text data.csv 
+timestamp;X;Y;Z
+09:28:52.419;-7;-8;1016
+09:28:52.430;-9;-8;1017
+09:28:52.441;-9;-8;1017
+09:28:52.452;-9;-8;1017
+```
+
+```python
+import csv
+
+with open('data.csv', mode='r') as csv_file:
+    csv_reader = csv.DictReader(csv_file, delimiter=';',)
+    list_of_dict = list(csv_reader)
+
+for row in list_of_dict:
+	print(row['X'], end=",")
+
+csv_file.close()
+```
+[[-7,-9,-9,-9,]]
+
+## Pandas Grundlagen
+> Ordnen Sie *Pandas Series* und *Pandas Dataframes* die richtigen Eigenschaften zu.
+[[*Pandas Series*]  [*Pandas Dataframe*]]
+[( )                ( )                 ]
+[( )                ( )                 ]
+[( )                ( )                 ]
