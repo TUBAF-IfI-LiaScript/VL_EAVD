@@ -486,7 +486,7 @@ examples = {"Kurt": 1.3,
 examples["Michi"] = 2.0
 
 grades.update(examples)
-print(grades)
+print(grades["Michi"])
 
 ```
 [(X)] 2.0
