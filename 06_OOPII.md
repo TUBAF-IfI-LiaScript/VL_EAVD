@@ -90,7 +90,7 @@ Folgendes Beispiel illustriert den erreichten Status unserer C++ Implementierung
 
 + 3 Membervariablen (Zeile 5-7)
 + 2 Konstruktoren (Zeile 9-10)
-+ 1 Memeberfunktion (Zeile 12)
++ 1 Memberfunktion (Zeile 12)
 
 Alle sind als `public` markiert.
 
@@ -146,7 +146,7 @@ int main()
 
 ### Konzept
 
-Das Überladen von Operatoren erlaubt die flexible klassenspezifische Nutzung von Arithmetischen- und Vergleichs-Symbolen wie  `+`, `-`, `*`, `==`. Damit kann deren Bedeutung für selbstdefinierter Klassen  mit einer neuen Bedeutung versehen werden. Ausnahmen bilden   spezieller Operatoren, die nicht überladen werden dürfen (  ?: ,  :: ,  . ,  .* , typeid , sizeof und die Cast-Operatoren).
+Das Überladen von Operatoren erlaubt die flexible klassenspezifische Nutzung von Arithmetischen- und Vergleichs-Symbolen wie  `+`, `-`, `*`, `==`. Damit kann deren Bedeutung für selbstdefinierte Klassen mit einer neuen Bedeutung versehen werden. Ausnahmen bilden spezielle Operatoren, die nicht überladen werden dürfen (  ?: ,  :: ,  . ,  .* , typeid , sizeof und die Cast-Operatoren).
 
 ```
 Matrix a, b;
