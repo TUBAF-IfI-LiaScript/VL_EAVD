@@ -635,6 +635,71 @@ csv_file.close()
 ## Pandas Grundlagen
 > Ordnen Sie *Pandas Series* und *Pandas Dataframes* die richtigen Eigenschaften zu.
 [[*Pandas Series*]  [*Pandas Dataframe*]]
-[( )                ( )                 ]
-[( )                ( )                 ]
-[( )                ( )                 ]
+[(X)                ( )                 ] Eindimensional
+[( )                (X)                 ] Zweidimensional
+[( )                (X)                 ] Heterogene Datentypen
+[(X)                ( )                 ] Homogene Datentypen
+[(X)                ( )                 ] Größenunveränderlich
+[( )                (X)                 ] Größenveränderlich
+
+### Arbeit mit Dataframes
+> Wie lautet die Ausgabe dieses Programms?
+```python
+import pandas as pd
+
+a = [5, 7, 2, 7, 6]
+
+s_1 = pd.Series(a, index=["a", "b", "c", "d", "e"])
+print(s_1["c"])
+```
+[[2]]
+
+{{1}}
+**********************************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```python
+import pandas as pd
+
+d = {
+    'A': [1,4,2,5],
+    'B': [2,5,3,6],
+    'C': [3,6,4,7],
+    'D': [4,7,5,8]
+}
+
+s_1 = pd.Series(d)
+print(s_1['C'][2])
+```
+[[4]]
+**********************************************************************************************
+
+{{2}}
+**********************************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```csv data.csv
+title,FSK
+Toy Story,0
+Jumanji,12
+Grumpier Old Men,6
+Waiting to Exhale,12
+Father of the Bride Part II,0
+Heat,16
+Sabrina,6
+Tom and Huck,6
+Sudden Death,16
+GoldenEye,16
+The Amerian President,6
+Dracula: Dead and Loving It,12
+Balto,0
+Nixon,12
+Cutthroat Island,12
+```
+
+```python
+import pandas as pd
+
+df = pd.read_csv('data.csv')
+print(df['title'][9])
+```
+[[GoldenEye]]
+**********************************************************************************************
