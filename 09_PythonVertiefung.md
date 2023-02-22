@@ -452,7 +452,6 @@ a = (9, 2)
 print(a[0])
 ```
 [(X)] 9
-[( )] 7
 [( )] 2
 [( )] Das Programm endet mit einem Error
 ********************************************************************
@@ -474,7 +473,7 @@ print(a[0])
 ### Dictionaries
 > Wie lautet die Ausgabe dieses Programms?
 ```python
-# Hier werden Klausurnoten von Schülern gespeichert
+# Hier werden Noten gespeichert
 grades = {"Peter": 1.0,
           "Franz": 3.0,
           "Max": 1.7,
