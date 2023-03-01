@@ -485,7 +485,7 @@ extern float berechneFlaeche(float breite, float hoehe);
 
 ### Parameterübergabe und Rückgabewerte
 
-Bisher wurden Funktionen betrachtet, die skalare Werte als Parameter erhilten
+Bisher wurden Funktionen betrachtet, die skalare Werte als Parameter erhielten
 und ebenfalls einen skalaren Wert als einen Rückgabewert lieferten. Allerdings
 ist diese Möglichkeit sehr einschränkend.
 
@@ -604,7 +604,7 @@ int main(void) {
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out -lm`, `./a.out`)
 
 Statt Zeiger kann die Notation als Array undefinierter (definierter) Größe verwendet werden.
-Unabhängig von der Notation entspricht die Größe des übergebenen Arrays der Difinition in der
+Unabhängig von der Notation entspricht die Größe des übergebenen Arrays der Definition in der
 aufrufenden Funktion (hier main-Funktion).
 
 Auch bei der Verwendung von Zeigern und Referenzen werden keine Kopien von Paramern angelegt, sondern die
@@ -847,3 +847,269 @@ void loop() {
 }
 ```
 @AVR8js.sketch
+
+# Quiz
+## Funktionen
+### Funktionsdefinition
+> Wechen Rückgabewert liefert eine als `void` deklatierte Funktion?
+[( )] Es können alle Arten von Rückgabewerten zurückgegeben werden.
+[(X)] Es wird kein Wert zurückgegeben.
+
+{{1}}
+************************************************************************
+> Welcher Datentyp wird automatisch als Rückgabewert ausgewählt, wenn Sie keinen Rückgabetyp angeben?
+[( )] `void`
+[(X)] `int`
+[( )] `float`
+[( )] `double`
+[( )] `char`
+[( )] `boolean`
+************************************************************************
+
+{{2}}
+************************************************************************
+> Muss die Parameterliste einer Funktionen wenigstens einen Parameter enthalten?
+[( )] Ja
+[(X)] Nein
+************************************************************************
+
+### Aufruf von Fuktionen
+> Wodurch muss `[_____]` ersetzt werden damit die Funktion `divi` ermittelt ob `a` ein Teiler von `b` ist? Die Lösung ist ohne Leerzeichen einzugeben.
+```cpp
+#include <iostream>
+using namespace std;
+
+bool divi(int x, int y){
+  if(x%y == 0)
+    return true;
+  else
+    return false;
+}
+
+int main() {
+  int a = 11;
+  int b = 1001;
+  bool bdiv = [_____]
+  if(bdiv == 1)
+    cout <<  a << " ist ein Teiler von " << b << "." << endl;
+  else
+    cout <<  a << " ist kein Teiler von " << b << "." << endl;
+}
+```
+[[divi(b,a);]]
+
+### Fehler
+> ist dieses Programm fehlerfrei?
+```cpp
+#include <iostream>
+using namespace std;
+
+int foo(){
+   return 42;
+}
+
+int main(void) {
+  int i = foo();
+  return 0;
+}
+```
+[(X)] Ja
+[( )] Nein
+
+{{1}}
+************************************************************************
+> Ist dieses Programm fehlerfrei?
+```cpp
+#include <iostream>
+using namespace std;
+
+void foo(){
+   return 42;
+}
+
+int main(void) {
+  foo();
+  return 0;
+}
+```
+[( )] Ja
+[(X)] Nein
+************************************************************************
+
+{{2}}
+************************************************************************
+> Welche Fehler liegen bei diesem Programm vor?
+```cpp
+#include <iostream>
+using namespace std;
+
+void foo(int index, float wert){
+  cout<<"Index   -  Wert\n";
+  cout<<index<<"   - "<<wert<<"\n\n";
+  return index;
+}
+
+int main(void) {
+  float f = foo(6.5, 4);
+  return 0;
+}
+```
+[[X]] Datentypen der Parameter beim Aufruf und der Defintion stimmen nicht überein
+[[X]] Rückgabewert ohne Definition des Rückgabetyps
+[[ ]] Anweisung nach dem `return` Schlüsselwort
+************************************************************************
+
+### Funktionsdeklaration
+> Ersetzen Sie `[_____]` durch eine explizite Deklaration der Funktion `hw`.
+```cpp
+#include <iostream>
+using namespace std;
+
+[_____]
+
+int main(void) {
+  hw();
+  return 0;
+}
+
+void hw(void) {
+  cout << "Hello World!" << endl;
+  return;
+}
+```
+[[void hw();]]
+
+{{1}}
+************************************************************************
+> Mit welcher dieser Anweisungen kann eine Funktion aus einer anderen Quellcodedatei einzufügt werden?
+[(X)] `extern int x(int y, bool z);`
+[( )] `import int x(int y, bool z);`
+[( )] `using int x(int y, bool z);`
+************************************************************************
+
+### Parameterübergabe und Rückgabewerte
+> Ordnen Sie die Eigenschaften den entsprechenden Arten der Parameterübergabe zu.
+- [[*call-by-value*] [*call-by-reference*]]
+- [    ( )           (X)      ]  Ermöglicht mehrere Rückgabewerte
+- [    (X)           ( )      ]  Arbeitet mit einer Kopie der Variablen
+- [    (X)           ( )      ]  Beeinflusst nicht den tatsächlichen Wert von Variablen in der `main`
+- [    ( )           (X)      ]  Beeinflusst den tatsächlichen Wert von Variablen in der `main`
+
+
+{{1}}
+************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+using namespace std;
+
+void f_a(int &variable){
+  variable++;
+}
+
+void f_b(int variable){
+  variable--;
+}
+
+void f_c(int &variable){
+  variable = 18;
+}
+
+int main(void) {
+  int a = 0;
+  f_a(a);
+  f_c(a);
+  f_b(a);
+  f_b(a);
+  f_a(a);
+  cout << a;
+  return 0;
+}
+```
+[[19]]
+************************************************************************
+
+{{2}}
+************************************************************************
+> Womit werden Array-Parameter übergeben?
+[( )] Referenz
+[(X)] Zeiger
+************************************************************************
+
+### Zeiger und Referenzen als Rückgabewerte
+> Wo liegt der Fehler im folgenden Programm?
+```cpp
+#include <iostream>
+using namespace std;
+
+int& doCalc(int &wert) {
+  int a = wert++;
+  return a;
+}
+
+int main(void) {
+  int b = 0;
+  cout << doCalc(b);
+  return 0;
+}
+```
+[(X)] Die mit `return` übergebene Referenz zeigt außerhalb der Funktion `doCalc` auf einen nicht existierenden Speicherplatz
+[( )] Referenzen dürfen nicht für die Rückgabe mit `return` verwendet werden
+
+{{1}}
+************************************************************************
+> Für die Variable `volumen` soll der Speicherplatz dynamisch zur Verfügung gestellt werden. Ersetzen Sie `[_____]` um die notwendige Ergängung der Anweisung.
+```cpp
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+double* kugelvolumen(double durchmesser) {
+  double *volumen = [_____]
+  *volumen = (4.0/3.0) * M_PI * pow(durchmesser / 2, 3);
+  return volumen;
+}
+
+int main(void) {
+  double wert = 5.0;
+  double *volumen;
+  volumen = kugelvolumen(wert);
+  cout << "Das Kugelvolumen beträgt für d=" << wert << "[m] " << *volumen << "[m³] \n";
+  delete volumen;
+  return 0;
+}
+```
+[[new double;]]
+************************************************************************
+
+### `main`-Funktion
+> Beurteilen Sie ob folgende Aussagen wahr oder falsch sind.
+- [[Wahr]        [Falsch]]
+- [(X)           ( )     ]  In jedem Programm darf es nur eine (1) `main`-Fuktion geben.
+- [( )           (X)     ]  Solange alle Funktionen `void` zurückgeben darf es auch mehrere `main`-Funktionen geben.
+- [( )           (X)     ]  `argc` wird als erstes Argument in der Befehlszeile übergeben und kann alle ganzzahligen positiven Werte grösser 0 annehmen.
+- [( )           (X)     ]  `argc` ist ein Array von Befehlszeilenargumenten.
+- [(X)           ( )     ]  `argv` ist ein Array von Befehlszeilenargumenten.
+- [(X)           ( )     ]  `argv[0]` ist das Programm selbst.
+
+{{1}}
+************************************************************************
+> Was ist `argv[argc]`?
+[(X)] NULL-Zeiger
+[( )] Das letzte Argument in der Befehlszeile
+************************************************************************
+
+{{2}}
+************************************************************************
+> Wie lautet die Ausgabe dieses Programms wenn die kompilierte Version des Programms intern mit `./a.out 3 2 1 Maus im Haus` aufgerufen wird?
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(int argc, char *argv[]) {
+  cout << argv[4];
+  return 0;
+}
+```
+[[Maus]]
+************************************************************************

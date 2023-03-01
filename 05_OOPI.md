@@ -452,7 +452,7 @@ int main()
 
 ### Datenkapselung
 
-Als Datenkapselung bezeichnet man das Verbergen von Implementierungsdetails einer Klasse. Auf die interne Daten kann nicht direkt zugegriffen werden, sondern nur über definierte Schnittstelle, die durch  `public`-Methoden repräsentiert wird.
+Als Datenkapselung bezeichnet man das Verbergen von Implementierungsdetails einer Klasse. Auf die internen Daten kann nicht direkt zugegriffen werden, sondern nur über definierte Schnittstellen, die durch `public`-Methoden repräsentiert wird.
 
 + get- und set-Methoden
 + andere Methoden
@@ -839,7 +839,7 @@ class_name instance_name (...);
 
 Beim Aufruf `Student bernhard {"Cotta", 25, "Zillbach"};` erzeugt der Compiler eine Methode `Student::Student(std::string, int, std::string)`, die die Initialisierungsparameter entgegennimmt und diese der Reihenfolge nach an die Membervariablen übergibt. Sobald wir nur einen explizten Konstruktor integrieren, weist der Compiler diese Verantwortung von sich.
 
-Entfernen Sie den Kommentar in Zeile 11 und der Compiler macht Sie darauf aufmerksam.
+Entfernen Sie den Kommentar in Zeile 13 und der Compiler macht Sie darauf aufmerksam.
 
 ```cpp                     defaultConstructor.cpp
 #include <iostream>
@@ -888,7 +888,7 @@ Student(std::string name, int alter, std::string ort):
 Die zuvor beschriebene Methodenüberladung kann auch auf die Konstruktoren angewandt werden. Entsprechend stehen dann eigene Aufrufmethoden für verschiedene Datenkonfigurationen zur Verfügung. In diesem Fall können wir auf drei verschiedenen Wegen Default-Werte setzen:
 
 + ohne spezfische Vorgabe wird der Standardinitialisierungswert verwendt (Ganzzahlen 0, Gleitkomma 0.0, Strings "")
-+ die Vorgabe eines indivduellen Default-Wertes (vgl. Zeile 5)
++ die Vorgabe eines indivduellen Default-Wertes (vgl. Zeile 7)
 
 ```cpp                     constructor.cpp
 #include <iostream>
@@ -897,10 +897,10 @@ class Student{
   public:
     std::string name;
     int alter;
-    std::string ort; // = "Freiberg"
+    std::string ort; // = "Freiberg";
 
     void ausgabeMethode(std::ostream& os){
-        os << name << " " << ort << " " << alter << "\ņ";
+        os << name << " " << ort << " " << alter << "\n";
     }
 
     Student(std::string name, int alter, std::string ort): name(name), alter(alter), ort(ort)
@@ -1015,3 +1015,295 @@ int main () {
     Die Auflistung der Memberfunktionen der entsprechenden Klassen finden Sie unter [Link](https://microsoft.github.io/azure-iot-developer-kit/docs/apis/)
 
 Der Beispielcode für die Anwendungen ist in den `examples` Ordnern des Projektes enthalten.
+
+# Quiz
+## Definieren von Klassen und Objekten
+### Grundlegend
+> Welches Schlüsselwort wird benutzt um eine Klasse zu definieren?
+[[class]]
+
+{{1}}
+**************************************************************************
+> Muss `[_____]` im unten aufgeführten Beispiel wirklich durch ein Semikolon ersetzt werden?
+```cpp
+class class_name {
+  access_specifier_1:
+    member1;
+  access_specifier_2:
+    member2;
+  ...
+}[_____]
+
+class_name instance_name;
+```
+[(X)] Ja
+[( )] Nein
+**************************************************************************
+
+{{2}}
+**************************************************************************
+> Welche der folgenden Schlüsselwörter regeln die Zugriffsrechte bei Klassen und Klassen-Member?
+[[ ]] void
+[[X]] private
+[[ ]] general
+[[ ]] open
+[[X]] public
+[[X]] protected
+[[ ]] encrypted
+**************************************************************************
+
+{{3}}
+**************************************************************************
+> Welcher Zugriffsbezeichner gilt standardmäßig für alle Member einer Klasse?
+[(X)] private
+[( )] protected
+[( )] public
+**************************************************************************
+
+{{4}}
+**************************************************************************
+> Ersetzen Sie `[_____]` durch den Aufruf der Methode `print` des Objektes `Beispielauto`? 
+```cpp
+#include <iostream>
+#include <string>
+
+class Auto
+{
+  public:
+    std::string Hersteller;
+    int Kilometerstand;
+    int PS;
+
+    void print(){
+        std::cout << Hersteller << " - " << PS <<" PS - " << Kilometerstand << " Kilometer" << std::endl;
+    }
+};
+
+int main()
+{
+  Auto Beispielauto;
+  Beispielauto.Hersteller = "Hyundai";
+  Beispielauto.Kilometerstand = 49564;
+  Beispielauto.PS = 76;
+  [_____]
+}
+```
+[[Beispielauto.print();]]
+**************************************************************************
+
+### Datenkapselung
+> Wodurch muss `[_____]` ersetzt werden um den Kilometerstand vom Objekt `Beispielauto` auf 40000 zu setzen?
+
+```cpp
+#include <iostream>
+#include <string>
+
+class Auto
+{
+  private:
+    std::string Hersteller;
+    int Kilometerstand;
+    int PS;
+  
+  public:
+    void set_Hersteller(std::string _Hersteller){
+        Hersteller = _Hersteller;
+    }
+    void set_Kilometerstand(int _Kilometerstand){
+        Kilometerstand = _Kilometerstand;
+    }
+    void set_PS(int _PS){
+        PS = _PS;
+    }
+};
+
+int main()
+{
+  Auto Beispielauto;
+  [_____]
+}
+```
+[[Beispielauto.set_Kilometerstand(40000);]]
+
+### Memberfunktion
+> Vervollständigen Sie die Implementierung der Methode `ausgabeMethode` in dem Sie `[_____]` durch noch fehlenden Teil ersetzen. Geben Sie die Antwort ohne Leerzeichen ein.
+```cpp
+#include <iostream>
+
+class Auto
+{
+  public:
+    std::string Hersteller;
+    int Kilometerstand;
+    int PS;
+
+    void ausgabeMethode();
+};
+
+// Implementierung der Methode
+void [_____]{
+    std::cout << Hersteller << " - " << Kilometerstand << " km " << PS << " PS" << std::endl;
+}
+
+int main()
+{
+  Auto beispielauto {"Tesla", 25000, 283};
+  beispielauto.ausgabeMethode();
+  return 0;
+}
+```
+[[Auto::ausgabeMethode()]]
+
+### Modularisierung unter C++
+> Im Programm `main.cpp` soll die in der Datei `Auto.h` deklarierte Klasse `Auto` verwendet werden. Welche Dateien werden dafür benötigt?
+[[ ]] `main.h`
+[[X]] `main.cpp`
+[[X]] `Auto.h`
+[[X]] `Auto.cpp`
+
+{{1}}
+**************************************************************************
+> Im folgenden Programm soll die in der Datei `Auto.h` deklarierte Klasse `Auto` verwendet werden. Wodurch muss `[_____]` ersetzt werden um das zu ermöglichen? Es kann davon ausgegangen werden, dass alle benötigten Dateien im selben Ordner liegen. 
+```cpp
+#include <iostream>
+#include [_____]
+
+int main()
+{
+  Auto Beispielauto{"Tesla", 25000, 283};
+  Beispielauto.ausgabeMethode();
+  return 0;
+}
+```
+[["Auto.h"]]
+**************************************************************************
+
+### Überladung von Methoden
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+
+class Force
+{
+  public:
+    double Newton(double mass){
+      double F = mass * 9.81;
+      return F;
+    };
+
+    double Newton(double mass, double acc){
+      double F = mass * acc;
+      return F;
+    };
+};
+
+int main()
+{
+  Force Kraft;
+  double G = Kraft.Newton(10);
+  double F = Kraft.Newton(10, 10);
+  double R = G + F;
+  std::cout << R << std::endl;
+}
+```
+[[198.1]]
+
+## Initialisierung/Zerstören eines Objektes
+### Konstruktoren
+> Wie lautet die Ausgabe dieses Programms?
+
+```cpp
+#include <iostream>
+
+class Student{
+  public:
+    std::string name;
+    int alter;
+    std::string lieblingstier = "Dikdik";
+
+    void ausgabeMethode(std::ostream& os){
+        os << name << " " << lieblingstier << " " << alter;
+    }
+
+    Student(std::string name, int alter, std::string lieblingstier): name(name), alter(alter), lieblingstier(lieblingstier)
+    {
+    }
+
+    Student(std::string name): name(name),alter(0)
+    {
+    }
+};
+
+int main()
+{
+  Student alexander = Student("Humboldt");
+  alexander.alter = 19;
+  alexander.ausgabeMethode(std::cout);
+
+  return 0;
+}
+```
+[[Humboldt Dikdik 19]]
+
+{{1}}
+**************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+
+class Student{
+  public:
+    std::string name;
+    int alter;
+    std::string lieblingstier = "Dikdik";
+
+    void ausgabeMethode(std::ostream& os){
+        os << name << " " << lieblingstier << " " << alter;
+    }
+
+    Student(std::string name, int alter, std::string lieblingstier): name(name), alter(alter), lieblingstier(lieblingstier)
+    {
+    }
+
+    Student(std::string name): name(name),alter(0)
+    {
+    }
+};
+
+int main()
+{
+  Student alexander = Student("Humboldt", 23, "Einhorn");
+  alexander.ausgabeMethode(std::cout);
+
+  return 0;
+}
+```
+[[Humboldt Einhorn 23]]
+**************************************************************************
+
+### Destruktoren
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+#include <string>
+
+class Auto
+{
+  public:
+    std::string Hersteller;
+    int Kilometerstand;
+    int PS;
+
+    ~Auto(){
+      std::cout << "!";
+    }
+};
+
+int main()
+{
+  Auto Beispielauto{"Hyundai", 25000, 76};
+  std::cout << Beispielauto.Hersteller << " ";
+  std::cout << Beispielauto.Kilometerstand << " " << Beispielauto.PS;
+}
+```
+[[Hyundai 25000 76!]]
