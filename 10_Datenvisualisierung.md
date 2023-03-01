@@ -574,10 +574,13 @@ plt.savefig('foo.png')
 
 # Quiz
 ## Objektorientierung in Python
+
+> Für welche der genannten Grundprinzipien der objektorientierten Programmierung treffen folgende Aussagen zu:
+
 [[Kapselung]  [Vererbung] [Polymorphie] ]
-[( )          ( )         (X)           ] Objekte werden durch Kapselung und Vererbung austauschbar!
-[(X)          ( )         ( )           ] Objekte [...] ihre Daten, Operatoren, Methoden usw. sofern diese nicht als "öffentlich" deklariert sind.
-[( )          (X)         ( )           ] Objekte können "Fähigkeiten" an andere, speziellere Objekte weitergeben.
+[( )          ( )         (X)           ] Welche konkrete Implementierung der Methode aufgerufen wird, hängt davon ab mit welchem konkreten Objekt sie aufrufen wird.
+[(X)          ( )         ( )           ] Objekte schützen ihre Daten und Methoden sofern diese nicht als "öffentlich" deklariert sind.
+[( )          (X)         ( )           ] Objekte können ihre Daten und Methoden an andere, spezielle Objekte weitergeben.
 
 ### Klassen in Python
 > Mit welchem Schlüsselwort beginnen Klassendefinitionen in Python?
@@ -585,21 +588,21 @@ plt.savefig('foo.png')
 
 {{1}}
 ********************************************************************
-> Wodurch muss `[_____]` ersetzt werden, um den Nachnamen von Student `i` auszugeben?
+> Wodurch muss `[_____]` ersetzt werden, um den Nachnamen von Student `neuer` auszugeben?
 ```python
 class Student:
     lastName = "Neuer"
     firstName = "Markus"
     age = 20
 
-i = Student()
+neuer = Student()
 print([_____])
 ```
-[[i.lastName]]
+[[neuer.lastName]]
 ********************************************************************
 
 ### OOP Grundelemente in Python
-> Wie lautet die Ausgabe dieses Programms?
+> Wie lauten die Ausgaben foldender Programme?
 ```python
 class Player:
     health = 100
@@ -697,7 +700,7 @@ Fifi.[_____]
 ********************************************************************
 
 ### Vererbung
-> Wodurch muss `[_____]` ersetzt werden, um einne neue Klasse `Auto` zu erstellen, die das Verhalten der Klasse `Fahrzeug` erbt?
+> Wodurch muss `[_____]` ersetzt werden, um eine neue Klasse `Auto` zu erstellen, die das Verhalten der Klasse `Fahrzeug` erbt?
 ```python
 class Fahrzeug:
   def __init__(self, ps):
@@ -712,7 +715,7 @@ a1 = Auto(70)
 
 ## Datenvisualisierung
 ### Matplotlib Grundlagen
-> Wordurch muss `[_____]` ersetzt werden, um einen plot mit dem Jahr auf der X-Achse und den getrunkenen Tassen Tee auf der Y-Achse zu erstellen?
+> Wodurch muss `[_____]` ersetzt werden, um einen plot mit dem Jahr auf der X-Achse und der Anzahl der Tassen Tee auf der Y-Achse zu erstellen?
 ```python
 import matplotlib.pyplot as plt
 
