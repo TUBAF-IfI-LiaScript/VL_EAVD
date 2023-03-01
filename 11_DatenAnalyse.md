@@ -603,13 +603,8 @@ plt.savefig('foo.png') # notwendig für die Ausgabe in LiaScript
 [(X)] *Comma-separated values*
 [( )] *Critical Signal Version*
 
-> In welchem Datenformat werden die Inhalte einer *CSV* angelegt?
-[( )] `integer`
-[( )] `float`
-[(X)] `string`
-
 ### Python nativ
-> Wie lautet die Ausgabe dieses Programms?
+> Wie lautet die Ausgabe des folgenden Programms, das die Daten aus der Datei data.csv einliest?
 ```text data.csv 
 timestamp;X;Y;Z
 09:28:52.419;-7;-8;1016
