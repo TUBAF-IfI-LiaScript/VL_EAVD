@@ -1,0 +1,22 @@
+name: Trigger_overview
+on:
+  push:
+    branches: [main]
+
+jobs:
+  dispatch:
+    name: Dispatch
+    env:
+      PACKAGES_TO_UPGRADE: ${{ needs.run_publish.outputs.packages }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repo: ['TUBAF-IfI-LiaScript/TUBAF-IfI-LiaScript.github.io']
+    timeout-minutes: 5
+    steps:
+      - name: Dispatch to workflows
+        run: |
+            curl -H "Accept: application/vnd.github.everest-preview+json" \
+            -H "Authorization: token ${{ secrets.GITHUB_API_TOKEN }}" \
+            --request POST \
+            --data '{"event_type": "new_version", "client_payload": { "foo": "bar" }}' https://api.github.com/repos/${{ matrix.repo }}/dispatches
