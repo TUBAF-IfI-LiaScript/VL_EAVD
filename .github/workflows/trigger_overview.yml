@@ -1,8 +1,9 @@
 name: Trigger_overview
 on:
   push:
-    branches: [main]
-
+    branches:
+      - master
+      
 jobs:
   dispatch:
     name: Dispatch
