@@ -6,9 +6,7 @@ on:
       
 jobs:
   dispatch:
-    name: Dispatch
-    env:
-      PACKAGES_TO_UPGRADE: ${{ needs.run_publish.outputs.packages }}
+    name: Dispatch dashboard
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -20,4 +18,4 @@ jobs:
             curl -H "Accept: application/vnd.github.everest-preview+json" \
             -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
             --request POST \
-            --data '{"event_type": "new_version", "client_payload": { "foo": "bar" }}' https://api.github.com/repos/${{ matrix.repo }}/dispatches
+            --data '{"event_type": "new_version_${{ github.repository }}", "client_payload": { "foo": "bar" }}' https://api.github.com/repos/${{ matrix.repo }}/dispatches
