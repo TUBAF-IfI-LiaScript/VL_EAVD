@@ -90,7 +90,7 @@ Folgendes Beispiel illustriert den erreichten Status unserer C++ Implementierung
 
 + 3 Membervariablen (Zeile 5-7)
 + 2 Konstruktoren (Zeile 9-10)
-+ 1 Memeberfunktion (Zeile 12)
++ 1 Memberfunktion (Zeile 12)
 
 Alle sind als `public` markiert.
 
@@ -146,7 +146,7 @@ int main()
 
 ### Konzept
 
-Das Überladen von Operatoren erlaubt die flexible klassenspezifische Nutzung von Arithmetischen- und Vergleichs-Symbolen wie  `+`, `-`, `*`, `==`. Damit kann deren Bedeutung für selbstdefinierter Klassen  mit einer neuen Bedeutung versehen werden. Ausnahmen bilden   spezieller Operatoren, die nicht überladen werden dürfen (  ?: ,  :: ,  . ,  .* , typeid , sizeof und die Cast-Operatoren).
+Das Überladen von Operatoren erlaubt die flexible klassenspezifische Nutzung von Arithmetischen- und Vergleichs-Symbolen wie  `+`, `-`, `*`, `==`. Damit kann deren Bedeutung für selbstdefinierte Klassen mit einer neuen Bedeutung versehen werden. Ausnahmen bilden spezielle Operatoren, die nicht überladen werden dürfen (  ?: ,  :: ,  . ,  .* , typeid , sizeof und die Cast-Operatoren).
 
 ```
 Matrix a, b;
@@ -709,3 +709,214 @@ void loop() {
 }
 ```
 @AVR8js.sketch
+
+# Quiz
+## Operatorenüberladung
+### Konzept
+> Welches Schlüsselwort wird bei der Operatorüberladung verwendet?
+[[operator]]
+
+{{1}}
+**************************************************************************
+> Für welche Operatoren sollten die Methoden einer Klasse und für welche die globalen Funktionen bevorzugt zum Einsatz kommen?
+[[Methode]  [Funktion]]
+[(X)        ( )       ] `++`
+[( )        (X)       ] `+`
+[( )        (X)       ] `*`
+[( )        (X)       ] `%`
+[(X)        ( )       ] `--`
+[(X)        ( )       ] `+=`
+**************************************************************************
+
+{{2}}
+**************************************************************************
+> Wie lautet die Ausgabe dieses Programms? (Hinweise können über das Feld mit der Glühbirne angezeigt werden.)
+```cpp
+#include<iostream>
+
+class Vektor {
+  public:
+	  int x = 0, y = 0;
+
+    Vektor(int x, int y);
+	
+	  Vektor operator+(const Vektor& vek_tmp);
+
+	  void printVektor(){
+      std::cout << x << ", " << y;
+      }
+};
+
+Vektor::Vektor(int x, int y): x(x), y(y) {}
+
+Vektor Vektor::operator+(const Vektor& vek_tmp){
+		  Vektor vek_loe(0, 0);
+		  vek_loe.x = this->x + vek_tmp.x;
+		  vek_loe.y = this->y + vek_tmp.y;
+		  return vek_loe;
+	  }
+
+int main(){
+	Vektor v1(4, 7), v2(10, 9);
+	Vektor v3 = v1 + v2;
+	v3.printVektor();
+}
+```
+[[14, 16]]
+[[?]] In diesem Beispiel sollen zwei Vektoren addiert werden. Im nächsten Tipp steht eine genauere Erklärung der Operatorüberladung anhand dieses Beispiels. 
+[[?]] `this->x` und `this->y` sind die Datenfelder des Objektes vor dem Operator (in der `main`-Funktion des Vektors `v1`). Der Vektor `v2`, der hinter dem Operator in der `main`-Funktion steht, wird an die Methode übergeben. `vek_tmp.x` und `vek_tmp.x` sind hier die Datenfelder des Vektors `v2`. Der neue Vektor `vek_loe` entsteht infolge der Addition und wird zurückgegeben.
+**************************************************************************
+
+### Anwendung
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+
+class Ort{
+  public:
+    std::string name;
+    std::string bundesland;
+    int einwohner;
+
+    Ort(const Ort&);
+    Ort(std::string n);
+    Ort(std::string n, std::string b, int e);
+};
+
+Ort::Ort(std::string n, std::string b, int e): name{n}, bundesland{b}, einwohner{e} {}
+
+std::ostream& operator<<(std::ostream& os, const Ort& ort)
+{
+    os << ort.name << ", " << ort.bundesland << ", " << ort.einwohner;
+    return os;
+}
+
+int main()
+{
+  Ort Freiberg = Ort("Freiberg", "Sachsen" , 41823);
+  std::cout << Freiberg;
+}
+```
+[[Freiberg, Sachsen, 41823]]
+
+## Vererbung
+> Erbt die erbende Klasse immer alle Attribute und Methoden der Basisklasse?
+[(X)] Ja
+[( )] Nein
+
+### Implementierung in C++
+> Wodurch muss `[_____]` ersetzt werden um eine Klasse `Flugzeug` zu definieren, die von der Klasse `Fahrzeug` erbt?
+```cpp
+#include <iostream>
+
+class Fahrzeug{
+  public:
+    int aktuellePosition[2];
+    std::string Zulassungsnummer;
+    bool Fuehrerscheinpflichtig;
+};
+
+[_____]{
+  public:
+    int Flughoehe;
+    void fliegen();
+};
+```
+[[class Flugzeug: public Fahrzeug]]
+<script>
+let input = "@input".trim()
+
+input == "class Flugzeug: public Fahrzeug" || input == "class Flugzeug:public Fahrzeug"
+</script>
+
+{{1}}
+**************************************************************************
+> Kann eine abgeleitete Klasse als Basis-Klasse für eine weitere Klasse verwendet werden?
+[(X)] Ja
+[( )] Nein
+**************************************************************************
+
+{{2}}
+**************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```cpp
+#include <iostream>
+
+class Fahrzeug {
+  public:
+    Fahrzeug(): name{"Fahrzeug"}{};
+    Fahrzeug(std::string _name): name{_name}{};
+    void defekt() {
+      std::cout << name << " muss in die Werkstatt.";
+    }
+    std::string name;
+};
+
+class Auto: public Fahrzeug {
+  public:
+    Auto(std::string name, int ps): Fahrzeug(name), ps{ps} {};
+    int ps = 0;
+};
+
+int main() {
+  Auto auto1 = Auto("Peters Auto", 100);
+  auto1.defekt();
+  return 0;
+} 
+```
+[[Peters Auto muss in die Werkstatt.]]
+**************************************************************************
+
+### Vererbungsattribute
+> Welche Zugriffspezifizierer sind für die Mitglieder einer Basisklasse zu verwenden damit die folgenden Aussagen zutreffen? 
+[[`private`]  [`protected`] [`public`]]
+[( )          ( )           (X)       ] Zugriff ist aus einer beliebigen Klasse möglich.
+[(X)          ( )           ( )       ] Zugriff ist nur innerhalb der Basisklasse möglich.
+[( )          (X)           ( )       ] Zugriff ist in der Basisklasse und in erbenden Klassen möglich.
+
+### Polymorphie
+> Was ist Polymorphie?
+[( )] Eine Technik, die es verhindert, bestehende Methoden in den ableiteten Klassen aufzurufen
+[(X)] Eine Technik, die es ermöglicht, bestehende Methoden zu überschreiben
+[( )] Eine Technik, die es ermöglicht, Datenfelder einer Klasse in den abgeleiteten Klassen zu überschreiben
+
+{{1}}
+**************************************************************************
+> Welche Aussagen treffen im Bezug auf Polymorphie zu?
+[( )] Polymorphie soll beim Erstellen einer abgeleiteten Klasse immer durch Vergabe eines anderen Namens umgangen werden.
+[(X)] Polymorphie ermöglicht die Methoden der Basisklase in der abgeleiteten Klasse mit einer anderen Funktionalität zu versehen.
+[( )] Polymorphie wird verwendet um die Methoden der Basisklasse zu löschen.
+**************************************************************************
+
+{{2}}
+**************************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+
+```cpp
+#include <iostream>
+
+class Basisklasse {
+  public:
+    void ausgabe() {
+      std::cout << "Ausgabe1";
+    }
+};
+
+class Ableitungsklasse : public Basisklasse {
+  public:
+    void ausgabe() {
+      std::cout << "Ausgabe2";
+    }
+};
+
+int main() {
+  Basisklasse b = Basisklasse();
+  b.ausgabe();
+
+  Ableitungsklasse a = Ableitungsklasse();
+  a.ausgabe();
+  return 0;
+}
+```
+[[Ausgabe1Ausgabe2]]
+**************************************************************************
