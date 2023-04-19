@@ -41,7 +41,7 @@ import: https://github.com/liascript/CodeRunner
 
 ## Weitere Datentypen 
 
-Sie haben bereits Listen (`list`), `range` Objekte und Text (``string`) als Datenstruktur kennengelernt - im Weiteren existieren daneben vier weitere Sequenzdatentypen: byte sequences (`bytes` objects), byte arrays (`bytearray` objects) und `tuples`.
+Sie haben bereits Listen (`list`), `range` Objekte und Text (`string`) als Datenstruktur kennengelernt - im Weiteren existieren daneben vier weitere Sequenzdatentypen: byte sequences (`bytes` objects), byte arrays (`bytearray` objects) und `tuples`.
 Dazu kommen `dictionaries` und `sets` als Containertypen. 
 
 | Datentyp    | Besonderheit                                    | Syntax                  |
@@ -434,4 +434,173 @@ if __name__ == "__main__":
 
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+# Quiz
+## Weitere Datentypen
+### Tupel oder Liste?
+> Welche Vorteile hat der Datentyp `Tupel` gegenüber dem Datentyp `Liste`?
+[[ ]] `Tupel` sind einfacher zu erstellen.
+[[X]] Iterationen über `Tupel` sind schneller als Iterationen über `Listen`
+[[ ]] `Tupel` können mehr Elemente enthalten
+[[X]] `Tupel`benötigen weniger Speicherbedarf
+
+{{1}}
+********************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```python
+a = (9, 2)
+print(a[0])
+```
+[(X)] 9
+[( )] 2
+[( )] Das Programm endet mit einem Error
+********************************************************************
+
+{{2}}
+********************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```python
+a = (9, 2)
+a[0] = 7
+print(a[0])
+```
+[( )] 9
+[( )] 7
+[( )] 2
+[(X)] Das Programm endet mit einem Error
+********************************************************************
+
+### Dictionaries
+> Wie lautet die Ausgabe dieses Programms?
+```python
+# Hier werden Noten gespeichert
+grades = {"Peter": 1.0,
+          "Franz": 3.0,
+          "Max": 1.7,
+          "Jonas": 2.3}
+
+examples = {"Kurt": 1.3,
+            "Bernd": 3.3}
+
+examples["Michi"] = 2.0
+
+grades.update(examples)
+print(grades["Michi"])
+
+```
+[(X)] 2.0
+[( )] Das Programm endet mit einem Error
+
+### Sets
+> Wie viele Elemente befinden sich im Set `st`?
+```python
+st = {"Franz", "Peter", "Franz", "Michi", "Peter"}
+print(st)
+```
+[[3]]
+
+{{1}}
+********************************************************************
+> Wie lautet die Ausgabe dieser Funktion? (Bitte geben Sie die Antwort ohne geschweifte Klammern an)
+```python
+a = {1,2,3,4}
+b = {7,4,6,7}
+
+print(b - a)
+```
+[[6, 7]]
+<script>
+let input = "@input"
+
+input == "6, 7" || input == "6,7"
+</script>
+********************************************************************
+
+{{2}}
+********************************************************************
+> Wie lautet die Ausgabe dieser Funktion? (Bitte geben Sie die Antwort ohne geschweifte Klammern an)
+```python
+a = {1,2,3,4}
+b = {7,4,6,7}
+
+print(b & a)
+```
+[[4]]
+********************************************************************
+
+{{3}}
+********************************************************************
+> Wie lautet die Ausgabe dieser Funktion? (Bitte geben Sie die Antwort ohne geschweifte Klammern an)
+```python
+a = {1,2,3,4}
+b = {7,4,6,7}
+
+print(b < a)
+```
+[( )] True
+[(X)] False
+********************************************************************
+
+{{4}}
+********************************************************************
+> Wie lautet die Ausgabe dieser Funktion? (Bitte geben Sie die Antwort ohne geschweifte Klammern oder Leerzeichen an)
+```python
+a = {1,2,3,4}
+b = {7,4,6,7}
+
+print(b | a)
+```
+[[1,2,3,4,6,7]]
+********************************************************************
+
+## Eigene Funktionen
+### Syntax
+> Mit welchem Schlüsselwort starten Funktionsdefinitionen in Python?
+[[def]]
+
+### Parameterübergabe
+> Wie lautet die Ausgabe dieses Programms auf 2 Nachkommastellen gerundet?
+```python
+from math import pi
+
+def to_rad(num):
+  rad = num * (pi / 180)
+  return rad
+
+deg = 90
+print(to_rad(deg))
+```
+[[1.57]]
+
+### Returnwerte
+> Wie lautet die Ausgabe dieses Programms? Bitte geben Sie die Antwort ohne Klammern an.
+```python
+def get_min_max(a):
+    return (min(a), max(a))
+
+a = (10, 47, 18, 1, 33, 20)
+result = get_min_max(a)
+print(result)
+```
+[[1, 47]]
+<script>
+let input = "@input"
+
+input == "1, 47" || input == "1,47"
+</script>
+
+{{1}}
+********************************************************************
+> Wie lautet die Ausgabe dieses Programms?
+```python
+def modify_number(a):
+    a = -1
+    return
+
+a = 42
+modify_number(a)
+print(a)
+```
+[[42]]
+********************************************************************
 
