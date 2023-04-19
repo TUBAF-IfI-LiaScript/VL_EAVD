@@ -221,7 +221,7 @@ i.makeSound()
 
 > Aufgabe: Schreiben Sie eine Methode, so dass eine Instanz von Dog in Abhängigkeit von ihrem Alter schläft. Recherchieren Sie dazu unter `python delay` die notwendigen Methoden der `time` Klasse.
 
-Wie Sie bereits bie der Inspektion der  `list`, `int` aber auch der `Dog` Klassen gesehen haben, existiert eine Zahl von vordefinierten Funktionen - die sogenannten _dunder Methods_. Das Wort _dunder_ leitet sich von _double underscore_ ab. 
+Wie Sie bereits bei der Inspektion der  `list`, `int` aber auch der `Dog` Klassen gesehen haben, existiert eine Zahl von vordefinierten Funktionen - die sogenannten _dunder Methods_. Das Wort _dunder_ leitet sich von _double underscore_ ab. 
 
 | Methode      | Typ                  | implementiert                              |
 | ------------ | -------------------- | ------------------------------------------ |
@@ -306,6 +306,9 @@ class Person:
   def __init__(self, fname, lname):
     self.firstname = fname
     self.lastname = lname
+  
+  def printname(self):
+    print(self.firstname, self.lastname)
 
 class Student(Person):
    pass
@@ -450,7 +453,7 @@ Python stellt eine Vielzahl von Paketen für die Visualisierung von Dateninhalte
 | Package    | Link                                | Besonderheiten                                             |
 | ---------- | ----------------------------------- | ---------------------------------------------------------- |
 | plotly     | [Link](https://plotly.com/)         | Fokus auf interaktive Diagramme eingebettetet in Webseiten |
-| seaborn    | [Link](https://seaborn.pydata.org/) | Leistungsfähige Darstelung von statistischen Daten         |
+| seaborn    | [Link](https://seaborn.pydata.org/) | Leistungsfähige Darstellung von statistischen Daten         |
 | matplotlib | [Link](https://matplotlib.org/)     |                                                            |
 | ...        |                                     |                                                            |
 
@@ -462,7 +465,6 @@ import matplotlib.pyplot as plt
 a = [5,6,7,9,12]
 b =[x**2 for x in a]   # List Comprehension
 plt.plot(a, b)
-plt.show()
 
 #plt.show()  
 plt.savefig('foo.png') # notwendig für die Ausgabe in LiaScript
@@ -569,3 +571,163 @@ fig.tight_layout()
 plt.savefig('foo.png')
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+# Quiz
+## Objektorientierung in Python
+
+> Für welche der genannten Grundprinzipien der objektorientierten Programmierung treffen folgende Aussagen zu:
+
+[[Kapselung]  [Vererbung] [Polymorphie] ]
+[( )          ( )         (X)           ] Welche konkrete Implementierung der Methode aufgerufen wird, hängt davon ab mit welchem konkreten Objekt sie aufrufen wird.
+[(X)          ( )         ( )           ] Objekte schützen ihre Daten und Methoden sofern diese nicht als "öffentlich" deklariert sind.
+[( )          (X)         ( )           ] Objekte können ihre Daten und Methoden an andere, spezielle Objekte weitergeben.
+
+### Klassen in Python
+> Mit welchem Schlüsselwort beginnen Klassendefinitionen in Python?
+[[class]]
+
+{{1}}
+********************************************************************
+> Wodurch muss `[_____]` ersetzt werden, um den Nachnamen von Student `neuer` auszugeben?
+```python
+class Student:
+    lastName = "Neuer"
+    firstName = "Markus"
+    age = 20
+
+neuer = Student()
+print([_____])
+```
+[[neuer.lastName]]
+********************************************************************
+
+### OOP Grundelemente in Python
+> Wie lauten die Ausgaben foldender Programme?
+```python
+class Player:
+    health = 100
+    exp = 10
+
+    def __init__(self, name, level):
+        self.name = name
+        self.level = level
+
+
+p1 = Player("Peter", 2)
+p2 = Player("Frank", 6)
+print(p2.level, p2.exp)
+```
+[[6 10]]
+
+{{1}}
+********************************************************************
+```python
+class Player:
+    health = 100
+    exp = 10
+
+    def __init__(self, name, level):
+        self.name = name
+        self.level = level
+
+    def level_up(self):
+        self.level += 1
+        self.exp = 0
+
+
+p1 = Player("Peter", 2)
+p2 = Player("Frank", 6)
+p2.level_up()
+print(p2.level, p2.exp)
+```
+[[7 0]]
+********************************************************************
+
+{{2}}
+********************************************************************
+> Welche dieser Methoden ist eine *dunder Method*?
+
+[(X)] `__sum__`
+[( )] `sum`
+[( )] `_sum`
+[( )] `_sum_`
+********************************************************************
+
+### Kapselung
+> Welche der im folgenden Code aufgeführten Methoden und Variablen sind öffentlich und welche privat?
+```python
+class Dog:
+  def bark(self):
+      print("woof")
+
+  def __bark_loud(self):
+    print("WOOF!")
+
+Fifi = Dog()
+Fifi.bark_loud()
+```
+[[`bark()`] [`__bark_loud()`] ]
+[(X)      ( )             ] öffentlich
+[( )      (X)             ] privat
+
+{{1}}
+********************************************************************
+> Was ist die Ausgabe des oben gezeigten Codes?
+[( )] woof
+[( )] WOOF!
+[(X)] Das Programm wird mit einem Error abgebrochen
+********************************************************************
+
+{{2}}
+********************************************************************
+> Ist es in Python grundsätzlich möglich auch private Methoden auszuführen?
+[(X)] Ja
+[( )] Nein
+
+> Wordurch muss `[_____]` ersetzt werden, um die Methode `__bark_loud()` auszuführen?
+```python
+class Dog:
+  def bark(self):
+      print("woof")
+
+  def __bark_loud(self):
+    print("WOOF!")
+
+Fifi = Dog()
+Fifi.[_____]
+```
+[[_Dog__bark_loud()]]
+********************************************************************
+
+### Vererbung
+> Wodurch muss `[_____]` ersetzt werden, um eine neue Klasse `Auto` zu erstellen, die das Verhalten der Klasse `Fahrzeug` erbt?
+```python
+class Fahrzeug:
+  def __init__(self, ps):
+    self.ps = ps
+
+class [_____]:
+   pass
+
+a1 = Auto(70)
+```
+[[Auto(Fahrzeug)]]
+
+## Datenvisualisierung
+### Matplotlib Grundlagen
+> Wodurch muss `[_____]` ersetzt werden, um einen plot mit dem Jahr auf der X-Achse und der Anzahl der Tassen Tee auf der Y-Achse zu erstellen?
+```python
+import matplotlib.pyplot as plt
+
+year = [2000, 2001, 2002, 2003, 2004]
+ttg =[232, 533, 433, 410, 450] # Tassen Tee getrunken
+plt.[_____]
+
+plt.show()
+```
+[[plot(year, ttg)]]
+<script>
+let input = "@input".trim().toLowerCase()
+
+input == "plot(year, ttg)" || input == "plot(year,ttg)"
+</script>
