@@ -36,27 +36,6 @@ Programmierkenntnissen.
 
 ![Gif einer Fahrradtour über eine Berg](https://media.giphy.com/media/3oKIP9M5hm5YxsG58I/giphy.gif)<!--style="width: 100%; max-width: 80vh;"-->
 
-### Ein Blick ins Modulhandbuch
-
-> __Ziele:__
->
-> + Studierende sollen verstehen, was Algorithmen sind und welche Eigenschaften sie haben,
-> + in der Lage sein, praktische Probleme mit wohl strukturierten Algorithmen zu beschreiben,
-> + die Syntax und Semantik einer prozeduralen Programmiersprache beherrschen, um Algorithmen von einem Computer erfolgreich ausführen zu lassen,
-> + Datenstrukturen und algorithmische Konzepte kennen und über Wissen ausgewählter Standardalgorithmen verfügen.
-
-> __Inhalte:__ Grundlegende Prinzipien und Eigenschaften von Algorithmen und deren prozedurale Programmierung:
->
-> + Datentypen und Variablen
-> + Zeiger und Felder
-> + Anweisungen
-> + Ausdrücke
-> + Operatoren
-> + Kontrollstrukturen
-> + Blöcke und Funktionen
-> + Strukturen
-> + Typnamen und Namensräume
-> + ...
 
 ### Konkrete Anwendungsszenarien
 
@@ -142,12 +121,45 @@ Das Diagramm zeigt die Darstellung der Lichtintensität über den Stunden eines 
 | Programmiersprache   | C++                  | Python                  |
 | Framework / Packages | Arduino              | pandas/numpy/matplotlib |
 | Ziel                 | Datenerhebung        | Datenauswertung         |
-| Plattform            | (PC) Mikrocontroller | PC                      |
+| Plattform            | PC / Mikrocontroller | PC                      |
 
 *****************************************************************************
 
-## Keine Angst vor Code!
+### Lernziele der Vorlesung
 
+
+| Einordnung und Klassifikation | Studierende ...                                                                                                                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Erinnern       | <ul class="lia-list--unordered" style="margin-left: 0">
+
+<li> ... kennen die grundlegende Syntaxelemente der behandelten Programmiersprachen. </li> 
+</ul>                     |
+| Verstehen      | <ul class="lia-list--unordered" style="margin-left: 0">
+<li> ... sind in der Lage den Algorithmusbegriff zu erklären. </li>
+<li> ... können die Elemente prozeduraler Programmierung (Schleife, Verzweigung, Sprung) beschreiben. </li>
+<li> ... erklären Basiskonzepte objektorientierter Programmierung (Vererbung, Kapselung). </li> 
+</ul>           |
+| Anwenden       | <ul class="lia-list--unordered" style="margin-left: 0">
+<li> ... wenden die Basis-Techniken der Codeentwicklung, des Debuggings und der Dokumentation an. </li>
+<li> ... sind in der Lage im Arduino-Kontext nach geeigneten Open-Source-Paketen zu suchen. </li>
+<li> ... realisieren kleiner Mikrocontroller-Beispiele auf Basis des Arduino-Projektes bzw. einer Datenanalysepipeline mit Python. </li> 
+</ul>          |
+| Analysieren    | <ul class="lia-list--unordered" style="margin-left: 0">
+<li> ... bewerten aggregierte Messdaten mit Blick auf deren Aussagekraft mit statistischen Methoden. </li>
+<li> ... können die Eigenschaften eines Sensors anhand von Datenblättern recherchieren. </li> 
+<li> ... quantifizieren das Zeitverhalten in Datensätzen und erklären es anhand des Programmcodes für die Datenerhebung. </li> 
+</ul>          |                                                                                                                        
+| Bewerten       | <ul class="lia-list--unordered" style="margin-left: 0">
+<li> ... können die Unterschiede der behandelten Programmiersprachen mit Bezug auf Ausführungskontex, Performance usw. beurteilen . </li>
+</ul>          |    
+
+
+
+
+Vergleich der Konzepte mit Blick auf die behandelten Programmiersprachen und deren Ausführungskontext, Performance, usw.                                                                                                                         |
+| Erschaffen     |                                                                                                                                                                                                                                                  |
+
+## Keine Angst vor Code!
 
 ### Jetzt mal konkret
 
