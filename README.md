@@ -152,12 +152,7 @@ Das Diagramm zeigt die Darstellung der Lichtintensität über den Stunden eines 
 | Bewerten       | <ul class="lia-list--unordered" style="margin-left: 0">
 <li> ... können die Unterschiede der behandelten Programmiersprachen mit Bezug auf Ausführungskontex, Performance usw. beurteilen . </li>
 </ul>          |    
-
-
-
-
-Vergleich der Konzepte mit Blick auf die behandelten Programmiersprachen und deren Ausführungskontext, Performance, usw.                                                                                                                         |
-| Erschaffen     |                                                                                                                                                                                                                                                  |
+| Erschaffen     |   -                                                                                                                                                                                                                                               |
 
 ## Keine Angst vor Code!
 
