@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.4
+version:  1.0.5
 language: de
 narrator: Deutsch Female
 
@@ -22,9 +22,9 @@ import: https://github.com/LiaTemplates/AVR8js/main/README.md#10
 Das vorliegende Material bedient die bisherigen Veranstaltungen 
 
 + _Prozedurale Programmierung_ und 
-+ _Einführung in die Informatik_ 
++ _Einführung in die Informatik_
 
-in einer übergreifenden Vorlesung. Diese zielt auf die Vermittlung grundlegender Konzepte und anwendungsbezogener Fähigkeiten beim Entwurf und der Umsetzung von Softwarelösungen im Kontext der wissenschaftlichen Arbeit. 
+und firmiert diese als neukonzeptionierte übergreifenden Vorlesung. Diese zielt auf die Vermittlung grundlegender Konzepte und anwendungsbezogener Fähigkeiten beim Entwurf und der Umsetzung von Softwarelösungen im Kontext der wissenschaftlichen Arbeit. 
 
 Die Veranstaltung richtet sich an Nicht-Informatiker aus verschiedenen
 ingenieurwissenschaftlichen Disziplinen mit keinen oder geringen
