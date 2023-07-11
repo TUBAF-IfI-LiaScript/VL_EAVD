@@ -156,8 +156,6 @@ Das Diagramm zeigt die Darstellung der Lichtintensität über den Stunden eines 
 
 ## Keine Angst vor Code!
 
-### Jetzt mal konkret
-
 --{{0}}--
 Das Beispiel zeigt ein "Hello World" Beispiel für die C++ Implementierung auf dem Mikrocontroller. Um das einfachste Beispiel darzustellen, lesen wir keinen Sensor ein, sondern lassen eine kleine [LED](https://de.wikipedia.org/wiki/Leuchtdiode) blinken. 
 
