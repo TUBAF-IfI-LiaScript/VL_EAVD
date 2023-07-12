@@ -14,7 +14,7 @@ import: https://github.com/LiaTemplates/AVR8js/main/README.md#10
 
 -->
 
-# Inhalt der Übungsbeschreibung 4 - OOP
+# Übung 4 - OOP
 
 ![Aufbau](./images/excercise_04.png "Realisierung der Übungsaufgabe mit Ultraschallsensor und Display")<!--style="max-height: 60vh;"-->
 
