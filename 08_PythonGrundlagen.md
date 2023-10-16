@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf & Florian Richter
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de & Flo.Richter@informatik.tu-freiberg.de
-version:  1.0.6
+version:  1.0.7
 language: de
 narrator: Deutsch Female
 
@@ -11,6 +11,7 @@ logo: ./img/LogoCodeExample.png
 
 import: https://github.com/liascript/CodeRunner
         https://github.com/LiaTemplates/AVR8js/main/README.md#10
+        https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/config.md
 
 -->
 
@@ -18,14 +19,14 @@ import: https://github.com/liascript/CodeRunner
 
 # Python Grundlagen
 
-| Parameter                | Kursinformationen                                                                                                                                                                              |
-|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Veranstaltung:**       | `Prozedurale Programmierung / Einführung in die Informatik`                                                                                                                                    |
-| **Semester**             | `Wintersemester 2022/23`                                                                                                                                                                       |
-| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                              |
-| **Inhalte:**             | `Grundlagen der Programmiersprache Python`                                                                                                                                                    |
-| **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/08_PythonGrundlagen.md](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/08_PythonGrundlagen.md) |
-| **Autoren**              | @author                                                                                                                                                                                        |
+| Parameter                | Kursinformationen                                                                                                                                                      |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Veranstaltung:**       | @config.lecture                                                                                                                                                        |
+| **Semester**             | @config.semester                                                                                                                                                       |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                      |
+| **Inhalte:**             | `Grundlagen der Programmiersprache Python`                                                                                                                             |
+| **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/08_PythonGrundlagen.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/08_PythonGrundlagen.md) |
+| **Autoren**              | @author                                                                                                                                                                |
 
 
 --------------------------------------------------------------------

@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 
@@ -10,6 +10,7 @@ comment: Einführung in die Programmierung für Nicht-Informatiker
 logo: ./img/LogoCodeExample.png
 
 import: https://github.com/liascript/CodeRunner
+        https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/config.md
 
 -->
 
@@ -17,14 +18,14 @@ import: https://github.com/liascript/CodeRunner
 
 # Datenanalyse mit Python
 
-| Parameter                | Kursinformationen                                                                                                                                                                              |
-|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Veranstaltung:**       | `Prozedurale Programmierung / Einführung in die Informatik`                                                                                                                                    |
-| **Semester**             | `Wintersemester 2022/23`                                                                                                                                                                       |
-| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                              |
-| **Inhalte:**             | `Datenanalyse mit dem Python Paket Pandas`                                                                                                                                                    |
-| **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/11_DatenAnalyse.md](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/11_DatenAnalyse.md) |
-| **Autoren**              | @author                                                                                                                                                                                        |
+| Parameter                | Kursinformationen                                                                                                                                              |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Veranstaltung:**       | @config.lecture                                                                                                                                                |
+| **Semester**             | @config.semester                                                                                                                                               |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                              |
+| **Inhalte:**             | `Datenanalyse mit dem Python Paket Pandas`                                                                                                                     |
+| **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/11_DatenAnalyse.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/11_DatenAnalyse.md) |
+| **Autoren**              | @author                                                                                                                                                        |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 

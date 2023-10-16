@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 
@@ -13,6 +13,7 @@ import: https://github.com/liascript/CodeRunner
         https://github.com/LiaTemplates/AVR8js/main/README.md#10
         https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
         https://raw.githubusercontent.com/liaTemplates/PyScript/main/README.md
+        https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/config.md
 
 -->
 
@@ -20,14 +21,14 @@ import: https://github.com/liascript/CodeRunner
 
 # Softwareentwicklung für Microcontroller
 
-| Parameter                | Kursinformationen                                                                                                                                                                              |
-|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Veranstaltung:**       | `Prozedurale Programmierung / Einführung in die Informatik`                                                                                                                                    |
-| **Semester**             | `Wintersemester 2022/23`                                                                                                                                                                       |
-| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                              |
-| **Inhalte:**             | `Anwendung von C++ auf bei der  Mikrocontrollerprogrammierung`                                                                                                                                                    |
-| **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/07_Microcontroller.md](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/07_Microcontroller.md) |
-| **Autoren**              | @author                                                                                                                                                                                        |
+| Parameter                | Kursinformationen                                                                                                                                                    |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Veranstaltung:**       | @config.lecture                                                                                                                                                      |
+| **Semester**             | @config.semester                                                                                                                                                     |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                    |
+| **Inhalte:**             | `Anwendung von C++ auf bei der  Mikrocontrollerprogrammierung`                                                                                                       |
+| **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/07_Microcontroller.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/07_Microcontroller.md) |
+| **Autoren**              | @author                                                                                                                                                              |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
