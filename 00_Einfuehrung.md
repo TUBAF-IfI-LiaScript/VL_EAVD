@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.0.3
 language: de
 narrator: Deutsch Female
 
@@ -333,7 +333,7 @@ x = x + 1;  /* increment the value of x */
 std::cout << "Hello World! "; // displays Hello world
 ```
 
-"... over-commenting your code can be as bad as under-commenting it"
+> _... over-commenting your code can be as bad as under-commenting it!_
 
 Quelle: [C Code Style Guidelines](https://www.cs.swarthmore.edu/~newhall/unixhelp/c_codestyle.html)
 
@@ -342,11 +342,17 @@ Quelle: [C Code Style Guidelines](https://www.cs.swarthmore.edu/~newhall/unixhel
 ``` JavaScript
 //When I wrote this, only God and I understood what I was doing
 //Now, God only knows
+```
 
+``` JavaScript
 // sometimes I believe compiler ignores all my comments
+```
 
+``` JavaScript
 // Magic. Do not touch.
-Hello World !Hello World !Hello World !Hello World !Hello World !Hello World !Hello World !Hello World !Hello Wor
+```
+
+``` JavaScript
 // I am not responsible of this code.
 
 try {
@@ -354,7 +360,6 @@ try {
 } catch(e) {
 
 } finally { // should never happen }
-
 ```
 
 [Sammlung von Kommentaren](https://fuzzzyblog.blogspot.com/2014/09/40-most-funny-code-comments.html)
@@ -374,7 +379,7 @@ int main() {
 	return 0;
 
 ```
-@LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
+@LIA.eval(`["main.cpp"]`, `g++ main.cpp -Wall -o a.out`, `./a.out`)
 
 Methodisches Vorgehen:
 
