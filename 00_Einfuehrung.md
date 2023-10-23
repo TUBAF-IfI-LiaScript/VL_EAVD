@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 
@@ -401,7 +401,7 @@ int mani() {
     return 0;
 }
 ```
-@LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
+@LIA.evalWithDebug(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
 **Beispiel 2**
 
@@ -413,7 +413,7 @@ int main()
     return 0;
 }
 ```
-@LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
+@LIA.evalWithDebug(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
 > Manchmal muss man sehr genau hinschauen, um zu verstehen, warum ein Programm nicht funktioniert. Versuchen Sie es!
 
@@ -426,7 +426,7 @@ imt main() {
 	return 0;
 }
 ```
-@LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
+@LIA.evalWithDebug(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
 
 ### Und wenn das Kompilieren gut geht?
