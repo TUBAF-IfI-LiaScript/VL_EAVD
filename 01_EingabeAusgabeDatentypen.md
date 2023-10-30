@@ -979,11 +979,10 @@ int main() {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-<!--START_SKIP_IN_PDF-->
-
 ## Quiz
 
-### Variablennamen
+Variablennamen
+================
 
 > Welche dieser Variablennamen sind grundsätzlich zulässig?
 - [[X]] geschwindigkeit
@@ -1002,7 +1001,8 @@ int main() {
 - [[?]] Variablennamen dürfen keine Schlüsselwörter sein.
 - [[?]] Variablennamen dürfen keine Punkte oder Leerzeichen enthalten.
 
-### Datentypen
+Datentypen
+================
 
 > Ordnen Sie die Datentypen die korrekten Zahlentypen zu.
 - [[Ganzzahl] (Fließkommazahl)]
@@ -1012,14 +1012,16 @@ int main() {
 - [    (X)           ( )      ]  bool
 - [    (X)           ( )      ]  char
 
-### Boolean
+Boolean
+================
 
 > Welche Werte können `bool`-Variablen zugewiesen werden?
 
     [(X)] 0 und 1
     [( )] 0 bis 1
 
-### Fließkommazahlen
+Fließkommazahlen
+================
 
 > Welche dieser Zahlen kann präzise im Speicher abgebildet werden?
 - [( )] 0.3
@@ -1029,12 +1031,14 @@ int main() {
 - [( )] 0.420
 - [[?]] Die Zahl muss eine Zweierpotenz sein.
 
-### Adressen
+Adressen
+================
 
 > Mit welchem Symbol kann auf die Speicheradresse einer Variable zugegriffen werden?
   [[&]]
 
-### Globale und lokale Variablen
+Globale und lokale Variablen
+================
 
 > Wählen Sie aus, welche Variablen global und welche lokal sind.
 
@@ -1061,7 +1065,8 @@ int main(void)
 - [    ( )           (X)      ]  v
 - [    (X)           ( )      ]  w
 
-### Definition, Deklaration und Initialisierung
+Definition, Deklaration und Initialisierung
+================
 
 > Wählen Sie aus in welchen Fällen eine Deklaration, Definition oder Initialisierung vorliegt.
 
@@ -1070,22 +1075,9 @@ int main(void)
 - [    [X]           [X]              [X]       ]  int i = 99;
 - [    [X]           [X]              [ ]       ]  double d;
 
-### Aus- und Eingabe
-> Wie lautet der Ausgabeoperator?
-[[<<]]
+Escape-Sequenzen
+================
 
-> Wie lautet der Eingabeoperator?
-[[>>]]
-
-### Feldbreite
-> Wie legen Sie die Breite einer Ausgabe auf 10 Zeichen fest? (ohne std:: oder ;)
-[[setw(10)]]
-
-### Präzision
-> Welcher Ausdruck begrenzt eine Ausgabe auf 2 Stellen nach em Komma? (ohne std:: oder ;)
-[[setprecision(2)]]
-
-### Escape-Sequenzen
 > Wie lautet die Escape-Sequenz für BACKSPACE?
 [[\b]]
 [[?]] Backspace löscht das letzte Symbol vor dem Cursor und funktioniert wie die Rücktaste auf der Tastatur.
@@ -1109,5 +1101,3 @@ int main(void)
 > Wie lautet die Escape-Sequenz für CARRIAGE RETURN?
 [[\r]]
 [[?]] Carriage return setzt den Cursor an den Anfang der Ausgabezeile zurück und ermöglicht das Überschreiben von Text.
-
-<!--END_SKIP_IN_PDF-->
