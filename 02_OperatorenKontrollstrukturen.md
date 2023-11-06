@@ -272,7 +272,7 @@ Und wie lassen sich logische Aussagen verknüpfen? Nehmen wir an, dass wir aus d
 
 Das ODER wird durch senkrechte Striche repräsentiert (Altgr+`<` Taste) und nicht durch große `I`!
 
-Nehmen wir an, sie wollen Messdaten evaluieren. Ihr Sensor funktioniert nur dann wenn die Temperatur ein Wert zwischen -10 und -20 Grad annimmt und die Luftfeuchte zwischen 40 bis 60 Prozent beträgt.
+> Nehmen wir an, sie wollen Messdaten evaluieren. Ihr Sensor funktioniert nur dann wenn die Temperatur ein Wert zwischen -10 und -20 Grad annimmt und die Luftfeuchte zwischen 40 bis 60 Prozent beträgt.
 
 ```cpp                                       Logic.cpp
 #include <iostream>
@@ -296,7 +296,7 @@ int main(){
 ********************************************************************************
 
 Anmerkung: C++ bietet für logische Operatoren und Bit-Operatoren Synonyme  `and`, `or`, `xor`.
-Die Synonyme sind Schlüsselwörter, wenn Compiler-Einstellungen /permissive- oder /Za (Spracherweiterungen deaktivieren) angegeben werden. Sie sind keine Schlüsselwörter, wenn Microsoft-Erweiterungen aktiviert sind. Die Verwendung der Synonyme kann die Lesbarkeit deutlich erhöhen.
+Die Synonyme sind Schlüsselwörter, wenn Compiler-Einstellungen `/permissive` oder `/Za` (Spracherweiterungen deaktivieren) angegeben werden. Sie sind keine Schlüsselwörter, wenn Microsoft-Erweiterungen aktiviert sind. Die Verwendung der Synonyme kann die Lesbarkeit deutlich erhöhen.
 
 ### `sizeof` - Operator
 
@@ -377,17 +377,12 @@ a = 4 / 2 / 2;
 Folgender Code nutzt die heute besprochenen Operatoren um die Eingaben von zwei
 Buttons auf eine LED abzubilden. Nur wenn beide Taster gedrückt werden, beleuchte das rote Licht für 3 Sekunden.
 
-<div>
-  <wokwi-pushbutton color="green" pin="10" ></wokwi-pushbutton>
-  <wokwi-led        color="red"   pin="13"></wokwi-led>
-  <wokwi-pushbutton color="red"   pin="11" ></wokwi-pushbutton>
-  <span id="simulation-time"></span>
-</div>
+> Wie ändert sich die Logik wenn Sie ein `||` anstelle des `&&` verwenden?
 
 ```cpp    ButtonSynch.cpp
-const int button_A_pin = 10;
-const int button_B_pin = 11;
-const int led_pin = 13;
+const int button_A_pin = A0;
+const int button_B_pin = A1;
+const int led_pin = 11;
 
 int buttonAState;
 int buttonBState;
@@ -400,14 +395,11 @@ void setup(){
  }
 
 void loop() {
-  Serial.println("Wait one second for A ");
-  delay(1000);
   buttonAState = digitalRead(button_A_pin);
-  Serial.println ("... and for B");
-  delay(1000);
   buttonBState = digitalRead(button_B_pin);
 
   if ( buttonAState && buttonBState){
+    Serial.println ("... Go");
     digitalWrite(led_pin, HIGH);
     delay(3000);
   }
@@ -417,7 +409,6 @@ void loop() {
   }
 }
 ```
-@AVR8js.sketch
 
 #### Logische Operatoren
 
@@ -818,6 +809,9 @@ Diagrammen wie folgt darstellen:
 
 * Iterationssymbol
 
+![Modelle](https://www.plantuml.com/plantuml/png/SoWkIImgAStDuG8pk3BJ53IIy_DICaioy_CK73KLIZ9IynGqAbEBDRaK5An2KYjA50ojkL9pYbDHbJfXLMfa3MGMb-GNOD7XZ5M7CJR3NR0gDO4eLT38oo_9oCnBHyY0X86IGErfN63R7O1ia2S1 "Darstellungsbeispiele für mehrstufige Verzweigungen (`switch`)")<!-- width="60%" -->
+
+
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
 -->
@@ -1111,8 +1105,12 @@ int main() {
 
 <!--START_SKIP_IN_PDF-->
 
-# Quiz
+# Quizze
+
 ## Operatoren
+
+Operatorentypen
+=================
 
 > Ordnen Sie die Operatoren den richtigen Bezeichnungen zu.
 - [(Unär)           (Binär)       (Ternär)]
@@ -1134,7 +1132,9 @@ int main() {
 - [    ( )           (X)            ( )       ]  `a=&b;`
 ************************************************************************
 
-### Zuweisungs- und Vergleichsoperatoren
+Zuweisungs- und Vergleichsoperatoren
+=================
+
 > Ordnen Sie die Operatoren den richtigen Bezeichnungen zu.
 - [(Zuweisungsoperator)           (Vergleichsoperator)]
 - [    ( )                         (X)                ]  `>=`
@@ -1145,7 +1145,9 @@ int main() {
 - [    (X)                         ( )                ]  `=`
 - [    ( )                         (X)                ]  `!=`
 
-### Inkrement und Dekrement
+Inkrement und Dekrement
+=================
+
 > Verkürzen Sie `x=x+1;` möglichst weit.
 [[x++;]]
 [[?]] `++` wird benutzt um Variablen zu Inkrementieren.
@@ -1166,7 +1168,9 @@ let input = "@input".trim().toLowerCase()
 input == "x--;" || input == "--x;"
 </script>
 
-### Arithmetische Operatoren
+Arithmetische Operatoren
+=================
+
 > Welche dieser Operatoren können **nur** mit Ganzzahlen verwendet werden?
 [[ ]] `+`
 [[ ]] `/`
@@ -1175,7 +1179,10 @@ input == "x--;" || input == "--x;"
 [[ ]] `*`
 
 ## Verzweigungen
-### `if`-Anweisungen
+
+`if`-Anweisungen
+=================
+
 > Was gibt dieses Programm aus?
 ```cpp
 #include <iostream>
@@ -1201,7 +1208,9 @@ int main(){
 ```
 [[5678]]
 
-### `switch`-Anweisungen
+`switch`-Anweisungen
+=================
+
 > Welche Zahlen dürfen zwischen den runden Klammern nach dem Schlüsselwort `switch` stehen?
 [(X)] Ganzzahlen
 [( )] Gleitkommazahlen
@@ -1330,7 +1339,8 @@ int main(){
 [(X)] `do-while`-Schleife
 ************************************************************************
 
-### `for`-Schleife
+`for`-Schleife
+=================
 
 > Dieses Programm soll die Zahlen 4 bis 15 einzeln in aufsteigender Reihenfolge ausgeben. Beantworten Sie die unten aufgeführten Fragen.
 ```cpp
@@ -1354,7 +1364,8 @@ int main(){
 > Welchen Wert hat `i` nach der Schleife?
 [[16]]
 
-### `while`-Schleife
+`while`-Schleife
+=================
 
 > Wie lautet die Ausgabe dieses Programms?
 ```cpp
@@ -1399,7 +1410,8 @@ int main(){
 [[3]]
 ************************************************************************
 
-### `do-while`-Schleife
+`do-while`-Schleife
+=================
 
 > Wie lautet die Ausgabe dieses Programms?
 ```cpp
