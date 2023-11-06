@@ -1,9 +1,8 @@
-// That's my first C program
-// Karl Klammer, Oct. 2022
-
 #include <iostream>
 
 int main() {
-    std::cout << "Hello World!";
-    return 0;
+    for (int j = 0; j < 10; j++) {
+        std::cout << "Hello World" << std::endl;
+    }
+	return 0;
 }
