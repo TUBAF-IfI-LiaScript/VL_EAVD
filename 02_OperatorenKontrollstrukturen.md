@@ -1065,44 +1065,58 @@ in der Vorlesung zu Funktionen).
 
 ## Beispiel des Tages
 
-Das Codebeispiel des Tages führt die Berechnung eines sogenannten magischen
-Quadrates vor.
+```cpp                     Divisors.cpp
+// A Better (than Naive) Solution to find all divisors 
+#include <iostream> 
+#include <math.h> 
+using namespace std; 
+  
+int main() 
+{ 
+    int n = 100;
+    cout <<"The divisors of " << n << " are: \n"; 
 
-Das Lösungsbeispiel stammt von der Webseite https://rosettacode.org, die für das
-Problem [magic square](https://rosettacode.org/wiki/Magic_squares_of_odd_order#C) und
-viele andere "Standardprobleme" Lösungen in unterschiedlichen Sprachen präsentiert.
-Sehr lesenswerte Sammlung!
-
-```cpp                     magicSquare.cpp
-#include <iostream>
-using namespace std;
-
-int f(int n, int x, int y)
-{
-  return (x + y*2 + 1) % n;
-}
-
-int main() {
-  int i, j, n;
-
-  //Input must be odd and not less than 3.
-  n = 5;
-  if (n < 3 || (n % 2) == 0) return 2;
-
-  for (i = 0; i < n; i++) {
-    for (j = 0; j < n; j++){
-      cout<<f(n, n - j - 1, i)*n + f(n, j, i) + 1<<"\t";
-      //fflush(stdout);
-    }
-    cout<<"\n";
-  }
-  cout<<"\nMagic Constant: "<<(n*n+1)/2*n<<".\n";
-
-  return 0;
-}
+    // Die naive Lösung
+    for (int i = 1; i <= n; i++) 
+          if (n % i == 0) 
+              cout <<" " << i;  
+    return 0; 
+} 
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
+> **Aufgabe:** Wie können wir die Laufzeit des Codes verbessern?
+
+{{1}}
+```cpp                     ImprovedDivisors.cpp
+// A Better (than Naive) Solution to find all divisors 
+#include <iostream> 
+#include <math.h> 
+using namespace std; 
+  
+  
+int main() 
+{ 
+    int n = 100;
+    cout <<"The divisors of " << n << " are: \n"; 
+
+    // Diesmal laufen wir nur bis zu Wurzel von n
+    for (int i=1; i<=sqrt(n); i++) 
+    { 
+        if (n % i == 0) 
+        { 
+            // Wenn die beiden Teiler gleich sind, dann nur einen ausgeben
+            if (n/i == i) 
+                cout <<" "<< i; 
+  
+            else // sonst alle beide
+                cout << " "<< i << " " << n/i; 
+        } 
+    } 
+    return 0; 
+} 
+```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
 # Quizze
 
