@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.4
+version:  1.0.5
 language: de
 narrator: Deutsch Female
 
@@ -45,29 +45,26 @@ import: https://github.com/liascript/CodeRunner
 
 ## Wie weit waren wir gekommen?
 
-> Aufgabe: Die LED blinkt im Beispiel 10 mal. Integrieren Sie eine Abbruchbedingung für diese Schleife, wenn der rote Button gedrückt wird. Welches Problem sehen Sie?
+> Aufgabe: Die LED blinkt im Beispiel 10 mal. Integrieren Sie eine Abbruchbedingung für diese Schleife, wenn der grüne Button gedrückt wird. Welches Problem sehen Sie?
 
 <div>
-  <wokwi-pushbutton color="green" pin="2"  port="D"></wokwi-pushbutton>
+  <wokwi-pushbutton color="green" pin="2"  port="D" label="2"></wokwi-pushbutton>
   <wokwi-led color="red"   pin="13" port="B" label="13"></wokwi-led>
 </div>
 ```cpp       ButtonLogic.cpp
 void setup() {
-  pinMode(2, INPUT);
-  pinMode(3, INPUT);
+  pinMode(2, INPUT);      // Button grün
   pinMode(13, OUTPUT);
+
+  for (int i = 0; i<10; i++){
+    digitalWrite(13, HIGH);
+    delay(500);
+    digitalWrite(13, LOW);
+    delay(500);
+  }
 }
 
 void loop() {
-  bool a = digitalRead(2);
-  if (a){
-    for (int i = 0; i<10; i++){
-      digitalWrite(13, HIGH);
-      delay(250);
-      digitalWrite(13, LOW);
-      delay(250);
-    }
-  }
 }
 ```
 @AVR8js.sketch
@@ -133,7 +130,7 @@ int main(void) {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-<iframe width="800" height="500" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0Ausing%20namespace%20std%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20int%20a%5B3%5D%3B%20%20%20%20%20%20%20//%20Array%20aus%203%20int%20Werten%0A%20%20a%5B0%5D%20%3D%20-2%3B%0A%20%20a%5B1%5D%20%3D%205%3B%0A%20%20a%5B2%5D%20%3D%2099%3B%0A%20%20for%20%28int%20i%3D0%3B%20i%3C3%3B%20i%2B%2B%29%7B%0A%20%20%20%20printf%28%22%25d%20%22,%20a%5Bi%5D%29%3B%0A%20%20%7D%0A%20%20cout%3C%3C%22%5CnGr%C3%B6%C3%9Fe%20des%20Arrays%20%22%3C%3Csizeof%28a%29%3C%3Cendl%3B%0A%20%20cout%3C%3C%22Zahl%20der%20Elemente%20%22%20%3C%3C%20sizeof%28a%29%20/%20sizeof%28int%29%20%3C%3Cendl%3B%0A%20%20cout%3C%3C%22Adresse%20des%20Arrays%20%22%20%3C%3C%20a%3B%0A%20%20return%200%3B%0A%7D&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=14&heapPrimitives=nevernest&origin=opt-frontend.js&py=cpp_g%2B%2B9.3.0&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+> Schauen wir uns das Ganze noch in einer Animation an: [PythonTutor](https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0Ausing%20namespace%20std%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20int%20a%5B3%5D%3B%20%20%20%20%20%20%20//%20Array%20aus%203%20int%20Werten%0A%20%20a%5B0%5D%20%3D%20-2%3B%0A%20%20a%5B1%5D%20%3D%205%3B%0A%20%20a%5B2%5D%20%3D%2099%3B%0A%20%20for%20%28int%20i%3D0%3B%20i%3C3%3B%20i%2B%2B%29%7B%0A%20%20%20%20printf%28%22%25d%20%22,%20a%5Bi%5D%29%3B%0A%20%20%7D%0A%20%20cout%3C%3C%22%5CnGr%C3%B6%C3%9Fe%20des%20Arrays%20%22%3C%3Csizeof%28a%29%3C%3Cendl%3B%0A%20%20cout%3C%3C%22Zahl%20der%20Elemente%20%22%20%3C%3C%20sizeof%28a%29%20/%20sizeof%28int%29%20%3C%3Cendl%3B%0A%20%20cout%3C%3C%22Adresse%20des%20Arrays%20%22%20%3C%3C%20a%3B%0A%20%20return%200%3B%0A%7D&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=14&heapPrimitives=nevernest&origin=opt-frontend.js&py=cpp_g%2B%2B9.3.0&rawInputLstJSON=%5B%5D&textReferences=false)
 
 
 {{1}}
@@ -141,18 +138,19 @@ Wie können Arrays noch initialisiert werden:
 
 {{1}}
 + vollständig (alle Elemente werden mit einem spezifischen Wert belegt)
-+ anteilig (einzelne Elemente werden mit spezfischen Werten gefüllt, der rest mit 0)
++ anteilig (einzelne Elemente werden mit spezifischen Werten gefüllt, der rest mit 0)
 
 {{1}}
 ```cpp                     ArrayExample.cpp
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 int main(void) {
   int a[] = {5, 2, 2, 5, 6};
-  float b[5] = {1.0};
+  float b[5] = {1.01};
   for (int i=0; i<5; i++){
-      cout<<a[i]<<" "<< b[i]<<"\n";
+      cout<< i << "  "  << a[i] <<" / " << fixed << b[i]<<"\n";
     }
   return 0;
 }
@@ -205,7 +203,7 @@ using namespace std;
 int main(void) {
   int a[] = {0, 1, 2, 4, 3, 5, 6, 7, 8, 9};
   int b[10];
-  for (int i=0; i<10; i++)
+  for (int i=0; i<10; i++)  // "Befüllen" des Arrays b
     b[i]=i;
   for (int i=0; i<10; i++)
     if (a[i]!=b[i])
@@ -314,6 +312,7 @@ int main(void)
 
 > Weiteres Beispiel: Lösung eines Gleichungssystem mit dem Gausschen Elimnationsverfahren [Link](https://www.codewithc.com/c-program-for-gauss-elimination-method/)
 
+> **Merke:** Größere Daten in Arrays abzulegen ist in der Regel effizienter als einzelne Variablen zu verwenden. Die Verwendung von Arrays ist aber nicht immer die beste Lösung. Prüfen Sie höherabstraktere Formate wie Listen oder Vektoren!
 
 ## Sonderfall Zeichenketten / Strings
 
@@ -351,7 +350,7 @@ C++ implementiert einen separaten string-Datentyp (Klasse), die ein deutliche ko
 
 ```cpp                                         stringarray.cpp
 #include <iostream>
-#include <string>
+#include <string>      // Header für string Klasse
 using namespace std;
 
 int main(void) {
@@ -537,7 +536,7 @@ int main(void)
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
 {{2}}
-<iframe width="800" height="500" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=%23include%20%3Cstdio.h%3E%0A%23include%20%3Cstdlib.h%3E%0A%0Aint%20main%28void%29%0A%7B%0A%20%20int%20a%20%3D%2015%3B%0A%20%20int%20*%20ptr_a%20%3D%20%26a%3B%0A%20%20printf%28%22Wert%20von%20a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%25d%5Cn%22,%20a%29%3B%0A%20%20printf%28%22Pointer%20ptr_a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%25p%5Cn%22,%20ptr_a%29%3B%0A%20%20printf%28%22Wert%20hinter%20dem%20Pointer%20ptr_a%20%20%25d%5Cn%22,%20*ptr_a%29%3B%0A%20%20*ptr_a%20%3D%2010%3B%0A%20%20printf%28%22Wert%20von%20a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%25d%5Cn%22,%20a%29%3B%0A%20%20printf%28%22Wert%20hinter%20dem%20Pointer%20ptr_a%20%20%25d%5Cn%22,%20*ptr_a%29%3B%0A%20%20return%20EXIT_SUCCESS%3B%0A%7D&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+> Schauen wir wiederum auf eine grafische Darstellung [PythonTutor](http://pythontutor.com/iframe-embed.html#code=%23include%20%3Cstdio.h%3E%0A%23include%20%3Cstdlib.h%3E%0A%0Aint%20main%28void%29%0A%7B%0A%20%20int%20a%20%3D%2015%3B%0A%20%20int%20*%20ptr_a%20%3D%20%26a%3B%0A%20%20printf%28%22Wert%20von%20a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%25d%5Cn%22,%20a%29%3B%0A%20%20printf%28%22Pointer%20ptr_a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%25p%5Cn%22,%20ptr_a%29%3B%0A%20%20printf%28%22Wert%20hinter%20dem%20Pointer%20ptr_a%20%20%25d%5Cn%22,%20*ptr_a%29%3B%0A%20%20*ptr_a%20%3D%2010%3B%0A%20%20printf%28%22Wert%20von%20a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%25d%5Cn%22,%20a%29%3B%0A%20%20printf%28%22Wert%20hinter%20dem%20Pointer%20ptr_a%20%20%25d%5Cn%22,%20*ptr_a%29%3B%0A%20%20return%20EXIT_SUCCESS%3B%0A%7D&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D&textReferences)
 
 ### Fehlerquellen
 
@@ -742,9 +741,9 @@ int main(void)
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-<!--START_SKIP_IN_PDF-->
 
 # Quiz
+
 ## Arrays
 
 > Erstellen Sie ein eindimensionales Array namens `arr`, das 7 Elemente vom Typ `int` enthält.
@@ -753,7 +752,8 @@ int main(void)
 > Erstellen Sie ein zweidimensionales Array namens `arr`, das 3*4 Elemente vom Typ `int` enthält.
 [[int arr[3][4];]]
 
-### Zugriff
+Zugriff
+====================
 
 > Wie lautet die Ausgabe dieses Programms?
 ```cpp
@@ -785,7 +785,8 @@ int main(){
 [[0]]
 ************************************************************************
 
-### Mehrdimensionale Arrays
+Mehrdimensionale Arrays
+====================
 
 > Es existiert ein Array `int A[2][5];`. Setzen Sie `[_____]` gleich 1.
 |            | Spalten   |           |           |           |           |
@@ -863,7 +864,8 @@ int main(){
 [( )] Referenzen
 [(X)] Speicheraddressen
 
-### Definition
+Definition
+====================
 
 > Welche der folgenden Definitionen sind möglich?
 [[X]] int* z1;
@@ -873,7 +875,8 @@ int main(){
 [[ ]] int z6*;
 [[X]] int *z7, i;
 
-### Initialisierung
+Initialisierung
+====================
 
 > Durch welches Zeichen werden Addressen ermittelt?
 [[&]]
@@ -898,7 +901,8 @@ int main(){
 [( )] `NULL`
 ************************************************************************
 
-### Dynamische Datenobjekte
+Dynamische Datenobjekte
+====================
 
 > Wie häufig kann `delete` auf ein Objekt angewendet werden?
 [( )] 0
@@ -987,5 +991,3 @@ a: 1 r: [_____]
 ```
 [[1]]
 ************************************************************************
-
-<!--END_SKIP_IN_PDF-->
