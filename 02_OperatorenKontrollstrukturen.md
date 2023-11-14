@@ -789,7 +789,7 @@ int main() {
   return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.eval(`["main.c"]`, `g++ -Wall main.c -o a.out`, `./a.out`)
 
 
 ### Schleifen
@@ -917,11 +917,11 @@ int main(){
   for (i = 1; i<10; i++);
     cout<<i<<" ";
 
-  cout<<"Das ging jetzt aber sehr schnell ... \n"<<i;
+  cout<<"Das ging jetzt aber sehr schnell ... Warum eigentlich? \n"<<i;
   return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.eval(`["main.c"]`, `g++ -Wall main.c -o a.out`, `./a.out`)
 
 
 #### `while`-Schleife
