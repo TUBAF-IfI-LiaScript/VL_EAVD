@@ -736,7 +736,7 @@ int main(void)
     if (a[i_right] + a[i_left] >= ZIELWERT) i_right--;
     else i_left++;
   }while (i_right != i_left);
-  return 0;s
+  return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
