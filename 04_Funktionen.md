@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 
@@ -10,9 +10,7 @@ comment: Einführung in die Programmierung für Nicht-Informatiker
 logo: ./img/LogoCodeExample.png
 
 import: https://github.com/liascript/CodeRunner
-        https://github.com/LiaTemplates/AVR8js/main/README.md#10
         https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/config.md
-
 
 -->
 
@@ -43,21 +41,6 @@ import: https://github.com/liascript/CodeRunner
 
 ---------------------------------------------------------------------
 
-## Einschub - Klausurhinweise
-
-> + Während der Klausur können Sie "alle Hilfsmittel aus Papier" verwenden!
-
-> + Im OPAL finden sich Klausurbeispiele.
-
-__Beispielhafte Klausuraufgabe aus dem vergangenen Jahr__
-
-_Die Zustimmung (in Prozent) für die Verwendung der künstlichen Intelligenz im Pflegebereich unter der Bevölkerung von Mauritius und Réunion soll vergleichend betrachtet werden. Die Ergebnisse der Umfragen für die Jahre 2010 bis 2020 (je ein Wert pro Jahr) in zwei Arrays erfasst werden (je ein Array pro Insel) und in einem Programm ausgewertet werden._
-
-+ _Für beide Inseln soll aus den in Arrays erfassten Werten je ein Mittelwert berechnet werden. Schreiben Sie dazu eine Funktion, die ein Array übergeben bekommt und einen Mittelwert als ein Ergebnis an die main-Funktion zurück liefert. Rufen Sie die Funktion in der main-Funktion für jedes beider Arrays auf und geben Sie die Mittelwerte in der main-Funktion aus._
-+ _Schreiben Sie eine weitere Funktion, die die korrespondierenden Werte beider Arrays miteinander vergleicht. Geben Sie für jedes Jahr aus, auf welcher Insel die Zustimmung größer war, bei den gleichen Werte ist eine entsprechende Meldung auszugeben. Rufen Sie die Funktion in der main-Funktion auf._
-+ _In der main()-Funktion sind die Werte von der Console einzulesen und in die Arrays zu speichern._
-
-
 ## Motivation
 
 Erklären Sie die Idee hinter folgendem Code.
@@ -65,6 +48,7 @@ Erklären Sie die Idee hinter folgendem Code.
 ```cpp                          onBlock.cpp
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 
 using namespace std;
 #define VALUECOUNT 17
@@ -87,9 +71,14 @@ int main(void) {
     abweichung += pow((a[i]-mittelwert),2.);
   }
   // Ausgabe
-  for (int i=0; i<10; i++){
-     printf("%d - %d\n", i, hist[i]);
+  for (int i=0; i<12; i++){
+     std::cout << std::setw(2) <<  i << " ";
   }
+  std::cout << std::endl;
+  for (int i=0; i<12; i++){
+     std::cout << std::setw(2) << a[i] << " ";
+  }
+  std::cout << std::endl;
   // Ausgabe Mittelwert
   cout<<"Die Summe betraegt "<<summe<<", der Mittelwert "<<mittelwert<<"\n";
   // Ausgabe Standardabweichung
@@ -100,8 +89,7 @@ int main(void) {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out -lm`, `./a.out`)
 
-Ihre Aufgabe besteht nun darin ein neues Programm zu schreiben, das Ihre
-Implementierung der Mittelwertbestimmung integriert. Wie gehen Sie vor? Was sind
+Sie wollen den Code in einem neuen Projekt wiederverwenden. Was sind
 die Herausforderungen dabei?
 
 > Stellen Sie das Programm so um, dass es aus einzelnen Bereichen besteht und überlegen Sie, welche Variablen wo gebraucht werden.
@@ -129,6 +117,8 @@ Entwickler dann nicht mehr kümmern.
 Fehler lassen sich durch die Modularisierung leichter finden und beheben.
 Darüber hinaus ist es leichter, weitere Funktionalitäten hinzuzufügen oder zu
 ändern.
+
+> Finden Sie Fehler im zuvor gezeigten Code?
 
 In allen 3 Aspekten ist der Vorteil in der Kapselung der Funktionalität zu
 suchen.
@@ -187,14 +177,11 @@ int main(void) {
 > *you want to use a piece of it in several different contexts, consider*
 > *breaking up the function into smaller and more manageable pieces.*
 >
->[Google Style Guide für C++ Projekte](https://google.github.io/styleguide/cppguide.html#Write_Short_Functions)
-
-
-## C++ Funktionen 
+>[Google Sthttps://stackoverflow.com/questions/2485963/c-alignmtionen 
 
 ![](https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif)
 
-### Funktionsdefinition
+## Funktionen in C++
 
 ```
 Rückgabedatentyp Funktionsname([Parameterliste]) {
@@ -258,12 +245,61 @@ int mittelwert(int * array){
 ```
 
 ### Aufruf der Funktion
+
+                        {{0-1}}
+*******************************************************
+
 > **Merke:** Die Funktion (mit der Ausnahme der `main`-Funktion) wird erst
 > ausgeführt, wenn sie aufgerufen wird. Vor dem Aufruf muss die Funktion
 > definiert oder deklariert werden.
 
 Der Funktionsaufruf einer Funktionen mit dem Rückgabewert kann Teil
 einer Anweisung, z.B. einer Zuweisung oder einer Ausgabeanweisung.
+
+```cpp                              callAFunction.cpp
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+void info(){
+    cout<<"Dieses Programm rundet Zahlenwerte.\n";
+    cout<<"-----------------------------------\n";
+}
+
+int runden(float a){
+    if (a < 0)
+       return (int)(a - 0.5);
+    else
+       return (int)(a + 0.5);
+}
+
+int main(void){
+    info();
+    float input = -8.4565;
+    cout<<"Eingabewert "<<input<<" - Ausgabewert "<<runden(input)<<"\n";
+    return 0;
+}
+```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out -lm`, `./a.out`)
+
+Die Funktion `runden` nutzt die Funktionalität des Cast-Operators `int` aus.
+
++ Wenn N eine positive Zahl ist, wird 0.5 addiert 
+
+  + $15.2 + 0.5 = 15.7$ `int(15.7) = 15` 
+  + $15.7 + 0.5 = 16.2$ `int(16.2) = 16` 
+
++ Wenn N eine negative Zahl ist, wird 0.5 subtrahiert 
+
+  + $-15.2 - 0.5 = -15.7$ `int(-15.7) = -15` 
+  + $-15.7 - 0.5 = -16.2$ `int(-16.2) = -16` 
+
+*******************************************************
+
+                        {{1-2}}
+*******************************************************
+
+> __Hinweis:__ C++ unterstützt gleiche Codenahmen bei unterschiedlichen Parametern. Der Compiler "sucht sich" die passende Funktion aus. Der Mechanismus wird als _Funktionsüberladung_ bezeichnet. 
 
 ```cpp                              callAFunction.cpp
 #include <iostream>
@@ -302,21 +338,10 @@ int main(void){
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out -lm`, `./a.out`)
 
-Die Funktion `runden` nutzt die Funktionalität des Cast-Operators `int` aus.
 
-+ Wenn N eine positive Zahl ist, wird 0.5 addiert 
+> Welche Verbesserungsmöglichkeit sehen Sie bei dem Programm? Tipp: Wie können wir den redundanten Code eliminieren?
 
-  + $15.2 + 0.5 = 15.7$ `int(15.7) = 15` 
-  + $15.7 + 0.5 = 16.2$ `int(16.2) = 16` 
-
-+ Wenn N eine negative Zahl ist, wird 0.5 subtrahiert 
-
-  + $-15.2 - 0.5 = -15.7$ `int(-15.7) = -15` 
-  + $-15.7 - 0.5 = -16.2$ `int(-16.2) = -16` 
-
-> Welche Verbesserungsmöglichkeit sehen Sie bei dem Programm? Tipp: Wie können wir den redundanten Code eleminieren?
-
-> __Hinweis:__ C++ unterstützt gleiche Codenahmen bei unterschiedlichen Parametern. Der Compiler "sucht sich" die passende Funktion aus. Der Mechanismus wird als _Funktionsüberladung_ bezeichnet. 
+*******************************************************
 
 ### Fehler
 
@@ -435,6 +460,8 @@ int main(void) {
 #include <iostream>
 using namespace std;
 
+// int foo(void); // Explizite Einführung der Funktion foo()
+
 int main(void) {
   int i = foo();       // <- Aufruf der Funktion
   cout<<"i="<<i<<"\n";
@@ -453,38 +480,16 @@ ihrem Aufruf bekannt gegeben werden. Im vorangegangenen Beispiel wird die
 die Funktion erst nach dem Aufruf definiert. Der Complier zeigt dies an.
 
 {{1}}
-Eine explizite Deklaration zeigt folgendes Beispiel:
-
-{{1}}
-```cpp     explicite.cpp
-#include <iostream>
-using namespace std;
-
-int foo(void); // Explizite Einführung der Funktion foo()
-
-int main(void) {
-  int i = foo(); // <- Aufruf der Funktion
-  cout << "i=" << i << "\n";
-  return 0;
-}
-
-int foo(void) { // <- Definition der Funktion foo()
-  return 3;
-}
-```
-@LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-{{2}}
 Das Ganze wird dann relevant, wenn Funktionen aus anderen Quellcodedateien
 eingefügt werden sollen. Die Deklaration macht den Compiler mit dem Aussehen der
 Funktion bekannt. Diese werden mit dem Schlüsselwort `extern`  markiert.
 
-{{2}}
+{{1}}
 ```cpp
 extern float berechneFlaeche(float breite, float hoehe);
 ```
 
-### Parameterübergabe und Rückgabewerte
+## Parameterübergabe und Rückgabewerte
 
 Bisher wurden Funktionen betrachtet, die skalare Werte als Parameter erhielten
 und ebenfalls einen skalaren Wert als einen Rückgabewert lieferten. Allerdings
@@ -493,7 +498,7 @@ ist diese Möglichkeit sehr einschränkend.
 Es wird in vielen Programmiersprachen, darunter in C/C++, zwei Konzepte der
 Parameterübergabe realisiert.
 
-**call-by-value**
+### Call-by-Value
 
 In allen Beispielen bis jetzt wurden Parameter an die Funktionen *call-by-value*,
 übergeben. Das bedeutet, dass innerhalb der aufgerufenen Funktion mit einer
@@ -518,17 +523,16 @@ int main(void) {
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
 
-**call-by-reference**
+### Call-by-Reference
 
 Bei einer Übergabe als Referenz wirken sich Änderungen an den Parametern auf die
 ursprünglichen Werte aus, es werden keine Kopien von Parametern angelegt.
-*Call-by-reference* wird unbedigt notwendig, wenn eine
+*Call-by-reference* wird unbedingt notwendig, wenn eine
 Funktion mehrere Rückgabewerte hat.
 
-In C++ wird die "call-by-reference"- Parameterübergabe mit Hilfe der Referenzen
-realisiert. In der Liste der formalen Parameter wird eine Referenz eines
-passenden Typs definiert. Beim Funktionsaufruf wird als Argument eine
-Variable des gleichen Datentyps übergeben.
+> In C++ kann die "call-by-reference"- Parameterübergabe mit Hilfe der Referenzen oder Pointern
+realisiert werden. 
+
 
 ```cpp                    ParameterI.cpp
 #include <iostream>
@@ -574,21 +578,20 @@ int main(void) {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-Es besteht ebenfalls die Möglichkeit, die bereits in C zur Verfügung stand, "call-by-reference"- Parameterübergabe mit Hilfe der Zeiger (Pointer)
-zu realisieren. Im allgemeinen ist die Verwendung von Referenzen vorzuziehen,
-bei Übergabe der Array-Parameter wird jedoch der Zeiger verwendet.
+Es besteht ebenfalls die Möglichkeit, "call-by-reference"- Parameterübergabe mit Hilfe der Zeiger (Pointer)
+zu realisieren. 
 
 ```cpp                   ParameterII.cpp
 #include <iostream>
 #include <cmath>
 using namespace std;
 
-double sinussatz(double *lookup_sin, int angle, double opositeSide){
-  return opositeSide*lookup_sin[angle];
+double hypothenuse(double *lookup_sin, int winkel, double gegenkathete){
+  return gegenkathete/lookup_sin[angle];
 }
 /*
-double sinussatz(double lookup_sin[], int angle, double opositeSide){
-  return opositeSide*lookup_sin[angle];
+double hypothenuse(double lookup_sin[], int winkel, double gegenkathete){
+  return gegenkathete/lookup_sin[angle];
 }
 */
 
@@ -603,36 +606,6 @@ int main(void) {
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out -lm`, `./a.out`)
-
-Statt Zeiger kann die Notation als Array undefinierter (definierter) Größe verwendet werden.
-Unabhängig von der Notation entspricht die Größe des übergebenen Arrays der Definition in der
-aufrufenden Funktion (hier main-Funktion).
-
-Auch bei der Verwendung von Zeigern und Referenzen werden keine Kopien von Paramern angelegt, sondern die
-Parameter selbst direkt verändert. Falls keine Veränderung angestrebt wird, aber das Anlegen von Kopien
-vermieden werden soll, können konstante Zeiger bzw. Referenzen verwendet werden.
-
-```cpp                   ParameterIV.cpp
-#include <iostream>
-#include <cmath>
-using namespace std;
-
-double sinussatz(const double *lookup_sin, int angle, double opositeSide){
-  return opositeSide*lookup_sin[angle];
-}
-
-int main(void) {
-  double sin_values[360] = {0};
-  for(int i=0; i<360; i++) {
-    sin_values[i] = sin(i*M_PI/180);
-  }
-  cout<<"Größe des Arrays "<<sizeof(sin_values)<<"\n";
-  cout<<"Result =  "<<sinussatz(sin_values, 30, 20)<<" \n";
-  return 0;
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out -lm`, `./a.out`)
-
 
 ### Zeiger und Referenzen als Rückgabewerte
 
@@ -718,7 +691,7 @@ using namespace std;
 
 void printSizeOf(int intArray[])
 {
-    cout<<"sizeof of parameter: "<<sizeof(intArray)<<"\n";
+    cout<<"sizeof of array as parameter: "<<sizeof(intArray)<<"\n";
 }
 
 void printLength(int intArray[])
@@ -735,6 +708,8 @@ int main()
 
     cout<<"Length of array: "<< sizeof(array) / sizeof(array[0])<<"\n";
     printLength(array);
+    
+    cout<<"Size of int pointer: "<< sizeof(int*) <<"\n";
 }
 ```
 @LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall -Wconversion main.cpp -o a.out`, `./a.out`)
@@ -781,77 +756,61 @@ int main(int argc, char *argv[]) {
 
 ## Beispiel des Tages
 
-Wie werden Funktionen im realen Programmierbetrieb angewendet? Werfen Sie einen Blick auf die Dokumentation unseres Mikrocontrollers. 
+```c++                        Functions.cpp
+#include <iostream>
+#include <cmath>
+#include <iomanip>
 
-https://microsoft.github.io/azure-iot-developer-kit/docs/apis/display/
+using namespace std;
 
-Dort finden Sie einzelne Funktionen, die der Display Klasse (wird in der nächsten Woche behandelt) zugordnet sind.+
+double Mittelwert(int *values, int entries);
+int Summe(int *values, int entries);
+void Ausgabe(int *values, int entries);
 
-+
-+
-+
-
-
-```cpp                ArduinoDisplay.cpp
-#include <OledDisplay.h>
-
-                                  // Aus Platzgründen entfernt
-unsigned char BMP[] = {0,0,0,0,0,0,0,0,0,0,0, ..... 0,0,0,0,0,0,0,0};
-
-void setup(){
-    Screen.init();
-}
-void loop(){
-    // print a string to the screen with wrapped = false
-    Screen.print("This is OLEDDisplay Testing", false);
-    delay(1000);
-    // print a string to the screen with wrapped = true
-    Screen.print("This is a very small display including only 4 lines", true);
-    delay(1000);
-    for(int i =0; i<=3; i++)
-    {
-        char buf[100];
-        sprintf(buf, "This is row %d", i);
-        Screen.print(i, buf);
-    }
-    delay(1000);
-    // draw a bitmap to the screen
-    Screen.draw(0, 0, 128, 8, BMP);
-    delay(1000);
-    // clean screen ready for next loop
-    Screen.clean();
-}
-```
-
-> Aufgabe: Wie könnten wir den Code abwandeln, um eine Laufschrift umzusetzen?
-
-{{1}}
-```cpp BuggyCode.cpp
-void setup() {
-  pinMode(LED_BUILTIN, OUTPUT);
-  Serial.begin(9600);
-	String text = "Das ist ein Test";
-	Serial.println(text);
-	String output = "";
-	int signs_per_line = 5;
-	for (int i=0; i<text.length(); i++){
-		 if (i <= text.length()-signs_per_line)
-				output = text.substring(i, i+signs_per_line);
-		 else
-        output = text.substring(i, text.length()) +
-                 text.substring(0, signs_per_line-(text.length()-i));
-		 Serial.println(output);
-	}
+double Mittelwert(int *values, int entries){
+  double summe = Summe(values, entries);
+  return summe / entries;
 }
 
-void loop() {
+int Summe(int *values, int entries){
+  int summe = 0;
+  for (int i=0; i<entries; i++){
+    summe += values[i];
+  }
+  return summe;
+}
+
+void Ausgabe(int *values, int entries){
+  for (int i=0; i<entries; i++){
+     std::cout << std::setw(2) <<  i << " ";
+  }
+  std::cout << std::endl;
+  for (int i=0; i<entries; i++){
+     std::cout << std::setw(2) << values[i] << " ";
+  }
+  std::cout << std::endl;
+}
+
+int main(void) {
+  int a [] = {1,2,3,3,4,2,3,4,5,6,7,8,9,1,2,3,3};
+  const int entries = sizeof(a)/sizeof(a[0]);
+  Ausgabe(a, entries);
+
+  int summe = Summe(a, entries);
+  double mittelwert = Mittelwert(a, entries);
+  cout<<"Die Summe betraegt "<<summe<<", der Mittelwert "<<mittelwert<<"\n";
+  return 0;
 }
 ```
-@AVR8js.sketch
+@LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall -Wconversion main.cpp -o a.out`, `./a.out`)
+
 
 # Quiz
 ## Funktionen
-### Funktionsdefinition
+
+Funktionsdefinitionen
+===================
+
 > Wechen Rückgabewert liefert eine als `void` deklatierte Funktion?
 [( )] Es können alle Arten von Rückgabewerten zurückgegeben werden.
 [(X)] Es wird kein Wert zurückgegeben.
@@ -874,7 +833,9 @@ void loop() {
 [(X)] Nein
 ************************************************************************
 
-### Aufruf von Fuktionen
+Aufruf von Fuktionen
+===================
+
 > Wodurch muss `[_____]` ersetzt werden damit die Funktion `divi` ermittelt ob `a` ein Teiler von `b` ist? Die Lösung ist ohne Leerzeichen einzugeben.
 ```cpp
 #include <iostream>
@@ -899,7 +860,9 @@ int main() {
 ```
 [[divi(b,a);]]
 
-### Fehler
+Fehler
+===================
+
 > ist dieses Programm fehlerfrei?
 ```cpp
 #include <iostream>
@@ -917,8 +880,7 @@ int main(void) {
 [(X)] Ja
 [( )] Nein
 
-{{1}}
-************************************************************************
+
 > Ist dieses Programm fehlerfrei?
 ```cpp
 #include <iostream>
@@ -935,10 +897,8 @@ int main(void) {
 ```
 [( )] Ja
 [(X)] Nein
-************************************************************************
 
-{{2}}
-************************************************************************
+
 > Welche Fehler liegen bei diesem Programm vor?
 ```cpp
 #include <iostream>
@@ -958,9 +918,10 @@ int main(void) {
 [[X]] Datentypen der Parameter beim Aufruf und der Defintion stimmen nicht überein
 [[X]] Rückgabewert ohne Definition des Rückgabetyps
 [[ ]] Anweisung nach dem `return` Schlüsselwort
-************************************************************************
 
-### Funktionsdeklaration
+Funktionsdeklaration
+===================
+
 > Ersetzen Sie `[_____]` durch eine explizite Deklaration der Funktion `hw`.
 ```cpp
 #include <iostream>
@@ -980,15 +941,16 @@ void hw(void) {
 ```
 [[void hw();]]
 
-{{1}}
-************************************************************************
+
 > Mit welcher dieser Anweisungen kann eine Funktion aus einer anderen Quellcodedatei einzufügt werden?
 [(X)] `extern int x(int y, bool z);`
 [( )] `import int x(int y, bool z);`
 [( )] `using int x(int y, bool z);`
-************************************************************************
 
-### Parameterübergabe und Rückgabewerte
+
+Parameterübergabe und Rückgabewerte
+===================
+
 > Ordnen Sie die Eigenschaften den entsprechenden Arten der Parameterübergabe zu.
 - [[*call-by-value*] [*call-by-reference*]]
 - [    ( )           (X)      ]  Ermöglicht mehrere Rückgabewerte
@@ -997,8 +959,7 @@ void hw(void) {
 - [    ( )           (X)      ]  Beeinflusst den tatsächlichen Wert von Variablen in der `main`
 
 
-{{1}}
-************************************************************************
+
 > Wie lautet die Ausgabe dieses Programms?
 ```cpp
 #include <iostream>
@@ -1028,16 +989,15 @@ int main(void) {
 }
 ```
 [[19]]
-************************************************************************
 
-{{2}}
-************************************************************************
 > Womit werden Array-Parameter übergeben?
 [( )] Referenz
 [(X)] Zeiger
-************************************************************************
 
-### Zeiger und Referenzen als Rückgabewerte
+
+Zeiger und Referenzen als Rückgabewerte
+===================
+
 > Wo liegt der Fehler im folgenden Programm?
 ```cpp
 #include <iostream>
@@ -1057,8 +1017,6 @@ int main(void) {
 [(X)] Die mit `return` übergebene Referenz zeigt außerhalb der Funktion `doCalc` auf einen nicht existierenden Speicherplatz
 [( )] Referenzen dürfen nicht für die Rückgabe mit `return` verwendet werden
 
-{{1}}
-************************************************************************
 > Für die Variable `volumen` soll der Speicherplatz dynamisch zur Verfügung gestellt werden. Ersetzen Sie `[_____]` um die notwendige Ergängung der Anweisung.
 ```cpp
 #include <iostream>
@@ -1081,9 +1039,10 @@ int main(void) {
 }
 ```
 [[new double;]]
-************************************************************************
 
-### `main`-Funktion
+`main`-Funktion
+===================
+
 > Beurteilen Sie ob folgende Aussagen wahr oder falsch sind.
 - [[Wahr]        [Falsch]]
 - [(X)           ( )     ]  In jedem Programm darf es nur eine (1) `main`-Fuktion geben.
@@ -1093,15 +1052,11 @@ int main(void) {
 - [(X)           ( )     ]  `argv` ist ein Array von Befehlszeilenargumenten.
 - [(X)           ( )     ]  `argv[0]` ist das Programm selbst.
 
-{{1}}
-************************************************************************
+
 > Was ist `argv[argc]`?
 [(X)] NULL-Zeiger
 [( )] Das letzte Argument in der Befehlszeile
-************************************************************************
 
-{{2}}
-************************************************************************
 > Wie lautet die Ausgabe dieses Programms wenn die kompilierte Version des Programms intern mit `./a.out 3 2 1 Maus im Haus` aufgerufen wird?
 ```cpp
 #include <iostream>
@@ -1113,4 +1068,3 @@ int main(int argc, char *argv[]) {
 }
 ```
 [[Maus]]
-************************************************************************
