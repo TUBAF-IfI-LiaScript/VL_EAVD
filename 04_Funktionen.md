@@ -89,6 +89,10 @@ int main(void) {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out -lm`, `./a.out`)
 
+> Für die Verbesserung des Verständnisses bei der Generierung des Histogramms hat einer Ihrer Kommilitonen eine sehr anschauliche grafische Darstellung vorbereitet. Vielen Dank dafür!
+>
+> ![](./images/04_ZeigerUndArrays/hist_generation.png)
+
 Sie wollen den Code in einem neuen Projekt wiederverwenden. Was sind
 die Herausforderungen dabei?
 
