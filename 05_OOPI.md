@@ -56,6 +56,7 @@ _Die Zustimmung (in Prozent) für die Verwendung der künstlichen Intelligenz im
 + _Schreiben Sie eine weitere Funktion, die die korrespondierenden Werte beider Arrays miteinander vergleicht. Geben Sie für jedes Jahr aus, auf welcher Insel die Zustimmung größer war, bei den gleichen Werte ist eine entsprechende Meldung auszugeben. Rufen Sie die Funktion in der main-Funktion auf._
 + _In der main()-Funktion sind die Werte von der Console einzulesen und in die Arrays zu speichern._
 
+> Denken Sie mal über eine Lösung nach, wie sprechen in der kommenden Veranstaltung darüber.
 
 ## Motivation
 
