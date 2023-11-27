@@ -495,7 +495,31 @@ Bisher wurden Funktionen betrachtet, die skalare Werte als Parameter erhielten
 und ebenfalls einen skalaren Wert als einen Rückgabewert lieferten. Allerdings
 ist diese Möglichkeit sehr einschränkend.
 
-Es wird in vielen Programmiersprachen, darunter in C/C++, zwei Konzepte der
+```cpp          Student.cpp
+#include <iostream>
+using namespace std;
+
+#include <iostream>
+using namespace std;
+
+//           Rückgabe der Ergebnisse
+//  +------------------------------------+
+//  |                                    |
+   int add(int a, int b){ // <--+        |
+      return a+b;         //    | Aufruf |   
+   }                      //    | mit    |   
+                          //    | Para-  |   
+   int main(void) {       //    | metern |  
+     int i = add(5, 6);   //----+        |  
+//    ^                                  |  
+//    +----------------------------------+
+     cout<<"i="<<i<<"\n";
+     return 0;
+   }
+```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+Es wird in vielen Programmiersprachen, darunter in C/C++, zwei generelle Konzepte der
 Parameterübergabe realisiert.
 
 ### Call-by-Value
@@ -509,8 +533,10 @@ ursprünglichen Wert auswirken.
 #include <iostream>
 using namespace std;
 
-// Definitionsteil
-void doSomething(int a) { cout << ++a << " a in der Schleife\n"; }
+void doSomething(int a) {
+   // eine KOPIE von a wird um 1 erhöht
+   cout << ++a << " a in der Schleife\n";
+}
 
 int main(void) {
   int a = 5;
@@ -522,6 +548,7 @@ int main(void) {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
+> **Merke:** Die _Call-by-value-_Funktionen können den Wert der Variablen nicht verändern.
 
 ### Call-by-Reference
 
