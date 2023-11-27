@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.4
+version:  1.0.5
 language: de
 narrator: Deutsch Female
 
@@ -14,7 +14,7 @@ import: https://github.com/liascript/CodeRunner
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/04_Funktionen.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/04_Funktionen.md)
 
 # Grundlagen der Sprache C++
 
@@ -610,7 +610,30 @@ int main(void) {
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
 Es besteht ebenfalls die Möglichkeit, "call-by-reference"- Parameterübergabe mit Hilfe der Zeiger (Pointer)
-zu realisieren. 
+zu realisieren. Allerdings muss dann im Unterschied zur Referenz jeweils eine Dereferenzierung vorgenommen werden `*a = ...`. 
+
+```cpp     ParameterIII.cpp
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+void runden(float* a){
+    if (*a < 0)
+       *a = (int)(*a - 0.5);
+    else
+       *a = (int)(*a + 0.5);
+}
+
+int main(void) {
+  float value = -8.4565;
+  float *pointer = &value;
+  runden(pointer);
+  cout<<"Eingabewert "<<value<<" - Ausgabewert "<<*pointer<<"\n";
+  return 0;
+}
+```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
 
 ```cpp                   ParameterII.cpp
 #include <iostream>
