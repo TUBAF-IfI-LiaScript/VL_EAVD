@@ -42,21 +42,43 @@ import: https://github.com/liascript/CodeRunner
 * Was bedeutet das "Überladen" von Funktionen?
 * Nach welchen Kriterien werden überladene Funktionen differenziert?
 
+## Einschub - Klausurhinweise
+
+> + Während der Klausur können Sie "alle Hilfsmittel aus Papier" verwenden!
+
+> + Im OPAL finden sich Klausurbeispiele.
+
+__Beispielhafte Klausuraufgabe__
+
+_Die Zustimmung (in Prozent) für die Verwendung der künstlichen Intelligenz im Pflegebereich unter der Bevölkerung von Mauritius und Réunion soll vergleichend betrachtet werden. Die Ergebnisse der Umfragen für die Jahre 2010 bis 2020 (je ein Wert pro Jahr) in zwei Arrays erfasst werden (je ein Array pro Insel) und in einem Programm ausgewertet werden._
+
++ _Für beide Inseln soll aus den in Arrays erfassten Werten je ein Mittelwert berechnet werden. Schreiben Sie dazu eine Funktion, die ein Array übergeben bekommt und einen Mittelwert als ein Ergebnis an die main-Funktion zurück liefert. Rufen Sie die Funktion in der main-Funktion für jedes beider Arrays auf und geben Sie die Mittelwerte in der main-Funktion aus._
++ _Schreiben Sie eine weitere Funktion, die die korrespondierenden Werte beider Arrays miteinander vergleicht. Geben Sie für jedes Jahr aus, auf welcher Insel die Zustimmung größer war, bei den gleichen Werte ist eine entsprechende Meldung auszugeben. Rufen Sie die Funktion in der main-Funktion auf._
++ _In der main()-Funktion sind die Werte von der Console einzulesen und in die Arrays zu speichern._
+
+
 ## Motivation
 
                              {{0-2}}
 **************************************************************************
 
-> Aufgabe: Statistische Untersuchung der Gehaltsentwicklung in Abhängigkeit vom Alter.
+> Aufgabe: Nehmen wir an, dass Sie eine statistische Untersuchung über einem Datensatz vornehmen und zum Beispiel für Mitarbeiter die Gehaltsentwicklung in Abhängigkeit vom Alter darstellen wollen.
 
 Welche zwei Elemente machen eine solche Untersuchung aus?
 
-| Daten        | Funktionen      |
-|--------------|-----------------|
-| Name         | Alter bestimmen |
-| Geburtsdatum | Daten ausgeben  |
-| Gehalt       |                 |
-| ...          |                 |
+* Daten 
+
+   * Name 
+   * Geburtsdatum
+   * Gehalt 
+   * ...
+
+* Funktionen
+
+   * Alter bestimmen
+   * Daten ausgeben
+   * ...
+
 
 Wir entwerfen also eine ganze Sammlung von Funktionen wie zum Beispiel für `alterbestimmen()`:
 
@@ -83,23 +105,172 @@ int main(){
 
 + lange Parameterliste bei der Funktionen
 + viele Variablen
-+ der inhaltliche Zusammenhang der Daten schwer zu erkennen
++ der inhaltliche Zusammenhang der Daten ist nur schwer zu erkennen
+
+> Wir brauchen eine neue Idee, um die Daten zu strukturieren!
 
 **************************************************************************
 
-                             {{2-4}}
-**************************************************************************
+## Strukturen als Teillösung
 
-> Lösungsansatz 1: Wir fassen die Daten zusammen in einer übergreifenden Datenstruktur `struct`.
+Mit Strukturen oder `structs` werden zusammengehörige Variablen unterschiedlicher Datentypen und
+Bedeutung in einem Konstrukt zusammengefasst. Damit wird für den Entwickler der
+Zusammenhang deutlich. Die Variablen der Struktur werden als Komponenten (engl.
+members) bezeichnet.
 
-Ein struct vereint unterschiedliche Aspekte eines Datensets in einer Variablen.
+Beispiele:
+
+```cpp
+struct datum
+{
+  int tag;
+  char monat[10];
+  int jahr;
+};
+
+
+struct Student
+{
+  int Matrikel;
+  char name[20];
+  char vorname[25];
+};  // <- Hier steht ein Semikolon!
+```
+
+### Deklaration, Definition, Initialisierung und Zugriff
+
+Und wie erzeuge ich Variablen dieses erweiterten Types, wie werden diese
+initialisiert und wie kann ich auf die einzelnen Komponenten zugreifen?
+
+Der Bespiel zeigt, dass die Definition der Variable unmittelbar nach der
+`struct`-Definition oder mit einer gesonderten Anweisung mit einer vollständigen,
+partiellen Initialisierung bzw. ohne Initialisierung erfolgen kann.
+
+Die nachträgliche Veränderung einzelner Komponenten ist über Zugriff mit Hilfe
+des Punkt-Operators möglich.
+
+```cpp                           structExample.c
+#include <iostream>
+#include <cstring> 
+
+struct datum                                        // <- Deklaration
+{
+  int tag;
+  char monat[10];
+  int jahr;
+} geburtstag_1 = {18, "April", 1986};               // <- Initialisierung
+                                                    //    globale Variable geburtstag_1
+
+void print_date(struct datum day){
+	  std::cout << "Person A wurde am " 
+	            << day.tag << ". " 
+	            << day.monat << " " 
+	            << day.jahr << " geboren." 
+	            << std::endl;
+}
+
+int main() {
+  struct datum geburtstag_2 = {};                   // <- Initialisierung
+                                                    //    Variable geburtstag_2
+  geburtstag_2.tag = 13;                            // Zuweisungen
+  geburtstag_2.jahr =1803;
+  strcpy(geburtstag_2.monat, "April");
+
+  // Unvollstaendige Initialisierung
+  struct datum geburtstag_3 ={.monat = "September"}; // <- partielle Initialisierung
+
+  print_date(geburtstag_1);
+  print_date(geburtstag_2);
+  print_date(geburtstag_3);
+  return 0;
+}
+```
+@LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+### Vergleich von `struct`-Variablen
+
+> Zusammengesetzte Datentypen machen die Anwendung von Vergleichsoperatoren schwieriger - bzw. wir müssen sie selbst definieren.
+
+Im nachfolgenden Beispiel werden zur Überprüfung der Gleichheit die `tag`und
+`monat` verglichen. Der Vergleich wird dadurch vereinfacht, dass
+wir für die Repräsentation des Monats ein `int` verwenden. Damit entfällt
+aufwändigerer Vergleich der `char arrays`.
+
+```cpp                           structExample.c
+#include <iostream>
+#include <cstring> 
+
+struct datum                                        // <- Deklaration
+{
+  int tag;
+  int monat;
+  int jahr;
+}; 
+
+int main() {
+  struct datum person_1 =  {10, 1, 2013};
+  struct datum person_2 =  {10, 3, 1956};
+  
+  if ((person_1.tag == person_2.tag) && (person_1.monat == person_2.monat))
+      printf("Oha, der gleiche Geburtstag im Jahr!\n");
+  else
+      printf("Ungleiche Geburtstage!\n");
+  return 0;
+}
+```
+@LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+### Arrays von Strukturen
+
+Natürlich lassen sich die beiden erweiterten Datenformate auf der Basis von
+`struct` und Arrays miteinander kombinieren.
+
+```cpp                    ArraysOfStructs.cpp
+#include <iostream>
+#include <cstring> 
+
+struct datum    
+{
+  int tag;
+  int monat;
+  int jahr;
+}; 
+
+void print_date(struct datum day){
+	  std::cout << "Person A wurde am " 
+	            << day.tag << ". " 
+	            << day.monat << " " 
+	            << day.jahr << " geboren." 
+	            << std::endl;
+}
+
+int main() {
+
+  struct datum geburtstage [3] = {{18, 4, 1986},
+                                 {12, 5, 1820}};
+
+  geburtstage[2].tag = 5;
+  geburtstage[2].monat = 9;
+  geburtstage[2].jahr = 1905;
+
+  for (long unsigned int i=0; i<sizeof(geburtstage)/sizeof(datum); i++)
+    print_date(geburtstage[i]);
+
+  return 0;
+}
+```
+@LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+## Zurück zum Ausgangsproblem
+
+> Mit Blick auf unsere Eingangsfragestellung könnte die Lösung also wie folgt aussehen:
 
 ```cpp
 struct Datum{           // hier wird ein neuer Datentyp definiert
     int tag, monat, jahr;
 };
 
-int alterbestimmen(Datum geb_datum, Datum akt_datum)
+int alterbestimmen(struct Datum geb_datum, struct Datum akt_datum)
 {
   //TODO
   return 0;
@@ -107,22 +278,18 @@ int alterbestimmen(Datum geb_datum, Datum akt_datum)
 
 int main(){       
   Datum geburtsdatum;
-  Datum akt_datum;       // ... und hier wird eine Variable des 
-                         // Typs angelegt 
-  geburtsdatum.tag = 5;  // ... und "befüllt"
-  geburtsdatum.monat = 10;
-  geburtsdatum.jahr = 1923;
+  Datum akt_datum;        // ... und hier wird eine Variable des 
+                          // Typs angelegt 
+  geburtsdatum.tag = 12;  // ... und "befüllt"
+  geburtsdatum.monat = 3;
+  geburtsdatum.jahr = 1920;
   int alter=alterbestimmen(geburtsdatum, akt_datum);
 }
 ```
 
-Mit `struct Datum` wurde ein Datentyp definiert, `Datum geburtstdatum;` definiert eine Variable (besser gesagt ein Objekt).
-
 > Was gefällt ihnen an diesem Ansatz nicht?
 
-**************************************************************************
-
-                             {{3-4}}
+                             {{1-2}}
 **************************************************************************
 
 + die Funktionen sind von dem neuen Datentyp abhängig gehören aber trotzdem nicht zusammen
@@ -130,10 +297,9 @@ Mit `struct Datum` wurde ein Datentyp definiert, `Datum geburtstdatum;` definier
 
 **************************************************************************
 
-                             {{4-5}}
-**************************************************************************
+## Idee von OOP
 
-Die objektorientierte Programmierung (OOP) ist ein Programmierparadigma, das auf dem Konzept der "Objekte" basiert, die Daten und Code enthalten können: Daten in Form von Feldern (oft als Attribute oder Eigenschaften bekannt) und Code in Form von Prozeduren (oft als Methoden bekannt).
+> Die objektorientierte Programmierung (OOP) ist ein Programmierparadigma, das auf dem Konzept der "Objekte" basiert, die Daten und Code enthalten können: Daten in Form von Feldern (oft als Attribute oder Eigenschaften bekannt) und Code in Form von Prozeduren (oft als Methoden bekannt).
 
 ```cpp
 struct Datum{
@@ -174,9 +340,7 @@ Ein Merkmal von Objekten ist, dass die eigenen Prozeduren eines Objekts auf die 
 
 Ein OOP-Computerprogramm kombiniert Objekt und lässt sie interagieren. Viele der am weitesten verbreiteten Programmiersprachen (wie C++, Java, Python usw.) sind Multi-Paradigma-Sprachen und unterstützen mehr oder weniger objektorientierte Programmierung, typischerweise in Kombination mit imperativer, prozeduraler Programmierung.
 
-**************************************************************************
-
-                             {{5-6}}
+                             {{1-2}}
 **************************************************************************
 
 <!--
@@ -222,28 +386,6 @@ C++ kombiniert die Effizienz von C mit den Abstraktionsmöglichkeiten der objekt
 
 ## ... das kennen wir doch schon
 
-**Ein- und Ausgabe**
-
-Bereits häufig verwendete std::cin und std::cout sind Objekte:
-
-+ `std::cin`  ist ein Objekt der Klasse `istream`
-+ `std::cout` ist ein Objekt der Klasse `ostream`
-
-```cpp
-extern std::istream cin;
-```
-```cpp
-extern std::ostream cout;
-```
-
-Sie werden in `<iostream>` als Komponente der Standard Template Library (STL) im Namensraum `std` definiert und durch
-`#include <iostream>` bekannt gegeben.
-
-Die Streams lassen sich nicht nur für die Standard Ein- und Ausgabe verwenden, sondern auch mit Dateien oder Zeichenketten.
-
-Mehr zu `iostream` unter
-[https://www.c-plusplus.net/forum/topic/152915/ein-und-ausgabe-in-c-io-streams](https://www.c-plusplus.net/forum/topic/152915/ein-und-ausgabe-in-c-io-streams)
-
 **Klasse string**
 
 C++ implementiert eine separate Klasse `string`-Datentyp (Klasse). In Programmen müssen nur Objekte dieser Klasse angelegt werden. Beim Anlegen eines Objektes muss nicht angegeben werden, wie viele Zeichen darin enthalten werden sollen, eine einfache Zuweisung reicht aus.
@@ -253,16 +395,14 @@ C++ implementiert eine separate Klasse `string`-Datentyp (Klasse). In Programmen
 #include <string>
 
 int main(void) {
-  std::string hallo;
-  hallo="Hallo";
-  std::string hanna = "Hanna";
-  std::string anna("Anna");
-  std::string alleBeide = anna + " + " + hanna;
-  std::cout<<hallo<<" "<<alleBeide<<std::endl;
+  std::string hallo_msg="Hallo";
+  std::cout<< hallo_msg << " hat eine Länge von " << hallo_msg.length() << " Zeichen." << std::endl;
   return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out `, `./a.out`)
+
+> Schauen Sie auch in die Dokumentation der Klasse `string` [http://www.cplusplus.com/reference/string/string/](http://www.cplusplus.com/reference/string/string/)
 
 **Arduino Klassen**
 
@@ -1017,9 +1157,11 @@ int main () {
 
 Der Beispielcode für die Anwendungen ist in den `examples` Ordnern des Projektes enthalten.
 
-# Quiz
-## Definieren von Klassen und Objekten
-### Grundlegend
+## Quiz
+
+Definieren von Klassen und Objekten
+====================
+
 > Welches Schlüsselwort wird benutzt um eine Klasse zu definieren?
 [[class]]
 
@@ -1092,7 +1234,9 @@ int main()
 [[Beispielauto.print();]]
 **************************************************************************
 
-### Datenkapselung
+Datenkapselung
+====================
+
 > Wodurch muss `[_____]` ersetzt werden um den Kilometerstand vom Objekt `Beispielauto` auf 40000 zu setzen?
 
 ```cpp
@@ -1126,7 +1270,9 @@ int main()
 ```
 [[Beispielauto.set_Kilometerstand(40000);]]
 
-### Memberfunktion
+Memberfunktion
+====================
+
 > Vervollständigen Sie die Implementierung der Methode `ausgabeMethode` in dem Sie `[_____]` durch noch fehlenden Teil ersetzen. Geben Sie die Antwort ohne Leerzeichen ein.
 ```cpp
 #include <iostream>
@@ -1155,7 +1301,9 @@ int main()
 ```
 [[Auto::ausgabeMethode()]]
 
-### Modularisierung unter C++
+Modularisierung unter C++
+====================
+
 > Im Programm `main.cpp` soll die in der Datei `Auto.h` deklarierte Klasse `Auto` verwendet werden. Welche Dateien werden dafür benötigt?
 [[ ]] `main.h`
 [[X]] `main.cpp`
@@ -1179,7 +1327,9 @@ int main()
 [["Auto.h"]]
 **************************************************************************
 
-### Überladung von Methoden
+Überladung von Methoden
+====================
+
 > Wie lautet die Ausgabe dieses Programms?
 ```cpp
 #include <iostream>
@@ -1209,8 +1359,9 @@ int main()
 ```
 [[198.1]]
 
-## Initialisierung/Zerstören eines Objektes
-### Konstruktoren
+Konstruktoren
+====================
+
 > Wie lautet die Ausgabe dieses Programms?
 
 ```cpp
@@ -1282,7 +1433,9 @@ int main()
 [[Humboldt Einhorn 23]]
 **************************************************************************
 
-### Destruktoren
+Destruktoren
+====================
+
 > Wie lautet die Ausgabe dieses Programms?
 ```cpp
 #include <iostream>
