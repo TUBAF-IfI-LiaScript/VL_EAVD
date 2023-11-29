@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 
@@ -565,7 +565,11 @@ Funktion mehrere Rückgabewerte hat.
 realisiert werden. 
 
 
-```cpp                    ParameterI.cpp
+                        {{0-1}}
+******************************************************
+
+
+```cpp                    Parameter_Reference_I.cpp
 #include <iostream>
 using namespace std;
 
@@ -584,11 +588,13 @@ int main(void) {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
+Vgl. Illustration mit Python-Tutor [Link](https://pythontutor.com/render.html#code=%23include%20%3Ciostream%3E%0Ausing%20namespace%20std%3B%0A%0Avoid%20inkrementieren%28int%20%26variable%29%7B%0A%20%20variable%2B%2B%3B%0A%7D%0A%0Aint%20main%28void%29%20%7B%0A%20%20int%20a%3D0%3B%0A%20%20inkrementieren%28a%29%3B%0A%20%20cout%3C%3C%22a%20%3D%20%22%3C%3Ca%3C%3C%22%5Cn%22%3B%0A%20%20inkrementieren%28a%29%3B%0A%20%20cout%3C%3C%22a%20%3D%20%22%3C%3Ca%3C%3C%22%5Cn%22%3B%0A%20%20return%200%3B%0A%7D&cppShowMemAddrs=true&cumulative=false&curInstr=5&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=cpp_g%2B%2B9.3.0&rawInputLstJSON=%5B%5D&textReferences=false)
+
 Der Vorteil der Verwendung der Referenzen als Parameter besteht darin, dass
 in der Funktion mehrere Variablen auf eine elegante Weise verändert
 werden können. Die Funktion hat somit quasi mehrere Ergebnisse.
 
-```cpp     ParameterIII.cpp
+```cpp               Parameter_Reference_II.cpp
 #include <iostream>
 #include <cmath>
 using namespace std;
@@ -609,10 +615,15 @@ int main(void) {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
+******************************************************
+
+                        {{1-2}}
+******************************************************
+
 Es besteht ebenfalls die Möglichkeit, "call-by-reference"- Parameterübergabe mit Hilfe der Zeiger (Pointer)
 zu realisieren. Allerdings muss dann im Unterschied zur Referenz jeweils eine Dereferenzierung vorgenommen werden `*a = ...`. 
 
-```cpp     ParameterIII.cpp
+```cpp     Parameter_Pointer_I.cpp
 #include <iostream>
 #include <cmath>
 using namespace std;
@@ -634,18 +645,25 @@ int main(void) {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
+Ein realistisches Beispiel könnte die Verwendung eines Arrays sein. 
 
-```cpp                   ParameterII.cpp
+> Zur Erinnerung Eine Variable, die ein Array representiert zeigt auf den ersten Eintrag.
+
+Dabei können zwei Varianten genutzt werden - die explizte Pointerschreibweise und die Array Schreibweise - beide drücken die Übergabe eines Pointers im Sinne von _Call-by-Reference_ aus.
+
+```cpp         Parameter_Pointer_II.cpp
 #include <iostream>
 #include <cmath>
 using namespace std;
 
+//                 Variante 1
 double hypothenuse(double *lookup_sin, int winkel, double gegenkathete){
-  return gegenkathete/lookup_sin[angle];
+  return gegenkathete/lookup_sin[winkel];
 }
 /*
+                   Variante 2
 double hypothenuse(double lookup_sin[], int winkel, double gegenkathete){
-  return gegenkathete/lookup_sin[angle];
+  return gegenkathete/lookup_sin[winkel];
 }
 */
 
@@ -655,11 +673,16 @@ int main(void) {
     sin_values[i] = sin(i*M_PI/180);
   }
   cout<<"Größe des Arrays "<<sizeof(sin_values)<<"\n";
-  cout<<"Result =  "<<sinussatz(sin_values, 30, 20)<<" \n";
+  cout<<"Result =  "<<hypothenuse(sin_values, 30, 20)<<" \n";
   return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out -lm`, `./a.out`)
+
+Die Visualisierung des Zugriffs finden Sie in einem [Python-Tutor](https://pythontutor.com/render.html#code=%23include%20%3Ciostream%3E%0A%23include%20%3Ccmath%3E%0Ausing%20namespace%20std%3B%0A%0A%23define%20ARRAYSIZE%205%0A%0A//%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Variante%201%0Adouble%20hypothenuse%28double%20*lookup_sin,%20int%20winkel,%20double%20gegenkathete%29%7B%0A%20%20return%20gegenkathete/lookup_sin%5Bwinkel%5D%3B%0A%7D%0A/*%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Variante%202%0Adouble%20hypothenuse%28double%20lookup_sin%5B%5D,%20int%20winkel,%20double%20gegenkathete%29%7B%0A%20%20return%20gegenkathete/lookup_sin%5Bangle%5D%3B%0A%7D%0A*/%0A%0Aint%20main%28void%29%20%7B%0A%20%20double%20sin_values%5BARRAYSIZE%5D%20%3D%20%7B0%7D%3B%0A%20%20for%28int%20i%3D0%3B%20i%3CARRAYSIZE%3B%20i%2B%2B%29%20%7B%0A%20%20%20%20sin_values%5Bi%5D%20%3D%20sin%28i*M_PI/180%29%3B%0A%20%20%7D%0A%20%20cout%3C%3C%22Gr%C3%B6%C3%9Fe%20des%20Arrays%20%22%3C%3Csizeof%28sin_values%29%3C%3C%22%5Cn%22%3B%0A%20%20cout%3C%3C%22Result%20%3D%20%20%22%3C%3Chypothenuse%28sin_values,%204,%2020%29%3C%3C%22%20%5Cn%22%3B%0A%20%20return%200%3B%0A%7D&cppShowMemAddrs=true&cumulative=false&curInstr=12&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=cpp_g%2B%2B9.3.0&rawInputLstJSON=%5B%5D&textReferences=false) Beispiel.
+
+******************************************************
+
 
 ### Zeiger und Referenzen als Rückgabewerte
 
