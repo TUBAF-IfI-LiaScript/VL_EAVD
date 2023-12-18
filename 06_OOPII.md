@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.4
+version:  1.0.5
 language: de
 narrator: Deutsch Female
 
@@ -50,6 +50,7 @@ import: https://github.com/liascript/CodeRunner
 
 > Und was bedeutet das angewandt auf unsere Vision mit dem Mikrocontroller Daten zu erheben?
 
+
 ```text @plantUML.png
 @startuml
 ditaa
@@ -75,7 +76,8 @@ ditaa
                    | void setup{                         |
                    |   rgbLed.setColor(255, 0, 0);       |
                    | }                      {d}cBFB      |
-                   +-------------------------------------+                      
+                   +-------------------------------------+
+@enduml
 ```
 
 Für die Implementierung einer Ausgabe auf dem Display des MXCHIP Boards nutzen wir die Klassenimplementierung der API.
@@ -128,7 +130,7 @@ int main()
   Student bernhard {"Cotta", 18, "Zillbach"};
   bernhard.ausgabeMethode(std::cout);
 
-  Student nochmalBernhrd {"Cotta", 18, "Zillbach"};
+  Student nochmalBernhard {"Cotta", 18, "Zillbach"};
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
@@ -137,9 +139,11 @@ int main()
 >
 >   + eine Funktion `int vergleich(Student, Student)` und
 >
-> + eine Methode `int Student::vergleich(Student, Student)`,
+> + eine Methode `int Student::vergleich(Student)`,
 >
 > die zwei Studenten miteinander vergleicht!
+>
+> Was ist der konzeptionelle Unterschied zwischen beiden Implementierungen?
 
 
 {{1}}
@@ -240,10 +244,7 @@ bool operator>(const Rectangle& a, const Rectangle& b){
 }
 ```
 
-Stellen wir die Abläufe nochmals grafisch dar:
-
-+ Aufruf über Call-by-Value [Pythontutor](http://pythontutor.com/visualize.html#code=%23include%20%3Ciostream%3E%0A%0Aclass%20Rectangle%20%7B%0A%20%20private%3A%0A%20%20%20%20float%20width,%20height%3B%0A%20%20public%3A%0A%20%20%20%20Rectangle%28int%20w,%20int%20h%29%3A%20width%7Bw%7D,%20height%7Bh%7D%20%7B%7D%0A%20%20%20%20float%20area%28%29%20%7Breturn%20width*height%3B%7D%0A%20%20%20%20Rectangle%20operator%2B%3D%28Rectangle%20offset%29%20%7B%0A%20%20%20%20%20%20%20float%20ratio%20%3D%20%28offset.area%28%29%20%2B%20this-%3Earea%28%29%29%20/%20this-%3Earea%28%29%3B%0A%20%20%20%20%20%20%20this-%3Ewidth%20%3D%20ratio%20*%20%20this-%3Ewidth%3B%0A%20%20%20%20%20%20%20return%20*this%3B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Abool%20operator%3E%28Rectangle%20a,%20Rectangle%20b%29%7B%0A%20%20%20%20if%20%28a.area%28%29%20%3E%20b.area%28%29%29%20return%201%3B%0A%20%20%20%20else%20return%200%3B%0A%7D%0A%0Aint%20main%20%28%29%20%7B%0A%20%20Rectangle%20rect_a%283,4%29%3B%0A%20%20Rectangle%20rect_b%285,7%29%3B%0A%20%20std%3A%3Acout%20%3C%3C%20%22Vergleich%3A%20%22%20%3C%3C%20%28rect_a%20%3E%20rect_b%29%20%3C%3C%20%22%5Cn%22%3B%0A%0A%20%20std%3A%3Acout%20%3C%3C%20%22Fl%C3%A4che%20a%20%3A%20%22%20%3C%3C%20rect_a.area%28%29%20%3C%3C%20%22%5Cn%22%3B%0A%20%20std%3A%3Acout%20%3C%3C%20%22Fl%C3%A4che%20b%20%3A%20%22%20%3C%3C%20rect_b.area%28%29%20%3C%3C%20%22%5Cn%22%3B%0A%20%20rect_a%20%2B%3D%20rect_b%3B%0A%20%20std%3A%3Acout%20%3C%3C%20%22Summe%20%20%20%20%3A%20%22%20%3C%3C%20rect_a.area%28%29%3B%0A%0A%20%20return%200%3B%0A%7D&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=cpp&rawInputLstJSON=%5B%5D&textReferences=false)
-+ Aufruf über Referenz [Pythontutor](http://pythontutor.com/visualize.html#code=%23include%20%3Ciostream%3E%0A%0Aclass%20Rectangle%20%7B%0A%20%20private%3A%0A%20%20%20%20float%20width,%20height%3B%0A%20%20public%3A%0A%20%20%20%20Rectangle%28int%20w,%20int%20h%29%3A%20width%7Bw%7D,%20height%7Bh%7D%20%7B%7D%0A%20%20%20%20float%20area%28%29%20%7Breturn%20width*height%3B%7D%0A%7D%3B%0A%0Abool%20operator%3E%28Rectangle%26%20a,%20Rectangle%26%20b%29%7B%0A%20%20%20%20if%20%28a.area%28%29%20%3E%20b.area%28%29%29%20return%201%3B%0A%20%20%20%20else%20return%200%3B%0A%7D%0A%0Aint%20main%20%28%29%20%7B%0A%20%20Rectangle%20rect_a%283,4%29%3B%0A%20%20Rectangle%20rect_b%285,7%29%3B%0A%20%20std%3A%3Acout%20%3C%3C%20%22Vergleich%3A%20%22%20%3C%3C%20%28rect_a%20%3E%20rect_b%29%20%3C%3C%20%22%5Cn%22%3B%0A%0A%20%20return%200%3B%0A%7D&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=cpp&rawInputLstJSON=%5B%5D&textReferences=false)
+Stellen wir die Abläufe nochmals grafisch dar [Pythontutor](http://pythontutor.com/visualize.html#code=%23include%20%3Ciostream%3E%0A%0Aclass%20Rectangle%20%7B%0A%20%20private%3A%0A%20%20%20%20float%20width,%20height%3B%0A%20%20public%3A%0A%20%20%20%20Rectangle%28int%20w,%20int%20h%29%3A%20width%7Bw%7D,%20height%7Bh%7D%20%7B%7D%0A%20%20%20%20float%20area%28%29%20%7Breturn%20width*height%3B%7D%0A%7D%3B%0A%0Abool%20operator%3E%28Rectangle%26%20a,%20Rectangle%26%20b%29%7B%0A%20%20%20%20if%20%28a.area%28%29%20%3E%20b.area%28%29%29%20return%201%3B%0A%20%20%20%20else%20return%200%3B%0A%7D%0A%0Aint%20main%20%28%29%20%7B%0A%20%20Rectangle%20rect_a%283,4%29%3B%0A%20%20Rectangle%20rect_b%285,7%29%3B%0A%20%20std%3A%3Acout%20%3C%3C%20%22Vergleich%3A%20%22%20%3C%3C%20%28rect_a%20%3E%20rect_b%29%20%3C%3C%20%22%5Cn%22%3B%0A%0A%20%20return%200%3B%0A%7D&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=cpp&rawInputLstJSON=%5B%5D&textReferences=false)
 
 ### Anwendung
 
@@ -515,7 +516,12 @@ int main(){
 
 Die Zugriffsattribute `public` und `private` kennen Sie bereits. Damit können wir Elemente unserer Implementierung vor dem Zugriff von außen Schützen.
 
-> **Aufgabe:** Verhindern Sie, dass die Einträge von `id` im Nachhinein geändert werden können! Welche zusätzlichen Methoden benötigen Sie dann?
+> **Wiederholungsaufgabe:** Verhindern Sie, dass
+>
+> + die Einträge von `id` im Nachhinein geändert werden können und
+> + das diese außerhalb der Klasse sichtbar sind. 
+>
+> Welche zusätzlichen Methoden benötigen Sie dann?
 
 ```cpp                     Animals.cpp
 #include <iostream>
@@ -576,40 +582,6 @@ Das Zugriffsattribut protected spielt nur bei der Vererbung eine Rolle. Innerhal
 
 Entsprechend muss man auch die Vererbungskonstellation berücksichtigen, wenn man festlegen möchte ob ein Member gar nicht (`private`), immer (`public`) oder nur im Vererbungsverlauf verfügbar sein (`protected`) soll.
 
-```cpp                     Animals.cpp
-#include <iostream>
-
-class Animal {
-public:
-    Animal(): name{"Animal"}, weight{0.0} {};
-    Animal(std::string _name, double _weight): name{_name}, weight{_weight} {};
-    void sleep () {
-      std::cout << name << " is sleeping!" << std::endl;
-    }
-    std::string name;
-    double weight;
-};
-
-class Dog : public Animal {
-public:
-    Dog(std::string name, double weight, int id): Animal(name, weight), id{id} {};
-    void bark() {
-      std::cout << "woof woof" << std::endl;
-    }
-    double top_speed() {
-      return (weight < 40) ? 15.5 : (weight < 90) ? 17.0 : 16.2;
-    }
-    int id;
-};
-
-int main(){
-    Dog dog = Dog("Rufus", 50.0, 2342);
-    dog.sleep();
-    dog.bark();
-    std::cout << dog.top_speed() << std::endl;
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
 ********************************************************************************
 
@@ -635,8 +607,8 @@ class Student : public Person{
   public:
     Student(std::string n, std::string o, std::string sg): Person(n, o), studiengang{sg}{};
     std::string studiengang;
-    void printCertificate(std::ostream& os){
-          os << "Studentendatensatz: "  << name << " " << ort << " " << studiengang << "\n";
+    void printData(std::ostream& os){
+        os << "Student Datensatz: "  << name << " " << ort << "\n";
     }
 };
 
@@ -644,15 +616,18 @@ class Professor : public Person{
   public:
     Professor(std::string n, std::string o, int id): Person(n, o), id{id}{};
     int id;
+    void printData(std::ostream& os){
+        os << "Prof. Datensatz: "  << name << " " << ort << "\n";
+    }
 };
 
 int main()
 {
-  Student gustav = Student("Zeuner", "Chemnitz", "Mathematik");
-  gustav.printData(std::cout);
+  Student *gustav = new Student("Zeuner", "Chemnitz", "Mathematik");
+  gustav->printData(std::cout);
 
-  Professor winkler = Professor("Winkler", "Freiberg", 234234);
-  winkler.printData(std::cout);
+  Professor *winkler = new Professor("Winkler", "Freiberg", 234234);
+  winkler->printData(std::cout);
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
@@ -713,7 +688,11 @@ void loop() {
 
 # Quiz
 ## Operatorenüberladung
-### Konzept
+
+Konzept
+---------
+
+
 > Welches Schlüsselwort wird bei der Operatorüberladung verwendet?
 [[operator]]
 
@@ -768,7 +747,9 @@ int main(){
 [[?]] `this->x` und `this->y` sind die Datenfelder des Objektes vor dem Operator (in der `main`-Funktion des Vektors `v1`). Der Vektor `v2`, der hinter dem Operator in der `main`-Funktion steht, wird an die Methode übergeben. `vek_tmp.x` und `vek_tmp.x` sind hier die Datenfelder des Vektors `v2`. Der neue Vektor `vek_loe` entsteht infolge der Addition und wird zurückgegeben.
 **************************************************************************
 
-### Anwendung
+Anwendung
+---------
+
 > Wie lautet die Ausgabe dieses Programms?
 ```cpp
 #include <iostream>
@@ -801,11 +782,14 @@ int main()
 [[Freiberg, Sachsen, 41823]]
 
 ## Vererbung
+
 > Erbt die erbende Klasse immer alle Attribute und Methoden der Basisklasse?
 [(X)] Ja
 [( )] Nein
 
-### Implementierung in C++
+Implementierung in C++
+-----------------
+
 > Wodurch muss `[_____]` ersetzt werden um eine Klasse `Flugzeug` zu definieren, die von der Klasse `Fahrzeug` erbt?
 ```cpp
 #include <iostream>
@@ -868,14 +852,18 @@ int main() {
 [[Peters Auto muss in die Werkstatt.]]
 **************************************************************************
 
-### Vererbungsattribute
+Vererbungsattribute
+-----------------------
+
 > Welche Zugriffspezifizierer sind für die Mitglieder einer Basisklasse zu verwenden damit die folgenden Aussagen zutreffen? 
 [[`private`]  [`protected`] [`public`]]
 [( )          ( )           (X)       ] Zugriff ist aus einer beliebigen Klasse möglich.
 [(X)          ( )           ( )       ] Zugriff ist nur innerhalb der Basisklasse möglich.
 [( )          (X)           ( )       ] Zugriff ist in der Basisklasse und in erbenden Klassen möglich.
 
-### Polymorphie
+Polymorphie
+-----------------------
+
 > Was ist Polymorphie?
 [( )] Eine Technik, die es verhindert, bestehende Methoden in den ableiteten Klassen aufzurufen
 [(X)] Eine Technik, die es ermöglicht, bestehende Methoden zu überschreiben
