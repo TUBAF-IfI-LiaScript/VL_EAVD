@@ -638,13 +638,7 @@ int main()
   winkler->printData(std::cout);
 }
 ```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-Die Polymorphie (griechisch "Vielgestaltigkeit") der objektorientierten Programmierung ist eine Eigenschaft, die in Zusammenhang mit Vererbung einhergeht. Eine Methode ist genau dann polymorph, wenn sie von verschiedenen Klassen unterschiedlich genutzt wird. Wenn Sie mehr darüber wissen wollen, sind Sie herzlich zur Vorlesung Softwareentwicklung im Sommersemester eingeladen!
-
-Dabei untersuchen wir unter anderem Konzepte, wie wir die erbenden Methoden zwingen können ein bestimmte Methode zu implementieren. Mit der Notation `virtual void printData(std::ostream& os) = 0;` wird aus unserer Implementierung eine abstrakte Methode, die in jedem Fall in den erbenden Klassen implementiert sein muss.  
-
-## Anwendungsfall
+@LIA.eval(`["main.cpp"]`, `g++ >
 
 Entwerfen Sie eine Klasse, die das Verhalten einer Ampel mit den notwendigen
 Zuständen modelliert. Welche Methoden sollten zusätzlich in die Klasse aufgenommen werden?

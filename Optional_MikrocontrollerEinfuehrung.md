@@ -12,12 +12,11 @@ logo: ./img/LogoCodeExample.png
 import: https://github.com/liascript/CodeRunner
         https://github.com/LiaTemplates/AVR8js/main/README.md#10
         https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
-        https://raw.githubusercontent.com/liaTemplates/PyScript/main/README.md
         https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/config.md
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/07_Microcontroller.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/Optional_MikrocontrollerEinfuehrung.md)
 
 # Softwareentwicklung für Microcontroller
 
@@ -27,7 +26,7 @@ import: https://github.com/liascript/CodeRunner
 | **Semester**             | @config.semester                                                                                                                                                     |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                    |
 | **Inhalte:**             | `Anwendung von C++ auf bei der  Mikrocontrollerprogrammierung`                                                                                                       |
-| **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/07_Microcontroller.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/07_Microcontroller.md) |
+| **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/Optional_MikrocontrollerEinfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/Optional_MikrocontrollerEinfuehrung.md) |
 | **Autoren**              | @author                                                                                                                                                              |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
@@ -107,7 +106,7 @@ __Beispiel: Ultraschallsensor__
 
 ... Was war das noch mal, "Schallgeschwindigkeit"
 
-![Bildtext](./images/07_Arduino//Sonar_Principle_DE.svg.png "Prinzip einer schallbasierten Entfernungsmessung [^Wiora]")<!-- width="50%" -->
+![Bildtext](./images/Optional_MikrocontrollerEinfuehrung/Sonar_Principle_DE.svg.png "Prinzip einer schallbasierten Entfernungsmessung [^Wiora]")<!-- width="50%" -->
 
 [^Wiora]: By Georg Wiora (Dr. Schorsch) - Self drawn with Inkscape, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=353385
 
@@ -213,7 +212,7 @@ Das Spektrum reicht von einfachen 8-Bit Controllern bis hin zu leistungsstarken 
 
 > **Merke:** Es gibt nicht **den** Arduino Controller, sondern eine Vielzahl von verschiedenen Boards.
 
-![Bild](./images/07_Arduino/ControllerBeispiele.jpg)<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/Optional_MikrocontrollerEinfuehrung/ControllerBeispiele.jpg)<!-- style="width: 75%; max-width: 1000px" -->
 
 Unser Controller, ein 32 Bit System, auf den im nachfolgenden eingegangen wird, liegt im mittleren Segment der Leistungsfähigkeit.
 
@@ -257,13 +256,13 @@ Eine Allgemeine Übersicht zu den Arduinobefehlen finden Sie unter folgendem [Li
 
 Darüber hinaus existiert eine Vielzahl von Bibliotheken, die die Arbeit mit verschiedenen Sensoren/Aktoren vereinfachen und bei der Entwicklung von Anwendungslogik unterstützen.  
 
-![Bild](./images/07_Arduino/Bibliotheken.png)<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/Optional_MikrocontrollerEinfuehrung/Bibliotheken.png)<!-- style="width: 75%; max-width: 1000px" -->
 
 ### Entwicklungsumgebung
 
 Die Arduino-Entwicklungsumgebung fasst grundsätzliche Entwicklungswerkzeuge zusammen und richtet sich an Einsteiger.
 
-![Bild](./images/07_Arduino/IDE_Screenshot.png)<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/Optional_MikrocontrollerEinfuehrung/IDE_Screenshot.png)<!-- style="width: 75%; max-width: 1000px" -->
 
 > Zwischenzeitlich liegt eine Version 2.0 vor, die ein deutlich größeres Leistungspektrum mitbring. In den Übungen verwenden die Visual Studio Code Umgebung für die Entwicklung von Mikrocontroller Code.
 
@@ -375,7 +374,7 @@ Der in der Arduino IDE eingebettete Serial Monitor ist eine Möglichkeit die üb
 
 werden die Texte sichtbar. Sie können die Informationen speichern, indem Sie diese Markieren und in eine Datei kopieren. Sofern Sie auf eine gleiche Zahl von Einträgen pro Zeile achten, können die Daten dann als [csv](https://de.wikipedia.org/wiki/CSV_(Dateiformat)) (_Comma-separated values_) Datei zum Beispiel mit Tabellenkalkulationsprogrammen geöffnet werden.
 
-![Monitor](./images/07_Arduino/SeriellerMonitor.png)<!--
+![Monitor](./images/Optional_MikrocontrollerEinfuehrung/SeriellerMonitor.png)<!--
 style=" width: 80%;
         max-width: 600px;
         min-width: 400px;
@@ -398,7 +397,7 @@ Neben dem einfachen plotten von Zahlen können diese auch beschriftet werden. Be
 Sensor1:30, Sensor2:45\n.
 ```
 
-![Plotter](./images/07_Arduino/SeriellerPlotter.png)<!--
+![Plotter](./images/Optional_MikrocontrollerEinfuehrung/SeriellerPlotter.png)<!--
 style=" width: 80%;
         max-width: 600px;
         min-width: 400px;
@@ -435,7 +434,7 @@ Anmerkungen:
 |            | _Microphone_                            |                                                          |
 | Anschlüsse | _Connecting finger extension interface_ |                                                          |
 
-![Bild](./images/07_Arduino/MXchip.png)<!-- style="width: 55%; max-width: 1000px" -->[^3]
+![Bild](./images/Optional_MikrocontrollerEinfuehrung/MXchip.png)<!-- style="width: 55%; max-width: 1000px" -->[^3]
 
 [^3]: Produktwebseite Firma MXChip, AZ3166 Procuct Details [Link](https://en.mxchip.com/az3166)
 
@@ -495,11 +494,11 @@ void loop(){
 
 Bringen wir einen magnetorresistives Objekt in die Nähe des Sensors, so kann er dessen Auswirkung auf das Magnetfeld der Erde messen.
 
-![Bild](./images/07_Arduino/MagnetSensorWithScrewDriver.png)<!-- style="width: 55%; max-width: 1000px" -->
+![Bild](./images/Optional_MikrocontrollerEinfuehrung/MagnetSensorWithScrewDriver.png)<!-- style="width: 55%; max-width: 1000px" -->
 
 Für unser Pendel sieht der Verlauf dann entsprechend wie folgt aus:
 
-![Bild](./images/07_Arduino/VerlaufMagnetSensor.png)<!-- style="width: 55%; max-width: 1000px" -->
+![Bild](./images/Optional_MikrocontrollerEinfuehrung/VerlaufMagnetSensor.png)<!-- style="width: 55%; max-width: 1000px" -->
 
 Eine Lösung für die Extraktion der Periodendauer finden Sie in unserem Vorlesungsverzeichnis [Link](https://github.com/SebastianZug/VL_ProzeduraleProgrammierung/blob/master/examples/11_Arduino/MagnetometerPendel/MagnetometerPendel.ino). Gelingt es Ihnen eine bessere Lösung zu entwickeln?
 

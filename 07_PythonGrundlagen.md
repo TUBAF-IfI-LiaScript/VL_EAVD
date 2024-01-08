@@ -15,7 +15,7 @@ import: https://github.com/liascript/CodeRunner
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/08_PythonGrundlagen.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/07_PythonGrundlagen.md)
 
 # Python Grundlagen
 
@@ -25,7 +25,7 @@ import: https://github.com/liascript/CodeRunner
 | **Semester**             | @config.semester                                                                                                                                                       |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                      |
 | **Inhalte:**             | `Grundlagen der Programmiersprache Python`                                                                                                                             |
-| **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/08_PythonGrundlagen.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/08_PythonGrundlagen.md) |
+| **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/07_PythonGrundlagen.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/07_PythonGrundlagen.md) |
 | **Autoren**              | @author                                                                                                                                                                |
 
 
@@ -47,6 +47,9 @@ import: https://github.com/liascript/CodeRunner
 ---------------------------------------------------------------------
 
 ## Motivation
+
+                           {{0-2}}
+************************************************************************
 
 > __Aufgabe__: Bestimmen Sie die maximalen Tages- und Nachttemperaturen pro Tag, Woche und Monat mit unserem Mikrocontroller über einem Jahr. Wie gehen Sie vor?
 
@@ -76,12 +79,23 @@ style="width: 100%; min-width: 620px; max-width: 920px;"
 
 > __Frage__: Welche Nachteile sehen Sie in dem Vorgehen?
 
-{{1}}
+************************************************************************
+
+                           {{1-2}}
+************************************************************************
+
 + Unser Controller hat keinen "festen Speicher" - die Daten würden im Arbeitsspeicher liegen und wären damit im Fall einer Stromunterbrechung verloren 
 
-+ Eine Messung pro 10 Minuten bedeutet, dass pro Tag $6 \cdot 24 = 144$ Datensätze entstehen. Im Monat sind das etwa $30 \cdot 144 = 4320$. Wenn wir davon ausgehen, dass wir die Daten als 4 Byte breite Float Werte abbilden, würde dies für eienn Monat 17.280 Byte (16.8 kB) und für ein Jahr 210.240 Byte (205 kB) Speicherbedarf bedeuten. Unser Controller verfügt über 256 kB Arbeitsspeicher.
++ Eine Messung pro 10 Minuten bedeutet, dass pro Tag $6 \cdot 24 = 144$ Datensätze entstehen. Im Monat sind das etwa $30 \cdot 144 = 4320$. 
+
+  Wenn wir davon ausgehen, dass wir die Daten als 4 Byte breite Float Werte abbilden, würde dies für einen Monat $17.280$ Byte (16.8 kB) und für ein Jahr $210.240$ Byte (205 kB) Speicherbedarf bedeuten. Unser beispielhafter MxChip-Controller verfügt über 256 kB Arbeitsspeicher.
 
 + Die lokale Verarbeitung ist energieaufwändig. Wenn wir davon ausgehen, dass der Controller in einem Feldversuch möglichst lange mit einer Batterie betrieben werden soll, so müssen wir den Berechnungsaufwand reduzieren.
+
+************************************************************************
+
+                           {{2-3}}
+************************************************************************
 
 > __Lösungsansatz__: Wir kommunizieren die Rohdaten in eine Cloud und verarbeiten diese separat.
 
@@ -109,7 +123,11 @@ style="width: 100%; min-width: 620px; max-width: 920px;"
 
 > Wir entkoppeln damit die Datenerzeugung und Auswertung! Welche Programmiersprache benutzen wir aber für die Auswertung? Warum nicht einfach weiter C++?
 
-{{2}}
+************************************************************************
+
+                           {{3-4}}
+************************************************************************
+
 Python erleichtert die schnelle Entwicklung von Scripten zur Datenauswertung.
 
 - Schnelles Ausprobieren durch:
@@ -123,29 +141,28 @@ Python erleichtert die schnelle Entwicklung von Scripten zur Datenauswertung.
 - Plattformunabhängigkeit (Linux, Windows, MacOS und auch Mikrocontroller)
 - Einfache Erweiterbarkeit, große Standardbibliothek und viele weitere frei verfügbare Module
 
-            {{3}}
-************************************
 
-![Comic C++](./images/08_Python/comic.png "C++")
+![Comic C++](./images/07_Python/comic.png "C++")
 
-![Comic Python](./images/08_Python/comic_python.png "Python")
+![Comic Python](./images/07_Python/comic_python.png "Python")
 
-************************************
 
-            {{3}}
-```python
-print("I will not throw paper airplanes in class\n" * 10)
+```python   ZumAusprobieren.py
+print("Mit python ist das Programmieren viel einfacher!")
+print("Zu generelles Vorurteil! " * 3)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
+************************************************************************
+
 ### Python Historie 
 
-* *relativ* jung Sprache, Entwicklung 1990 in Amsterdam (vgl. C 1972, C++ 1979)
+* *relativ* junge Sprache, Entwicklung 1990 in Amsterdam (vgl. C 1972, C++ 1979)
 * Ziel sollte eine Sprache sein, die auch von Programmieranfängern einfach erlernt werden kann
 * 2008 erschien Version 3.0 mit einer Komplettüberarbeitung und vielen Verbesserungen
-* Aktuell sollte **mindestens Version 3.7** oder neuer verwendet werden (**3.11** ist die neueste Version)
+* Aktuell sollte **mindestens Version 3.7** oder neuer verwendet werden (**3.13** ist die neueste Version)
 
-  * Anaconda nutzt derzeit Version 3.9
+  * Anaconda nutzt derzeit Version 3.12 [Link zur Dokumentation](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-python.html)
 
 > Achten Sie bei Ihren Recherchen auf das Alter Ihrer Quellen, bzw. die verwendete Python-Version. Man findet noch viele Anleitungen zu Python 2.7. Diese sind häufig jedoch **nicht mehr kompatibel** zu Python 3.
 
@@ -153,34 +170,25 @@ print("I will not throw paper airplanes in class\n" * 10)
 Typische Einsatzszenarien sind z.B.:
 
 * Kleine Server-Programme
-* Schnelles entiwckeln von Scripten zur Datenauswertung
+* Schnelles Entwickeln von Scripten zur Datenauswertung
 * Konvertierung / Formatierung von Dateien bzw. großen Datenmengen
 * Numerische Berechnungen und Generierung von Diagrammen
 * **Maschinelles Lernen** dank Bibliotheken, wie TensorFlow, scikit-learn oder PyTorch
-* Python als Scriptsprache für Erweiterungen (z.B. **ParaView**, **QGIS**, Blender, Gimp)
+* Python als Skriptsprache für Erweiterungen (z.B. **ParaView**, **QGIS**, Blender, Gimp)
 * Programmierung auf dem RaspberryPi
 * Etwas spezieller: Programmierung von Robotern mit ROS (Robot Operating System)
 * ...
 
-{{1}}
-![QGIS mit Python Konsole](./images/08_Python/qgis.png "QGIS Python Konsole")
-![Raspberry Pi 4B](./images/08_Python/raspberry4.jpg "www.raspberrypi.com")
+![QGIS mit Python Konsole](./images/07_Python/qgis.png "QGIS Python Konsole")
+![Raspberry Pi 4B](./images/07_Python/raspberry4.jpg "www.raspberrypi.com")
 
+> Demo: Unterschied zwischen Python und C++
 
-### Entwicklungsumgebungen
+                {{1-2}}
+************************************
 
-**Wie installiere ich bei mir Python?**
+**Welche Programmierparadigment kann ich damit abdecken?**
 
-Unter Linux und MacOS kann Python z.B. über die Kommandozeile bzw. Paketmanager installiert werden. Für Windows empfiehlt sich die Installation der Anaconda Distribution (auch für Linux und Mac verfügbar).
-
-> Für Python gibt es viele verschiedene Entwicklungsumgebungen. In den Übungen nutzen wir aber weiterhin Visual Studio Code.
-
-Anaconda nutzt als Standard-Editor **Spyder** (**S**cientific **PY**thon **D**evelopment **E**nvi**R**onment). Beliebt sind auch interaktive **Jupyter**-Dokumente (Notebooks).
-
-![Spyder IDE](./images/08_Python/spyder.png "Spyder Editor")
-![Interaktive Jupyter-Notebooks](./images/08_Python/jupyter.png "Jupyter Notebook")
-
-## Elemente der Programmiersprache 
 Welche Programmierparadigmen unterstützt Python?
 
 * Imperativ?
@@ -188,13 +196,16 @@ Welche Programmierparadigmen unterstützt Python?
 * Objektorientiert?
 
 ```python
-for i in range(10):
+for i in range(3):
   print("Hallo Welt", i)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
-{{1}}
 ************************************
+
+                {{2-3}}
+************************************
+
 Welche Programmierparadigmen unterstützt Python? -> **Alle 3** :-P
 
 * Imperativ ✔️
@@ -220,51 +231,59 @@ class Hallo:
 ```
 ************************************
 
+
+### Entwicklungsumgebungen
+
+**Wie installiere ich bei mir Python?**
+
+Unter Linux und MacOS kann Python z.B. über die Kommandozeile bzw. Paketmanager installiert werden. Für Windows empfiehlt sich die Installation der Anaconda Distribution (auch für Linux und Mac verfügbar).
+
+**Wie arbeiten ich bei mir Python?**
+
+> Für Python gibt es viele verschiedene Entwicklungsumgebungen. In den Übungen nutzen wir aber weiterhin Visual Studio Code.
+
+Anaconda nutzt als Standard-Editor **Spyder** (**S**cientific **PY**thon **D**evelopment **E**nvi**R**onment). Beliebt sind auch interaktive **Jupyter**-Dokumente (Notebooks).
+
+![Spyder IDE](./images/07_Python/spyder.png "Spyder Editor")
+![Interaktive Jupyter-Notebooks](./images/07_Python/jupyter.png "Jupyter Notebook")
+
+> Demo: Notebooks
+
+
+
+## Sprachelemente
+
 ### Zuweisungen und Datentypen
 > Python nutzt eine dynamische Typisierung, d.h. eine Variable wird erst zur Laufzeit mit Typ des zugewiesenen Werts assoziiert. Sie kann auch mit einem beliebigen neuen Datentypen überschrieben werden.
 
-```python
+```python  Zuweisungen_1.py
 a = 1
 a += 3
 type(a)
 
 a = "hello"
 type(a)
-
-# Python kann ohne Hilfsvariable, 2 Variablen tauschen:
-x, y = 3.0, -2.0
-x, y = y, x
-print(x, y)
-
-# a = b
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 {{1}}
 <section>
-> Verkürzte Schreibweisen für Rechenoperationen, wie **+=** **-=** ***=** und **/=** existieren. Ein **++** oder **--** gibt es in Python aber nicht.
+> Verkürzte Schreibweisen für Rechenoperationen, wie `+=` `-=` `*=` und `/=` existieren. Ein `++` oder `--` gibt es in Python aber nicht.
 
-```python
+```python  Zuweisungen_2.py
 x = 10
 y = 5
 x /= y
 x += 8.5
 x *= 4
 print(x)
+
+y=y**2    # Potenzieren mit **
+print(y)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 </section>
-
-### Standard Datentypen
-> Die Standard-Datentypen von Python bringen neben elementaren Datentypen wie **int**, **float** und **bool** auch komplexere Datentypen mit, die uns bei der schnellen Implementierung von mathematischen Formeln oder großen Datenstrukturen helfen.
-
-|||
-|Numerisch | int, float, complex |
-|Text | str |
-|Sequenz | list, tuple, range |
-|Weitere | z.B. bool, dict, set, bytearray |
-|NoneType | None |
 
 ### Namenswahl für Variablen
 > Namen von Variablen, Funktionen, Klassen,... bestehen aus Buchstaben, Ziffern, Underscore (_)
@@ -309,83 +328,19 @@ Siehe auch Python Tutorial zum Thema Coding Style:
 * https://docs.python.org/3/tutorial/controlflow.html#intermezzo-coding-style
 * https://peps.python.org/pep-0008/
 
-### Ausgabe
-> Die **print**-Funktion ist unser Äquivalent zu std::cout aus C++. Beliebig viele Konstanten und Variablen können als Parameter übergeben werden. Die uns bereits bekannten Sonderzeichen **\\t** (Tabulator) und **\\n** (Neue Zeile) können wie gewohnt eingebaut werden.
 
-```python
-x = 3.141
-y = x**2
-print("5 * 5 =", 25)
-print("x \t=\t", x, "\nx² \t=\t", y)
-```
-@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+### Standard Datentypen
+> Die Standard-Datentypen von Python bringen neben elementaren Datentypen wie **int**, **float** und **bool** auch komplexere Datentypen mit, die uns bei der schnellen Implementierung von mathematischen Formeln oder großen Datenstrukturen helfen.
 
-Mit dem optionalen Parameter *end=* können Sie den standardmäßigen Zeilumbruch durch ein anderes Zeichen ersetzen. Die erweiterte Formatierung von Ausgaben ist Teil der nächsten Vorlesung.
+|||
+|Numerisch | int, float, complex |
+|Text | str |
+|Sequenz | list, tuple, range |
+|Weitere | z.B. bool, dict, set, bytearray |
+|NoneType | None |
 
-```python
-print(x, y, z, end=",")
-```
+### Alles ist ein Objekt! 
 
-### Eingabe
-> Ergebnis der **input**-Funktion ist immer ein **String**. Für die Verarbeitung als Zahl ist daher immer eine **Typenkonvertierung** erforderlich. Eine Eingabeaufforderung kann optional als Parameter übergeben werden.
-
-**Falsch:**<!-- style="color:red" -->
-
-```python
-""" 
-Liefert einen Fehler, da x ein String ist
-"""
-x = input("x eingeben:")
-y = x**2
-print("y = ", y)
-```
-@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
-
-**Richtig:**<!-- style="color:darkgreen" -->
-
-```python
-x = float( input("x eingeben:") )
-y = x**2
-print("y = ", y)
-```
-@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
-
-### Zusätzliche Module einbinden
-> Mit **import** lassen sich Module einbinden. Ähnlich zu den Standard C++ Headern sind die Bestandteile der Python Module in einen Namensraum gekapselt.
-
-```cpp
-#include <cmath>
-
-x = std::sin(M_PI)
-std::cout << x;
-```
-
-```python
-import math
-
-x = math.sin(math.pi)
-print(x)
-
-#---- Formatiertes Beispiel:
-print(f"{x:.5f}")
-```
-@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
-
-Bei Bedarf lassen sich alle oder einzelne Komponenten in den eigenen Namensraum importieren:
-
-```python
-from math import *       # Einfach, aber sollte wenn möglich vermieden werden
-from math import sin,cos
-```
-
-Eine Umbennung ist alternativ auch möglich:
-
-```python
-import math as m
-print(m.pi)
-```
-
-### Listen
 > **In Python ist alles ein Objekt!** Z.B. auch elementare Datentypen, wie **Integer**. Komplexere Datentypen, wie Listen verfügen über Methoden zu deren Manipulation. Die Länge einer Liste fragen wir hingegen mit der **Funktion** **len** ab.
 
 Der Aufruf von Methoden funktioniert wie in C++. Der Datentyp **list** verfügt über mehrere spezielle Methoden:
@@ -393,7 +348,7 @@ Der Aufruf von Methoden funktioniert wie in C++. Der Datentyp **list** verfügt 
 * reverse(), sort(), extend(), append(), remove(), clear(), ...
 
 ```python
-liste = [4,2,3,1]
+liste = [10,20,50,200,300,350]
 print( len(liste) )
 
 liste.reverse()
@@ -413,19 +368,102 @@ print( len(liste) )
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
-### Listen-Indizierung
-> Die Möglichkeiten Listenelemente zu indizieren sind sehr vielfältig in Python. Wir können beispielsweise auch vom Ende der Liste starten oder bestimmte Bereiche auswählen. **Wichtig:** Listen beginnen immer mit dem Index **0**.
+> Auch C++ offeriert ähnliche "Container" wie die Python Liste. Diese offerieren auch ein OOP API. Hierauf sind wir aber aus Zeitgründen nicht eingegangen.
 
-```python
-data = [10,20,50,200,300,350]
+### Eingabe und Ausgabe
 
-print( data[-1] )
-print( data[1:] )
-print( data[1:4] )
-print( data[1:4:2] )
-print( data[-3:] )
+                {{0-1}}
+************************************
+
+Ausgabe
+------------------
+
+> Die **print**-Funktion ist unser Äquivalent zu std::cout aus C++. Beliebig viele Konstanten und Variablen können als Parameter übergeben werden. Die uns bereits bekannten Sonderzeichen **\\t** (Tabulator) und **\\n** (Neue Zeile) können wie gewohnt eingebaut werden.
+
+```python    printAusgabe.py
+x = 3.141
+y = x**2
+print("5 * 5 =", 25)
+print("x \t=\t", x, "\nx² \t=\t", y)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+Mit dem optionalen Parameter *end=* können Sie den standardmäßigen Zeilumbruch durch ein anderes Zeichen ersetzen. Die erweiterte Formatierung von Ausgaben ist Teil der nächsten Vorlesung.
+
+```python
+print(x, y, z, end=",")
+```
+
+************************************
+
+                {{1-2}}
+************************************
+
+Eingabe
+------------------
+
+> Ergebnis der **input**-Funktion ist immer ein **String**. Für die Verarbeitung als Zahl ist daher immer eine **Typenkonvertierung** erforderlich. Eine Eingabeaufforderung kann optional als Parameter übergeben werden.
+
+**Falsch:**<!-- style="color:red" -->
+
+```python    inputFehler.py
+# Liefert einen Fehler, da x ein String ist 
+x = input("x eingeben:")
+y = x**2
+print("y = ", y)
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+**Richtig:**<!-- style="color:darkgreen" -->
+
+```python    inputRichtig.py
+x = float( input("x eingeben:") )
+y = x**2
+print("y = ", y)
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+************************************
+
+### Zusätzliche Module einbinden
+> Mit **import** lassen sich Module einbinden. Ähnlich zu den Standard C++ Headern sind die Bestandteile der Python Module in einen Namensraum gekapselt.
+
+```cpp
+#include <cmath>
+
+x = std::sin(M_PI)
+std::cout << x;
+```
+
+```python      importBeispiel.py
+import math
+
+x = math.sin(math.pi)   # math.pi ist eine Konstante
+                        # math.sin ist eine Methode des Moduls math 
+                        # Checken Sie das Ergebnis!
+print(x)
+
+#---- Formatiertes Beispiel:
+print(f"{x:.5f}")
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+Bei Bedarf lassen sich alle oder einzelne Komponenten in den eigenen Namensraum importieren:
+
+```python
+from math import *       # Einfach, aber sollte wenn möglich vermieden werden
+from math import sin,cos
+```
+
+Eine Umbenennung ist alternativ auch möglich:
+
+```python
+import math as m
+print(m.pi)
+```
+
+
+
 
 ## Konstrollstrukturen
 
@@ -440,11 +478,11 @@ Wiederholung:
 
   Beispiel: Ein Datensatz wird durchlaufen um die Gesamtsumme einer Spalte zu bestimmen. Wenn der letzte Eintrag erreicht ist, wird der Durchlauf abgebrochen und das Ergebnis ausgegeben.
 
-### Selektion mit if
+### if
 > Auch in Python sind innerhalb einer Selektion mehrere Alternativen möglich. Eine **if**-Anweisung kann von beliebig vielen **elif** Zweigen gefolgt werden. Am Ende darf **höchstens** ein **else**-Zweig stehen.
 
 <!--
-style="width: 50%;"
+style="width: 30%;"
 -->
 ```ascii
              |
@@ -468,17 +506,7 @@ style="width: 50%;"
 ```
 
 Aufbau:
-=======
-
-- **if** – Schlüsselwort
-- Bedingung -> kann zu True oder False evaluiert werden
-
-  - auch komplexe Bedingungen, z.B. verknüpft mit **and** oder **or**
-  - *if a > 5 and a < 10 :*
-
-- Doppelpunkt ':'
-- Anweisungen, die ausgeführt werden, falls Bedingung gilt (**eingerückt**)
-- optionaler **else**-Zweig
+-----------
 
 ```python
 if Bedingung:
@@ -489,75 +517,31 @@ else:
 Anweisung3
 ```
 
-```python
+```python     ifBeispiel.py
+x=5
+y=3
+
+# Variante 1:
 if x == y:
   print("x and y are equal")
 elif x < y:
   print("x is less than y")
 else:
   print("x is greater than y")
+
+# Variante 2:
+if x == y:
+  print("x and y are equal")
+else:
+  if x < y:
+    print("x is less than y")
+  else:
+    print("x is greater than y")
 ```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 > Achten Sie in Python immer auf eine korrekte und möglichst konsistente **Einrückung**!
 
-### Kleines Beispiel
-
-```python
-a = int( input("Erste Zahl:") )
-b = int( input("Zweite Zahl:") )
-
-if a%2 == 0 and b%2 == 0:
-  print("Beide Zahlen sind gerade!")
-elif a%2 == 0:
-  print("Nur die erste Zahl", a, "ist gerade!")
-elif b%2 == 0:
-  print("Nur die zweite Zahl", b, "ist gerade!")
-else:
-  print("Keine Zahl ist gerade!")
-```
-@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
-
-Erinnerung: Der **Modulo**-Operator **%** liefert den Rest einer ganzzahligen Division.
-
-### Verschachtelte If-Anweisungen
-> If-Anweisungen lassen sich beliebig verschachteln. Dabei ist wieder ganz besonders auf eine korrekte **Einrückung** zu achten!
-
-**Beispiel: Tiere raten**
-
-<!--style="width: 20%; float:left;"-->
-```ascii
-         .-----------------.
-         |   can it fly?   |
-         '--------+--------'
-         n        |        y
-         +--------+--------+   
-         |                 |
-         v                 v
-.-----------------.     +--+---+
-|  does it bark?  |     | bird |
-'--------+--------'     +------+
-   n     |     y
-   +-----+-----+   
-   |           |
-   v           v
-+--+--+     +--+--+
-| cat |     | dog |
-+--+--+     +--+--+
-```
-![Korrekte Einrückung](./images/08_Python/indentation.png "")<!--style="margin-left:20%; width: 30%;"-->
-
-
-
-```python
-if input("can it fly? ") == 'y':
-  print("bird")
-else:
-  if input("does it bark? ") == 'y':
-    print("dog")
-  else:
-    print("cat")
-```
-@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 ### While-Schleife
 > In Python gibt es zwei Arten von Schleifen: **for** und **while** (abweisende Schleifen). Beide Schleifenarten kennen Sie auch aus C++. Erinnerung: eine while-Schleife wird **solange** ausgeführt, wie die Bedingung erfüllt ist (**True**).
@@ -591,9 +575,12 @@ Beispiel: Fibonacci-Zahlen < 100
 
 ```python
 a, b = 0, 1
-while b < 100:
-  print(b, end='|')
-  a, b = b, a+b
+while a < 100:
+  print(a, end='|')
+  aux = a + b
+  a = b
+  b = aux
+  # analoger Einzeiler a, b = b, a+b
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
@@ -611,24 +598,23 @@ for <variable> in <sequenz>:
 
 Die Schreibweise ermöglicht ein sehr einfaches Abarbeiten von Listen und anderen indizierbaren Datenstrukturen:
 
-{{1}}
-<section>
 Beispiele mit verschiedenen Sequenzen:
 
 ```python
 for i in ['a','b','c']:
   print(i, end=",")
+
 for i in "abc":
   print(i, end=",")
 
 for i in [5,7,9]:
   print(i, end=",")
+
 for i in [3.4,7.9,6.78]:
   print(i, end=",")
 
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
-</section>
 
 ***************************************************************************
 
@@ -638,14 +624,15 @@ for i in [3.4,7.9,6.78]:
 
 > Die **range**-Funktion kann mit 1, 2 oder 3 Parametern aufgerufen werden. Sie wird hauptsächlich für for-Schleifen benötigt. **Wichtig:** der Endwert ist in der Menge **nicht** enthalten!
 
-* **Signatur:** range([start,] stop[, step])
+* **Signatur:** `range([start,] stop[, step])`
 
   * start, step sind optionale Parameter
   * 1 Parameter -> nur Endwert angeben (start=0, step=1)
   * 2 Parameter -> Start- und Endwert angeben (step=1)
 
 * Ergebnis der Funktion ist ein **range-Objekt**, keine Liste! Es lässt sich aber in eine Liste konvertieren:
-```python
+
+```python    rangeBeispiel.py
 x = range(0,5)
 print(x, type(x))
 print( list(x) )
@@ -672,6 +659,7 @@ print("\n")
 ***************************************************************************
 
 ### Schleifen oder List Comprehension
+
 > **List Comprehension** oder Listen-Abstraktion ermöglicht eine sehr kurze Schreibweise bei der Arbeit mit Listen. Es erinenrt etwas an mathematische Mengendefinitionen, wie \{ x² \| x ∈ ℕ ^ x < 20 }.
 
 ```python
@@ -858,19 +846,28 @@ print(f"{num1} and {num2} are equal - {True if num1 == num2 else False}.")
 ****************************************************************************************
           
 # Quiz
-## Elemente der Programmiersprache
+
 > Welche Programmierparadigmen unterstützt Python?
 [[X]] Imperativ
 [[X]] Prozedural
 [[X]] Objektorientiert
 
-### Zuweisung und Datentypen
+## Sprachelemente
+
+Zuweisung und Datentypen
+---------------------
+
+{{0}}
+************************************************************************
+
 > Der Variable `d` soll erstmalig der Wert `3.14` zugewiesen werden. Welche Umsetzung ist korrekt?
 [( )] `float d = 3.14;`
 [( )] `float d = 3.14`
 [( )] `d = 3.14;`
 [(X)] `d = 3.14`
 [( )] `int d = 3.14;`
+
+************************************************************************
 
 {{1}}
 ************************************************************************
@@ -902,7 +899,9 @@ input == "x,y=y,x" || input == "y,x=x,y"
 [[ ]] `--`
 ************************************************************************
 
-### Standard Datentypen
+Standard Datentypen
+---------------------
+
 > Welche dieser beispielhaft angegebenen Datentypen existieren in Python?
 [[X]] tupel
 [[X]] dictionary
@@ -914,7 +913,8 @@ input == "x,y=y,x" || input == "y,x=x,y"
 [[X]] string
 [[X]] complex
 
-### Ausgabe
+## Eingabe / Ausgabe
+
 > Mit welcher Funktion können Konstanten und Variablen in Python in der Konsole ausgegeben werden?
 [[print]]
 <script>
@@ -934,7 +934,9 @@ input == "end" || input == "end=" || input == "end ="
 </script>
 ************************************************************************
 
-### Eingabe
+{{2}}
+************************************************************************
+
 > Mit welcher Funktion können String-Variablen in Python in der Konsole eingegeben werden?
 [[input]]
 <script>
@@ -943,8 +945,11 @@ let input = "@input".trim()
 input == "input" || input == "input()" || input == "input ()"
 </script>
 
-{{1}}
 ************************************************************************
+
+{{3}}
+************************************************************************
+
 > Liefert dieses Programm einen Fehler?
 ```python
 x = input("x eingeben:")
@@ -953,9 +958,11 @@ print("y = ", y)
 ```
 [(X)] Ja
 [( )] Nein
+
 ************************************************************************
 
-### Zusätzliche Module einbinden
+## Zusätzliche Module einbinden
+
 > Mit welchem Schlüsselwort werden Module in Python eingebunden?
 - [( )] `using`
 - [(X)] `import`
@@ -983,7 +990,8 @@ print([_____])
 [[pi]]
 ************************************************************************
 
-### Listen
+## Alles ist ein Objekt 
+
 > Wodurch muss `[_____]` ersetzt werden um die Länge der Liste `l` auszugeben?
 ```python
 l = ['r', 6, 8.0]
@@ -1008,7 +1016,9 @@ print(liste)
 [[7,2,5,6]]
 ************************************************************************
 
-### Listen-Indizierung
+Listen-Indizierung
+---------------------------
+
 > Wie lautet die Ausgabe dieses Programms?
 ```python
 data = ['a', 'b', 'c', 'd', 'e', 'f']
@@ -1032,7 +1042,10 @@ print(l)
 ************************************************************************
 
 ## Kontrollstrukturen
-### Selektion mit `if`
+
+Selektion mit `if`
+---------------------
+
 > Wie viele `elif` Zweige darf es maximal in einer `if`-Anweisung geben?
 [( )] 0
 [( )] 1
@@ -1102,7 +1115,10 @@ else:
 [[C]]
 ************************************************************************
 
-### `while`-Schleife
+`while`-Schleife
+---------------------
+
+
 > Wodurch muss `[_____]` ersetzt werden?
 ```python
 while True[_____]
@@ -1110,7 +1126,9 @@ while True[_____]
 ```
 [[:]]
 
-### `for`-Schleife
+`for`-Schleife
+---------------------
+
 > Wie lautet die Ausgabe dieses Programms?
 ```python
 for x in [7, 8, 9]:
@@ -1174,7 +1192,9 @@ for x in range(5,-1,-1):
 [[5,4,3,2,1,0,]]
 ************************************************************************
 
-### Schleifen oder List Comprehension
+Schleifen oder List Comprehension
+---------------------
+
 > Wie lautet die Ausgabe dieses Programms? Bitte geben Sie die Lösung ohne eckige Klammern oder Leerzeichen an.
 ```python
 a = [x*2 for x in range(5)]
