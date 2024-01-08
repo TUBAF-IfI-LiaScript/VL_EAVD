@@ -888,7 +888,7 @@ int main(void) {
 Funktionsdefinitionen
 ===================
 
-> Wechen Rückgabewert liefert eine als `void` deklatierte Funktion?
+> Wechen Rückgabewert liefert eine als `void` deklarierte Funktion?
 [( )] Es können alle Arten von Rückgabewerten zurückgegeben werden.
 [(X)] Es wird kein Wert zurückgegeben.
 
