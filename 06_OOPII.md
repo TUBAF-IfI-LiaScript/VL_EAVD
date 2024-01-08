@@ -480,6 +480,7 @@ Das Beispiel zeigt die Initialisierung der Membervariablen :
 ```cpp                     Animals.cpp
 #include <iostream>
 
+// Vererbende Klasse Animal
 class Animal {
 public:
     Animal(): name{"Animal"}, weight{0.0} {};
@@ -491,14 +492,19 @@ public:
     double weight;
 };
 
+// Erbende Klasse Dog - Dog übernimmt die Methoden und Attribute von Animal
 class Dog : public Animal {
 public:
     Dog(std::string name, double weight, int id): Animal(name, weight), id{id} {};
+    
+    // Dog spezifische Methoden: bark() und top_speed()
     void bark() {
       std::cout << "woof woof" << std::endl;
     }
     double top_speed() {
-      return (weight < 40) ? 15.5 : (weight < 90) ? 17.0 : 16.2;
+      if (weight < 40) return 15.5;
+      else if (weight < 90) return 17.0;
+      else return 16.2;
     }
     int id;
 };
@@ -528,13 +534,15 @@ Die Zugriffsattribute `public` und `private` kennen Sie bereits. Damit können w
 
 class Animal {
 public:
+    Animal(std::string name, int id): name{name}, id{id} {};
     std::string name;
     int id;
-    Animal(std::string name, int id): name{name}, id{id} {};
+    
 };
 
 int main(){
-    Animal fish = Animal("Nemo", 234242343);
+    Animal fish = Animal("Nemo", 234242);
+    fish.id = 12345;
     std::cout << fish.id << std::endl;
 }
 ```
