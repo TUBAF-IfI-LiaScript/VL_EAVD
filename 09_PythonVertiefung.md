@@ -167,7 +167,7 @@ print(oldtimer)
                             {{2-3}}
 ********************************************************************
 
-> Nehmen wir an, Sie entwerfen ein Verzeichnis der Studierenden aus Freiberg. Sie wollen die Paarung Studierendenname zu Matrikel als Dictornary umsetzen. Einer Ihrer Kommilitonen schlägt vor, dafür zwei Listen zu verwenden und die Verknüpfung über den Index zu realsieren. Was meinen Sie dazu? 
+> Nehmen wir an, Sie entwerfen ein Verzeichnis der Studierenden aus Freiberg. Sie wollen die Paarung Studierendenname zu Matrikel als Dictonary umsetzen. Einer Ihrer Kommilitonen schlägt vor, dafür zwei Listen zu verwenden und die Verknüpfung über den Index zu realisieren. Was meinen Sie dazu? 
 
 ```python  goodSolution.py
 students = {"von Cotta": 12, "Humboldt": 17, "Zeuner": 233}

@@ -40,32 +40,6 @@ import: https://github.com/liascript/CodeRunner
 
 ---------------------------------------------------------------------
 
-Organisatorisches
-========================
-
-Praktische Zusatzaufgabe für die Hörerinnen und Hörer der Einführung in die Informatik
-
-+ Entwickeln Sie eine Forschungsfrage, die sie mit Hilfe der in der Vorlesung vermittelten Programmierkenntnisse evaluieren wollen. Das Thema darf sich gern aus Ihrem Fachgebiet ergeben.
-
-   + Reine Datenanalyse mit Python 
-
-   + Messdatenerhebung mit dem Mikrocontroller 
-
-   + Kombination aus Mikrocontrolleranwendung und Python Datenanalyse 
-
-+ Fassen Sie Ihre Ergebnisse in einem kurzen Bericht zusammen. Dieser sollte  
-
-   + die Forschungsfrage motivieren 
-
-   + die Lösungsidee skizzieren 
-
-   + den Code enthalten 
-
-   + das Ergebnis dokumentieren 
-
-+ Senden Sie uns das Dokument bis spätestens 31. März.
-
-
 ## Motivation
 
                            {{0-1}}
@@ -184,7 +158,7 @@ Python kann die Textdateien umittelbar einlesen
 2. Zeilenweises einlesen der Daten 
 
     + Erfassen der Spaltennamen aus der ersten Zeile
-    + Zerlegen anhand des `delimters` (hier `;`)
+    + Zerlegen anhand des `delimiter` (hier `;`)
     + Ablegen in einer vorbereiteten Datenstruktur  
 
 3. Schließen der Datei 
@@ -216,7 +190,7 @@ csv_file.close()
 ```
 @LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
 
-> __Aufgabe:__ Bestimmen Sie die vorkommenden Maxima pro Spalte oder berechnen Sie die differenz zwischen zwei benachbarten Werten einer Beschleunigungsachse.
+> __Aufgabe:__ Bestimmen Sie die vorkommenden Maxima pro Spalte oder berechnen Sie die Differenz zwischen zwei benachbarten Werten einer Beschleunigungsachse.
 
 ### Lösungsansatz 3: Python mit Pandas 
 
@@ -289,7 +263,7 @@ print(df_2)
 
 ### Arbeit mit Dataframes 
 
-Welche Aufgaben lassen sich nun mit Hilfe von Pandas über den Daten realsieren?
+Welche Aufgaben lassen sich nun mit Hilfe von Pandas über den Daten realisieren?
 
 Indizierung 
 ----------------
