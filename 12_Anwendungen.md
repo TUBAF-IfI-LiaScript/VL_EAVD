@@ -61,10 +61,6 @@ Wir wollen dies mit einer sehr einfachen Messkampange bestätigen. Dazu wurde ei
 
 Der Messaufbau wurde über 3 Wochen im Januar 2023 betrieben. Die gesammelten Daten wurden über ein WLAN-Kommunikation mit der Webseite [https://thingspeak.com/](https://thingspeak.com/) abgelegt. Der zugehörige Code findet sich im [Projektrepository](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/tree/master/examples/12_Anwendungen/Datenerhebung).
 
-![](./images/12_Anwendung/thinkspeak_webseite.jpeg)
-
-https://thingspeak.com/channels/1998194
-
 
 ### Datenfilterung
 
@@ -81,7 +77,7 @@ created_at,entry_id,field1,field2,field3,latitude,longitude,elevation,status
 Folgende Adaptionen waren notwendig:
 
 + Wie im [Programmcode](https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/examples/12_Anwendungen/Datenerhebung/UltraSonicToThinkspeak.ino) sichtbar, wurde alle 20s eine Messung erhoben. Diese zeitliche Auflösung ist für die weitere Verwendung (die Daten werden bei jedem Start der Analysen von Github geladen) zu hoch.  
-+ Die Spaltenköpfe treffen keine Aussage zu zur Bedeutung der Messwerte - hier sollten aussägekräftige Spaltenbezeichner vewendet werden.
++ Die Spaltenköpfe treffen keine Aussage zu zur Bedeutung der Messwerte - hier sollten aussagekräftige Spaltenbezeichner verwendet werden.
 
 Für die Realisierung wurde in Python-Skript verwendet
 
@@ -92,7 +88,7 @@ df=pd.read_csv("distanceMeasurements.csv", sep=',', header = 0)
 # Löschen der irrelevanten Spalten aus dem Datensatz
 df.drop(['entry_id', 'latitude', 'longitude', 'elevation', 'status'], axis=1, inplace=True)
 # Entfernen aller Messungen mit geradem Index 
-df_filtered = df[df.reset_index().index % 2 != 0]  .copy()
+df_filtered = df[df.reset_index().index % 2 != 0].copy()
 df_filtered.head(5)
 
 df_filtered.reset_index(drop=True, inplace = True)
@@ -157,12 +153,36 @@ Die Schallgeschwindigkeit lässt sich nach der Gleichung
 $$v_{schall} (m/s) = 331.3 + (0.606 \cdot T)$$
 
 abschätzen. Dabei ist zu beachten, dass die Zeitmessung in $ns$ erfolgte. Im Ergebnis wollen wir aber eine Ausgabe in $cm$ realisieren.
-
-<!-- --{{0}}-- Idee des Codefragments:
-  # Erklärung der Berechnung der Schallgeschwindigkeit/Distanz 
-  # Ausgabe der Parameter mit .describe 
-  # Histogrammdarstellung mit 
-  df["US_distance"].plot.hist(bins=25)
+#include <iostream>
+#include <string>
+class Akte
+{
+private:
+std::string aktenzeichen;
+int laufzeit;
+public:
+Akte():aktenzeichen("00-00"),laufzeit(0){}
+Akte(std::string _zeichen,int _laufzeit):
+aktenzeichen(_zeichen),laufzeit(_laufzeit){}
+int getLaufzeit(){return laufzeit;}
+void setLaufzeit(int _laufzeit){laufzeit=_laufzeit;}
+void ausgabe(){std::cout<<aktenzeichen<<" "<<laufzeit<<"\n";}
+};
+class AkteX: public Akte
+{
+private:
+int aktencode;
+public:
+AkteX(std::string _zeichen,int _laufzeit,int _code):
+Akte(_zeichen,_laufzeit),aktencode(_code){}
+void ausgabe(){
+Akte::ausgabe();
+std::cout<<getAktencode()<<"\n";
+}
+int getAktencode(){
+return aktencode/100+aktencode%100/10+aktencode%10;
+}
+};
 -->
 ```python evaluateDataSet.py
 import pandas as pd
@@ -176,8 +196,13 @@ df=pd.read_csv(url, sep=',', header = 0)
 df["US_speed"] = (331.3 + (0.606 * df["Temperature"])) / 1000 / 1000 * 100
 df["US_distance"] = df["US_duration"]*df["US_speed"] / 2
 print(df.head(3))
+
+#plt.show()  
+#plt.savefig('foo.png') # notwendig für die Ausgabe in LiaScript
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+> Bewerten Sie die Messgenauigkeit des Sensors.
 
 ******************************************************************************
 
@@ -186,11 +211,11 @@ print(df.head(3))
 Ein Blick zurück in den Oktober ... mit welchen Zielen/ Motivation waren wir gestartet:
 
 <!-- style="background-color: rgba(255, 255, 0, 0.5);"-->
-> Vorlesung I - 25.10.2022
+> Vorlesung I - 16.10.2023
 >
 > + __Anwendungssicht__
 > 
->   _Wir möchten Sie in die Lage versetzen einfache Messaufgaben mit einem Mikrocontroller zu realisieren und die Daten auszuwerten._
+>   _Wir möchten Sie in die Lage versetzen einfache Messaufgaben (mit einem Mikrocontroller) zu realisieren und die Daten auszuwerten._
 > 
 > + __Algorithmische Perspektive__
 > 
@@ -204,7 +229,7 @@ Ein Blick zurück in den Oktober ... mit welchen Zielen/ Motivation waren wir ge
 > 
 >   _Wir vermitteln Grundkenntnisse in den Programmiersprachen C++ und Python._
 
-### Exkurs
+### Exkurs "Prototypische Implementierung"
 
 Bislang programmieren wir unsere Anwendungen in einem klassischen Format. Wir schreiben den Code in eine Datei und führen diesen mit einem Mausklick in der Entwicklungsumgebung oder einem Aufruf im Terminal aus.
 
@@ -224,7 +249,7 @@ Was konnten / wollten wir dabei nicht leisten:
 
 + Der Softwareentwicklungsprozess ist völlig unberücksichtigt geblieben.
 + Sie haben die Programmiersprachen C++ und Python nur in den Grundkonzepten kennen gelernt.
-+ Die unterschiedlichen Programmiertechniken von C++ für  Mikrocontroller und Desktopanwendungen wurden nicht berührt.
++ Die unterschiedlichen Programmiertechniken von C++ für  Mikrocontroller und Desktop-Anwendungen wurden nicht berührt.
 + ...
 
 > Wenn Sie Lust auf mehr "Software" haben, bietet die Veranstaltung _Softwareentwicklung_ im kommenden Semester einen guten Ansatzpunkt!
@@ -347,12 +372,6 @@ int main() {
    - [( )] private Methoden
    - [( )] `new`
 
-## Fragebögen
+## Finale Worte
 
-Für die Analyse des Erfolgs der Lehrveranstaltung bitten wir Sie um Ihr Feedback. Der gleich Fragebogen wurde bereit 2019 genutzt, um die Erwartungen und die Motivation der Studierenden mit dem Erreichten in Relation zu setzen.
-
-![instruction-set](./images/12_Anwendung/screenshot_fragebogen.png)
-
-> Vielen Dank für Ihre Mitarbeit am Fragebogen!
-
-> Vielen Dank für Ihre Beteiligung während der Übungen und der Vorlesungen!
+> Vielen Dank für Ihre Beteiligung während der Übungen und der Vorlesungen und toi toi toi für die anstehenden Klausuren!
