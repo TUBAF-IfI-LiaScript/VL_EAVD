@@ -116,6 +116,7 @@ __Fragekomplex 1:__ Welche Temperaturentwicklung konnte beobachtet werden?
   ax = df.plot(x="date", y="Temperature")
   df.plot(x="date", y="Temperature_diff", ax = ax)
 -->
+
 ```python evaluateDataSet.py
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -153,37 +154,7 @@ Die Schallgeschwindigkeit lässt sich nach der Gleichung
 $$v_{schall} (m/s) = 331.3 + (0.606 \cdot T)$$
 
 abschätzen. Dabei ist zu beachten, dass die Zeitmessung in $ns$ erfolgte. Im Ergebnis wollen wir aber eine Ausgabe in $cm$ realisieren.
-#include <iostream>
-#include <string>
-class Akte
-{
-private:
-std::string aktenzeichen;
-int laufzeit;
-public:
-Akte():aktenzeichen("00-00"),laufzeit(0){}
-Akte(std::string _zeichen,int _laufzeit):
-aktenzeichen(_zeichen),laufzeit(_laufzeit){}
-int getLaufzeit(){return laufzeit;}
-void setLaufzeit(int _laufzeit){laufzeit=_laufzeit;}
-void ausgabe(){std::cout<<aktenzeichen<<" "<<laufzeit<<"\n";}
-};
-class AkteX: public Akte
-{
-private:
-int aktencode;
-public:
-AkteX(std::string _zeichen,int _laufzeit,int _code):
-Akte(_zeichen,_laufzeit),aktencode(_code){}
-void ausgabe(){
-Akte::ausgabe();
-std::cout<<getAktencode()<<"\n";
-}
-int getAktencode(){
-return aktencode/100+aktencode%100/10+aktencode%10;
-}
-};
--->
+
 ```python evaluateDataSet.py
 import pandas as pd
 
@@ -374,4 +345,4 @@ int main() {
 
 ## Finale Worte
 
-> Vielen Dank für Ihre Beteiligung während der Übungen und der Vorlesungen und toi toi toi für die anstehenden Klausuren!
+> Vielen Dank für Ihre Beteiligung während der Übungen und der Vorlesungen und toi toi toi für die anstehenden!
