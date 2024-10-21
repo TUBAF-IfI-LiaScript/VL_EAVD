@@ -40,7 +40,7 @@ import: https://github.com/liascript/CodeRunner
 
 -------------------------------------------------------------------------------
 
-> <font size="6"> Erhebung, Analyse und Visualisierung digitaler Daten </font>
+> <font size="5"> ___Erhebung, Analyse und Visualisierung digitaler Daten (EAVD)___</font>
 >
 > (_Prozedurale Programmierung_  / _Einführung in die Informatik_)
 
@@ -49,7 +49,9 @@ import: https://github.com/liascript/CodeRunner
 
 -------------------------------------------------------------------------------
 
-Prof. Dr. Sebastian Zug, Technische Universität Bergakademie Freiberg
+<font size="5"> Prof. Dr. Sebastian Zug</font>
+
+TU Bergakademie Freiberg, Wintersemester 2024/25
 
 -------------------------------------------------------------------------------
 
@@ -71,25 +73,96 @@ und firmiert diese als neukonzeptionierte übergreifenden Vorlesung _Erhebung, A
 
 ### Modulhandbuch 
 
+         {{0-1}}
+******************************************
+
 __Qualifikationsziele / Kompetenzen:__
 
 Mit der erfolgreichen Teilnahme an der Veranstaltung sollen die Studierenden:
 
 * verstehen, was Algorithmen sind und wie konkrete wissenschaftliche Aufgaben algorithmisch abgebildet werden können,
 * Konzepte der prozeduralen und objektorientiertenProgrammierung in Python und C++ anzuwenden
-* in der Lage sein, praktische Herausforderungen derDatenaggregation und Verarbeitung zu identifizieren und Umsetzungen zu realisieren
+* in der Lage sein, praktische Herausforderungen der Datenaggregation und Verarbeitung zu identifizieren und Umsetzungen zu realisieren
 * Werkzeuge der Programmierung einordnen und nutzen zu können 
 * Datenstrukturen und algorithmische Konzepte anwenden zu können und über Wissen ausgewählter Standardalgorithmen verfügen.
 
-### Konkrete Anwendungsszenarien
+******************************************
+
+         {{1-2}}
+******************************************
+
+__Lernziele der Vorlesung__
+
+| Einordnung | Studierende ...                                         |
+| ---------- | ------------------------------------------------------- |
+| Erschaffen | -                                                       |
+| Bewerten   | <ul class="lia-list--unordered" style="margin-left: 0"> 
+<li> ... können die Unterschiede der behandelten Programmiersprachen mit Bezug auf Ausführungskontex, Performance usw. beurteilen . </li>
+<li> ... beurteilen die Qualität eines Codes anhand grundlegender Metriken. </li> 
+</ul>          |  
+| Analysieren    | <ul class="lia-list--unordered" style="margin-left: 0">
+<li> ... können einen einfachen, fremden Code systematisch erschließen. </li>
+</ul>          |   
+| Anwenden       | <ul class="lia-list--unordered" style="margin-left: 0">
+<li> ... realisieren kleiner Beispiele zur Datenerfassung bzw. -analysepipeline. </li> 
+<li> ... sind in der Lage eine wissenschaftliche Fragestellung auf eine Datenerfassungs- und Analysepipeline abzubilden. </li>
+<li> ... wenden die Basis-Techniken der Codeentwicklung, des Debuggings und der Dokumentation an. </li>
+</ul>          |
+| Verstehen      | <ul class="lia-list--unordered" style="margin-left: 0">
+<li> ... erklären Basiskonzepte objektorientierter Programmierung (Vererbung, Kapselung). </li> 
+<li> ... können die Elemente prozeduraler Programmierung (Schleife, Verzweigung, Sprung, Funktion) beschreiben. </li>
+</ul>           |
+| Erinnern       | <ul class="lia-list--unordered" style="margin-left: 0">
+<li> ... kennen die grundlegende Syntaxelemente der behandelten Programmiersprachen. </li> 
+<li> ... beschreiben Grundkonzepte der Informatik wie Algorithmus, Sprache, Speicher usw. </li> 
+</ul>                     |
+
+
+******************************************
+
+### Unsere Motivation 
+
++ __Anwendungssicht__
+
+  _Wir möchten Sie in die Lage versetzen einfache Messaufgaben (mit einem Mikrocontroller) zu entwerfen und die Daten auszuwerten._
+
++ __Algorithmische Perspektive__
+
+  _Wir möchten Sie dazu ertüchtigen den Algorithmusbegriff der Informatik zu durchdringen und anwenden zu können._
+
++ __Konzeptionelle Perspektive__
+
+  _Sie erlernen grundlegende Elemente der prozeduralen und der objektorientierten Programmierung._
+
++ __Umsetzungssicht__
+
+  _Wir vermitteln Grundkenntnisse in den Programmiersprachen C++ und Python._
+
+{{1-3}}
+> Wir sind kein "Programmierkurs" sondern vermitteln die Konzepte und Grundlagen der Softwareentwicklung sowohl abstrakt als auch praktisch.
+
+                      {{2-3}}
+*****************************************************************************
+
+|                      | Phase 1              | Phase 2                 |
+| -------------------- | -------------------- | ----------------------- |
+| Programmiersprache   | C++                  | Python                  |
+| Framework / Packages | "Messrechner"        | pandas/numpy/matplotlib |
+| Ziel                 | Datenerhebung        | Datenauswertung         |
+| Plattform            | PC / Mikrocontroller | PC                      |
+
+*****************************************************************************
+
+## Anwendungsszenarien
 
                              {{0-1}}
 ********************************************************************************
 
 1. Erstellen einer Hypothese                                                  
-2. Entwurf eines Experimentes für die systematische Untersuchung  der Fragestellung 
-3. Durchführung des Experimentes                                                    
-4. Bewertung der erlangten Daten                                                    
+2. Entwurf eines Vorgehens für die systematische Untersuchung der Fragestellung 
+3. Vorbereitung des Experimentes                                                    
+4. Durchführung
+5. Analyse UND Bewertung der erlangten Daten                                                    
 
 ********************************************************************************
 
@@ -104,6 +177,12 @@ Beispiel
 
 > **2. Konzeption eines Experimentes:**  ...
 
+********************************************************************************
+
+
+                             {{1-2}}
+********************************************************************************
+
 > **Frage:** Wie würden Sie vorgehen?
 
 ********************************************************************************
@@ -111,7 +190,7 @@ Beispiel
                              {{2-4}}
 *******************************************************************************
 
-> **3. Durchführung des Experimentes**
+> **3. Vorbereitung/4. Durchführung des Experimentes**
 
 ![Diagramme](./images/Readme/Wetterstation.png "Prototypische Wetterstation im Keller des Humboldt-Baus")<!-- width="70%" -->
 
@@ -120,7 +199,7 @@ Beispiel
                              {{3-4}}
 *******************************************************************************
 
->  **4. Filterung und Interpretation der erlangten Daten**
+>  **5.  Analyse UND Bewertung**
 
 Das Diagramm zeigt die Darstellung der Lichtintensität über den Stunden eines Tages für eine Woche. Blau sind die Wochentage markiert, rot der Samstag und der Sonntag.
 
@@ -147,67 +226,6 @@ Weitere Beispiele:
 
 *******************************************************************************
 
-### Unsere Motivation 
-
-+ __Anwendungssicht__
-
-  _Wir möchten Sie in die Lage versetzen einfache Messaufgaben (mit einem Mikrocontroller) zu realisieren und die Daten auszuwerten._
-
-+ __Algorithmische Perspektive__
-
-  _Wir möchten Sie dazu ertüchtigen den Algorithmusbegriff der Informatik zu durchdringen und anwenden zu können._
-
-+ __Konzeptionelle Perspektive__
-
-  _Sie erlernen grundlegende Elemente der prozeduralen und der objektorientierten Programmierung._
-
-+ __Umsetzungssicht__
-
-  _Wir vermitteln Grundkenntnisse in den Programmiersprachen C++ und Python._
-
-{{1-3}}
-> _Zwischenfrage:_ Welche Argumente vermuten Sie hinter der Entscheidung zwei Programmiersprachen in die Vorlesung aufzunehmen?
-
-                      {{2-3}}
-*****************************************************************************
-
-|                      | Phase 1              | Phase 2                 |
-|----------------------|----------------------|-------------------------|
-| Programmiersprache   | C++                  | Python                  |
-| Framework / Packages | Arduino              | pandas/numpy/matplotlib |
-| Ziel                 | Datenerhebung        | Datenauswertung         |
-| Plattform            | PC / Mikrocontroller | PC                      |
-
-*****************************************************************************
-
-### Lernziele der Vorlesung
-
-
-| Einordnung und Klassifikation | Studierende ...                                                                                                                                                                                                                                            |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Erschaffen     |   -                                                                                                                                                                                                                                               |
-| Bewerten       | <ul class="lia-list--unordered" style="margin-left: 0">
-<li> ... können die Unterschiede der behandelten Programmiersprachen mit Bezug auf Ausführungskontex, Performance usw. beurteilen . </li>
-</ul>          |  
-| Analysieren    | <ul class="lia-list--unordered" style="margin-left: 0">
-<li> ... bewerten aggregierte Messdaten mit Blick auf deren Aussagekraft mit statistischen Methoden. </li>
-<li> ... können die Eigenschaften eines Sensors anhand von Datenblättern recherchieren. </li> 
-<li> ... quantifizieren das Zeitverhalten in Datensätzen und erklären es anhand des Programmcodes für die Datenerhebung. </li> 
-</ul>          |   
-| Anwenden       | <ul class="lia-list--unordered" style="margin-left: 0">
-<li> ... wenden die Basis-Techniken der Codeentwicklung, des Debuggings und der Dokumentation an. </li>
-<li> ... sind in der Lage im Arduino-Kontext nach geeigneten Open-Source-Paketen zu suchen. </li>
-<li> ... realisieren kleiner Mikrocontroller-Beispiele auf Basis des Arduino-Projektes bzw. einer Datenanalysepipeline mit Python. </li> 
-</ul>          |
-| Verstehen      | <ul class="lia-list--unordered" style="margin-left: 0">
-<li> ... sind in der Lage den Algorithmusbegriff zu erklären. </li>
-<li> ... können die Elemente prozeduraler Programmierung (Schleife, Verzweigung, Sprung) beschreiben. </li>
-<li> ... erklären Basiskonzepte objektorientierter Programmierung (Vererbung, Kapselung). </li> 
-</ul>           |
-| Erinnern       | <ul class="lia-list--unordered" style="margin-left: 0">
-<li> ... kennen die grundlegende Syntaxelemente der behandelten Programmiersprachen. </li> 
-</ul>                     |
-
 
 ## Keine Angst vor Code!
 
@@ -220,7 +238,7 @@ Das Beispiel zeigt ein "Hello World" Beispiel für die C++ Implementierung auf d
 **Hello World - Beispiele Phase 1**
 
 
-```cpp
+```cpp main.cpp
 #include <iostream>
 using namespace std;
 
@@ -358,23 +376,23 @@ Wer sind _wir_?
 
 | Nr. | Datum      |        | Inhalt                                       |
 | :-- | ---------- | ------ | -------------------------------------------- |
-| 0   | 16.10.2023 |        | Motivation, Organisation                     |
-| 1   | 23.10.2023 | C++    | C++ Programmstrukturen / Entwicklungsprozess |
-| 2   | 30.10.2023 | C++    | Datentypen / Ein- und Ausgabe                |
-| 3   | 06.11.2023 | C++    | Kontrollstrukturen                           |
-| 4   | 13.11.2023 | C++    | Zeiger und Arrays                            |
-| 5   | 20.11.2023 | C++    | Funktionen                                   |
-| 6   | 27.11.2023 | C++    | Objekte                                      |
-| 7   | 04.12.2023 | C++    | Vererbung                                    |
-| 8   | 11.12.2023 | C++    | Anwendung auf dem Mikrocontroller            |
-| 9   | 18.12.2023 | Python | Python Grundlagen                            |
-| 10  | 08.01.2023 | Python | Python Grundlagen                            |
-| 11  | 15.01.2023 | Python | Objekte                                      |
-| 12  | 22.01.2023 | Python | Visualisierung                               |
-| 13  | 29.01.2023 | Python | Datenanalyse                                 |
-| 14  | 05.02.2023 | Python | Übergreifende Anwendungen                    |
+| 0   | 21.10.2024 |        | Motivation, Organisation                     |
+| 1   | 28.10.2024 | C++    | C++ Programmstrukturen / Entwicklungsprozess |
+| 2   | 04.10.2024 | C++    | Datentypen / Ein- und Ausgabe                |
+| 3   | 11.11.2024 | C++    | Kontrollstrukturen                           |
+| 4   | 18.11.2024 | C++    | Zeiger und Arrays                            |
+| 5   | 25.11.2024 | C++    | Funktionen                                   |
+| 6   | 02.12.2024 | C++    | Objekte                                      |
+| 7   | 09.12.2024 | C++    | Vererbung                                    |
+| 8   | 16.12.2024 | C++    | Anwendungen                                  |
+| 9   | 06.01.2025 | Python | Python Grundlagen                            |
+| 10  | 13.01.2025 | Python | Python Grundlagen                            |
+| 11  | 15.01.2025 | Python | Objekte                                      |
+| 12  | 20.01.2025 | Python | Visualisierung                               |
+| 13  | 27.01.2025 | Python | Datenanalyse                                 |
+| 14  | 03.02.2025 | Python | Übergreifende Anwendungen                    |
 
-> **Achtung:** C++ wird zunächst ohne die spezifische Verwendung des Mikrocontrollers verwendet. Vielmehr erfolgt die Programmierung auf dem Desktoprechner. Wenn wir die Grundlagen erarbeitet haben, wechseln wir die Hardware einfach aus.
+> **Achtung:** C++ wird ohne die spezifische Verwendung des Mikrocontrollers verwendet. Vielmehr erfolgt die Programmierung auf dem Desktoprechner. In freiwilligen Tutorien haben Sie Gelegenheit die Hardware auszuwechseln und mit dem Mikrocontroller zu arbeiten.
 
 ### Übungen
 
@@ -390,7 +408,7 @@ Die Übungen vertiefen das erlernte anhand praktischer Programmieraufgaben:
 
 Die Tutorials werden im Dezember erstmalig angeboten. Sie dienen interessierten Studierenden der weiteren Vertiefung ihrer Kenntnisse.
 
-> Mikrocontrollerbezogene Inhalte sind nicht Gegenstand der Prüfungen.
+> Mikrocontrollerbezogene Inhalte sind nicht Gegenstand der Prüfungen!
 
 ### Vorlesungsmaterialien
 
@@ -404,6 +422,7 @@ verfügbar. Diese können entweder in der Markdown-Syntax oder als interaktives 
 >
 > + der Inhalt wird sich ggf. anhand Ihrer Verbesserungsvorschläge verändern
 > + die Dokumente enthalten eine Vielzahl von ausführbarem Code.
+
 
 ## Erwartungen 
 
@@ -437,6 +456,10 @@ Die Prüfung besteht aus einer Klausur und ggf. einer praktischen Arbeit (Einfü
 * Machen Sie Verbesserungsvorschläge für die Vorlesungsfolien!
 
 * Sprechen Sie uns gern wegen "Bastelbedarf" für ein eigenes Projekt an!
+
+* Kommentieren Sie die Vorlesungsunterlagen
+
+> SHRIMP LINK einfügen
 
 ## Beispiel der Woche
 
@@ -477,18 +500,27 @@ flowchart TD
 <div class="left">
 
 ```cpp
+// Einbinden der Bibliothek für den Sensor
 #include <Arduino_APDS9960.h>
 
+// Konfiguration (wird einmalig durchlaufen)
 void setup() {
+  // Sensor initialisieren
   APDS.begin();
+  // LED aktivieren
   pinMode(LED_BUILTIN, OUTPUT); 
 }
 
+// Endlosschleife
 void loop() {
+  // Liegt eine Geste vor?
   if (APDS.gestureAvailable()) {
+    // Einlesen der Geste
     int gesture = APDS.readGesture();
+    // Haben wir es mit einem Links-Wish zu tuen?
     if (gesture == GESTURE_LEFT)
     {
+        // Wenn ja dann Leuchte einmalig für 1s
         digitalWrite(LED_BUILTIN, HIGH);
         delay(1000);
         digitalWrite(LED_BUILTIN, LOW);
