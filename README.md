@@ -455,6 +455,8 @@ Die Prüfung besteht aus einer Klausur und ggf. einer praktischen Arbeit (Einfü
 
 * Machen Sie Verbesserungsvorschläge für die Vorlesungsfolien!
 
+* Definieren Sie mit uns Anwendungsfälle, die die Übertragbarkeit des erworbenen Wissens auf Ihre Fachdisziplinen deutlich machen.
+
 * Sprechen Sie uns gern wegen "Bastelbedarf" für ein eigenes Projekt an!
 
 * Kommentieren Sie die Vorlesungsunterlagen
