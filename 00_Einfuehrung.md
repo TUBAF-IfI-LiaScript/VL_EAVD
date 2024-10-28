@@ -454,7 +454,6 @@ int main() {
 	return 0;
 }
 ```
-@LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
 > **Hinweis:** Die Datentypen werden wir in der nächsten Woche besprechen.
 
