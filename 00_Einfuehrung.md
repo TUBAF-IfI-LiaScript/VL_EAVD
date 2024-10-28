@@ -43,13 +43,23 @@ import: https://github.com/liascript/CodeRunner
 
 ---------------------------------------------------------------------
 
-## Umfrage
+## Reflexion Ihrer Fragen
+
+> Partizipative Materialentwicklung mit den Informatikern ...
+
+<!-- data-type="none" -->
+| Format                   | Informatik Studierende  | Nicht-Informatik Studierende |
+|--------------------------|-------------------------|------------------------------|
+| Verbesserungsvorschlag   | 1                       | 0                            |
+| Fragen                   | 0                       | 0                            |
+| generelle Hinweise       | 0                       | 0                            |
 
 > Hat Sie die letztwöchige Vorstellung der Ziele der Lehrveranstaltung überzeugt? 
 
 - [(ja)] Ja, ich gehe davon aus, viel nützliches zu erfahren.
 - [(schau'n wir mal)] Ich bin noch nicht sicher. Fragen Sie in einigen Wochen noch mal.
 - [(nein)] Nein, ich bin nur hier, weil ich muss.
+
 
 ##  Wie arbeitet ein Rechner eigentlich?
 
@@ -482,7 +492,7 @@ for i in range(3):
 ```cpp                     Output.cpp
 #include <iostream>
 
-imt main() {
+int main() {
   int i = 5;
   int j = 4;
   i = i + j + 2;
@@ -528,8 +538,6 @@ void loop() {
 @AVR8js.sketch
 
 ********************************************************************************************
-
-<!--START_SKIP_IN_PDF-->
 
 ## Quiz
 ### Einbinden von Bibliotheken
@@ -591,5 +599,3 @@ int main()     {
 - [[ ]] 1.cpp
 - [[X]] 2.cpp
 - [[ ]] 3.cpp
-
-<!--END_SKIP_IN_PDF-->
