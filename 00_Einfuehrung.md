@@ -389,7 +389,6 @@ int main() {
 	return 0;
 
 ```
-@LIA.eval(`["main.cpp"]`, `g++ main.cpp -Wall -o a.out`, `./a.out`)
 
 Methodisches Vorgehen:
 
