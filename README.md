@@ -81,7 +81,7 @@ __Qualifikationsziele / Kompetenzen:__
 Mit der erfolgreichen Teilnahme an der Veranstaltung sollen die Studierenden:
 
 * verstehen, was Algorithmen sind und wie konkrete wissenschaftliche Aufgaben algorithmisch abgebildet werden können,
-* Konzepte der prozeduralen und objektorientiertenProgrammierung in Python und C++ anzuwenden
+* Konzepte der prozeduralen und objektorientierten Programmierung in Python und C++ anzuwenden
 * in der Lage sein, praktische Herausforderungen der Datenaggregation und Verarbeitung zu identifizieren und Umsetzungen zu realisieren
 * Werkzeuge der Programmierung einordnen und nutzen zu können 
 * Datenstrukturen und algorithmische Konzepte anwenden zu können und über Wissen ausgewählter Standardalgorithmen verfügen.
