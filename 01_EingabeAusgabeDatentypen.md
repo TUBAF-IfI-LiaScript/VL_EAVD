@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 
@@ -166,6 +166,7 @@ Welche Informationen lassen sich mit Blick auf einen Speicherauszug im Hinblick
 auf die Daten extrahieren?
 
 {{0-1}}
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 | Adresse | Speicherinhalt |
 |         | binär          |
 | 0010    | 0000 1100      |
@@ -174,6 +175,7 @@ auf die Daten extrahieren?
 | 0013    | 1000 0000      |
 
 {{1-2}}
+<!-- data-type="none" style="table-layout: fixed; max-width:450px;"-->
 | Adresse | Speicherinhalt | Zahlenwert |
 |         |                |  (Byte)    |
 | 0010    | 0000 1100      | 12         |
@@ -182,6 +184,7 @@ auf die Daten extrahieren?
 | 0013    | 1000 0000      | 128 (-128) |
 
 {{2}}
+<!-- data-type="none" style="table-layout: fixed; max-width:750px;"-->
 | Adresse | Speicherinhalt | Zahlenwert | Zahlenwert | Zahlenwert   |
 |         |                |  (Byte)    | (2 Byte)   | (4 Byte)     |
 | 0010    | 0000 1100      | 12         |            |              |
@@ -332,7 +335,7 @@ Die implementierungspezifische Werte, wie die Grenzen des Wertebereichs der
 ganzzahlinen Datentypen sind in `limits.h` definiert, z.B.
 
 {{1}}
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:600px;"-->
 | Makro    | Wert                 |
 |:---------|:---------------------|
 | CHAR_MIN | -128                 |
@@ -401,7 +404,7 @@ sind in C/C++ immer vorzeichenbehaftet.
 
 In C/C++ gibt es zur Darstellung reeller Zahlen folgende Typen:
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:500px;"-->
 | Schlüsselwort | Mindestgröße            |
 |:--------------|:------------------------|
 | `float`       | 4 Byte                  |
@@ -419,7 +422,7 @@ Exponenten zur Basis 2.
 Zur Darstellung von Fließkommazahlen sagt der C/C++-Standard nichts aus. Zur
 konkreten Realisierung ist die Headerdatei `float.h` auszuwerten.
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:800px;"-->
 |                        | `float`           | `double`                 |
 |:-----------------------|:------------------|--------------------------|
 | kleinste positive Zahl | 1.1754943508e-38  | 2.2250738585072014E-308  |
@@ -482,7 +485,7 @@ void funktion(void) {
 
 Zahlenliterale können in C/C++ mehr als Ziffern umfassen!
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:600px;"-->
 | Gruppe                 | zulässige Zeichen                       |
 |------------------------|-----------------------------------------|
 | *decimal-digits*       | `0` `1` `2` `3` `4` `5` `6` `7` `8` `9` |
@@ -502,7 +505,7 @@ Zahlenliterale können in C/C++ mehr als Ziffern umfassen!
 | *floating-suffix*      | `f` `l` `F` `L`                         |
 
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:700px;"-->
 | Zahlentyp | Dezimal  | Oktal | Hexadezimal |
 |:----------|:---------|-------|-------------|
 | Eingabe   | x        | x     | x           |
@@ -512,7 +515,8 @@ Zahlenliterale können in C/C++ mehr als Ziffern umfassen!
 |           | `123e-2` |       | `0xC.68p+2` |
 |           | `1.23F`  |       |             |
 
-> Erkennen Sie jetzt die Bedeutung der Compilerfehlermeldung `error: invalid suffix "abc" on integer constant` aus dem ersten Beispiel der Vorlesung?
+> **Merke:** Die Zahlenliterale können mit Vorzeichen, Zahlenbasis und Typ
+> versehen werden.
 
 {{1}}
 `Variable = (Vorzeichen)(Zahlensystem)[Wert](Typ);`
