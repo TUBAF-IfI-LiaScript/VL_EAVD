@@ -12,6 +12,7 @@ logo: ./img/LogoCodeExample.png
 import: https://github.com/liascript/CodeRunner
         https://github.com/LiaTemplates/AVR8js/main/README.md#10
         https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/config.md
+        https://raw.githubusercontent.com/liaScript/mermaid_template/master/README.md
 
 -->
 
@@ -804,12 +805,22 @@ Schleifen können verschachtelt werden, d.h. innerhalb eines Schleifenkörpers
 können weitere Schleifen erzeugt und ausgeführt werden. Zur Beschleunigung des
 Programmablaufs werden Schleifen oft durch den Compiler entrollt (*Enrollment*).
 
+                      {{0-1}}
+*************************************************
+
 Grafisch lassen sich die wichtigsten Formen in mit der Nassi-Shneiderman
 Diagrammen wie folgt darstellen:
 
-* Iterationssymbol
-
-![Modelle](https://www.plantuml.com/plantuml/png/SoWkIImgAStDuG8pk3BJ53IIy_DICaioy_CK73KLIZ9IynGqAbEBDRaK5An2KYjA50ojkL9pYbDHbJfXLMfa3MGMb-GNOD7XZ5M7CJR3NR0gDO4eLT38oo_9oCnBHyY0X86IGErfN63R7O1ia2S1 "Darstellungsbeispiele für mehrstufige Verzweigungen (`switch`)")<!-- width="60%" -->
+```mermaid @mermaid
+graph TD
+    Start --> Überprüfung{Bedingung A erfüllt?}
+    Überprüfung -->|Ja| Aktion1[Aktion 1]
+    Aktion1 --> Überprüfung2{Bedingung B erfüllt?}
+    Überprüfung2 -->|Ja| Aktion2[Aktion 2]
+    Aktion2 --> Überprüfung
+    Überprüfung2 -->|Nein| Überprüfung
+    Überprüfung -->|Nein| Ende
+```
 
 
 <!--
@@ -824,6 +835,11 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
    | |  Anweisungsblock 1                                                |
    +-+-------------------------------------------------------------------+     .
 ```
+
+*************************************************
+
+                      {{1-2}}
+*************************************************
 
 * Wiederholungsstruktur mit vorausgehender Bedingungsprüfung
 
@@ -857,6 +873,8 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 Die Programmiersprache C/C++ kennt diese drei Formen über die Schleifenkonstrukte
 `for`, `while` und `do while`.
+
+*************************************************
 
 #### `for`-Schleife
 

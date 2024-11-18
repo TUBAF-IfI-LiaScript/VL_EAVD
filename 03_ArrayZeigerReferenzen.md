@@ -84,6 +84,8 @@ Datentyp Variablenname[Anzahl_der_Elemente];
 int a[6];
 ```
 
+
+<!-- data-type="none" style="table-layout: fixed; max-width:600px;"-->
 | `a[0]` | `a[1]` | `a[2]` | `a[3]` | `a[4]` | `a[5]` |
 
 
@@ -94,7 +96,7 @@ Datentyp Variablenname[Anzahl_der_Elemente_Dim0][Anzahl_der_Elemente_Dim1];
 ```cpp
 int a[3][5];
 ```
-
+<!-- data-type="none" style="table-layout: fixed; max-width:800px;"-->
 |            | Spalten   |           |           |           |           |
 | ---------- | --------- | --------- | --------- | --------- | --------- |
 | **Zeilen** | `a[0][0]` | `a[0][1]` | `a[0][2]` | `a[0][3]` | `a[0][4]` |
@@ -339,7 +341,7 @@ int main(void) {
   cout<<"->"<<b<<"<-\n";
   char c[] = "Noch eine \0Moeglichkeit";
   cout<<"->"<<c<<"<-\n";
-  char d[] = { 80, 114, 111, 122, 80, 114, 111, 103, 32, 50, 48,  50, 50,  0  };
+  char d[] = { 69, 65, 86, 68, 32, 50, 48, 50, 52, 0 };
   cout<<"->"<<d<<"<-\n";
   return 0;
 }
@@ -425,7 +427,7 @@ Programmiertechniken lassen sich realisieren:
 * Übergabe von Funktionen als Argumente an andere Funktionen,
 * Umsetzung rekursiver Datenstrukturen wie Listen und Bäume.
 
-> An dieser Stelle sei erwähnt, dass die Übergabe der "call-by-reference"-Parameter via Reference ist ebenfalls möglich und einfacher in der Handhabung.
+> An dieser Stelle sei bereits erwähnt, dass die Übergabe der "call-by-reference"-Parameter via Reference ist ebenfalls möglich und einfacher in der Handhabung.
 
 ### Definition von Zeigern
 
@@ -446,7 +448,6 @@ int *zeiger4, *zeiger5;
 /* Definition eines Zeigers und einer Variablen vom Typ Integer */
 int *zeiger6, ganzzahl;
 ```
-
 
 ### Initialisierung
 
@@ -482,7 +483,7 @@ int main(void)
   return 0;
 }
 ```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+@LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
 
 {{1}}
@@ -571,7 +572,7 @@ int main(void)
 {
   int a = 5;
   int * ptr_a = &a;
-  cout<<"Pointer ptr_a                  "<<(void*)ptr_a<<"\n";
+  cout<<"Pointer ptr_a                  "<<ptr_a<<"\n";
   cout<<"Wert hinter dem Pointer ptr_a  "<<ptr_a<<"\n";
   cout<<"Aus Maus!\n";
   return 0;
@@ -590,9 +591,12 @@ using namespace std;
 int main(void)
 {
   int * ptr_a;
-  *ptr_a = 10;
   // korrekte Initalisierung
   // int * ptr_a = NULL;
+  
+  // ... hier passiert irgendwas 
+  
+  *ptr_a = 10;
   // Prüfung auf gültige Adresse
   // if (ptr_a != NULL) *ptr_a = 10;
   cout<<"Pointer ptr_a                  "<<ptr_a<<"\n";
@@ -670,11 +674,11 @@ using namespace std;
 
 int main(void)
 {
-int  a = 1;  // Variable
-int &r = a;  // Referenz auf die Variable a
+  int  a = 1;  // Variable
+  int &r = a;  // Referenz auf die Variable a
 
-std::cout << "a: " << a << " r: " << r << std::endl;
-std::cout << "a: " << &a << " r: " << &r << std::endl;
+  std::cout << "a: " << a << " r: " << r << std::endl;
+  std::cout << "a: " << &a << " r: " << &r << std::endl;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
