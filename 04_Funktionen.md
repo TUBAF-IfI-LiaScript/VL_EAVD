@@ -840,16 +840,16 @@ int main(int argc, char *argv[]) {
 
 using namespace std;
 
-double Mittelwert(int *values, int entries);
+double Mittelwert(int values[], int entries);
 int Summe(int *values, int entries);
 void Ausgabe(int *values, int entries);
 
-double Mittelwert(int *values, int entries){
+double Mittelwert(int values[], int entries){
   double summe = Summe(values, entries);
   return summe / entries;
 }
 
-int Summe(int *values, int entries){
+int Summe(int values[], int entries){
   int summe = 0;
   for (int i=0; i<entries; i++){
     summe += values[i];
@@ -857,7 +857,7 @@ int Summe(int *values, int entries){
   return summe;
 }
 
-void Ausgabe(int *values, int entries){
+void Ausgabe(int values[], int entries){
   for (int i=0; i<entries; i++){
      std::cout << std::setw(2) <<  i << " ";
   }
