@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf & Florian Richter
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de & Flo.Richter@informatik.tu-freiberg.de
-version:  1.0.7
+version:  1.0.8
 language: de
 narrator: Deutsch Female
 
@@ -57,24 +57,24 @@ import: https://github.com/liascript/CodeRunner
 style="width: 100%; min-width: 620px; max-width: 920px;"
 -->
 ```ascii 
-                            Datenlogger
+                            Datenlogger / Mikrocontroller
                             +------------------------------------------------+
                             |                             Arbeitsspeicher    |
                        +    |         +-----------+      +--------------+    |
-       Umgebung-       |\   | Sensor- | Controll- |      | ...          |\   |         
-       phänomene       | +--|-------->| Software  |--+-->| 12:30 Temp 12+-+  |
+       Umgebung-       |\   | Sensor- | Messsoft- |      | ...          |\   |         
+       phänomene       | +--|-------->| ware      |--+-->| 12:30 Temp 12+-+  |
                        |/   | signale |           |      | 12:40 Temp 13  |  |
                        +    |         +-----------+      +----------------+  |
-                            |                                     |          | 
+                            |                                     |          |     
                             |               +---------------------+          |
-                            |               |    .----.                      |  +-> Serielle Schnittstelle
-                            |               v    |    | täglich,             |  |            max    min
-                            |         +-----------+   | wöchtentlich,        |  |   1.3.     10.5     -3.5
-                            |         | Min/Max   |<--. monatlich            |  |   2.3.     11.0     -3.8
-                            |         | Algo-     |                          |  |   ...
-                            |         | rithmus   |--------------------------|--+   KW 9      9.2      1.3
-                            |         +-----------+                          |      ...     
-                            +------------------------------------------------+      März     12.3      2.7
+                            |               |                            +---|----- "min/ max Werte pro Tag" 
+                            |               v                            |   |  
+                            |         +-----------+   h/d/m/y            |   |  
+                            |         | Min/Max   |<---------------------+   |  +-> Serielle Schnittstelle
+                            |         | Algo-     |                          |  |            max    min
+                            |         | rithmus   |--------------------------|--+   1.3.     10.5     -3.5   
+                            |         +-----------+                          |      2.3.     11.0     -3.8        
+                            +------------------------------------------------+      ...   
 ```
 
 > __Frage__: Welche Nachteile sehen Sie in dem Vorgehen?
@@ -249,9 +249,9 @@ Anaconda nutzt als Standard-Editor **Spyder** (**S**cientific **PY**thon **D**ev
 
 > Demo: Notebooks
 
-
-
 ## Sprachelemente
+
+
 
 ### Zuweisungen und Datentypen
 > Python nutzt eine dynamische Typisierung, d.h. eine Variable wird erst zur Laufzeit mit Typ des zugewiesenen Werts assoziiert. Sie kann auch mit einem beliebigen neuen Datentypen überschrieben werden.
@@ -259,10 +259,10 @@ Anaconda nutzt als Standard-Editor **Spyder** (**S**cientific **PY**thon **D**ev
 ```python  Zuweisungen_1.py
 a = 1
 a += 3
-type(a)
+print(type(a))
 
 a = "hello"
-type(a)
+print(type(a))
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
@@ -573,7 +573,7 @@ while <bedingung>:
 Beispiel: Fibonacci-Zahlen < 100
 ================================
 
-```python
+```python  fibunacci.py
 a, b = 0, 1
 while a < 100:
   print(a, end='|')
@@ -762,7 +762,7 @@ while True:
 
 Bislang haben wir uns mit dem "einfachen" `print` Mechanismus für einzelne Ausgabe zufrieden gegeben. Um aber gut lesbaren Code zu schreiben genügt dies nicht.
 
-Wir erinnern uns an die von uns verwendenten C++ und Arduino-bezogenen Ausgabeformate ...
+Wir erinnern uns an die von uns verwendenten C++ bezogenen Ausgabeformate ...
 
 ```cpp        c++output.cpp
 #include <iostream>
@@ -778,38 +778,7 @@ int main(){
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-
-```cpp       ArduinoSerial.cpp
-void setup() {
-    Serial.begin(9600);
-
-    // Variante 1: print / println Methoden von Serial
-    Serial.println("Das ist ein Test");
-
-    float gleitkommaZahl = 3.123456;
-    Serial.print(gleitkommaZahl, 4); //liefert 3.1234
-    Serial.print(" ");
-    Serial.println(gleitkommaZahl, 6); //liefert 3.123456
-
-    Serial.print(15, BIN); //liefert den Wert 1111
-    Serial.print(" ");
-    Serial.print(15, HEX); //liefert den Wert f
-    Serial.print(" ");
-    Serial.println(15, OCT); //liefert den Wert 17
-
-    // Variante 2: sprintf Formatierte Ausgabe
-    int zahl = 65;
-    char buffer[100];
-    sprintf(buffer, "Dezimal %05i Dezimal %5i Hexadezimal %x Character %c", zahl, zahl , zahl, zahl);
-    Serial.println(buffer); 
-}
-
-void loop() {
-}
-```
-@AVR8js.sketch
-
-> Die für den Arduino gezeigte Variante mit `sprintf` oder ``printf` funktioniert natürlich auch unter C++ generell. Aus didaktischen Gründen wurde aber die `cout` Variante vorrangig genutzt. 
+> Die für C Varianten mit `sprintf` oder ``printf` funktioniert auch unter C++. Aus didaktischen Gründen wurde aber die `cout` Variante vorrangig genutzt. 
 
 ****************************************************************************************
 
