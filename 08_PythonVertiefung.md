@@ -324,7 +324,7 @@ In allen 3 Aspekten ist der Vorteil in der Kapselung der Funktionalität zu
 suchen.
 
 
-### Syntax:
+### Syntax
 
 > Funktionsdefinition starten immer mit dem Schlüsselwort **def**. Typen für Parameter oder Rückgabewerte müssen nicht angegeben werden! Es gelten die üblichen Einrückungsregeln.
 
@@ -333,7 +333,7 @@ def funktionsname(arg1, arg2, ...):
   <anweisungen>
 ```
 
-```python
+```python  FunctionExample.py
 import math
 
 def print_pi():
