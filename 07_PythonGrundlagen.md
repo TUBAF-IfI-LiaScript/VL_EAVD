@@ -662,7 +662,7 @@ print("\n")
 
 > **List Comprehension** oder Listen-Abstraktion ermöglicht eine sehr kurze Schreibweise bei der Arbeit mit Listen. Es erinenrt etwas an mathematische Mengendefinitionen, wie \{ x² \| x ∈ ℕ ^ x < 20 }.
 
-```python
+```python  listcomprehension.py
 square = [x**2 for x in range(20)]
 print( square )
 
@@ -678,7 +678,7 @@ _List Comprehensions_ werden oft als "pythonischer" beschrieben als loops ( oder
 
 Beispiele:
 
-```python
+```python  listcomprehension2.py
 square = [x**2 for x in range(20)]
 print( square )
 
@@ -692,6 +692,16 @@ print( [c.upper() for c in cities if c[0] == "F"] )
 # Wir können auch das Ergebnis manipulieren
 cities = ["Dresden", "Freiberg", "Leipzig", "Frankenberg"]
 print( [c.upper() if c != "Freiberg" else c.upper()+" (Sachs)" for c in cities if c[0] == "F"] )
+
+# Im Unterschied zum letztgenannten Ausdruck die korrespondierende Schleife
+new_cities = []  # leere Liste
+for c in cities:
+  if c[0] == "F":
+    if c != "Freiberg":
+      new_cities.append(c.upper())
+    else:
+      new_cities.append(c.upper()+" (Sachs)")
+print(new_cities)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
