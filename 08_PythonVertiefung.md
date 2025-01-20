@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 
@@ -16,7 +16,7 @@ import: https://github.com/liascript/CodeRunner
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/08_PythonVertiefung.md)
 
-# Objektorientierung in Python
+# Vertiefung der Python Konzepte
 
 | Parameter                | Kursinformationen                                                                                                                                                      |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -170,7 +170,9 @@ print(oldtimer)
 > Nehmen wir an, Sie entwerfen ein Verzeichnis der Studierenden aus Freiberg. Sie wollen die Paarung Studierendenname zu Matrikel als Dictonary umsetzen. Einer Ihrer Kommilitonen schlägt vor, dafür zwei Listen zu verwenden und die Verknüpfung über den Index zu realisieren. Was meinen Sie dazu? 
 
 ```python  goodSolution.py
-students = {"von Cotta": 12, "Humboldt": 17, "Zeuner": 233}
+students = {"von Cotta": 12, 
+            "Humboldt": 17,
+            "Zeuner": 233}
 
 student = "von Cotta"
 print(f"Student  {student} ({students[student]})")
@@ -256,7 +258,7 @@ Gegeben sei eine Liste der Studiengangsbezeichnungen für die Studierenden diese
 3. Wie viele Studierende zu den Studiengängen gehören?
 
 ```python
-# Angabe der Studiengänge der eingeschriebenen Teilnehmer in der 
+# Angabe der Studiengänge der 2022 eingeschriebenen Teilnehmer in der 
 # Veranstaltung
 topics = [
   "S-UWE", "S-WIW", "S-GÖ", "S-VT", "S-GÖ", "S-BAF", "S-VT",
@@ -371,7 +373,7 @@ print(zahl)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
-Der Parameter `zahl` wird als _Call-by-Value_ übergeben. Die Zuweisung eines neuen Wertes ändert nicht die gleichnamige Variable außerhalb der Funktion! 
+Der Parameter `zahl` wird als _Call-by-Assignment_ übergeben. Die Zuweisung eines neuen Wertes ändert nicht die gleichnamige Variable außerhalb der Funktion! 
 
 `return` erlaubt lediglich einen Rückgabewert. Wie handhaben wir dann die Situation, wenn es mehrere sind?
 
@@ -396,7 +398,20 @@ print(y)
 
 ## Typ-Hinweise für Variablen
 
-Demo
+__Variante 1: Der Interpreter meckert ...__
+
+```python
+from typing import List
+
+def my_function(numbers: List[int]) -> int:
+    return sum(numbers)
+
+numbers = [1, 2, 3, 4, 5]
+print(my_function(numbers))
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+__Variante 2: Die Entwicklungsumgebung meckert ...__
 
 ![alt-text](images/09_Python/ScreenshotTypeHinting.png)
 
@@ -410,8 +425,8 @@ Funktion $f(x) = x^2 - a$, so dass für die Nullstelle gilt: $x^2 = a$
 2. Für unseren Fall: $x_{n+1} = \frac{1}{2} (x_n + \frac{a}{x_n})$
 3. Wir beenden die Iteration, wenn $|x_{n+1} - x_n| < \varepsilon$
 
-```python
-def square_root(a, output=False, eps=0.00000001):
+```python newton.py
+def square_root(start, a, output=False, eps=0.00000001):
   xn = a
   while True:
     if output: print(xn)
@@ -427,14 +442,21 @@ def square_root(a, output=False, eps=0.00000001):
   return x
 
 if __name__ == "__main__":
-  x = float( input("Enter value for x:") )
+  x = float( input("Inital value for x:") )
   output = input("Show all outputs (y/n)?")
+  if output == 'y':
+    output = True
+  else:
+    output = False
 
-  result = square_root(x, output=='y')
-  print("sqrt(",x,") =", result)
+  a=4
+  result = square_root(x, a, output)
+  print(f"Zero point of x^2-{a}", result)
 
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+> Welches Problem sehen Sie?
 
 # Quiz
 ## Weitere Datentypen
