@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.6
+version:  1.0.7
 language: de
 narrator: Deutsch Female
 
@@ -14,7 +14,7 @@ import: https://github.com/liascript/CodeRunner
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/10_Datenvisualisierung.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/09_Datenvisualisierung.md)
 
 # Objektorientierung / Visualisierung mit Python
 
@@ -24,7 +24,7 @@ import: https://github.com/liascript/CodeRunner
 | **Semester**             | @config.semester                                                                                                                                               |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                              |
 | **Inhalte:**             | `Visualisierung mit Python`                                                                                                                                    |
-| **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/11_DatenAnalyse.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/11_DatenAnalyse.md) |
+| **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/09_Datenvisualisierung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/09_Datenvisualisierung.md) |
 | **Autoren**              | @author                                                                                                                                                        |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
@@ -180,8 +180,15 @@ class Dog:
     name = "Bello"
     age = 5
 
+    #def __eq__(self, other): 
+    #  if not isinstance(other, Dog): 
+    #    return False 
+    #  return self.a==other.a 
+
 i = Dog()
+print(i)
 j = Dog()
+print(j)
 
 print(i == j)
 ```
@@ -236,18 +243,6 @@ Wie Sie bereits bei der Inspektion der  `list`, `int` aber auch der `Dog` Klasse
 | ...          |                      |                                            |
 
 Eine gute Einführung und detailierte Erklärung liefert [Link](https://mathspp.com/blog/pydonts/dunder-methods)
-
-```python    OOPclass.py
-class Dog:
-    family = "Canidae"
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
-
-i = Dog("Rex", 5)
-print(i)
-```
-@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 ### Kapselung 
 
@@ -318,7 +313,7 @@ class StaffMember(Person):
    pass
 
 Humboldt = Student("Alexander", "Humboldt")
-Cotta = StaffMember("Prof. - " "Bernhard", "von-Cotta")
+Cotta = StaffMember("Bernhard", "von-Cotta")
 
 Humboldt.printname()
 Cotta.printname()
@@ -543,30 +538,21 @@ plt.savefig('foo.png') # notwendig für die Ausgabe in LiaScript
 ```python      Beispiel.py
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.fft import fft, fftfreq
 
-# Fixing random state for reproducibility
-np.random.seed(19680801)
-
-dt = 0.01
-t = np.arange(0, 30, dt)
-nse1 = np.random.randn(len(t))                 # white noise 1
-nse2 = np.random.randn(len(t))                 # white noise 2
-
-# Two signals with a coherent part at 10 Hz and a random part
-s1 = np.sin(2 * np.pi * 10 * t) + nse1
-s2 = np.sin(2 * np.pi * 10 * t) + nse2
+# Number of sample points
+N = 600
+# sample spacing
+T = 1.0 / 800.0
+x = np.linspace(0.0, N*T, N, endpoint=False)
+y = np.sin(50.0 * 2.0*np.pi*x) + 0.5*np.sin(80.0 * 2.0*np.pi*x)
+yf = fft(y)
+xf = fftfreq(N, T)[:N//2]
 
 fig, axs = plt.subplots(2, 1)
-axs[0].plot(t, s1, t, s2)
-axs[0].set_xlim(0, 2)
-axs[0].set_xlabel('Time')
-axs[0].set_ylabel('s1 and s2')
-axs[0].grid(True)
-
-cxy, f = axs[1].cohere(s1, s2, 256, 1. / dt)
-axs[1].set_ylabel('Coherence')
-
-fig.tight_layout()
+axs[0].plot(x, y)
+axs[1].plot(xf, 2.0/N * np.abs(yf[0:N//2]))
+plt.grid()
 
 #plt.show()
 plt.savefig('foo.png')
