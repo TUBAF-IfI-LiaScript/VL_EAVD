@@ -20,14 +20,14 @@ import: https://github.com/liascript/CodeRunner
 
 # Operatoren & Kontrollstrukturen
 
-| Parameter                 | Kursinformationen                                                                                                                                                                              |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**        | @config.lecture                                                                                                                                                                                |
-| **Semester**              | @config.semester                                                                                                                                                                               |
-| **Hochschule:**           | `Technische Universität Freiberg`                                                                                                                                                              |
-| **Inhalte:**              | `Operatoren / Kontrollstrukturen`                                                                                                                                                              |
-| **Link auf Repository: ** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/02_OperatorenKontrollstrukturen.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/02_OperatorenKontrollstrukturen.md) |
-| **Autoren**               | @author                                                                                                                                                                                        |
+|  Parameter                  |  Kursinformationen                                                                                                                                                                               |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|  **Veranstaltung:**         |  @config.lecture                                                                                                                                                                                 |
+|  **Semester**               |  @config.semester                                                                                                                                                                                |
+|  **Hochschule:**            |  `Technische Universität Freiberg`                                                                                                                                                               |
+|  **Inhalte:**               |  `Operatoren / Kontrollstrukturen`                                                                                                                                                               |
+|  **Link auf Repository: **  |  [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/02_OperatorenKontrollstrukturen.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/02_OperatorenKontrollstrukturen.md)  |
+|  **Autoren**                |  @author                                                                                                                                                                                         |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
@@ -49,7 +49,7 @@ import: https://github.com/liascript/CodeRunner
 ---------------------------------------------------------------------
 
 
-## Operatoren 
+## Operatoren
 
 Unterscheidungsmerkmale
 =============================
@@ -66,12 +66,13 @@ Unterscheidungsmerkmale
 Man unterscheidet in der Sprache C/C++ *unäre*, *binäre* und *ternäre* Operatoren
 
 <!-- data-type="none" -->
-| Operator           | Operanden | Beispiel                | Anwendung              |
-|:-------------------|:---------:|:------------------------|------------------------|
-| Unäre Operatoren   |     1     | `&` Adressoperator      | `sizeof(b);`           |
-|                    |           | `sizeof` Größenoperator | `b=-a;`                |
-| Binäre Operatoren  |     2     | `+`, `-`, `%`           | `b=a-2;`               |
-| Ternäre Operatoren |     3     | `?` Bedingungsoperator  | `b=(3 > 4 ? 0 : 1 ); ` |
+|  Operator            |  Operanden  |  Beispiel                 |  Anwendung                |
+| :------------------- | :---------: | :------------------------ | ------------------------- |
+|  Unäre Operatoren    |      1      |  `&` Adressoperator       |  `b = &a;`                |
+|                      |             |  `-` Negierungsoperator   |  `b = -a;`                |
+|                      |             |  `sizeof` Größenoperator  |  `sizeof(b);`             |
+|  Binäre Operatoren   |      2      |  `+`, `-`, `%`            |  `b = a-2;`               |
+|  Ternäre Operatoren  |      3      |  `?` Bedingungsoperator   |  `b = (a > 4 ? 0 : 1 );`  |
 
 Es gibt auch Operatoren, die, je nachdem wo sie stehen, entweder unär oder binär
 sind. Ein Beispiel dafür ist der `-`-Operator.
@@ -118,11 +119,10 @@ Weitere Unterscheidungsmerkmale ergeben sich zum Beispiel aus der [Assoziativit�
 ### Zuweisungsoperator
 
 Der Zuweisungsoperator `=` ist von seiner mathematischen Bedeutung zu trennen -
-einer Variablen wird ein Wert zugeordnet. Damit macht dann auch `x=x+1` Sinn.
+einer Variablen wird ein Wert zugeordnet. Damit ergibt dann auch `x=x+1` Sinn.
 
 ```cpp                     zuweisung.cpp
 #include <iostream>
-using namespace std;
 
 int main() {
    int zahl1 = 10;
@@ -131,7 +131,7 @@ int main() {
    // Zuweisung des Ausdrucks 'zahl1 + zahl2'
    ergeb = zahl1 + zahl2;
 
-   cout<<zahl1<<" + "<<zahl2<<" = "<<ergeb<<"\n";
+   std::cout << zahl1 << " + " << zahl2 << " = " << ergeb << "\n";
    return 0;
 }
 ```
@@ -148,17 +148,18 @@ eins vermindert werden. Man bezeichnet die Erhöhung um eins auch als Inkrement,
 die Verminderung um eins als Dekrement. Ein Inkrement einer Variable `x`
 entspricht `x = x + 1`, ein Dekrement einer Variable `x` entspricht `x = x - 1`.
 
+<!--- TODO: Haben wir lvalues, rvalues, xvalues, etc. schon erklärt? müssen wir das? --->
+
 ```cpp                            IncrementDecrement.cpp
 #include <iostream>
-using namespace std;
 
 int main(){
   int x, result;
   x = 5;
   result = 2 * ++x;   // Gebrauch als Präfix
-  cout<<"x="<<x<<" und result="<<result<<"\n";
+  std::cout << "x=" << x << " und result=" << result << "\n";
   result = 2 * x++;   // Gebrauch als Postfix
-  cout<<"x="<<x<<" und result="<<result<<"\n";
+  std::cout << "x=" << x << " und result=" << result << "\n";
   return 0;
 }
 ```
@@ -167,13 +168,13 @@ int main(){
 
 ### Arithmetische Operatoren
 
-| Operator | Bedeutung                    | Ganzzahlen | Gleitkommazahlen |
-|:--------:|:-----------------------------|:-----------|:-----------------|
-|   `+`    | Addition                     | x          | x                |
-|   `-`    | Subtraktion                  | x          | x                |
-|   `*`    | Multiplikation               | x          | x                |
-|   `/`    | Division                     | x          | x                |
-|   `%`    | Modulo (Rest einer Division) | x          |                  |
+|  Operator  |  Bedeutung                     |  Ganzzahlen  |  Gleitkommazahlen  |
+| :--------: | :----------------------------- | :----------- | :----------------- |
+|    `+`     |  Addition                      |  x           |  x                 |
+|    `-`     |  Subtraktion                   |  x           |  x                 |
+|    `*`     |  Multiplikation                |  x           |  x                 |
+|    `/`     |  Division                      |  x           |  x                 |
+|    `%`     |  Modulo (Rest einer Division)  |  x           |                    |
 
 {{1}}
 > **Achtung:** Divisionsoperationen werden für Ganzzahlen und Gleitkommazahlen
@@ -188,15 +189,14 @@ int main(){
 {{1}}
 ```cpp                                  division.cpp
 #include <iostream>
-using namespace std;
 
 int main(){
   int timestamp, minuten;
 
   timestamp = 345; //[s]
-  cout<<"Zeitstempel "<<timestamp<<" [s]\n";
+  std::cout << "Zeitstempel " << timestamp << " [s]\n";
   minuten=timestamp/60;
-  cout<<timestamp<<" [s] entsprechen "<<minuten<<" Minuten\n";
+  std::cout << timestamp << " [s] entsprechen " << minuten << " Minuten\n";
   return 0;
 }
 ```
@@ -208,16 +208,15 @@ int main(){
 {{2}}
 ```cpp                                  moduloExample.cpp
 #include <iostream>
-using namespace std;
 
 int main(){
   int timestamp, sekunden, minuten;
 
   timestamp = 345; //[s]
-  cout<<"Zeitstempel "<<timestamp<<" [s]\n";
+  std::cout << "Zeitstempel " << timestamp << " [s]\n";
   minuten=timestamp/60;
   sekunden=timestamp%60;
-  cout<<"Besser lesbar = "<<minuten<<" min. "<<sekunden<<" sek.\n";
+  std::cout << "Besser lesbar: " << minuten << " min. " << sekunden << " sek.\n";
   return 0;
 }
 ```
@@ -228,24 +227,25 @@ int main(){
 Kern der Logik sind Aussagen, die wahr oder falsch sein können.
 
 
-| Operation | Bedeutung           |
-|:---------:|:--------------------|
-|    `<`    | kleiner als         |
-|    `>`    | größer als          |
-|   `<=`    | kleiner oder gleich |
-|   `>=`    | größer oder gleich  |
-|   `==`    | gleich              |
-|   `!=`    | ungleich            |
+|  Operation  |  Bedeutung            |
+| :---------: | :-------------------- |
+|     `<`     |  kleiner als          |
+|     `>`     |  größer als           |
+|    `<=`     |  kleiner oder gleich  |
+|    `>=`     |  größer oder gleich   |
+|    `==`     |  gleich               |
+|    `!=`     |  ungleich             |
+
+<!--- TODO: three-way comparison operator? oder verwirrt der nur? --->
 
 ```cpp                                       LogicOperators.cpp
 #include <iostream>
-using namespace std;
 
 int main(){
   int x = 15;
-  cout<<"x = "<<x<<" \n";
-  cout<<boolalpha<<"Aussage x > 5 ist "<< (x>5) << " \n";
-  cout<<boolalpha<<"Aussage x == 5 ist "<< (x==-15) << " \n";
+  std::cout << "x = " << x << " \n";
+  std::cout << std::boolalpha << "Aussage x > 5 ist "<< (x>5) << "\n";
+  std::cout << std::boolalpha << "Aussage x == 5 ist "<< (x==-15) << "\n";
   return 0;
 }
 ```
@@ -265,11 +265,11 @@ int main(){
 
 Und wie lassen sich logische Aussagen verknüpfen? Nehmen wir an, dass wir aus den Messdaten zweier Sensoren ein Alarmsignal generieren wollen. Nur wenn die Temperatur _und_ die Luftfeuchte in einem bestimmten Fenster liegen, soll dies nicht  passieren.
 
-| Operation | Bedeutung |
-|:---------:|:----------|
-|   `&&`    | UND       |
-|   `||`    | ODER      |
-|    `!`    | NICHT     |
+|  Operation  |  Bedeutung  |
+| :---------: | :---------- |
+|    `&&`     |  UND        |
+|    `||`     |  ODER       |
+|     `!`     |  NICHT      |
 
 Das ODER wird durch senkrechte Striche repräsentiert (Altgr+`<` Taste) und nicht durch große `I`!
 
@@ -277,7 +277,6 @@ Das ODER wird durch senkrechte Striche repräsentiert (Altgr+`<` Taste) und nich
 
 ```cpp                                       Logic.cpp
 #include <iostream>
-using namespace std;
 
 int main(){
   float Temperatur = -30;     // Das sind unsere Probewerte
@@ -288,7 +287,7 @@ int main(){
 
   // Ausgabe
   if ... {
-    cout<<"Die Messwerte kannst Du vergessen!";
+    std::cout << "Die Messwerte kannst Du vergessen!\n";
   }
   return 0;
 }
@@ -309,12 +308,11 @@ Kompiliertzeit.
 
 ```cpp      sizeof.cpp
 #include <iostream>
-using namespace std;
 
 int main(){
   double wert=0.0;
-  cout<<sizeof(0)<<" "<<sizeof(double)<<" "<<sizeof(wert);
-return 0;
+  std::cout << sizeof(0) << " " << sizeof(double) << " " << sizeof(wert) << "\n";
+  return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
@@ -388,7 +386,7 @@ const int led_pin = 11;
 int buttonAState;
 int buttonBState;
 
-void setup(){
+void setup() {
   pinMode(button_A_pin, INPUT);
   pinMode(button_B_pin, INPUT);
   pinMode(led_pin, OUTPUT);
@@ -399,13 +397,12 @@ void loop() {
   buttonAState = digitalRead(button_A_pin);
   buttonBState = digitalRead(button_B_pin);
 
-  if ( buttonAState && buttonBState){
+  if (buttonAState && buttonBState) {
     Serial.println ("... Go");
     digitalWrite(led_pin, HIGH);
     delay(3000);
   }
-  else
-  {
+  else {
     digitalWrite(led_pin, LOW);
   }
 }
@@ -480,12 +477,12 @@ Zum Anweisungsblock werden die Anweisungen mit geschweiften Klammern (`{` und
 `}`) zusammengefasst.
 
 ```cpp
-if(Bedingung) Anweisung;  // <- Einzelne Anweisung
+if (Bedingung) Anweisung;  // <- Einzelne Anweisung
 
-if(Bedingung){            // <- Beginn Anweisungsblock
-   Anweisung;
-   Anweisung;
-}                         // <- Ende Anweisungsblock
+if (Bedingung) {           // <- Beginn Anweisungsblock
+  Anweisung;
+  Anweisung;
+}                          // <- Ende Anweisungsblock
 ```
 
        {{1}}
@@ -495,9 +492,9 @@ Optional kann eine alternative Anweisung angegeben werden, wenn die Bedingung
 nicht erfüllt wird:
 
 ```cpp
-if(Bedingung){
+if (Bedingung) {
   Anweisung;
-}else{
+} else {
   Anweisung;
 }
 ```
@@ -506,10 +503,10 @@ Mehrere Fälle können verschachtelt abgefragt werden:
 
 
 ```cpp
-if(Bedingung)
+if (Bedingung)
   Anweisung;
 else
-  if(Bedingung)
+  if (Bedingung)
     Anweisung;
   else
     Anweisung;
@@ -519,6 +516,8 @@ else
 > **Merke**: An diesem Beispiel wird deutlich, dass die Klammern für die
 > Zuordnung elementar wichtig sind. Die letzte Anweisung gehört NICHT zum zweiten
 > `else` Zweig und auch nicht zum ersten. Diese Anweisung wird immer ausgeführt!
+> Der Kompiler kann dieses Verhalten finden und mit der Option
+> `-Wmisleading-indentation` aufzeigen.
 
 ************************************************************************
 
@@ -529,13 +528,13 @@ else
 Die Bedingungen können als logische UND arithmetische Ausdrücke
 formuliert werden.
 
-| Ausdruck      | Bedeutung        |
-|---------------|------------------|
-| `if (a != 0)`     | $a\neq 0$ |
-| `if (a == 0)`     | $a = 0$ |
-| `if (!(a <= b))`  | $\overline{(a \leq b)}$ oder $a > b$ |
-| `if (a != b)`     | $a\neq b$ |
-| `if (a || b)` | $a>0$ oder $b>0$ |
+|  Ausdruck          |  Bedeutung                             |
+| ------------------ | -------------------------------------- |
+|  `if (a != 0)`     |  $a\neq 0$                             |
+|  `if (a == 0)`     |  $a = 0$                               |
+|  `if (!(a <= b))`  |  $\overline{(a \leq b)}$ oder $a > b$  |
+|  `if (a != b)`     |  $a\neq b$                             |
+|  `if (a || b)`     |  $a>0$ oder $b>0$                      |
 
 ************************************************************************
 
@@ -568,41 +567,40 @@ style=" width: 80%;
         margin-right: auto;"
 -->
 
-| Fall | Bedeutung                                                                                                                         |
-|------|-----------------------------------------------------------------------------------------------------------------------------------|
-| 1.   | Die Wand knickt nach links weg. Unabhängig von WG und WR folgt der Robter diesem Verlauf.                                         |
-| 2.   | Der Roboter folgt der linksseitigen Wand.                                                                                         |
-| 3.   | Die Wand blockiert die Fahrt. Der Roboter dreht sich nach rechts, damit liegt diese Wandelement nun wieder zu seiner linken Hand. |
-| 4.   | Der Roboter folgt dem Verlauf nach einer Drehung um 180 Grad.                                                                     |
+|  Fall  |  Bedeutung                                                                                                                          |
+| ------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+|  1.    |  Die Wand knickt nach links weg. Unabhängig von WG und WR folgt der Robter diesem Verlauf.                                          |
+|  2.    |  Der Roboter folgt der linksseitigen Wand.                                                                                          |
+|  3.    |  Die Wand blockiert die Fahrt. Der Roboter dreht sich nach rechts, damit liegt diese Wandelement nun wieder zu seiner linken Hand.  |
+|  4.    |  Der Roboter folgt dem Verlauf nach einer Drehung um 180 Grad.                                                                      |
 
 <!-- data-type="none" -->
-| WL | WG | WR | Fall | Verhalten                |
-|:---|:---|:---|------|:-------------------------|
-| 0  | 0  | 0  | 1    | Drehung Links, Vorwärts  |
-| 0  | 0  | 1  | 1    | Drehung Links, Vorwärts  |
-| 0  | 1  | 0  | 1    | Drehung Links, Vorwärts  |
-| 0  | 1  | 1  | 1    | Drehung Links, Vorwärts  |
-| 1  | 0  | 0  | 2    | Vorwärts                 |
-| 1  | 0  | 1  | 2    | Vorwärts                 |
-| 1  | 1  | 0  | 3    | Drehung Rechts, Vorwärts |
-| 1  | 1  | 1  | 4    | Drehung 180 Grad         |
+|  WL  |  WG  |  WR  |  Fall  |  Verhalten                 |
+| :--- | :--- | :--- | ------ | :------------------------- |
+|  0   |  0   |  0   |  1     |  Drehung Links, Vorwärts   |
+|  0   |  0   |  1   |  1     |  Drehung Links, Vorwärts   |
+|  0   |  1   |  0   |  1     |  Drehung Links, Vorwärts   |
+|  0   |  1   |  1   |  1     |  Drehung Links, Vorwärts   |
+|  1   |  0   |  0   |  2     |  Vorwärts                  |
+|  1   |  0   |  1   |  2     |  Vorwärts                  |
+|  1   |  1   |  0   |  3     |  Drehung Rechts, Vorwärts  |
+|  1   |  1   |  1   |  4     |  Drehung 180 Grad          |
 
 
 ```cpp                     IfExample.c
 #include <iostream>
-using namespace std;
 
-int main(){
+int main() {
   int WL, WG, WR;
   WL = 0; WG = 1; WR =1;
-  if (!WL)                         // Fall 1
-    cout<<"Drehung Links\n";
-  if ((WL) && (!WG))                // Fall 2
-      cout<<"Vorwärts\n";
+  if (!WL)                           // Fall 1
+    std::cout << "Drehung Links\n";
+  if ((WL) && (!WG))                 // Fall 2
+    std::cout << "Vorwärts\n";
   if ((WL) && (WG) && (!WR))         // Fall 3
-    cout<<"Drehung Rechts\n";
+    std::cout << "Drehung Rechts\n";
   if ((WL) && (WG) && (WR))          // Fall 4
-    cout<<"Drehung 180 Grad\n";
+    std::cout << "Drehung 180 Grad\n";
 	return 0;
 }
 ```
@@ -615,27 +613,25 @@ int main(){
 
 ```cpp                     Test.cpp
 #include <iostream>
-using namespace std;
 
-int main()
-{
-    int Punkte = 45;
-    int Zusatzpunkte = 15;
-    if (Punkte + Zusatzpunkte >= 50)
+int main() {
+  int Punkte = 45;
+  int Zusatzpunkte = 15;
+  if (Punkte + Zusatzpunkte >= 50)
+  {
+    std::cout << "Test ist bestanden!\n";
+    if (Zusatzpunkte >= 15)
     {
-       cout<<"Test ist bestanden!\n";
-       if (Zusatzpunkte >= 15)
-       {
-          cout<<"Alle Zusatzpunkte geholt!\n";
-       }else{
-           if(Zusatzpunkte > 8) {
-               cout<<"Respektable Leistung\n";
-           }
-       }
+      std::cout << "Alle Zusatzpunkte geholt!\n";
     }else{
-       cout<<"Leider durchgefallen!\n";
+      if(Zusatzpunkte > 8) {
+        std::cout << "Respektable Leistung\n";
+      }
     }
-    return 0;
+  }else{
+    std::cout << "Leider durchgefallen!\n";
+  }
+  return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
@@ -661,43 +657,41 @@ werden sollen. Das Ergebnis der "expression"-Auswertung soll eine Ganzzahl
 Trifft keine der Bedingungen zu, wird der `default`-Fall aktiviert.
 
 ```cpp
-switch(expression)
- {
-   case const-expr: Anweisung break;
-   case const-expr:
-      Anweisungen
-      break;
-   case const-expr: Anweisungen break;
-   default: Anweisungen
- }
+switch(expression) {
+  case const-expr: Anweisung break;
+  case const-expr:
+    Anweisungen
+    break;
+  case const-expr: Anweisungen break;
+  default: Anweisungen
+}
 ```
 
 {{1}}
 ```cpp                     SwitchExample.cpp
 #include <iostream>
-using namespace std;
 
 int main() {
   int a=50, b=60;
   char op;
-  cout<<"Bitte Operator definieren (+,-,*,/): ";
-  cin>>op;
+  std::cout << "Bitte Operator definieren (+,-,*,/): ";
+  std::cin >> op;
 
   switch(op) {
     case '+':
-      cout<<a<<" + "<<b<<" = "<<a+b<<" \n";
+      std::cout << a << " + " << b << " = " << a+b << " \n";
       break;
     case '-':
-      cout<<a<<" - "<<b<<" = "<<a-b<<" \n";
+      std::cout << a << " - " << b << " = " << a-b << " \n";
       break;
     case '*':
-      cout<<a<<" * "<<b<<" = "<<a*b<<" \n";
+      std::cout << a << " * " << b << " = " << a*b << " \n";
       break;
     case '/':
-      cout<<a<<" / "<<b<<" = "<<a/b<<" \n";
+      std::cout << a << " / " << b << " = " << a/b << " \n";
       break;
     default:
-      cout<<op<<"? kein Rechenoperator \n";
+      std::cout << op << "? kein Rechenoperator \n";
   }
   return 0;
 }
@@ -713,16 +707,16 @@ abgefragt werden und muss ganzzahlig oder `char` sein.
 {{2}}
 ```cpp
 // Fehlerhafte case Blöcke
-switch(x)
-{
-   case x < 100: // das ist ein Fehler
-     y = 1000;
-  break;
+int x = 100;
+switch(x) {
+  case x < 100: // das ist ein Fehler
+    y = 1000;
+    break;
 
   case 100.1: // das ist genauso falsch
-     y = 5000;
-     z = 3000;
-  break;
+    y = 5000;
+    z = 3000;
+    break;
 }
 ```
 
@@ -734,7 +728,6 @@ zwingend ausgeführt.
 {{3}}
 ```cpp                     SwitchBreak.cpp
 #include <iostream>
-using namespace std;
 
 int main() {
   int a=5;
@@ -743,13 +736,14 @@ int main() {
     case 5:   // Multiple Konstanten
     case 6:
     case 7:
-      cout<<"Der Wert liegt zwischen 4 und 8\n";
+      std::cout << "Der Wert liegt zwischen 4 und 8\n";
     case 3:
-      cout<<"Der Wert ist 3 \n";
+      std::cout << "Der Wert ist 3 \n";
       break;
     case 0:
-      cout<<"Der Wert ist 0 \n";
-    default: cout<<"Wert in keiner Kategorie\n";}
+      std::cout << "Der Wert ist 0 \n";
+    default: std::cout << "Wert in keiner Kategorie\n";
+  }
 
   return 0;
 }
@@ -763,29 +757,28 @@ aufbauen und dann übergreifend "aktiviert" werden.
 {{4}}
 ```cpp                     CharClassification.cpp
 #include <iostream>
-using namespace std;
 
 int main() {
   char ch;
-  cout<<"Geben Sie ein Zeichen ein :  ";
-  cin>>ch;
+  std::cout << "Geben Sie ein Zeichen ein:  ";
+  std::cin >> ch;
 
   switch(ch)
   {
-      case 'a':
-      case 'A':
-      case 'e':
-      case 'E':
-      case 'i':
-      case 'I':
-      case 'o':
-      case 'O':
-      case 'u':
-      case 'U':
-          cout<<"\n\n"<<ch<<" ist ein Vokal.\n\n";
-          break;
-      default:
-          cout<<ch<<" ist ein Konsonant.\n\n";
+    case 'a':
+    case 'A':
+    case 'e':
+    case 'E':
+    case 'i':
+    case 'I':
+    case 'o':
+    case 'O':
+    case 'u':
+    case 'U':
+      std::cout << ch << " ist ein Vokal.\n";
+      break;
+    default:
+      std::cout << ch << " ist ein Konsonant.\n";
   }
   return 0;
 }
@@ -889,26 +882,25 @@ den Wert false (falsch) annimmt.
 
 ```cpp
 // generisches Format der for-Schleife
-for(Initialisierung; Bedingung; Reinitialisierung) {
+for (Initialisierung; Bedingung; Reinitialisierung) {
    // Anweisungen
 }
 
 // for-Schleife als Endlosschleife
-for(;;){
+for (;;) {
    // Anweisungen
 }
 ```
 
 ```cpp                     ForLoopExample.cpp
 #include <iostream>
-using namespace std;
 
 int main(){
 	int i;
   for (i = 1; i<10; i++)
-    cout<<i<<" ";
+    std::cout << i << " ";
 
-  cout<<"\nNach der Schleife hat i den Wert "<<i<<"\n";
+  std::cout << "\nNach der Schleife hat i den Wert " << i << "\n";
 	return 0;
 }
 ```
@@ -928,14 +920,13 @@ int main(){
 {{1}}
 ```cpp                     SemicolonAfterFor.cpp
 #include <iostream>
-using namespace std;
 
 int main(){
   int i;
   for (i = 1; i<10; i++);
-    cout<<i<<" ";
+    std::cout << i << " ";
 
-  cout<<"Das ging jetzt aber sehr schnell ... Warum eigentlich? \n"<<i;
+  std::cout << "Das ging jetzt aber sehr schnell ... Warum eigentlich? \n" << i;
   return 0;
 }
 ```
@@ -953,28 +944,27 @@ Fortführung/Abbruch.
 while (Bedingung)
   Anweisungen;
 
-while (Bedingung){
-    Anweisungen;
-    Anweisungen;
+while (Bedingung) {
+  Anweisungen;
+  Anweisungen;
 }
 ```
 
 ```cpp                     count_plus.cpp
 #include <iostream>
-using namespace std;
 
-int main(){
+int main() {
   char c;
   int zaehler = 0;
-  cout<<"Pluszeichenzähler - zum Beenden \"_\" [Enter]\n";
-  cin>>c;
-  while(c != '_')
+  std::cout << "Pluszeichenzähler - zum Beenden \"_\" [Enter]\n";
+  std::cin >> c;
+  while (c != '_')
   {
-    if(c == '+')
+    if (c == '+')
       zaehler++;
-      cin>>c;
+    std::cin >> c;
   }
-  cout<<"Anzahl der Pluszeichen: "<<zaehler<<"\n";
+  std::cout << "Anzahl der Pluszeichen: " << zaehler << "\n";
   return 0;
 }
 ```
@@ -988,13 +978,13 @@ ersetzen kann.
 ```cpp
 // generisches Format der while-Schleife
 i = 0;
-while (i<10){
-   // Anweisungen;
-   i++;
+while (i<10) {
+  // Anweisungen;
+  i++;
 }
 
-for (i=0; i<10; i++){
-   // Anweisungen;
+for (i=0; i<10; i++) {
+  // Anweisungen;
 }
 ```
 
@@ -1006,8 +996,8 @@ des Abbruchkriteriums erst am Schleifenende aus.
 ```cpp
 // generisches Format der while-Schleife
 do
-   Anweisung;
- while (Bedingung);
+  Anweisung;
+while (Bedingung);
 ```
 
 Welche Konsequenz hat das? Die `do-while`-Schleife wird in jedem Fall einmal
@@ -1016,19 +1006,17 @@ ausgeführt.
 {{1}}
 ```cpp                     count_plus.cpp
 #include <iostream>
-using namespace std;
 
 int main(){
   char c;
   int zaehler = 0;
-  cout<<"Pluszeichenzähler - zum Beenden \"_\" [Enter]\n";
-  do
-  {
-    cin>>c;
+  std::cout << "Pluszeichenzähler - zum Beenden \"_\" [Enter]\n";
+  do {
+    std::cin >> c;
     if(c == '+')
       zaehler++;
-  }while(c != '_');
-  cout<<"Anzahl der Pluszeichen: "<<zaehler<<"\n";
+  } while(c != '_');
+  std::cout << "Anzahl der Pluszeichen: " << zaehler << "\n";
   return 0;
 }
 ```
@@ -1037,20 +1025,19 @@ int main(){
 ### Kontrolliertes Verlassen der Anweisungen
 
 Bei allen drei Arten der Schleifen kann zum vorzeitigen Verlassen der Schleife
- `break` benutzt werden. Damit wird aber nur die unmittelbar umgebende Schleife
- beendet!
+`break` benutzt werden. Damit wird aber nur die unmittelbar umgebende Schleife
+beendet!
 
 ```cpp                     breakForLoop.cpp
 #include <iostream>
-using namespace std;
 
-int main(){
+int main() {
 	int i;
-  for (i = 1; i<10; i++){
-      if (i == 5) break;
-      cout<<i<<" ";
+  for (i = 1; i<10; i++) {
+    if (i == 5) break;
+    std::cout << i << " ";
   }
-  cout<<"\nUnd vorbei ... i ist jetzt "<<i<<"\n";
+  std::cout << "\nUnd vorbei ... i ist jetzt " << i << "\n";
 	return 0;
 }
 ```
@@ -1064,13 +1051,12 @@ Durchgang gestoppt.
 {{1}}
 ```cpp                     continueForLoop.cpp
 #include <iostream>
-using namespace std;
 
-int main(){
+int main() {
 	int i;
-  for (i = -5; i<6; i++){
-      if (i == 0) continue;
-      cout<<12. / i<<"\n";
+  for (i = -5; i<6; i++) {
+    if (i == 0) continue;
+    std::cout << 12.0 / i << "\n";
   }
 	return 0;
 }
@@ -1084,22 +1070,20 @@ in der Vorlesung zu Funktionen).
 ## Beispiel des Tages
 
 ```cpp                     Divisors.cpp
-// A Better (than Naive) Solution to find all divisors 
-#include <iostream> 
-#include <math.h> 
-using namespace std; 
-  
-int main() 
-{ 
-    int n = 100;
-    cout <<"The divisors of " << n << " are: \n"; 
+// A Better (than Naive) Solution to find all divisors
+#include <iostream>
+#include <math.h>
 
-    // Die naive Lösung
-    for (int i = 1; i <= n; i++) 
-          if (n % i == 0) 
-              cout <<" " << i;  
-    return 0; 
-} 
+int main() {
+  int n = 100;
+  std::cout << "The divisors of " << n << " are:\n";
+
+  // Die naive Lösung
+  for (int i = 1; i <= n; i++)
+    if (n % i == 0)
+      std::cout << " " << i << "\n";
+  return 0;
+}
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
@@ -1107,32 +1091,30 @@ int main()
 
 {{1}}
 ```cpp                     ImprovedDivisors.cpp
-// A Better (than Naive) Solution to find all divisors 
-#include <iostream> 
-#include <math.h> 
-using namespace std; 
-  
-  
-int main() 
-{ 
-    int n = 100;
-    cout <<"The divisors of " << n << " are: \n"; 
+// A Better (than Naive) Solution to find all divisors
+#include <iostream>
+#include <cmath>
 
-    // Diesmal laufen wir nur bis zu Wurzel von n
-    for (int i=1; i<=sqrt(n); i++) 
-    { 
-        if (n % i == 0) 
-        { 
-            // Wenn die beiden Teiler gleich sind, dann nur einen ausgeben
-            if (n/i == i) 
-                cout <<" "<< i; 
-  
-            else // sonst alle beide
-                cout << " "<< i << " " << n/i; 
-        } 
-    } 
-    return 0; 
-} 
+
+int main()
+{
+  int n = 100;
+  std::cout << "The divisors of " << n << " are:\n";
+
+  // Diesmal laufen wir nur bis zu Wurzel von n
+  for (int i=1; i <= std::sqrt(n); i++)
+  {
+    if (n % i == 0)
+    {
+      // Wenn die beiden Teiler gleich sind, dann nur einen ausgeben
+      if (n/i == i)
+        std::cout << " " << i << "\n";
+      else // sonst alle beide
+        std::cout << " " << i << " " << n/i << "\n";
+    }
+  }
+  return 0;
+}
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
@@ -1217,21 +1199,20 @@ Arithmetische Operatoren
 > Was gibt dieses Programm aus?
 ```cpp
 #include <iostream>
-using namespace std;
 
-int main(){
+int main() {
 	int a = 44;
   int b = 3;
 
-  if(a == 44 && a == b){
-    cout << "1234";
+  if (a == 44 && a == b) {
+    std::cout << "1234\n";
   }
-  else{
-    if(a >= b || a == 10){
-      cout << "5678";
+  else {
+    if (a >= b || a == 10) {
+      std::cout << "5678\n";
     }
-    else{
-      cout << "9";
+    else {
+      std::cout << "9\n";
     }
   }
 	return 0;
@@ -1251,26 +1232,26 @@ int main(){
 > Was gibt dieses Programm aus?
 ```cpp
 #include <iostream>
-using namespace std;
 
-int main(){
+int main() {
   int b = 6;
 	int a = b;
 
   switch(a) {
     case 4:
-      cout << "4";
+      std::cout << "4\n";
       break;
     case 5:
     case 6:
     case 7:
-      cout << "5 bis 7";
+      std::cout << "5 bis 7\n";
     case 3:
-      cout << "3";
+      std::cout << "3\n";
       break;
     case 0:
-      cout << "0";
-    default: cout<<"Keine Kategorie!";}
+      std::cout << "0\n";
+    default: std::cout << "Keine Kategorie!\n";
+  }
 	return 0;
 }
 ```
@@ -1282,26 +1263,26 @@ int main(){
 > Was gibt dieses Programm aus?
 ```cpp
 #include <iostream>
-using namespace std;
 
-int main(){
+int main() {
   int b = 9;
 	int a = b;
 
   switch(a) {
     case 4:
-      cout << "4";
+      std::cout << "4\n";
       break;
     case 5:
     case 6:
     case 7:
-      cout << "5 bis 7";
+      std::cout << "5 bis 7\n";
     case 3:
-      cout << "3";
+      std::cout << "3\n";
       break;
     case 0:
-      cout << "0";
-    default: cout<<"Keine Kategorie!";}
+      std::cout << "0\n";
+    default: std::cout << "Keine Kategorie!\n";
+  }
 	return 0;
 }
 ```
@@ -1376,12 +1357,11 @@ int main(){
 > Dieses Programm soll die Zahlen 4 bis 15 einzeln in aufsteigender Reihenfolge ausgeben. Beantworten Sie die unten aufgeführten Fragen.
 ```cpp
 #include <iostream>
-using namespace std;
 
-int main(){
+int main() {
 	int i;
   for (i = [_____]; i < [_____]; i++)
-    cout << i << endl;
+    std::cout << i << "\n";
 
 	return 0;
 }
@@ -1401,17 +1381,15 @@ int main(){
 > Wie lautet die Ausgabe dieses Programms?
 ```cpp
 #include <iostream>
-using namespace std;
 
-int main(){
+int main() {
 	int i = 16;
-  while (i > 4)
-  {
+  while (i > 4) {
     i = i / 2;
-    cout << i << " ";
+    std::cout << i << " ";
   }
 
-  cout << "ende";
+  std::cout << "ende\n";
 	return 0;
 }
 ```
@@ -1422,19 +1400,18 @@ int main(){
 > Welcher Wert wird für die Variable `zaehler` ausgegeben wenn folgende Eingaben einzeln getätigt werden? `X` `X` `A` `X` `Y` `X` `Y`
 ```cpp
 #include <iostream>
-using namespace std;
 
-int main(){
+int main() {
   char c;
   int zaehler = 0;
-  cin >> c;
+  std::cin >> c;
   while(c != 'Y')
   {
     if(c == 'X')
       zaehler++;
-      cin >> c;
+    std::cin >> c;
   }
-  cout << zaehler;
+  std::cout << zaehler << "\n";
   return 0;
 }
 ```
@@ -1447,16 +1424,15 @@ int main(){
 > Wie lautet die Ausgabe dieses Programms?
 ```cpp
 #include <iostream>
-using namespace std;
 
-int main(){
+int main() {
 	int i = 16;
   do {
     i = i / 2;
-    cout << i << " ";
+    std::cout << i << " ";
   } while (i < 4);
 
-  cout << "ende";
+  std::cout << "ende\n";
 	return 0;
 }
 ```
@@ -1467,15 +1443,14 @@ int main(){
 > Wie lautet die Ausgabe dieses Programms?
 ```cpp
 #include <iostream>
-using namespace std;
 
-int main(){
+int main() {
 	int i;
-  for (i = 1; i<10; i++){
-      if (i > 5) break;
-      cout<<i<<" ";
+  for (i = 1; i<10; i++) {
+    if (i > 5) break;
+    std::cout << i << " ";
   }
-  cout<<"ende";
+  std::cout << "ende\n";
 	return 0;
 }
 ```
@@ -1487,15 +1462,14 @@ int main(){
 > Wie lautet die Ausgabe dieses Programms?
 ```cpp                     breakForLoop.cpp
 #include <iostream>
-using namespace std;
 
-int main(){
+int main() {
 	int i;
-  for (i = 1; i<10; i++){
-      if (i < 5) continue;
-      cout<<i<<" ";
+  for (i = 1; i<10; i++) {
+    if (i < 5) continue;
+    std::cout << i << " ";
   }
-  cout<<"ende";
+  std::cout << "ende\n";
 	return 0;
 }
 ```

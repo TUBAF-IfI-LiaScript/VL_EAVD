@@ -56,7 +56,7 @@ void setup() {
   pinMode(2, INPUT);      // Button grün
   pinMode(13, OUTPUT);
 
-  for (int i = 0; i<10; i++){
+  for (int i = 0; i<10; i++) {
     digitalWrite(13, HIGH);
     delay(500);
     digitalWrite(13, LOW);
@@ -73,7 +73,7 @@ void loop() {
 
 Bisher umfassten unsere Variablen einzelne Skalare. Arrays erweitern das
 Spektrum um Folgen von Werten, die in n-Dimensionen aufgestellt werden können.
-Array ist eine geordnete Folge von Werten des gleichen Datentyps.
+Ein Array ist eine geordnete Folge von Werten des gleichen Datentyps.
 Die Deklaration erfolgt in folgender Anweisung:
 
 ```text
@@ -116,7 +116,6 @@ sind über einen Index möglich.
 
 ```cpp                     ArrayExample.cpp
 #include <iostream>
-using namespace std;
 
 int main(void) {
   int a[3];       // Array aus 3 int Werten
@@ -124,11 +123,11 @@ int main(void) {
   a[1] = 5;
   a[2] = 99;
   for (int i=0; i<3; i++)
-    cout<<a[i]<<" ";
-  cout<<"\nNur zur Info "<< sizeof(a);
-  cout<<"\nZahl der Elemente "<< sizeof(a) / sizeof(int);
+    std::cout << a[i] << " ";
+  std::cout << "\nNur zur Info " << sizeof(a) << "\n";
+  std::cout << "Zahl der Elemente " << sizeof(a) / sizeof(int) << "\n";
   return 0;
-  }
+}
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
@@ -146,14 +145,13 @@ Wie können Arrays noch initialisiert werden:
 ```cpp                     ArrayExample.cpp
 #include <iostream>
 #include <iomanip>
-using namespace std;
 
 int main(void) {
   int a[] = {5, 2, 2, 5, 6};
   float b[5] = {1.01};
-  for (int i=0; i<5; i++){
-      cout<< i << "  "  << a[i] <<" / " << fixed << b[i]<<"\n";
-    }
+  for (int i=0; i<5; i++) {
+    std::cout << i << "  "  << a[i] << " / " << std::fixed << b[i] << "\n";
+  }
   return 0;
 }
 ```
@@ -166,12 +164,11 @@ Arrays?
 {{2}}
 ```cpp                     ArrayExample.cpp
 #include <iostream>
-using namespace std;
 
 int main(void) {
   int a[3];
-  cout<<"\nNur zur Speicherplatz [Byte] "<<sizeof(a);
-  cout<<"\nZahl der Elemente "<<sizeof(a)/sizeof(int)<<"\n";
+  std::cout << "Speicherplatz [Byte] " << sizeof(a) << "\n";
+  std::cout << "Zahl der Elemente " << sizeof(a)/sizeof(int) << "\n";
   return 0;
 }
 ```
@@ -181,14 +178,14 @@ int main(void) {
 
 ```cpp                     ArrayExample.cpp
 #include <iostream>
-using namespace std;
 
 int main(void) {
   int a[] = {-2, 5, 99};
   for (int i=0; i<=3; i++)
-    cout<<a[i]<<" ";
+    std::cout << a[i] << " ";
+  std::cout << "\n";
   return 0;
-  }
+}
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
@@ -200,16 +197,15 @@ die intuitive Lösung `a == b` nicht korrekt, wenn `a` und `b` arrays sind?
 
 ```cpp                     ArrayExample.cpp
 #include <iostream>
-using namespace std;
 
 int main(void) {
   int a[] = {0, 1, 2, 4, 3, 5, 6, 7, 8, 9};
   int b[10];
   for (int i=0; i<10; i++)  // "Befüllen" des Arrays b
-    b[i]=i;
+    b[i] = i;
   for (int i=0; i<10; i++)
-    if (a[i]!=b[i])
-      cout<<"An Stelle "<<i<<" unterscheiden sich die Vektoren \n";
+    if (a[i] != b[i])
+      std::cout << "An Stelle " << i << " unterscheiden sich die Arrays!\n";
   return 0;
   }
 ```
@@ -228,15 +224,15 @@ int Matrix[4][5];    /* Zweidimensional - 4 Zeilen x 5 Spalten */
 Deklaration mit einer sofortigen Initialisierung aller bzw. einiger Elemente:
 
 ```cpp
-int Matrix[4][5] = { {1,2,3,4,5},
-                     {6,7,8,9,10},
-                     {11,12,13,14,15},
-                     {16,17,18,19,20}};
+int Matrix[4][5] = {{1,  2,  3,  4,  5},
+                    {6,  7,  8,  9,  10},
+                    {11, 12, 13, 14, 15},
+                    {16, 17, 18, 19, 20}};
 
-int Matrix[4][4] = { {1,},
-                     {1,1},
-                     {1,1,1},
-                     {1,1,1,1}};
+int Matrix[4][4] = {{1,},
+                    {1, 1},
+                    {1, 1, 1},
+                    {1, 1, 1, 1}};
 
 int Matrix[4][4] = {1,2,3,4,5,6,7,8};
 ```
@@ -257,7 +253,6 @@ style=" width: 60%;
 {{2}}
 ```cpp                          nDimArray.cpp
 #include <iostream>
-using namespace std;
 
 int main(void) {
   // Initiallisierung
@@ -270,12 +265,12 @@ int main(void) {
   // Ausgabe
   int i, j;
   // Schleife fuer Zeilen, Y-Achse
-  for(i=0; i<8; i++) {
-  	// Schleife fuer Spalten, X-Achse
-  	for(j=0; j<8; j++) {
-  		cout<<brett[i][j]<<" ";
-  	}
-  	cout<<"\n";
+  for (i=0; i<8; i++) {
+    // Schleife fuer Spalten, X-Achse
+    for (j=0; j<8; j++) {
+      std::cout << brett[i][j] << " ";
+    }
+    std::cout << "\n";
   }
   return 0;
 }
@@ -290,24 +285,23 @@ Elementwese Addition zweier Matrizen
 
 ```cpp       Addition.cpp
 #include <iostream>
-using namespace std;
 
 int main(void)
 {
-  int A[2][3]={{1,2,3},{4,5,6}};
-  int B[2][3]={{10,20,30},{40,50,60}};
-	int C[2][3];
-	int i,j;
-	for (i=0;i<2;i++)
-		for (j=0;j<3;j++)
-			C[i][j]=A[i][j]+B[i][j];
-	for (i=0;i<2;i++)
-	{
-		for (j=0;j<3;j++)
-			cout<<C[i][j]<<"\t";
-		cout<<"\n";
-	}
-    return 0;
+  int A[2][3] = {{1, 2, 3}, {4, 5, 6}};
+  int B[2][3] = {{10, 20, 30}, {40, 50, 60}};
+  int C[2][3];
+  int i, j;
+  for (i=0; i<2; i++)
+    for (j=0; j<3; j++)
+      C[i][j] = A[i][j] + B[i][j];
+  for (i=0; i<2; i++)
+  {
+    for (j=0; j<3; j++)
+      std::cout << C[i][j] << "\t";
+    std::cout << "\n";
+  }
+  return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
@@ -324,25 +318,25 @@ Elementen vom Datentyp `char` repräsentiert. Die Zeichenfolgen werden mit
 
 ```cpp                                         stringarray.cpp
 #include <iostream>
-using namespace std;
 
 int main(void) {
-  cout<<"Diese Form eines Strings haben wir bereits mehrfach benutzt!\n";
+  std::cout << "Diese Form eines Strings haben wir bereits mehrfach benutzt!\n";
   //////////////////////////////////////////////////////////////////////////////
 
   char a[] = "Ich bin ein char Array!";  // Der Compiler fügt das \0 automatisch ein!
-  if (a[23] == '\0'){
-    cout<<"char Array Abschluss in a gefunden!";
+  if (a[23] == '\0') {
+    std::cout << "char Array Abschluss in a gefunden!\n";
   }
 
-  cout<<"->"<<a<<"<-\n";
+  std::cout << "->" << a << "<-\n";
   char b[] = { 'H', 'a', 'l', 'l', 'o', ' ',
                'F', 'r', 'e', 'i', 'b', 'e', 'r', 'g', '\0' };
-  cout<<"->"<<b<<"<-\n";
+  std::cout << "->" << b << "<-\n";
   char c[] = "Noch eine \0Moeglichkeit";
-  cout<<"->"<<c<<"<-\n";
+  std::cout << "->" << c << "<-\n";
   char d[] = { 69, 65, 86, 68, 32, 50, 48, 50, 52, 0 };
-  cout<<"->"<<d<<"<-\n";
+  std::cout << "->" << d << "<-\n";
+
   return 0;
 }
 ```
@@ -353,24 +347,22 @@ C++ implementiert einen separaten string-Datentyp (Klasse), die ein deutliche ko
 ```cpp                                         stringarray.cpp
 #include <iostream>
 #include <string>      // Header für string Klasse
-using namespace std;
 
 int main(void) {
-  string hanna = "Hanna";
-  string anna = "Anna";
-  string alleBeide = anna + " + " + hanna;
-  cout<<"Hallo: "<<alleBeide<<std::endl;
+  std::string hanna = "Hanna";
+  std::string anna = "Anna";
+  std::string alleBeide = anna + " + " + hanna;
+  std::cout << "Hallo: " << alleBeide << "\n";
 
   int res = anna.compare(hanna);
+  if (res == 0)
+    std::cout << "Both input strings are equal.\n";
+  else if (res < 0)
+    std::cout << "String 1 is smaller as compared to String 2\n.";
+  else
+    std::cout << "String 1 is greater as compared to String 2\n.";
 
-	if (res == 0)
-		cout << "\nBoth the input strings are equal." << endl;
-	else if(res < 0)
-		cout << "String 1 is smaller as compared to String 2\n.";
-		else
-		cout<<"String 1 is greater as compared to String 2\n.";
-
-  return EXIT_SUCCESS;
+  return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
@@ -454,18 +446,18 @@ int *zeiger6, ganzzahl;
 > **Merke:** Zeiger müssen vor der Verwendung initialisiert werden.
 
 Der Zeiger kann initialisiert werden durch die Zuweisung:
-* der Adresse einer Variable, wobei die Adresse mit Hilfe des Adressoperators
-  `&` ermittelt wird,
+
+* der Adresse einer Variable, wobei die Adresse mit Hilfe des Adressoperators `&` ermittelt wird,
 * eines Arrays,
 * eines weiteren Zeigers oder
 * des Wertes von `NULL`.
 
+<!--- TODO: Sollten wir im C++ Kontext nicht mind. auf `nullptr` verweisen? --->
+
 ```cpp                      PointerExamples.cpp
 #include <iostream>
-using namespace std;
 
-int main(void)
-{
+int main(void) {
   int a = 0;
   int * ptr_a = &a;       /* mit Adressoperator */
 
@@ -476,10 +468,10 @@ int main(void)
 
   int * ptr_Null = NULL;  /* mit NULL */
 
-  cout<<"Pointer ptr_a    "<<ptr_a<<"\n";
-  cout<<"Pointer ptr_feld "<<ptr_feld<<"\n";
-  cout<<"Pointer ptr_b    "<<ptr_b<<"\n";
-  cout<<"Pointer ptr_Null "<<ptr_Null<<"\n";
+  std::cout << "Pointer ptr_a    " << ptr_a << "\n";
+  std::cout << "Pointer ptr_feld " << ptr_feld << "\n";
+  std::cout << "Pointer ptr_b    " << ptr_b << "\n";
+  std::cout << "Pointer ptr_Null " << ptr_Null << "\n";
   return 0;
 }
 ```
@@ -519,18 +511,16 @@ benötigen wir den *Inhaltsoperator* `*`.
 {{2}}
 ```cpp                   DereferencingPointers.cpp
 #include <iostream>
-using namespace std;
 
-int main(void)
-{
+int main(void) {
   int a = 15;
   int * ptr_a = &a;
-  cout<<"Wert von a                     "<<a<<"\n";
-  cout<<"Pointer ptr_a                  "<<ptr_a<<"\n";
-  cout<<"Wert hinter dem Pointer ptr_a  "<<*ptr_a<<"\n";
+  std::cout << "Wert von a                     " << a << "\n";
+  std::cout << "Pointer ptr_a                  " << ptr_a << "\n";
+  std::cout << "Wert hinter dem Pointer ptr_a  " << *ptr_a << "\n";
   *ptr_a = 10;
-  cout<<"Wert von a                     "<<a<<"\n";
-  cout<<"Wert hinter dem Pointer ptr_a  "<<*ptr_a<<"\n";
+  std::cout << "Wert von a                     " << a << "\n";
+  std::cout << "Wert hinter dem Pointer ptr_a  " << *ptr_a << "\n";
   return 0;
 }
 ```
@@ -545,16 +535,14 @@ Fehlender Adressoperator bei der Zuweisung
 
 ```cpp               PointerFailuresI.cpp
 #include <iostream>
-using namespace std;
 
-int main(void)
-{
+int main(void) {
   int a = 5;
   int * ptr_a;
   ptr_a = a;
-  cout<<"Pointer ptr_a                  "<<ptr_a<<"\n";
-  cout<<"Wert hinter dem Pointer ptr_a  "<<*ptr_a<<"\n";
-  cout<<"Aus Maus!\n";
+  std::cout << "Pointer ptr_a                  " << ptr_a << "\n";
+  std::cout << "Wert hinter dem Pointer ptr_a  " << *ptr_a << "\n";
+  std::cout << "Aus Maus!\n";
   return 0;
 }
 ```
@@ -566,19 +554,18 @@ Fehlender Dereferenzierungsoperator beim Zugriff
 {{1}}
 ```cpp          PointerFailuresII.cpp
 #include <iostream>
-using namespace std;
 
 int main(void)
 {
   int a = 5;
   int * ptr_a = &a;
-  cout<<"Pointer ptr_a                  "<<ptr_a<<"\n";
-  cout<<"Wert hinter dem Pointer ptr_a  "<<ptr_a<<"\n";
-  cout<<"Aus Maus!\n";
+  std::cout << "Pointer ptr_a                  " << ptr_a << "\n";
+  std::cout << "Wert hinter dem Pointer ptr_a  " << ptr_a << "\n";
+  std::cout << "Aus Maus!\n";
   return 0;
 }
 ```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out 2&>1`)
 
 {{2}}
 Uninitialierte Pointer zeigen "irgendwo ins nirgendwo"!
@@ -586,22 +573,20 @@ Uninitialierte Pointer zeigen "irgendwo ins nirgendwo"!
 {{2}}
 ```cpp                  PointerFailuresIII.cpp
 #include <iostream>
-using namespace std;
 
-int main(void)
-{
+int main(void) {
   int * ptr_a;
   // korrekte Initalisierung
   // int * ptr_a = NULL;
-  
+
   // ... hier passiert irgendwas 
-  
+
   *ptr_a = 10;
   // Prüfung auf gültige Adresse
   // if (ptr_a != NULL) *ptr_a = 10;
-  cout<<"Pointer ptr_a                  "<<ptr_a<<"\n";
-  cout<<"Wert hinter dem Pointer ptr_a  "<<*ptr_a<<"\n";
-  cout<<"Aus Maus!\n";
+  std::cout << "Pointer ptr_a                  " << ptr_a << "\n";
+  std::cout << "Wert hinter dem Pointer ptr_a  " << *ptr_a << "\n";
+  std::cout << "Aus Maus!\n";
   return 0;
 }
 ```
@@ -610,22 +595,20 @@ int main(void)
 ### Dynamische Datenobjekte
 
 C++ bietet die Möglichkeit den Speicherplatz für eine Variable zur Laufzeit zur Verfügung zu stellen.
-Mit `new`-Operator wird der Speicherplatz bereit gestellt und mit `delete`-Operator (`delete[]`) wieder freigegeben.
+Mit dem `new`-Operator wird der Speicherplatz bereit gestellt und mit dem `delete`-Operator (`delete[]`) wieder freigegeben.
 
 `new` erkennt die benötigte Speichermenge am angegebenen Datentyp und reserviert für die Variable auf dem Heap die entsperechde Byte-Menge.
 
 ```cpp                   new.cpp
 #include <iostream>
-using namespace std;
 
-int main(void)
-{
+int main(void) {
   int * ptr_a;
-  ptr_a=new int;
+  ptr_a = new int;
   *ptr_a = 10;
-  cout<<"Pointer ptr_a                  "<<ptr_a<<"\n";
-  cout<<"Wert hinter dem Pointer ptr_a  "<<*ptr_a<<"\n";
-  cout<<"Aus Maus!\n";
+  std::cout << "Pointer ptr_a                  " << ptr_a << "\n";
+  std::cout << "Wert hinter dem Pointer ptr_a  " << *ptr_a << "\n";
+  std::cout << "Aus Maus!\n";
   delete ptr_a;
   return 0;
 }
@@ -634,17 +617,16 @@ int main(void)
 
 ```cpp                   newArray.cpp
 #include <iostream>
-using namespace std;
 
-int main(void)
-{
+int main(void) {
   int * ptr_a;
-  ptr_a=new int[3];
+  ptr_a = new int[3];
   ptr_a[0] = ptr_a[1] = ptr_a[2] = 42;
-  cout<<"Werte hinter dem Pointer ptr_a:  ";
-  for (int i=0;i<3;i++) cout<<ptr_a[i]<<" ";
-  cout<<"\n";
-  cout<<"Aus Maus!\n";
+  std::cout << "Werte hinter dem Pointer ptr_a:  ";
+  for (int i=0;i<3;i++)
+    std::cout << ptr_a[i] << " ";
+  std::cout << "\n";
+  std::cout << "Aus Maus!\n";
   delete[] ptr_a;
   return 0;
 }
@@ -670,10 +652,8 @@ Der Vorteil der Referenzen gegenüber den Zeigern besteht in der einfachen Nutzu
 
 ```cpp referenzen.cpp
 #include <iostream>
-using namespace std;
 
-int main(void)
-{
+int main(void) {
   int  a = 1;  // Variable
   int &r = a;  // Referenz auf die Variable a
 
@@ -685,7 +665,7 @@ int main(void)
 
 Die Referenzen werden verwendet:
 
-+ zur "call bei reference"-Parameterübergabe
++ zur "call by reference"-Parameterübergabe
 + zur Optimierung des Programms, um Kopien von Objekten zu vermeiden
 + in speziellen Memberfunktionen, wie Copy-Konstruktor und Zuweisungsoperator
 + als sogenannte universelle Referenz (engl.: universal reference), die bei Templates einen beliebigen Parametertyp repräsentiert.
@@ -722,24 +702,26 @@ Haben Sie eine bessere Idee?
 
 ```cpp                             Pairing.cpp
 #include <iostream>
-using namespace std;
 #define ZIELWERT 18
 
-int main(void)
-{
+int main(void) {
   int a[] = {1, 2, 5, 7, 9, 10, 12, 13, 16, 17, 18, 21, 25};
-  int i_left=0;
-  int i_right=12;
-  cout<<"Value left "<<a[i_left]<<" right "<<a[i_right]<<"\n-----------------------\n";
-  do{
-    cout<<"Value left "<<a[i_left]<<" right "<<a[i_right];
-    if (a[i_right] + a[i_left] == ZIELWERT){
-       cout<<" -> TREFFER";
-    }
-    cout<<"\n";
-    if (a[i_right] + a[i_left] >= ZIELWERT) i_right--;
-    else i_left++;
-  }while (i_right != i_left);
+  int i_left = 0;
+  int i_right = 12;
+
+  std::cout << "Value left " << a[i_left] << " right " << a[i_right] << "\n-----------------------\n";
+  do {
+    std::cout << "Value left " << a[i_left] << " right " << a[i_right];
+    if (a[i_right] + a[i_left] == ZIELWERT)
+      std::cout << " -> TREFFER";
+    std::cout << "\n";
+
+    if (a[i_right] + a[i_left] >= ZIELWERT)
+      i_right--;
+    else
+      i_left++;
+  } while (i_right != i_left);
+
   return 0;
 }
 ```
@@ -762,12 +744,10 @@ Zugriff
 > Wie lautet die Ausgabe dieses Programms?
 ```cpp
 #include <iostream>
-using namespace std;
 
 int main(void) {
   float b[5] = {1.0, 4.8, 1.2, 42.0, 99.0};
-  cout << b[2];
-
+  std::cout << b[2] << "\n";
   return 0;
 }
 ```
@@ -778,11 +758,10 @@ int main(void) {
 > Wie lautet die Ausgabe dieses Programms?
 ```cpp
 #include <iostream>
-using namespace std;
 
-int main(){
+int main() {
   int a[5] = {5, 8};
-  cout << a[2];
+  std::cout << a[2] << "\n";
   return 0;
 }
 ```
@@ -809,18 +788,17 @@ input == "A[1][2] = 1;" || input == "A[1][2]= 1;" || input == "A[1][2] =1;" || i
 > Durch was muss `[_____]` ersetzt werden damit die Zahl `19` aus `m[4][5]` ausgegeben wird?
 ```cpp
 #include <iostream>
-using namespace std;
 
-int main(){
-  int m[4][5] = { {1,2,3,4,5},
-                  {6,7,8,9,10},
-                  {11,12,13,14,15},
-                  {16,17,18,19,20}};
-  cout << [_____]
+int main() {
+  int m[4][5] = {{1, 2, 3, 4, 5},
+                {6, 7, 8, 9, 10},
+                {11,12,13,14,15},
+                {16,17,18,19,20}};
+  std::cout << [_____] << "\n";
   return 0;
 }
 ```
-[[m[3][3];]]
+[[m[3][3]]]
 ************************************************************************
 
 {{2}}
@@ -828,13 +806,12 @@ int main(){
 > Wie lautet die Ausgabe dieses Programms?
 ```cpp
 #include <iostream>
-using namespace std;
 
-int main(){
-  int A[2][3]={{1,2,3},{4,5,6}};
-  int B[2][3]={{10,20,30},{40,50,60}};
+int main() {
+  int A[2][3] = {{1, 2, 3}, {4, 5, 6}};
+  int B[2][3] = {{10, 20, 30}, {40, 50, 60}};
 
-	cout << A[1][0] + B[0][1];
+  std::cout << A[1][0] + B[0][1] << "\n";
   return 0;
 }
 ```
@@ -851,11 +828,10 @@ int main(){
 > Wie lautet die Ausgabe dieses Programms?
 ```cpp
 #include <iostream>
-using namespace std;
 
-int main(){
+int main() {
   char c[] = "Peter wohnt irgendwo\0 in Freiberg.";
-  cout << c;
+  std::cout << c << "\n";
 }
 ```
 [[Peter wohnt irgendwo]]
@@ -890,12 +866,11 @@ Initialisierung
 > Wie lautet die Ausgabe dieses Programms?
 ```cpp
 #include <iostream>
-using namespace std;
 
-int main(){
+int main() {
   int a = 15;
   int *ptr_a = &a;
-  cout << *ptr_a;
+  std::cout << *ptr_a << "\n";
 
   return 0;
 }
@@ -919,12 +894,11 @@ Dynamische Datenobjekte
 > Wie lautet die Aussage dieses Programms?
 ```cpp
 #include <iostream>
-using namespace std;
 
-int main(){
-	int a = 10;
+int main() {
+  int a = 10;
   int *ptr_a = &a;
-  cout << ptr_a;
+  std::cout << ptr_a  << "\n";
   delete ptr_a;
   return 0;
 }
@@ -940,13 +914,12 @@ int main(){
 > Welche der im Beispiel benutzten Variablen ist eine Referenz?
 ```cpp
 #include <iostream>
-using namespace std;
 
-int main(){
-	int a = 10;
+int main() {
+  int a = 10;
   int &b = a;
   int *c = b;
-  cout << c;
+  std::cout << c << "\n";
   return 0;
 }
 ```
@@ -959,14 +932,12 @@ int main(){
 > Hier ist ein Programm mit Ausgabe vorgegeben. Was müsste statt `[_____]` ausgegeben werden?
 ```cpp
 #include <iostream>
-using namespace std;
 
-int main(void)
-{
+int main(void) {
   int  a = 1;
   int &r = a;
 
-  cout << "a: " << &a << " r: " << &r << endl;
+  std::cout << "a: " << &a << " r: " << &r << endl;
 }
 ```
 ```
@@ -980,14 +951,12 @@ a: [_____] r: 0x7ffdddd212fc
 > Hier ist ein Programm mit Ausgabe vorgegeben. Was müsste statt `[_____]` ausgegeben werden?
 ```cpp
 #include <iostream>
-using namespace std;
 
-int main(void)
-{
+int main(void) {
   int  a = 1;
   int &r = a;
 
-  cout << "a: " << a << " r: " << r << endl;
+  std::cout << "a: " << a << " r: " << r << "\n";
 }
 ```
 ```

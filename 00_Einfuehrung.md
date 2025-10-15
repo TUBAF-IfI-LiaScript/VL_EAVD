@@ -66,13 +66,12 @@ import: https://github.com/liascript/CodeRunner
 {{0-1}}
 Programme sind Anweisungslisten, die vom Menschen erdacht, auf einem Rechner zur
 Ausführung kommen. Eine zentrale Hürde ist dabei die Kluft zwischen menschlicher
-Vorstellungskraft und Logik, die **implizite Annahmen und Erfahrungen**
-einschließt und der **"stupiden" Abarbeitung von Befehlsfolgen** in einem
-Rechner.
+Vorstellungskraft die **implizite Annahmen und Erfahrungen** einschließt und Logik,
+der **"stupiden" Abarbeitung von Befehlsfolgen** in einem Rechner.
 
 {{0-1}}
 Programmiersprachen bemühen sich diese Lücke zu schließen und werden dabei von
-einer Vielzahl von Tools begleitet, diesen **Transformationsprozess**
+einer Vielzahl von Tools begleitet, die diesen **Transformationsprozess**
 unterstützen sollen.
 
 {{0-1}}
@@ -195,8 +194,8 @@ Stufen des Compile-Vorganges:
 #include <iostream>
 
 int main() {
-    std::cout << "Hello World!";
-    return 0;
+  std::cout << "Hello World!\n";
+  return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
@@ -204,7 +203,7 @@ int main() {
 | Zeile | Bedeutung                                                                             |
 |:------|:--------------------------------------------------------------------------------------|
 | 1 - 2 | Kommentar (wird vom Präprozessor entfernt)                                            |
-| 4     | Voraussetzung für das Einbinden von Befehlen der Standardbibliothek hier `std:cout()` |
+| 4     | Voraussetzung für das Einbinden von Befehlen der Standardbibliothek hier `std:cout`   |
 | 6     | Einsprungstelle für den Beginn des Programmes                                         |
 | 6 - 9 | Ausführungsblock der `main`-Funktion                                                  |
 | 7     | Anwendung eines Operators `<<` hier zur Ausgabe auf dem Bildschirm                    |
@@ -253,7 +252,7 @@ void loop() {
 int main() {
   int zahl;
   for (zahl=0; zahl<3;  zahl++){
-	    std::cout << "Hello World! ";
+	    std::cout << "Hello World!\n";
   }
 	return 0;
 }
@@ -263,7 +262,7 @@ int main() {
 
 ```cpp                     BadHelloWorld.cpp
 #include <iostream>
-int main() {int zahl; for (zahl=0; zahl<3;  zahl++){ std::cout << "Hello World! ";} return 0;}
+int main() {int zahl; for (zahl=0; zahl<3;  zahl++){ std::cout << "Hello World!\n";} return 0;}
 ```
 @LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
@@ -295,25 +294,23 @@ for (i = (numElementsReturned - 1); i >= 0; i--){
 // Karl Klammer, Oct. 2018
 // Version 109.1.12
 
-int main(){...}
+int main() {...}
 ```
 
 *3. Beschreibung eines Algorithmus*
 
 ```cpp
-/* Function:  approx_pi
- * --------------------
- * computes an approximation of pi using:
- *    pi/6 = 1/2 + (1/2 x 3/4) 1/5 (1/2)^3  + (1/2 x 3/4 x 5/6) 1/7 (1/2)^5 +
+/**
+ * @brief Computes an approximation of pi.
  *
- *  n: number of terms in the series to sum
+ * The approximation is calculated using
+ * pi/6 = 1/2 + (1/2 x 3/4) 1/5 (1/2)^3  + (1/2 x 3/4 x 5/6) 1/7 (1/2)^5 + …
  *
- *  returns: the approximate value of pi obtained by suming the first n terms
- *           in the above series
- *           returns zero on error (if n is non-positive)
+ * @param n Number of terms in the sum series.
+ *
+ * @return the approximate valuen of pi OR zero on error
  */
-
- double approx_pi(int n);
+double approx_pi(int n);
 ```
 
 In realen Projekten werden Sie für diese Aufgaben Dokumentationstools verwenden,
@@ -324,7 +321,7 @@ Schlüsselworte in den Kommentaren unterstützen ->
 *4. Debugging*
 
 ```cpp
-int main(){
+int main() {
   ...
   preProcessedData = filter1(rawData);
   // printf('Filter1 finished ... \n');
@@ -340,7 +337,7 @@ int main(){
 
 ```cpp
 x = x + 1;  /* increment the value of x */
-std::cout << "Hello World! "; // displays Hello world
+std::cout << "Hello World!\n"; // displays Hello world
 ```
 
 > _... over-commenting your code can be as bad as under-commenting it!_
@@ -369,7 +366,9 @@ try {
 
 } catch(e) {
 
-} finally { // should never happen }
+} finally {
+  // should never happen
+}
 ```
 
 [Sammlung von Kommentaren](https://fuzzzyblog.blogspot.com/2014/09/40-most-funny-code-comments.html)
@@ -407,8 +406,8 @@ Methodisches Vorgehen:
 #include <iostream>
 
 int mani() {
-    std::cout << "Hello World!";
-    return 0;
+  std::cout << "Hello World!";
+  return 0;
 }
 ```
 @LIA.evalWithDebug(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
@@ -419,8 +418,8 @@ int mani() {
 #include <iostream>
 
 int main()
-    std::cout << "Hello World!";
-    return 0;
+  std::cout << "Hello World!";
+  return 0;
 }
 ```
 @LIA.evalWithDebug(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
@@ -449,8 +448,8 @@ funktioniert.
 
 int main() {
   char zahl;
-  for (zahl=250; zahl<256; zahl++){
-	    std::cout << "Hello World!";
+  for (zahl=250; zahl<256; zahl++) {
+    std::cout << "Hello World!\n";
   }
 	return 0;
 }
@@ -469,7 +468,7 @@ Zwei Varianten der Umsetzung ... C++ vs. Python
 int main() {
   char zahl;
   for (int zahl=0; zahl<3; zahl++){
-	    std::cout << "Hello World! " << zahl << "\n";
+    std::cout << "Hello World! " << zahl << "\n";
   }
 	return 0;
 }
@@ -478,7 +477,7 @@ int main() {
 
 ```python
 for i in range(3):
-  print("Hallo World ", i)
+  print("Hallo World!", i)
 ```
 @LIA.eval(`["main.py"]`, `python3 -m compileall .`, `python3 main.py`)
 
@@ -497,7 +496,7 @@ int main() {
   int j = 4;
   i = i + j + 2;
 	std::cout << "Hello World ";
-  std::cout << i << "!";
+  std::cout << i << "!\n";
 	return 0;
 }
 ```

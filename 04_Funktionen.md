@@ -50,7 +50,6 @@ Erklären Sie die Idee hinter folgendem Code.
 #include <cmath>
 #include <iomanip>
 
-using namespace std;
 #define VALUECOUNT 17
 
 int main(void) {
@@ -62,28 +61,28 @@ int main(void) {
   int summe = 0;
   // Ergebnis Standardabweichung
   float abweichung = 0;
-  for (int i=0; i<VALUECOUNT; i++){
+  for (int i=0; i<VALUECOUNT; i++) {
     hist[a[i]]++;
     summe += a[i];
   }
   float mittelwert = summe / (float)VALUECOUNT;
-  for (int i=0; i<VALUECOUNT; i++){
+  for (int i=0; i<VALUECOUNT; i++) {
     abweichung += pow((a[i]-mittelwert),2.);
   }
   // Ausgabe
-  for (int i=0; i<12; i++){
+  for (int i=0; i<12; i++) {
      std::cout << std::setw(2) <<  i << " ";
   }
   std::cout << std::endl;
-  for (int i=0; i<12; i++){
+  for (int i=0; i<12; i++) {
      std::cout << std::setw(2) << a[i] << " ";
   }
   std::cout << std::endl;
   // Ausgabe Mittelwert
-  cout<<"Die Summe betraegt "<<summe<<", der Mittelwert "<<mittelwert<<"\n";
+  std::cout << "Die Summe betraegt " << summe << ", der Mittelwert " << mittelwert << "\n";
   // Ausgabe Standardabweichung
   float stdabw = sqrt(abweichung / VALUECOUNT);
-  cout<<"Die Standardabweichung der Grundgesamtheit betraegt "<<stdabw<<"\n";
+  std::cout << "Die Standardabweichung der Grundgesamtheit betraegt " << stdabw << "\n";
   return 0;
 }
 ```
@@ -136,7 +135,6 @@ möglicherweise wiederverwendbare Codeelemente zerlegen.
 ```cpp                          standardabweichung.cpp
 #include <iostream>
 
-using namespace std;
 // Funktion für den Mittelwert
 // Mittelwert = f_Mittelwert(daten)
 
@@ -181,7 +179,7 @@ int main(void) {
 > *you want to use a piece of it in several different contexts, consider*
 > *breaking up the function into smaller and more manageable pieces.*
 >
->[Google Sthttps://stackoverflow.com/questions/2485963/c-alignmtionen 
+> [Stackoverflow](https://stackoverflow.com/questions/2485963/c-alignmtionen)
 
 ![](https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif)
 
@@ -189,8 +187,8 @@ int main(void) {
 
 ```
 Rückgabedatentyp Funktionsname([Parameterliste]) {
-   /* Anweisungsblock mit Anweisungen */
-   [return Rückgabewert]
+  /* Anweisungsblock mit Anweisungen */
+  [return Rückgabewert]
 }
 ```
 
@@ -211,7 +209,7 @@ Rückgabedatentyp Funktionsname([Parameterliste]) {
   einen Datentyp und einen Namen spezifiziert werden. Mehrere Parameter
   werden durch Kommas getrennt.
 
-  Parameterliste ist optional, die Klammern jedoch nicht.  Alternative zur
+  Die Parameterliste ist optional, die Klammern jedoch nicht.  Alternative zur
   fehlenden Parameterliste ist die Liste aus einen Parameter vom Datentyp `void` ohne Angabe des Namen.
 
 * __Anweisungsblock__ - Der Anweisungsblock umfasst die im Rahmen der
@@ -229,22 +227,22 @@ int main (void) {
 ```
 
 ``` cpp
-double pow (double base, double exponent){
-   /* Anweisungsblock mit Anweisungen */
+double pow (double base, double exponent) {
+  /* Anweisungsblock mit Anweisungen */
 }
 
-//int y = pow(25.0,0.5));
+// double y = pow(25.0,0.5));
 ```
 
 ``` cpp
-void tauschen(int &var1,int &var2){
-   /* Anweisungsblock mit Anweisungen */
+void tauschen(int &var1,int &var2) {
+  /* Anweisungsblock mit Anweisungen */
 }
 ```
 
 ``` cpp
-int mittelwert(int * array){
-   /* Anweisungsblock mit Anweisungen */
+int mittelwert(int * array) {
+  /* Anweisungsblock mit Anweisungen */
 }
 ```
 
@@ -263,81 +261,79 @@ einer Anweisung, z.B. einer Zuweisung oder einer Ausgabeanweisung.
 ```cpp                              callAFunction.cpp
 #include <iostream>
 #include <cmath>
-using namespace std;
 
-void info(){
-    cout<<"Dieses Programm rundet Zahlenwerte.\n";
-    cout<<"-----------------------------------\n";
+void info() {
+  std::cout << "Dieses Programm rundet Zahlenwerte.\n";
+  std::cout << "-----------------------------------\n";
 }
 
-int runden(float a){
-    if (a < 0)
-       return (int)(a - 0.5);
-    else
-       return (int)(a + 0.5);
+int runden(float a) {
+  if (a < 0)
+    return (int)(a - 0.5);
+  else
+    return (int)(a + 0.5);
 }
 
-int main(void){
-    info();
-    float input = -8.4565;
-    cout<<"Eingabewert "<<input<<" - Ausgabewert "<<runden(input)<<"\n";
-    return 0;
+int main(void) {
+  info();
+  float input = -8.4565;
+  std::cout << "Eingabewert " << input << " - Ausgabewert " << runden(input) << "\n";
+  return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out -lm`, `./a.out`)
 
 Die Funktion `runden` nutzt die Funktionalität des Cast-Operators `int` aus.
 
-+ Wenn N eine positive Zahl ist, wird 0.5 addiert 
++ Wenn N eine positive Zahl ist, wird 0.5 addiert
 
-  + $15.2 + 0.5 = 15.7$ `int(15.7) = 15` 
-  + $15.7 + 0.5 = 16.2$ `int(16.2) = 16` 
+  + $15.2 + 0.5 = 15.7$ `(int)(15.7) = 15`
+  + $15.7 + 0.5 = 16.2$ `(int)(16.2) = 16`
 
-+ Wenn N eine negative Zahl ist, wird 0.5 subtrahiert 
++ Wenn N eine negative Zahl ist, wird 0.5 subtrahiert
 
-  + $-15.2 - 0.5 = -15.7$ `int(-15.7) = -15` 
-  + $-15.7 - 0.5 = -16.2$ `int(-16.2) = -16` 
+  + $-15.2 - 0.5 = -15.7$ `(int)(-15.7) = -15`
+  + $-15.7 - 0.5 = -16.2$ `(int)(-16.2) = -16`
 
 *******************************************************
 
                         {{1-2}}
 *******************************************************
 
-> __Hinweis:__ C++ unterstützt gleiche Codenahmen bei unterschiedlichen Parametern. Der Compiler "sucht sich" die passende Funktion aus. Der Mechanismus wird als _Funktionsüberladung_ bezeichnet. 
+> __Hinweis:__ C++ unterstützt gleiche Codenahmen bei unterschiedlichen Parametern. Der Compiler "sucht sich" die passende Funktion aus. Der Mechanismus wird als _Funktionsüberladung_ bezeichnet.
 
 ```cpp                              callAFunction.cpp
 #include <iostream>
 #include <cmath>
-using namespace std;
 
-void info(){
-    cout<<"Dieses Programm rundet Zahlenwerte.\n";
-    cout<<"-----------------------------------\n";
+void info() {
+  std::cout << "Dieses Programm rundet Zahlenwerte.\n";
+  std::cout << "-----------------------------------\n";
 }
 
-int runden(float a){
-    if (a < 0)
-       return (int)(a - 0.5);
-    else
-       return (int)(a + 0.5);
+int runden(float a) {
+  if (a < 0)
+    return (int)(a - 0.5);
+  else
+    return (int)(a + 0.5);
 }
 
-float rundenf(float a, int nachkomma){
-    float shifted= a* pow(10, nachkomma);
-    int result=0;
-    if (shifted < 0)
-    	  result = int(shifted -0.5);
-    else
-    		result = int(shifted +0.5);
-    return (float)result * pow(10, -nachkomma);
+float rundenf(float a, int nachkomma) {
+  float shifted = a * pow(10, nachkomma);
+  int result = 0;
+  if (shifted < 0)
+    result = int(shifted - 0.5);
+  else
+    result = int(shifted + 0.5);
+  return (float)result * pow(10, -nachkomma);
 }
 
-int main(void){
-    info();
-    float input = -8.4565;
-    cout<<"Eingabewert "<<input<<" - Ausgabewert "<<runden(input)<<"\n";
-    cout<<"Eingabewert "<<input<<" - Ausgabewert "<<rundenf(input,1)<<"\n";
-    return 0;
+int main(void) {
+  info();
+  float input = -8.4565;
+  std::cout << "Eingabewert " << input << " - Ausgabewert " << runden(input) << "\n";
+  std::cout << "Eingabewert " << input << " - Ausgabewert " << rundenf(input,1) << "\n";
+  return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out -lm`, `./a.out`)
@@ -352,15 +348,13 @@ int main(void){
 **Rückgabewert ohne Rückgabedefintion**
 
 ```cpp   return.cpp
-void foo()
-{
-	/* Code */
-	return 5; /* Fehler */
+void foo() {
+  /* Code */
+  return 5; /* Fehler */
 }
 
-int main(void)
-{
-  foo()
+int main(void) {
+  foo();
   return 0;
 }
 ```
@@ -372,10 +366,9 @@ int main(void)
 {{1}}
 ```cpp   returnII.cpp
 #include <iostream>
-using namespace std;
 
-void foo(){
-   cout<<"Ausgabe";
+void foo() {
+  std::cout << "Ausgabe";
 }
 
 int main(void) {
@@ -391,15 +384,14 @@ int main(void) {
 {{2}}
 ```cpp     conversion.cpp
 #include <iostream>
-using namespace std;
 
-float foo(){
-   return 3.123f;
+float pi() {
+  return 3.1415926f;
 }
 
 int main(void) {
-  int i = foo();
-  cout<<i<<"\n";
+  int i = pi();
+  std::cout << i << "\n";
   return 0;
 }
 ```
@@ -412,8 +404,8 @@ int main(void) {
 ```cpp    paramters.cpp
 #include <iostream>
 
-int foo(void){       // <- Die Funktion erwartet explizit keine Parameter
-   return 3;
+int foo(void) {       // <- Die Funktion erwartet explizit keine Parameter
+  return 3;
 }
 
 int main(void) {
@@ -429,12 +421,19 @@ int main(void) {
 
 {{4}}
 ```cpp    codeOrder.cpp
-int foo()
-{
-	return 5;
-  /* Code */   // Wird nie erreicht!
+#include <iostream>
+
+int foo() {
+  return 5;
+  std::cout << "foo!\n";   // Wird nie erreicht!
+}
+
+int main(void) {
+  int i = foo();
+  std::cout << i << "\n";
 }
 ```
+@LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
 {{5}}
 **Falsche Reihenfolgen der Parameter**
@@ -442,11 +441,10 @@ int foo()
 {{5}}
 ```cpp     conversion.cpp
 #include <iostream>
-using namespace std;
 
-void foo(int index, float wert){
-  cout<<"Index   -  Wert\n";
-  cout<<index<<"   - "<<wert<<"\n\n";
+void foo(int index, float wert) {
+  std::cout << "Index   -  Wert\n";
+  std::cout << index << "   - " << wert << "\n\n";
 }
 
 int main(void) {
@@ -462,18 +460,17 @@ int main(void) {
 
 ```cpp  experiments.cpp
 #include <iostream>
-using namespace std;
 
 // int foo(void); // Explizite Einführung der Funktion foo()
 
 int main(void) {
   int i = foo();       // <- Aufruf der Funktion
-  cout<<"i="<<i<<"\n";
+  std::cout << "i=" << i << "\n";
   return 0;
 }
 
-int foo(void){         // <- Definition der Funktion
-   return 3;
+int foo(void) {         // <- Definition der Funktion
+  return 3;
 }
 ```
 @LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
@@ -501,23 +498,21 @@ ist diese Möglichkeit sehr einschränkend.
 
 ```cpp          Student.cpp
 #include <iostream>
-using namespace std;
 
 #include <iostream>
-using namespace std;
 
 //           Rückgabe der Ergebnisse
-//  +------------------------------------+
-//  |                                    |
-   int add(int a, int b){ // <--+        |
-      return a+b;         //    | Aufruf |   
-   }                      //    | mit    |   
-                          //    | Para-  |   
-   int main(void) {       //    | metern |  
-     int i = add(5, 6);   //----+        |  
-//    ^                                  |  
-//    +----------------------------------+
-     cout<<"i="<<i<<"\n";
+//  +-------------------------------------+
+//  |                                     |
+   int add(int a, int b) { // <--+        |
+     return a + b;         //    | Aufruf |
+   }                       //    | mit    |
+                           //    | Para-  |
+   int main(void) {        //    | metern |
+     int i = add(5, 6);    //----+        |
+//    ^                                   |
+//    +-----------------------------------+
+     std::cout << "i=" << i << "\n";
      return 0;
    }
 ```
@@ -535,24 +530,23 @@ ursprünglichen Wert auswirken.
 
 ```cpp          Student.cpp
 #include <iostream>
-using namespace std;
 
 void doSomething(int a) {
-   // eine KOPIE von a wird um 1 erhöht
-   cout << ++a << " a in der Schleife\n";
+  // eine KOPIE von a wird um 1 erhöht
+  std::cout << ++a << " a in der Funktion\n";
 }
 
 int main(void) {
   int a = 5;
-  cout << a << " a in main\n";
+  std::cout << a << " a in main\n";
   doSomething(a);
-  cout << a << " a in main\n";
+  std::cout << a << " a in main\n";
   return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-> **Merke:** Die _Call-by-value-_Funktionen können den Wert der Variablen nicht verändern.
+> **Merke:** Die _Call-by-value-_Funktionen können den Wert der äußeren Variablen nicht verändern.
 
 ### Call-by-Reference
 
@@ -562,7 +556,7 @@ ursprünglichen Werte aus, es werden keine Kopien von Parametern angelegt.
 Funktion mehrere Rückgabewerte hat.
 
 > In C++ kann die "call-by-reference"- Parameterübergabe mit Hilfe der Referenzen oder Pointern
-realisiert werden. 
+realisiert werden.
 
 
                         {{0-1}}
@@ -571,18 +565,17 @@ realisiert werden.
 
 ```cpp                    Parameter_Reference_I.cpp
 #include <iostream>
-using namespace std;
 
-void inkrementieren(int &variable){
+void inkrementieren(int &variable) {
   variable++;
 }
 
 int main(void) {
-  int a=0;
+  int a = 0;
   inkrementieren(a);
-  cout<<"a = "<<a<<"\n";
+  std::cout << "a = " << a << "\n";
   inkrementieren(a);
-  cout<<"a = "<<a<<"\n";
+  std::cout << "a = " << a << "\n";
   return 0;
 }
 ```
@@ -596,20 +589,18 @@ werden können. Die Funktion hat somit quasi mehrere Ergebnisse.
 
 ```cpp               Parameter_Reference_II.cpp
 #include <iostream>
-#include <cmath>
-using namespace std;
 
-void tauschen(char &anna, char &hanna){
-  char aux=anna;
-  anna=hanna;
-  hanna=aux;
+void tauschen(char &anna, char &hanna) {
+  char aux = anna;
+  anna = hanna;
+  hanna = aux;
 }
 
 int main(void) {
-  char anna='A',hanna='H';
-  cout<<anna<<" und "<<hanna<<"\n";
+  char anna = 'A', hanna = 'H';
+  std::cout << anna << " und " << hanna << "\n";
   tauschen(anna,hanna);
-  cout<<anna<<" und "<<hanna<<"\n";
+  std::cout << anna << " und " << hanna << "\n";
   return 0;
 }
 ```
@@ -621,31 +612,31 @@ int main(void) {
 ******************************************************
 
 Es besteht ebenfalls die Möglichkeit, "call-by-reference"- Parameterübergabe mit Hilfe der Zeiger (Pointer)
-zu realisieren. Allerdings muss dann im Unterschied zur Referenz jeweils eine Dereferenzierung vorgenommen werden `*a = ...`. 
+zu realisieren. Allerdings muss dann im Unterschied zur Referenz jeweils eine Dereferenzierung vorgenommen werden `*a = ...`.
 
 ```cpp     Parameter_Pointer_I.cpp
 #include <iostream>
 #include <cmath>
-using namespace std;
 
-void runden(float* a){
-    if (*a < 0)
-       *a = (int)(*a - 0.5);
-    else
-       *a = (int)(*a + 0.5);
+void runden(float* a) {
+  if (*a < 0)
+    *a = (int)(*a - 0.5);
+  else
+    *a = (int)(*a + 0.5);
 }
 
 int main(void) {
   float value = -8.4565;
   float *pointer = &value;
+  std::cout << "Eingabewert " << value << " - Ausgabewert ";
   runden(pointer);
-  cout<<"Eingabewert "<<value<<" - Ausgabewert "<<*pointer<<"\n";
+  std::cout << *pointer << "\n";
   return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-Ein realistisches Beispiel könnte die Verwendung eines Arrays sein. 
+Ein realistisches Beispiel könnte die Verwendung eines Arrays sein.
 
 > Zur Erinnerung Eine Variable, die ein Array representiert zeigt auf den ersten Eintrag.
 
@@ -654,32 +645,31 @@ Dabei können zwei Varianten genutzt werden - die explizte Pointerschreibweise u
 ```cpp         Parameter_Pointer_II.cpp
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 //                 Variante 1
-double hypothenuse(double *lookup_sin, int winkel, double gegenkathete){
-  return gegenkathete/lookup_sin[winkel];
+double hypothenuse(double *lookup_sin, int winkel, double gegenkathete) {
+  return gegenkathete / lookup_sin[winkel];
 }
 /*
                    Variante 2
-double hypothenuse(double lookup_sin[], int winkel, double gegenkathete){
-  return gegenkathete/lookup_sin[winkel];
+double hypothenuse(double lookup_sin[], int winkel, double gegenkathete) {
+  return gegenkathete / lookup_sin[winkel];
 }
 */
 
 int main(void) {
   double sin_values[360] = {0};
-  for(int i=0; i<360; i++) {
-    sin_values[i] = sin(i*M_PI/180);
+  for (int i=0; i<360; i++) {
+    sin_values[i] = sin(i * M_PI / 180);
   }
-  cout<<"Größe des Arrays "<<sizeof(sin_values)<<"\n";
-  cout<<"Result =  "<<hypothenuse(sin_values, 30, 20)<<" \n";
+  std::cout << "Größe des Arrays " << sizeof(sin_values) / sizeof(double) << "\n";
+  std::cout << "Result =  " << hypothenuse(sin_values, 30, 20) << " \n";
   return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out -lm`, `./a.out`)
 
-Die Visualisierung des Zugriffs finden Sie in einem [Python-Tutor](https://pythontutor.com/render.html#code=%23include%20%3Ciostream%3E%0A%23include%20%3Ccmath%3E%0Ausing%20namespace%20std%3B%0A%0A%23define%20ARRAYSIZE%205%0A%0A//%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Variante%201%0Adouble%20hypothenuse%28double%20*lookup_sin,%20int%20winkel,%20double%20gegenkathete%29%7B%0A%20%20return%20gegenkathete/lookup_sin%5Bwinkel%5D%3B%0A%7D%0A/*%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Variante%202%0Adouble%20hypothenuse%28double%20lookup_sin%5B%5D,%20int%20winkel,%20double%20gegenkathete%29%7B%0A%20%20return%20gegenkathete/lookup_sin%5Bangle%5D%3B%0A%7D%0A*/%0A%0Aint%20main%28void%29%20%7B%0A%20%20double%20sin_values%5BARRAYSIZE%5D%20%3D%20%7B0%7D%3B%0A%20%20for%28int%20i%3D0%3B%20i%3CARRAYSIZE%3B%20i%2B%2B%29%20%7B%0A%20%20%20%20sin_values%5Bi%5D%20%3D%20sin%28i*M_PI/180%29%3B%0A%20%20%7D%0A%20%20cout%3C%3C%22Gr%C3%B6%C3%9Fe%20des%20Arrays%20%22%3C%3Csizeof%28sin_values%29%3C%3C%22%5Cn%22%3B%0A%20%20cout%3C%3C%22Result%20%3D%20%20%22%3C%3Chypothenuse%28sin_values,%204,%2020%29%3C%3C%22%20%5Cn%22%3B%0A%20%20return%200%3B%0A%7D&cppShowMemAddrs=true&cumulative=false&curInstr=12&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=cpp_g%2B%2B9.3.0&rawInputLstJSON=%5B%5D&textReferences=false) Beispiel.
+Die Visualisierung des Zugriffs finden Sie in einem [Python-Tutor](https://pythontutor.com/render.html#code=%23include%20%3Ciostream%3E%0A%23include%20%3Ccmath%3E%0A%0A//%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Variante%201%0Adouble%20hypothenuse%28double%20*lookup_sin,%20int%20winkel,%20double%20gegenkathete%29%20%7B%0A%20%20return%20gegenkathete%20/%20lookup_sin%5Bwinkel%5D%3B%0A%7D%0A/*%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Variante%202%0Adouble%20hypothenuse%28double%20lookup_sin%5B%5D,%20int%20winkel,%20double%20gegenkathete%29%20%7B%0A%20%20return%20gegenkathete%20/%20lookup_sin%5Bwinkel%5D%3B%0A%7D%0A*/%0A%0Aint%20main%28void%29%20%7B%0A%20%20double%20sin_values%5B360%5D%20%3D%20%7B0%7D%3B%0A%20%20for%20%28int%20i%3D0%3B%20i%3C360%3B%20i%2B%2B%29%20%7B%0A%20%20%20%20sin_values%5Bi%5D%20%3D%20sin%28i%20*%20M_PI%20/%20180%29%3B%0A%20%20%7D%0A%20%20std%3A%3Acout%20%3C%3C%20%22Gr%C3%B6%C3%9Fe%20des%20Arrays%20%22%20%3C%3C%20sizeof%28sin_values%29%20/%20sizeof%28double%29%20%3C%3C%20%22%5Cn%22%3B%0A%20%20std%3A%3Acout%20%3C%3C%20%22Result%20%3D%20%20%22%20%3C%3C%20hypothenuse%28sin_values,%2030,%2020%29%20%3C%3C%20%22%20%5Cn%22%3B%0A%20%20return%200%3B%0A%7D&cppShowMemAddrs=true&cumulative=false&curInstr=1&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=cpp_g%2B%2B9.3.0&rawInputLstJSON=%5B%5D&textReferences=false) Beispiel.
 
 ******************************************************
 
@@ -692,7 +682,6 @@ sollen Sie dabei aufpassen ...
 
 ```cpp                         returnReferenz.cpp
 #include <iostream>
-using namespace std;
 
 int& doCalc(int &wert) {
   int a = wert + 5;
@@ -701,21 +690,20 @@ int& doCalc(int &wert) {
 
 int main(void) {
   int b = 5;
-  cout<<"Irgendwas stimmt nicht "<<doCalc(b);
+  std::cout << "Irgendwas stimmt nicht " << doCalc(b) << "\n";
   return 0;
 }
 ```
 @LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
 Mit dem Beenden der Funktion werden deren lokale Variablen vom Stack gelöscht.
-Um diese Situation zu handhaben können Sie zwei Lösungsansätze realisieren.
+Um diese Situation zu handhaben können Sie mehrere Lösungsansätze realisieren.
 
 **Variante 1**  Sie übergeben den Rückgabewert in der Parameterliste.
 
 ```cpp          ReferenzAsParameter.cpp
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 void kreisflaeche(double durchmesser, double &flaeche) {
   flaeche = M_PI * pow(durchmesser / 2, 2);
@@ -726,7 +714,7 @@ int main(void) {
   double wert = 5.0;
   double flaeche = 0;
   kreisflaeche(wert, flaeche);
-  cout<<"Die Kreisfläche beträgt für d="<<wert<<"[m] "<<flaeche<<"[m²] \n";
+  std::cout << "Die Kreisfläche beträgt für d=" << wert << "[m] " << flaeche << "[m²] \n";
   return 0;
 }
 ```
@@ -740,10 +728,9 @@ int main(void) {
 ```cpp                        PointerInsteadOfReturnII.cpp
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 double* kreisflaeche(double durchmesser) {
-  double *flaeche=new double;
+  double *flaeche = new double;
   *flaeche = M_PI * pow(durchmesser / 2, 2);
   return flaeche;
 }
@@ -752,41 +739,61 @@ int main(void) {
   double wert = 5.0;
   double *flaeche;
   flaeche=kreisflaeche(wert);
-  cout<<"Die Kreisfläche beträgt für d="<<wert<<"[m] "<<*flaeche<<"[m²] \n";
+  std::cout << "Die Kreisfläche beträgt für d=" << wert << "[m] " << *flaeche << "[m²] \n";
   delete flaeche;
   return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out -lm`, `./a.out`)
 
+
+{{1}}
+**Variante 3** Sie geben den referenzierten Parameter zurück.
+
+{{1}}
+```cpp                        ReferencedParameter.cpp
+#include <iostream>
+
+struct Foo {
+  int index;
+  double value;
+};
+std::ostream &operator<<(std::ostream &stream, const Foo &foo) {
+  stream << "Foo{index = " << foo.index << ", value = " << foo.value << "}";
+  return stream;
+}
+
+int main(void) {
+  Foo a{0, 3.1415926};
+  std::cout << a << "\n";
+}
+```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
 ### Besonderheit Arrays
 
 ```cpp     conversion.c
 #include <iostream>
 #include <cstdlib>
-using namespace std;
 
-void printSizeOf(int intArray[])
-{
-    cout<<"sizeof of array as parameter: "<<sizeof(intArray)<<"\n";
+void printSizeOf(int intArray[]) {
+  std::cout << "sizeof of array as parameter: " << sizeof(intArray) << "\n";
 }
 
-void printLength(int intArray[])
-{
-    cout<<"Length of parameter: "<<sizeof(intArray) / sizeof(intArray[0])<<"\n";
+void printLength(int intArray[]) {
+  std::cout << "Length of parameter: " << sizeof(intArray) / sizeof(intArray[0]) << "\n";
 }
 
-int main()
-{
-    int array[] = { 0, 1, 2, 3, 4, 5, 6 };
+int main() {
+  int array[] = { 0, 1, 2, 3, 4, 5, 6 };
 
-    cout<<"sizeof of array: "<<sizeof(array)<<"\n";
-    printSizeOf(array);
+  std::cout << "sizeof of array: " << sizeof(array) << "\n";
+  printSizeOf(array);
 
-    cout<<"Length of array: "<< sizeof(array) / sizeof(array[0])<<"\n";
-    printLength(array);
-    
-    cout<<"Size of int pointer: "<< sizeof(int*) <<"\n";
+  std::cout << "Length of array: " << sizeof(array) / sizeof(array[0]) << "\n";
+  printLength(array);
+
+  std::cout << "Size of int pointer: " << sizeof(int*) << "\n";
 }
 ```
 @LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall -Wconversion main.cpp -o a.out`, `./a.out`)
@@ -821,15 +828,17 @@ Im Beispiel wird die kompilierte Version von mainArgumente.cpp intern mit `./a.o
 
 ```cpp                        mainArgumente.cpp
 #include <iostream>
-using namespace std;
 
 int main(int argc, char *argv[]) {
   for (int i=0;i<argc;i++)
-    cout<<argv[i]<<" ";
+    std::cout << argv[i] << " ";
   return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out -lm`, `./a.out 1 2 3 aus die Maus`)
+
+Der integrale Rückgabewert stellt traditionell einen Statuswert da, welcher ausdrückt, ob das Programm ohne Probleme lief (0) oder Fehler aufgetreten sind (1, 2, 3...).
+Die genaue Bedeutung letzterer Werte ist dabei dem Entwickler überlassen.
 
 ## Beispiel des Tages
 
@@ -838,44 +847,43 @@ int main(int argc, char *argv[]) {
 #include <cmath>
 #include <iomanip>
 
-using namespace std;
 
 double Mittelwert(int values[], int entries);
 int Summe(int *values, int entries);
 void Ausgabe(int *values, int entries);
 
-double Mittelwert(int values[], int entries){
+double Mittelwert(int values[], int entries) {
   double summe = Summe(values, entries);
   return summe / entries;
 }
 
-int Summe(int values[], int entries){
+int Summe(int values[], int entries) {
   int summe = 0;
-  for (int i=0; i<entries; i++){
+  for (int i=0; i<entries; i++) {
     summe += values[i];
   }
   return summe;
 }
 
-void Ausgabe(int values[], int entries){
-  for (int i=0; i<entries; i++){
-     std::cout << std::setw(2) <<  i << " ";
+void Ausgabe(int values[], int entries) {
+  for (int i=0; i<entries; i++) {
+    std::cout << std::setw(2) <<  i << " ";
   }
-  std::cout << std::endl;
-  for (int i=0; i<entries; i++){
-     std::cout << std::setw(2) << values[i] << " ";
+  std::cout << "\n";
+  for (int i=0; i<entries; i++) {
+    std::cout << std::setw(2) << values[i] << " ";
   }
-  std::cout << std::endl;
+  std::cout << "\n";
 }
 
 int main(void) {
-  int a [] = {1,2,3,3,4,2,3,4,5,6,7,8,9,1,2,3,3};
+  int a [] = {1, 2, 3, 3, 4, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 3};
   const int entries = sizeof(a)/sizeof(a[0]);
   Ausgabe(a, entries);
 
   int summe = Summe(a, entries);
   double mittelwert = Mittelwert(a, entries);
-  cout<<"Die Summe betraegt "<<summe<<", der Mittelwert "<<mittelwert<<"\n";
+  std::cout << "Die Summe betraegt " << summe << ", der Mittelwert " << mittelwert << "\n";
   return 0;
 }
 ```
@@ -889,7 +897,10 @@ Funktionsdefinitionen
 ===================
 
 > Wechen Rückgabewert liefert eine als `void` deklarierte Funktion?
-[( )] Es können alle Arten von Rückgabewerten zurückgegeben werden.
+[( )] Ganzzahlen
+[( )] Fließkommazahlen
+[( )] Zeichenketten
+[( )] Arrays
 [(X)] Es wird kein Wert zurückgegeben.
 
 {{1}}
@@ -913,12 +924,11 @@ Funktionsdefinitionen
 Aufruf von Fuktionen
 ===================
 
-> Wodurch muss `[_____]` ersetzt werden damit die Funktion `divi` ermittelt ob `a` ein Teiler von `b` ist? Die Lösung ist ohne Leerzeichen einzugeben.
+> Wodurch muss `[_____]` ersetzt werden, damit die Funktion `divi` ermittelt ob `a` ein Teiler von `b` ist? Die Lösung ist ohne Leerzeichen einzugeben.
 ```cpp
 #include <iostream>
-using namespace std;
 
-bool divi(int x, int y){
+bool divi(int x, int y) {
   if(x%y == 0)
     return true;
   else
@@ -929,10 +939,10 @@ int main() {
   int a = 11;
   int b = 1001;
   bool bdiv = [_____]
-  if(bdiv == 1)
-    cout <<  a << " ist ein Teiler von " << b << "." << endl;
+  if (bdiv == 1)
+    std::cout <<  a << " ist ein Teiler von " << b << "." << "\n";
   else
-    cout <<  a << " ist kein Teiler von " << b << "." << endl;
+    std::cout <<  a << " ist kein Teiler von " << b << "." << "\n";
 }
 ```
 [[divi(b,a);]]
@@ -943,10 +953,9 @@ Fehler
 > ist dieses Programm fehlerfrei?
 ```cpp
 #include <iostream>
-using namespace std;
 
-int foo(){
-   return 42;
+int foo() {
+  return 42;
 }
 
 int main(void) {
@@ -961,10 +970,9 @@ int main(void) {
 > Ist dieses Programm fehlerfrei?
 ```cpp
 #include <iostream>
-using namespace std;
 
-void foo(){
-   return 42;
+void foo() {
+  return 42;
 }
 
 int main(void) {
@@ -979,11 +987,10 @@ int main(void) {
 > Welche Fehler liegen bei diesem Programm vor?
 ```cpp
 #include <iostream>
-using namespace std;
 
-void foo(int index, float wert){
-  cout<<"Index   -  Wert\n";
-  cout<<index<<"   - "<<wert<<"\n\n";
+void foo(int index, float wert) {
+  std::cout << "Index   -  Wert\n";
+  std::cout << index << "   - " << wert << "\n\n";
   return index;
 }
 
@@ -1002,7 +1009,6 @@ Funktionsdeklaration
 > Ersetzen Sie `[_____]` durch eine explizite Deklaration der Funktion `hw`.
 ```cpp
 #include <iostream>
-using namespace std;
 
 [_____]
 
@@ -1012,7 +1018,7 @@ int main(void) {
 }
 
 void hw(void) {
-  cout << "Hello World!" << endl;
+  std::cout << "Hello World!" << endl;
   return;
 }
 ```
@@ -1040,17 +1046,16 @@ Parameterübergabe und Rückgabewerte
 > Wie lautet die Ausgabe dieses Programms?
 ```cpp
 #include <iostream>
-using namespace std;
 
-void f_a(int &variable){
+void f_a(int &variable) {
   variable++;
 }
 
-void f_b(int variable){
+void f_b(int variable) {
   variable--;
 }
 
-void f_c(int &variable){
+void f_c(int &variable) {
   variable = 18;
 }
 
@@ -1061,7 +1066,7 @@ int main(void) {
   f_b(a);
   f_b(a);
   f_a(a);
-  cout << a;
+  std::cout << a;
   return 0;
 }
 ```
@@ -1078,7 +1083,6 @@ Zeiger und Referenzen als Rückgabewerte
 > Wo liegt der Fehler im folgenden Programm?
 ```cpp
 #include <iostream>
-using namespace std;
 
 int& doCalc(int &wert) {
   int a = wert++;
@@ -1087,7 +1091,7 @@ int& doCalc(int &wert) {
 
 int main(void) {
   int b = 0;
-  cout << doCalc(b);
+  std::cout << doCalc(b);
   return 0;
 }
 ```
@@ -1098,7 +1102,6 @@ int main(void) {
 ```cpp
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 double* kugelvolumen(double durchmesser) {
   double *volumen = [_____]
@@ -1110,7 +1113,7 @@ int main(void) {
   double wert = 5.0;
   double *volumen;
   volumen = kugelvolumen(wert);
-  cout << "Das Kugelvolumen beträgt für d=" << wert << "[m] " << *volumen << "[m³] \n";
+  std::cout << "Das Kugelvolumen beträgt für d=" << wert << "[m] " << *volumen << "[m³] \n";
   delete volumen;
   return 0;
 }
@@ -1137,10 +1140,9 @@ int main(void) {
 > Wie lautet die Ausgabe dieses Programms wenn die kompilierte Version des Programms intern mit `./a.out 3 2 1 Maus im Haus` aufgerufen wird?
 ```cpp
 #include <iostream>
-using namespace std;
 
 int main(int argc, char *argv[]) {
-  cout << argv[4];
+  std::cout << argv[4];
   return 0;
 }
 ```

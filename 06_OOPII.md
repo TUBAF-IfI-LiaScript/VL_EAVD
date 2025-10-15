@@ -44,7 +44,7 @@ import: https://github.com/liascript/CodeRunner
 
 ## Rückblick
 
-> Unter einer Klasse (auch Objekttyp genannt) versteht man in der objektorientierten Programmierung ein abstraktes Modell bzw. einen Bauplan für eine Reihe von ähnlichen Objekten. 
+> Unter einer Klasse (auch Objekttyp genannt) versteht man in der objektorientierten Programmierung ein abstraktes Modell bzw. einen Bauplan für eine Reihe von ähnlichen Objekten.
 
 ![Prinzipdarstellung](images/06_OOPII/KlasseObjektBeispiel.png "Von Binz - Own Creation, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=62707688 ")
 
@@ -100,7 +100,7 @@ Alle sind als `public` markiert.
 ```cpp                     example.cpp
 #include <iostream>
 
-class Student{
+class Student {
   public:
     std::string name;
     int alter;
@@ -112,12 +112,16 @@ class Student{
     void ausgabeMethode(std::ostream& os); // Deklaration der Methode
 };
 
-Student::Student(std::string n): name(n), alter(8), ort("Freiberg"){}
+Student::Student(std::string n):
+  name(n), alter(8), ort("Freiberg")
+{}
 
-Student::Student(std::string n, int a, std::string o): name(n), alter(a), ort(o) {}
+Student::Student(std::string n, int a, std::string o):
+  name(n), alter(a), ort(o)
+{}
 
-void Student::ausgabeMethode(std::ostream& os){
-    os << name << " " << ort << " " << alter << "\n";
+void Student::ausgabeMethode(std::ostream& os) {
+  os << name << " " << ort << " " << alter << "\n";
 }
 
 int main()
@@ -137,7 +141,7 @@ int main()
 
 > **Aufgabe:** Schreiben Sie
 >
->   + eine Funktion `int vergleich(Student, Student)` und
+> + eine Funktion `int vergleich(Student, Student)` und
 >
 > + eine Methode `int Student::vergleich(Student)`,
 >
@@ -164,30 +168,30 @@ String c = a + b;    \\ hier werden mit dem Plus zwei Strings konkateniert
 Operatorüberladung ist Funktionsüberladung, wobei die Funktionen durch eine spezielle Namensgebung gekennzeichnet sind. Diese beginnen mit dem Schlüsselwort `operator`, das von dem Token für den jeweiligen Operator gefolgt wird.
 
 ```cpp
-class Matrix{
+class Matrix {
   public:
-    Matrix operator+(Matrix zweiterOperand){ ... }
-    Matrix operator/(Matrix zweiterOperand){ ... }
-    Matrix operator*(Matrix zweiterOperand){ ... }
+    Matrix operator+(Matrix zweiterOperand) { ... }
+    Matrix operator/(Matrix zweiterOperand) { ... }
+    Matrix operator*(Matrix zweiterOperand) { ... }
 }
 
-class String{
+class String {
   public:
-    String operator+(String zweiterString){ ... }
+    String operator+(String zweiterString) { ... }
 }
 ```
 
 Operatoren können entweder als Methoden der Klasse oder als globale Funktionen überladen werden. Die Methodenbeispiele sind zuvor dargestellt, analoge Funktionen ergeben sich zu:
 
 ```cpp
-class Matrix{
+class Matrix {
   public:
     ...
 }
 
-Matrix operator+(Matrix ersterOperand, Matrix zweiterOperand){ ... }
-Matrix operator/(Matrix ersterOperand, Matrix zweiterOperand){ ... }
-Matrix operator*(Matrix ersterOperand, Matrix zweiterOperand){ ... }
+Matrix operator+(Matrix ersterOperand, Matrix zweiterOperand) { ... }
+Matrix operator/(Matrix ersterOperand, Matrix zweiterOperand) { ... }
+Matrix operator*(Matrix ersterOperand, Matrix zweiterOperand) { ... }
 ```
 
 > **Merke:** Funktion oder Methode - welche Version sollte wann zum Einsatz kommen? Einstellige Operatoren `++` sollten Sie als Methode, zweistellige Operatoren ohne Manipulation der Operanden als Funktion implementieren. Für zweistellige Operatoren, die einen der Operanden verändern (`+=`), sollte als Methode realisiert werden.
@@ -206,18 +210,24 @@ class Rectangle {
   private:
     float width, height;
   public:
-    Rectangle(int w, int h): width{w}, height{h} {}
-    float area() {return width*height;}
+    Rectangle(int w, int h):
+      width{w}, height{h}
+    {}
+    float area() {
+      return width * height;
+    }
     Rectangle operator+=(Rectangle offset) {
-       float ratio = (offset.area() + this->area()) / this->area();
-       this->width = ratio *  this->width;
-       return *this;
+      float ratio = (offset.area() + this->area()) / this->area();
+      this->width = ratio *  this->width;
+      return *this;
     }
 };
 
-bool operator>(Rectangle a, Rectangle b){
-    if (a.area() > b.area()) return 1;
-    else return 0;
+bool operator>(Rectangle a, Rectangle b) {
+  if (a.area() > b.area())
+    return 1;
+  else
+    return 0;
 }
 
 int main () {
@@ -235,12 +245,17 @@ int main () {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-> **Merke:** Üblicherweise werden die Operanden bei der Operatorüberladung als Referenzen übergeben. Damit wird eine Kopie vermieden. In Kombination mit dem Schlüsselwort `const` kann dem Compiler angezeigt werden. dass keine Veränderung an den Daten vorgenommen wird. Sie müssen also nicht gespeichert werden.
+> **Merke:** Üblicherweise werden die Operanden, welche lediglich betrachtet werden, bei der Operatorüberladung als Referenzen übergeben. Damit wird eine Kopie vermieden.
+> In Kombination mit dem Schlüsselwort `const` kann dem Compiler angezeigt werden. dass keine Veränderung an den Daten vorgenommen wird. Sie müssen also nicht gespeichert werden.
+
+<!--- TODO: Aufgabe: Überlegen Sie sich, in welchen Situationen ein pass by reference eventuell doch sinnvoll wäre. --->
 
 ```
-bool operator>(const Rectangle& a, const Rectangle& b){
-    if (a.area() > b.area()) return 1;
-    else return 0;
+bool operator>(const Rectangle& a, const Rectangle& b) {
+  if (a.area() > b.area())
+    return 1;
+  else
+    return 0;
 }
 ```
 
@@ -254,7 +269,7 @@ wir den Abgleich des Namens und des Alters als ausreichend an.
 ```cpp                     Comparison.cpp
 #include <iostream>
 
-class Student{
+class Student {
   public:
     std::string name;
     int alter;
@@ -267,20 +282,23 @@ class Student{
     bool operator==(const Student&);
 };
 
-Student::Student(std::string n): name(n), alter(8), ort("Freiberg"){}
+Student::Student(std::string n):
+  name(n), alter(8), ort("Freiberg")
+{}
 
-Student::Student(std::string n, int a, std::string o): name(n), alter(a), ort(o) {}
+Student::Student(std::string n, int a, std::string o):
+  name(n), alter(a), ort(o)
+{}
 
-void Student::ausgabeMethode(std::ostream& os){
-    os << name << " " << ort << " " << alter << "\n";
+void Student::ausgabeMethode(std::ostream& os) {
+  os << name << " " << ort << " " << alter << "\n";
 }
 
-bool Student::operator==(const Student& other){
-  if ((this->name == other.name) && (this->alter == other.alter)){
+bool Student::operator==(const Student& other) {
+  if ((this->name == other.name) && (this->alter == other.alter))
     return true;
-  }else{
+  else
     return false;
-  }
 }
 
 int main()
@@ -294,11 +312,10 @@ int main()
   Student NochMalBernhard {"Cotta", 18, "Zillbach"};
   NochMalBernhard.ausgabeMethode(std::cout);
 
-  if (bernhard == NochMalBernhard){
-    std::cout << "Identische Studenten \n";
-  }else{
-    std::cout << "Ungleiche Identitäten \n";
-  }
+  if (bernhard == NochMalBernhard)
+    std::cout << "Identische Studenten\n";
+  else
+    std::cout << "Ungleiche Identitäten\n";
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
@@ -309,7 +326,7 @@ Eine besondere Form der Operatorüberladung ist der `<<`, mit dem die Ausgabe au
 ```cpp                     streamOperator.cpp
 #include <iostream>
 
-class Student{
+class Student {
   public:
     std::string name;
     int alter;
@@ -324,49 +341,54 @@ class Student{
     bool operator==(const Student&);
 };
 
-Student::Student(std::string n, int a, std::string o): name{n}, alter{a}, ort{o} {}
+Student::Student(std::string n, int a, std::string o):
+  name{n}, alter{a}, ort{o}
+{}
 
-std::ostream& operator<<(std::ostream& os, const Student& student)
-{
-    os << student.name << '/' << student.alter << '/' << student.ort;
-    return os;
+std::ostream& operator<<(std::ostream& os, const Student& student) {
+  os << student.name << '/' << student.alter << '/' << student.ort;
+  return os;
 }
 
-int main()
-{
+int main() {
   Student gustav = Student("Zeuner", 27, "Chemnitz");
   Student bernhard = Student( "Cotta", 18, "Zillbach");
-  std::cout << gustav;
+  std::cout << gustav << "\n";
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
+> __Beachte__: Innerhalb des `<<` Operanden wird normalerweise kein finales `"\n"` angehangen, sondern die Kontrolle über Zeilenumbrüche wird den Nutzern überlassen.
+
 Eine umfangreiche Diskussion zur Operatorüberladung finden Sie unter https://www.c-plusplus.net/forum/topic/232010/%C3%BCberladung-von-operatoren-in-c-teil-1/2
+
+Ebenso eine ausführliche Auskunft über Operatoren und ihre Eigenheiten: https://en.cppreference.com/w/cpp/language/operators.html
 
 ## Vererbung
 
-```cpp                     MultipleTypesOfPersons.cpp
+```cpp                     MultipleTypesOfPeople.cpp
 #include <iostream>
 
-class Student{
+class Student {
   public:
     std::string name;
     std::string ort;
     std::string studiengang;
 
-    Student(std::string n, std::string o, std::string sg): name{n}, ort{o}, studiengang{sg} {};
-    void printCertificate(std::ostream& os){
-          os << "Studentendatensatz: "  << name << " " << ort << " " << studiengang << "\n";
+    Student(std::string n, std::string o, std::string sg):
+      name{n}, ort{o}, studiengang{sg}
+    {}
+    void printCertificate(std::ostream& os) {
+      os << "Studentendatensatz: " << name << " " << ort << " " << studiengang << "\n";
     }
 };
 
-int main()
-{
+int main() {
   Student gustav = Student("Zeuner", "Chemnitz", "Mathematik");
   gustav.printCertificate(std::cout);
 
-  //Professor winkler = Professor("Winkler", "Freiberg");
-  //winkler.printCertificate(std::cout);
+  // Professor winkler = Professor("Winkler", "Freiberg");
+  // winkler.printCertificate(std::cout);
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
@@ -375,7 +397,7 @@ int main()
 
 ### Motivation
 
-> **Merke: ** Eine unserer Hauptmotivationen bei der "ordentlichen" Entwicklung von Code ist die Vermeidung von Codedopplungen!
+> **Merke:** Eine unserer Hauptmotivationen bei der "ordentlichen" Entwicklung von Code ist die Vermeidung von Codedopplungen!
 
 In unserem Code entstehen Dopplungen, weil bestimmte Variablen oder Memberfunktionen usw. mehrfach für individuelle Klassen Implementiert werden. Dies wäre für viele Szenarien analog der Fall:
 
@@ -391,23 +413,23 @@ In unserem Code entstehen Dopplungen, weil bestimmte Variablen oder Memberfunkti
 
 In C++ werden Vererbungsmechanismen folgendermaßen abgebildet:
 
-```cpp  
-class Fahrzeug{
+```cpp
+class Fahrzeug {
   public:
     int aktuellePosition[2];    // lat, long Position auf der Erde
-    std::string Zulassungsnummer;
-    Bool Fuehrerscheinpflichtig
+    std::string zulassungsnummer;
+    bool fuehrerscheinpflichtig
     ...
 };
 
-class Flugzeug: public Fahrzeug{
+class Flugzeug: public Fahrzeug {
   public:
-    int Flughoehe;
+    int flughoehe;
     void fliegen();
     ...
 };
 
-class Boot: public Fahrzeug{
+class Boot: public Fahrzeug {
   public:
     void schwimmen();
     ...
@@ -418,24 +440,24 @@ Die generellere Klasse `Fahrzeug` liefert einen Bauplan für die spezifischeren,
 
 Dabei können ganze Ketten von Vererbungen entstehen, wenn aus einem sehr allgemeinen Objekt über mehrere Stufen ein spezifischeres Set von Membern umgesetzt wird.
 
-```cpp  
-class Fahrzeug{
+```cpp
+class Fahrzeug {
   public:
     int aktuellePosition[2];    // lat, long Position auf der Erde
-    std::string Zulassungsnummer;
-    Bool Fuehrerscheinpflichtig
+    std::string zulassungsnummer;
+    bool fuehrerscheinpflichtig
     ...
 };
 
-class Automobil: public Fahrzeug{
+class Automobil: public Fahrzeug {
   public:
     void fahren();
-    int ZahlderRaeder;
-    int Sitze;
+    int zahlderRaeder;
+    int sitze;
     ...
 };
 
-class Hybrid: public Automobil{
+class Hybrid: public Automobil {
   public:
     void fahreElektrisch();
     ...
@@ -447,15 +469,17 @@ Was bedeutet das für unsere Implementierung von Studenten und Professoren?
 ```cpp                     Inheritance.cpp
 #include <iostream>
 
-class Student{
+class Student {
   public:
     std::string name;
     std::string ort;
     std::string studiengang;
 
-    Student(std::string n, std::string o, std::string sg): name{n}, ort{o}, studiengang{sg} {};
-    void printCertificate(std::ostream& os){
-          os << "Studentendatensatz: "  << name << " " << ort << " " << studiengang << "\n";
+    Student(std::string n, std::string o, std::string sg):
+      name{n}, ort{o}, studiengang{sg}
+    {};
+    void printCertificate(std::ostream& os) {
+      os << "Studentendatensatz: " << name << " " << ort << " " << studiengang << "\n";
     }
 };
 
@@ -482,38 +506,46 @@ Das Beispiel zeigt die Initialisierung der Membervariablen :
 
 // Vererbende Klasse Animal
 class Animal {
-public:
-    Animal(): name{"Animal"}, weight{0.0} {};
-    Animal(std::string _name, double _weight): name{_name}, weight{_weight} {};
+  public:
+    Animal():
+      name{"Animal"}, weight{0.0}
+    {}
+    Animal(std::string _name, double _weight):
+      name{_name}, weight{_weight}
+    {};
     void sleep () {
-      std::cout << name << " is sleeping!" << std::endl;
+      std::cout << name << " is sleeping!\n";
     }
+
     std::string name;
     double weight;
 };
 
 // Erbende Klasse Dog - Dog übernimmt die Methoden und Attribute von Animal
-class Dog : public Animal {
+class Dog: public Animal {
 public:
-    Dog(std::string name, double weight, int id): Animal(name, weight), id{id} {};
-    
+    Dog(std::string name, double weight, int id):
+      Animal(name, weight), id{id}
+    {};
+
     // Dog spezifische Methoden: bark() und top_speed()
     void bark() {
-      std::cout << "woof woof" << std::endl;
+      std::cout << "woof woof\n";
     }
     double top_speed() {
       if (weight < 40) return 15.5;
       else if (weight < 90) return 17.0;
       else return 16.2;
     }
+
     int id;
 };
 
-int main(){
+int main() {
     Dog dog = Dog("Rufus", 50.0, 2342);
     dog.sleep();
     dog.bark();
-    std::cout << dog.top_speed() << std::endl;
+    std::cout << dog.top_speed() << "\n";
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
@@ -525,7 +557,7 @@ Die Zugriffsattribute `public` und `private` kennen Sie bereits. Damit können w
 > **Wiederholungsaufgabe:** Verhindern Sie, dass
 >
 > + die Einträge von `id` im Nachhinein geändert werden können und
-> + das diese außerhalb der Klasse sichtbar sind. 
+> + das diese außerhalb der Klasse sichtbar sind.
 >
 > Welche zusätzlichen Methoden benötigen Sie dann?
 
@@ -534,16 +566,18 @@ Die Zugriffsattribute `public` und `private` kennen Sie bereits. Damit können w
 
 class Animal {
 public:
-    Animal(std::string name, int id): name{name}, id{id} {};
-    std::string name;
-    int id;
-    
+  Animal(std::string name, int id):
+    name{name}, id{id}
+  {}
+
+  std::string name;
+  int id;
 };
 
-int main(){
-    Animal fish = Animal("Nemo", 234242);
-    fish.id = 12345;
-    std::cout << fish.id << std::endl;
+int main() {
+  Animal fish = Animal("Nemo", 234242);
+  fish.id = 12345;
+  std::cout << fish.id << "\n";
 }
 ```
 @LIA.eval(`["main.c"]`, `g++ -Wall main.c -o a.out`, `./a.out`)
@@ -554,78 +588,82 @@ int main(){
 Wie wirkt sich das Ganze aber auf die Vererbung aus? Hierbei muss neben dem individuellen Zugriffsattribut auch der Status der Vererbung beachtet werden. Damit ergibt sich dann folgendes Bild:
 
 ```c++
-class A
-{
+class A {
 public:
-    int x;
+  int x;
 protected:
-    int y;
+  int y;
 private:
-    int z;
+  int z;
 };
 
-class B : public A
-{
-    // x is public
-    // y is protected
-    // z is not accessible from B
+class B : public A {
+  // x is public
+  // y is protected
+  // z is not accessible from B
 };
 
-class C : protected A
-{
-    // x is protected
-    // y is protected
-    // z is not accessible from C
+class C : protected A {
+  // x is protected
+  // y is protected
+  // z is not accessible from C
 };
 
-class D : private A    // 'private' is default for classes
-{
-    // x is private
-    // y is private
-    // z is not accessible from D
+class D : private A {   // 'private' is default for classes
+  // x is private
+  // y is private
+  // z is not accessible from D
 };
 ```
 
-Das Zugriffsattribut protected spielt nur bei der Vererbung eine Rolle. Innerhalb einer Klasse ist `protected` gleichbedeuted mit `private`. In der Basisklasse ist also ein Member geschützt und nicht von außen zugreifbar. Bei der Vererbung wird der Unterschied zwischen `private` und `protected` deutlich: Während `private` Member in erbenden Klassen nicht direkt verfügbar sind, kann auf die als `protected` deklariert zugegriffen werden.
+Das Zugriffsattribut `protected` spielt nur bei der Vererbung eine Rolle. Innerhalb einer Klasse ist `protected` gleichbedeuted mit `private`. In der Basisklasse ist also ein Member geschützt und nicht von außen zugreifbar. Bei der Vererbung wird der Unterschied zwischen `private` und `protected` deutlich: Während `private` Member in erbenden Klassen nicht direkt verfügbar sind, kann auf die als `protected` deklariert zugegriffen werden.
 
 Entsprechend muss man auch die Vererbungskonstellation berücksichtigen, wenn man festlegen möchte ob ein Member gar nicht (`private`), immer (`public`) oder nur im Vererbungsverlauf verfügbar sein (`protected`) soll.
 
 
 ********************************************************************************
 
-### Überschreiben von Methoden der Basisklasse
+### Überschreiben von Methoden der Basisklasse (Polymorphie)
 
 Die grundsätzlicher Idee bezieht sich auf die Implementierung "eigener" Methoden gleicher Signatur in den abgeleiteten Klassen. Diese implementieren dann das spezifische Verhalten der jeweiligen Objekte.
 
 ```cpp                     Inheritance.cpp
 #include <iostream>
 
-class Person{
+class Person {
   public:
     std::string name;
     std::string ort;
 
-    Person(std::string n, std::string o): name{n}, ort{o} {};
-    void printData(std::ostream& os){
-        os << "Datensatz: "  << name << " " << ort << "\n";
+    Person(std::string n, std::string o):
+      name{n}, ort{o}
+    {}
+    void printData(std::ostream& os) {
+      os << "Datensatz: "  << name << " " << ort << "\n";
     }
 };
 
-class Student : public Person{
+class Student: public Person {
   public:
-    Student(std::string n, std::string o, std::string sg): Person(n, o), studiengang{sg}{};
     std::string studiengang;
-    void printData(std::ostream& os){
-        os << "Student Datensatz: "  << name << " " << ort << "\n";
+
+    Student(std::string n, std::string o, std::string sg):
+      Person(n, o), studiengang{sg}
+    {}
+    void printData(std::ostream& os) {
+      os << "Student Datensatz: "  << name << " " << ort << "\n";
     }
 };
 
-class Professor : public Person{
+class Professor: public Person {
   public:
-    Professor(std::string n, std::string o, int id): Person(n, o), id{id}{};
     int id;
-    void printData(std::ostream& os){
-        os << "Prof. Datensatz: "  << name << " " << ort << "\n";
+
+    Professor(std::string n, std::string o, int id):
+      Person(n, o), id{id}
+    {}
+    void printData(std::ostream& os) {
+      os << "Prof. Datensatz: "  << name << " " << ort << "\n";
     }
 };
 
@@ -633,12 +671,14 @@ int main()
 {
   Student *gustav = new Student("Zeuner", "Chemnitz", "Mathematik");
   gustav->printData(std::cout);
+  delete gustav;
 
   Professor *winkler = new Professor("Winkler", "Freiberg", 234234);
   winkler->printData(std::cout);
+  delete winkler;
 }
 ```
-@LIA.eval(`["main.cpp"]`, `g++ >
+@LIA.eval(`["main.c"]`, `g++ -Wall main.c -o a.out`, `./a.out`)
 
 Entwerfen Sie eine Klasse, die das Verhalten einer Ampel mit den notwendigen
 Zuständen modelliert. Welche Methoden sollten zusätzlich in die Klasse aufgenommen werden?
@@ -655,12 +695,14 @@ class Ampel {
 private:
     int redPin, yellowPin, greenPin;
     int state = 0;
-	
+
 public:
-    Ampel(int red, int yellow, int green): redPin{red}, yellowPin{yellow}, greenPin{green} {
-    	  pinMode(red, OUTPUT);
-        pinMode(yellow, OUTPUT);
-        pinMode(green, OUTPUT);
+    Ampel(int red, int yellow, int green):
+      redPin{red}, yellowPin{yellow}, greenPin{green}
+    {
+      pinMode(red, OUTPUT);
+      pinMode(yellow, OUTPUT);
+      pinMode(green, OUTPUT);
     };
     void activateRed() {
       digitalWrite(redPin, HIGH);
@@ -718,34 +760,36 @@ Konzept
 
 class Vektor {
   public:
-	  int x = 0, y = 0;
+    int x = 0, y = 0;
 
     Vektor(int x, int y);
-	
-	  Vektor operator+(const Vektor& vek_tmp);
 
-	  void printVektor(){
-      std::cout << x << ", " << y;
-      }
+    Vektor operator+(const Vektor& vek_tmp);
+
+    void printVektor() {
+      std::cout << x << ", " << y << "\n";
+    }
 };
 
-Vektor::Vektor(int x, int y): x(x), y(y) {}
+Vektor::Vektor(int x, int y):
+  x(x), y(y)
+{}
 
-Vektor Vektor::operator+(const Vektor& vek_tmp){
-		  Vektor vek_loe(0, 0);
-		  vek_loe.x = this->x + vek_tmp.x;
-		  vek_loe.y = this->y + vek_tmp.y;
-		  return vek_loe;
-	  }
+Vektor Vektor::operator+(const Vektor& vek_tmp) {
+  Vektor vek_loe(0, 0);
+  vek_loe.x = this->x + vek_tmp.x;
+  vek_loe.y = this->y + vek_tmp.y;
+  return vek_loe;
+}
 
-int main(){
-	Vektor v1(4, 7), v2(10, 9);
-	Vektor v3 = v1 + v2;
-	v3.printVektor();
+int main() {
+  Vektor v1(4, 7), v2(10, 9);
+  Vektor v3 = v1 + v2;
+  v3.printVektor();
 }
 ```
 [[14, 16]]
-[[?]] In diesem Beispiel sollen zwei Vektoren addiert werden. Im nächsten Tipp steht eine genauere Erklärung der Operatorüberladung anhand dieses Beispiels. 
+[[?]] In diesem Beispiel sollen zwei Vektoren addiert werden. Im nächsten Tipp steht eine genauere Erklärung der Operatorüberladung anhand dieses Beispiels.
 [[?]] `this->x` und `this->y` sind die Datenfelder des Objektes vor dem Operator (in der `main`-Funktion des Vektors `v1`). Der Vektor `v2`, der hinter dem Operator in der `main`-Funktion steht, wird an die Methode übergeben. `vek_tmp.x` und `vek_tmp.x` sind hier die Datenfelder des Vektors `v2`. Der neue Vektor `vek_loe` entsteht infolge der Addition und wird zurückgegeben.
 **************************************************************************
 
@@ -756,7 +800,7 @@ Anwendung
 ```cpp
 #include <iostream>
 
-class Ort{
+class Ort {
   public:
     std::string name;
     std::string bundesland;
@@ -767,18 +811,20 @@ class Ort{
     Ort(std::string n, std::string b, int e);
 };
 
-Ort::Ort(std::string n, std::string b, int e): name{n}, bundesland{b}, einwohner{e} {}
+Ort::Ort(std::string n, std::string b, int e):
+  name{n}, bundesland{b}, einwohner{e}
+{}
 
 std::ostream& operator<<(std::ostream& os, const Ort& ort)
 {
-    os << ort.name << ", " << ort.bundesland << ", " << ort.einwohner;
-    return os;
+  os << ort.name << ", " << ort.bundesland << ", " << ort.einwohner;
+  return os;
 }
 
 int main()
 {
   Ort Freiberg = Ort("Freiberg", "Sachsen" , 41823);
-  std::cout << Freiberg;
+  std::cout << Freiberg << "\n";
 }
 ```
 [[Freiberg, Sachsen, 41823]]
@@ -796,7 +842,7 @@ Implementierung in C++
 ```cpp
 #include <iostream>
 
-class Fahrzeug{
+class Fahrzeug {
   public:
     int aktuellePosition[2];
     std::string Zulassungsnummer;
@@ -831,17 +877,25 @@ input == "class Flugzeug: public Fahrzeug" || input == "class Flugzeug:public Fa
 
 class Fahrzeug {
   public:
-    Fahrzeug(): name{"Fahrzeug"}{};
-    Fahrzeug(std::string _name): name{_name}{};
+    Fahrzeug():
+      name{"Fahrzeug"}
+    {}
+    Fahrzeug(std::string _name):
+      name{_name}
+    {}
     void defekt() {
-      std::cout << name << " muss in die Werkstatt.";
+      std::cout << name << " muss in die Werkstatt.\n";
     }
+
     std::string name;
 };
 
 class Auto: public Fahrzeug {
   public:
-    Auto(std::string name, int ps): Fahrzeug(name), ps{ps} {};
+    Auto(std::string name, int ps):
+      Fahrzeug(name), ps{ps}
+    {};
+
     int ps = 0;
 };
 
@@ -849,7 +903,7 @@ int main() {
   Auto auto1 = Auto("Peters Auto", 100);
   auto1.defekt();
   return 0;
-} 
+}
 ```
 [[Peters Auto muss in die Werkstatt.]]
 **************************************************************************
@@ -857,7 +911,7 @@ int main() {
 Vererbungsattribute
 -----------------------
 
-> Welche Zugriffspezifizierer sind für die Mitglieder einer Basisklasse zu verwenden damit die folgenden Aussagen zutreffen? 
+> Welche Zugriffspezifizierer sind für die Mitglieder einer Basisklasse zu verwenden damit die folgenden Aussagen zutreffen?
 [[`private`]  [`protected`] [`public`]]
 [( )          ( )           (X)       ] Zugriff ist aus einer beliebigen Klasse möglich.
 [(X)          ( )           ( )       ] Zugriff ist nur innerhalb der Basisklasse möglich.
@@ -889,14 +943,14 @@ Polymorphie
 class Basisklasse {
   public:
     void ausgabe() {
-      std::cout << "Ausgabe1";
+      std::cout << "Ausgabe1\n";
     }
 };
 
 class Ableitungsklasse : public Basisklasse {
   public:
     void ausgabe() {
-      std::cout << "Ausgabe2";
+      std::cout << "Ausgabe2\n";
     }
 };
 

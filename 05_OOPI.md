@@ -50,7 +50,7 @@ import: https://github.com/liascript/CodeRunner
 
 __Beispielhafte Klausuraufgabe__
 
-_Die Zustimmung (in Prozent) für die Verwendung der künstlichen Intelligenz im Pflegebereich unter der Bevölkerung von Mauritius und Réunion soll vergleichend betrachtet werden. Die Ergebnisse der Umfragen für die Jahre 2010 bis 2020 (je ein Wert pro Jahr) in zwei Arrays erfasst werden (je ein Array pro Insel) und in einem Programm ausgewertet werden._
+_Die Zustimmung (in Prozent) für die Verwendung der künstlichen Intelligenz im Pflegebereich unter der Bevölkerung von Mauritius und Réunion soll vergleichend betrachtet werden. Die Ergebnisse der Umfragen für die Jahre 2010 bis 2020 (je ein Wert pro Jahr) sollen in zwei Arrays erfasst werden (je ein Array pro Insel) und in einem Programm ausgewertet werden._
 
 + _Für beide Inseln soll aus den in Arrays erfassten Werten je ein Mittelwert berechnet werden. Schreiben Sie dazu eine Funktion, die ein Array übergeben bekommt und einen Mittelwert als ein Ergebnis an die main-Funktion zurück liefert. Rufen Sie die Funktion in der main-Funktion für jedes beider Arrays auf und geben Sie die Mittelwerte in der main-Funktion aus._
 + _Schreiben Sie eine weitere Funktion, die die korrespondierenden Werte beider Arrays miteinander vergleicht. Geben Sie für jedes Jahr aus, auf welcher Insel die Zustimmung größer war, bei den gleichen Werte ist eine entsprechende Meldung auszugeben. Rufen Sie die Funktion in der main-Funktion auf._
@@ -67,11 +67,11 @@ _Die Zustimmung (in Prozent) für die Verwendung der künstlichen Intelligenz im
 
 Welche zwei Elemente machen eine solche Untersuchung aus?
 
-* Daten 
+* Daten
 
-   * Name 
+   * Name
    * Geburtsdatum
-   * Gehalt 
+   * Gehalt
    * ...
 
 * Funktionen
@@ -81,19 +81,18 @@ Welche zwei Elemente machen eine solche Untersuchung aus?
    * ...
 
 
-Wir entwerfen also eine ganze Sammlung von Funktionen wie zum Beispiel für `alterbestimmen()`:
+Wir entwerfen also eine ganze Sammlung von Funktionen wie zum Beispiel `alterbestimmen()`:
 
 ```cpp
 int alterbestimmen(int tag, int monat, int jahr,
-                   int akt_tag, int akt_monat, int akt_jahr)
-{
+                   int akt_tag, int akt_monat, int akt_jahr) {
   //TODO
 }
 
-int main(){
+int main() {
   int tag, monat, jahr;
   int akt_tag, akt_monat, akt_jahr;
-  int alter=alterbestimmen(tag,monat,jahr,akt_tag,akt_monat,akt_jahr);
+  int alter = alterbestimmen(tag, monat, jahr, akt_tag, akt_monat, akt_jahr);
 }
 ```
 
@@ -104,7 +103,7 @@ int main(){
                               {{1-2}}
 **************************************************************************
 
-+ lange Parameterliste bei der Funktionen
++ lange Parameterliste bei der Funktion
 + viele Variablen
 + der inhaltliche Zusammenhang der Daten ist nur schwer zu erkennen
 
@@ -122,17 +121,15 @@ members) bezeichnet.
 Beispiele:
 
 ```cpp
-struct datum
-{
+struct Datum {
   int tag;
   char monat[10];
   int jahr;
 };
 
 
-struct Student
-{
-  int Matrikel;
+struct Student {
+  int matrikel;
   char name[20];
   char vorname[25];
 };  // <- Hier steht ein Semikolon!
@@ -143,18 +140,18 @@ struct Student
 Und wie erzeuge ich Variablen dieses erweiterten Types, wie werden diese
 initialisiert und wie kann ich auf die einzelnen Komponenten zugreifen?
 
-Der Bespiel zeigt, dass die Definition der Variable unmittelbar nach der
+Das Bespiel zeigt, dass die Definition der Variable unmittelbar nach der
 `struct`-Definition oder mit einer gesonderten Anweisung mit einer vollständigen,
-partiellen Initialisierung bzw. ohne Initialisierung erfolgen kann.
+partiellen oder ohne Initialisierung erfolgen kann.
 
 Die nachträgliche Veränderung einzelner Komponenten ist über Zugriff mit Hilfe
 des Punkt-Operators möglich.
 
 ```cpp                           structExample.c
 #include <iostream>
-#include <cstring> 
+#include <cstring>
 
-struct datum                                        // <- Deklaration
+struct Datum                                        // <- Deklaration
 {
   int tag;
   char monat[10];
@@ -162,23 +159,23 @@ struct datum                                        // <- Deklaration
 } geburtstag_1 = {18, "April", 1986};               // <- Initialisierung
                                                     //    globale Variable geburtstag_1
 
-void print_date(struct datum day){
-	  std::cout << "Person A wurde am " 
-	            << day.tag << ". " 
-	            << day.monat << " " 
-	            << day.jahr << " geboren." 
-	            << std::endl;
+void print_date(struct Datum day) {
+  std::cout << "Person A wurde am "
+            << day.tag << ". "
+            << day.monat << " "
+            << day.jahr << " geboren."
+            << "\n";
 }
 
 int main() {
-  struct datum geburtstag_2 = {};                   // <- Initialisierung
+  struct Datum geburtstag_2 = {};                   // <- Initialisierung
                                                     //    Variable geburtstag_2
   geburtstag_2.tag = 13;                            // Zuweisungen
-  geburtstag_2.jahr =1803;
+  geburtstag_2.jahr = 1803;
   strcpy(geburtstag_2.monat, "April");
 
   // Unvollstaendige Initialisierung
-  struct datum geburtstag_3 ={.monat = "September"}; // <- partielle Initialisierung
+  struct Datum geburtstag_3 = {.monat = "September"}; // <- partielle Initialisierung
 
   print_date(geburtstag_1);
   print_date(geburtstag_2);
@@ -199,23 +196,23 @@ aufwändigerer Vergleich der `char arrays`.
 
 ```cpp                           structExample.c
 #include <iostream>
-#include <cstring> 
+#include <cstring>
 
-struct datum                                        // <- Deklaration
+struct Datum                                        // <- Deklaration
 {
   int tag;
   int monat;
   int jahr;
-}; 
+};
 
 int main() {
-  struct datum person_1 =  {10, 1, 2013};
-  struct datum person_2 =  {10, 3, 1956};
-  
+  struct Datum person_1 =  {10, 1, 2013};
+  struct Datum person_2 =  {10, 3, 1956};
+
   if ((person_1.tag == person_2.tag) && (person_1.monat == person_2.monat))
-      printf("Oha, der gleiche Geburtstag im Jahr!\n");
+    std::cout << "Oha, der gleiche Geburtstag im Jahr!\n";
   else
-      printf("Ungleiche Geburtstage!\n");
+    std::cout << "Ungleiche Geburtstage!\n";
   return 0;
 }
 ```
@@ -228,33 +225,32 @@ Natürlich lassen sich die beiden erweiterten Datenformate auf der Basis von
 
 ```cpp                    ArraysOfStructs.cpp
 #include <iostream>
-#include <cstring> 
+#include <cstring>
 
-struct datum    
-{
+struct Datum {
   int tag;
   int monat;
   int jahr;
-}; 
+};
 
-void print_date(struct datum day){
-	  std::cout << "Person A wurde am " 
-	            << day.tag << ". " 
-	            << day.monat << " " 
-	            << day.jahr << " geboren." 
-	            << std::endl;
+void print_date(struct Datum day) {
+  std::cout << "Person A wurde am "
+            << day.tag << ". "
+            << day.monat << " "
+            << day.jahr << " geboren."
+            << "\n";
 }
 
 int main() {
 
-  struct datum geburtstage [3] = {{18, 4, 1986},
+  struct Datum geburtstage[3] = {{18, 4, 1986},
                                  {12, 5, 1820}};
 
   geburtstage[2].tag = 5;
   geburtstage[2].monat = 9;
   geburtstage[2].jahr = 1905;
 
-  for (long unsigned int i=0; i<sizeof(geburtstage)/sizeof(datum); i++)
+  for (long unsigned int i = 0; i < sizeof(geburtstage)/sizeof(struct Datum); i++)
     print_date(geburtstage[i]);
 
   return 0;
@@ -267,26 +263,27 @@ int main() {
 > Mit Blick auf unsere Eingangsfragestellung könnte die Lösung also wie folgt aussehen:
 
 ```cpp
-struct Datum{           // hier wird ein neuer Datentyp definiert
-    int tag, monat, jahr;
+struct Datum              // hier wird ein neuer Datentyp definiert
+{
+  int tag, monat, jahr;
 };
 
-int alterbestimmen(struct Datum geb_datum, struct Datum akt_datum)
-{
+int alterbestimmen(struct Datum geb_datum, struct Datum akt_datum) {
   //TODO
   return 0;
 }
 
-int main(){       
+int main() {
   Datum geburtsdatum;
-  Datum akt_datum;        // ... und hier wird eine Variable des 
-                          // Typs angelegt 
+  Datum akt_datum;        // ... und hier wird eine Variable des
+                          // Typs angelegt
   geburtsdatum.tag = 12;  // ... und "befüllt"
   geburtsdatum.monat = 3;
   geburtsdatum.jahr = 1920;
-  int alter=alterbestimmen(geburtsdatum, akt_datum);
+  int alter = alterbestimmen(geburtsdatum, akt_datum);
 }
 ```
+> __Hinweis__: Die angabe des Schlüsselworts `struct` bei der Deklaration von Variablen des Typs `Datum` ist zwingend in C und optional in C++.
 
 > Was gefällt ihnen an diesem Ansatz nicht?
 
@@ -303,43 +300,41 @@ int main(){
 > Die objektorientierte Programmierung (OOP) ist ein Programmierparadigma, das auf dem Konzept der "Objekte" basiert, die Daten und Code enthalten können: Daten in Form von Feldern (oft als Attribute oder Eigenschaften bekannt) und Code in Form von Prozeduren (oft als Methoden bekannt).
 
 ```cpp
-struct Datum{
-    int tag,monat,jahr;
-    int alterbestimmen(Datum akt_datum)
-    {
-      //hier sind tag, monat und jahr bereits bekannt
-      //TODO
-    }
-}
+struct Datum {
+  int tag, monat, jahr;
+  int alterbestimmen(Datum akt_datum) {
+    //hier sind tag, monat und jahr bereits bekannt
+    //TODO
+  }
+};
 
-int main(){
+int main() {
   Datum geburtstdatum;
   Datum akt_datum;
-  int alter=geburtstdatum.alterbestimmen(akt_datum);
+  int alter = geburtstdatum.alterbestimmen(akt_datum);
 }
 ```
 C++ sieht vor als Datentyp für Objekte `struct`- und `class` - Definitionen. Der Unterschied wird später geklärt, vorerst verwenden wird nur die `class` - Definitionen.
 
 ```cpp
-class Datum{
-public:
-    int tag,monat,jahr;
-    int alterbestimmen(Datum akt_datum)
-    {
+class Datum {
+  public:
+    int tag, monat, jahr;
+    int alterbestimmen(Datum akt_datum) {
       //hier sind tag, monat und jahr bereits bekannt
       //TODO
     }
-}
+};
 
-int main(){
+int main() {
   Datum geburtstdatum;
   Datum akt_datum;
-  int alter=geburtstdatum.alterbestimmen(akt_datum);
+  int alter = geburtstdatum.alterbestimmen(akt_datum);
 }
 ```
-Ein Merkmal von Objekten ist, dass die eigenen Prozeduren eines Objekts auf die Datenfelder seiner selbst zugreifen und diese oft verändern können - Objekte haben somit eine Vorstellung davon oder von sich selbst :-).
+Ein Merkmal von Objekten ist, dass die eigenen Prozeduren eines Objekts auf die Datenfelder seiner selbst zugreifen und diese oft verändern können - Objekte haben somit eine Vorstellung von sich selbst :-).
 
-Ein OOP-Computerprogramm kombiniert Objekt und lässt sie interagieren. Viele der am weitesten verbreiteten Programmiersprachen (wie C++, Java, Python usw.) sind Multi-Paradigma-Sprachen und unterstützen mehr oder weniger objektorientierte Programmierung, typischerweise in Kombination mit imperativer, prozeduraler Programmierung.
+Ein OOP-Computerprogramm kombiniert Objekte und lässt sie interagieren. Viele der am weitesten verbreiteten Programmiersprachen (wie C++, Java, Python usw.) sind Multi-Paradigmen-Sprachen und unterstützen mehr oder weniger objektorientierte Programmierung, typischerweise in Kombination mit imperativer, prozeduraler Programmierung.
 
                              {{1-2}}
 **************************************************************************
@@ -348,16 +343,16 @@ Ein OOP-Computerprogramm kombiniert Objekt und lässt sie interagieren. Viele de
 style="width: 90%; max-width: 960px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
-main                        Farm                           Animal
-+-----------------------+  +--------------------------+   +--------------------+
-| Farm JohnsFarm;       |->| Animal myAnimals[];      |-> | string name;       |
-| Farm PetersFarm;      |  | checkAnimalsPosition();  |   | ...                |
+main                        Farm                          Animal
++-----------------------+  +--------------------------+  +--------------------+
+| Farm JohnsFarm;       |->| Animal myAnimals[];      |->| string name;       |
+| Farm PetersFarm;      |  | checkAnimalsPosition();  |  | ...                |
 | ...                   |  | feedAnimals();           |
-                           | getAnimalStatistics();   |    Building
-                           | ...                      |   +--------------------+
-                           | Farmbuilding buildings[];|-> | int purpose        |
-                                                          | startScanning()    |
-                                                          | ...                |
+                           | getAnimalStatistics();   |   Building
+                           | ...                      |  +--------------------+
+                           | Farmbuilding buildings[];|->| int purpose        |
+                                                         | startScanning()    |
+                                                         | ...                |
 ```
 
 Wir erzeugen ausgehend von unserem Bauplan verschiedene Instanzen / Objekte vom Typ `Animals`. Jede hat den gleichen Funktionsumfang, aber unterschiedliche Daten.
@@ -389,15 +384,15 @@ C++ kombiniert die Effizienz von C mit den Abstraktionsmöglichkeiten der objekt
 
 **Klasse string**
 
-C++ implementiert eine separate Klasse `string`-Datentyp (Klasse). In Programmen müssen nur Objekte dieser Klasse angelegt werden. Beim Anlegen eines Objektes muss nicht angegeben werden, wie viele Zeichen darin enthalten werden sollen, eine einfache Zuweisung reicht aus.
+C++ implementiert eine separate Klasse `string`, welche den Umgang mit Zeichenketten im Vergleich zu `char[]` vereinfacht. Beim Anlegen eines Objektes dieser Klasse muss nicht angegeben werden, wie viele Zeichen darin enthalten werden sollen, eine einfache Zuweisung reicht aus.
 
 ```cpp   string.cpp
 #include <iostream>
 #include <string>
 
 int main(void) {
-  std::string hallo_msg="Hallo";
-  std::cout<< hallo_msg << " hat eine Länge von " << hallo_msg.length() << " Zeichen." << std::endl;
+  std::string hallo_msg ="Hallo";
+  std::cout << hallo_msg << " hat eine Länge von " << hallo_msg.length() << " Zeichen.\n";
   return 0;
 }
 ```
@@ -407,7 +402,7 @@ int main(void) {
 
 **Arduino Klassen**
 
-Die Implementierungen für unseren Mikrocontroller sind auch Objektorientiert. Klassen repräsentieren unserer Hardwarekomponenten und sorgen für deren einfache Verwendung.
+Die Implementierungen für unseren Mikrocontroller sind auch Objektorientiert. Klassen repräsentieren unsere Hardwarekomponenten und sorgen für deren einfache Verwendung.
 
 ```cpp                ArduinoDisplay.cpp
 #include <OledDisplay.h>
@@ -431,6 +426,7 @@ class class_name {
     member1;
   access_specifier_2:
     member2;
+
   ...
 };   // <- Das Semikolon wird gern vergessen
 
@@ -443,11 +439,11 @@ class_name instance_name;
 | `instance_name`    | Objekte der Klasse `class_name` - Instanz |
 | `access_specifier` | Zugriffsberechtigung                      |
 
-Der Hauptteil der Deklaration kann _member_ enthalten, die entweder Daten- oder Funktionsdeklarationen sein können und jeweils einem Zugriffsbezeichner . Ein Zugriffsbezeichner ist eines der folgenden drei Schlüsselwörter: `private`, `public` oder `protected`. Diese Bezeichner ändern die Zugriffsrechte für die *member*, die ihnen nachfolgen:
+Der Hauptteil der Deklaration kann _member_ enthalten, die entweder Daten- oder Funktionsdeklarationen sein können, und jeweils einen Zugriffsbezeichner. Ein Zugriffsbezeichner ist eines der folgenden drei Schlüsselwörter: `private`, `public` oder `protected`. Diese Bezeichner ändern die Zugriffsrechte für die *member*, die ihnen nachfolgen:
 
 + `private` *member* einer Klasse sind nur von anderen *members* derselben Klasse (oder von ihren "Freunden") aus zugänglich.
 + `protected`  *member*  sind von anderen  *member*  derselben Klasse (oder von ihren "Freunden") aus zugänglich, aber auch von Mitgliedern ihrer abgeleiteten Klassen.
-+ `public` *member*  sind öffentliche  *member*  von überall her zugänglich, wo das Objekt sichtbar ist.
++ `public` *member*  sind öffentliche  *member*  und damit von überall her zugänglich, wo das Objekt sichtbar ist.
 
 Standardmäßig sind alle Members in der Klasse `private`!
 
@@ -458,20 +454,18 @@ Standardmäßig sind alle Members in der Klasse `private`!
 ```cpp      ClassExample.cpp
 #include <iostream>
 
-class Datum
-{
+class Datum {
   public:
     int tag;
     int monat;
     int jahr;
 
-    void print(){
-        std::cout << tag << "." << monat <<"." << jahr <<std::endl;
+    void print() {
+      std::cout << tag << "." << monat << "." << jahr << "\n";
     }
 };
 
-int main()
-{
+int main() {
   // 1. Instanz der Klasse, Objekt myDatumA
   Datum myDatumA;
   myDatumA.tag = 12;
@@ -493,7 +487,7 @@ Und wie können wir weitere Methoden zu unserer Klasse hinzufügen?
 ```cpp      AdditionalMethod.cpp
 #include <iostream>
 
-class Datum{
+class Datum {
   public:
     int tag;
     int monat;
@@ -501,33 +495,35 @@ class Datum{
 
     const int monthDays[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-    void print(){
-        std::cout << tag << "." << monat <<"." << jahr <<std::endl;
+    void print() {
+      std::cout << tag << "." << monat << "." << jahr << "\n";
     }
 
-    int istSchaltJahr(){
-      if (((jahr % 4 == 0) && (jahr % 100 != 0)) || (jahr % 400 == 0)) return 1;
-      else return 0;
+    int istSchaltJahr() {
+      if (((jahr % 4 == 0) && (jahr % 100 != 0)) ||
+          (jahr % 400 == 0))
+        return 1;
+      else
+        return 0;
     }
 
-    int nterTagimJahr(){
+    int nterTagimJahr() {
       int n = tag;
-      for (int i=0; i<monat - 1; i++){
-          n += monthDays[i];
+      for (int i = 0; i < monat - 1; i++) {
+        n += monthDays[i];
       }
       if (monat > 2) n += istSchaltJahr();
       return n;
     }
 };
 
-int main()
-{
+int main() {
   Datum myDatumA;
   myDatumA.tag = 31;
   myDatumA.monat = 12;
   myDatumA.jahr = 2000;
   myDatumA.print();
-  std::cout << myDatumA.nterTagimJahr() << "ter Tag im Jahr " << myDatumA.jahr << std::endl;
+  std::cout << myDatumA.nterTagimJahr() << "ter Tag im Jahr " << myDatumA.jahr << "\n";
   return 0;
 }
 ```
@@ -542,50 +538,49 @@ Natürlich lassen sich Klassen beliebig miteinander kombinieren, was folgende Be
 #include <ctime>
 #include <string>
 
-class Datum{
+class Datum {
   public:
     int tag;
     int monat;
     int jahr;
 
-    void print(){
-        std::cout << tag << "." << monat <<"." << jahr <<std::endl;
+    void print() {
+      std::cout << tag << "." << monat << "." << jahr << "\n";
     }
 };
 
-class Person{
+class Person {
   public:
     Datum geburtstag;
     std::string name;
 
-    void print(){
-        std::cout << name << ": ";
-        geburtstag.print();
-        std::cout <<std::endl;
+    void print() {
+      std::cout << name << ": ";
+      geburtstag.print();
     }
 
     int zumGeburtstagAnrufen() {
-       time_t t = time(NULL);
-       tm* tPtr = localtime(&t);
-       if ((geburtstag.tag == tPtr->tm_mday) &&
-           (geburtstag.monat == (tPtr->tm_mon + 1))) {
-          std::cout << "\"Weil heute Dein ... \"" <<std::endl;
-          return 1;
-       }
-       else return -1;
+      time_t aktuellerZeitstempel = time(NULL);
+      tm* lokaleZeit = localtime(&aktuellerZeitstempel);
+      if ((geburtstag.tag == lokaleZeit->tm_mday) &&
+          (geburtstag.monat == (lokaleZeit->tm_mon + 1))) {
+        std::cout << "\"Weil heute Dein ... \"\n";
+        return 1;
+      }
+      else
+        return -1;
     }
 };
 
-int main()
-{
+int main() {
   Person freundA = {.geburtstag = {1, 12, 2022}, .name = "Peter"};
   freundA.print();
-  if (freundA.zumGeburtstagAnrufen() == 1){
-      std::cout << "Zum Geburtstag gratuliert!" <<std::endl;
-  }
-  else{
-      std::cout << freundA.name << " hat heute nicht Geburtstag" <<std::endl;
-  }
+
+  if (freundA.zumGeburtstagAnrufen() == 1)
+    std::cout << "Zum Geburtstag gratuliert!\n";
+  else
+    std::cout << freundA.name << " hat heute nicht Geburtstag\n";
+
   return 0;
 }
 ```
@@ -601,41 +596,39 @@ Als Datenkapselung bezeichnet man das Verbergen von Implementierungsdetails eine
 
 ```cpp getSetMethods.cpp
 #include <iostream>
-using namespace std;
-class Datum
-{
+class Datum {
     private:
       int tag;
       int monat;
       int jahr;
     public:
-      void setTag(int _tag){
-        tag=_tag;
+      void setTag(int _tag) {
+        tag = _tag;
       }
-      void setMonat(int _monat){
-        monat=_monat;
+      void setMonat(int _monat) {
+        monat = _monat;
       }
-      void setJahr(int _jahr){
-        jahr=_jahr;
+      void setJahr(int _jahr) {
+        jahr = _jahr;
       }
-      int getTag(){
+      int getTag() {
         return tag;
       }
       //analog monat und jahr
-      void ausgabe()
-      {
-          cout<<tag<<"."<<monat<<"."<<jahr<<endl;
+      void print() {
+        std::cout << tag << "." << monat << "." << jahr << "\n";
       }
  };
 
- int main()
- {
+ int main() {
    Datum datum;
-   datum.setTag(31);datum.setMonat(12);datum.setJahr(1999);
-   datum.ausgabe();//jetzt geht es
+   datum.setTag(31); datum.setMonat(12); datum.setJahr(1999);
+   datum.print(); //jetzt geht es
  }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out `, `./a.out`)
+
+<!--- TODO: Wären die Setter nicht der perfekte Zeitpunkt, um `this` einzuführen/anzuteasern? --->
 
 ### Memberfunktionen
 
@@ -646,24 +639,23 @@ Worin liegt der technische Unterschied?
 ```cpp                     ApplicationOfStructs.cpp
 #include <iostream>
 
-class Student{
+class Student {
   public:
     std::string name;  // "-"
     int alter;
     std::string ort;
 
-    void ausgabeMethode(){
-        std::cout << name << " " << ort << " " << alter  << std::endl;
+    void ausgabeMethode() {
+      std::cout << name << " " << ort << " " << alter  << "\n";
     }
 };
 
-void ausgabeFunktion(Student studentA){
-    std::cout << studentA.name << " " << studentA.ort << " " << studentA.alter  << std::endl;
+void ausgabeFunktion(Student studentA) {
+  std::cout << studentA.name << " " << studentA.ort << " " << studentA.alter  << "\n";
 }
 
-int main()
-{
-  Student bernhard {"Cotta", 25, "Zillbach"};
+int main() {
+  Student bernhard{"Cotta", 25, "Zillbach"};
   bernhard.ausgabeMethode();
 
   ausgabeFunktion(bernhard);
@@ -678,7 +670,7 @@ Methoden können auch von der Klassendefinition getrennt werden.
 ```cpp                     ApplicationOfStructs.cpp
 #include <iostream>
 
-class Student{
+class Student {
   public:
     std::string name;  // "-"
     int alter;
@@ -688,12 +680,11 @@ class Student{
 };
 
 // Implementierung der Methode
-void Student::ausgabeMethode(){
-    std::cout << name << " " << ort << " " << alter  << std::endl;
+void Student::ausgabeMethode() {
+  std::cout << name << " " << ort << " " << alter  << "\n";
 }
 
-int main()
-{
+int main() {
   Student bernhard {"Cotta", 25, "Zillbach"};
   bernhard.ausgabeMethode();
   return 0;
@@ -714,19 +705,18 @@ Der Konzept der Modularisierung lässt sich unter C++ durch die Aufteilung der K
 #define DATUM_H_INCLUDED
 /* ^^ these are the include guards */
 
-class Datum
-{
+class Datum {
   public:
     int tag;
     int monat;
     int jahr;
 
-    void ausgabeMethode(){
-        std::cout << tag << "." << monat <<"." << jahr <<std::endl;
+    void ausgabeMethode() {
+      std::cout << tag << "." << monat << "." << jahr << "\n";
     }
 };
 
-#endif
+#endif // !defined(DATUM_H_INCLUDED)
 ```
 ```cpp     -Student.h
 #ifndef STUDENT_H_INCLUDED
@@ -736,7 +726,7 @@ class Datum
 #include <string>
 #include "Datum.h"
 
-class Student{
+class Student {
   public:
     std::string name;  // "-"
     Datum geburtsdatum;
@@ -745,15 +735,14 @@ class Student{
     void ausgabeMethode();    // Deklaration der Methode
 };
 
-#endif
+#endif // !defined(STUDENT_H_INCLUDED)
 ```
 ```cpp     -Student.cpp
 #include "Student.h"
 
-void Student::ausgabeMethode(){
-    std::cout << name << " " << ort << " ";
-    geburtsdatum.ausgabeMethode();
-    std::cout << std::endl;
+void Student::ausgabeMethode() {
+  std::cout << name << " " << ort << " ";
+  geburtsdatum.ausgabeMethode();
 }
 
 ```
@@ -761,9 +750,8 @@ void Student::ausgabeMethode(){
 #include <iostream>
 #include "Student.h"
 
-int main()
-{
-  Datum datum{1,1,2000};
+int main() {
+  Datum datum{1, 1, 2000};
   Student bernhard {"Cotta", datum, "Zillbach"};
   bernhard.ausgabeMethode();
   return 0;
@@ -781,7 +769,7 @@ Definitionen der Klassen erfolgen in den Header-Dateien (.h), wobei für die mei
 
 ### Überladung von Methoden
 
-C++ verbietet für die Variablen und Objekte die gleichen Namen, erlaubt jedoch die variable Verwendung von Funktionen in Abhängigkeit von der Signatur der Funktion. Dieser Mechanismus heißt
+C++ verbietet für Variablen und Objekte die gleichen Namen, erlaubt jedoch eine variable Verwendung von Funktionen in Abhängigkeit von der Signatur der Funktion. Dieser Mechanismus heißt
 "Überladen von Funktionen" und ist sowohl an die global definierten Funktionen als auch an die Methoden der Klasse anwendbar.
 
 > **Merke: ** Der Rückgabedatentyp trägt nicht zur Unterscheidung der Methoden bei. Unterscheidet sich die Signatur nur in diesem Punkt, "meckert" der Compiler.
@@ -791,43 +779,43 @@ C++ verbietet für die Variablen und Objekte die gleichen Namen, erlaubt jedoch 
 #include <iostream>
 #include <fstream>
 
-class Seminar{
+class Seminar {
   public:
     std::string name;
     bool passed;
 };
 
-class Lecture{
+class Lecture {
   public:
     std::string name;
     float mark;
 };
 
-class Student{
+class Student {
   public:
     std::string name;  // "-"
     int alter;
     std::string ort;
 
-    void printCertificate(Seminar sem){
-      std::string comment = " nicht bestanden";
+    void printCertificate(Seminar sem) {
+      std::string verdict;
       if (sem.passed)
-        comment = " bestanden!";
-      std::cout << "\n" << name << " hat das Seminar " << sem.name  
-                <<  comment;
+        verdict = " bestanden!";
+      else
+        verdict = " nicht bestanden";
+      std::cout << name << " hat das Seminar " << sem.name << verdict << "\n";
     }
 
-    void printCertificate(Lecture lect){
-      std::cout << "\n" << name << " hat in der Vorlesung " <<
-                   lect.name << " die Note " << lect.mark << " erreicht";
+    void printCertificate(Lecture lect) {
+      std::cout << name << " hat in der Vorlesung " << lect.name
+                << " die Note " << lect.mark << " erreicht\n";
     }
 };
 
-int main()
-{
-  Student bernhard {"Cotta", 25, "Zillbach"};
-  Seminar roboticSeminar {"Robotik-Seminar", false};
-  Lecture ProzProg {"Prozedurale Programmierung", 1.3};
+int main() {
+  Student bernhard{"Cotta", 25, "Zillbach"};
+  Seminar roboticSeminar{"Robotik-Seminar", false};
+  Lecture ProzProg{"Prozedurale Programmierung", 1.3};
 
   bernhard.printCertificate(roboticSeminar);
   bernhard.printCertificate(ProzProg);
@@ -837,27 +825,27 @@ int main()
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-> **Achtung:** Im Beispiel erfolgt die Ausgabe nicht auf die Console, sondern in ein ostream-Objekt, dessen Referenz an die print-Methoden als Parameter übergeben wird. Das ermöglicht eine flexible Ausgabe, z.B. in eine Datei, auf den Drucker etc.
-
 ## Ein Wort zur Ausgabe
+
+Im Beispiel erfolgt die Ausgabe nicht auf die Console, sondern in ein ostream-Objekt, dessen Referenz an die print-Methoden als Parameter übergeben wird. Das ermöglicht eine flexible Ausgabe, z.B. in eine Datei, auf den Drucker etc.
 
 ```cpp                     ostream.cpp
 #include <iostream>
 #include <fstream>
 
-class Seminar{
+class Seminar {
   public:
     std::string name;
     bool passed;
 };
 
-class Lecture{
+class Lecture {
   public:
     std::string name;
     float mark;
 };
 
-class Student{
+class Student {
   public:
     std::string name;  // "-"
     int alter;
@@ -867,19 +855,21 @@ class Student{
     void printCertificate(std::ostream& os, Lecture sem);
 };
 
-void Student::printCertificate(std::ostream& os, Seminar sem){
-  std::string comment = " nicht bestanden";
+void Student::printCertificate(std::ostream& os, Seminar sem) {
+  std::string verdict;
   if (sem.passed)
-    comment = " bestanden!";
-  os << "\n" << name << " hat das Seminar " << sem.name <<  comment;
+    verdict = " bestanden!";
+  else
+    verdict = " nicht bestanden";
+  os << name << " hat das Seminar " << sem.name << verdict << "\n";
 }
 
-void Student::printCertificate(std::ostream& os, Lecture lect){
-  os << "\n" << name << " hat in der Vorlesung " << lect.name << " die Note " << lect.mark << " erreicht";
+void Student::printCertificate(std::ostream& os, Lecture lect) {
+  os << name << " hat in der Vorlesung " << lect.name
+     << " die Note " << lect.mark << " erreicht\n";
 }
 
-int main()
-{
+int main() {
   Student bernhard {"Cotta", 25, "Zillbach"};
   Seminar roboticSeminar {"Robotik-Seminar", false};
   Lecture ProzProg {"Prozedurale Programmierung", 1.3};
@@ -892,14 +882,14 @@ int main()
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-## Initalisierung/Zerstören eines Objektes
+## Initalisieren/Zerstören eines Objektes
 
 Die Klasse spezifiziert unter anderem (!) welche Daten in den Instanzen/Objekten zusammenfasst werden. Wie aber erfolgt die Initialisierung? Bisher haben wir die Daten bei der Erzeugung der Instanz übergeben.
 
 ```cpp                     Konstruktoren.cpp
 #include <iostream>
 
-class Student{
+class Student {
   public:
     std::string name;
     int alter;
@@ -909,12 +899,11 @@ class Student{
 };
 
 // Implementierung der Methode
-void Student::ausgabeMethode(std::ostream& os){
-    os << name << " " << ort << " " << alter << "\n";
+void Student::ausgabeMethode(std::ostream& os) {
+  os << name << " " << ort << " " << alter << "\n";
 }
 
-int main()
-{
+int main() {
   Student bernhard {"Cotta", 25, "Zillbach"};
   bernhard.ausgabeMethode(std::cout);
 
@@ -945,14 +934,14 @@ Kombinationen  initialisieren:
 
 | Umsetzung                                                                             | Beispiel                                      |
 |:--------------------------------------------------------------------------------------|:----------------------------------------------|
-| vollständige Liste in absteigender Folge (uniforme Initialisierung)                   | `Student Bernhard {"Cotta", 25, "Zillbach"};` |
-| unvollständige Liste (die fehlenden Werte werden durch Standard Defaultwerte ersetzt) | `Student Bernhard {"Cotta", 25};`             |
-| vollständig leere Liste, die zum Setzen von Defaultwerten führt                       | `Student Bernhard {};`                        |
+| vollständige Liste in absteigender Folge (uniforme Initialisierung)                   | `Student bernhard {"Cotta", 25, "Zillbach"};` |
+| unvollständige Liste (die fehlenden Werte werden durch Standard Defaultwerte ersetzt) | `Student bernhard {"Cotta", 25};`             |
+| vollständig leere Liste, die zum Setzen von Defaultwerten führt                       | `Student bernhard {};`                        |
 | Aggregierende Initialisierung (C++20)                                                 | `Student alexander = { .ort = "unknown"}; `   |
 
 Wie können wir aber:
 
-+ erzwingen, dass eine bestimmte Membervariable in jedem Fall gesetzt wird (weil die Klasse sonst keinen Sinn macht)
++ erzwingen, dass eine bestimmte Membervariable in jedem Fall gesetzt wird (weil die Klasse sonst keinen Sinn ergibt)
 + prüfen, ob die Werte einem bestimmten Muster entsprechen ("Die PLZ kann keine negativen Werte umfassen")
 + automatische weitere Einträge setzen (einen Zeitstempel, der die Initialisierung festhält)
 + ... ?
@@ -974,7 +963,7 @@ class class_name {
   }
 };
 
-class_name instance_name (...);
+class_name instance_name(...);
 ```
 
 > **Merke: ** Ein Konstruktor hat keinen Rückgabetyp!
@@ -992,8 +981,8 @@ class Student{
     int alter;
     std::string ort;
 
-    void ausgabeMethode(std::ostream& os){
-        os << name << " " << ort << " " << alter;
+    void ausgabeMethode(std::ostream& os) {
+      os << name << " " << ort << " " << alter;
     }
 
     //Student();
@@ -1002,8 +991,7 @@ class Student{
 // Implementierung der Methode
 
 
-int main()
-{
+int main() {
   Student bernhard {"Cotta", 25, "Zillbach"};
   bernhard.ausgabeMethode(std::cout);
   return 0;
@@ -1015,15 +1003,15 @@ Dabei sind innerhalb des Konstruktors zwei Schreibweisen möglich:
 
 ```cpp
 //Initalisierung
-Student(std::string name, int alter, std::string ort): name(name), alter(alter), ort(ort)
-{
-}
+Student(std::string name, int alter, std::string ort):
+  name(name), alter(alter), ort(ort)
+{}
 
 // Zuweisung innerhalb des Konstruktors
-Student(std::string name, int alter, std::string ort):
-    this->name = name;
-    this->alter = alter;
-    this->ort = ort;
+Student(std::string name, int alter, std::string ort) {
+  this->name = name;
+  this->alter = alter;
+  this->ort = ort;
 }
 ```
 
@@ -1041,21 +1029,20 @@ class Student{
     int alter;
     std::string ort; // = "Freiberg";
 
-    void ausgabeMethode(std::ostream& os){
-        os << name << " " << ort << " " << alter << "\n";
+    void ausgabeMethode(std::ostream& os) {
+      os << name << " " << ort << " " << alter << "\n";
     }
 
-    Student(std::string name, int alter, std::string ort): name(name), alter(alter), ort(ort)
-    {
-    }
+    Student(std::string name, int alter, std::string ort):
+      name(name), alter(alter), ort(ort)
+    {}
 
-    Student(std::string name): name(name)
-    {
-    }
+    Student(std::string name):
+      name(name)
+    {}
 };
 
-int main()
-{
+int main() {
   Student bernhard {"Cotta", 25, "Zillbach"};
   bernhard.ausgabeMethode(std::cout);
 
@@ -1073,8 +1060,8 @@ Kombination aller Parameter ergeben, minimieren.
 
 ```cpp
 Student(std::string n, int a, std::string o): name{n}, alter{a}, ort{o} { }
-Student(std::string n) : Student (n, 18, "Freiberg") {};
-Student(int a, std::string o): Student ("unknown", a, o) {};
+Student(std::string n) : Student(n, 18, "Freiberg") {};
+Student(int a, std::string o): Student("unknown", a, o) {};
 ```
 
 ### Destruktoren
@@ -1092,14 +1079,16 @@ class Student{
     ~Student();
 };
 
-Student::Student(std::string n, int a, std::string o): name{n}, alter{a}, ort{o} {}
+Student::Student(std::string n, int a, std::string o):
+  name{n}, alter{a}, ort{o}
+{}
 
-Student::~Student(){
-  std::cout << "Destructing object of type 'Student' with name = '" << this->name << "'\n";
+Student::~Student() {
+  std::cout << "Destructing object of type 'Student' with name = '"
+            << this->name << "'\n";
 }
 
-int main()
-{
+int main() {
   Student max {"Maier", 19, "Dresden"};
   std::cout << "End...\n";
   return 0;
@@ -1122,25 +1111,26 @@ Einen Destruktor explizit aufzurufen, ist selten notwendig (oder gar eine gute I
 
 ```cpp   Rectangle
 #include <iostream>
-using namespace std;
 
 class Rectangle {
   private:
     int width, height;
   public:
-    void set_values (int,int);          // Deklaration
-    int area() {return width*height;}   // Deklaration und Defintion
+    void set_values(int, int);          // Deklaration
+    int area() {                        // Deklaration und Defintion
+      return width * height;
+    }
 };
 
-void Rectangle::set_values (int x, int y) {
+void Rectangle::set_values(int x, int y) {
   width = x;
   height = y;
 }
 
 int main () {
   Rectangle rect;
-  rect.set_values (3,4);
-  cout << "area: " << rect.area();
+  rect.set_values (3, 4);
+  std::cout << "area: " << rect.area() << "\n";
   return 0;
 }
 ```
@@ -1206,70 +1196,66 @@ class_name instance_name;
 
 {{4}}
 **************************************************************************
-> Ersetzen Sie `[_____]` durch den Aufruf der Methode `print` des Objektes `Beispielauto`? 
+> Ersetzen Sie `[_____]` durch den Aufruf der Methode `print` des Objektes `beispielauto`?
 ```cpp
 #include <iostream>
 #include <string>
 
-class Auto
-{
+class Auto {
   public:
-    std::string Hersteller;
-    int Kilometerstand;
-    int PS;
+    std::string hersteller;
+    int kilometerstand;
+    int leistung;
 
-    void print(){
-        std::cout << Hersteller << " - " << PS <<" PS - " << Kilometerstand << " Kilometer" << std::endl;
+    void print() {
+      std::cout << hersteller << " - " << leistung << " PS - " << kilometerstand << " Kilometer\n";
     }
 };
 
-int main()
-{
-  Auto Beispielauto;
-  Beispielauto.Hersteller = "Hyundai";
-  Beispielauto.Kilometerstand = 49564;
-  Beispielauto.PS = 76;
+int main() {
+  Auto beispielauto;
+  beispielauto.hersteller = "Hyundai";
+  beispielauto.kilometerstand = 49564;
+  beispielauto.leistung = 76;
   [_____]
 }
 ```
-[[Beispielauto.print();]]
+[[beispielauto.print();]]
 **************************************************************************
 
 Datenkapselung
 ====================
 
-> Wodurch muss `[_____]` ersetzt werden um den Kilometerstand vom Objekt `Beispielauto` auf 40000 zu setzen?
+> Wodurch muss `[_____]` ersetzt werden, um den Kilometerstand vom Objekt `beispielauto` auf 40000 zu setzen?
 
 ```cpp
 #include <iostream>
 #include <string>
 
-class Auto
-{
+class Auto {
   private:
-    std::string Hersteller;
-    int Kilometerstand;
-    int PS;
-  
+    std::string hersteller;
+    int kilometerstand;
+    int leistung;
+
   public:
-    void set_Hersteller(std::string _Hersteller){
-        Hersteller = _Hersteller;
+    void set_Hersteller(std::string _hersteller) {
+      hersteller = _hersteller;
     }
-    void set_Kilometerstand(int _Kilometerstand){
-        Kilometerstand = _Kilometerstand;
+    void set_Kilometerstand(int _kilometerstand) {
+      kilometerstand = _kilometerstand;
     }
-    void set_PS(int _PS){
-        PS = _PS;
+    void set_Leistung(int _leistung) {
+      leistung = _leistung;
     }
 };
 
-int main()
-{
-  Auto Beispielauto;
+int main() {
+  Auto beispielauto;
   [_____]
 }
 ```
-[[Beispielauto.set_Kilometerstand(40000);]]
+[[beispielauto.set_Kilometerstand(40000);]]
 
 Memberfunktion
 ====================
@@ -1278,23 +1264,21 @@ Memberfunktion
 ```cpp
 #include <iostream>
 
-class Auto
-{
+class Auto {
   public:
-    std::string Hersteller;
-    int Kilometerstand;
-    int PS;
+    std::string hersteller;
+    int kilometerstand;
+    int leistung;
 
     void ausgabeMethode();
 };
 
 // Implementierung der Methode
 void [_____]{
-    std::cout << Hersteller << " - " << Kilometerstand << " km " << PS << " PS" << std::endl;
+    std::cout << hersteller << " - " << kilometerstand << " km " << leistung << " PS\n";
 }
 
-int main()
-{
+int main() {
   Auto beispielauto {"Tesla", 25000, 283};
   beispielauto.ausgabeMethode();
   return 0;
@@ -1313,15 +1297,14 @@ Modularisierung unter C++
 
 {{1}}
 **************************************************************************
-> Im folgenden Programm soll die in der Datei `Auto.h` deklarierte Klasse `Auto` verwendet werden. Wodurch muss `[_____]` ersetzt werden um das zu ermöglichen? Es kann davon ausgegangen werden, dass alle benötigten Dateien im selben Ordner liegen. 
+> Im folgenden Programm soll die in der Datei `Auto.h` deklarierte Klasse `Auto` verwendet werden. Wodurch muss `[_____]` ersetzt werden um das zu ermöglichen? Es kann davon ausgegangen werden, dass alle benötigten Dateien im selben Ordner liegen.
 ```cpp
 #include <iostream>
 #include [_____]
 
-int main()
-{
-  Auto Beispielauto{"Tesla", 25000, 283};
-  Beispielauto.ausgabeMethode();
+int main() {
+  Auto beispielauto{"Tesla", 25000, 283};
+  beispielauto.ausgabeMethode();
   return 0;
 }
 ```
@@ -1335,27 +1318,25 @@ int main()
 ```cpp
 #include <iostream>
 
-class Force
-{
+class Force {
   public:
-    double Newton(double mass){
+    double Newton(double mass) {
       double F = mass * 9.81;
       return F;
     };
 
-    double Newton(double mass, double acc){
+    double Newton(double mass, double acc) {
       double F = mass * acc;
       return F;
     };
 };
 
-int main()
-{
+int main() {
   Force Kraft;
   double G = Kraft.Newton(10);
   double F = Kraft.Newton(10, 10);
   double R = G + F;
-  std::cout << R << std::endl;
+  std::cout << R << "\n";
 }
 ```
 [[198.1]]
@@ -1374,21 +1355,20 @@ class Student{
     int alter;
     std::string lieblingstier = "Dikdik";
 
-    void ausgabeMethode(std::ostream& os){
-        os << name << " " << lieblingstier << " " << alter;
+    void ausgabeMethode(std::ostream& os) {
+      os << name << " " << lieblingstier << " " << alter;
     }
 
-    Student(std::string name, int alter, std::string lieblingstier): name(name), alter(alter), lieblingstier(lieblingstier)
-    {
-    }
+    Student(std::string name, int alter, std::string lieblingstier):
+      name(name), alter(alter), lieblingstier(lieblingstier)
+    {}
 
-    Student(std::string name): name(name),alter(0)
-    {
-    }
+    Student(std::string name):
+      name(name), alter(0)
+    {}
 };
 
-int main()
-{
+int main() {
   Student alexander = Student("Humboldt");
   alexander.alter = 19;
   alexander.ausgabeMethode(std::cout);
@@ -1410,21 +1390,20 @@ class Student{
     int alter;
     std::string lieblingstier = "Dikdik";
 
-    void ausgabeMethode(std::ostream& os){
-        os << name << " " << lieblingstier << " " << alter;
+    void ausgabeMethode(std::ostream& os) {
+      os << name << " " << lieblingstier << " " << alter;
     }
 
-    Student(std::string name, int alter, std::string lieblingstier): name(name), alter(alter), lieblingstier(lieblingstier)
-    {
-    }
+    Student(std::string name, int alter, std::string lieblingstier):
+      name(name), alter(alter), lieblingstier(lieblingstier)
+    {}
 
-    Student(std::string name): name(name),alter(0)
-    {
-    }
+    Student(std::string name):
+      name(name), alter(0)
+    {}
 };
 
-int main()
-{
+int main() {
   Student alexander = Student("Humboldt", 23, "Einhorn");
   alexander.ausgabeMethode(std::cout);
 
@@ -1442,23 +1421,21 @@ Destruktoren
 #include <iostream>
 #include <string>
 
-class Auto
-{
+class Auto {
   public:
-    std::string Hersteller;
-    int Kilometerstand;
-    int PS;
+    std::string hersteller;
+    int kilometerstand;
+    int leistung;
 
-    ~Auto(){
+    ~Auto() {
       std::cout << "!";
     }
 };
 
-int main()
-{
-  Auto Beispielauto{"Hyundai", 25000, 76};
-  std::cout << Beispielauto.Hersteller << " ";
-  std::cout << Beispielauto.Kilometerstand << " " << Beispielauto.PS;
+int main() {
+  Auto beispielauto{"Hyundai", 25000, 76};
+  std::cout << beispielauto.hersteller << " ";
+  std::cout << beispielauto.kilometerstand << " " << beispielauto.leistung;
 }
 ```
 [[Hyundai 25000 76!]]

@@ -60,16 +60,16 @@ y=3x^2 + 4x + 8
 $$
 
 ```cpp                     QuadraticEquation.cpp
-#include<iostream>
+#include <iostream>
 
 int main() {
   // Variante 1 - ganz schlecht
-  std::cout <<"f("<<5<<") = "<<3*5*5 + 4*5 + 8<<" \n";
+  std::cout << "f(" << 5 << ") = " << 3 * 5 * 5 + 4 * 5 + 8 << "\n";
 
   // Variante 2 - Nutzung von Variablen
   int x = 9;
-  std::cout <<"f("<<x<<") = "<<3*x*x + 4*x + 8<<" \n";
-	return 0;
+  std::cout << "f(" << x << ") = " << 3 * x * x + 4 * x + 8 << "\n";
+  return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
@@ -93,7 +93,7 @@ Kennzeichen einer Variable:
 2. Datentyp
 3. Wert
 4. Adresse
-5. Gültigkeitraum
+5. Gültigkeitsraum
 
 ******************************************************************
 
@@ -109,6 +109,8 @@ const double e = 2.71828182845905;
 Ein weiterer Typqualifikator ist `volatile`. Er gibt an, dass der
 Wert der Variable sich jederzeit z. B. durch andere Prozesse ändern kann.
 
+<!--- TODO: Das fühlt sich an der Stelle etwas verloren an? Theoretisch gäbe es ja auch noch so Sachen, wie extern und static - sollte man dafür nicht eher später nen eigenen Absatz machen? --->
+
 ******************************************************************
 
 ### Zulässige Variablennamen
@@ -119,7 +121,7 @@ beachten:
 * Das erste Zeichen muss ein Buchstabe sein, der Unterstrich ist auch möglich.
 * C++ betrachte Groß- und Kleinschreibung - `Zahl` und `zahl` sind also
   unterschiedliche Variablennamen.
-* Schlüsselworte (`class`, `for`, `return`, etc.) sind als Namen unzulässig.
+* [Schlüsselworte](https://en.cppreference.com/w/cpp/keywords.html) (`class`, `for`, `return`, etc.) sind als Namen unzulässig.
 
 | Name            | Zulässigkeit                                   |
 |:----------------|:-----------------------------------------------|
@@ -132,12 +134,12 @@ beachten:
 | `x y`           | nicht zulässig (Leerzeichen im Variablennamen) |
 
 ```cpp                     QuadraticEquation.cpp
-#include<iostream>
+#include <iostream>
 
 int main() {
   int x = 5;
-  std::cout<<"Unsere Variable hat den Wert "<<x<<" \n";
-	return 0;
+  std::cout << "Unsere Variable hat den Wert " << x << "\n";
+  return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
@@ -148,7 +150,7 @@ int main() {
                                   {{1}}
 ******************************************************************
 
-Neben der Namensgebung selbst unterstützt auch eine entsprechende Notationen die Lesbarkeit. In Programmen sollte ein Format konsistent verwendet werden.
+Neben der Namensgebung selbst unterstützt auch eine entsprechende [Notationen](https://en.wikipedia.org/wiki/Naming_convention_(programming%29#Examples_of_multiple-word_identifier_formats) die Lesbarkeit. In Programmen sollte ein Format konsistent verwendet werden.
 
 | Bezeichnung            | denkbare Variablennamen                            |
 |:-----------------------|:---------------------------------------------------|
@@ -225,7 +227,7 @@ es folgende Typen für Ganzzahlen:
 signed char <= short <= int <= long <= long long
 ```
 
-Gängige Zuschnitte für `char` oder `int`
+Gängige Zuschnitte für `char` oder `int`:
 
 <!-- data-type="none" -->
 | Schlüsselwort | Wertebereich     |
@@ -235,7 +237,7 @@ Gängige Zuschnitte für `char` oder `int`
 | `signed int`  | -32768 bis 32767 |
 | `int`         | 65536 (0xFFFF)   |
 
-Wenn die Typ-Spezifizierer (`long` oder `short`) vorhanden sind kann auf die
+Wenn die Typenspezifikationen (`long` oder `short`) vorhanden sind kann auf die
 `int` Typangabe verzichtet werden.
 
 ```cpp
@@ -244,7 +246,7 @@ long int b;  // äquivalent zu long b;
 ```
 
 Standardmäßig wird von vorzeichenbehafteten Zahlenwerten ausgegangen. Somit wird
-das Schlüsselwort `signed` eigentliche nicht benötigt
+das Schlüsselwort `signed` eigentlich nicht benötigt.
 
 ```cpp
 int a;  //  signed int a;
@@ -260,7 +262,7 @@ zwiespältig:
   Variable nicht explizit als vorzeichenbehaftet oder vorzeichenlos vereinbart,
   dann ist es implementierungsabhängig, ob `char` vorzeichenbehaftet ist oder
   nicht.
-* Wenn ein Zeichen gespeichert wird, so garantiert der Standard, dass der
+* Wenn ein Buchstabe oder Zeichen gespeichert wird, so garantiert der Standard, dass der
   gespeicherte Wert der nicht negativen Codierung im **Zeichensatz** entspricht.
 
 ```cpp
@@ -271,6 +273,8 @@ char s[] = "Eine kurze Zeichenkette";
 
 > **Achtung:** Anders als bei einigen anderen Programmiersprachen unterscheidet
 > C/C++ zwischen den verschiedenen Anführungsstrichen.
+
+<!--- TODO: Sollten wir hier kurz aufzeigen, was der Unterschied ist, oder reicht das in der Übung? --->
 
 ![ASCII-Zeichensatz](./images/01_EinAusgabeDatentypen/ASCII_Zeichensatz.jpeg "ASCII Zeichensatz [^ASCII]")<!-- width="80%" -->
 
@@ -284,12 +288,12 @@ gespeichert werden. Eine implizite Umwandlung der ganzen Zahlen zu den Werten 0 
 #include <iostream>
 
 int main() {
-   bool a = true;
-   bool b = false;
-   bool c = 45;
+  bool a = true;
+  bool b = false;
+  bool c = 45;
 
-   std::cout<<"a = "<<a<<" b = "<<b<<" c = "<<c<<"\n";
-   return 0;
+  std::cout << "a = " << a << " b = " << b << " c = " << c << "\n";
+  return 0;
 }
 ```
 @LIA.eval(`["main.c"]`, `g++ -Wall main.c -o a.out`, `./a.out`)
@@ -305,10 +309,9 @@ Variablen in Byte.
 ```cpp                     sizeof.cpp
 #include <iostream>
 
-int main(void)
-{
+int main(void) {
   int x;
-  std::cout<<"x umfasst " <<sizeof(x)<<" Byte.";
+  std::cout << "x umfasst " << sizeof(x) << " Byte.\n";
   return 0;
 }
 ```
@@ -320,11 +323,11 @@ int main(void)
 #include <limits.h>   /* INT_MIN und INT_MAX */
 
 int main(void) {
-   std::cout<<"int size: "<< sizeof(int)<<" Byte\n";
-   std::cout<<"Wertebereich von "<< INT_MIN<<" bis "<< INT_MAX<< "\n";
-   std::cout<<"char size : "<< sizeof(char) <<" Byte\n";
-   std::cout<<"Wertebereich von "<< CHAR_MIN<<" bis "<<CHAR_MAX<<"\n";
-   return 0;
+  std::cout << "int size: " << sizeof(int) << " Byte\n";
+  std::cout << "Wertebereich von " << INT_MIN << " bis " << INT_MAX << "\n";
+  std::cout << "char size : " << sizeof(char) << " Byte\n";
+  std::cout << "Wertebereich von " << CHAR_MIN << " bis " << CHAR_MAX << "\n";
+  return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
@@ -370,21 +373,23 @@ Quelle: [Arithmetischer Überlauf (Autor: WissensDürster)](https://de.wikipedia
 #include <iostream>
 #include <limits.h>   /* SHRT_MIN und SHRT_MAX */
 
-int main(){
+int main() {
   short a = 30000;
 
-  std::cout<<"Berechnung von 30000+3000 mit:\n\n";
+  std::cout << "Berechnung von 30000+3000 mit:\n\n";
 
   signed short c;     // -32768 bis 32767
-  std::cout<<"(signed) short c - Wertebereich von "<<SHRT_MIN<<" bis "<<SHRT_MAX<<"\n";
+  std::cout << "(signed) short c - Wertebereich von "
+            << SHRT_MIN << " bis " << SHRT_MAX << "\n";
   c = 3000 + a;      // ÜBERLAUF!
-  std::cout<<"c="<<c<<"\n";
+  std::cout << "c=" << c<<"\n";
 
   unsigned short d;   //      0 bis 65535
-  std::cout<<"unsigned short d - Wertebereich von "<<0<<" bis "<<USHRT_MAX<<"\n";
+  std::cout << "unsigned short d - Wertebereich von "
+            << 0 << " bis " << USHRT_MAX << "\n";
 
   d = 3000 + a;
-  std::cout<<"d="<<d<<"\n";
+  std::cout << "d=" << d<<"\n";
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
@@ -395,12 +400,14 @@ Ganzzahlüberläufe in der fehlerhaften Bestimmung der Größe eines
 Puffers oder in der Adressierung eines Feldes können es einem Angreifer
 ermöglichen den Stack zu überschreiben.
 
+<!--- TODO: Ist an der Stelle bekannt, was ein Stack ist? --->
+
 #### Fließkommazahlen
 
 Fließkommazahlen sind Zahlen mit Nachkommastellen (reelle Zahlen).
 Im Gegensatz zu Ganzzahlen gibt es bei den Fließkommazahlen keinen Unterschied
-zwischen vorzeichenbehafteten und vorzeichenlosen Zahlen. Alle Fließkommazahlen
-sind in C/C++ immer vorzeichenbehaftet.
+zwischen vorzeichenbehafteten und vorzeichenlosen Zahlen. In C/C++ sind immer
+alle Fließkommazahlen vorzeichenbehaftet.
 
 In C/C++ gibt es zur Darstellung reeller Zahlen folgende Typen:
 
@@ -434,18 +441,18 @@ konkreten Realisierung ist die Headerdatei `float.h` auszuwerten.
 
 {{1}}
 ```cpp                     float_precision.cpp
-#include<iostream>
+#include <iostream>
 #include<float.h>
 
 int main(void) {
-	std::cout<<"float Genauigkeit  :"<<FLT_DIG<<" \n";
-	std::cout<<"double Genauigkeit :"<<DBL_DIG<<" \n";
-	float x = 0.1;
+  std::cout << "float Genauigkeit  :" << FLT_DIG << " \n";
+  std::cout << "double Genauigkeit :" << DBL_DIG << " \n";
+  float x = 0.1;
   if (x == 0.1) {   // <- das ist ein double "0.1"
   //if (x == 0.1f) {   // <- das ist ein float "0.1"
-   std::cout<<"Gleich\n";
+    std::cout << "Gleich\n";
   }else{
-    std::cout<<"Ungleich\n";
+    std::cout << "Ungleich\n";
   }
   return 0;
 }
@@ -453,13 +460,14 @@ int main(void) {
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
 {{2}}
-Potenzen von 2 (zum Beispiel $2^{-3}=0.125$) können im Unterschied zu `0.1` präzise im Speicher abgebildet werden. Können Sie erklären?
+Potenzen von 2 (zum Beispiel $2^{-3}=0.125$) können im Unterschied zu `0.1`
+präzise im Speicher abgebildet werden. Können Sie das erklären?
 
 
 #### Datentyp `void`
 
 `void` wird als „unvollständiger Typ“ bezeichnet,
-umfasst eine leere Wertemenge und wird verwendet überall dort, wo kein
+umfasst eine leere Wertemenge und wird überall dort verwendet, wo kein
 Wert vorhanden oder benötigt wird.
 
 Anwendungsbeispiele:
@@ -470,14 +478,14 @@ Anwendungsbeispiele:
 
 ```cpp
 int main(void) {
-	//Anweisungen
+  //Anweisungen
   return 0;
 }
 ```
 
 ```cpp
 void funktion(void) {
-	//Anweisungen
+  //Anweisungen
 }
 ```
 
@@ -488,6 +496,8 @@ Zahlenliterale können in C/C++ mehr als Ziffern umfassen!
 <!-- data-type="none" style="table-layout: fixed; max-width:600px;"-->
 | Gruppe                 | zulässige Zeichen                       |
 |------------------------|-----------------------------------------|
+| *binary-prefix*        | `0b` `0B`                               |
+| *binary-digits*        | `0` `1`                                 |
 | *decimal-digits*       | `0` `1` `2` `3` `4` `5` `6` `7` `8` `9` |
 | *octal-prefix*         | `0`                                     |
 | *octal-digits*         | `0` `1` `2` `3` `4` `5` `6` `7`         |
@@ -506,14 +516,18 @@ Zahlenliterale können in C/C++ mehr als Ziffern umfassen!
 
 
 <!-- data-type="none" style="table-layout: fixed; max-width:700px;"-->
-| Zahlentyp | Dezimal  | Oktal | Hexadezimal |
-|:----------|:---------|-------|-------------|
-| Eingabe   | x        | x     | x           |
-| Ausgabe   | x        | x     | x           |
-| Beispiel  | `12`     | `011` | `0x12`      |
-|           | `0.123`  |       | `0X1a`      |
-|           | `123e-2` |       | `0xC.68p+2` |
-|           | `1.23F`  |       |             |
+| Zahlentyp | Binär    | Dezimal  | Oktal | Hexadezimal |
+|:----------|:---------|----------|-------|-------------|
+| Eingabe   | x        | x        | x     | x           |
+| Ausgabe   | x        | x        | x     | x           |
+| Beispiel  | `0b1`    | `12`     | `011` | `0x12`      |
+|           | `0b10`   | `0.123`  |       | `0X1a`      |
+|           | `0b01`   | `123e-2` |       | `0xC.68p+2` |
+|           |          | `1.23F`  |       |             |
+
+<!--- TODO: Theoretisch gibts bei Hexadezimalzahlen den Sonderfall, dass z.B.
+0xE+2 nicht 16 wäre, sondern als 0x und E+2 interpretiert werden würde.
+Andererseits bezweifel ich, dass das eine für Studies relevante Situation ist --->
 
 > **Merke:** Die Zahlenliterale können mit Vorzeichen, Zahlenbasis und Typ
 > versehen werden.
@@ -536,15 +550,14 @@ Zahlenliterale können in C/C++ mehr als Ziffern umfassen!
 
 {{1}}
 ```cpp                     NumberFormats.cpp
-#include<iostream>
+#include <iostream>
 
-int main(void)
-{
-  int x=020;
-  int y=0x20;
-  std::cout<<"x = "<<x<<"\n";
-  std::cout<<"y = "<<y<<"\n";
-  std::cout<<"Rechnen mit Oct und Hex x + y = "<< x + y;
+int main(void) {
+  int x = 020;
+  int y = 0x20;
+  std::cout << "x = " << x << "\n";
+  std::cout << "y = " << y << "\n";
+  std::cout << "Rechnen mit Oct und Hex x + y = " << x + y << "\n";
   return 0;
 }
 ```
@@ -556,18 +569,17 @@ int main(void)
 > **Merke:** Einige Anweisungen in C/C++ verwenden Adressen von
 > Variablen.
 
-Jeder Variable in C++ wird eine bestimmten Position im Hauptspeicher zugeordnet. Diese Position nennt man Speicheradresse.
-Solange eine Variable gültig ist, bleibt sie an dieser Stelle im Speicher.
-Um einen Zugriff auf die Adresse einer Variablen zu haben, kann man den Operator
-`&` nutzen.
+Jeder Variable in C++ wird eine bestimmten Position im Hauptspeicher
+zugeordnet. Diese Position nennt man Speicheradresse. Solange eine Variable
+gültig ist, bleibt sie an dieser Stelle im Speicher. Um einen Zugriff auf die
+Adresse einer Variablen zu erlangen, kann man den Operator `&` nutzen.
 
 ```cpp                     Pointer.cpp
 #include <iostream>
 
-int main(void)
-{
-  int x=020;
-  std::cout<<&x<<"\n";
+int main(void) {
+  int x = 020;
+  std::cout << &x << "\n";
   return 0;
 }
 ```
@@ -578,7 +590,8 @@ int main(void)
 **Lokale Variablen**
 
 Variablen *leben* innerhalb einer Funktion, einer Schleife oder einfach nur
-innerhalb eines durch geschwungene Klammern begrenzten Blocks von Anweisungen von der Stelle ihrer Definition bis zum Ende des Blocks.
+innerhalb eines durch geschwungene Klammern begrenzten Blocks von Anweisungen
+von der Stelle ihrer Definition bis zum Ende des Blocks.
 Beachten Sie, dass die Variable vor der ersten Benutzung vereinbart werden muss.
 
 Wird eine Variable/Konstante z. B. im Kopf einer Schleife vereinbart, gehört sie
@@ -586,19 +599,18 @@ zu dem Block, in dem auch der Code der Schleife steht.
 Folgender Codeausschnitt soll das verdeutlichen:
 
 ```cpp                           visibility.cpp
-#include<iostream>
+#include <iostream>
 
-int main(void)
-{
+int main(void) {
   int v = 1;
   int w = 5;
   {
     int v;
     v = 2;
-    std::cout<<v<<"\n";
-    std::cout<<w<<"\n";
+    std::cout << v << "\n";
+    std::cout << w << "\n";
   }
-  std::cout<<v<<"\n";
+  std::cout << v << "\n";
   return 0;
 }
 ```
@@ -610,13 +622,12 @@ Muss eine Variable immer innerhalb von `main` definiert werden? Nein, allerdings
 sollten globale Variablen vermieden werden.
 
 ```cpp                           visibility.cpp
-#include<iostream>
+#include <iostream>
 
 int v = 1; /*globale Variable*/
 
-int main(void)
-{
-  std::cout<<v<<"\n";
+int main(void) {
+  std::cout << v << "\n";
   return 0;
 }
 ```
@@ -655,14 +666,14 @@ Fall kein Speicherplatz reserviert wurde, handelt es sich um keine Definition.
 **Fehlende Initialisierung**
 
 ```cpp                     MissingInitialisation.cpp
-#include<iostream>
+#include <iostream>
 
 int main(void) {
   int x = 5;
-  std::cout<<"x="<<x<<"\n";
+  std::cout << "x=" << x << "\n";
   int y;     // <- Fehlende Initialisierung
-  std::cout<<"y="<<y<<"\n";
-	return 0;
+  std::cout << "y=" << y << "\n";
+  return 0;
 }
 ```
 @LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
@@ -672,7 +683,7 @@ int main(void) {
 
 {{1}}
 ```cpp                     Redeclaration.cpp
-#include<iostream>
+#include <iostream>
 
 int main(void) {
   int x;
@@ -688,11 +699,11 @@ int main(void) {
 
 {{2}}
 ```cpp                     wrong_float.cpp
-#include<iostream>
+#include <iostream>
 
 int main(void) {
-  float a=1,5;   /* FALSCH  */
-  float b=1.5;   /* RICHTIG */
+  float a = 1,5;   /* FALSCH  */
+  float b = 1.5;   /* RICHTIG */
   return 0;
 }
 ```
@@ -704,13 +715,13 @@ int main(void) {
 
 {{3}}
 ```cpp                     TooLarge.cpp
-#include<iostream>
+#include <iostream>
 
 int main(void) {
   short a;
   a = 0xFFFF + 2;
-  std::cout<<"Schaun wir mal ... "<<a<<"\n";
-	return 0;
+  std::cout << "Schaun wir mal ... " << a << "\n";
+  return 0;
 }
 ```
 @LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
@@ -730,8 +741,9 @@ style=" width: 100%;
 -->
 Quelle: [EVA-Prinzip (Autor:  Deadlyhappen)](https://de.wikipedia.org/wiki/EVA-Prinzip#/media/File:EVA-Prinzip.svg)
 
-Für Ein- und Ausgabe stellt C++ das Konzept der Streams bereit, dass nicht nur für elementare Datentypen gilt, sondern auch auf die neu definierten Datentypen (Klassen) erweitert werden kann.
-Unter Stream wird eine Folge von Bytes verstanden.
+Für Ein- und Ausgabe stellt C++ das Konzept der Streams bereit, dass nicht nur
+für elementare Datentypen gilt, sondern auch auf die neu definierten Datentypen
+(Klassen) erweitert werden kann. Unter einem Stream wird eine Folge von Bytes verstanden.
 
 Als Standard werden verwendet:
 
@@ -751,9 +763,9 @@ Mit Namensräumen können Deklarationen und Definitionen unter einem Namen zusam
 #include <iostream>
 
 int main(void) {
-  char hanna[]="Hanna";
-  char anna[]="Anna";
-  std::cout << "C++ stream: " << "Hallo "<< hanna << ", " << anna <<std::endl;
+  char hanna[] = "Hanna";
+  char anna[] = "Anna";
+  std::cout << "C++ stream: " << "Hallo "<< hanna << ", " << anna << "\n";
   return 0;
 }
 ```
@@ -761,17 +773,17 @@ int main(void) {
 
 ### Ausgabe
 
-Der Ausgabeoperator `<<` formt automatisch die Werte der Variablen in die Textdarstellung der benötigten Weite um.
+Der Ausgabeoperator ` << ` formt automatisch die Werte der Variablen in die Textdarstellung der benötigten Weite um.
 Der Rückgabewert des Operators ist selbst ein Stream-Objekt (Referenz), so dass ein weiterer Ausgabeoperator darauf angewendet werden kann. Damit ist die Hintereinanderschaltung
 von Ausgabeoperatoren möglich.
 
 ```cpp
-std::cout<<55<<"55"<<55.5<<true;    
+std::cout << 55 << "55" << 55.5 << true << "\n";
 ```
 
 Welche Formatierungmöglichkeiten bietet der Ausgabeoperator noch?
 
-Mit Hilfe von in `<iomanip>` definierten Manipulatoren können besondere Ausgabeformatierungen erreicht werden.
+Mit Hilfe von in `<iomanip>` definierten [Manipulatoren](https://en.cppreference.com/w/cpp/io/manip.html) können besondere Ausgabeformatierungen erreicht werden.
 
 | Manipulator           | Bedeutung                      |
 |:----------------------|:-------------------------------|
@@ -785,9 +797,9 @@ Mit Hilfe von in `<iomanip>` definierten Manipulatoren können besondere Ausgabe
 #include <iostream>
 #include <iomanip>
 
-int main(){
-  std::cout<<std::setbase(16)<< std::fixed<<55<<std::endl;
-  std::cout<<std::setbase(10)<< std::fixed<<55<<std::endl;
+int main() {
+  std::cout << std::setbase(16) << std::fixed << 55 << "\n";
+  std::cout << std::setbase(10) << std::fixed << 55 << "\n";
   return 0;
 }
 ```
@@ -807,12 +819,11 @@ nicht benutzte Stellen mit dem Zeichen 0 aufgefüllt, `endl` bewirkt die Ausgabe
 ```cpp                             manipulatoren2.c
 #include <iostream>
 #include <iomanip>
-int main(){
-
-  std::cout<<std::right<< std::setw(5)<<55<<std::endl;
-  std::cout<<std::right<< std::setfill('0')<<std::setw(5)<<55<<std::endl;
-  std::cout<<std::left<< std::fixed<<std::setw(5)<<55<<std::endl;
-  std::cout<<std::setw(5)<<"Zu klein gedacht: "<<234534535<<std::endl;
+int main() {
+  std::cout << std::right << std::setw(5) << 55 << "\n";
+  std::cout << std::right << std::setfill('0') << std::setw(5) << 55 << "\n";
+  std::cout << std::left << std::fixed << std::setw(5) << 55 << "\n";
+  std::cout << std::setw(5) << "Zu klein gedacht: " << 234534535 << "\n";
   return 0;
 }
 ```
@@ -826,8 +837,8 @@ int main(){
 #include <math.h>
 
 int main() {
-  for (int i = 12; i > 1; i -=3) {
-    std::cout << std::setprecision(i) << std::fixed << M_PI << std::endl;
+  for (int i = 12; i > 1; i -= 3) {
+    std::cout << std::setprecision(i) << std::fixed << M_PI << "\n";
   }
 }
 ```
@@ -841,24 +852,31 @@ int main() {
 | `\b`    | backspace             |
 | `\r`    | carriage return       |
 | `\t`    | horizontal tab        |
-| `\\\`   | backslash             |
+| `\\ `   | backslash             |
 | `\'`    | single quotation mark |
 | `\"`    | double quotation mark |
 
 ```cpp  esc_sequences.c
 #include <iostream>
-using namespace std;
 
-int main(){
-  cout << "123456789\r";
-  cout << "ABCD\n\n";
-	cout << "Vorname \t Name \t\t Alter \n";
-	cout << "Andreas \t Mustermann\t 42 \n\n";
-	cout << "Manchmal braucht man auch ein \"\\\"\n";
+int main() {
+  std::cout << "123456789\r";
+  std::cout << "ABCD\n\n";
+  std::cout << "Vorname \t Name \t\t Alter \n";
+  std::cout << "Andreas \t Mustermann\t 42 \n\n";
+  std::cout << "Manchmal braucht man auch ein \"\\\"\n";
   return 0;
 }
 ```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+```
+ABCD56789
+
+Vorname 	 Name 		 Alter
+Andreas 	 Mustermann	 42
+
+Manchmal braucht man auch ein "\"
+```
+<!--- @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`) --->
 
 {{1}}
 Beispiele
@@ -866,10 +884,10 @@ Beispiele
 > Newline erschafft eine neue Zeile in der weitergeschrieben wird.
 ```cpp  newline.c
 #include <iostream>
-using namespace std;
 
-int main(){
-  cout << "Dieser Text steht in der 1. Zeile.\nDieser Text steht in der 2. Zeile.";
+int main() {
+  std::cout << "Dieser Text steht in der 1. Zeile.\n"
+            << "Dieser Text steht in der 2. Zeile.\n";
   return 0;
 }
 ```
@@ -879,12 +897,12 @@ Dieser text steht in der 2. Zeile.
 ```
 
 > Backspace setzt den Cursor um eins zurück und ermöglicht es das Symbol zu überschreiben.
-```cpp  backspace.c
+```cpp  backspace.cpp
 #include <iostream>
-using namespace std;
 
-int main(){
-  cout << "Dieser Text steht in der 9\b1. Zeile.\nDieser Text steht in der 2. Zeile.";
+int main() {
+  std::cout << "Dieser Text steht in der 9\b1. Zeile.\n"
+            << "Dieser Text steht in der 2. Zeile.\n";
   return 0;
 }
 ```
@@ -894,12 +912,12 @@ Dieser text steht in der 2. Zeile.
 ```
 
 > Carriage return setzt den Cursor auf den Anfang der Zeile zurück und ermöglicht es Text zu überschreiben.
-```cpp  carriagereturn.c
+```cpp  carriagereturn.cpp
 #include <iostream>
-using namespace std;
 
-int main(){
-  cout << "Dieser Text steht in der 9\b2. Zeile. Dies steht noch am Ende.\rDieser Text steht in der 1. Zeile.";
+int main() {
+  std::cout << "Dieser Text steht in der 9\b2. Zeile. Dies steht noch am Ende."
+            << "\rDieser Text steht in der 1. Zeile.\n";
   return 0;
 }
 ```
@@ -910,13 +928,12 @@ Dieser Text steht in der 1. Zeile. Dies steht noch am Ende.
 > Horizontal tab erzeugt einen Tabulator. Damit ist eine saubere Formattierung möglich.
 ```cpp  horizontaltab.c
 #include <iostream>
-using namespace std;
 
-int main(){
-  cout << "Name\tAlter\n";
-  cout << "Peter\t18\n";
-  cout << "Frank\t25\n";
-  cout << "Xi\t22\n";
+int main() {
+  std::cout << "Name\tAlter\n";
+  std::cout << "Peter\t18\n";
+  std::cout << "Frank\t25\n";
+  std::cout << "Xi\t22\n";
   return 0;
 }
 ```
@@ -928,12 +945,11 @@ Xi    22
 ```
 
 > Escape characters ermöglichen auch das Ausgeben von escape characters und Anführungszeichen.
-```cpp  backslash.c
+```cpp  backslash.cpp
 #include <iostream>
-using namespace std;
 
-int main(){
-  cout << "A\\\B und \"C\" und \'D\'\n";
+int main() {
+  std::cout << "A\\\B und \"C\" und \'D\'\n";
   return 0;
 }
 ```
@@ -956,9 +972,9 @@ int main()
   char b;
   float a;
   int i;
-  std::cout<<"Bitte Werte eingeben [char float int] : ";
-  std::cin>>b>>a>>i;
-  std::cout<<"char - " <<b<< " float - "<<a<<" int - "<<i;
+  std::cout << "Bitte Werte eingeben [char float int] : ";
+  std::cin >> b >> a >> i;
+  std::cout << "char - " << b << " float - " << a << " int - " << i << "\n";
   return 0;
 }
 ```
@@ -969,16 +985,16 @@ int main()
 Implementieren Sie einen programmierbaren Taschenrechner für quadaratische Funktionen.
 
 ```cpp                     QuadraticEquation.cpp
-#include<iostream>
+#include <iostream>
 
 int main() {
   // Variante 1 - ganz schlecht
-  std::cout <<"f("<<x<<") = "<<3*5*5 + 4*5 + 8<<" \n";
+  std::cout << "f(5) = " << 3 * 5 * 5 + 4 * 5 + 8 << "\n";
 
   // Variante 2 - besser
   int x = 9;
-  std::cout <<"f("<<x<<") = "<<3*x*x + 4*x + 8<<" \n";
-	return 0;
+  std::cout << "f(" << x << ") = " << 3 * x * x + 4 * x + 8 << "\n";
+  return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
@@ -1047,7 +1063,7 @@ Globale und lokale Variablen
 > Wählen Sie aus, welche Variablen global und welche lokal sind.
 
 ```cpp
-#include<iostream>
+#include <iostream>
 
 int w = 5;
 
@@ -1057,10 +1073,10 @@ int main(void)
   {
     int v;
     v = 2;
-    std::cout<<v<<"\n";
-    std::cout<<w<<"\n";
+    std::cout << v << "\n";
+    std::cout << w << "\n";
   }
-  std::cout<<v<<"\n";
+  std::cout << v << "\n";
   return 0;
 }
 ```
