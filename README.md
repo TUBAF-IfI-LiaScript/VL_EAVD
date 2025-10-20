@@ -413,7 +413,7 @@ Ein Mikrocontroller-Tutorial wird im Dezember / Januar angeboten. Es dient inter
 
 Die Vorlesungsunterlagen selbst sind unter
 
-https://github.com/SebastianZug/VL_EAVD
+https://tubaf-ifi-liascript.github.io/prozprog.html
 
 verfügbar. Diese können entweder in der Markdown-Syntax oder als interaktives Dokument betrachtet werden.
 
@@ -421,7 +421,6 @@ verfügbar. Diese können entweder in der Markdown-Syntax oder als interaktives 
 >
 > + der Inhalt wird sich ggf. anhand Ihrer Verbesserungsvorschläge verändern
 > + die Dokumente enthalten eine Vielzahl von ausführbarem Code.
-
 
 > Sie finden die PDF Versionen der Vorlesungen im SHRIMP Portal der Universität Leipzig.
 >
@@ -447,6 +446,8 @@ Die Prüfung besteht aus einer Klausur und ggf. einer praktischen Arbeit (Einfü
 + _Welchen Wert gibt das folgende Programm in Zeile x aus?_
 + _Finden Sie alle syntaktischen und logischen Fehler im nachfolgenden Code_
 + _Bewerten Sie folgenden Aussagen: ..._
+
+> Studierenden, die an der Einführung in die Informatik (7 LP), realisieren neben der Klausur eine praktische Programmieraufgabe. Diese wird mit den Übungsbetreuern abgestimmt.
 
 ### Wie können Sie zum Gelingen der Veranstaltung beitragen?
 
