@@ -390,12 +390,13 @@ Die Übungen vertiefen das erlernte anhand praktischer Programmieraufgaben:
 
 ```
 1. Maximumsberechnung:
-    a) Nach der Eingabe zweier reellen Zahlen ist mit Hilfe einer if-Anweisung das Maximum zu 
-       bestimmen und auszugeben.
-    b) Bestimmen Sie nach einer Programmerweiterung das Maximum von drei beliebigen reellen 
-       Zahlen, wobei zur Problemlösung eine geschachtelte if-Anweisung eingesetzt werden soll.
-   Bei Gleichheit der drei Zahlen soll zusätzlich eine Ausschrift „Zahlen gleich“ ausgegeben 
-   werden.
+    a) Nach der Eingabe zweier reellen Zahlen ist mit Hilfe einer if-
+       Anweisung das Maximum zu bestimmen und auszugeben.
+    b) Bestimmen Sie nach einer Programmerweiterung das Maximum von 
+       drei beliebigen reellen Zahlen, wobei zur Problemlösung eine 
+       geschachtelte if-Anweisung eingesetzt werden soll.
+   Bei Gleichheit der drei Zahlen soll zusätzlich eine Ausschrift 
+   „Zahlen gleich“ ausgegeben werden.
 ```
 
 > **Frage:** Ist jemand noch nicht für die Übungen eingeschrieben?
