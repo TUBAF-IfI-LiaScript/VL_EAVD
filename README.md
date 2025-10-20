@@ -49,9 +49,9 @@ import: https://github.com/liascript/CodeRunner
 
 -------------------------------------------------------------------------------
 
-<font size="5"> Prof. Dr. Sebastian Zug</font>
+<font size="5"> Prof. Dr. Sebastian Zug & Prof. Dr. Bernhard Jung</font>
 
-TU Bergakademie Freiberg, Wintersemester 2024/25
+TU Bergakademie Freiberg, Wintersemester 2025/26
 
 -------------------------------------------------------------------------------
 
@@ -65,7 +65,7 @@ Das vorliegende Material bedient die bisherigen Veranstaltungen
 
 und firmiert diese als neukonzeptionierte übergreifenden Vorlesung _Erhebung, Analyse und Visualisierung digitaler Daten_. 
 
-> Die Veranstaltung richtet sich an Nicht-Informatiker aus verschiedenen ingenieurwissenschaftlichen Disziplinen mit keinen oder geringen Programmierkenntnissen.
+> Die Veranstaltung richtet sich an Nicht-Informatiker aus verschiedenen ingenieurwissenschaftlichen Disziplinen mit keinen oder geringen Programmiervorkenntnissen.
 
 ## Worum geht es?
 
@@ -91,13 +91,16 @@ Mit der erfolgreichen Teilnahme an der Veranstaltung sollen die Studierenden:
          {{1-2}}
 ******************************************
 
-__Lernziele der Vorlesung__
+__Lernziele der Vorlesung im Kontext der Bloom'schen Taxonomie__
 
 | Einordnung | Studierende ...                                         |
 | ---------- | ------------------------------------------------------- |
-| Erschaffen | -                                                       |
+| Entwickeln | <ul class="lia-list--unordered" style="margin-left: 0">
+<li> ... entwerfen eigenständige Lösungsansätze für einfache wissenschaftliche Datenerhebungen / Analysen. </li> 
+<li> ... kombinieren verschiedene Programmierkonzepte zu funktionsfähigen Anwendungen. </li>
+</ul>                                                       |
 | Bewerten   | <ul class="lia-list--unordered" style="margin-left: 0"> 
-<li> ... können die Unterschiede der behandelten Programmiersprachen mit Bezug auf Ausführungskontex, Performance usw. beurteilen . </li>
+<li> ... können die Unterschiede der behandelten Programmiersprachen beurteilen . </li>
 <li> ... beurteilen die Qualität eines Codes anhand grundlegender Metriken. </li> 
 </ul>          |  
 | Analysieren    | <ul class="lia-list--unordered" style="margin-left: 0">
@@ -153,7 +156,9 @@ __Lernziele der Vorlesung__
 
 *****************************************************************************
 
-## Anwendungsszenarien
+### Warum das Ganze?
+
+> **Merke:** Wissenschaftliches Arbeiten ist im Bereich der Natur- und Ingenieurwissenschaften ohne den Rechner (fast) nicht denkbar.
 
                              {{0-1}}
 ********************************************************************************
@@ -222,15 +227,14 @@ Weitere Beispiele:
 
 ![Diagramme](./images/Readme/Engstelle_Roboter.jpg)<!-- width="70%" -->
 
-> **Merke:** Wissenschaftliches Arbeiten ist im Bereich der Natur- und Ingenieurwissenschaften ohne den Rechner (fast) nicht denkbar.
-
 *******************************************************************************
 
 
 ## Keine Angst vor Code!
 
 --{{0}}--
-Das Beispiel zeigt ein "Hello World" Beispiel für die C++ Implementierung auf dem Mikrocontroller. Um das einfachste Beispiel darzustellen, lesen wir keinen Sensor ein, sondern lassen eine kleine [LED](https://de.wikipedia.org/wiki/Leuchtdiode) blinken. 
+Das Beispiel zeigt ein "Hello World" Beispiel in C++. 
+
 
                                      {{0-1}}
 *******************************************************************************
@@ -257,28 +261,6 @@ int main (){
 ```
 @LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
-
-Auf der Basis von C++ lassen sich einfache Mess- und Regelungstechnikaufgaben
-sehr einfach automatisieren. Ein Startpunkt dafür ist das Arduino Projekt, dass sowohl eine
-entsprechende Hardware, wie auch eine Programmierumgebung bereitstellt.
-
-<div>
-<wokwi-led color="red" pin="13" port="B"></wokwi-led>
-</div>
-
-```cpp helloWorldinArduino.cpp
-void setup() {
-  pinMode(LED_BUILTIN, OUTPUT);
-}
-
-void loop() {
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(1000);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(1000);
-}
-```
-@AVR8js.sketch
 
 *******************************************************************************
 
@@ -311,6 +293,9 @@ plt.savefig('temp.png')
 
 ### "Python ist ja nett, aber C++ ist ..."
 
+                                 {{0-1}}
+*******************************************************************************
+
 Foreneinträge aus Veranstaltungen anderer Hochschulen:
 
 > _"Viele haben bei uns wegen dem Info-Grundlagenmodul gewechselt. Allerdings_
@@ -324,6 +309,8 @@ Foreneinträge aus Veranstaltungen anderer Hochschulen:
 
 > **Frage:** Was sind die besonderen Herausforderungen bei der Programmierarbeit?
 
+*******************************************************************************
+
                                  {{1-2}}
 *******************************************************************************
 
@@ -331,23 +318,25 @@ Foreneinträge aus Veranstaltungen anderer Hochschulen:
 * Penible Beachtung der Syntax
 * Ungewohnte Arbeitsmittel
 
-<div>
-<wokwi-led color="red" pin="13" port="B"></wokwi-led>
-</div>
+> **Warum ist Syntax so wichtig?** Computer verstehen nur exakte Anweisungen - ein kleiner Tippfehler kann das gesamte Programm zum Absturz bringen!
 
-```cpp BuggyCode.cpp
-void setup() {
-  pinMode(LED_BUILTIN, OUTPUT)
-}
+```python fehlerhaft.py
+  print("Einfaches Programm zur Temperaturumrechnung")
 
-void loop() {
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(1000);
-  digitalwrite(LED_BUILTIN, LOW);
-  delay(1000.);
+def celsius_to_fahrenheit(celsius):
+    fahrenheit = celsius * 9/5 - 32     # C * 9/5 + 32 (aus Wikipedia)
+    return fahrenheit
 
+for i in range(0, 35, 5):
+    print("Temperatur in Celsius:", i, end=""
+    result = Celsius_to_Fahrenheit(i)
+    print(" = ", result, "Grad Fahrenheit")
 ```
-@AVR8js.sketch
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`, `*`)
+
+> **Entdecken Sie die 3 Syntaxfehler!** Diese kleinen Fehler verhindern, dass der Computer das Programm überhaupt ausführen kann.
+
+> **Aufgabe** Was fällt Ihnen neben den Syntaxfehlern auf?
 
 *******************************************************************************
 
@@ -364,33 +353,34 @@ void loop() {
 
 Wer sind _wir_?
 
-| Name                    | Email                                   | Rolle                                    |
-| :---------------------- | :-------------------------------------- | ---------------------------------------- |
-| Prof. Dr. Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de | Vorlesungen                              |
-| Dr. Galina Rudolf       | galina.rudolf@informatik.tu-freiberg.de | Vorlesungen und Koordination der Übungen |
-| Florian Richter         | flo.richter@informatik.tu-freiberg.de   |                                          |
-| Robert Lösch            | robert.loesch@informatik.tu-freiberg.de |                                          |
-| Adrian Köppen           | adrian.koeppen@student.tu-freiberg.de   | Tutor                                    |
+| Name                    | Email                                    | Rolle                   |
+| :---------------------- | :--------------------------------------- | ----------------------- |
+| Prof. Dr. Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de  | Vorlesungen bis Februar |
+| Prof. Dr. Bernhard Jung | bernhard.jung@informatik.tu-freiberg.de  | Vorlesungen ab Januar   |
+| Florian Richter         | flo.richter@informatik.tu-freiberg.de    |                         |
+| Johannes Kohl           | johannes.kohl@informatik.tu-freiberg.de  |                         |
+| Johannes Vater          | johannes.vater@informatik.tu-freiberg.de |                         |
+| Adrian Köppen           | adrian.koeppen@student.tu-freiberg.de    | Tutor                   |
 
 ### Strukurierung der Veranstaltung
 
 | Nr. | Datum      |        | Inhalt                                       |
 | :-- | ---------- | ------ | -------------------------------------------- |
-| 0   | 21.10.2024 |        | Motivation, Organisation                     |
-| 1   | 28.10.2024 | C++    | C++ Programmstrukturen / Entwicklungsprozess |
-| 2   | 04.10.2024 | C++    | Datentypen / Ein- und Ausgabe                |
-| 3   | 11.11.2024 | C++    | Kontrollstrukturen                           |
-| 4   | 18.11.2024 | C++    | Zeiger und Arrays                            |
-| 5   | 25.11.2024 | C++    | Funktionen                                   |
-| 6   | 02.12.2024 | C++    | Objekte                                      |
-| 7   | 09.12.2024 | C++    | Vererbung                                    |
-| 8   | 16.12.2024 | C++    | Anwendungen                                  |
-| 9   | 06.01.2025 | Python | Python Grundlagen                            |
-| 10  | 13.01.2025 | Python | Python Grundlagen                            |
-| 11  | 15.01.2025 | Python | Objekte                                      |
-| 12  | 20.01.2025 | Python | Visualisierung                               |
-| 13  | 27.01.2025 | Python | Datenanalyse                                 |
-| 14  | 03.02.2025 | Python | Übergreifende Anwendungen                    |
+| 0   | 20.10.2024 |        | Motivation, Organisation                     |
+| 1   | 27.10.2024 | C++    | C++ Programmstrukturen / Entwicklungsprozess |
+| 2   | 03.11.2024 | C++    | Datentypen / Ein- und Ausgabe                |
+| 3   | 10.11.2024 | C++    | Kontrollstrukturen                           |
+| 4   | 17.11.2024 | C++    | Zeiger und Arrays                            |
+| 5   | 24.11.2024 | C++    | Funktionen                                   |
+| 6   | 01.12.2024 | C++    | Objekte                                      |
+| 7   | 08.12.2024 | C++    | Vererbung                                    |
+| 8   | 15.12.2024 | C++    | Anwendungen                                  |
+| 9   | 05.01.2025 | Python | Python Grundlagen                            |
+| 10  | 12.01.2025 | Python | Python Grundlagen                            |
+| 11  | 19.01.2025 | Python | Objekte                                      |
+| 12  | 26.01.2025 | Python | Visualisierung                               |
+| 13  | 02.02.2025 | Python | Datenanalyse                                 |
+| 14  | 09.02.2025 | Python | Übergreifende Anwendungen                    |
 
 > **Achtung:** C++ wird ohne die spezifische Verwendung des Mikrocontrollers verwendet. Vielmehr erfolgt die Programmierung auf dem Desktoprechner. In freiwilligen Tutorien haben Sie Gelegenheit die Hardware auszuwechseln und mit dem Mikrocontroller zu arbeiten.
 
@@ -398,7 +388,15 @@ Wer sind _wir_?
 
 Die Übungen vertiefen das erlernte anhand praktischer Programmieraufgaben:
 
-... haben wir hier noch mal ein Beispiel?
+```
+1. Maximumsberechnung:
+    a) Nach der Eingabe zweier reellen Zahlen ist mit Hilfe einer if-Anweisung das Maximum zu 
+       bestimmen und auszugeben.
+    b) Bestimmen Sie nach einer Programmerweiterung das Maximum von drei beliebigen reellen 
+       Zahlen, wobei zur Problemlösung eine geschachtelte if-Anweisung eingesetzt werden soll.
+   Bei Gleichheit der drei Zahlen soll zusätzlich eine Ausschrift „Zahlen gleich“ ausgegeben 
+   werden.
+```
 
 > **Frage:** Ist jemand noch nicht für die Übungen eingeschrieben?
 
@@ -406,7 +404,7 @@ Die Übungen vertiefen das erlernte anhand praktischer Programmieraufgaben:
 
 ### Mikrocontroller Tutorials
 
-Die Tutorials werden im Dezember erstmalig angeboten. Sie dienen interessierten Studierenden der weiteren Vertiefung ihrer Kenntnisse.
+Ein Mikrocontroller-Tutorial wird im Dezember / Januar angeboten. Es dient interessierten Studierenden der weiteren Vertiefung ihrer Kenntnisse.
 
 > Mikrocontrollerbezogene Inhalte sind nicht Gegenstand der Prüfungen!
 
@@ -424,7 +422,13 @@ verfügbar. Diese können entweder in der Markdown-Syntax oder als interaktives 
 > + die Dokumente enthalten eine Vielzahl von ausführbarem Code.
 
 
-## Erwartungen 
+> Sie finden die PDF Versionen der Vorlesungen im SHRIMP Portal der Universität Leipzig.
+>
+> ![](./images/SHRIMP.png)
+>
+> Das Passwort wird in der Vorlesung bekannt gegeben.
+
+### Zeitaufwand 
 
 Der Zeitaufwand beträgt 180h und setzt sich zusammen aus 60h Präsenzzeit und
 120h Selbststudium. Letzteres umfasst die Vor- und Nachbereitung der
@@ -433,7 +437,7 @@ Prüfungsvorbereitung.
 
 Sie müssen, insbesondere wenn Sie noch keine Programmiererfahrung haben, ggf. deutlich mehr Zeit in den Kurs investieren. Dies macht gemeinsam mehr Spaß als allein!
 
-## Prüfungsinhalte 
+### Prüfungsinhalte 
 
 Die Prüfung besteht aus einer Klausur und ggf. einer praktischen Arbeit (Einführung in die Informatik).
 
@@ -459,93 +463,81 @@ Die Prüfung besteht aus einer Klausur und ggf. einer praktischen Arbeit (Einfü
 
 * Sprechen Sie uns gern wegen "Bastelbedarf" für ein eigenes Projekt an!
 
-* Kommentieren Sie die Vorlesungsunterlagen
+* Kommentieren Sie die Vorlesungsunterlagen unter https://app.shrimpp.de/pod/90o.1.1.XxQ9
 
-> SHRIMP LINK einfügen
 
 ## Beispiel der Woche
 
-__Aufgabe:__ Wir Gestenbasiertes Schreibtischlicht realisieren - Auf eine Bewegung der Hand nach links hin soll sich das Licht einschalten und nach einer gewissen Zeit (1s) wieder ausschalten.
+__Aufgabe:__ Wann erscheinen Studierende in der Vorlesung? Gibt es da Muster - _Der frühe Vogel_, _rechtzeitig aber knapp_, _In den ersten 10 Minuten passiert sowieso nichts!_
 
-Grundlage für die Umsetzung ist ein Microcontroller mit einem [APDS-9960](https://www.sparkfun.com/datasheets/Components/General/APDS-9960.pdf) Sensor. Dieser Sensor kann einfache Gesten erkennen.
+Wir starten unsere Demo mit einem Ultraschallsensor, der die Entfernung von Personen misst. Der folgende Code misst die Entfernung und gibt diese über die serielle Schnittstelle aus.
 
+```c
+#define PIN_TRIGGER 12
+#define PIN_ECHO    13
 
-{{1-6}}
-> Welche "Bausteine" brauchen wir dafür?
+unsigned long duration;
+unsigned int distance;
 
-{{2-6}}
-> Wie müssen diese miteinander verknüpft werden?
-
-{{3-6}}
-> Wie kann ich diese Information abstrakt darstellen?
-
-{{4-5}}
-``` mermaind @mermaid
-flowchart TD
-    A(Configure Sensor) --> B(Configure LED Pin)
-    B --> C{Meas.\n available?}
-    C -->|Yes| D(Read Gesture Sensor)
-    C -->|No| C
-    D --> E{Left swipe?}
-    E -->|Yes| F(Activate LED)
-    F --> G(Wait 1s)
-    G --> H(Deactivate LED)
-    E -->|No| C
-    H --> C
-```
-
-                                     {{5-6}}
-*******************************************************************************
-
-> Wie sieht die C++ Lösung dafür aus?
-
-<div class="left">
-
-```cpp
-// Einbinden der Bibliothek für den Sensor
-#include <Arduino_APDS9960.h>
-
-// Konfiguration (wird einmalig durchlaufen)
-void setup() {
-  // Sensor initialisieren
-  APDS.begin();
-  // LED aktivieren
-  pinMode(LED_BUILTIN, OUTPUT); 
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(PIN_TRIGGER, OUTPUT);
+  pinMode(PIN_ECHO, INPUT);
 }
 
-// Endlosschleife
-void loop() {
-  // Liegt eine Geste vor?
-  if (APDS.gestureAvailable()) {
-    // Einlesen der Geste
-    int gesture = APDS.readGesture();
-    // Haben wir es mit einem Links-Wish zu tuen?
-    if (gesture == GESTURE_LEFT)
-    {
-        // Wenn ja dann Leuchte einmalig für 1s
-        digitalWrite(LED_BUILTIN, HIGH);
-        delay(1000);
-        digitalWrite(LED_BUILTIN, LOW);
-    }
-  }
+void loop()
+{
+  digitalWrite(PIN_TRIGGER, LOW);
+  delayMicroseconds(2);
+
+  digitalWrite(PIN_TRIGGER, HIGH);
+  delayMicroseconds(10);
+
+  duration = pulseIn(PIN_ECHO, HIGH);
+  distance = duration/58;
+  Serial.println(distance);
+  delay(100);
 }
 ```
 
-</div>
 
-<!-- class="right" -->
-``` mermaind @mermaid
-flowchart TD
-    A(Configure Sensor) --> B(Configure LED Pin)
-    B --> C{Meas.\n available?}
-    C -->|Yes| D(Read Gesture Sensor)
-    C -->|No| C
-    D --> E{Left swipe?}
-    E -->|Yes| F(Activate LED)
-    F --> G(Wait 1s)
-    G --> H(Deactivate LED)
-    E -->|No| C
-    H --> C
-```
+Der Mikrocontroller misst die Zeit \( t \), die ein Schallsignal benötigt, um vom Sender zur reflektierenden Oberfläche und wieder zurück zu gelangen.
 
-*******************************************************************************
+$$
+s_{\text{hin+zurück}} = v \cdot t
+$$
+
+wobei  
+
+- $s_{\text{hin+zurück}}$ die gesamte Laufstrecke (Hin- und Rückweg) ist,  
+- $v$ die Schallgeschwindigkeit in Luft (in cm/µs),  
+- $t$ die gemessene Zeit (in µs).
+
+
+Da uns nur die **einfache Entfernung** (Hinweg) interessiert, gilt:
+
+$$
+s = \frac{s_{\text{hin+zurück}}}{2} = \frac{v \cdot t}{2}
+$$
+
+
+Die Schallgeschwindigkeit in Luft beträgt bei $ 20^\circ \text{C} $:
+
+$$
+v = 343\,\text{m/s} = 0.0343\,\text{cm/µs}
+$$
+
+Damit folgt:
+
+$$
+s = \frac{0.0343 \cdot t}{2} = 0.01715 \cdot t
+$$
+
+Die Entfernung in Zentimetern ergibt sich somit zu:
+
+$$
+s_{\text{cm}} = \frac{t}{58.3}
+$$
+
+Wie geht es weiter ... im Projektordner wartet die Lösung auf Sie!
