@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf & Copilot
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.1.0
+version:  1.1.1
 language: de
 narrator: Deutsch Female
 
