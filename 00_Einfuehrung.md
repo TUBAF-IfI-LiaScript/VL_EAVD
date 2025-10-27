@@ -1,8 +1,8 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Galina Rudolf
+author:   Sebastian Zug & André Dietrich & Galina Rudolf & Copilot
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.4
+version:  1.1.0
 language: de
 narrator: Deutsch Female
 
@@ -45,14 +45,26 @@ import: https://github.com/liascript/CodeRunner
 
 ## Reflexion Ihrer Fragen
 
+                         {{0-1}}
+***************************************************************
+
+> Zur Erinnerung ...
+
+![Weihnachtsmänner](./images/00_Einfuehrung/Weihnachtsmaenner.jpeg)<!-- style="width: 40%; display: block; margin-left: auto; margin-right: auto;"-->
+
 > Partizipative Materialentwicklung mit den Informatikern ...
 
 <!-- data-type="none" -->
 | Format                   | Informatik Studierende  | Nicht-Informatik Studierende |
 |--------------------------|-------------------------|------------------------------|
-| Verbesserungsvorschlag   | 1                       | 0                            |
-| Fragen                   | 0                       | 0                            |
+| Verbesserungsvorschlag   | 0                       | 0                            |
+| Fragen                   | 1                       | 0                            |
 | generelle Hinweise       | 0                       | 0                            |
+
+***************************************************************
+
+                         {{1-2}}
+***************************************************************
 
 > Hat Sie die letztwöchige Vorstellung der Ziele der Lehrveranstaltung überzeugt? 
 
@@ -60,62 +72,156 @@ import: https://github.com/liascript/CodeRunner
 - [(schau'n wir mal)] Ich bin noch nicht sicher. Fragen Sie in einigen Wochen noch mal.
 - [(nein)] Nein, ich bin nur hier, weil ich muss.
 
+***************************************************************
 
-##  Wie arbeitet ein Rechner eigentlich?
+## Warum sollten Sie programmieren lernen?
 
-{{0-1}}
-Programme sind Anweisungslisten, die vom Menschen erdacht, auf einem Rechner zur
+    --{{0}}--
+Sie fragen sich vielleicht: "Ich studiere doch gar nicht Informatik - wozu brauche ich das?" Eine berechtigte Frage! Lassen Sie mich Ihnen zeigen, warum Programmierkenntnisse für IHRE Arbeit wertvoll sind.
+
+                           {{0-1}}
+********************************************************************************
+
+**Stellen Sie sich folgende Situationen vor:**
+
+* 📊 Sie haben 500 Excel-Dateien mit Messdaten, die Sie alle auswerten müssen
+* 🔬 Ihr Experiment muss 1000 mal wiederholt werden - immer mit leicht veränderten Parametern
+* 📈 Sie möchten Ihre Versuchsergebnisse professionell visualisieren
+* 🤖 Das Experiment soll kontinuierlich Daten erfassen - auch nachts und am Wochenende
+
+> **Frage:** Wie würden Sie diese Aufgaben ohne Programmierung lösen? Wie lange würde das dauern?
+
+********************************************************************************
+
+                           {{1-2}}
+********************************************************************************
+
+**Was Programmierung für Sie bedeutet:**
+
+<!-- data-type="none" -->
+| Ohne Programmierung                | Mit Programmierung                           |
+| ---------------------------------- | -------------------------------------------- |
+| 2 Wochen manuelles Kopieren        | 5 Minuten Skript schreiben, dann automatisch |
+| Wiederholung = Langeweile + Fehler | Computer macht die Wiederholung fehlerfrei   |
+| Begrenzt auf Standard-Tools        | Individuelle Lösungen für Ihre Probleme      |
+| Abhängig von anderen               | Selbstständig arbeiten können                |
+
+> **Programmieren ist wie ein Schweizer Taschenmesser für wissenschaftliches Arbeiten!**
+
+> **Programmieren macht einmal arbeit, spart dann aber viel Zeit und Mühe!**
+
+********************************************************************************
+
+--{{1}}--
+Viele Aufgaben in Wissenschaft und Technik lassen sich mit ein wenig Programmierkenntnis enorm vereinfachen. Lassen Sie sich nicht abschrecken – Sie müssen kein Profi werden, um große Effekte zu erzielen!
+
+                           {{2-3}}
+********************************************************************************
+
+**Das Beste daran:**
+
+* 💪 Sie werden **unabhängiger** in Ihrer wissenschaftlichen Arbeit
+* ⚡ Sie **sparen Zeit** bei repetitiven Aufgaben
+* 🎯 Sie können **präziser** arbeiten (Computer machen keine Tippfehler)
+* 🚀 Sie erschließen sich **neue Möglichkeiten** für Ihre Forschung
+
+> _"Ich kann jetzt in 10 Minuten auswerten, wofür ich früher einen Tag gebraucht habe!"_ - Studentin der Geowissenschaften nach diesem Kurs
+
+********************************************************************************
+
+### Und wie "erkläre" ich dem Computer, was ich will?
+
+    --{{0}}--
+Warum können wir Computer nicht einfach in unserer Alltagssprache programmieren? Warum brauchen wir überhaupt Programmiersprachen wie C++ oder Python? Die Antwort liegt in der fundamentalen Funktionsweise von Computern ... und der unterschiedlichen Natur von menschlicher und maschineller Kommunikation.
+
+
+                        {{0-1}}
+********************************************************
+
+**Warum versteht der Computer keine natürliche Sprache?**
+
+> _"Computer, erhöhe bitte die Temperatur etwas!"_
+
+Was bedeutet "etwas"? 1 Grad? 5 Grad? 10 Grad? Und wie schnell? Sofort oder graduell?
+
+********************************************************
+
+                        {{1-2}}
+********************************************************
+
+**Das Problem mit natürlicher Sprache:**
+
+* 🤔 **Mehrdeutigkeit**: "Erhöhe etwas" kann vieles bedeuten
+* 💭 **Kontext**: "Es ist kalt" → Mensch versteht: "Heizung aufdrehen" | Computer: "???"
+* 🎭 **Interpretation**: "Das ist ja toll!" kann Lob oder Sarcasmus sein
+* 🌍 **Implizites Wissen**: Wir setzen voraus, dass andere verstehen, was wir meinen.
+
+**Computer hingegen:**
+
+* ⚙️ Verarbeiten **nur exakte Anweisungen** (Nullen und Einsen)
+* 🤖 Haben **kein Weltwissen** oder Erfahrung
+* 📏 Brauchen **präzise Definitionen** für jeden Schritt
+* ❌ Können **nicht raten oder interpretieren**
+
+> **Computer sind wie ein extrem pedantischer Bürokrat, der JEDE Anweisung wörtlich nimmt und nichts zwischen den Zeilen liest!**
+
+********************************************************
+
+                        {{2-3}}
+********************************************************
+
+Programme sind daher Anweisungslisten, die vom Menschen erdacht, auf einem Rechner zur
 Ausführung kommen. Eine zentrale Hürde ist dabei die Kluft zwischen menschlicher
-Vorstellungskraft die **implizite Annahmen und Erfahrungen** einschließt und Logik,
-der **"stupiden" Abarbeitung von Befehlsfolgen** in einem Rechner.
+Vorstellungskraft, die **implizite Annahmen und Erfahrungen** einschließt, und der
+**"stupiden" Abarbeitung von Befehlsfolgen** in einem Rechner.
 
-{{0-1}}
-Programmiersprachen bemühen sich diese Lücke zu schließen und werden dabei von
-einer Vielzahl von Tools begleitet, die diesen **Transformationsprozess**
-unterstützen sollen.
 
-{{0-1}}
-Um das Verständnis für diesen Vorgang zu entwickeln werden zunächst die Vorgänge
-in einem Rechner bei der Abarbeitung von Programmen beleuchtet, um dann die
-Realisierung eines Programmes mit C++ zu adressieren.
+Programmiersprachen sind ein Kompromiss zwischen:
 
-{{0-1}}
-![instruction-set](./images/00_Einfuehrung/Programmiersprache_Umfeld.png "Erzeugung von Programmcode [^Programmerstellung]")<!-- width="80%" -->
+* 👨‍💻 **Menschlicher Lesbarkeit** → Wir können sie (einigermaßen) verstehen
+* 🤖 **Maschineller Eindeutigkeit** → Computer können sie exakt ausführen
 
-[^Programmerstellung]: Programmiervorgang und Begriffe(Autor VÖRBY, https://commons.wikimedia.org/wiki/File:Programmiersprache_Umfeld.png
+**Beispiel:**
 
-{{1-2}}
+<!-- data-type="none" -->
+| Natürliche Sprache            | Programmiersprache               | Maschinensprache        |
+| ----------------------------- | -------------------------------- | ----------------------- |
+| "Erhöhe die Temperatur etwas" | `temperature = temperature + 2;` | `01011010 11001001 ...` |
+| Mehrdeutig                    | Präzise                          | Für Menschen unlesbar   |
+| Flexibel                      | Strukturiert                     | Direkt ausführbar       |
+
+********************************************************
+
+###  Wie arbeitet ein Rechner eigentlich?
+
+      --{{0}}--
+Die Intel 4004 war der erste kommerziell erhältliche Mikroprozessor (1971). Er konnte einfache Rechenoperationen ausführen, hatte ein eigenes Steuerwerk, ein Rechenwerk (ALU), Register und einen Speicherzugriff – alles auf einem einzigen Chip. Das nachfolgende Bild zeigt die grundlegenden Komponenten und deren Zusammenspiel: Steuerwerk, Rechenwerk, Register und Busse. Er konnte übrigens nur 4-Bit Zahlen verarbeiten!
+
+                     {{0-1}}
+****************************************************
+
 Beispiel: Intel 4004-Architektur (1971)
 
-{{1-2}}
-![intel](./images/00_Einfuehrung/4004_arch.svg.png "Intel 4004 Architekturdarstellung [^Intel4004]")<!-- style="width: 80%; display: block; margin-left: auto; margin-right: auto;"-->
 
-[^Intel4004]: Autor Appaloosa, Intel 4004, https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png
+![intel](./images/00_Einfuehrung/4004_arch.svg.png "Intel 4004 Architekturdarstellung Autor Appaloosa, Intel 4004, https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png")<!-- style="width: 80%; display: block; margin-left: auto; margin-right: auto;"-->
 
-{{2}}
-Jeder Rechner hat einen spezifischen Satz von Befehlen, die durch "0" und "1"
-ausgedrückt werden, die er überhaupt abarbeiten kann.
+> Jeder Rechner hat einen spezifischen Satz von Befehlen, die durch "0" und "1" ausgedrückt werden, die er überhaupt abarbeiten kann. Man spricht vom sogenannten _Instruction Set_.
 
-{{2}}
 Speicherauszug den Intel 4004:
 
-{{2}}
 <!-- data-type="none" -->
-| Adresse | Speicherinhalt | OpCode    | Mnemonik |
-|:--------|:---------------|:----------|:---------|
-| 0010    | 1101 0101      | 1101 DDDD | LD $5    |
-| 0012    | 1111 0010      | 1111 0010 | IAC      |
+| Adresse | Speicherinhalt | OpCode    | Mnemonik | Bedeutung                            |
+| :------ | :------------- | :-------- | :------- | ------------------------------------ |
+| 0010    | `1101 0101`    | 1101 DDDD | LD $5    | Lade den Wert 5 in die Recheneinheit |
+| 0012    | `1111 0010`    | 1111 0010 | IAC      | erhöhe den Wert um 1                 |
 
-{{3}}
-Unterstützung für die Interpretation aus dem Nutzerhandbuch, dass das _Instruction Set_ beschreibt:
+****************************************************
 
-{{3}}
-![instruction-set](./images/00_Einfuehrung/4004_Instruction_set.png)<!-- width="100%" -->
+   --{{1}}--
+Maschinencode lässt sich nicht zwischen verschiedenen Rechnerarchitekturen übertragen. Jede CPU-Familie hat ihr eigenes Instruction Set, das festlegt, welche Befehle sie versteht und wie diese kodiert sind. Ein Programm, das für eine Architektur geschrieben wurde, funktioniert daher nicht automatisch auf einer anderen.
 
-{{3}}
-Quelle: [Intel 4004 Assembler](http://e4004.szyc.org/asm.html)
-
-### Programmierung
+                     {{1-2}}
+****************************************************
 
 Möchte man so Programme schreiben?
 
@@ -129,59 +235,53 @@ Möchte man so Programme schreiben?
 * geringer Abstraktionsgrad, bereits einfache Konstrukte benötigen viele Codezeilen
 * weitgehende semantische Analysen möglich
 
-{{1}}
-> Eine höhere Programmiersprache ist eine Programmiersprache zur Abfassung eines
-> Computerprogramms, die in **Abstraktion und Komplexität** von der Ebene der
-> Maschinensprachen deutlich entfernt ist. Die Befehle müssen durch
-> **Interpreter oder Compiler** in Maschinensprache übersetzt werden.
+****************************************************
 
-{{2}}
-> Ein **Compiler** (auch Kompiler; von englisch für zusammentragen bzw.
-> lateinisch compilare ‚aufhäufen‘) ist ein Computerprogramm, das Quellcodes
-> einer bestimmten Programmiersprache in eine Form übersetzt, die von einem
-> Computer (direkter) ausgeführt werden kann.
+###  Begrifflichkeiten
 
-{{2}}
-Stufen des Compile-Vorganges:
+Um das Verständnis für diesen Vorgang zu entwickeln werden zunächst die Vorgänge
+in einem Rechner bei der Abarbeitung von Programmen beleuchtet, um dann die
+Realisierung eines Programmes mit C++ zu adressieren.
 
-{{2}}
-![instruction-set](./images/00_Einfuehrung/compilerElements.png "Stufen der Compilierung [^Compiliation]")<!-- width="80%" -->
+![instruction-set](./images/00_Einfuehrung/Programmiersprache_Umfeld.png "Erzeugung von Programmcode Programmiervorgang und Begriffe(Autor VÖRBY, https://commons.wikimedia.org/wiki/File:Programmiersprache_Umfeld.png")<!-- width="60%" -->
 
-[^Compiliation]: Jimmy Thong, Oct 13, 2016, What happens when you type GCC main.c, https://medium.com/@vietkieutie/what-happens-when-you-type-gcc-main-c-2a136896ade3
+
+| Begriff                | Erklärung                                                                                                       |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------- |
+| **Compiler**           | Übersetzt den Quellcode (Sourcecode) einer Programmiersprache in Maschinensprache oder eine andere Zielsprache. |
+| **Sourcecode**         | Der vom Menschen geschriebene Programmtext in einer Programmiersprache.                                         |
+| **Editor**             | Programm zum Schreiben und Bearbeiten von Sourcecode.                                                           |
+| **Programmiersprache** | Formale Sprache mit festgelegter Syntax und Semantik, um Computerprogramme zu formulieren.                      |
+| **Interpreter**        | Führt den Sourcecode Zeile für Zeile direkt aus, ohne ihn vorher zu übersetzen.                                 |
+
 
 
 ### Einordnung von C und C++
 
-* Adressiert Hochsprachenaspekte und Hardwarenähe -> Hohe Geschwindigkeit bei
-  geringer Programmgröße
-* Imperative Programmiersprache
+> **imperative (befehlsorientierte) Programmiersprachen**: Ein Programm
+> besteht aus einer Folge von Befehlen an den Computer. Das Programm
+> beschreibt den Lösungsweg für ein Problem (C, Python, Java, LabView,
+> Matlab, ...).
+>
+> **deklarative Programiersprachen**: Ein Programm beschreibt die
+> allgemeinen Eigenschaften von Objekten und ihre Beziehungen
+> untereinander. Das Programm beschreibt zunächst nur das Wissen zur Lösung
+> des Problems (Prolog, Haskal, SQL, ...).
 
-                                 {{1}}
-  > **imperative (befehlsorientierte) Programmiersprachen**: Ein Programm
-  > besteht aus einer Folge von Befehlen an den Computer. Das Programm
-  > beschreibt den Lösungsweg für ein Problem (C, Python, Java, LabView,
-  > Matlab, ...).
-  >
-  > **deklarative Programiersprachen**: Ein Programm beschreibt die
-  > allgemeinen Eigenschaften von Objekten und ihre Beziehungen
-  > untereinander. Das Programm beschreibt zunächst nur das Wissen zur Lösung
-  > des Problems (Prolog, Haskal, SQL, ...).
+**Fakten zu C++:**
 
-
-* Wenige Schlüsselwörter als Sprachumfang
-
-                                  {{2}}
-  > **Schlüsselwort** Reserviertes Wort, das der Compiler verwendet, um ein
-  > Programm zu parsen (z.B. if, def oder while). Schlüsselwörter dürfen nicht
-  > als Name für eine Variable gewählt werden
-
-* Große Mächtigkeit
-
-                                  {{3}}
-  > Je "höher" und komfortabler die Sprache, desto mehr ist der Programmierer
-  > daran gebunden, die in ihr vorgesehenen Wege zu beschreiten.
+- Entwickelt ab 1979 von Bjarne Stroustrup (AT&T Bell Labs)
+- Erweiterung von C um objektorientierte Programmierung
+- Sehr weit verbreitet in Technik, Wissenschaft, Spieleentwicklung und Embedded Systems
+- Kompiliert zu sehr effizientem Maschinencode (hohe Performance)
+- Unterstützt prozedurale, objektorientierte und generische Programmierung
+- Wird von vielen modernen Compilern (z.B. GCC, Clang, MSVC) unterstützt
+- Standardisiert (ISO C++), aktuell C++23/26
 
 ## Erstes C++ Programm
+
+--{{0}}--
+Keine Angst vor dem ersten Programm! Sie müssen nicht alles sofort verstehen – wichtig ist, dass Sie sehen, wie ein vollständiges Programm aussieht und wie einfach der Einstieg sein kann.
 
 ![](https://media.giphy.com/media/8YBpKSm3uPWG9Ca0F4/giphy-downsized.gif)
 
@@ -200,14 +300,17 @@ int main() {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
-| Zeile | Bedeutung                                                                             |
-|:------|:--------------------------------------------------------------------------------------|
-| 1 - 2 | Kommentar (wird vom Präprozessor entfernt)                                            |
-| 4     | Voraussetzung für das Einbinden von Befehlen der Standardbibliothek hier `std:cout`   |
-| 6     | Einsprungstelle für den Beginn des Programmes                                         |
-| 6 - 9 | Ausführungsblock der `main`-Funktion                                                  |
-| 7     | Anwendung eines Operators `<<` hier zur Ausgabe auf dem Bildschirm                    |
-| 8     | Definition eines Rückgabewertes für das Betriebssystem                                |
+| Zeile | Bedeutung                                                                                                            |
+| :---- | :------------------------------------------------------------------------------------------------------------------- |
+| 1 - 2 | Kommentar (wird vom Präprozessor entfernt)                                                                           |
+| 4     | Voraussetzung für das Einbinden von Befehlen der Standardbibliothek hier `std:cout` (wird für die Ausgabe gebraucht) |
+| 6     | Einsprungstelle für den Beginn des Programmes                                                                        |
+| 6 - 9 | Ausführungsblock der `main`-Funktion                                                                                 |
+| 7     | Anwendung eines Operators `<<` hier zur Ausgabe auf dem Bildschirm                                                   |
+| 8     | Definition eines Rückgabewertes für das Betriebssystem                                                               |
+
+        --{{0-1}}--
+Die Arduino-Programme haben eine etwas andere Struktur als konventionelle C++ Programme. Das liegt daran, dass das Arduino-Framework bestimmte Funktionen und Abläufe vorgibt, um die Programmierung von Mikrocontrollern zu erleichtern. Es gibt zwei Hauptfunktionen, die in jedem Arduino-Sketch definiert werden müssen: `setup()` und `loop()` - was die grundsätzlichen Nutzungsmuster wiederspiegelt.
 
                  {{1-2}}
 *********************************************************************
@@ -218,7 +321,7 @@ int main() {
 <wokwi-led color="red" pin="13" port="B"></wokwi-led>
 </div>
 
-```cpp BuggyCode.cpp
+```cpp ArduinoExample.cpp
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
 }
@@ -266,7 +369,7 @@ int main() {int zahl; for (zahl=0; zahl<3;  zahl++){ std::cout << "Hello World!\
 ```
 @LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
-                                  {{1}}
+    {{1}}
 * Das *systematische Einrücken* verbessert die Lesbarkeit und senkt damit die
   Fehleranfälligkeit Ihres Codes!
 * Wählen sie *selbsterklärende Variablen- und Funktionsnamen*!
@@ -274,6 +377,9 @@ int main() {int zahl; for (zahl=0; zahl<3;  zahl++){ std::cout << "Hello World!\
 * Kommentieren Sie Ihr Vorgehen trotz "Good code is self-documenting"
 
 ### Gute Kommentare
+
+     --{{0}}--
+Kommentare sind für Menschen gedacht, die den Code lesen und verstehen müssen. Sie helfen dabei, den Zweck und die Funktionsweise von Codeabschnitten zu erklären, insbesondere wenn dieser komplex oder nicht sofort verständlich ist. Das bezieht auch Sie selbst mit ein :-)
 
 *1. Kommentare als Pseudocode*
 
@@ -333,6 +439,9 @@ int main() {
 
 ### Schlechte Kommentare
 
+     --{{0}}--
+Schlechte Kommentare können mehr schaden als nützen. Sie können den Code unübersichtlich machen, falsche Informationen vermitteln oder einfach nur Zeit verschwenden.
+
 *1. Überkommentierung von Code*
 
 ```cpp
@@ -347,8 +456,8 @@ Quelle: [C Code Style Guidelines](https://www.cs.swarthmore.edu/~newhall/unixhel
 *2. "Merkwürdige Kommentare"*
 
 ``` JavaScript
-//When I wrote this, only God and I understood what I was doing
-//Now, God only knows
+// When I wrote this, only God and I understood what I was doing
+// Now, God only knows
 ```
 
 ``` JavaScript
@@ -375,6 +484,10 @@ try {
 
 ### Was tun, wenn es schief geht?
 
+     --{{0}}--
+Auch erfahrene Programmierer machen Fehler. Das ist normal und gehört zum Lernprozess dazu. Wichtig ist, dass Sie lernen, wie Sie mit Fehlern umgehen und sie beheben können. Gehen Sie systematisch vor und lassen Sie sich nicht entmutigen! Sofern der Compiler Fehlermeldungen ausgibt, sind diese Ihr bester Freund.
+
+
 ```cpp                     ErroneousHelloWorld.cpp
 // Karl Klammer
 // Print Hello World drei mal
@@ -396,7 +509,7 @@ Methodisches Vorgehen:
 * Lesen der Fehlermeldung
 * Verstehen der Fehlermeldung / Aufstellen von Hypothesen
 * Systematische Evaluation der Thesen
-* Seien Sie im Austausch mit anderen (Kommilitonen, Forenbesucher, usw.) konkret
+* Seien Sie im Austausch mit anderen (Kommilitonen, Forenbesucher, KI usw.) konkret.
 
 ### Compilerfehlermeldungen
 
@@ -440,6 +553,10 @@ imt main() {
 
 ### Und wenn das Kompilieren gut geht?
 
+     --{{0}}--
+Logische Fehler kann der Compiler nicht erkennen. Wenn Ihr Programm also ohne
+Fehlermeldungen kompiliert, bedeutet es noch nicht, dass es auch korrekt ist. Vielmehr müssen wir nun durch Testen und Debuggen sicherstellen, dass das Programm das tut, was wir erwarten.
+
 ... dann bedeutet es noch immer nicht, dass Ihr Programm wie erwartet
 funktioniert.
 
@@ -459,6 +576,9 @@ int main() {
 > **Hinweis:** Die Datentypen werden wir in der nächsten Woche besprechen.
 
 ## Warum dann C++?
+
+     --{{0}}--
+C++ ist eine weit verbreitete Programmiersprache, die in vielen Bereichen der Softwareentwicklung eingesetzt wird. Sie bietet eine gute Balance zwischen Leistung, Flexibilität und Kontrolle über Systemressourcen. C++ ermöglicht sowohl prozedurale als auch objektorientierte Programmierung, was es Entwicklern erlaubt, komplexe Anwendungen zu erstellen. Python im Unterschied ist eine interpretierte Sprache, die für ihre Einfachheit und Lesbarkeit bekannt ist. Python eignet sich hervorragend für schnelle Prototypenentwicklung, Datenanalyse und wissenschaftliches Rechnen. Es hat eine umfangreiche Standardbibliothek und viele Drittanbieter-Pakete, die die Entwicklung beschleunigen können. Merke, es gibt nicht die "beste" Programmiersprache – die Wahl hängt immer von den spezifischen Anforderungen und Zielen eines Projekts ab.
 
 Zwei Varianten der Umsetzung ... C++ vs. Python
 
@@ -488,6 +608,15 @@ for i in range(3):
 
 **Gültiger C++ Code**
 
+> **Umfrage:** Welche Ausgabe erwarten Sie für folgendes Code-Schnippselchen?
+
+- [(`Hello World5`)] `Hello World7`
+- [(`Hello World11`)] `Hello World11`
+- [(`Hello World 11!`)] `Hello World 11!`
+- [(`Hello World 11 !`)] `Hello World 11 !`
+- [(`Hello World 5 !`)] `Hello World 5 !`
+
+
 ```cpp                     Output.cpp
 #include <iostream>
 
@@ -500,14 +629,7 @@ int main() {
 	return 0;
 }
 ```
-
-> **Umfrage:** Welche Ausgabe erwarten Sie für folgendes Code-Schnippselchen?
-
-- [(`Hello World5`)] `Hello World7`
-- [(`Hello World11`)] `Hello World11`
-- [(`Hello World 11!`)] `Hello World 11!`
-- [(`Hello World 11 !`)] `Hello World 11 !`
-- [(`Hello World 5 !`)] `Hello World 5 !`
+@LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
 ********************************************************************************************
 
@@ -539,7 +661,12 @@ void loop() {
 ********************************************************************************************
 
 ## Quiz
-### Einbinden von Bibliotheken
+
+--{{0}}--
+Testen Sie Ihr Wissen! Die folgenden Fragen helfen Ihnen, die wichtigsten Konzepte noch einmal zu reflektieren.
+
+Einbinden von Bibliotheken
+=====================================
 
 > Wie müssen Bibliotheken in C++ eingebunden werden?
 
@@ -547,7 +674,8 @@ void loop() {
 - [( )] import iostream
 - [(X)] #include \<iostream>
 
-### Kommentare 
+Kommentare 
+=====================================
 
 > Sind diese Kommentare angebracht?
 
@@ -566,7 +694,8 @@ int main() {                        // main-function
 - [( )] Ja
 - [(X)] Nein
 
-### Konventionen und Formalien
+Konventionen und Formalien
+=====================================
 
 > Wählen Sie alle Programme aus, die den üblichen Formalien entsprechen.
 
