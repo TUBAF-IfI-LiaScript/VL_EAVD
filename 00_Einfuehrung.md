@@ -564,16 +564,37 @@ funktioniert.
 #include <iostream>
 
 int main() {
-  char zahl;
-  for (zahl=250; zahl<256; zahl++) {
-    std::cout << "Hello World!\n";
+  int a[5] = {1, 2, 3, 4, 5};
+  int b[5] = {2, 2, 2, 2, 2};
+  int result = 0;
+
+  // Achtung: Der letzte Index (4) wird nicht adressiert!
+  for (int i = 0; i < 4; i++) {
+    result += a[i] * b[i];
   }
-	return 0;
+
+  std::cout << "Skalarprodukt: " << result << std::endl;
+  return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
-> **Hinweis:** Die Datentypen werden wir in der nächsten Woche besprechen.
+$$
+\vec{a} = \begin{pmatrix} 1 \\ 2 \\ 3 \\ 4 \\ 5 \end{pmatrix}, \quad
+\vec{b} = \begin{pmatrix} 2 \\ 2 \\ 2 \\ 2 \\ 2 \end{pmatrix}
+$$
+
+// Skalarprodukt korrekt berechnet:
+$$
+\vec{a} \cdot \vec{b} = 1 \cdot 2 + 2 \cdot 2 + 3 \cdot 2 + 4 \cdot 2 + 5 \cdot 2 = 30
+$$
+// Fehlerhafte Berechnung (letztes Element fehlt):
+$$
+\vec{a} \cdot \vec{b} \neq 1 \cdot 2 + 2 \cdot 2 + 3 \cdot 2 + 4 \cdot 2 = 20
+$$
+// Unsere Schleife hört zu früh auf!
+
+> **Hinweis:** Die Arrays werden wir in einer der kommenden Veranstaltungen im Detail besprechen.
 
 ## Warum dann C++?
 
