@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf & Copilot
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.1.1
+version:  1.1.2
 language: de
 narrator: Deutsch Female
 
@@ -112,7 +112,7 @@ Sie fragen sich vielleicht: "Ich studiere doch gar nicht Informatik - wozu brauc
 
 ********************************************************************************
 
---{{1}}--
+     --{{1}}--
 Viele Aufgaben in Wissenschaft und Technik lassen sich mit ein wenig Programmierkenntnis enorm vereinfachen. Lassen Sie sich nicht abschrecken – Sie müssen kein Profi werden, um große Effekte zu erzielen!
 
                            {{2-3}}
@@ -280,7 +280,7 @@ Realisierung eines Programmes mit C++ zu adressieren.
 
 ## Erstes C++ Programm
 
---{{0}}--
+      --{{0}}--
 Keine Angst vor dem ersten Programm! Sie müssen nicht alles sofort verstehen – wichtig ist, dass Sie sehen, wie ein vollständiges Programm aussieht und wie einfach der Einstieg sein kann.
 
 ![](https://media.giphy.com/media/8YBpKSm3uPWG9Ca0F4/giphy-downsized.gif)
@@ -309,8 +309,6 @@ int main() {
 | 7     | Anwendung eines Operators `<<` hier zur Ausgabe auf dem Bildschirm                                                   |
 | 8     | Definition eines Rückgabewertes für das Betriebssystem                                                               |
 
-        --{{0-1}}--
-Die Arduino-Programme haben eine etwas andere Struktur als konventionelle C++ Programme. Das liegt daran, dass das Arduino-Framework bestimmte Funktionen und Abläufe vorgibt, um die Programmierung von Mikrocontrollern zu erleichtern. Es gibt zwei Hauptfunktionen, die in jedem Arduino-Sketch definiert werden müssen: `setup()` und `loop()` - was die grundsätzlichen Nutzungsmuster wiederspiegelt.
 
                  {{1-2}}
 *********************************************************************
@@ -336,6 +334,9 @@ void loop() {
 @AVR8js.sketch
 
 *********************************************************************
+
+        --{{1}}--
+Die Arduino-Programme haben eine etwas andere Struktur als konventionelle C++ Programme. Das liegt daran, dass das Arduino-Framework bestimmte Funktionen und Abläufe vorgibt, um die Programmierung von Mikrocontrollern zu erleichtern. Es gibt zwei Hauptfunktionen, die in jedem Arduino-Sketch definiert werden müssen: `setup()` und `loop()` - was die grundsätzlichen Nutzungsmuster wiederspiegelt.
 
                  {{2-3}}
 *********************************************************************
@@ -683,7 +684,7 @@ void loop() {
 
 ## Quiz
 
---{{0}}--
+     --{{0}}--
 Testen Sie Ihr Wissen! Die folgenden Fragen helfen Ihnen, die wichtigsten Konzepte noch einmal zu reflektieren.
 
 Einbinden von Bibliotheken
