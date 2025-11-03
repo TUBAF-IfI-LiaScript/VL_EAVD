@@ -1,8 +1,8 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Galina Rudolf
+author:   Sebastian Zug & André Dietrich & Galina Rudolf & Copilot
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.4
+version:  1.0.5
 language: de
 narrator: Deutsch Female
 
@@ -12,12 +12,13 @@ logo: ./img/LogoCodeExample.png
 import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/config.md
 
+link:     style.css
 
 -->
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/01_EingabeAusgabeDatentypen.md)
 
-# Grundlagen der Sprache C
+# Grundlagen der Sprache C++
 
 | Parameter                 | Kursinformationen                                                                                                                                                                      |
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -45,13 +46,51 @@ import: https://github.com/liascript/CodeRunner
 * Ist `printf` ein Schlüsselwort der Programmiersprache C++?
 * Welche Beschränkung hat `getchar`
 
+---------------------------------------------------------------------
+
+## Reflexion Ihrer Fragen / Rückmeldungen
+
+
+                         {{0-1}}
+***************************************************************
+
+> Zur Erinnerung ... Wettstreit zur partizipativen Materialentwicklung mit den Informatikern ...
+
+<section class="flex-container">
+
+<!-- class="flex-child" style="min-width: 250px;" -->
+![Weihnachtsmänner](./images/00_Einfuehrung/Weihnachtsmaenner.jpeg "Preis für die aktivste Vorlesung")
+
+<div class="flex-child" style="min-width: 250px;">
+
+<!-- data-type="none" -->
+| Format                   | Informatik Studierende  | Nicht-Informatik Studierende |
+|--------------------------|-------------------------|------------------------------|
+| Verbesserungsvorschlag   | 0                       | 0                            |
+| Fragen                   | 1                       | 0                            |
+| generelle Hinweise       | 0                       | 0                            |
+
+</div>
+
+</section>
+
+***************************************************************
+
+                         {{1-2}}
+***************************************************************
+
+> Gab es Schwierigkeiten beim Anlauf der Übungen?
+
+***************************************************************
+
+## Variablen
+
+                                    {{0-1}}
+******************************************************************
+
 > **Vorwarnung:** Man kann Variablen nicht ohne Ausgaben und Ausgaben nicht ohne
 >Variablen erklären. Deshalb wird im folgenden immer wieder auf einzelne Aspekte
 > vorgegriffen. Nach der Vorlesung sollte sich dann aber ein Gesamtbild ergeben.
-
----------------------------------------------------------------------
-
-## Variablen
 
 Lassen sie uns den Rechner als Rechner benutzen ... und die Lösungen einer quadratischen Gleichung bestimmen:
 
@@ -67,49 +106,69 @@ int main() {
   std::cout << "f(" << 5 << ") = " << 3 * 5 * 5 + 4 * 5 + 8 << "\n";
 
   // Variante 2 - Nutzung von Variablen
-  int x = 9;
+  int x = 5;
   std::cout << "f(" << x << ") = " << 3 * x * x + 4 * x + 8 << "\n";
   return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-Unbefriedigende Lösung, jede neue Berechnung muss in den Source-Code integriert
-und dieser dann kompiliert werden. Ein Taschenrechner wäre die bessere Lösung!
+__Unbefriedigende Lösung, jede neue Berechnung muss in den Source-Code integriert und dieser dann kompiliert werden. Ein Taschenrechner wäre die bessere Lösung!__
 
-                                    {{1}}
+******************************************************************
+
+                                    {{1-2}}
 ******************************************************************
 
 Ein Programm manipuliert Daten, die in Variablen organisiert werden.
 
-Eine Variable ist ein **abstrakter Behälter** für Inhalte, welche im
-Verlauf eines Rechenprozesses benutzt werden. Im Normalfall wird eine Variable
-im Quelltext durch einen Namen bezeichnet, der die Adresse im Speicher
-repräsentiert. Alle Variablen müssen vor Gebrauch vereinbart werden.
+> Eine Variable ist ein **abstrakter Behälter** für Inhalte, welche im Verlauf eines Rechenprozesses benutzt werden. Im Normalfall wird eine Variable im Quelltext durch einen Namen bezeichnet, der die Adresse im Speicher repräsentiert. Alle Variablen müssen vor Gebrauch vereinbart werden.
 
 Kennzeichen einer Variable:
 
-1. Name
-2. Datentyp
-3. Wert
-4. Adresse
-5. Gültigkeitsraum
+1. Name (Bezeichner)
+2. Datentyp (wie `int`, `float`, etc.)
+3. Wert (der gespeicherte Inhalt)
+4. Adresse (Position im Speicher)
+5. Gültigkeitsraum (Scope)
+6. Attribute/Qualifizierer (wie `const`, `volatile`, etc.)
+
+Die ersten fünf Kennzeichen definieren die grundlegende Struktur einer Variable, während die Attribute zusätzliche Eigenschaften und Verhaltensweisen festlegen.
 
 ******************************************************************
 
                                   {{2}}
 ******************************************************************
-Mit `const` kann bei einer Vereinbarung der Variable festgelegt werden, dass
-ihr Wert sich nicht ändert.
 
-```cpp
-const double e = 2.71828182845905;
+Betrachten wir die verschiedenen Kennzeichen am Beispiel der mathematischen Konstante `e`:
+
+```cpp                     VariableAnatomy.cpp
+#include <iostream>
+
+int main() {
+  // Attribut
+  // |    Datentyp
+  // |    |    Name  
+  // |    |    |        
+  // v    v    v     Wert
+  const double e = 2.71828182845905;  // Die Eulersche Zahl
+
+  std::cout << "Der Wert von e lautet " << e << "\n";
+  std::cout << "Die Adresse von e lautet " << &e << "\n";
+  
+  return 0;
+}
 ```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-Ein weiterer Typqualifikator ist `volatile`. Er gibt an, dass der
-Wert der Variable sich jederzeit z. B. durch andere Prozesse ändern kann.
+Dieses Beispiel demonstriert alle sechs Kennzeichen einer Variable:
 
-<!--- TODO: Das fühlt sich an der Stelle etwas verloren an? Theoretisch gäbe es ja auch noch so Sachen, wie extern und static - sollte man dafür nicht eher später nen eigenen Absatz machen? --->
+* Jede Variable braucht einen **Namen** als Bezeichner
+* Der **Datentyp** bestimmt die Interpretation der Bits im Speicher
+* Der aktuelle **Wert** wird im Speicher abgelegt
+* Die **Adresse** zeigt die Position im Speicher (variiert bei jedem Programmlauf)
+* Der **Gültigkeitsraum** definiert, wo auf die Variable zugegriffen werden kann
+* **Attribute** wie `const` legen zusätzliche Eigenschaften fest
 
 ******************************************************************
 
@@ -132,17 +191,6 @@ beachten:
 | `robot.speed`   | nicht zulässig (`.` im Namen)                  |
 | `3thName`       | nicht zulässig (Ziffer als erstes Zeichen)     |
 | `x y`           | nicht zulässig (Leerzeichen im Variablennamen) |
-
-```cpp                     QuadraticEquation.cpp
-#include <iostream>
-
-int main() {
-  int x = 5;
-  std::cout << "Unsere Variable hat den Wert " << x << "\n";
-  return 0;
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
 > Vergeben Sie die Variablennamen mit Sorgfalt. Für jemanden der Ihren Code liest, sind diese wichtige Informationsquellen!
 > [Link](https://wiki.c2.com/?BadVariableNames)
@@ -290,9 +338,17 @@ gespeichert werden. Eine implizite Umwandlung der ganzen Zahlen zu den Werten 0 
 int main() {
   bool a = true;
   bool b = false;
-  bool c = 45;
+  bool c = 45;      // ungleich 0 -> true
 
-  std::cout << "a = " << a << " b = " << b << " c = " << c << "\n";
+  // Numerische Ausgabe (Standard)
+  std::cout << "Numerische Darstellung:\n";
+  std::cout << "a = " << a << ", b = " << b << ", c = " << c << "\n\n";
+  
+  // Textuelle Ausgabe mit boolalpha
+  std::cout << std::boolalpha;
+  std::cout << "Textuelle Darstellung (mit boolalpha):\n";
+  std::cout << "a = " << a << ", b = " << b << ", c = " << c << "\n";
+
   return 0;
 }
 ```
@@ -300,6 +356,8 @@ int main() {
 
 Sinnvoll sind boolsche Variablen insbesondere im Kontext von logischen
 Ausdrücken. Diese werden zum späteren Zeitpunkt eingeführt.
+
+> `boolalpha` ermöglicht die textuelle Ausgabe von booleschen Werten als "true" oder "false".
 
 #### Architekturspezifische Ausprägung (Integer Datentypen)
 
@@ -350,59 +408,89 @@ ganzzahlinen Datentypen sind in `limits.h` definiert, z.B.
 | LONG_MIN | -9223372036854775808 |
 | LONG_MAX | +9223372036854775807 |
 
+> Warum muss ich soetwas wissen? 
 
 #### Was passiert bei der Überschreitung des Wertebereiches
 
-> Der Arithmetische Überlauf (arithmetic overflow) tritt auf, wenn das Ergebnis
-> einer Berechnung für den gültigen Zahlenbereich zu groß ist, um noch richtig
-> interpretiert werden zu können.
+                        {{0-1}}
+******************************************************************
 
-![instruction-set](./images/01_EinAusgabeDatentypen/2Komplement.png)<!--
-style=" width: 80%;
-        max-width: 500px;
-        min-width: 250px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;"
--->
+
+> Der Arithmetische Überlauf (Integer Overflow) tritt auf, wenn das Ergebnis einer Berechnung den gültigen Zahlenbereich eines Datentyps überschreitet.
+
+<section class="flex-container">
+
+<!-- class="flex-child" style="min-width: 250px;" -->
+![instruction-set](./images/01_EinAusgabeDatentypen/2Komplement.png "4-Bit 2er-Komplement Darstellung")
+
+
+<!-- class="flex-child" style="min-width: 250px;"-->
+![instruction-set](./images/01_EinAusgabeDatentypen/2Komplement_unsigned.png "4-Bit Unsigned Darstellung")
+
+</section>
 
 Quelle: [Arithmetischer Überlauf (Autor: WissensDürster)](https://de.wikipedia.org/wiki/Arithmetischer_%C3%9Cberlauf#/media/File:4Bi-2Komplement.svg)
 
-{{1}}
-```cpp                     Overflow.cpp
+> 💡 _Das ist wie bei einem Kilometerzähler: Wenn man rückwärts fährt und bei 0 ist, springt er auf 99999._
+
+******************************************************************
+
+                        {{1-2}}
+******************************************************************
+
+Ein berühmtes Beispiel dafür ist der "Nuclear Gandhi"-Bug aus dem Spiel Civilization:
+
+```cpp                     GandhiBitwise.cpp
 #include <iostream>
-#include <limits.h>   /* SHRT_MIN und SHRT_MAX */
+#include <bitset>
 
 int main() {
-  short a = 30000;
+    unsigned char aggression = 1;
+    
+    std::cout << "Gandhis Startwert (1):\n";
+    std::cout << "Bits:  " << std::bitset<8>(aggression) << "\n";
+    std::cout << "Wert:  " << (int)aggression << "\n\n";
+    
+    // Wenn eine Zivilisation die Demokratie einführte, sank der Wert um 2
+    std::cout << "Demokratie wird eingeführt (-2 Aggression)...\n";
+    aggression = aggression - 2;
 
-  std::cout << "Berechnung von 30000+3000 mit:\n\n";
-
-  signed short c;     // -32768 bis 32767
-  std::cout << "(signed) short c - Wertebereich von "
-            << SHRT_MIN << " bis " << SHRT_MAX << "\n";
-  c = 3000 + a;      // ÜBERLAUF!
-  std::cout << "c=" << c<<"\n";
-
-  unsigned short d;   //      0 bis 65535
-  std::cout << "unsigned short d - Wertebereich von "
-            << 0 << " bis " << USHRT_MAX << "\n";
-
-  d = 3000 + a;
-  std::cout << "d=" << d<<"\n";
+    // Bei 1 - 2 passiert folgendes auf Bitebene:
+    //   00000001    (1)
+    // - 00000010    (2)
+    // = 11111111    (255, weil unsigned! sonst -1)
+    
+    std::cout << "Nach Demokratie (1-2):\n";
+    std::cout << "Bits:  " << std::bitset<8>(aggression) << "\n";
+    std::cout << "Wert:  " << (int)aggression << "\n";
+    
+    return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
+Die Erklärung auf Bit-Ebene:
 
-{{1}}
-Ganzzahlüberläufe in der fehlerhaften Bestimmung der Größe eines
-Puffers oder in der Adressierung eines Feldes können es einem Angreifer
-ermöglichen den Stack zu überschreiben.
+* Ein `unsigned char` verwendet 8 Bits (1 Byte)
+* Der Wert 1 wird als `00000001` gespeichert
+* Bei der Subtraktion von 2 (`00000010`) würde theoretisch -1 entstehen
+* Da es aber keine negativen Zahlen bei `unsigned` gibt, "springt" der Wert auf `11111111`
+* `11111111` entspricht dem Wert 255 (höchstmöglicher 8-Bit Wert)
 
-<!--- TODO: Ist an der Stelle bekannt, was ein Stack ist? --->
+Resultat: Der friedlichste Anführer wurde zum nuklear bewaffneten Kriegstreiber! 😅
+
+Solche Überläufe können in der Praxis zu schwerwiegenden Problemen führen:
+
+* Fehlerhafte Berechnungen
+* Sicherheitslücken
+* Unerwartetes Programmverhalten
+
+******************************************************************
 
 #### Fließkommazahlen
+
+                        {{0-1}}
+******************************************************************
 
 Fließkommazahlen sind Zahlen mit Nachkommastellen (reelle Zahlen).
 Im Gegensatz zu Ganzzahlen gibt es bei den Fließkommazahlen keinen Unterschied
@@ -418,7 +506,7 @@ In C/C++ gibt es zur Darstellung reeller Zahlen folgende Typen:
 | `double`      | 8 Byte                  |
 | `long double` | je nach Implementierung |
 
-``` c++
+```
 float <= double <=  long double
 ```
 
@@ -435,9 +523,13 @@ konkreten Realisierung ist die Headerdatei `float.h` auszuwerten.
 | kleinste positive Zahl | 1.1754943508e-38  | 2.2250738585072014E-308  |
 | Wertebereich           | ±3.4028234664e+38 | ±1.7976931348623157E+308 |
 
-{{1}}
-> **Achtung:** Fließkommazahlen bringen einen weiteren Faktor mit
->  - die Unsicherheit
+
+******************************************************************
+
+                        {{1-2}}
+******************************************************************
+
+> Seien Sie vorsichtig beim Vermischen unterschiedlicher Fließkommatypen (`float` und `double`), da dies zu unerwarteten Ergebnissen führen kann.
 
 {{1}}
 ```cpp                     float_precision.cpp
@@ -459,10 +551,49 @@ int main(void) {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-{{2}}
+
+******************************************************************
+
+                        {{2-3}}
+******************************************************************
+
+> **Achtung:** Fließkommazahlen bringen einen weiteren Faktor mit
+>  - die Unsicherheit
+
 Potenzen von 2 (zum Beispiel $2^{-3}=0.125$) können im Unterschied zu `0.1`
 präzise im Speicher abgebildet werden. Können Sie das erklären?
 
+Hier ein Beispiel, das die Ungenauigkeit bei der Darstellung von 0.1 zeigt:
+
+```cpp                     FloatPrecision.cpp
+#include <iostream>
+#include <iomanip>
+
+int main() {
+    float sum = 0.0f;
+    
+    // Addiere zehnmal 0.1
+    std::cout << std::fixed << std::setprecision(20);
+    std::cout << "Erwartete Werte vs. tatsächliche Werte:\n\n";
+    
+    for(int i = 1; i <= 10; i++) {
+        sum += 0.1f;      
+    }
+    
+    // Vergleich mit 1.0 zeigt das Problem
+    std::cout << "Ist:      " << sum << "\n\n";
+   
+    return 0;
+}
+```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+Der Grund dafür ist, dass 0.1 im Binärsystem eine unendliche Folge ist:
+$0.1_{10} = 0.00011001100110011..._2$
+
+Diese Zahl kann nicht exakt in einem `float` oder `double` gespeichert werden, während Zweierpotenzen wie 0.125 ($0.001_2$) eine endliche Darstellung haben. Probieren Sie es im obigen Beispiel aus, indem Sie 0.125 anstelle von 0.1 verwenden.
+
+******************************************************************
 
 #### Datentyp `void`
 
@@ -491,78 +622,58 @@ void funktion(void) {
 
 ### Wertspezifikation
 
-Zahlenliterale können in C/C++ mehr als Ziffern umfassen!
+In C++ gibt es verschiedene Möglichkeiten, Zahlen zu schreiben. Hier sind die wichtigsten Schreibweisen für __dezimale__ Zahlen, die Sie kennen sollten:
 
-<!-- data-type="none" style="table-layout: fixed; max-width:600px;"-->
-| Gruppe                 | zulässige Zeichen                       |
-|------------------------|-----------------------------------------|
-| *binary-prefix*        | `0b` `0B`                               |
-| *binary-digits*        | `0` `1`                                 |
-| *decimal-digits*       | `0` `1` `2` `3` `4` `5` `6` `7` `8` `9` |
-| *octal-prefix*         | `0`                                     |
-| *octal-digits*         | `0` `1` `2` `3` `4` `5` `6` `7`         |
-| *hexadecimal-prefix*   | `0x` `0X`                               |
-| *hexadecimal-digits*   | `0` `1` `2` `3` `4` `5` `6` `7` `8` `9` |
-|                        | `a` `b` `c` `d` `e` `f`                 |
-|                        | `A` `B` `C` `D` `E` `F`                 |
-| *unsigned-suffix*      | `u` `U`                                 |
-| *long-suffix*          | `l` `L`                                 |
-| *long-long-suffix*     | `ll` `LL`                               |
-| *fractional-constant*  | `.`                                     |
-| *exponent-part*        | `e` `E`                                 |
-| *binary-exponent-part* | `p` `P`                                 |
-| *sign*                 | `+` `-`                                 |
-| *floating-suffix*      | `f` `l` `F` `L`                         |
+1. **Normale Ganzzahlen:**
 
+   ```cpp
+   int a = 42;        // Positive Ganzzahl
+   int b = -42;       // Negative Ganzzahl
+   int c = 011;       // !!! Oktale Schreibweise (entspricht 9 im Dezimalsystem)
+   ```
 
-<!-- data-type="none" style="table-layout: fixed; max-width:700px;"-->
-| Zahlentyp | Binär    | Dezimal  | Oktal | Hexadezimal |
-|:----------|:---------|----------|-------|-------------|
-| Eingabe   | x        | x        | x     | x           |
-| Ausgabe   | x        | x        | x     | x           |
-| Beispiel  | `0b1`    | `12`     | `011` | `0x12`      |
-|           | `0b10`   | `0.123`  |       | `0X1a`      |
-|           | `0b01`   | `123e-2` |       | `0xC.68p+2` |
-|           |          | `1.23F`  |       |             |
+2. **Kommazahlen:**
 
-<!--- TODO: Theoretisch gibts bei Hexadezimalzahlen den Sonderfall, dass z.B.
-0xE+2 nicht 16 wäre, sondern als 0x und E+2 interpretiert werden würde.
-Andererseits bezweifel ich, dass das eine für Studies relevante Situation ist --->
+   ```cpp
+   double d1 = 3.14;      // Normale Schreibweise
+   double d2 = 0.234;     // Mit führender Null
+   double d3 = 123.0e-2;  // Wissenschaftliche Notation (= 1.23)
+   float  f1 = 1.23f;     // Als float (durch 'f' am Ende)
+   ```
 
-> **Merke:** Die Zahlenliterale können mit Vorzeichen, Zahlenbasis und Typ
-> versehen werden.
+3. **Große Zahlen lesbarer machen:**
 
-{{1}}
-`Variable = (Vorzeichen)(Zahlensystem)[Wert](Typ);`
+   ```cpp
+   // Seit C++14: Zifferngruppierung mit Unterstrich
+   int million = 1'000'000;  // Besser lesbar als 1000000
+   ```
 
-{{1}}
-| Literal      | Bedeutung                                    |
-|:-------------|:---------------------------------------------|
-| 12           | Ganzzahl vom Typ `int`                       |
-| -234L        | Ganzzahl vom Typ `signed long`               |
-| 100000000000 | Ganzzahl vom Typ `long`                      |
-| 011          | Ganzzahl also oktale Zahl (Wert $9_d$)       |
-| 0x12         | Ganzzahl ($18_d$)                            |
-| 1.23F        | Fließkommazahl vom Typ `float`               |
-| 0.132        | Fließkommazahl vom Typ `double`              |
-| 123e-2       | Fließkommazahl vom Typ `double`              |
-| 0xC.68p+2    | hexadizimale Fließkommazahl vom Typ `double` |
+> **Merke:** Die Endung `f` bei Kommazahlen ist wichtig! Ohne sie interpretiert 
+> C++ die Zahl als `double`, was zu Genauigkeitsverlusten führen kann.
 
-{{1}}
+Ein praktisches Beispiel:
+
 ```cpp                     NumberFormats.cpp
 #include <iostream>
 
-int main(void) {
-  int x = 020;
-  int y = 0x20;
-  std::cout << "x = " << x << "\n";
-  std::cout << "y = " << y << "\n";
-  std::cout << "Rechnen mit Oct und Hex x + y = " << x + y << "\n";
-  return 0;
+int main() {
+    // Gängige Schreibweisen für verschiedene Anwendungen
+    double preis = 19.99;              // Preisangabe
+    float  temp = 36.5f;               // Temperatur
+    int    anzahl = 1'000'000;         // Große Zahl
+    double mikro = 0.000001;           // Sehr kleine Zahl
+    double mikro2 = 1.0e-6;            // Gleicher Wert, andere Schreibweise
+    
+    std::cout << "Preis: " << preis << " EUR\n";
+    std::cout << "Temperatur: " << temp << " °C\n";
+    std::cout << "Anzahl: " << anzahl << "\n";
+    std::cout << "Mikrometer: " << mikro << " m\n";
+    std::cout << "Wissenschaftlich: " << mikro2 << " m\n";
+    
+    return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
 
 ### Adressen
 
@@ -584,6 +695,9 @@ int main(void) {
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+> **Hinweis:** Die Ausgabe der Adresse erfolgt in der Regel im Hexadezimalformat.
+> Mit Adressen werden wir uns im Zusammenhang mit Arrays und Zeigern intensiv beschäftigen.
 
 ### Sichtbarkeit und Lebensdauer von Variablen
 
@@ -627,7 +741,9 @@ sollten globale Variablen vermieden werden.
 int v = 1; /*globale Variable*/
 
 int main(void) {
+  //int v = 5;
   std::cout << v << "\n";
+  std::cout << ::v << "\n"; // Zugriff auf die globale Variable
   return 0;
 }
 ```
@@ -719,7 +835,8 @@ int main(void) {
 
 int main(void) {
   short a;
-  a = 0xFFFF + 2;
+  // 65535 ist die größte Zahl, die in 2 Byte passt
+  a = 65535 + 2;
   std::cout << "Schaun wir mal ... " << a << "\n";
   return 0;
 }
@@ -785,12 +902,13 @@ Welche Formatierungmöglichkeiten bietet der Ausgabeoperator noch?
 
 Mit Hilfe von in `<iomanip>` definierten [Manipulatoren](https://en.cppreference.com/w/cpp/io/manip.html) können besondere Ausgabeformatierungen erreicht werden.
 
-| Manipulator           | Bedeutung                      |
-|:----------------------|:-------------------------------|
-| `setbase(int B)`      | Basis 8, 10 oder 16 definieren |
-| `setfill(char c)`     | Füllzeichen festlegen          |
-| `setprecision(int n)` | Flieskommaprezession           |
-| `setw(int w)`         | Breite setzen                  |
+| Manipulator           | Bedeutung                                                     |
+| :-------------------- | :------------------------------------------------------------ |
+| `setbase(int B)`      | Basis 8, 10 oder 16 definieren                                |
+| `setfill(char c)`     | Füllzeichen festlegen                                         |
+| `setprecision(int n)` | Flieskommaprezession                                          |
+| `setw(int w)`         | Breite setzen                                                 |
+| `std::fixed`          | Dezimaldarstellung (ohne wissenschaftliches Format) erzwingen |
 
 
 ```cpp        manipulatoren1.c
@@ -822,8 +940,7 @@ nicht benutzte Stellen mit dem Zeichen 0 aufgefüllt, `endl` bewirkt die Ausgabe
 int main() {
   std::cout << std::right << std::setw(5) << 55 << "\n";
   std::cout << std::right << std::setfill('0') << std::setw(5) << 55 << "\n";
-  std::cout << std::left << std::fixed << std::setw(5) << 55 << "\n";
-  std::cout << std::setw(5) << "Zu klein gedacht: " << 234534535 << "\n";
+  std::cout << std::left << std::fixed << std::setw(15) << 0.00000002352352 << "\n";
   return 0;
 }
 ```
@@ -868,95 +985,7 @@ int main() {
   return 0;
 }
 ```
-```
-ABCD56789
-
-Vorname 	 Name 		 Alter
-Andreas 	 Mustermann	 42
-
-Manchmal braucht man auch ein "\"
-```
-<!--- @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`) --->
-
-{{1}}
-Beispiele
-
-> Newline erschafft eine neue Zeile in der weitergeschrieben wird.
-```cpp  newline.c
-#include <iostream>
-
-int main() {
-  std::cout << "Dieser Text steht in der 1. Zeile.\n"
-            << "Dieser Text steht in der 2. Zeile.\n";
-  return 0;
-}
-```
-```
-Dieser Text steht in der 1. Zeile.
-Dieser text steht in der 2. Zeile.
-```
-
-> Backspace setzt den Cursor um eins zurück und ermöglicht es das Symbol zu überschreiben.
-```cpp  backspace.cpp
-#include <iostream>
-
-int main() {
-  std::cout << "Dieser Text steht in der 9\b1. Zeile.\n"
-            << "Dieser Text steht in der 2. Zeile.\n";
-  return 0;
-}
-```
-```
-Dieser Text steht in der 1. Zeile.
-Dieser text steht in der 2. Zeile.
-```
-
-> Carriage return setzt den Cursor auf den Anfang der Zeile zurück und ermöglicht es Text zu überschreiben.
-```cpp  carriagereturn.cpp
-#include <iostream>
-
-int main() {
-  std::cout << "Dieser Text steht in der 9\b2. Zeile. Dies steht noch am Ende."
-            << "\rDieser Text steht in der 1. Zeile.\n";
-  return 0;
-}
-```
-```
-Dieser Text steht in der 1. Zeile. Dies steht noch am Ende.
-```
-
-> Horizontal tab erzeugt einen Tabulator. Damit ist eine saubere Formattierung möglich.
-```cpp  horizontaltab.c
-#include <iostream>
-
-int main() {
-  std::cout << "Name\tAlter\n";
-  std::cout << "Peter\t18\n";
-  std::cout << "Frank\t25\n";
-  std::cout << "Xi\t22\n";
-  return 0;
-}
-```
-```
-Name  Alter
-Peter 18
-Frank 25
-Xi    22
-```
-
-> Escape characters ermöglichen auch das Ausgeben von escape characters und Anführungszeichen.
-```cpp  backslash.cpp
-#include <iostream>
-
-int main() {
-  std::cout << "A\\\B und \"C\" und \'D\'\n";
-  return 0;
-}
-```
-```
-A\B und "C" und 'D'
-```
-
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
 ### Eingabe
 
@@ -988,11 +1017,9 @@ Implementieren Sie einen programmierbaren Taschenrechner für quadaratische Funk
 #include <iostream>
 
 int main() {
-  // Variante 1 - ganz schlecht
-  std::cout << "f(5) = " << 3 * 5 * 5 + 4 * 5 + 8 << "\n";
-
-  // Variante 2 - besser
-  int x = 9;
+  // Variante 3 - verglichen mit dem Anfang der Vorlesung 
+  int x;
+  std::cin >> x;
   std::cout << "f(" << x << ") = " << 3 * x * x + 4 * x + 8 << "\n";
   return 0;
 }
