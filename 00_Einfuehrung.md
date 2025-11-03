@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf & Copilot
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.1.2
+version:  1.1.3
 language: de
 narrator: Deutsch Female
 
@@ -12,6 +12,8 @@ logo: ./img/LogoCodeExample.png
 import: https://github.com/liascript/CodeRunner
         https://github.com/LiaTemplates/AVR8js/main/README.md#10
         https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/config.md
+
+link:   style.css
 
 -->
 
@@ -43,16 +45,19 @@ import: https://github.com/liascript/CodeRunner
 
 ---------------------------------------------------------------------
 
-## Reflexion Ihrer Fragen
+## Reflexion Ihrer Fragen / Rückmeldungen
 
                          {{0-1}}
 ***************************************************************
 
-> Zur Erinnerung ...
+> Wettstreit zur partizipativen Materialentwicklung mit den Informatikern ...
 
-![Weihnachtsmänner](./images/00_Einfuehrung/Weihnachtsmaenner.jpeg)<!-- style="width: 40%; display: block; margin-left: auto; margin-right: auto;"-->
+<section class="flex-container">
 
-> Partizipative Materialentwicklung mit den Informatikern ...
+<!-- class="flex-child" style="min-width: 250px;" -->
+![Weihnachtsmänner](./images/00_Einfuehrung/Weihnachtsmaenner.jpeg "Preis für die aktivste Vorlesung")
+
+<div class="flex-child" style="min-width: 250px;">
 
 <!-- data-type="none" -->
 | Format                   | Informatik Studierende  | Nicht-Informatik Studierende |
@@ -60,6 +65,10 @@ import: https://github.com/liascript/CodeRunner
 | Verbesserungsvorschlag   | 0                       | 0                            |
 | Fragen                   | 1                       | 0                            |
 | generelle Hinweise       | 0                       | 0                            |
+
+</div>
+
+</section>
 
 ***************************************************************
 
