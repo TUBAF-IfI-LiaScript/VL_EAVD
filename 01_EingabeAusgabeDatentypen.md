@@ -1,8 +1,8 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Galina Rudolf & Copilot & Ebby
+author:   Sebastian Zug & André Dietrich & Galina Rudolf & Copilot & Ebby & Anna
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 
@@ -275,15 +275,23 @@ es folgende Typen für Ganzzahlen:
 signed char <= short <= int <= long <= long long
 ```
 
-Gängige Zuschnitte für `char` oder `int`:
+Die Wertebereiche hängen von der Architektur ab. Hier ein Vergleich zwischen einem 8-Bit Mikrocontroller (z.B. Arduino) und einem modernen PC (64-Bit):
 
 <!-- data-type="none" -->
-| Schlüsselwort | Wertebereich     |
-|:--------------|:-----------------|
-| `signed char` | -128 bis 127     |
-| `char`        | 0 bis 255 (0xFF) |
-| `signed int`  | -32768 bis 32767 |
-| `int`         | 65536 (0xFFFF)   |
+| Datentyp        | 8-Bit Mikrocontroller      | Moderner PC (64-Bit)                | Anmerkung                 |
+| :-------------- | :------------------------- | :---------------------------------- | :------------------------ |
+| `char`          | -128 bis 127 oder          | -128 bis 127 oder                   | Vorzeichen ist            |
+|                 | 0 bis 255                  | 0 bis 255                           | systemabhängig!           |
+| `signed char`   | -128 bis 127               | -128 bis 127                        | Immer 1 Byte              |
+| `unsigned char` | 0 bis 255                  | 0 bis 255                           | Immer 1 Byte              |
+| `short`         | -32768 bis 32767           | -32768 bis 32767                    | Immer 2 Byte              |
+| `int`           | -32768 bis 32767  (2 Byte) | -2147483648 bis 2147483647 (4 Byte) | Unterschied! 2 vs. 4 Byte |
+
+> 💡 **Wichtig:** Der Datentyp `int` passt sich der "natürlichen Wortgröße" der Architektur an:
+> * Auf 8-Bit/16-Bit Systemen: 2 Byte
+> * Auf 32-Bit/64-Bit Systemen: 4 Byte
+>
+> Dies ist einer der Gründe, warum Programme nicht immer 1:1 zwischen verschiedenen Systemen übertragbar sind!
 
 Wenn die Typenspezifikationen (`long` oder `short`) vorhanden sind kann auf die
 `int` Typangabe verzichtet werden.
