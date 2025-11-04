@@ -1,6 +1,6 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Galina Rudolf & Copilot
+author:   Sebastian Zug & André Dietrich & Galina Rudolf & Copilot & Ebby
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
 version:  1.0.5
 language: de
@@ -301,32 +301,90 @@ int a;  //  signed int a;
 unsigned long long int b;
 ```
 
-#### Sonderfall `char`
+#### Sonderfall `char` - Ein Typ, zwei Gesichter
 
-Für den Typ `char` ist der mögliche Gebrauch und damit auch die Vorzeichenregel
-zwiespältig:
-
-* Wird `char` dazu verwendet einen **numerischen Wert** zu speichern und die
-  Variable nicht explizit als vorzeichenbehaftet oder vorzeichenlos vereinbart,
-  dann ist es implementierungsabhängig, ob `char` vorzeichenbehaftet ist oder
-  nicht.
-* Wenn ein Buchstabe oder Zeichen gespeichert wird, so garantiert der Standard, dass der
-  gespeicherte Wert der nicht negativen Codierung im **Zeichensatz** entspricht.
-
-```cpp
-char c = 'M';  // =  1001101 (ASCII Zeichensatz)
-char c = 77;   // =  1001101
-char s[] = "Eine kurze Zeichenkette";
-```
+Der Datentyp `char` ist ein interessanter Sonderfall: Er kann sowohl für einzelne Zeichen (Buchstaben, Symbole) als auch für kleine Zahlen verwendet werden. Das macht ihn vielseitig, aber manchmal auch verwirrend.
 
 > **Achtung:** Anders als bei einigen anderen Programmiersprachen unterscheidet
 > C/C++ zwischen den verschiedenen Anführungsstrichen.
 
-<!--- TODO: Sollten wir hier kurz aufzeigen, was der Unterschied ist, oder reicht das in der Übung? --->
+```cpp                     CharExample.cpp
+#include <iostream>
 
-![ASCII-Zeichensatz](./images/01_EinAusgabeDatentypen/ASCII_Zeichensatz.jpeg "ASCII Zeichensatz [^ASCII]")<!-- width="80%" -->
+int main() {
+    // 1. char als Zeichen
+    char buchstabe = 'M';         // Speichert das Zeichen 'M'
+    char symbol = '*';            // Speichert ein Symbol
+    char ziffer = '5';            // Speichert die Ziffer '5' (nicht die Zahl 5!)
+    
+    // 2. char als kleine Zahl
+    char zahlenwert = 77;         // Speichert die Zahl 77
+    
+    // 3. Vorsicht bei char als Zahl ohne Vorzeichen-Spezifikation
+    char zahl = 200;                       // Achtung: Implementierungsabhängig !!!
+    signed char sicher_negativ = 200;      // Wird definitiv als -56 interpretiert
+    unsigned char sicher_positiv = 200;    // Wird definitiv als 200 interpretiert
+    
+    std::cout << zahlenwert << " als Zeichen: " << zahlenwert << "\n";
+    std::cout << "'" << zahlenwert << "' als Zahl: " << (int)zahlenwert << "\n";
 
-[^ASCII]: [ASCII-Tabelle](http://www.chip.de/webapps/ASCII-Tabelle_50073950.html)
+    return 0;
+}
+```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+Was passiert hier?
+
+1. Ein `char` speichert intern immer eine Zahl (0 bis 255 oder -128 bis 127)
+2. Bei der Ausgabe wird diese Zahl entweder:
+
+   * als Zeichen interpretiert (normale Ausgabe)
+   * als Zahl angezeigt (mit `(int)` Umwandlung)
+
+3. Eingabe kann erfolgen durch:
+
+   * Zeichen in Anführungszeichen: `'A'`, `'+'`, `'5'`
+   * Direkte Zahlenwerte: `65` (= 'A'), `43` (= '+'), `53` (= '5')
+
+> 💡 **Tipp:** Die ASCII-Tabelle zeigt, welche Zahl welchem Zeichen entspricht.
+> Zum Beispiel ist 'A' = 65, 'a' = 97, '0' = 48
+
+<!-- data-type="none" -->
+| Dezimal | Binär     | Symbol | Bedeutung/Beispiel   |
+| :------ | :-------- | :----- | :------------------- |
+| 32      | 0010 0000 | `␣`    | Leerzeichen          |
+| 48      | 0011 0000 | `0`    | Ziffer Null          |
+| 65      | 0100 0001 | `A`    | Großbuchstabe A      |
+| 77      | 0100 1101 | `M`    | Großbuchstabe M      |
+| 97      | 0110 0001 | `a`    | Kleinbuchstabe a     |
+| 10      | 0000 1010 | `\n`   | Neue Zeile (newline) |
+| 9       | 0000 1001 | `\t`   | Tabulator            |
+| 42      | 0010 1010 | `*`    | Sternchen            |
+| 33      | 0010 0001 | `!`    | Ausrufezeichen       |
+| 63      | 0011 1111 | `?`    | Fragezeichen         |
+
+> 💡 Die ASCII-Tabelle ist clever aufgebaut:
+> * Ziffern liegen fortlaufend von 48 (‚0') bis 57 (‚9')
+> * Großbuchstaben liegen fortlaufend von 65 (‚A') bis 90 (‚Z')
+> * Kleinbuchstaben liegen fortlaufend von 97 (‚a') bis 122 (‚z')
+> * Die Differenz zwischen Groß- und Kleinbuchstaben ist immer 32!
+
+```cpp                     BoolExample.cpp
+#include <iostream>
+
+int main() {
+  char sign_1 = 'T';  // =  1001101 (ASCII Zeichensatz)
+  char sign_2 = 85;   // =  1010101
+  char sign_3 = '\n';  // Neue Zeile
+
+  std::cout << sign_1 << sign_2 << " FREIBERG" << sign_3;
+
+  return 0;
+}
+```
+@LIA.eval(`["main.c"]`, `g++ -Wall main.c -o a.out`, `./a.out`)
+
+> **Achtung**: Die Kodierung von Zeichen ist nicht auf ASCII beschränkt. Es gibt auch andere Zeichencodierungen wie UTF-8, die eine größere Anzahl von Zeichen unterstützen.
 
 #### Sonderfall `bool`
 Auf die Variablen von Datentyp `bool` können Werte `true` (1) und `false` (0)
