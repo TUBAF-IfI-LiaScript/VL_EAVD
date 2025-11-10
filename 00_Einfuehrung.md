@@ -55,7 +55,7 @@ link:   style.css
 <section class="flex-container">
 
 <!-- class="flex-child" style="min-width: 250px;" -->
-![Weihnachtsmänner](./images/00_Einfuehrung/Weihnachtsmaenner.jpeg "Preis für die aktivste Vorlesung")
+![Weihnachtsmänner](./images/00_Einfuehrung/Weihnachtsmaenner.jpeg "Preis für das aktivste Auditorium")
 
 <div class="flex-child" style="min-width: 250px;">
 

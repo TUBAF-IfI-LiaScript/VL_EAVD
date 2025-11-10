@@ -1,8 +1,8 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Galina Rudolf
+author:   Sebastian Zug & André Dietrich & Galina Rudolf & Copilot
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 
@@ -14,6 +14,8 @@ import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/config.md
         https://raw.githubusercontent.com/liaScript/mermaid_template/master/README.md
 
+
+link:     style.css
 -->
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/02_OperatorenKontrollstrukturen.md)
@@ -48,78 +50,263 @@ import: https://github.com/liascript/CodeRunner
 
 ---------------------------------------------------------------------
 
+## Reflexion Ihrer Fragen / Rückmeldungen
+
+
+                         {{0-1}}
+***************************************************************
+
+> Zur Erinnerung ... Wettstreit zur partizipativen Materialentwicklung mit den Informatikern ...
+
+<section class="flex-container">
+
+<!-- class="flex-child" style="min-width: 250px;" -->
+![Weihnachtsmänner](./images/00_Einfuehrung/Weihnachtsmaenner.jpeg "Preis für das aktivste Auditorium")
+
+<div class="flex-child" style="min-width: 250px;">
+
+<!-- data-type="none" -->
+| Format                   | Informatik Studierende  | Nicht-Informatik Studierende |
+|--------------------------|-------------------------|------------------------------|
+| Verbesserungsvorschlag   | 0                       | 2                            |
+| Fragen                   | 2                       | 0                            |
+| generelle Hinweise       | 0                       | 1                            |
+
+</div>
+
+</section>
+
+***************************************************************
+
+                         {{1-2}}
+***************************************************************
+
+> Wie verwende ich internationale Sprache in C++?
+
+**Achtung:** Nicht alle internationalen Zeichen passen in einen einfachen `char` (1 Byte). Beispiel:
+
+
+```cpp
+#include <iostream>
+#include <clocale>
+int main() {
+  std::setlocale(LC_ALL, "de_DE.UTF-8");
+  char smiley = '😊'; // funktioniert NICHT wie erwartet!
+  std::cout << "char: " << smiley << std::endl;
+  wchar_t wsmiley = L'😊'; // funktioniert (sofern Konsole und Compiler Unicode unterstützen)
+  std::wcout << L"wchar_t: " << wsmiley << std::endl;
+  std::cout << "Erledigt : " << std::endl; 
+  return 0;
+}
+```
+
+Das Smiley-Symbol benötigt mehr als 1 Byte. Sie haben in einem Byte schlicht und einfach keinen Platz. Darüberhinau sind einzelne Unicode-Zeichen (wie z.B. Emojis) immer etwas "schwierig" in der Handhabung.
+
+Um Umlaute und internationale Zeichen korrekt in C++ zu verwenden, sollte die Quellcodedatei als UTF-8 gespeichert werden. Für die Ausgabe empfiehlt sich die Nutzung von `UTF-8-Strings`, z. B.:
+
+```cpp
+#include <iostream>
+int main() {
+  std::cout << "Grüße aus München! äöü ß ç ñ" << std::endl;    // funktioniert, wenn die Datei als UTF-8 gespeichert ist
+  std::cout << u8"Grüße aus München! äöü ß ç ñ" << std::endl;  // explizite Vorgabe eines UTF-8-Strings
+  return 0;
+}
+```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+***************************************************************
+
+## Worum geht es heute?
+
+<!-- data-type="none" -->
+| Vorgang                                                                                                                                                         | Operatoren / Kontrollstrukturen                                                                                |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| _Durchlaufe die Bestandsliste des Lagers und erhöhe pro Produkt den Lagerbestand um 1, wenn Du es findest._                                                     | Schleife bis zum Ende (des Lagerbestandes), Inkrementierung (Addition mit 1)                                   |
+| _Berechne die Nullstelle einer Funktion iterativ mit dem Newton-Verfahren. Wiederhole es so lange bis die Abweichung kleiner als ein vorgegebenes Epsilon ist._ | Schleife mit Abbruchbedingung, Vergleich von Zahlenwerten, Zuweisung,                                          |
+| _Wenn die Temperatur oberhalb von 20 Grad Celsius liegt und es nicht regnet, bewerten wir das Wetter als frühlingshaft, sonst als zu kalt._                     | Verzweigung mit (zwei !) Bedingungen, Vergleich von Zahlenwerten UND wahr/falsch Aussagen (Boolsche variablen) |
 
 ## Operatoren
 
-Unterscheidungsmerkmale
-=============================
+> Operatoren sind die „Verben“ einer Programmiersprache: Sie charakterisieren "_was passieren soll_" und ermöglichen Berechnungen, Vergleichen, Zuweisen und logische Verknüpfungen.
 
-> Ein Ausdruck ist eine Kombination aus Variablen, Konstanten, Operatoren und
-> Rückgabewerten von Funktionen. Die Auswertung eines Ausdrucks ergibt einen
-> Wert.
++ `c=a+b`
++ `a>b`
++ `sizeof(d)`
++ ...
 
-       {{0-1}}
-******************************************************************************
+### 1. Arithmetische Operatoren
 
-**Zahl der beteiligten Operationen**
-
-Man unterscheidet in der Sprache C/C++ *unäre*, *binäre* und *ternäre* Operatoren
+> **Merkkasten:**
+> Arithmetische Operatoren funktionieren wie in der Mathematik – aber Achtung: Bei Ganzzahlen werden Nachkommastellen einfach abgeschnitten! Das führt oft zu unerwarteten Ergebnissen.
 
 <!-- data-type="none" -->
-|  Operator            |  Operanden  |  Beispiel                 |  Anwendung                |
-| :------------------- | :---------: | :------------------------ | ------------------------- |
-|  Unäre Operatoren    |      1      |  `&` Adressoperator       |  `b = &a;`                |
-|                      |             |  `-` Negierungsoperator   |  `b = -a;`                |
-|                      |             |  `sizeof` Größenoperator  |  `sizeof(b);`             |
-|  Binäre Operatoren   |      2      |  `+`, `-`, `%`            |  `b = a-2;`               |
-|  Ternäre Operatoren  |      3      |  `?` Bedingungsoperator   |  `b = (a > 4 ? 0 : 1 );`  |
+| Operator | Bedeutung      | Beispiel (C++) | Alltagsbeispiel                             |
+| :------: | :------------- | :------------- | :------------------------------------------ |
+|   `+`    | Addition       | `a + b`        |                                             |
+|   `-`    | Subtraktion    | `a - b`        |                                             |
+|   `*`    | Multiplikation | `a * b`        |                                             |
+|   `/`    | Division       | `a / b`        | 20 Seiten / 4 Tage = 5 Seiten pro Tag       |
+|   `%`    | Modulo (Rest)  | `a % b`        | 20 Seiten % 3 Tage = 2 Seiten bleiben übrig |
 
-Es gibt auch Operatoren, die, je nachdem wo sie stehen, entweder unär oder binär
-sind. Ein Beispiel dafür ist der `-`-Operator.
+> **Typische Fehlerquelle:** Bei Ganzzahlen liefert `/` nur den ganzzahligen Anteil, `%` den Rest. Beispiel: `7 / 3 = 2`, `7 % 3 = 1`.
+>
+> * Wenn zwei Ganzzahlen wie z. B. $4/3$ dividiert werden, erhalten wir das Ergebnis 1 zurück, der nicht ganzzahlige Anteil der Lösung bleibt unbeachtet.
+> * Für Fließkommazahlen wird die Division wie erwartet realisiert.
 
-******************************************************************************
+```cpp                                  division.cpp
+#include <iostream>
 
-       {{1-2}}
-******************************************************************************
+int main(){
+  int a=20;
+  float b=20.f;
 
-**Position**
+  std::cout << "Ganzzahlige Division 20 / 3 = " << a/3 << "\n";
+  std::cout << "Gleitkomma Division 20 / 3 = " << b/3 << "\n";
+  return 0;
+}
+```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-Des Weiteren wird unterschieden, welche Position der Operator einnimmt:
 
-- *Infix* – der Operator steht zwischen den Operanden.
-- *Präfix* – der Operator steht vor den Operanden.
-- *Postfix* – der Operator steht hinter den Operanden.
+```cpp                                  moduloExample.cpp
+#include <iostream>
 
-`+` und `-` können alle drei Rollen einnehmen:
+int main(){
+  int timestamp, sekunden, minuten;
+
+  timestamp = 345; //[s]
+  std::cout << "Zeitstempel " << timestamp << " [s]\n";
+  minuten=timestamp/60;
+  sekunden=timestamp%60;
+  std::cout << "Besser lesbar: " << minuten << " min. " << sekunden << " sek.\n";
+  return 0;
+}
+```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+### 2. Vergleichsoperatoren
+
+> **Warnung:**
+> Verwechsle niemals das Gleichheitszeichen `==` (Vergleich) mit dem Zuweisungszeichen `=`! Das ist einer der häufigsten Anfängerfehler und kann schwer auffindbare Bugs verursachen.
+
+> Kern der Logik sind Aussagen, die wahr oder falsch sein können.
+
+<!-- data-type="none" -->
+| Operator | Bedeutung         | Beispiel (C++)      | Alltagsbeispiel                 |
+|:--------:|:------------------|:--------------------|:---------------------------------|
+|   `==`   | Gleich            | `a == b`            | Ist die Temperatur genau 20°C?   |
+|   `!=`   | Ungleich          | `a != b`            | Ist die Note nicht 1,0?          |
+|   `<`    | Kleiner           | `a < b`             | Ist das Alter < 18?              |
+|   `<=`   | Kleiner/gleich    | `a <= b`            | Ist die Geschwindigkeit ≤ 50 km/h?|
+|   `>`    | Größer            | `a > b`             | Ist der Kontostand > 0?          |
+|   `>=`   | Größer/gleich     | `a >= b`            | Ist die Temperatur ≥ 100°C?      |
+
+> **Typische Fehlerquelle:** Verwechsle nie `=` (Zuweisung) und `==` (Vergleich)!
+
+
+```cpp                                       LogicOperators.cpp
+#include <iostream>
+
+int main(){
+  int x = 15;
+  std::cout << "x = " << x << " \n";
+  std::cout << std::boolalpha << "Aussage x > 5 ist "<< (x>5) << "\n";
+  std::cout << std::boolalpha << "Aussage x == 5 ist "<< (x==-15) << "\n";
+  return 0;
+}
+```
+@LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+> **Merke:** Der Rückgabewert einer Vergleichsoperation ist `bool`. Dabei bedeutet
+> `false` eine ungültige und `true` eine gültige Aussage. 
+>
+> Vor 1993 wurde ein logischer Datentyp in C++ durch
+> `int` simuliert. Aus der Gründen der Kompatibilität wird `bool` überall,
+> wo wie hier nicht ausdrücklich `bool` verlangt wird in `int` (Werte `0` und `1`) umgewandelt.
+
+> Mit dem `boolalpha` Parameter kann man `cout` überreden zumindest `true` und `false` auszugeben.
+
+### 3. Logische Operatoren
+
+> **Praxis-Tipp:**
+> Kombiniere Bedingungen mit logischen Operatoren, um komplexe Prüfungen in einer einzigen if-Abfrage auszudrücken. Das macht deinen Code übersichtlicher und vermeidet unnötige Verschachtelungen.
+
+Und wie lassen sich logische Aussagen verknüpfen? Nehmen wir an, dass wir aus den Messdaten zweier Sensoren ein Alarmsignal generieren wollen. Nur wenn die Temperatur _und_ die Luftfeuchte in einem bestimmten Fenster liegen, soll dies nicht  passieren.
+
+<!-- data-type="none" -->
+| Operator | Bedeutung         | Beispiel (C++)      | Alltagsbeispiel                 |
+|:--------:|:------------------|:--------------------|:---------------------------------|
+|   `&&`   | UND               | `a && b`            | „Ich gehe raus, wenn es warm **und** trocken ist.“ |
+|   `||`   | ODER              | `a || b`            | „Ich nehme Tee **oder** Kaffee.“ |
+|   `!`    | NICHT             | `!a`                | „Ich gehe **nicht** schwimmen.“  |
+
+> **Praxis-Tipp:** Logische Operatoren verknüpfen Bedingungen, z.B. in if-Abfragen oder Schleifen.
+
+Das ODER wird durch senkrechte Striche repräsentiert (Altgr+`<` Taste) und nicht durch große `I`!
+
+> Nehmen wir an, sie wollen Messdaten evaluieren. Ihr Sensor funktioniert nur dann wenn die Temperatur ein Wert zwischen -10 und -20 Grad annimmt und die Luftfeuchte zwischen 40 bis 60 Prozent beträgt.
+
+```cpp                                       Logic.cpp
+#include <iostream>
+
+int main(){
+  float Temperatur = -30;     // Das sind unsere Probewerte
+  float Feuchte = 65;
+
+  // Vergleichsoperationen und Logische Operationen
+  bool Temp_valid = ....    // Hier sind Sie gefragt!
+  bool Feuchte_valid = .... 
+
+  // Ausgabe
+  if ... {
+    std::cout << "Die Messwerte kannst Du vergessen!\n";
+  }else{
+    std::cout << "Die Messwerte sind in Ordnung.\n";
+  }
+  return 0;
+}
+```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+
+> Anmerkung: C++ bietet für logische Operatoren und Bit-Operatoren Synonyme  `and`, `or`, `xor`. Die Synonyme sind Schlüsselwörter, die die Lesbarkeit deutlich erhöhen.
 
 ```cpp
-a = b + c; // Infix
-a = -b;    // Präfix
-a = b++;   // Postfix
+#include <iostream>
+int main() {
+  float Temperatur = -30;
+  float Feuchte = 65;
+
+  bool Temp_valid = Temperatur > -20 and Temperatur < -10;
+  bool Feuchte_valid = Feuchte >= 40 and Feuchte <= 60;
+
+  if (not (Temp_valid and Feuchte_valid)) {
+    std::cout << "Die Messwerte kannst Du vergessen!\n";
+  } else {
+    std::cout << "Die Messwerte sind in Ordnung.\n";
+  }
+  return 0;
+}
 ```
-******************************************************************************
+@LIA.eval(["main.cpp"], `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-       {{2-3}}
-******************************************************************************
+> **Hinweis:** Die Synonyme `and`, `or`, `not` können die Lesbarkeit erhöhen, sind aber nicht in allen C++-Compilern und -Einstellungen standardmäßig aktiviert.
 
-**Funktion des Operators**
 
-* Zuweisung
-* Arithmetische Operatoren
-* Logische Operatoren
-* Bit-Operationen
-* Bedingungsoperator
 
-Weitere Unterscheidungsmerkmale ergeben sich zum Beispiel aus der [Assoziativität der Operatoren](https://de.wikipedia.org/wiki/Operatorassoziativit%C3%A4t).
+### 4. Zuweisungsoperatoren
 
-> __Achtung:__ Die nachvollgende Aufzählung erhebt nicht den Anspruch auf Vollständigkeit! Es werden bei weitem nicht alle Varianten der Operatoren dargestellt - vielmehr liegt der Fokus auf den für die Erreichung der didaktischen Ziele notwendigen Grundlagen.
-
-******************************************************************************
-
-### Zuweisungsoperator
-
-Der Zuweisungsoperator `=` ist von seiner mathematischen Bedeutung zu trennen -
+> Der Zuweisungsoperator `=` ist von seiner mathematischen Bedeutung zu trennen -
 einer Variablen wird ein Wert zugeordnet. Damit ergibt dann auch `x=x+1` Sinn.
+
+<!-- data-type="none" -->
+| Operator | Bedeutung               | Beispiel (C++) | Alltagsbeispiel                 |
+| :------: | :---------------------- | :------------- | :------------------------------ |
+|   `=`    | Zuweisung               | `a = 5`        | „Lege fest: Kontostand = 100 €“ |
+|   `+=`   | Addition & Zuweisung    | `a += 2`       | „Kontostand um 2 € erhöhen“     |
+|   `-=`   | Subtraktion & Zuweisung | `a -= 1`       | „1 € abheben“                   |
+
+> **Merke:** Zuweisung ist kein Vergleich! `a = 5` setzt den Wert, `a == 5` prüft ihn.
 
 ```cpp                     zuweisung.cpp
 #include <iostream>
@@ -141,14 +328,22 @@ int main() {
 > Vergleichsoperator `==`. Der Compiler kann die Fehlerhaftigkeit kaum erkennen
 > und generiert Code, der ein entsprechendes Fehlverhalten zeigt.
 
+
+## Besondere Operatoren
+
+Operatoren lassen sich nach der Anzahl der Operanden klassifizieren:
+
+<!-- data-type="none" -->
+| Operatorenart | Beschreibung                                                               | Beispiele                           |
+| :-----------: | :------------------------------------------------------------------------- | :---------------------------------- |
+|     Unär      | Ein Operand (z.B. Inkrement, Negation, logische Negation)                  | `++x`, `-x`, `!x`                   |
+|     Binär     | Zwei Operanden (z.B. Addition, Subtraktion, Multiplikation, logisches UND) | `a + b`, `a - b`, `a * b`, `a && b` |
+|    Ternär     | Drei Operanden (z.B. Bedingungsoperator)                                   | `a ? b : c`, `x > 0 ? x : -x`       |
+
 ### Inkrement und Dekrement
 
-Mit den `++` und `--` -Operatoren kann ein L-Wert um eins erhöht bzw. um
-eins vermindert werden. Man bezeichnet die Erhöhung um eins auch als Inkrement,
-die Verminderung um eins als Dekrement. Ein Inkrement einer Variable `x`
-entspricht `x = x + 1`, ein Dekrement einer Variable `x` entspricht `x = x - 1`.
-
-<!--- TODO: Haben wir lvalues, rvalues, xvalues, etc. schon erklärt? müssen wir das? --->
+Mit den `++` und `--` -Operatoren kann ein Wert um eins erhöht bzw. um
+eins vermindert werden. Man kan dies vor odr nach der Verarbeitung umsetzen.
 
 ```cpp                            IncrementDecrement.cpp
 #include <iostream>
@@ -165,143 +360,9 @@ int main(){
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-
-### Arithmetische Operatoren
-
-|  Operator  |  Bedeutung                     |  Ganzzahlen  |  Gleitkommazahlen  |
-| :--------: | :----------------------------- | :----------- | :----------------- |
-|    `+`     |  Addition                      |  x           |  x                 |
-|    `-`     |  Subtraktion                   |  x           |  x                 |
-|    `*`     |  Multiplikation                |  x           |  x                 |
-|    `/`     |  Division                      |  x           |  x                 |
-|    `%`     |  Modulo (Rest einer Division)  |  x           |                    |
-
-{{1}}
-> **Achtung:** Divisionsoperationen werden für Ganzzahlen und Gleitkommazahlen
-> unterschiedlich realisiert.
-
-{{1}}
-* Wenn zwei Ganzzahlen wie z. B. $4/3$ dividiert werden, erhalten wir das
-  Ergebnis 1 zurück, der nicht ganzzahlige Anteil der Lösung bleibt
-  unbeachtet.
-* Für Fließkommazahlen wird die Division wie erwartet realisiert.
-
-{{1}}
-```cpp                                  division.cpp
-#include <iostream>
-
-int main(){
-  int timestamp, minuten;
-
-  timestamp = 345; //[s]
-  std::cout << "Zeitstempel " << timestamp << " [s]\n";
-  minuten=timestamp/60;
-  std::cout << timestamp << " [s] entsprechen " << minuten << " Minuten\n";
-  return 0;
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-{{2}}
-> Die Modulo Operation generiert den Rest einer Divisionsoperation bei ganzen Zahlen.
-
-{{2}}
-```cpp                                  moduloExample.cpp
-#include <iostream>
-
-int main(){
-  int timestamp, sekunden, minuten;
-
-  timestamp = 345; //[s]
-  std::cout << "Zeitstempel " << timestamp << " [s]\n";
-  minuten=timestamp/60;
-  sekunden=timestamp%60;
-  std::cout << "Besser lesbar: " << minuten << " min. " << sekunden << " sek.\n";
-  return 0;
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-### Vergleichsoperatoren
-
-Kern der Logik sind Aussagen, die wahr oder falsch sein können.
-
-
-|  Operation  |  Bedeutung            |
-| :---------: | :-------------------- |
-|     `<`     |  kleiner als          |
-|     `>`     |  größer als           |
-|    `<=`     |  kleiner oder gleich  |
-|    `>=`     |  größer oder gleich   |
-|    `==`     |  gleich               |
-|    `!=`     |  ungleich             |
-
-<!--- TODO: three-way comparison operator? oder verwirrt der nur? --->
-
-```cpp                                       LogicOperators.cpp
-#include <iostream>
-
-int main(){
-  int x = 15;
-  std::cout << "x = " << x << " \n";
-  std::cout << std::boolalpha << "Aussage x > 5 ist "<< (x>5) << "\n";
-  std::cout << std::boolalpha << "Aussage x == 5 ist "<< (x==-15) << "\n";
-  return 0;
-}
-```
-@LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-> **Merke:** Der Rückgabewert einer Vergleichsoperation ist `bool`. Dabei bedeutet
-> `false` eine ungültige und `true` eine gültige Aussage. Vor 1993 wurde ein logischer Datentyp in C++ durch
-> `int` simuliert. Aus der Gründen der Kompatibilität wird `bool` überall,
-> wo wie hier nicht ausdrücklich `bool` verlangt wird in `int` (Werte `0` und `1`) umgewandelt.
-
-> Mit dem `boolalpha` Parameter kann man `cout` überreden zumindest `true` und `false` auszugeben.
-
-### Logische Operatoren
-
-    {{0-1}}
-********************************************************************************
-
-Und wie lassen sich logische Aussagen verknüpfen? Nehmen wir an, dass wir aus den Messdaten zweier Sensoren ein Alarmsignal generieren wollen. Nur wenn die Temperatur _und_ die Luftfeuchte in einem bestimmten Fenster liegen, soll dies nicht  passieren.
-
-|  Operation  |  Bedeutung  |
-| :---------: | :---------- |
-|    `&&`     |  UND        |
-|    `||`     |  ODER       |
-|     `!`     |  NICHT      |
-
-Das ODER wird durch senkrechte Striche repräsentiert (Altgr+`<` Taste) und nicht durch große `I`!
-
-> Nehmen wir an, sie wollen Messdaten evaluieren. Ihr Sensor funktioniert nur dann wenn die Temperatur ein Wert zwischen -10 und -20 Grad annimmt und die Luftfeuchte zwischen 40 bis 60 Prozent beträgt.
-
-```cpp                                       Logic.cpp
-#include <iostream>
-
-int main(){
-  float Temperatur = -30;     // Das sind unsere Probewerte
-  float Feuchte = 65;
-
-  // Vergleichsoperationen und Logische Operationen
-  bool TempErgebnis = ....    // Hier sind Sie gefragt!
-
-  // Ausgabe
-  if ... {
-    std::cout << "Die Messwerte kannst Du vergessen!\n";
-  }
-  return 0;
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-********************************************************************************
-
-Anmerkung: C++ bietet für logische Operatoren und Bit-Operatoren Synonyme  `and`, `or`, `xor`.
-Die Synonyme sind Schlüsselwörter, wenn Compiler-Einstellungen `/permissive` oder `/Za` (Spracherweiterungen deaktivieren) angegeben werden. Sie sind keine Schlüsselwörter, wenn Microsoft-Erweiterungen aktiviert sind. Die Verwendung der Synonyme kann die Lesbarkeit deutlich erhöhen.
-
 ### `sizeof` - Operator
 
-Der Operator `sizeof` ermittelt die Größe eines Datentyps (in Byte) zur
-Kompiliertzeit.
+> `sizeof` ist ein Operator, der bereits beim Übersetzen des Programms (compile time) ausgewertet wird. Er liefert die Größe eines Datentyps oder einer Variable in Bytes – und zwar **ohne** dass das Programm dafür laufen muss. Das ist effizient, sicher und ermöglicht viele typische Aufgaben in C/C++:
 
 * `sizeof` ist keine Funktion, sondern ein Operator.
 * `sizeof` wird häufig zur dynamischen Speicherreservierung verwendet.
@@ -351,24 +412,28 @@ c = sizeof(x) + ++a  / 3;
 
 c = (sizeof(x)) + ((++a) / 3);
 ```
-{{1}}
-**Assoziativität**
 
-{{1}}
 Für Operatoren mit der gleichen Priorität ist für die Reihenfolge der Auswertung die Assoziativität das zweite Kriterium.
 
-{{1}}
-```cpp
-a = 4 / 2 / 2;
 
+```cpp      sizeof.cpp
+#include <iostream>
+
+int main(){
 // von rechts nach links (FALSCH)
 // 4 / (2 / 2)   // ergibt 4
 
 // von links nach rechts ausgewertet
 // (4 / 2) / 2   // ergibt 1
+  double a = 4 / 2 / 2;
+  std::cout << a << "\n";
+  return 0;
+}
 ```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-> **Merke:** Setzen Sie Klammern, um alle Zweifel auszuräumen
+
+> **Merke:** Setzen Sie Klammern, um alle Zweifel auszuräumen!
 
 
 ## ... und mal praktisch
@@ -378,63 +443,29 @@ Buttons auf eine LED abzubilden. Nur wenn beide Taster gedrückt werden, beleuch
 
 > Wie ändert sich die Logik wenn Sie ein `||` anstelle des `&&` verwenden?
 
-```cpp    ButtonSynch.cpp
-const int button_A_pin = A0;
-const int button_B_pin = A1;
-const int led_pin = 11;
-
-int buttonAState;
-int buttonBState;
+```cpp    ButtonSynch.ino
+const int button1Pin = A0;
+const int button2Pin = A1;
+const int ledPin = 8;
 
 void setup() {
-  pinMode(button_A_pin, INPUT);
-  pinMode(button_B_pin, INPUT);
-  pinMode(led_pin, OUTPUT);
-  Serial.begin(9600);
- }
+  pinMode(button1Pin, INPUT_PULLUP);
+  pinMode(button2Pin, INPUT_PULLUP);
+  pinMode(ledPin, OUTPUT);
+}
 
 void loop() {
-  buttonAState = digitalRead(button_A_pin);
-  buttonBState = digitalRead(button_B_pin);
+  // Taster sind aktiv LOW (wegen INPUT_PULLUP)
+  bool button1Pressed = digitalRead(button1Pin) == HIGH;
+  bool button2Pressed = digitalRead(button2Pin) == HIGH;
 
-  if (buttonAState && buttonBState) {
-    Serial.println ("... Go");
-    digitalWrite(led_pin, HIGH);
-    delay(3000);
-  }
-  else {
-    digitalWrite(led_pin, LOW);
+  if (button1Pressed || button2Pressed) {
+    digitalWrite(ledPin, HIGH); // LED an
+  } else {
+    digitalWrite(ledPin, LOW);  // LED aus
   }
 }
 ```
-
-#### Logische Operatoren
-
-> Wofür steht der logische Operator `&&`?
-[[und]]
-<script>
-let input = "@input".trim().toLowerCase()
-
-input == "und" || input == "UND" || input == "Und"
-</script>
-
-> Wofür steht der logische Operator `||`?
-[[oder]]
-<script>
-let input = "@input".trim().toLowerCase()
-
-input == "oder" || input == "ODER" || input == "Oder"
-</script>
-
-> Wofür steht der logische Operator `!`?
-[[nicht]]
-<script>
-let input = "@input".trim().toLowerCase()
-
-input == "nicht" || input == "NICHT" || input == "Nicht"
-</script>
-
-
 
 # Kontrollfluss
 
@@ -549,65 +580,33 @@ formuliert werden.
 4. Multiple Anweisungen ohne Anweisungsblock
 5. Komplexität der Statements
 
-************************************************************************
 
-#### Beispiel
-
-Nehmen wir an, dass wir einen kleinen Roboter aus einem Labyrinth fahren lassen
-wollen. Dazu gehen wir davon aus, dass er bereits an einer Wand steht. Dieser soll er mit der "Linke-Hand-Regel" folgen. Dabei wird von einem einfach zusammenhängenden Labyrith ausgegangen.
-
-Die nachfolgende Grafik illustriert den Aufbau des Roboters und die vier möglichen Konfigurationen des Labyrinths, nachdem ein neues Feld betreten wurde.
-
-![robotMaze.jpeg](./images/03_Kontrollfluss/robotMaze.jpeg)<!--
-style=" width: 80%;
-        max-width: 600px;
-        min-width: 400px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;"
--->
-
-|  Fall  |  Bedeutung                                                                                                                          |
-| ------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-|  1.    |  Die Wand knickt nach links weg. Unabhängig von WG und WR folgt der Robter diesem Verlauf.                                          |
-|  2.    |  Der Roboter folgt der linksseitigen Wand.                                                                                          |
-|  3.    |  Die Wand blockiert die Fahrt. Der Roboter dreht sich nach rechts, damit liegt diese Wandelement nun wieder zu seiner linken Hand.  |
-|  4.    |  Der Roboter folgt dem Verlauf nach einer Drehung um 180 Grad.                                                                      |
-
-<!-- data-type="none" -->
-|  WL  |  WG  |  WR  |  Fall  |  Verhalten                 |
-| :--- | :--- | :--- | ------ | :------------------------- |
-|  0   |  0   |  0   |  1     |  Drehung Links, Vorwärts   |
-|  0   |  0   |  1   |  1     |  Drehung Links, Vorwärts   |
-|  0   |  1   |  0   |  1     |  Drehung Links, Vorwärts   |
-|  0   |  1   |  1   |  1     |  Drehung Links, Vorwärts   |
-|  1   |  0   |  0   |  2     |  Vorwärts                  |
-|  1   |  0   |  1   |  2     |  Vorwärts                  |
-|  1   |  1   |  0   |  3     |  Drehung Rechts, Vorwärts  |
-|  1   |  1   |  1   |  4     |  Drehung 180 Grad          |
-
-
-```cpp                     IfExample.c
+```cpp      errors.cpp
 #include <iostream>
 
-int main() {
-  int WL, WG, WR;
-  WL = 0; WG = 1; WR =1;
-  if (!WL)                           // Fall 1
-    std::cout << "Drehung Links\n";
-  if ((WL) && (!WG))                 // Fall 2
-    std::cout << "Vorwärts\n";
-  if ((WL) && (WG) && (!WR))         // Fall 3
-    std::cout << "Drehung Rechts\n";
-  if ((WL) && (WG) && (WR))          // Fall 4
-    std::cout << "Drehung 180 Grad\n";
-	return 0;
+int main(){
+  int a = 5, b = 10;
+  if (a = b) {                     // Fehler 1
+    std::cout << "a gleich b\n";  
+  }
+  if a != b {                      // Fehler 2
+    std::cout << "a ungleich b\n";
+  }
+  if (a < b); {                    // Fehler 3
+    std::cout << "a kleiner b\n"; 
+  }
+  if (a > b)                       // Fehler 4
+    std::cout << "a größer b\n";   
+    std::cout << "Ende\n";
+  if ((a < b) && (b > 0) || (a == 5)) { // Fehler 5
+    std::cout << "Komplexe Bedingung\n";
+  }
+  return 0;
 }
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-> Sehen Sie mögliche Vereinfachungen des Codes?**
-
+************************************************************************
 
 #### Zwischenfrage
 
@@ -620,13 +619,13 @@ int main() {
   if (Punkte + Zusatzpunkte >= 50)
   {
     std::cout << "Test ist bestanden!\n";
-    if (Zusatzpunkte >= 15)
+    if (Zusatzpunkte < 15)
     {
-      std::cout << "Alle Zusatzpunkte geholt!\n";
-    }else{
       if(Zusatzpunkte > 8) {
         std::cout << "Respektable Leistung\n";
       }
+    }else{
+      std::cout << "Alle Zusatzpunkte geholt!\n";
     }
   }else{
     std::cout << "Leider durchgefallen!\n";
@@ -798,22 +797,11 @@ Schleifen können verschachtelt werden, d.h. innerhalb eines Schleifenkörpers
 können weitere Schleifen erzeugt und ausgeführt werden. Zur Beschleunigung des
 Programmablaufs werden Schleifen oft durch den Compiler entrollt (*Enrollment*).
 
-                      {{0-1}}
+                      {{0-2}}
 *************************************************
 
 Grafisch lassen sich die wichtigsten Formen in mit der Nassi-Shneiderman
 Diagrammen wie folgt darstellen:
-
-```mermaid @mermaid
-graph TD
-    Start --> Überprüfung{Bedingung A erfüllt?}
-    Überprüfung -->|Ja| Aktion1[Aktion 1]
-    Aktion1 --> Überprüfung2{Bedingung B erfüllt?}
-    Überprüfung2 -->|Ja| Aktion2[Aktion 2]
-    Aktion2 --> Überprüfung
-    Überprüfung2 -->|Nein| Überprüfung
-    Überprüfung -->|Nein| Ende
-```
 
 
 <!--
