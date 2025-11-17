@@ -1,8 +1,8 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Galina Rudolf
+author:   Sebastian Zug & André Dietrich & Galina Rudolf & Copilot
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 
@@ -12,6 +12,8 @@ logo: ./img/LogoCodeExample.png
 import: https://github.com/liascript/CodeRunner
         https://github.com/LiaTemplates/AVR8js/main/README.md#10
         https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/config.md
+
+link:     style.css
 
 
 -->
@@ -43,6 +45,28 @@ import: https://github.com/liascript/CodeRunner
 
 ---------------------------------------------------------------------
 
+## Reflexion Ihrer Fragen / Rückmeldungen
+
+> Zur Erinnerung ... Wettstreit zur partizipativen Materialentwicklung mit den Informatikern ...
+
+<section class="flex-container">
+
+<!-- class="flex-child" style="min-width: 250px;" -->
+![Weihnachtsmänner](./images/00_Einfuehrung/Weihnachtsmaenner.jpeg "Preis für das aktivste Auditorium")
+
+<div class="flex-child" style="min-width: 250px;">
+
+<!-- data-type="none" -->
+| Format                   | Informatik Studierende  | Nicht-Informatik Studierende |
+|--------------------------|-------------------------|------------------------------|
+| Verbesserungsvorschlag   | 2                       | 2                            |
+| Fragen                   | 2                       | 3                            |
+| generelle Hinweise       | 0                       | 1                            |
+
+</div>
+
+</section>
+
 ## Wie weit waren wir gekommen?
 
 > Aufgabe: Die LED blinkt im Beispiel 10 mal. Integrieren Sie eine Abbruchbedingung für diese Schleife, wenn der grüne Button gedrückt wird. Welches Problem sehen Sie?
@@ -56,8 +80,12 @@ void setup() {
   pinMode(2, INPUT);      // Button grün
   pinMode(13, OUTPUT);
 
-  for (int i = 0; i<10; i++) {
-    digitalWrite(13, HIGH);
+  while (digitalRead(2) == LOW) {     // Kopfgesteuerte Schleife für das 
+     delay(10);                       // warten auf den Buttondruck
+  }
+
+  for (int i = 0; i<10; i++) {        // 10 mal LED blinken - Wiederholungs
+    digitalWrite(13, HIGH);           // -schleife
     delay(500);
     digitalWrite(13, LOW);
     delay(500);
@@ -122,8 +150,9 @@ int main(void) {
   a[0] = -2;
   a[1] = 5;
   a[2] = 99;
-  for (int i=0; i<3; i++)
+  for (int i=0; i<3; i++){
     std::cout << a[i] << " ";
+  }
   std::cout << "\nNur zur Info " << sizeof(a) << "\n";
   std::cout << "Zahl der Elemente " << sizeof(a) / sizeof(int) << "\n";
   return 0;
@@ -203,6 +232,9 @@ int main(void) {
   int b[10];
   for (int i=0; i<10; i++)  // "Befüllen" des Arrays b
     b[i] = i;
+
+  // Wir haben jetzt zwei Arrays a und b vorzuliegen und wolle diese 
+  // parweise vergleichen
   for (int i=0; i<10; i++)
     if (a[i] != b[i])
       std::cout << "An Stelle " << i << " unterscheiden sich die Arrays!\n";
@@ -214,6 +246,9 @@ int main(void) {
 Welche Verbesserungsmöglichkeiten sehen Sie bei dem Programm?
 
 ### Mehrdimensionale Arrays
+
+                     {{0-1}}
+********************************************
 
 Deklaration:
 
@@ -236,12 +271,13 @@ int Matrix[4][4] = {{1,},
 
 int Matrix[4][4] = {1,2,3,4,5,6,7,8};
 ```
+******************************************
 
 {{1}}
 Initialisierung eines n-dimensionalen Arrays:
 
 {{1}}
-![Matrix](./images/04_ZeigerUndArrays/2DArray.jpg "Darstellung der Matrixinhalte für das nachfolgende Codebeispiel [^1]")<!--
+![Matrix](./images/04_ZeigerUndArrays/2DArray.jpg "Darstellung der Matrixinhalte für das nachfolgende Codebeispiel - Aufgabe aus [C-Kurs](http://www.c-howto.de/tutorial/arrays-felder/zweidimensionale-felder/")<!--
 style=" width: 60%;
         max-width: 800px;
         min-width: 400px;
@@ -249,6 +285,17 @@ style=" width: 60%;
         margin-left: auto;
         margin-right: auto;"
 -->
+
+{{1}}
+> **Praxisbezug:**
+> Solche zweidimensionalen Arrays werden oft genutzt, um Karten oder Spielfelder zu modellieren – zum Beispiel für ein Labyrinth, ein Brettspiel oder eine Landkarte. Die Zahlen im Array stehen dann für verschiedene Objekte oder Besonderheiten:
+> - 0 = freies Feld
+> - 1 = Startpunkt
+> - 2 = Hindernis
+> - 3 = Schatz
+> - 4 = Ziel
+> So kann man das Feld auswerten, anzeigen oder für eine Spiellogik weiterverarbeiten.
+
 
 {{2}}
 ```cpp                          nDimArray.cpp
@@ -277,7 +324,7 @@ int main(void) {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-[^1]: Quelle: [C-Kurs](http://www.c-howto.de/tutorial/arrays-felder/zweidimensionale-felder/)
+
 
 ### Anwendung eines zweidimesionalen Arrays
 
@@ -312,7 +359,7 @@ int main(void)
 
 ## Sonderfall Zeichenketten / Strings
 
-Folgen von Zeichen, die sogenannten *Strings* werden in C/C++ durch Arrays mit
+Folgen von Zeichen werden in C/C++ durch Arrays mit
 Elementen vom Datentyp `char` repräsentiert. Die Zeichenfolgen werden mit
 `\0` abgeschlossen.
 
@@ -592,85 +639,52 @@ int main(void) {
 ```
 @LIA.evalWithDebug(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-### Dynamische Datenobjekte
-
-C++ bietet die Möglichkeit den Speicherplatz für eine Variable zur Laufzeit zur Verfügung zu stellen.
-Mit dem `new`-Operator wird der Speicherplatz bereit gestellt und mit dem `delete`-Operator (`delete[]`) wieder freigegeben.
-
-`new` erkennt die benötigte Speichermenge am angegebenen Datentyp und reserviert für die Variable auf dem Heap die entsperechde Byte-Menge.
-
-```cpp                   new.cpp
-#include <iostream>
-
-int main(void) {
-  int * ptr_a;
-  ptr_a = new int;
-  *ptr_a = 10;
-  std::cout << "Pointer ptr_a                  " << ptr_a << "\n";
-  std::cout << "Wert hinter dem Pointer ptr_a  " << *ptr_a << "\n";
-  std::cout << "Aus Maus!\n";
-  delete ptr_a;
-  return 0;
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-```cpp                   newArray.cpp
-#include <iostream>
-
-int main(void) {
-  int * ptr_a;
-  ptr_a = new int[3];
-  ptr_a[0] = ptr_a[1] = ptr_a[2] = 42;
-  std::cout << "Werte hinter dem Pointer ptr_a:  ";
-  for (int i=0;i<3;i++)
-    std::cout << ptr_a[i] << " ";
-  std::cout << "\n";
-  std::cout << "Aus Maus!\n";
-  delete[] ptr_a;
-  return 0;
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-+ `delete` daft nur einmal auf ein Objekt angewendet werden
-+ `delete` daft ausschließlich auf mit new angelegte Objekte oder NULL-Pointer angewandt werden
-+ Nach der Verwendung von `delete` ist das Objekt *undefiniert* (nicht gleich NULL)
-
-> **Merke:** Die Verwendung von Zeigern kann zur unerwünschten Speicherfragmentierung und die Programmierfehler zu den Programmabstürzen und Speicherlecks führen. *Intelligente* Zeiger stellen sicher, dass Programme frei von Arbeitsspeicher- und Ressourcenverlusten sind.
-
 
 ## Referenz
 
-Eine Referenz ist eine Datentyp, der Verweis (Aliasnamen) auf ein Objekt liefert und ist genau wie eine Variable zu benutzen ist.
-Der Vorteil der Referenzen gegenüber den Zeigern besteht in der einfachen Nutzung:
+Eine Referenz ist wie ein zweiter Name für eine Variable. Sie zeigt immer auf ein existierendes Objekt und kann nicht „ins Leere“ zeigen. 
 
-+ Dereferenzierung ist nicht notwendig, der Compiler löst die Referenz selbst auf
-+ Freigabe ist ebenfalls nicht notwendig
+> Referenzen existieren nur in C++. In C gibt es nur Zeiger.
 
-> **Merke:** Auch Referenzen müssen vor der Verwendung initialisiert werden. Eine Referenz bezieht sich immer auf ein existierendes Objekt, sie kann nie NULL sein
+Im Gegensatz zu Zeigern (Pointer) ist die Handhabung für Einsteiger viel einfacher:
 
-```cpp referenzen.cpp
+|                | Zeiger (Pointer)         | Referenz                |
+|----------------|-------------------------|-------------------------|
+| Kann NULL sein | Ja                      | Nein                    |
+| Muss initialisiert werden | Nein         | Ja                      |
+| Dereferenzierung nötig?   | Ja (`*p`)    | Nein                    |
+| Nachträglich umsetzbar?   | Ja (kann auf andere Variable zeigen) | Nein (bleibt immer auf das gleiche Objekt) |
+| Speicherfreigabe nötig?   | Ja (bei `new`) | Nein                  |
+
+**Beispiel:**
+
+```cpp // referenzen.cpp
 #include <iostream>
 
 int main(void) {
-  int  a = 1;  // Variable
-  int &r = a;  // Referenz auf die Variable a
+  int  a = 1;      // Variable
+  int &r = a;      // Referenz auf a
+  int *p = &a;     // Zeiger auf a
 
+  std::cout << "a: " << a << " r: " << r << " *p: " << *p << std::endl;
+  r = 5;           // Ändert auch a
   std::cout << "a: " << a << " r: " << r << std::endl;
-  std::cout << "a: " << &a << " r: " << &r << std::endl;
+  *p = 10;         // Ändert auch a
+  std::cout << "a: " << a << " r: " << r << std::endl;
 }
 ```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+@LIA.eval(["main.cpp"], `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-Die Referenzen werden verwendet:
+> **Merke:**
+> - Referenzen sind ideal für Funktionsparameter, wenn man Werte verändern möchte, ohne Kopien zu erzeugen.
+> - Zeiger braucht man, wenn man „ins Leere“ zeigen oder dynamisch Speicher verwalten will.
 
-+ zur "call by reference"-Parameterübergabe
-+ zur Optimierung des Programms, um Kopien von Objekten zu vermeiden
-+ in speziellen Memberfunktionen, wie Copy-Konstruktor und Zuweisungsoperator
-+ als sogenannte universelle Referenz (engl.: universal reference), die bei Templates einen beliebigen Parametertyp repräsentiert.
+**Typische Anwendungen für Referenzen:**
+- Übergabe an Funktionen („call by reference“)
+- Vermeidung von Kopien großer Objekte
+- Spezielle Memberfunktionen (z. B. Copy-Konstruktor)
 
-> **Achtung:** Zur dynamischen Verwaltung von Speicherbereichen sind Referenzen nicht geeignet.
+> **Achtung:** Referenzen sind nicht geeignet, um dynamisch Speicher zu verwalten oder auf „nichts“ zu zeigen.
 
 
 ## Beispiel der Woche
