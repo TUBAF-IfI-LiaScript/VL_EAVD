@@ -1,8 +1,8 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Galina Rudolf
+author:   Sebastian Zug & André Dietrich & Galina Rudolf & Copilot
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.6
+version:  1.0.7
 language: de
 narrator: Deutsch Female
 
@@ -40,6 +40,77 @@ import: https://github.com/liascript/CodeRunner
   kostet das Ganze doch Speicherplatz?
 
 ---------------------------------------------------------------------
+
+## Reflexion Ihrer Fragen / Rückmeldungen
+
+              {{0-1}}
+*********************************************
+
+> Zur Erinnerung ... Wettstreit zur partizipativen Materialentwicklung mit den Informatikern ...
+
+<section class="flex-container">
+
+<!-- class="flex-child" style="min-width: 250px;" -->
+![Weihnachtsmänner](./images/00_Einfuehrung/Weihnachtsmaenner.jpeg "Preis für das aktivste Auditorium")
+
+<div class="flex-child" style="min-width: 250px;">
+
+<!-- data-type="none" -->
+| Format                   | Informatik Studierende  | Nicht-Informatik Studierende |
+|--------------------------|-------------------------|------------------------------|
+| Verbesserungsvorschlag   | 2                       | 2                            |
+| Fragen                   | 2                       | 5                            |
+| generelle Hinweise       | 0                       | 1                            |
+
+</div>
+
+</section>
+
+*********************************************
+
+              {{1-2}}
+*********************************************
+
+Einlesen eines Arrays aus einer Datei
+=============================
+
+In der Praxis liegen Daten oft nicht direkt im Quellcode, sondern werden aus einer Datei eingelesen. Das ist zum Beispiel nützlich, wenn Messwerte, Konfigurationsdaten oder größere Datenmengen verarbeitet werden sollen.
+
+
+**Beispiel:** Angenommen, in der Datei `daten.txt` stehen Zahlen, jeweils durch Leerzeichen getrennt:
+
+```
+3 7 2 9 4 1 5
+```
+
+Das folgende C++-Programm liest die Zahlen aus der Datei in ein Array ein:
+
+```cpp // array_from_file.cpp
+#include <iostream>
+#include <fstream>
+
+int main() {
+  std::ifstream file("daten.txt");
+  const int MAX = 100;
+  int arr[MAX];
+  int n = 0;
+  while (file >> arr[n] && n < MAX) {
+    n++;
+  }
+  std::cout << "Gelesene Werte:";
+  for (int i = 0; i < n; i++) {
+    std::cout << " " << arr[i];
+  }
+  std::cout << std::endl;
+  return 0;
+}
+```
+
+> **Hinweis:**
+> - Die Datei `daten.txt` muss im gleichen Verzeichnis wie das Programm liegen.
+> - Die Schleife liest so lange Zahlen ein, bis das Dateiende erreicht ist oder das Array voll ist.
+
+*********************************************
 
 ## Motivation
 
@@ -839,6 +910,21 @@ int main(int argc, char *argv[]) {
 
 Der integrale Rückgabewert stellt traditionell einen Statuswert da, welcher ausdrückt, ob das Programm ohne Probleme lief (0) oder Fehler aufgetreten sind (1, 2, 3...).
 Die genaue Bedeutung letzterer Werte ist dabei dem Entwickler überlassen.
+
+## Zusammenfassung: Parameterübergabe in C++
+
+| Übergabeart         | Syntax im Funktionskopf      | Was wird übergeben?         | Auswirkungen auf Originalwert? | Typische Anwendung           |
+|---------------------|-----------------------------|-----------------------------|-------------------------------|------------------------------|
+| Call-by-Value       | `int foo(int x)`            | Kopie des Werts             | Nein                          | Reine Berechnung, keine Änderung am Original |
+| Call-by-Reference   | `int foo(int &x)`           | Alias/Referenz auf Original | Ja                            | Wenn Funktion Wert verändern soll, mehrere Rückgaben |
+| Call-by-Pointer     | `int foo(int *x)`           | Adresse (Pointer)           | Ja (über Dereferenzierung)    | Dynamische Daten, optionale Übergabe, Arrays |
+
+> **Merke:**
+>
+> - Call-by-Value ist sicher, aber Änderungen wirken sich nicht auf die Ursprungsvariable aus.
+> - Call-by-Reference ist elegant, wenn der Wert verändert werden soll.
+> - Call-by-Pointer ist flexibel, aber fehleranfällig (z. B. bei nullptr).
+
 
 ## Beispiel des Tages
 
