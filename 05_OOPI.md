@@ -12,6 +12,7 @@ logo: ./img/LogoCodeExample.png
 import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/config.md
 
+link:     style.css
 
 -->
 
@@ -25,7 +26,7 @@ import: https://github.com/liascript/CodeRunner
 | **Semester**              | @config.semester                                                                                                                                     |
 | **Hochschule:**           | `Technische Universität Freiberg`                                                                                                                    |
 | **Inhalte:**              | `Klassen und Objekte`                                                                                                                                |
-| **Link auf Repository: ** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/04_Funktionen.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/05_OOPI.md) |
+| **Link auf Repository: ** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/05_OOPI.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/05_OOPI.md) |
 | **Autoren**               | @author                                                                                                                                              |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
@@ -38,14 +39,44 @@ import: https://github.com/liascript/CodeRunner
 * Was sind Objekte?
 * Welche Aufgabe erfüllt ein Konstruktor?
 * Was geschieht, wenn kein expliziter Konstruktor durch den Entwickler vorgesehen wurde?
-* Wann ist ein Dekonstruktor erforderlich?
+* Wann ist ein Destruktor erforderlich?
 * Was bedeutet das "Überladen" von Funktionen?
 * Nach welchen Kriterien werden überladene Funktionen differenziert?
 
-## Einschub - Klausurhinweise
+## Reflexion Ihrer Fragen / Rückmeldungen
 
+              {{0-1}}
+*********************************************
+
+> Zur Erinnerung ... Wettstreit zur partizipativen Materialentwicklung mit den Informatikern ...
+
+<section class="flex-container">
+
+<!-- class="flex-child" style="min-width: 250px;" -->
+![Weihnachtsmänner](./images/00_Einfuehrung/Weihnachtsmaenner.jpeg "Preis für das aktivste Auditorium")
+
+<div class="flex-child" style="min-width: 250px;">
+
+<!-- data-type="none" -->
+| Format                   | Informatik Studierende  | Nicht-Informatik Studierende |
+|--------------------------|-------------------------|------------------------------|
+| Verbesserungsvorschlag   | 2                       | 2                            |
+| Fragen                   | 2                       | 5                            |
+| generelle Hinweise       | 0                       | 1                            |
+
+</div>
+
+</section>
+
+*********************************************
+
+              {{1-2}}
+*********************************************
+
+>  **Was davon kommt denn nun in der Klausur dran?**
+>
 > + Während der Klausur können Sie "alle Hilfsmittel aus Papier" verwenden!
-
+>
 > + Im OPAL finden sich Klausurbeispiele.
 
 __Beispielhafte Klausuraufgabe__
@@ -57,6 +88,75 @@ _Die Zustimmung (in Prozent) für die Verwendung der künstlichen Intelligenz im
 + _In der main()-Funktion sind die Werte von der Console einzulesen und in die Arrays zu speichern._
 
 > Denken Sie mal über eine Lösung nach, wie sprechen in der kommenden Veranstaltung darüber.
+
+*********************************************
+
+## Rückblick auf Funktionen 
+
+                 {{0-2}}
+*************************************************
+
+Bevor wir in die Objektorientierung einsteigen, wiederholen wir noch einmal die wichtigsten Konzepte von Funktionen mit einem geowissenschaftlichen Beispiel:
+
+```cpp                        FunctionExample.cpp
+#include <iostream>
+#include <string>
+
+// Funktion zur Klassifikation von Gesteinen nach Korngröße
+std::string klassifiziereKorngroesse(double korngroesse_mm) {
+    if (korngroesse_mm < 0.063) return "Tonstein";
+    else if (korngroesse_mm < 2.0) return "Schluffstein";
+    else if (korngroesse_mm < 64.0) return "Sandstein";
+    else return "Konglomerat";
+}
+
+// Funktion zur Klassifikation nach Porosität
+std::string klassifizierePorosität(double porosität_prozent) {
+    if (porosität_prozent < 5.0) return "sehr gering";
+    else if (porosität_prozent < 15.0) return "gering";
+    else if (porosität_prozent < 25.0) return "mittel";
+    else return "hoch";
+}
+
+// Funktion zur Ausgabe der Gesteinsanalyse
+void ausgabeGesteinsdaten(double korngroesse, double porosität, 
+                         std::string gesteinstyp, std::string porositätskl) {
+    std::cout << "=== Gesteinsanalyse ===\n";
+    std::cout << "Korngröße: " << korngroesse << " mm -> " << gesteinstyp << "\n";
+    std::cout << "Porosität: " << porosität << "% -> " << porositätskl << "\n\n";
+}
+
+int main() {
+    // Messdaten einer Gesteinsprobe
+    double korngroesse = 0.8;  // mm
+    double porosität = 12.5;   // %
+    
+    // Funktionsaufrufe
+    std::string gesteinstyp = klassifiziereKorngroesse(korngroesse);
+    std::string porositätskl = klassifizierePorosität(porosität);
+    
+    ausgabeGesteinsdaten(korngroesse, porosität, gesteinstyp, porositätskl);
+    
+    return 0;
+}
+```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+> **Erklären Sie das Codefragment. Warum stecken nicht alle Klassifikationslogiken in der `main`-Methode?**
+
+*************************************************
+
+                 {{1-2}}
+*************************************************
+
+- Funktionen klassifizieren Messdaten nach geologischen Kriterien
+- Jede Funktion hat einen klaren Zweck (Korngröße, Porosität, Ausgabe) und kapselt ihre Logik.
+- Parameter werden übergeben, Klassifikationen zurückgegeben
+- Aber: Die Messdaten und die Funktionen sind getrennt - für jede Probe müssen alle Parameter einzeln verwaltet werden
+
+Hinweis: Die Beispielaufgabe entstand nach einer kurzen Internetrecherche und ist nicht wissenschaftlich geprüft. Geben Sie uns gern Hinweise, wenn die Klassifikationen nicht korrekt sind.
+
+*************************************************
 
 ## Motivation
 
@@ -187,7 +287,7 @@ int main() {
 
 ### Vergleich von `struct`-Variablen
 
-> Zusammengesetzte Datentypen machen die Anwendung von Vergleichsoperatoren schwieriger - bzw. wir müssen sie selbst definieren.
+> Zusammengesetzte Datentypen machen die Anwendung von Vergleichsoperatoren schwieriger, bzw. wir müssen sie selbst definieren.
 
 Im nachfolgenden Beispiel werden zur Überprüfung der Gleichheit die `tag`und
 `monat` verglichen. Der Vergleich wird dadurch vereinfacht, dass
@@ -632,7 +732,7 @@ class Datum {
 
 ### Memberfunktionen
 
-Mit der Integration einer Funktion in eine Klasse wird diese zur _Methode_ oder _Memberfunktion_. Der Mechanismus der Nutzung bleibt der gleiche, es erfolgt der Aufruf, ggf mit Parametern, die Abarbeitung realisiert Berechnungen, Ausgaben usw. und ein optionaler Rückgabewert bzw. geänderte Parameter (bei Call-by-Referenz Aufrufen) werden zurückgegeben.
+Mit der Integration einer Funktion in eine Klasse wird diese zur _Methode_ oder _Memberfunktion_. Der Mechanismus der Nutzung bleibt der gleiche, es erfolgt der Aufruf, ggf. mit Parametern, die Abarbeitung realisiert Berechnungen, Ausgaben usw. und ein optionaler Rückgabewert bzw. geänderte Parameter (bei Call-by-Referenz Aufrufen) werden zurückgegeben.
 
 Worin liegt der technische Unterschied?
 
@@ -827,7 +927,7 @@ int main() {
 
 ## Ein Wort zur Ausgabe
 
-Im Beispiel erfolgt die Ausgabe nicht auf die Console, sondern in ein ostream-Objekt, dessen Referenz an die print-Methoden als Parameter übergeben wird. Das ermöglicht eine flexible Ausgabe, z.B. in eine Datei, auf den Drucker etc.
+Im Beispiel erfolgt die Ausgabe nicht auf die Console, sondern in ein ostream-Objekt, dessen Referenz an die print-Methoden als Parameter übergeben wird. Das ermöglicht eine flexible Ausgabe, z. B. in eine Datei, auf den Drucker etc.
 
 ```cpp                     ostream.cpp
 #include <iostream>
@@ -968,7 +1068,7 @@ class_name instance_name(...);
 
 > **Merke: ** Ein Konstruktor hat keinen Rückgabetyp!
 
-Beim Aufruf `Student bernhard {"Cotta", 25, "Zillbach"};` erzeugt der Compiler eine Methode `Student::Student(std::string, int, std::string)`, die die Initialisierungsparameter entgegennimmt und diese der Reihenfolge nach an die Membervariablen übergibt. Sobald wir nur einen explizten Konstruktor integrieren, weist der Compiler diese Verantwortung von sich.
+Beim Aufruf `Student bernhard {"Cotta", 25, "Zillbach"};` erzeugt der Compiler eine Methode `Student::Student(std::string, int, std::string)`, die die Initialisierungsparameter entgegennimmt und diese der Reihenfolge nach an die Membervariablen übergibt. Sobald wir nur einen expliziten Konstruktor integrieren, weist der Compiler diese Verantwortung von sich.
 
 Entfernen Sie den Kommentar in Zeile 13 und der Compiler macht Sie darauf aufmerksam.
 
@@ -1136,17 +1236,6 @@ int main () {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out `, `./a.out`)
 
-## Anwendung
-
-1. Ansteuern einer mehrfarbigen LED
-
-    Die Auflistung der Memberfunktionen der entsprechenden Klasse finden Sie unter [Link](https://microsoft.github.io/azure-iot-developer-kit/docs/apis/led/)
-
-2. Abfragen eines Sensors
-
-    Die Auflistung der Memberfunktionen der entsprechenden Klassen finden Sie unter [Link](https://microsoft.github.io/azure-iot-developer-kit/docs/apis/)
-
-Der Beispielcode für die Anwendungen ist in den `examples` Ordnern des Projektes enthalten.
 
 ## Quiz
 
