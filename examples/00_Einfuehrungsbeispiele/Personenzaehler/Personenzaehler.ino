@@ -2,8 +2,8 @@
 #define PIN_ECHO    13
 
 // Überwachungsbereich in cm
-const int RANGE_MIN = 30;      // Untere Grenze
-const int RANGE_MAX = 60;      // Obere Grenze
+const int RANGE_MIN = 60;      // Untere Grenze
+const int RANGE_MAX = 200;      // Obere Grenze
 
 const unsigned long DEBOUNCE_TIME = 1000; // ms - Mindestzeit zwischen Zählungen
 const int STABILIZATION_DELAY = 50;    // ms

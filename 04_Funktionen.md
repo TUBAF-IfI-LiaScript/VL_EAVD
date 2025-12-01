@@ -12,6 +12,8 @@ logo: ./img/LogoCodeExample.png
 import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/config.md
 
+link:     style.css
+
 -->
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/04_Funktionen.md)
