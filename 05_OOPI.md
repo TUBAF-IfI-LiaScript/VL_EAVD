@@ -1,8 +1,8 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Galina Rudolf
+author:   Sebastian Zug & André Dietrich & Galina Rudolf & Edda
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.6
+version:  1.0.7
 language: de
 narrator: Deutsch Female
 
@@ -335,8 +335,8 @@ struct Datum {
 
 void print_date(struct Datum day) {
   std::cout << "Person A wurde am "
-            << day.tag << ". "
-            << day.monat << " "
+            << day.tag << "."
+            << day.monat << "."
             << day.jahr << " geboren."
             << "\n";
 }
@@ -350,7 +350,9 @@ int main() {
   geburtstage[2].monat = 9;
   geburtstage[2].jahr = 1905;
 
-  for (long unsigned int i = 0; i < sizeof(geburtstage)/sizeof(struct Datum); i++)
+  long unsigned array_size = sizeof(geburtstage)/sizeof(struct Datum);
+
+  for (long unsigned int i = 0; i < array_size; i++)
     print_date(geburtstage[i]);
 
   return 0;
@@ -660,8 +662,12 @@ class Person {
     }
 
     int zumGeburtstagAnrufen() {
+      // bestimmt das aktuelle Datum in Sekunden seit 1970
       time_t aktuellerZeitstempel = time(NULL);
+      // wandelt den Zeitstempel in eine lokale Zeitstruktur um
       tm* lokaleZeit = localtime(&aktuellerZeitstempel);
+      // vergleicht Tag und Monat aus der Struktur mit dem
+      // aktuellen Datum
       if ((geburtstag.tag == lokaleZeit->tm_mday) &&
           (geburtstag.monat == (lokaleZeit->tm_mon + 1))) {
         std::cout << "\"Weil heute Dein ... \"\n";
