@@ -1,8 +1,8 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Galina Rudolf & Copilot
+author:   Sebastian Zug & André Dietrich & Galina Rudolf & Copilot & Anna
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.6
+version:  1.0.7
 language: de
 narrator: Deutsch Female
 
@@ -490,7 +490,7 @@ int *zeiger6, ganzzahl;
 
 ### Initialisierung
 
-> **Merke:** Zeiger müssen vor der Verwendung initialisiert werden.
+> **Merke:** Zeiger sollten vor der Verwendung initialisiert werden.
 
 Der Zeiger kann initialisiert werden durch die Zuweisung:
 
