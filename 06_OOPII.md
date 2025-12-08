@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 
@@ -13,6 +13,8 @@ import: https://github.com/liascript/CodeRunner
         https://github.com/LiaTemplates/AVR8js/main/README.md#10
         https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
         https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/config.md
+
+link:   style.css
 
 -->
 
@@ -42,47 +44,118 @@ import: https://github.com/liascript/CodeRunner
 
 ---------------------------------------------------------------------
 
+## Reflexion Ihrer Fragen / Rückmeldungen
+
+                          {{0-1}}
+********************************************************************
+
+> Zur Erinnerung ... Wettstreit zur partizipativen Materialentwicklung mit den Informatikern ...
+
+<section class="flex-container">
+
+<!-- class="flex-child" style="min-width: 250px;" -->
+![Weihnachtsmänner](./images/00_Einfuehrung/Weihnachtsmaenner.jpeg "Preis für das aktivste Auditorium")
+
+<div class="flex-child" style="min-width: 250px;">
+
+<!-- data-type="none" -->
+| Format                   | Informatik Studierende  | Nicht-Informatik Studierende |
+|--------------------------|-------------------------|------------------------------|
+| Verbesserungsvorschlag   | 3                       | 2                            |
+| Fragen                   | 2                       | 8                            |
+| generelle Hinweise       | 0                       | 1                            |
+
+</div>
+
+</section>
+
+********************************************************************
+
+                  {{1-2}}
+********************************************************************
+
+_Die Zustimmung (in Prozent) für die Verwendung der künstlichen Intelligenz im Pflegebereich unter der Bevölkerung von Mauritius und Réunion soll vergleichend betrachtet werden. Die Ergebnisse der Umfragen für die Jahre 2010 bis 2020 (je ein Wert pro Jahr) sollen in zwei Arrays erfasst werden (je ein Array pro Insel) und in einem Programm ausgewertet werden._
+
++ _Für beide Inseln soll aus den in Arrays erfassten Werten je ein Mittelwert berechnet werden. Schreiben Sie dazu eine Funktion, die ein Array übergeben bekommt und einen Mittelwert als ein Ergebnis an die main-Funktion zurück liefert. Rufen Sie die Funktion in der main-Funktion für jedes beider Arrays auf und geben Sie die Mittelwerte in der main-Funktion aus._
++ _Schreiben Sie eine weitere Funktion, die die korrespondierenden Werte beider Arrays miteinander vergleicht. Geben Sie für jedes Jahr aus, auf welcher Insel die Zustimmung größer war, bei den gleichen Werte ist eine entsprechende Meldung auszugeben. Rufen Sie die Funktion in der main-Funktion auf._
++ _In der main()-Funktion sind die Werte von der Console einzulesen und in die Arrays zu speichern._
+
+Lösung Beispielaufgabe aus der Klausur
+
+```cpp                     example.cpp
+#include <iostream>
+
+const int YEARS = 11; // von 2010 bis 2020 inkl.
+
+double berechneMittelwert(const double arr[], int size) {
+    double summe = 0.0;
+    for (int i = 0; i < size; ++i) {
+        summe += arr[i];
+    }
+    return summe / size;
+}
+
+void vergleicheZustimmung(const double arrMauritius[], const double arrReunion[], int size) {
+    std::cout << "\nVergleich der Zustimmung pro Jahr:\n";
+    for (int i = 0; i < size; ++i) {
+        int jahr = 2010 + i;
+        std::cout << "Jahr " << jahr << ": ";
+        if (arrMauritius[i] > arrReunion[i]) {
+            std::cout << "Mauritius hat höhere Zustimmung (" << arrMauritius[i] << "% vs " << arrReunion[i] << "%)\n";
+        } else if (arrMauritius[i] < arrReunion[i]) {
+            std::cout << "Réunion hat höhere Zustimmung (" << arrReunion[i] << "% vs " << arrMauritius[i] << "%)\n";
+        } else {
+            std::cout << "Beide Inseln haben gleiche Zustimmung (" << arrMauritius[i] << "%)\n";
+        }
+    }
+}
+
+int main() {
+    //Das wäre die korrekte Lösung - um die Eingaben zu vermeiden habe ich feste Werte eingetragen
+    //
+    // double zustimmungMauritius[YEARS];
+    // double zustimmungReunion[YEARS];
+    //
+    //std::cout << "Geben Sie die Zustimmung in Prozent für Mauritius für die Jahre 2010 bis 2020 ein:\n";
+    //for (int i = 0; i < YEARS; ++i) {
+    //    std::cout << "Jahr " << 2010 + i << ": ";
+    //    std::cin >> zustimmungMauritius[i];
+    //}
+    //
+    //std::cout << "\nGeben Sie die Zustimmung in Prozent für Réunion für die Jahre 2010 bis 2020 ein:\n";
+    //for (int i = 0; i < YEARS; ++i) {
+    //    std::cout << "Jahr " << 2010 + i << ": ";
+    //    std::cin >> zustimmungReunion[i];
+    //}
+
+    // Feste Werte für Mauritius
+    double zustimmungMauritius[YEARS] = {65.5, 67.2, 70.1, 72.3, 74.0, 75.5, 77.8, 80.0, 82.1, 84.3, 85.0}; 
+    // Feste Werte für Réunion       
+    double zustimmungReunion[YEARS] = {60.0, 62.5, 65.0, 68.0, 70.5, 73.0, 75.0, 78.0, 80.0, 83.0, 85.0}; 
+
+    double mittelwertMauritius = berechneMittelwert(zustimmungMauritius, YEARS);
+    double mittelwertReunion = berechneMittelwert(zustimmungReunion, YEARS);
+
+    std::cout << std::fixed << std::setprecision(2); // Ausgabeformat für Prozentwerte
+
+    std::cout << "\nMittelwert der Zustimmung (2010-2020):\n";
+    std::cout << "Mauritius: " << mittelwertMauritius << "%\n";
+    std::cout << "Réunion:   " << mittelwertReunion << "%\n";
+
+    vergleicheZustimmung(zustimmungMauritius, zustimmungReunion, YEARS);
+
+    return 0;
+}
+```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
+
+********************************************************************
+
 ## Rückblick
 
 > Unter einer Klasse (auch Objekttyp genannt) versteht man in der objektorientierten Programmierung ein abstraktes Modell bzw. einen Bauplan für eine Reihe von ähnlichen Objekten.
 
 ![Prinzipdarstellung](images/06_OOPII/KlasseObjektBeispiel.png "Von Binz - Own Creation, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=62707688 ")
-
-> Und was bedeutet das angewandt auf unsere Vision mit dem Mikrocontroller Daten zu erheben?
-
-
-```text @plantUML.png
-@startuml
-ditaa
-
-+-------------------------------------+  +-------------------------------------+
-| API Implementierung des Herstellers |  | Eigene Klassenimplementierungen     |
-| * Led-Klasse                        |  | * Filter-Klasse                     |
-| * Drucksensor-Klasse                |  | * System-Monitor-Klasse             |
-| * Serial-Klasse                     |  | * ....                              |
-| * ....                        cCCB  |  | * ....                      cBFB    |
-+-------------------------------------+  +-------------------------------------+
-               |                                            |
-               |                                            |
-               +-----------------------+--------------------+
-                                       |
-                                       v
-                   +-------------------------------------+
-                   | // Mein Programm                    |
-                   | void setup{                         |
-                   |   RGB_LED rgbLed(red, green, blue); |
-                   | }                                   |
-                   |                                     |
-                   | void setup{                         |
-                   |   rgbLed.setColor(255, 0, 0);       |
-                   | }                      {d}cBFB      |
-                   +-------------------------------------+
-@enduml
-```
-
-Für die Implementierung einer Ausgabe auf dem Display des MXCHIP Boards nutzen wir die Klassenimplementierung der API.
-
-[Link](https://microsoft.github.io/azure-iot-developer-kit/docs/apis/display/)
 
 ## Operatorenüberladung
 
@@ -165,7 +238,7 @@ String a, b;
 String c = a + b;    \\ hier werden mit dem Plus zwei Strings konkateniert
 ```
 
-Operatorüberladung ist Funktionsüberladung, wobei die Funktionen durch eine spezielle Namensgebung gekennzeichnet sind. Diese beginnen mit dem Schlüsselwort `operator`, das von dem Token für den jeweiligen Operator gefolgt wird.
+Operatorüberladung ist Funktionsüberladung, wobei die Funktionen durch eine spezielle Namensgebung gekennzeichnet sind. Diese beginnen mit dem Schlüsselwort `operator`, das vom Symbol für den jeweiligen Operator gefolgt wird.
 
 ```cpp
 class Matrix {
@@ -323,43 +396,6 @@ int main()
 
 Eine besondere Form der Operatorüberladung ist der `<<`, mit dem die Ausgabe auf ein Streamobjekt realsiert werden kann.
 
-```cpp                     streamOperator.cpp
-#include <iostream>
-
-class Student {
-  public:
-    std::string name;
-    int alter;
-    std::string ort;
-
-    Student(const Student&);
-    Student(std::string n);
-    Student(std::string n, int a, std::string o);
-
-    void ausgabeMethode(std::ostream& os); // Deklaration der Methode
-
-    bool operator==(const Student&);
-};
-
-Student::Student(std::string n, int a, std::string o):
-  name{n}, alter{a}, ort{o}
-{}
-
-std::ostream& operator<<(std::ostream& os, const Student& student) {
-  os << student.name << '/' << student.alter << '/' << student.ort;
-  return os;
-}
-
-int main() {
-  Student gustav = Student("Zeuner", 27, "Chemnitz");
-  Student bernhard = Student( "Cotta", 18, "Zillbach");
-  std::cout << gustav << "\n";
-}
-```
-@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
-
-> __Beachte__: Innerhalb des `<<` Operanden wird normalerweise kein finales `"\n"` angehangen, sondern die Kontrolle über Zeilenumbrüche wird den Nutzern überlassen.
-
 Eine umfangreiche Diskussion zur Operatorüberladung finden Sie unter https://www.c-plusplus.net/forum/topic/232010/%C3%BCberladung-von-operatoren-in-c-teil-1/2
 
 Ebenso eine ausführliche Auskunft über Operatoren und ihre Eigenheiten: https://en.cppreference.com/w/cpp/language/operators.html
@@ -397,9 +433,9 @@ int main() {
 
 ### Motivation
 
-> **Merke:** Eine unserer Hauptmotivationen bei der "ordentlichen" Entwicklung von Code ist die Vermeidung von Codedopplungen!
+> **Merke:** Eine unserer Hauptmotivationen bei der "ordentlichen" Entwicklung von Code ist die Vermeidung von Code-Duplikationen!
 
-In unserem Code entstehen Dopplungen, weil bestimmte Variablen oder Memberfunktionen usw. mehrfach für individuelle Klassen Implementiert werden. Dies wäre für viele Szenarien analog der Fall:
+In unserem Code entstehen Dopplungen, weil bestimmte Variablen oder Memberfunktionen usw. mehrfach für individuelle Klassen implementiert werden. Dies wäre für viele Szenarien analog der Fall:
 
 | Basisklasse | abgeleitete Klassen                 | Gemeinsamkeiten                                                  |
 | ----------- | ----------------------------------- | ---------------------------------------------------------------- |
@@ -436,9 +472,9 @@ class Boot: public Fahrzeug {
 };
 ```
 
-Die generellere Klasse `Fahrzeug` liefert einen Bauplan für die spezifischeren, die die Vorgaben weiter ergänzen. Folglich müssen wir uns die Frage stellen, welche Daten oder Funktionalität übergreifend abgebildet werden soll und welche individuell realisiert werden sollen.
+Die allgemeinere Klasse `Fahrzeug` liefert einen Bauplan für die spezielleren Klassen, die diese Vorgaben weiter ergänzen. Folglich müssen wir uns die Frage stellen, welche Daten oder Funktionalität übergreifend abgebildet werden soll und welche individuell realisiert werden sollen.
 
-Dabei können ganze Ketten von Vererbungen entstehen, wenn aus einem sehr allgemeinen Objekt über mehrere Stufen ein spezifischeres Set von Membern umgesetzt wird.
+Dabei können ganze Ketten von Vererbungen entstehen, wenn aus einem sehr allgemeinen Objekt über mehrere Stufen eine spezifischere Zusammenstellung von Membern umgesetzt wird.
 
 ```cpp
 class Fahrzeug {
@@ -528,7 +564,7 @@ public:
       Animal(name, weight), id{id}
     {};
 
-    // Dog spezifische Methoden: bark() und top_speed()
+    // Dog-spezifische Methoden: bark() und top_speed()
     void bark() {
       std::cout << "woof woof\n";
     }
@@ -550,82 +586,9 @@ int main() {
 ```
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o a.out`, `./a.out`)
 
-### Vererbungsattribute
-
-Die Zugriffsattribute `public` und `private` kennen Sie bereits. Damit können wir Elemente unserer Implementierung vor dem Zugriff von außen Schützen.
-
-> **Wiederholungsaufgabe:** Verhindern Sie, dass
->
-> + die Einträge von `id` im Nachhinein geändert werden können und
-> + das diese außerhalb der Klasse sichtbar sind.
->
-> Welche zusätzlichen Methoden benötigen Sie dann?
-
-```cpp                     Animals.cpp
-#include <iostream>
-
-class Animal {
-public:
-  Animal(std::string name, int id):
-    name{name}, id{id}
-  {}
-
-  std::string name;
-  int id;
-};
-
-int main() {
-  Animal fish = Animal("Nemo", 234242);
-  fish.id = 12345;
-  std::cout << fish.id << "\n";
-}
-```
-@LIA.eval(`["main.c"]`, `g++ -Wall main.c -o a.out`, `./a.out`)
-
-                                  {{1}}
-********************************************************************************
-
-Wie wirkt sich das Ganze aber auf die Vererbung aus? Hierbei muss neben dem individuellen Zugriffsattribut auch der Status der Vererbung beachtet werden. Damit ergibt sich dann folgendes Bild:
-
-```c++
-class A {
-public:
-  int x;
-protected:
-  int y;
-private:
-  int z;
-};
-
-class B : public A {
-  // x is public
-  // y is protected
-  // z is not accessible from B
-};
-
-class C : protected A {
-  // x is protected
-  // y is protected
-  // z is not accessible from C
-};
-
-class D : private A {   // 'private' is default for classes
-  // x is private
-  // y is private
-  // z is not accessible from D
-};
-```
-
-Das Zugriffsattribut `protected` spielt nur bei der Vererbung eine Rolle. Innerhalb einer Klasse ist `protected` gleichbedeuted mit `private`. In der Basisklasse ist also ein Member geschützt und nicht von außen zugreifbar. Bei der Vererbung wird der Unterschied zwischen `private` und `protected` deutlich: Während `private` Member in erbenden Klassen nicht direkt verfügbar sind, kann auf die als `protected` deklariert zugegriffen werden.
-
-Entsprechend muss man auch die Vererbungskonstellation berücksichtigen, wenn man festlegen möchte ob ein Member gar nicht (`private`), immer (`public`) oder nur im Vererbungsverlauf verfügbar sein (`protected`) soll.
-
-
-********************************************************************************
-
 ### Überschreiben von Methoden der Basisklasse (Polymorphie)
 
-Die grundsätzlicher Idee bezieht sich auf die Implementierung "eigener" Methoden gleicher Signatur in den abgeleiteten Klassen. Diese implementieren dann das spezifische Verhalten der jeweiligen Objekte.
+Die grundsätzliche Idee bezieht sich auf die Implementierung "eigener" Methoden gleicher Signatur in den abgeleiteten Klassen. Diese implementieren dann das spezifische Verhalten der jeweiligen Objekte.
 
 ```cpp                     Inheritance.cpp
 #include <iostream>
@@ -680,6 +643,8 @@ int main()
 ```
 @LIA.eval(`["main.c"]`, `g++ -Wall main.c -o a.out`, `./a.out`)
 
+## Anwendungsbeispiele
+
 Entwerfen Sie eine Klasse, die das Verhalten einer Ampel mit den notwendigen
 Zuständen modelliert. Welche Methoden sollten zusätzlich in die Klasse aufgenommen werden?
 
@@ -729,6 +694,15 @@ void loop() {
 }
 ```
 @AVR8js.sketch
+
+## Allgemeine C++ Anwendungsbeispiele
+
+Nachfolgend sollen einige Anwendungsbeispiele die Möglichkeiten von C++ in Bezug auf Ihre Fachdisziplinen aufzeigen.
+
++ Messung der Ausbreitung von Schwingungen in Festkörpern
++ Bildanalyse mit OpenCV am Beispiel von Dünnschliffen
+
+> Beide Beispiele finden Sie im Repository unter [Link]()
 
 # Quiz
 ## Operatorenüberladung
