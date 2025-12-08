@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.6
+version:  1.0.7
 language: de
 narrator: Deutsch Female
 
@@ -135,8 +135,6 @@ int main() {
 
     double mittelwertMauritius = berechneMittelwert(zustimmungMauritius, YEARS);
     double mittelwertReunion = berechneMittelwert(zustimmungReunion, YEARS);
-
-    std::cout << std::fixed << std::setprecision(2); // Ausgabeformat für Prozentwerte
 
     std::cout << "\nMittelwert der Zustimmung (2010-2020):\n";
     std::cout << "Mauritius: " << mittelwertMauritius << "%\n";
