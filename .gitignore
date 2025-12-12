@@ -1,3 +1,4 @@
 .vscode/
 a.out
 .DS_STORE
+*.code-workspace
