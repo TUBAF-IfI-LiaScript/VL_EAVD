@@ -1,4 +1,12 @@
+# Visual Studio Code settings
 .vscode/
-a.out
-.DS_STORE
 *.code-workspace
+
+# compiled binary files
+*.exe
+a.out
+main
+
+# auto-generated files on macOS
+.DS_Store
+*.dSYM/
