@@ -30,13 +30,13 @@ import: https://github.com/liascript/CodeRunner
 
 --------------------------------------------------------------------
 
-![Python Logo](https://www.python.org/static/img/python-logo@2x.png "www.python.org")<!-- style="width:30%;" -->
+![Python Logo](https://www.python.org/static/community_logos/python-logo.png "www.python.org")<!-- style="width:30%;" -->
 
 **Fragen an die heutige Veranstaltung ...**
 
 * Warum sollte man andere Programmiersprachen als C++ in Betracht ziehen?
 * Welche Vorteile hat die Sprache **Python**?
-* Wie unterscheidet sich der Syntax von C++?
+* Wie unterscheidet sich die Syntax von C++?
 
 **Beispiel-Literatur:**
 
@@ -444,6 +444,33 @@ y = x**2
 print("y = ", y)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+************************************
+
+                {{2-3}}
+************************************
+
+Ausgabe in Dateien, Lesen aus Dateien
+---------------------------
+
+> `print` kann auch zum Schreiben in Dateien verwendet werden.
+> Zu beachten ist, dass jedes `print`-Statement (normalerweise) eine Zeile schreibt, d.h. den eigentlichen Ausgabetext gefolgt vom Zeilenendezeichen '\n'.
+
+```
+with open('mydata.txt', 'w') as f:  # 'w': open for writing
+    print('Hallo', file=f)          # writes 'Hallo\n'
+    print('Welt', file=f)           # writes 'Welt\n'
+```
+
+> Eine Textdatei kann wie folgt zeilenweise (jede Zeile einschließlich des Zeilenendezeichens '\n') eingelesen werden:
+
+```
+with open('mydata.txt', 'r') as f:  # 'r': open for reading
+    for line in f:
+        print(line)       # print line to the console
+        #print(line[:-1]) # print line without its last character, i.e. '\n'
+```
+
 
 ************************************
 
