@@ -462,6 +462,12 @@ with open('mydata.txt', 'w') as f:  # 'w': open for writing
     print('Welt', file=f)           # writes 'Welt\n'
 ```
 
+Die Funktion `open` öffnet eine Datei, in diesem Fall ('w') zum Schreiben. Existiert die Datei noch nicht, wird die Datei neu erzeugt.
+Das `with`-Statement ist eine Besonderheit von Python und sorgt dafür, dass die Datei nach Ende des eingerückten Blocks, hier also den beiden print-Befehlen, auch wieder geschlossen wird.
+
+Geöffnete Dateien sollten nicht nur der guten Ordnung halber wieder geschlossen werden. Jede offene Datei benötigt etwas Arbeitsspeicher. Wenn sehr viele Dateien offen sind, kann dies den Computer verlangsamen. Sind sehr, sehr, sehr viele Dateien offen, kann es zum "Einfrieren" kommen, d.h. der Computer reagiert überhaupt nicht mehr. Nutzen Sie daher **with open(...) as** zum Öffnen (und automatischen Schließen) von Dateien.
+
+
 > Eine Textdatei kann wie folgt zeilenweise (jede Zeile einschließlich des Zeilenendezeichens '\n') eingelesen werden:
 
 ```
