@@ -1,8 +1,8 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Galina Rudolf
-email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.4
+author:   Sebastian Zug & André Dietrich & Galina Rudolf & Bernhard Jung
+email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de & junginformatik.tu-freiberg.de 
+version:  1.0.5
 language: de
 narrator: Deutsch Female
 
@@ -47,21 +47,28 @@ Dazu kommen `dictionaries` und `sets` als Containertypen.
 
 | Datentyp    | Besonderheit                                    | Syntax                  |
 |-------------|-------------------------------------------------|-------------------------|
-| `list`      | veränderliche Sequenz von (beliebigen) Daten    | `l = ["grün", 1, True]` |
-|             |                                                 | `l[0] = 4`              |
-| `strings`   | Darstellung von Zeichenketten                   | `s="Hello World"`       |
-| `bytes`     | Unveränderbare Folge von Elementen              | `t1 = (1, 2, 3)`        |
-| `bytearray` | Unveränderbare Folge von Elementen              | `t1 = (1, 2, 3)`        |
+| `list`      | *veränderbare* Sequenz von (beliebigen) Daten | `l = ["grün", 1, True]` |
+|             |                                                 | `l[0] = 4` `l.append(1)`      |
+| `strings`   | Darstellung von Zeichenketten, unveränderbar    | `s = "Universität"`       |
+| `bytes`     | Unveränderbare Folge von ASCII-Zeichen              | `b = b"Universitaet"`        |
+| `bytearray` | Unveränderbare Folge von Bytes (Integer 0...255)              | `b_array = bytearray([0, 1, 255])`        |
 | `tupel`     | Unveränderbare Folge von Elementen              | `t1 = (1, 2, 3)`        |
 | `range`     | iterierbare, unveränderbare Folge von Elementen | `r = range(3, 20, 2)`   |
 
 ### Tupel oder Liste?
 
++ Listen sind veränderbar, d.h. Elemente können hinzugefügt, gelöscht oder modifiziert werden.
+
++ Tupel sind dagegen unveränderbar.
+
+
 Warum ein Tupel anstelle einer Liste verwenden?
 
-+ Die Programmausführung ist beim Iterieren eines Tupels schneller als bei der entsprechenden Liste - Dies wird wahrscheinlich nicht auffallen, wenn die Liste oder das Tupel klein ist.
++ Die Programmausführung ist beim Iterieren eines Tupels etwas schneller als bei der entsprechenden Liste - Dies wird wahrscheinlich nicht auffallen, wenn die Liste oder das Tupel klein ist.
 
-+ Der Speicherbedarf eines Tupels fällt in der Regel geringer aus, als bei einer Listendarstellung ein und des selben Inhaltes.
++ Der Speicherbedarf eines Tupels fällt etwas in der Regel geringer aus, als bei einer Listendarstellung ein und des selben Inhaltes
+
+  + weil die zusätzlichen Möglichkeiten zur Veränderung von Listen etwas zusätzlichen Speicherbedarf zur Verwealtung erfordern.
 
 + Manchmal sollen Daten unveränderlich gehalten werden - Tupel schützen die Informationen vor versehentlichen Änderungen.
 
@@ -80,20 +87,20 @@ print("Tupel data size: " + str(sys.getsizeof(a_tuple)))
 ```python  duration.py
 import time
 
-l=list(range(10000001))
-t=tuple(range(10000001))
+l=list(range(1_000_000))
+t=tuple(range(1_000_000))
 
-start = time.time_ns()
-for i in range(len(t)):
-    a = t[i]
-end = time.time_ns()
-print("Tuple duration: ", end - start)
+start = time.perf_counter()
+for item in l:
+    a = item
+end = time.perf_counter()
+print("List duration:  ", end - start, "s")
 
-start = time.time_ns()
-for i in range(len(l)):
-    a = l[i]
-end = time.time_ns()
-print("List duration : ", end - start)
+start = time.perf_counter()
+for item in t:
+    a = item
+end = time.perf_counter()
+print("Tuple duration: ", end - start, "s")
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
@@ -102,29 +109,29 @@ print("List duration : ", end - start)
                             {{0-1}}
 ********************************************************************
 
-Dictionaries werden zur Speicherung von Schlüssel Werte Paaren genutzt. Ein dictionary ist eine Sammlung von geordneten (entsprechend der Reihenfolge der "Einlagerung"), veränderlichen Einträgen, für die Schlüssel werden keine Dublikate zugelassen.
+Dictionaries werden zur Speicherung von Schlüssel Werte Paaren genutzt. Ein dictionary ist eine Sammlung von geordneten (entsprechend der Reihenfolge der "Einlagerung"), veränderlichen Einträgen, für die Schlüssel werden keine Duplikate zugelassen.
 
 > Ein Telefonbuch ist das traditionelle Beispiel für eine Implementierung des Dictonaries. Anhand der Namen werden die Telefonnummern zugeordnet.
 
 <!--style="width: 70%;"-->
 ```ascii
    
- Listen                                     Dictonary
+ Listen: Zugriff auf Elemente über Index       Dictonary: Zugriff auf Elemente über Schlüssel
 
- Index                                      Schlüssel
- +---------------+     +---------+          +---------------+     +---------+
- |       0       |---->| `Hello` |          | `erstes Wort` |---->| `Hello` |
- +---------------+     +---------+          +---------------+     +---------+
+ Index                                        Schlüssel
+ +---------------+     +---------+            +---------------+     +---------+
+ |       0       |---->| `Hello` |            | `erstes Wort` |---->| `Hello` |
+ +---------------+     +---------+            +---------------+     +---------+
 
- +---------------+     +---------+          +---------------+     +---------+
- |       1       |---->| `World` |          | `zweites Wort`|---->| `World` |
- +---------------+     +---------+          +---------------+     +---------+
+ +---------------+     +---------+            +---------------+     +---------+
+ |       1       |---->| `World` |            | `zweites Wort`|---->| `World` |
+ +---------------+     +---------+            +---------------+     +---------+
 
- +---------------+     +---------+          +---------------+     +---------+  
- |       2       |---->| ...     |          | `drittes Wort`|---->| ...     |
- +---------------+     +---------+          +---------------+     +---------+
+ +---------------+     +---------+            +---------------+     +---------+  
+ |       2       |---->| ...     |            | `drittes Wort`|---->| ...     |
+ +---------------+     +---------+            +---------------+     +---------+
 
-       ....                                      ....
+       ....                                        ....
 ```
 
 ********************************************************************
@@ -133,22 +140,27 @@ Dictionaries werden zur Speicherung von Schlüssel Werte Paaren genutzt. Ein dic
 ********************************************************************
 
 ```python  dictonary.py
-capital_city = {"France": "Paris",
-                "Italy": "Rome",
-                "England": "London"}
+capitals = {"France": "Paris",
+            "Italy": "Rome",
+            "UK": "London"}
 
-print(capital_city)
-print("England" in capital_city)
+print(capitals)
 
-capital_city["Germany"] = "Berlin"  # add a single value
+print("UK" in capitals)
 
-examples = {"Belgium": "Bruessels",
-            "Poland": "Warsaw"}
+capitals["Germany"] = "Berlin"  # add a single value
 
-capital_city.update(examples)       # add a single or multiple new entries 
-                                    # contained in a dictionary
-print(capital_city)
+more_capitals = {"Belgium": "Brussels",
+                 "Poland": "Warsaw",}
 
+capitals.update(more_capitals)  # add a single or multiple new entries 
+                                # contained in a dictionary
+print(capitals)
+
+another_dict_with_capitals = {"France": "Paris",  # France is in this dict too!
+                              "Spain": "Madrid",}
+capitals = capitals | another_dict_with_capitals  # union of the two dicts
+print(capitals)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
@@ -193,12 +205,15 @@ print(f"Student  {names[i]} ({matrikel[i]})")
 
 ### Sets
 
-Ein Set ist eine Sammlung, die ungeordnet, unveränderlich (in Bezug auf exisiterende Einträge) und nicht indiziert ist. Kernelement der Idee ist das Verbot von Dublikaten. 
+Ein Set ist eine Sammlung, die ungeordnet, unveränderlich (in Bezug auf exisiterende Einträge) und nicht indiziert ist. Eine Kernidee ist das Verbot von Duplikaten. 
 
 ```python  set.py
-fruits = {"apple", "banana", "cherry", "apple", "apple"}
-
+fruits = {"apple", "banana", "cherry", "lemon", "apple"}
 print(fruits)
+
+vegetables_list = ["carrot", "broccoli", "asparagus", "carrot"]
+vegetables = set(vegetables_list)
+print(vegetables)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
@@ -209,11 +224,33 @@ a = {1,2,3,4,5,6}
 b = {2,4,6,7,8,9}
 even = {2,4,6,8,}
 
-print(8 in a)
+print(8 in a)     # ist 8 Element von a?
 print(even < b)   # ist even eine Teilmenge von b?
 print(a | b)      # Vereinigung von a und b
 print(a & b)      # Schnittmenge von a und b
 print(b - a)      # welche Einträge existieren in b die nicht in a präsent sind
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+Über den Elementen eines Sets ist keine Reihenfolge festgelegt
+
++  ... im Gegensatz zu Sequenz-Datentypen wie Listen, Zeichenketten oder Tupel,   
+   die eine Indizierung unterstützen, d.h. Zugriff auf Elemente mit ganzzahligem Index, z.B. `my_todo_list[3]`
+
++  (nicht nur) bei `print`-Ausgaben ist es jedoch oft wünschenswert, die Elemente 
+   eines Sets in eine feste / vorhersagbare Reihenfolge zu bringen. 
+   Dies kann z.B. mit der builtin-Funktion `sorted()` erfolgen 
+
+```python
+fruits = {"banana", "cherry", "apple", "lemon", "apple"}
+print("Set of fruits:", fruits)  # Reihenfolge der Elemente nicht definiert
+sorted_fruits = sorted(fruits)  # liefert sortierte Liste
+print("List of fruits:", sorted_fruits)  
+
+vegetables = ["carrot", "broccoli", "asparagus", "broccoli", "carrot"]
+unique_vegetables = set(vegetables)  # Duplikate werden entfernt
+sorted_unique_vegetables = sorted(unique_vegetables)
+print("\nVegetables (no duplicates, sorted):", sorted_unique_vegetables)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
@@ -236,7 +273,7 @@ for i in ('a','b','c'):     # Tupel
   print(i, end=",")
 print()
 
-for i in {0:"a", 1:"b"}:    # Dictonary
+for i in {0:"a", 1:"b"}:    # Dictionary
   print(i, end=",")
 print()
   
@@ -253,14 +290,14 @@ for i in {'a','b','c','c'}: # Set
 
 Gegeben sei eine Liste der Studiengangsbezeichnungen für die Studierenden dieser Vorlesung. Leiten Sie aus der Liste ab
 
-1. Wie viele Studierende eingeschrieben sind?
-2. Wie viele Studiengänge in der Veranstaltung präsent sind?
-3. Wie viele Studierende zu den Studiengängen gehören?
+1. wie viele Studierende eingeschrieben sind?
+2. wie viele Studiengänge in der Veranstaltung präsent sind?
+3. wie viele Studierende zu den Studiengängen gehören?
 
 ```python
 # Angabe der Studiengänge der 2022 eingeschriebenen Teilnehmer in der 
 # Veranstaltung
-topics = [
+study_programs = [
   "S-UWE", "S-WIW", "S-GÖ", "S-VT", "S-GÖ", "S-BAF", "S-VT",
   "S-WWT", "S-NT", "S-WIW", "S-ET", "S-WWT", "S-MB", "S-WIW",
   "S-FWK", "F1-INF", "S-WIW", "S-BWL", "S-WIW", "S-MAG",
@@ -278,16 +315,15 @@ topics = [
 ]
 
 # zu 1
-print(len(topics))                          # Länge der Liste
+print(len(study_programs))                  # Länge der Liste
 
 # zu 2
-print(len(set(topics)))                     # Anzahl individueller Einträge
+print(len(set(study_programs)))             # Anzahl Studiengänge
                                             # als Größe des Sets
 
 # zu 3
-print({i:topics.count(i) for i in topics})  # Auftretenshäufigkeit als 
-                                            # "List" Comprehension
-                                            # Dictonary der Einträge
+print({i:study_programs.count(i)            # (Studiengang:Häufigkeit)
+       for i in study_programs})            #  als "Dictonary" Comprehension
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
@@ -303,10 +339,9 @@ _Funktionen sind Unterprogramme, die ein Ausgangsproblem in kleine, möglicherwe
 **Bessere Lesbarkeit**
 
 Der Quellcode eines Programms kann schnell mehrere tausend Zeilen umfassen. Beim
-Linux Kernel sind es sogar über 15 Millionen Zeilen und Windows, das ebenfalls
-zum Großteil in C geschrieben wurde, umfasst schätzungsweise auch mehrere
-Millionen Zeilen. Um dennoch die Lesbarkeit des Programms zu gewährleisten, ist
-die Modularisierung unerlässlich.
+Linux Kernel sind es sogar über 15 Millionen Zeilen und Windows 11, das ebenfalls
+zum Großteil in C geschrieben wurde, umfasst schätzungsweise über 60 Millionen 
+Zeilen. Ein modernes Auto enthält sogar über 100 Millionen Zeilen Code. Um dennoch die Lesbarkeit des Programms zu gewährleisten, ist die Modularisierung unerlässlich.
 
 **Wiederverwendbarkeit**
 
@@ -325,10 +360,9 @@ Darüber hinaus ist es leichter, weitere Funktionalitäten hinzuzufügen oder zu
 In allen 3 Aspekten ist der Vorteil in der Kapselung der Funktionalität zu
 suchen.
 
-
 ### Syntax
 
-> Funktionsdefinition starten immer mit dem Schlüsselwort **def**. Typen für Parameter oder Rückgabewerte müssen nicht angegeben werden! Es gelten die üblichen Einrückungsregeln.
+> Funktionsdefinition starten immer mit dem Schlüsselwort **def**. Typen für Parameter oder Rückgabewerte müssen nicht notwendigerweise angegeben werden! Es gelten die üblichen Einrückungsregeln.
 
 ```python
 def funktionsname(arg1, arg2, ...):
@@ -373,9 +407,12 @@ print(zahl)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
-Der Parameter `zahl` wird als _Call-by-Assignment_ übergeben. Die Zuweisung eines neuen Wertes ändert nicht die gleichnamige Variable außerhalb der Funktion! 
+Der Parameter `zahl` wird als _Call-by-Assignment_ übergeben. Die Zuweisung eines neuen Wertes ändert nicht die gleichnamige Variable außerhalb der Funktion!
 
-`return` erlaubt lediglich einen Rückgabewert. Wie handhaben wir dann die Situation, wenn es mehrere sind?
+`return` erlaubt formal lediglich einen Rückgabewert. Wie handhaben wir dann die Situation, wenn es mehrere sind?
+
++  Python erlaubt nach einem `return` mehrere Rückgabewerte. Die Rückgabe erfolgt
+   formal als *ein* Tupel
 
 ```python
 def sumAndMultiplyTo(n):
@@ -398,12 +435,10 @@ print(y)
 
 ## Typ-Hinweise für Variablen
 
-__Variante 1: Der Interpreter meckert ...__
+__Der Interpreter ignoriert die Typhinweise und führt den Code aus ...__
 
 ```python
-from typing import List
-
-def my_function(numbers: List[int]) -> int:
+def my_function(numbers: list[int]) -> int:
     return sum(numbers)
 
 numbers = [1, 2, 3, 4, 5]
@@ -411,7 +446,7 @@ print(my_function(numbers))
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
-__Variante 2: Die Entwicklungsumgebung meckert ...__
+__Die Entwicklungsumgebung (oder ein externer Type Checker) meckert ...__
 
 ![alt-text](images/09_Python/ScreenshotTypeHinting.png)
 
@@ -426,10 +461,10 @@ Funktion $f(x) = x^2 - a$, so dass für die Nullstelle gilt: $x^2 = a$
 3. Wir beenden die Iteration, wenn $|x_{n+1} - x_n| < \varepsilon$
 
 ```python newton.py
-def square_root(start, a, output=False, eps=0.00000001):
+def square_root(start, a, verbose=False, eps=0.00000001):
   xn = a
   while True:
-    if output: print(xn)
+    if verbose: print(xn)
 
     # x = xn - (xn**2 - a) / (2*xn)
     # oder:
@@ -442,17 +477,16 @@ def square_root(start, a, output=False, eps=0.00000001):
   return x
 
 if __name__ == "__main__":
-  x = float( input("Inital value for x:") )
-  output = input("Show all outputs (y/n)?")
-  if output == 'y':
-    output = True
+  a = float( input("Value for a (to compute sqrt(a)): ") )
+  x = float( input("Inital value for x: ") )
+  verbose_output = input("Show all iterations (y/n)? ")
+  if verbose_output == 'y':
+    verbose_output = True
   else:
-    output = False
-
-  a=4
-  result = square_root(x, a, output)
-  print(f"Zero point of x^2-{a}", result)
-
+    verbose_output = False
+  result = square_root(x, a, verbose_output)
+  print(f"The zero point of y=x^2-{a} is", result)
+  print(f"I.e. the square root of {a} is {result}")
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
@@ -518,7 +552,7 @@ print(grades["Michi"])
 > Wie viele Elemente befinden sich im Set `st`?
 ```python
 st = {"Franz", "Peter", "Franz", "Michi", "Peter"}
-print(st)
+print(len(st))
 ```
 [[3]]
 
@@ -529,7 +563,7 @@ print(st)
 a = {1,2,3,4}
 b = {7,4,6,7}
 
-print(b - a)
+print(sorted(b - a))
 ```
 [[6, 7]]
 <script>
@@ -555,13 +589,14 @@ print(b & a)
 ********************************************************************
 > Wie lautet die Ausgabe dieser Funktion? (Bitte geben Sie die Antwort ohne geschweifte Klammern an)
 ```python
-a = {1,2,3,4}
-b = {7,4,6,7}
+a = {1, 2, 3, 4}
+b = {7, 4, 6, 7}
 
 print(b < a)
 ```
 [( )] True
 [(X)] False
+[( )] {1, 2, 3}
 ********************************************************************
 
 {{4}}
@@ -571,7 +606,7 @@ print(b < a)
 a = {1,2,3,4}
 b = {7,4,6,7}
 
-print(b | a)
+print(sorted(b | a))
 ```
 [[1,2,3,4,6,7]]
 ********************************************************************
