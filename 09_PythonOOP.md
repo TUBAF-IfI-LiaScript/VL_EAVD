@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Galina Rudolf & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de & jung@informatik.tu-freiberg.de
-version:  1.0.8
+version:  1.0.9
 language: de
 narrator: Deutsch Female
 
@@ -14,17 +14,17 @@ import: https://github.com/liascript/CodeRunner
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/09_Datenvisualisierung.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/09_PythonOOP.md)
 
-# Objektorientierung / Visualisierung mit Python
+# Objektorientierung in Python
 
 | Parameter                | Kursinformationen                                                                                                                                              |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Veranstaltung:**       | @config.lecture                                                                                                                                                |
 | **Semester**             | @config.semester                                                                                                                                               |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                              |
-| **Inhalte:**             | `Visualisierung mit Python`                                                                                                                                    |
-| **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/09_Datenvisualisierung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/09_Datenvisualisierung.md) |
+| **Inhalte:**             | `Objektorientierung in Python`                                                                                                                                    |
+| **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/09_PythonOOP.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/09_PythonOOP.md) |
 | **Autoren**              | @author                                                                                                                                                        |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
@@ -35,19 +35,8 @@ import: https://github.com/liascript/CodeRunner
 
 * Wie lassen sich die Konzepte der OOP in Python ausdrücken?
 * Welche spezifischen Einschränkungen gibt es dabei?
-* Welche Grundkonzepte stehen hinter der Programmierung von Grafiken?
-* Wie geht man bei der Erschließung von unbekannten Methoden sinnvoll vor?
 
----------------------------------------------------------------------
-
-Organisatorisches
-========================
-
-+ Wer von Ihnen ist Hörerin oder Hörer der Vorlesung _Einführung in die Informatik_?
-
-+ Bitte bringen Sie sofern möglich Ihre Notebooks zu den Übungen mit. Installieren Sie darauf bereits Python mittels [Anaconda](https://www.anaconda.com/products/distribution).
-
-+ In der letzten Übung wird eine Zusammenfassung der behandelten Inhalte angeboten. Dabei wird insbesondere auf die Objektorientierung unter C++ eingegangen.
+--------------------------------------------------------------------
 
 ## Objektorientierung in Python
 
@@ -57,19 +46,15 @@ Eine kurze Auffrischung Ihrer Erinnerungen zur objektorientierter Programmierung
 
 ```cpp                     Comparison.cpp
 #include <iostream>
+#include <cmath>
 
 class Rectangle {
   private:
     float width, height;
   public:
-    Rectangle(int w, int h){
-        if ((w > 0) & (h > 0)) {
-                this->width = w;
-                this->height = h;
-        }else{
-                this->width = w;
-                this->height = h;
-        }
+    Rectangle(float w, float h){
+        this->width = abs(w);  // ensure non-negative width
+        this->height = abs(h);
     }
     float area() {return width*height;}
     Rectangle operator+=(Rectangle offset) {
@@ -94,12 +79,12 @@ int main () {
 
 | Zeile | Bedeutung                                                                     |
 | ----: | ----------------------------------------------------------------------------- |
-|  3-22 | Definition der Klasse `Rectangle` (Schablone für Daten, Methoden, Operatoren) |
-|     5 | Gekapselte Daten der Klasse, diese sind "von Außen" nicht sichtbar            |
-|     7 | Konstruktor mit Evaluation der übergebenen Parameter                          |
-|    16 | Methode über den Daten der Klasse                                             |
-|    17 | Individueller Operator `+` mit einer spezifischen Bedeutung                   |
-| 25-28 | Generierung von Objekten mittels Konstruktoraufruf und Parameterübergabe      |
+|  4-18 | Definition der Klasse `Rectangle` (Schablone für Daten, Methoden, Operatoren) |
+|     6 | Gekapselte Daten der Klasse, diese sind "von Außen" nicht sichtbar            |
+|     8 | Konstruktor mit Evaluation der übergebenen Parameter                          |
+|    12 | Methode über den Daten der Klasse                                             |
+|    13 | Individueller Operator `+` mit einer spezifischen Bedeutung                   |
+| 21-26 | Generierung von Objekten mittels Konstruktoraufruf und Parameterübergabe, Methoden- und Operatoraufrufe      |
 
 Objektorientierte Programmierung (OOP) ist ein Paradigma, das über die Ideen der Prozeduralen Programmierung hinaus geht. Es definiert Objekte und deren Verhalten. Dabei baut es auf 3 zentralen Grundprinzipien auf:
 
@@ -118,16 +103,18 @@ Objektorientierte Programmierung (OOP) ist ein Paradigma, das über die Ideen de
 Vorteile der objektorientierten Programmierung
 
 - höhere Wartbarkeit durch Abstraktion 
-- Wiederverwendbarkeit von Code (je mehr desto kleiner und allgemeiner die Objekte gehalten sind)
+- Wiederverwendbarkeit von Code (bessere Wiederverwendbarkeit je kleiner und allgemeiner die Objekte gehalten sind)
 - schlanker und übersichtlicher Code durch Vererbung
 
 Warum also nicht immer objektorientiert entwickeln?
 
-OOP verführt ggf. dazu, das eigentliche Problem durch eine aufwändigen Entwurf unnötig zu verkomplizieren. Dabei ist die Entwicklung der Gesamtstruktur eines komplexen Softwareprojektes aus n Objekten eine Kunst und braucht viel Übung! Erst, wenn man entsprechende Regeln kennt und sinnvoll anwendet, zeigen sich die Vorteile des Paradigmas.
+OOP verführt ggf. dazu, das eigentliche Problem durch einen aufwändigen Entwurf unnötig zu verkomplizieren. Dabei ist die Entwicklung der Gesamtstruktur eines komplexen Softwareprojektes aus n Objekten eine Kunst und braucht viel Übung! Erst, wenn man entsprechende Regeln kennt und sinnvoll anwendet, zeigen sich die Vorteile des Paradigmas.
 
 ### ... und in Python?
 
 > **In Python ist alles ein Objekt!**
+
+... z.B. auch Integer und Floats, die in C++ und vielen anderen Programmiersprachen keine Objekte sind
 
 ```python
 import inspect
@@ -155,18 +142,18 @@ class Dog:    # Schlüsselwort "class"
     name = "Bello"
     age = 5
 
-i = Dog()
-print(i.family)
-i.name = "Russel"
-print(i.name)
+d = Dog()
+print(d.family)
+d.name = "Russel"
+print(d.name)
 
-for name, data in inspect.getmembers(i):
+for name, data in inspect.getmembers(d):
     if name == '__builtins__':
         continue
     print(f'{name} - {repr(data)}')
-
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
 
 > Aufgabe: Erläutern Sie die Ausgabe folgenden Codes. Wie müssen wir das Ergebnis interpretieren?
 
@@ -178,24 +165,48 @@ class Dog:
     name = "Bello"
     age = 5
 
-i = Dog()
-print(i)
-j = Dog()
-print(j)
+d1 = Dog()
+print("dog 1:", d1.name, d1.age)
+print(d1)
+d2 = Dog()
+print("dog 2:", d2.name, d2.age)
+print(d2)
 
-print(i == j)
+print(d1 == d2)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
+    {{1}}
+****************************************************************************
+Antworten:
+
++ d1 und d2 sind Objekte vom Typ "Hund" mit gleichen Attributen (Name, Alter, Familie), aber es handelt sich trotzdem um verschiedene Objekte (deren Daten an verschiedenen Stellen im Speicher liegen)
+
++ Gleichheit von zwei Objekten der Klasse Hund wird offenbar nicht als
+  Gleichheit aller Attribute berechnet. 
+  
+  + Man könnte Gleichheit von Hunden auch anders definieren (durch Definition
+    einer speziellen Methode `__eq__`) 
+
+Zudem fällt auf:
+Name und Alter sind für individuelle Hunde üblicherweise verschieden,
+die Familie "Canidae" bezieht sich aber auf alle Hunde.
+Um dies besser zu modellieren, sollte zwischem Instanzvariablen und Klassenvariablen unterschieden werden ...
+
+****************************************************************************
+
+
+
 ### OOP Grundelemente in Python
+
 
 > Frage: Für welche Aufgaben ist der Konstruktor in einer Klasse verantwortlich?
 
 ```python    OOPclass.py
 class Dog:
-    family = "Canidae"
+    family = "Canidae"     # Klassenvariable 
     def __init__(self, name, age):
-        self.name = name
+        self.name = name   # Instanzvariable
         self.age = age
 
 i = Dog("Rex", 5)
@@ -222,7 +233,7 @@ i.makeSound()
 
 > Aufgabe: Schreiben Sie eine Methode, so dass eine Instanz von Dog in Abhängigkeit von ihrem Alter schläft. Recherchieren Sie dazu unter `python delay` die notwendigen Methoden der `time` Klasse.
 
-Wie Sie bereits bei der Inspektion der  `list`, `int` aber auch der `Dog` Klassen gesehen haben, existiert eine Zahl von vordefinierten Funktionen - die sogenannten _dunder Methods_. Das Wort _dunder_ leitet sich von _double underscore_ ab.
+Wie Sie bereits bei der Inspektion der  `list`, `int` aber auch der `Dog` Klasse gesehen haben, existiert eine Zahl von vordefinierten Funktionen - die sogenannten _dunder Methods_. Das Wort _dunder_ leitet sich von _double underscore_ ab.
 
 | Methode      | Typ                  | implementiert                              |
 | ------------ | -------------------- | ------------------------------------------ |
@@ -357,6 +368,53 @@ print(cotta)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
+### Instanzvariablen und Klassenvariablen
+
+Die Unterscheidung zwischen Instanzvariablen und Klassenvariablen wurde schon
+oben bei der Klasse Dog angesprochen. 
+
+Instanzvariablen (oder *Member Variables*) sind typischerweise für jedes Objekt
+unterschiedliche belegt. Beispiele sind etwa der Name von Personen oder Tieren (Alexander, Mary, Fido, ...) oder die Matrikelnummer von Studierenden.
+
+*Klassenvariablen* beziehen dagegen sich auf die Klasse selbst.
+
++  Der Zugriff auf Klassenvariablen sollte nach dem Schema 
+   **Klassenname.Klassenvariable** erfolgen! 
+
+Im folgenden Beispiel wird in der Klasse Student eine Klassenvariable *next\_available\_id* zur automatischen Generierung eindeutiger Martikelnummern
+für neue Studierende genutzt.
+
+```python    ClassVariable.py
+class Person:
+    def __init__(self, fname, lname):
+        self.firstname = fname
+        self.lastname = lname
+  
+    def __str__(self):
+        return f"{self.firstname} {self.lastname}"
+
+class Student(Person):
+
+    next_available_id = 10000
+
+    def __init__(self, fname, lname):
+        super().__init__(fname, lname)
+        self.student_id = Student.next_available_id
+        Student.next_available_id += 1
+
+    def __str__(self):
+        return "Student: " + super().__str__() + f", ID: {self.student_id}"
+
+
+humboldt = Student("Alexander", "Humboldt")
+hegeler = Student("Mary", "Hegeler")
+
+print(humboldt)
+print(hegeler)
+print("Next available student ID:", Student.next_available_id)
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
 ### Python und C++ mit Blick auf OOP Konzepte
 
 * Das Konzept der (Methoden-)Überladung wird in Python nicht nativ unterstützt!
@@ -366,25 +424,36 @@ print(cotta)
 
   * in Python kann es dagegen nur eine Methode mit demselben Namen geben
 
-  * als Konsequenz müssen in Python oft Typ-Überprüfungen der Argumente
-    durchgeführt werden, z.B. mit der builtin-Funktion `isinstance`
+  * als Konsequenz werden in Python oft Funktionen mit relativ vielen Parametern
+    definiert
 
-```python    OOPclass.py
-class Dog:  
-  family = "Canidae"
-  def __init__(self, *args):
-    if len(args)>0:
-      if isinstance(args[0], str):
-        self.name = args[0]
-      else:
-        print("Der Datentyp passt nicht für die Variable Name!")
-    else:
-      self.name = "-"
+    * viele oder oft auch alle Parameter haben Default-Werte, oft `None`
 
-i = Dog()
-print(i.name, i.family)
-j = Dog("Fido")
-print(j.name, j.family)
+    * zusätzliche Typannotationen der Parameter verbessern die Lesbarkeit
+
+    * der Aufruf der Methoden erfolgt dann flexibel über Schlüsselwort-Argumente
+      (d.h. durch explizite Angabe des Parameternames)
+
+```python    Dog.py
+class Dog:
+    def __init__(self, 
+                 name:str | None = None, 
+                 age:int | None = None, 
+                 breed:str | None = None):
+        self.name = name
+        self.age = age
+        self.breed = breed
+
+    def __str__(self):
+        return f"Dog(Name: {self.name}, Age: {self.age}, Breed: {self.breed})"
+
+# Creating Dog instances with different combinations of arguments
+d1 = Dog(name = "Buddy", age=3, breed = "Golden Retriever")
+d2 = Dog(age = 5, name = "Max")
+d3 = Dog(name = "Bella", breed = "Beagle")
+d4 = Dog()
+
+print(d1, d2, d3, d4, sep="\n")
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
@@ -394,15 +463,16 @@ print(j.name, j.family)
 
   * private Methoden _können_ jedoch mittels "Name Mangling" aufgerufen werden
 
-  * private Methoden _sollte_ man trotzdem nicht direkt aufrufen (schlechter Stil)
+  * private Methoden _sollte_ man trotzdem nicht von außerhalb der Klasse aufrufen (schlechter Stil)
 
 ```python    NameMangling.py
 class A:
 	def fun(self):
-		print("This is a public method")
+		print("This is a public method.", 
+			    "It may call a private method but this is none of your business.")
 
 	def __fun(self):
-		print("This is a private method")
+		print("This is a private method.")
 
 obj = A()
 obj.fun()
@@ -411,20 +481,21 @@ obj._A__fun()   # <- Name Mangling  "_classname__function"
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
-### OOP Beispiel
+### OOP Beispiele
 
 Nehmen wir an, dass wir eine Liste von Vornamen erzeugen wollen. Dabei soll sichergestellt werden, dass diese unabhängig von den Eingaben der Bediener vergleichbar sind. Zudem sollen fehlerhafte Eingaben, die zum Beispiel Zahlen enthalten erkannt und gefiltert werden.
 
-```python    newListClass.py
+```python    NameList.py
 class NameList(list):
   def __init__(self):
     super().__init__()
 
   def append(self, item):
-    if isinstance(item, str):
+    if isinstance(item, str) and item.isalpha():
       super().append(item.lower())
     else:
-      print(f"Cannot add {item} to name list! Expected a string.")
+      print(f"Cannot add {item} to name list!",   
+            "Expected a string with alphabetic characters only.")
 
   def uniques(self):
     # return set(self)  # no duplicates, but unordered
@@ -435,7 +506,7 @@ friends.append("Jannes")
 friends.append("linda")
 friends.append("Moritz")
 friends.append("MORITZ")
-friends.append("Linda2")  
+friends.append("Linda2")  # name with digit is not allowed
 friends.append(42)   # wrong data type for name lists
 
 print(friends)
@@ -447,329 +518,105 @@ Dafür schreiben wir eine abgeleitet Listenklasse mit einer eigenen Implementier
 
 > __Aufgabe__ Erweitern Sie die Implementierung auf die `extend()` Methode der Listen.
 
-## Datenvisualisierung
 
-In der vergangenen Woche haben wir Ihre Zugehörigkeit zu verschiedenen Studiengängen eingelesen und analysiert [Link L09](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/09_PythonVertiefung.md#6).
+---
 
-Auf die Frage hin, welche Häufigkeiten dabei auftraten, beantwortete unser Skript mit einem Dictonary:
+Zum Vergleich mit dem einführenden C++-Beispiel hier noch eine Python-Implementierung der [Rectangle-Klasse in C++](#2). Der `+=`-Operator wird hier mittels der dunder-Methode `__iadd__()` (in-place addition) implementiert.
 
-```bash
-{'S-UWE': 1, 'S-WIW': 18, 'S-GÖ': 9, 'S-VT': 2, 'S-BAF': 3, 'S-WWT': 8, 'S-NT': 4, 
- 'S-ET': 3, 'S-MB': 1, 'S-FWK': 3, 'F1-INF': 2, 'S-BWL': 2, 'S-MAG': 4, 'F2-ANCH': 3, 
- 'S-ACW': 4, 'S-GTB': 4, 'S-GBG': 5, 'S-GM': 2, 'S-ERW': 1, 'S-INA': 1, 'S-MORE': 1,
-  'S-CH': 1}
-```
+```python    Rectangle.py
+class Rectangle:
+    def __init__(self, width: float, height: float):
+        self.width = abs(width)  # ensure non-negative width
+        self.height = abs(height)
 
-<!--
-data-title="Teilnehmende Studierende pro Studiengang"
-data-show
--->
-| Studiengang | Anzahl |
-| ----------- | ------ |
-| 'S-UWE'     | 1      |
-| 'S-WIW'     | 18     |
-| 'S-GÖ'      | 9      |
-| 'S-VT'      | 2      |
-| 'S-BAF'     | 3      |
-| 'S-WWT'     | 8      |
-| 'S-NT'      | 4      |
-| 'S-ET'      | 3      |
-| 'S-MB'      | 1      |
-| 'S-FWK'     | 3      |
-| 'F1-INF'    | 2      |
-| 'S-BWL'     | 2      |
-| 'S-MAG'     | 4      |
-| 'F2-ANCH'   | 3      |
-| 'S-ACW'     | 4      |
-| 'S-GTB'     | 4      |
-| 'S-GBG'     | 5      |
-| 'S-GM'      | 2      |
-| 'S-ERW'     | 1      |
-| 'S-INA'     | 1      |
-| 'S-MORE'    | 1      |
-| 'S-CH'      | 1      |
+    def area(self):
+        return self.width * self.height
 
+    def __iadd__(self, offset):
+        ratio = (offset.area() + self.area()) / self.area()
+        self.width = ratio * self.width
+        return self
 
-Die textbasierte Ausgabe ist nur gering geeignet, um einen raschen Überblick zu erlangen. Entsprechend suchen wir nach einer grafischen Ausgabemöglichkeit für unsere Python Skripte.
-
-### Python Visualisierungstools
-
-Python stellt eine Vielzahl von Paketen für die Visualisierung von Dateninhalten bereit. Diese zielen auf unterschiedliche Visionen oder Features:
-
-+ einfache Verwendbarkeit
-+ große Bandbreite von Diagrammarten und Adaptionsmöglichkeiten
-+ interaktive Diagramme 
-+ Vielzahl von Exportschnittstellen
-
-| Package    | Link                                | Besonderheiten                                             |
-| ---------- | ----------------------------------- | ---------------------------------------------------------- |
-| plotly     | [Link](https://plotly.com/)         | Fokus auf interaktive Diagramme eingebettetet in Webseiten |
-| seaborn    | [Link](https://seaborn.pydata.org/) | Leistungsfähige Darstellung von statistischen Daten         |
-| matplotlib | [Link](https://matplotlib.org/)     |                                                            |
-| ...        |                                     |                                                            |
-
-### Matplotlib Grundlagen
-
-```python      Beispiel.py
-import matplotlib.pyplot as plt
-
-a = [5,6,7,9,12]
-b =[x**2 for x in a]   # List Comprehension
-plt.plot(a, b)
-
-#plt.show()  
-plt.savefig('foo.png') # notwendig für die Ausgabe in LiaScript
+if __name__ == "__main__":
+    rect_a = Rectangle(3, 4)
+    rect_b = Rectangle(1, 3)
+    print(f"Fläche a : {rect_a.area()}")
+    print(f"Fläche b : {rect_b.area()}")
+    rect_a += rect_b
+    print(f"Summe    : {rect_a.area()}")
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
-| Anpassung                      | API                                                                                      |                                                   |
-| ------------------------------ | ---------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| Linientyp der Datendarstellung | [pyplot.plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html)     | `plt.plot(a, b, 'ro:')`                           |
-| Achsenlabel hinzufügen         | [pyplot.xlabel](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.xlabel.html) | `plt.xlabel('my data', fontsize=14, color='red')` |
-| Titel einfügen                 |  [pyplot.title](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.title.html)                                                                                       | `plt.title(r'$\sigma_i=15$')`                     |
-| Gitter einfügen                |  [pyplot.grid](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.grid.html)                                                                                        | `plt.grid()`                                      |
-| Legende                        |  [pyplot.legend](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html)                                                                                        | `plt.plot(a, b, 'ro:', label="Data")`             |
-|                                |                                                                                          | `plt.legend()`                                    |
-| Speichern                      |  [pyplot.savefig](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html)                                                                                        | `plt.savefig('foo.png') `                         |
+### Dataclasses
 
-![Matplot](images/10_Datenvisualisierung/UbersichtGrafiken.png "Tutorial von Rizky Maulana Nurhidayat auf [medium](https://towardsdatascience.com/visualizations-with-matplotlib-part-1-c9651008b6b8) ")
+Dataclasses, die es seit Python 3.7 gibt, ermöglichen eine einfache und komfortable Definition von Klassen, die hauptsächlich der Datenhaltung dienen, aber deren Verhalten (durch Definition von Methoden) weniger wichtig ist.
+Sie sind in etwa vergleichbar zu `struct`s in C++.
 
-Weiter Tutorials sind zum Beispiel unter 
+Für Dataclasses wird viel "Boilerplate-Code" automatisch generiert, z.B. die Methoden `__init__()`, `__eq__()` und  `__repr__()`. 
 
-!?[MatplotlibTutorial](https://www.youtube.com/watch?v=UO98lJQ3QGI)
+Die automatische Code-Generierung erfolgt durch einen *Dekorator* `@dataclass`.
 
+*Felder* von Datenklassen werden über Typannotationen sowie optionalen Default-Werten definiert (man verwendet den Begriff *Feld* auch, weil die Felder
+syntaktisch eher wie Klassenvariablen aussehen, durch den Dekorator aber zu Instanzvariablen gemacht werden; durch den anderen Begriff wird es weniger verwirrend).
 
-### Matplotlib Beispiele
+```python    dataclass_example.py
+from dataclasses import dataclass
 
-```python      MultipleDiagrams.py
-import numpy as np
-import matplotlib.pyplot as plt
-
-N = 21
-x = np.linspace(0, 10, 11)
-y = [3.9, 4.4, 10.8, 10.3, 11.2, 13.1, 14.1,  9.9, 13.9, 15.1, 12.5]
-
-# fit a linear curve an estimate its y-values and their error.
-a, b = np.polyfit(x, y, deg=1)
-y_est = a * x + b
-y_err = x.std() * np.sqrt(1/len(x) +
-                          (x - x.mean())**2 / np.sum((x - x.mean())**2))
-
-fig, ax = plt.subplots()
-ax.plot(x, y_est, '-')
-ax.fill_between(x, y_est - y_err, y_est + y_err, alpha=0.2)
-ax.plot(x, y, 'o', color='tab:brown')
-
-#plt.show()  
-plt.savefig('foo.png') # notwendig für die Ausgabe in LiaScript
-```
-@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
-
-
-```python      MultipleDiagrams.py
-import numpy as np
-import matplotlib.pyplot as plt
-
-def f(t):
-    return np.exp(-t) * np.cos(2*np.pi*t)
-
-t1 = np.arange(0.0, 5.0, 0.1)
-t2 = np.arange(0.0, 5.0, 0.02)
-
-plt.figure()
-plt.subplot(211)
-plt.plot(t1, f(t1), 'bo', t2, f(t2), 'k')
-
-plt.subplot(212)
-plt.plot(t2, np.cos(2*np.pi*t2), 'r--')
-#plt.show()  
-plt.savefig('foo.png') # notwendig für die Ausgabe in LiaScript
-```
-@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
-
-
-## Beispiel der Woche
-
-```python      Beispiel.py
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.fft import fft, fftfreq
-
-# Number of sample points
-N = 600
-# sample spacing
-T = 1.0 / 800.0
-x = np.linspace(0.0, N*T, N, endpoint=False)
-y = np.sin(50.0 * 2.0*np.pi*x) + 0.5*np.sin(80.0 * 2.0*np.pi*x)
-yf = fft(y)
-xf = fftfreq(N, T)[:N//2]
-
-fig, axs = plt.subplots(2, 1)
-axs[0].plot(x, y)
-axs[1].plot(xf, 2.0/N * np.abs(yf[0:N//2]))
-plt.grid()
-
-#plt.show()
-plt.savefig('foo.png')
-```
-@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
-
-# Quiz
-## Objektorientierung in Python
-
-> Für welche der genannten Grundprinzipien der objektorientierten Programmierung treffen folgende Aussagen zu:
-
-[[Kapselung]  [Vererbung] [Polymorphie] ]
-[( )          ( )         (X)           ] Welche konkrete Implementierung der Methode aufgerufen wird, hängt davon ab mit welchem konkreten Objekt sie aufrufen wird.
-[(X)          ( )         ( )           ] Objekte schützen ihre Daten und Methoden sofern diese nicht als "öffentlich" deklariert sind.
-[( )          (X)         ( )           ] Objekte können ihre Daten und Methoden an andere, spezielle Objekte weitergeben.
-
-### Klassen in Python
-> Mit welchem Schlüsselwort beginnen Klassendefinitionen in Python?
-[[class]]
-
-{{1}}
-********************************************************************
-> Wodurch muss `[_____]` ersetzt werden, um den Nachnamen von Student `neuer` auszugeben?
-```python
-class Student:
-    lastName = "Neuer"
-    firstName = "Markus"
-    age = 20
-
-neuer = Student()
-print([_____])
-```
-[[neuer.lastName]]
-********************************************************************
-
-### OOP Grundelemente in Python
-> Wie lauten die Ausgaben foldender Programme?
-```python
-class Player:
-    health = 100
-    exp = 10
-
-    def __init__(self, name, level):
-        self.name = name
-        self.level = level
-
-
-p1 = Player("Peter", 2)
-p2 = Player("Frank", 6)
-print(p2.level, p2.exp)
-```
-[[6 10]]
-
-{{1}}
-********************************************************************
-```python
-class Player:
-    health = 100
-    exp = 10
-
-    def __init__(self, name, level):
-        self.name = name
-        self.level = level
-
-    def level_up(self):
-        self.level += 1
-        self.exp = 0
-
-
-p1 = Player("Peter", 2)
-p2 = Player("Frank", 6)
-p2.level_up()
-print(p2.level, p2.exp)
-```
-[[7 0]]
-********************************************************************
-
-{{2}}
-********************************************************************
-> Welche dieser Methoden ist eine *dunder Method*?
-
-[(X)] `__sum__`
-[( )] `sum`
-[( )] `_sum`
-[( )] `_sum_`
-********************************************************************
-
-### Kapselung
-> Welche der im folgenden Code aufgeführten Methoden und Variablen sind öffentlich und welche privat?
-```python
+@dataclass
 class Dog:
-  def bark(self):
-      print("woof")
+    name: str | None = None  # field 'name' with default value None
+    age: int | None = None 
+    breed: str | None = None
 
-  def __bark_loud(self):
-    print("WOOF!")
+d1 = Dog(name = "Buddy", age=3, breed = "Golden Retriever")
+d2 = Dog(age = 5, name = "Max")
+d3 = Dog(name = "Bella", breed = "Beagle")
+d4 = Dog(breed = "Beagle", name = "Bella")
+d5 = Dog()
 
-Fifi = Dog()
-Fifi.bark_loud()
+print(d1, d2, d3, d4, d5, sep="\n")
+print("Is d3 equal to d4?", d3 == d4)  # True, as the field values are the same
 ```
-[[`bark()`] [`__bark_loud()`] ]
-[(X)      ( )             ] öffentlich
-[( )      (X)             ] privat
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
-{{1}}
-********************************************************************
-> Was ist die Ausgabe des oben gezeigten Codes?
-[( )] woof
-[( )] WOOF!
-[(X)] Das Programm wird mit einem Error abgebrochen
-********************************************************************
+Hinter den Kulissen erzeugt der Dekorator u.a. automatisch einen Konstruktor:
 
-{{2}}
-********************************************************************
-> Ist es in Python grundsätzlich möglich auch private Methoden auszuführen?
-[(X)] Ja
-[( )] Nein
+```
+"Automatically generated __init__ method by @dataclass:"
+    def __init__(self, 
+                 name: str | None = None, 
+                 age: int | None = None, 
+                 breed: str | None = None):
+        self.name = name
+        self.age = age
+        self.breed = breed
+```
 
-> Wordurch muss `[_____]` ersetzt werden, um die Methode `__bark_loud()` auszuführen?
-```python
+Interessant an Dataclasses ist zudem, dass Instanzen entweder als veränderliche (Default) oder unveränderliche Objekte definiert werden können.
+
++ Erweitert man den Dekorator um den Parameter `frozen=True`, dann sind die
+  Instanzen unveränderlich
+
++ Ein Vorteil von unveränderlichen Objekten ist, dass sie Elemente von Sets
+  oder Schlüssel von Dictionaries sein können.
+
+
+```python    frozen_dataclass.py
+from dataclasses import dataclass
+
+@dataclass(frozen=True)  # default: frozen=False
 class Dog:
-  def bark(self):
-      print("woof")
+    name: str | None = None  # field 'name' with default value None
+    age: int | None = None 
+    breed: str | None = None
+    
+d1 = Dog(name = "Buddy", age=3, breed = "Golden Retriever")
+d2 = Dog(name = "Bella", breed = "Beagle")
+d3 = Dog(breed = "Beagle", name = "Bella")
 
-  def __bark_loud(self):
-    print("WOOF!")
-
-Fifi = Dog()
-Fifi.[_____]
+dogs = {d1, d2, d3}  # d2 and d3 are considered equal
+print(dogs)
 ```
-[[_Dog__bark_loud()]]
-********************************************************************
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
-### Vererbung
-> Wodurch muss `[_____]` ersetzt werden, um eine neue Klasse `Auto` zu erstellen, die das Verhalten der Klasse `Fahrzeug` erbt?
-```python
-class Fahrzeug:
-  def __init__(self, ps):
-    self.ps = ps
-
-class [_____]:
-   pass
-
-a1 = Auto(70)
-```
-[[Auto(Fahrzeug)]]
-
-## Datenvisualisierung
-### Matplotlib Grundlagen
-> Wodurch muss `[_____]` ersetzt werden, um einen plot mit dem Jahr auf der X-Achse und der Anzahl der Tassen Tee auf der Y-Achse zu erstellen?
-```python
-import matplotlib.pyplot as plt
-
-year = [2000, 2001, 2002, 2003, 2004]
-ttg =[232, 533, 433, 410, 450] # Tassen Tee getrunken
-plt.[_____]
-
-plt.show()
-```
-[[plot(year, ttg)]]
-<script>
-let input = "@input".trim().toLowerCase()
-
-input == "plot(year, ttg)" || input == "plot(year,ttg)"
-</script>
+> __Aufgabe__ Definieren Sie ein Dictionary, in welchem Instanzen der Dataclass Dog als Schlüssel verwendet werden. Experimentieren Sie dabei mit den beiden möglichen Werten den Parameter `frozen` des Dekorators (False bzw. True).

@@ -61,7 +61,6 @@ Dazu kommen `dictionaries` und `sets` als Containertypen.
 
 + Tupel sind dagegen unveränderbar.
 
-
 Warum ein Tupel anstelle einer Liste verwenden?
 
 + Die Programmausführung ist beim Iterieren eines Tupels etwas schneller als bei der entsprechenden Liste - Dies wird wahrscheinlich nicht auffallen, wenn die Liste oder das Tupel klein ist.
@@ -71,6 +70,9 @@ Warum ein Tupel anstelle einer Liste verwenden?
   + weil die zusätzlichen Möglichkeiten zur Veränderung von Listen etwas zusätzlichen Speicherbedarf zur Verwealtung erfordern.
 
 + Manchmal sollen Daten unveränderlich gehalten werden - Tupel schützen die Informationen vor versehentlichen Änderungen.
+
++ Als Elemente von Sets und Schlüssel von Dictionaries (s.u.) sind nur unveränderliche Objekte erlaubt, also z.B. Tupel aber keine Listen.
+
 
 ```python  size.py
 import sys
@@ -139,7 +141,7 @@ Dictionaries werden zur Speicherung von Schlüssel Werte Paaren genutzt. Ein dic
                             {{1-2}}
 ********************************************************************
 
-```python  dictonary.py
+```python  dictionary.py
 capitals = {"France": "Paris",
             "Italy": "Rome",
             "UK": "London"}

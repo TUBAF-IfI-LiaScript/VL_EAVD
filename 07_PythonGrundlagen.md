@@ -520,6 +520,7 @@ Eine Umbenennung ist alternativ auch möglich:
 import math as m
 print(m.pi)
 ```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 Im obigen Beispiel ist uns eine numerische Ungenaugikeit von Python
 (und anderen Programmiersprachen) aufgefallen: der Sinus von π ist nicht exakt 0!
@@ -743,7 +744,7 @@ print(squares)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
-_List Comprehensions_ werden oft als "pythonischer" beschrieben als loops ( oder `map()`). Sie sind auch aussagekräftiger als Schleifen, was bedeutet, dass sie einfacher zu lesen und zu verstehen sind. Schleifen entwickeln einen Iterationsprozess, während Sie sich mit einem _List Comprehensions_ stattdessen auf das konzentrieren, was Sie in die Liste umsetzen wollen.
+_List Comprehensions_ werden oft als "pythonischer" beschrieben als loops ( oder `map()`). Sie sind auch aussagekräftiger als Schleifen, was bedeutet, dass sie einfacher zu lesen und zu verstehen sind. Schleifen entwickeln einen Iterationsprozess, während Sie sich mit _List Comprehensions_ stattdessen auf das konzentrieren, was Sie in die Liste umsetzen wollen.
 
 Beispiele:
 
