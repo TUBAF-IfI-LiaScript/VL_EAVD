@@ -620,3 +620,152 @@ print(dogs)
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 > __Aufgabe__ Definieren Sie ein Dictionary, in welchem Instanzen der Dataclass Dog als Schlüssel verwendet werden. Experimentieren Sie dabei mit den beiden möglichen Werten den Parameter `frozen` des Dekorators (False bzw. True).
+
+
+# Quiz
+## Objektorientierung in Python
+
+> Für welche der genannten Grundprinzipien der objektorientierten Programmierung treffen folgende Aussagen zu:
+
+[[Kapselung]  [Vererbung] [Polymorphie] ]
+[( )          ( )         (X)           ] Welche konkrete Implementierung der Methode aufgerufen wird, hängt davon ab mit welchem konkreten Objekt sie aufrufen wird.
+[(X)          ( )         ( )           ] Objekte schützen ihre Daten und Methoden sofern diese nicht als "öffentlich" deklariert sind.
+[( )          (X)         ( )           ] Objekte können ihre Daten und Methoden an andere, spezielle Objekte weitergeben.
+
+### Klassen in Python
+> Mit welchem Schlüsselwort beginnen Klassendefinitionen in Python?
+[[class]]
+
+{{1}}
+********************************************************************
+> Wodurch muss `[_____]` ersetzt werden, um den Nachnamen von Student `neuer` auszugeben?
+```python
+class Student:
+    lastName = "Neuer"
+    firstName = "Markus"
+    age = 20
+
+neuer = Student()
+print([_____])
+```
+[[neuer.lastName]]
+********************************************************************
+
+### OOP Grundelemente in Python
+> Wie lauten die Ausgaben foldender Programme?
+```python
+class Player:
+    max_health = 100
+    max_experience = 10
+
+    def __init__(self, name, level):
+        self.name = name
+        self.level = level
+        self.health = Player.max_health
+        self.experience = Player.max_experience
+
+p1 = Player("Peter", 2)
+p2 = Player("Frank", 6)
+print(p2.level, p2.experience)
+```
+[[6 10]]
+
+{{1}}
+********************************************************************
+```python
+class Player:
+    max_health = 100
+    max_experience = 10
+
+    def __init__(self, name, level):
+        self.name = name
+        self.level = level
+        self.health = Player.max_health
+        self.experience = Player.max_experience
+
+    def level_up(self):
+        self.level += 1
+        self.health = Player.max_health
+        self.experience = 1
+
+p1 = Player("Peter", 2)
+p2 = Player("Frank", 6)
+p2.level_up()
+print(p2.level, p2.experience)
+```
+[[7 1]]
+********************************************************************
+
+{{2}}
+********************************************************************
+> Welche dieser Methoden ist eine *dunder Method*?
+
+[(X)] `__sum__`
+[( )] `sum`
+[( )] `_sum`
+[( )] `_sum_`
+********************************************************************
+
+### Kapselung
+> Welche der im folgenden Code aufgeführten Methoden und Variablen sind öffentlich und welche privat?
+```python
+class Dog:
+  def bark(self):
+      print("woof")
+
+  def __bark_loud(self):
+    print("WOOF!")
+
+Fifi = Dog()
+Fifi.bark_loud()
+```
+[[`bark()`] [`__bark_loud()`] ]
+[(X)      ( )             ] öffentlich
+[( )      (X)             ] privat
+
+{{1}}
+********************************************************************
+> Was ist die Ausgabe des oben gezeigten Codes?
+[( )] woof
+[( )] WOOF!
+[(X)] Das Programm wird mit einem Error abgebrochen
+********************************************************************
+
+{{2}}
+********************************************************************
+> Ist es in Python grundsätzlich möglich auch private Methoden auszuführen?
+[(X)] Ja
+[( )] Nein
+
+> Wordurch muss `[_____]` ersetzt werden, um die Ausgabe `WOOF!` zu erzeugen?
+```python
+class Dog:
+  
+  def bark(self):
+      [_____]
+
+  def __bark_subtle(self):
+    print("woof")
+
+  def __bark_loud(self):
+    print("WOOF!")
+
+Fifi = Dog()
+Fifi.bark()
+```
+[[self.__bark_loud()]]
+********************************************************************
+
+### Vererbung
+> Wodurch muss `[_____]` ersetzt werden, um eine neue Klasse `Auto` zu erstellen, die das Verhalten der Klasse `Fahrzeug` erbt?
+```python
+class Fahrzeug:
+  def __init__(self, ps):
+    self.ps = ps
+
+class [_____]:
+   pass
+
+a1 = Auto(70)
+```
+[[Auto(Fahrzeug)]]
