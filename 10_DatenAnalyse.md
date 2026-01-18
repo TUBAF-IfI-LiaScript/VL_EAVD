@@ -1,8 +1,8 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Galina Rudolf
-email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de
-version:  1.0.7
+author:   Sebastian Zug & André Dietrich & Galina Rudolf & Bernhard Jung
+email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@ovgu.de & Galina.Rudolf@informatik.tu-freiberg.de & jung@informatik.tu-freiberg.de
+version:  1.0.0
 language: de
 narrator: Deutsch Female
 
@@ -34,13 +34,61 @@ import: https://github.com/liascript/CodeRunner
 
 **Fragen an die heutige Veranstaltung ...**
 
+* Wie unterstützt das `numpy` Paket das Arbeiten mit großen wissenschaftlichen Datensätzen?
 * Welche Datenformate sind für den Daten Austausch zwischen Mikrocontroller und Python Script üblich?
 * Wie unterstützt das `pandas` Paket die wissenschaftliche Analyse von Datensätzen?
 * Wie ändert sich der Analyseprozess verglichen mit der Verwendung einer Tabellenkalkulation?
 
+## NumPy
+
+NumPy (Numerical Python) ist eine grundlegende Bibliothek im Python-Ökosystem.
+
+NumPy bietet leistungsstarke Werkzeuge für die effiziente Arbeit mit Arrays und Matrizen. 
+
+Stellen Sie es sich als Pythons Methode vor, mathematische Operationen auf großen Datensätzen schnell und effektiv durchzuführen.
+
+NumPy wird insbesondere bei der Datenanalyse, beim wissenschaftlichem Rechnen, der Bildverarbeitung und maschinellem Lernen verwendet, oft im Zusammenspiel mit weiteren Bibliotheken wie `pandas` und `matplotlib`.
+
+> NumPy ist nicht Teil von Pythons Standardbibliothek und muss daher nachinstalliert werden. Hierfür gibt es verschiedene Methoden, die in den Übungen näher erklärt werden.
+
+### NumPy: Effiziente, n-dimensionale Arrays
+
+Ein wesentlicher Grund für die Existenz von NumPy liegt in der Unterstützung effizienter mathematischer Operationen auf n-dimensionalen Arrays (1D-Vektoren, 2D-Matrizen, nD-Tensoren).
+
+- *N-dimensionale Arrays (ndarray)*: NumPy Arrays sind wesentlich effizienter als Python-Listen bei der Durchführung mathematischer Operationen auf großen Datenmengen. Python-Listen können beliebige Datentypen enthalten, wodurch sie für numerische Berechnungen weniger optimiert sind.
+
+- *Effiziente Implementierung in C*: NumPy ist in C implementiert und nutzt auch C-Datentypen für Zahlen wie `uint8` oder `float32`. In Python sind `int` und `float` dagegen keine primitiven Datentypen sondern vollwertige Objekte, was sie oft komfortabler, aber auch weniger effizient macht.
+
+- *Elementweise Operationen*: NumPy ermöglicht mathematische Operation auf ganzen Arrays, ohne dass explizit Schleifen durchlaufen werden müssen (z.B. `for`-Schleifen). Dies nennt man auch *Vektorisierung*.
+
+```python  numpy_arrays.py
+import numpy as np
+
+# Ansatz mit Python Listen (langsam)
+list1 = [1, 2, 3]
+list2 = [4, 5, 6]
+result_list = []
+for i in range(len(list1)):
+    result_list.append(list1[i] + list2[i])
+print(result_list)  # Output: [5, 7, 9]
+
+# Ansatz mit NumPy Arrays (schnell)
+array1 = np.array([1, 2, 3])
+array2 = np.array([4, 5, 6])
+result_array = array1 + array2  # Elementweises Addieren!
+print(result_array)  # Output: [5 7 9]
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+NumPy wird näher in zwei einführenden *Jupyther Notebooks* erläutert (im Verzeichnis notebooks):
+
+- Einführung in Numpy [numpy\_01\_intro.ipynb](notebooks/numpy_01_intro.ipynb)
+- Bildverarbeitung mit Numpy [numpy\_02\_image_processing.ipynb](notebooks/numpy_02_image_processing.ipynb)
+
+
 ---------------------------------------------------------------------
 
-## Motivation
+## Motivation: Datenanalyse mit Python / Pandas
 
                            {{0-1}}
 ****************************************************************************
@@ -60,12 +108,11 @@ style="width: 100%; min-width: 620px; max-width: 920px;"
                             Datenlogger                    Speichermedium         Auswertung
                             +------------------------+
                             |                        |     +---------------+
-                       +    |         +-----------+  |  +->| Speicherkarte |      +-------------------+ 
-       Umgebung-       |\   | Sensor- | Controll- |  |  |  +---------------+      | Einlesen          |  
-       phänomene       | +--|-------->| Software  |--|--+                         | Analyse           |
-                       |/   | signale |           |  |  |  +---------------+      | Diagrammerzeugung |
-                       +    |         +-----------+  |  +->| Datenserver   |      | ...               |   
-                            |                        |     +---------------+      +-------------------+
+                       +    | Sensor- | Controll- |  |  +->| Speicherkarte |      +-------------------+ 
+       Umgebung-       |\   |-------->| Software  |--|--+                         | Einlesen          |  
+       phänomene       | +--| signale |           |  |  |  +---------------+      | Analyse           |
+                       |/   |         +-----------+  |  +->| Datenserver   |      | Diagrammerzeugung |
+                       +    |                        |     +---------------+      +-------------------+
                             |                        |                             ^ 
                             +------------------------+     +--------------+        |          .....
                                                            | ...          |\       | .... ....     .
@@ -96,7 +143,7 @@ void loop() {
     Serial.printf("; %d; %d; %d\n",xAxesData[0],xAxesData[1],xAxesData[2]);
                                  //Ausgabe der Daten via Serielle 
                                  //Schnittstelle
-    delay(10);
+    delay(10);                   //10ms warten
 }
 ```
 
@@ -111,9 +158,9 @@ Für die Konfiguration des Zeitstempels im Visual Studio Code wurde der Paramete
 
 Die Daten liegen als sogenannten _Comma-separated values_ in einer csv Datei vor. Sie sind eine bequeme Möglichkeit, Daten aus Tabellenkalkulationen und Datenbanken zu exportieren und sie in andere Programme zu importieren oder zu verwenden. CSV-Dateien lassen sich sehr einfach programmatisch bearbeiten. Jede Sprache, die die Eingabe von Textdateien und die Manipulation von Zeichenketten unterstützt (wie Python), kann direkt mit CSV-Dateien arbeiten. Nachteilig ist, dass alle Inhalte als Text angelegt werden und damit verschwenderisch mit dem Speicher umgehen.
 
-Als Trenner wurde hier das `;` verwendet. 
+Als Trenner wurde hier das `;` verwendet.
 
-```text 
+```text
 09:28:52.419; -7; -8; 1016
 09:28:52.430; -9; -8; 1017
 09:28:52.441; -9; -8; 1017
@@ -140,7 +187,7 @@ Als Trenner wurde hier das `;` verwendet.
 
 ### Lösungsansatz 1: Office Tabellenkalkulation
 
-```text data.csv 
+```text data.csv
 timestamp;X;Y;Z
 09:28:52.419; -7; -8; 1016
 09:28:52.430; -9; -8; 1017
@@ -148,20 +195,25 @@ timestamp;X;Y;Z
 09:28:52.452; -9; -8; 1017
 ```
 
-Nutzen Sie die Importfunktion für csv-Dateien
+Nutzen Sie die Importfunktion für csv-Dateien Ihres Office-Programs (Excel, LibreOffice Calc, ...)
 
 ### Lösungsansatz 2: Python nativ
 
 Python kann die Textdateien umittelbar einlesen
 
-1. Öffnen der Datei für das Lesen 
-2. Zeilenweises einlesen der Daten 
+1. Öffnen der Datei für das Lesen
+2. Zeilenweises einlesen der Daten
 
-    + Erfassen der Spaltennamen aus der ersten Zeile
-    + Zerlegen anhand des `delimiter` (hier `;`)
-    + Ablegen in einer vorbereiteten Datenstruktur  
+    * Erfassen der Spaltennamen aus der ersten Zeile
+    * Zerlegen anhand des `delimiter` (hier `;`)
+    * Ablegen in einer vorbereiteten Datenstruktur  
 
-3. Schließen der Datei 
+3. Schließen der Datei
+
+   * durch `open()` ... `close()`
+   * oder besser durch Verwendung von `with open() as`,
+     was Datei automatisch schließt, siehe Beispiel unten.
+
 4. Analyse der Daten
 
 Diese Schrittfolge können wir mit dem Standardpaket [csv](https://docs.python.org/3/library/csv.html) etwas vereinfachen.
@@ -185,8 +237,6 @@ with open('data.csv', mode='r') as csv_file:
 print(f"{len(list_of_dict)} Datensätze gelesen!")
 for row in list_of_dict:
 	print(row)
-
-csv_file.close()
 ```
 @LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
 
@@ -208,25 +258,25 @@ Pandas kennt zwei grundsätzliche Datentypen [Series]() und [DataFrame]()
 
 |                   | Pandas Series                                                                 | Pandas DataFrame                                                                                      |
 | ----------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Format            | Eindimensional                                                                | Zweidimensional                                                                                       |
+| Format            | Eindimensional                                                                | Zweidimensional (Tabellen)                                                                                      |
 | Datentypen        | Homogen - Reihenelemente müssen vom gleichen Datentyp sein.                   | Heterogen - DataFrame-Elemente können unterschiedliche Datentypen haben.                              |
 | Zahl der Einträge | Größenunveränderlich - Einmal erstellt, kann die Größe nicht geändert werden. | Größenveränderlich - Elemente können in einem bestehenden DataFrame gelöscht oder hinzugefügt werden. |
 
-Wir betrachten zunächst die grundsätzliche Arbeitsweise für Series Daten.
+Wir betrachten zunächst die grundsätzliche Arbeitsweise für _Series_ Daten.
 
 ```python    PandasSeries.py
 import pandas as pd
 import numpy as np
 
-#Zufallszahlen mit dem Paket "numpy"
+# Zufallszahlen mit dem Paket "numpy"
 s_1 = pd.Series(np.random.randn(5))
 print(s_1)
 
-#Zufallszahlen und individuelle Indizes 
+# Zufallszahlen und individuelle Indizes 
 s_2 = pd.Series(np.random.randn(5), index=["a", "b", "c", "d", "e"])
 print(s_2)
 
-# Für unseren Datensatz und die Z Beschleunigungsdaten
+# Für unseren Datensatz: Z Beschleunigungsdaten mit Zeitstempel als Index
 data = {"09:28:52.419": 1016, "09:28:52.430": 1017, "09:28:52.441": 1017}
 s_3 = pd.Series(data)
 print(s_3)
@@ -239,16 +289,16 @@ print(s_3)
 import pandas as pd
 import numpy as np
 
-#Multidimensionales DataFrame mit identischen Datentypen
+# Multidimensionales DataFrame mit identischen Datentypen
 df_1 = pd.DataFrame(np.random.randn(6, 4))
 print(df_1)
 print()
 
-#Variables Set von Daten unterschiedlicher Typen 
+# Variables Set von Daten unterschiedlicher Typen 
 df_2 = pd.DataFrame(
     {
         "A": True,
-        "B": pd.date_range("20230101", periods=4),
+        "B": pd.date_range("20260101", periods=4),
         "C": pd.Series(np.random.randn(4)),
         "D": np.random.randint(16, size=4),
         "E": pd.Categorical(["A", "A", "B", "C"]),
@@ -259,11 +309,44 @@ print(df_2)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
-> Aufgabe: Evaluieren Sie mittel `print(df_2.dtypes)` die realsierten Datentypen für `df_2`. Worüber "stolpern" Sie?
+> Aufgabe: Evaluieren Sie mittels `print(df_2.dtypes)` die realsierten Datentypen für `df_2`. Worüber "stolpern" Sie?
 
-### Arbeit mit Dataframes 
+### Arbeiten mit Dataframes
 
 Welche Aufgaben lassen sich nun mit Hilfe von Pandas über den Daten realisieren?
+
+Einblicke in die Struktur von Dataframes
+----------------
+
+```text -data.csv 
+timestamp;X;Y;Z
+09:28:52.353; -8; -9; 1016
+09:28:52.364; -9; -8; 1017
+09:28:52.375; -9; -8; 1017
+09:28:52.386; -8; -8; 1016
+09:28:52.397; -9; -8; 1017
+09:28:52.408; -9; -8; 1018
+09:28:52.419; -9; -8; 1016
+09:28:52.430; -9; -8; 1017
+09:28:52.441; -9; -8; 1017
+09:28:52.452; -9; -8; 1017
+```
+```python df_structure.py
+import pandas as pd
+
+# CSV-Datei einlesen
+# Header-Info in erster Zeile (0 ist auch Default)
+df = pd.read_csv('data.csv', header = 0, sep=";") 
+
+print("-- Anzahl Zeilen und Spalten:", df.shape)
+print("-- Spaltennamen:", df.keys().values)
+print("-- Datentypen der Spalten:\n", df.dtypes)
+print("-- Erste 5 Zeilen:\n", df.head(5))
+# print("-- Letzte 5 Zeilen:\n", df.tail(5))
+# print(df)  # Ausgabe des gesamten DataFrames 
+             # (kann bei grossen Dateien unübersichtlich sein)
+```
+@LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
 
 Indizierung 
 ----------------
@@ -284,8 +367,18 @@ timestamp;X;Y;Z
 ```python index.py
 import pandas as pd
 
-df = pd.read_csv('data.csv', header = 0, sep=";")  
-print(df)
+df = pd.read_csv('data.csv', header = 0, sep=";")
+
+# Auswahl von Spalten
+s: pd.Series = df.timestamp  # oder: s = df['timestamp']
+print(s)
+print("-- timestep 9:", df.timestamp[9])
+print("-- Slice von timestamps:")
+print(df.timestamp[5:8])
+
+# Auswahl von Zeilen
+print("-- Auswahl von Zeilen")
+print(df[2:4])
 ```
 @LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
 
@@ -313,9 +406,10 @@ print(df)
 ```
 @LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
 
-
 Statistische Beschreibung 
 ----------------
+
+Die Erzeugung deskriptiver Statistiken ist oft ein erster Schritt bei der Datenanalyse.
 
 ```text -data.csv 
 timestamp;X;Y;Z
@@ -365,12 +459,12 @@ print(df)
 
 
 
-### Visualisierung mit pandas 
+### Visualisierung mit pandas
 
                             {{0-1}}
 **********************************************************************************************
 
-Pandas ist unmittelbar mit der schon bekannten Bibliothek matplotlib verknüpft. Damit können wir unsere bereits bekannten Methoden nahtlos nutzen.
+Pandas ist unmittelbar mit der Bibliothek matplotlib verknüpft. Damit können wir die matplotlib-Methoden nahtlos nutzen.
 
 ![](https://raw.githubusercontent.com/PatrikHlobil/Pandas-Bokeh/master/docs/Images/Startimage.gif)
 
@@ -485,6 +579,7 @@ plt.savefig('foo.png')
 + __Automatisierung__ - Viele der Aufgaben, die mit Pandas durchgeführt werden können, sind extrem einfach zu automatisieren, wodurch die Anzahl der langweiligen und sich wiederholenden Aufgaben, die täglich durchgeführt werden müssen, reduziert wird.
 + __Interpretierbarkeit__ - Eine Codesequenz aus Pandas ist übersichtlich und einfach zu interpretieren, da Tabellenkalkulationen Berechnungen pro Zelle ausführen, sind Fehler schwieriger zu identifizieren und zu beheben.
 + __Erweiterte Funktionen__ - Die Durchführung erweiterter statistischer Analysen und die Erstellung komplexer Visualisierungen ist sehr einfach.
++ __Kompatibilität mit Excel-Dateien__ - _xslx_-Dateien können mit [read_excel()](https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html) eingelesen werden (d.h. ein Zwischenschritt mit Konvertierung zu CSV ist nicht notwendig).
 
 
 | pandas      | Tabellenkalkulation |
@@ -598,8 +693,6 @@ with open('data.csv', mode='r') as csv_file:
 
 for row in list_of_dict:
 	print(row['X'], end=",")
-
-csv_file.close()
 ```
 [[-7,-9,-9,-9,]]
 
