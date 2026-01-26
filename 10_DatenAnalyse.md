@@ -82,8 +82,8 @@ print(result_array)  # Output: [5 7 9]
 
 NumPy wird näher in zwei einführenden *Jupyter Notebooks* erläutert (im Verzeichnis notebooks):
 
-- Einführung in Numpy [numpy\_01\_intro.ipynb](notebooks/numpy_01_intro.ipynb)
-- Bildverarbeitung mit Numpy [numpy\_02\_image_processing.ipynb](notebooks/numpy_02_image_processing.ipynb)
+- Einführung in Numpy [numpy\_01\_intro.ipynb](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/notebooks/numpy_01_intro.ipynb)
+- Bildverarbeitung mit Numpy [numpy\_02\_image\_processing.ipynb](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/notebooks/numpy_02_image_processing.ipynb)
 
 
 ---------------------------------------------------------------------
