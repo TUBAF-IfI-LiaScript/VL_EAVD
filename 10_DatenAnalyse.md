@@ -309,7 +309,7 @@ print(df_2)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
-> Aufgabe: Evaluieren Sie mittels `print(df_2.dtypes)` die realsierten Datentypen für `df_2`. Worüber "stolpern" Sie?
+> Aufgabe: Evaluieren Sie mittels `print(df_2.dtypes)` die realisierten Datentypen für `df_2`. Worüber "stolpern" Sie?
 
 ### Arbeiten mit Dataframes
 
@@ -402,7 +402,18 @@ timestamp;X;Y;Z
 import pandas as pd
 
 df = pd.read_csv('data.csv', header = 0, sep=";")  
-print(df)
+print(df, '\n')
+
+# select columns by name
+df2 = df.filter(items=["timestamp", "Z"])
+print(df2, '\n')
+
+# select rows where 'Z' > 1016
+df3 = df['Z'] > 1016
+print(df3, '\n')
+
+above_1016 = df[df["Z"] > 1016]
+print(above_1016, '\n')
 ```
 @LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
 
@@ -429,31 +440,6 @@ import pandas as pd
 
 df = pd.read_csv('data.csv', header = 0, sep=";")  
 print(df.describe())
-```
-@LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
-
-
-Nutzung
-----------------
-
-```text -data.csv 
-timestamp;X;Y;Z
-09:28:52.353; -8; -9; 1016
-09:28:52.364; -9; -8; 1017
-09:28:52.375; -9; -8; 1017
-09:28:52.386; -8; -8; 1016
-09:28:52.397; -9; -8; 1017
-09:28:52.408; -9; -8; 1018
-09:28:52.419; -9; -8; 1016
-09:28:52.430; -9; -8; 1017
-09:28:52.441; -9; -8; 1017
-09:28:52.452; -9; -8; 1017
-```
-```python describe.py
-import pandas as pd
-
-df = pd.read_csv('data.csv', header = 0, sep=";")  
-print(df)
 ```
 @LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
 
