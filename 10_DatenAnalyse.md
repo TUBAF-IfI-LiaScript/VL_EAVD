@@ -506,12 +506,19 @@ plt.savefig('foo.png')
 |                                |                                                                                          | `plt.legend()`                                    |
 | Speichern                      |  [pyplot.savefig](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html)                                                                                        | `plt.savefig('foo.png') `                         |
 
-> Merke: Mit dem zusätzlichen Parameter `styple='o:'` können Sie die Konfiguration der Darstellung anpassen.
+
+
+
 
 **********************************************************************************************
 
                             {{1-2}}
 **********************************************************************************************
+
+Die Bearbeitung der folgenden Aufgaben ist leichter, nachdem Sie sich mit 
+den Inhalten der folgenden Vorlesung 
+[Link L11](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/11_Datenvisualisierung.md)
+vertraut gemacht haben (bzw. noch eine Woche auf die Vorlesung warten ;-) ). 
 
 > Aufgabe 1:  Weisen Sie grafisch nach, dass es einen starken Zusammenhang zwischen den 3 Beschleunigungsdaten gibt! 
 >
@@ -603,11 +610,18 @@ url="https://raw.githubusercontent.com/" + \
     "master/examples/11_DatenAnalyse/" + \
     "Wetterdaten/wetter_tageswerte_Beschreibung_Stationen.txt"
 
+# Datensatz laden
 df=pd.read_csv(url, sep=';', header = 0)  
-#df=pd.read_csv("wetter_tageswerte_Beschreibung_Stationen.txt", sep=';', header = 0)  
-df['Bundesland'] = df['Bundesland'].str.strip()
+#df=pd.read_csv("wetter_tageswerte_Beschreibung_Stationen.txt", sep=';', header = 0)
+
+# Datensatz säubern
+# Leerzeichen um Stationsnamen (39 Zeichen im Datensatz) entfernen, z.B.
+# ' Freiberg                              '  -> 'Freiberg'
 df['Stationsname'] = df['Stationsname'].str.strip()
-df_sachsen = df[df.Bundesland  == "Sachsen"]
+df['Bundesland'] = df['Bundesland'].str.strip()
+
+# Datensatz filtern (nur Sachsen) und ausgeben
+df_sachsen = df[df.Bundesland  == "Sachsen"]  # nur Land Sachsen
 print(df_sachsen)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
