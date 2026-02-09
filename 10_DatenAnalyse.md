@@ -250,7 +250,7 @@ Der Name leitet sich von dem Begriff "_panel data_" ab, einem Begriff aus der Ö
 
 Der Code zum Paket kann unter [Link](https://github.com/pandas-dev/pandas) eingesehen und bearbeitet werden.
 
-> __Achtung:__ Mit der Verwendung von pandas ändert sich unser Blick auf den Code. Bislang haben wir Prozedural oder Objektorientiert programmiert. Jetzt ändert sich unser Blick - wir denken in Datenstrukturen und wenden Methoden darauf an.
+> __Achtung:__ Mit der Verwendung von pandas ändert sich unser Blick auf den Code. Bislang haben wir prozedural oder objektorientiert programmiert. Jetzt ändert sich unser Blick - wir denken in spezifischen Datenstrukturen (Series und hauptsächlich DataFrame) und wenden Methoden darauf an.
 
 ## Pandas Grundlagen
 
@@ -284,6 +284,11 @@ print(s_3)
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 > __Achtung:__ Im letztgenannten Beispiel `s_3` werden die Indizes nicht als Datum interpretiert sonder als Text. Realistisch wäre hier noch eine Transformation notwendig!
+
+_DataFrames_ sind Tabellen. Die Spalten eines DataFrames kann man sich als _Series_-Objekte vorstellen (alle Elemente einer Spalte haben denselben Datentyp).
+
+  - falls Sie mit der Programmiersprache R vertraut sind:
+    Panda DataFrames ähneln den (Tidyverse) DataFrames von R.
 
 ```python    PandasDataFrame.py
 import pandas as pd
@@ -348,8 +353,12 @@ print("-- Erste 5 Zeilen:\n", df.head(5))
 ```
 @LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
 
-Indizierung 
+Zugriff auf Zeilen und Spalten über Index 
 ----------------
+
+Der Zugriff auf Spalten und Zeilen ist möglich über
+- Integer-Wert (0, 1, 2, ...), oder
+- Label (String)
 
 ```text -data.csv 
 timestamp;X;Y;Z
@@ -364,26 +373,32 @@ timestamp;X;Y;Z
 09:28:52.441; -9; -8; 1017
 09:28:52.452; -9; -8; 1017
 ```
-```python index.py
+```python   pd_index.py
 import pandas as pd
 
-df = pd.read_csv('data.csv', header = 0, sep=";")
+df = pd.read_csv('data.csv', header = 0, sep=";")  
 
-# Auswahl von Spalten
-s: pd.Series = df.timestamp  # oder: s = df['timestamp']
-print(s)
-print("-- timestep 9:", df.timestamp[9])
-print("-- Slice von timestamps:")
-print(df.timestamp[5:8])
+# Auswahl einzelner Spalten
+print("-- Auswahl einzelner Spalten")
+col = df['timestamp']  # oder df.timestamp
+print("  Datentyp der Spalte:", type(col))   # Datentyp Series
 
-# Auswahl von Zeilen
-print("-- Auswahl von Zeilen")
-print(df[2:4])
+# Auswahl einzelner Zellen (Spalte + Zeile)
+print("-- timestep #2:", df['timestamp'][2])  # oder df.timestamp[2]
+ # Auswahl der Zeile mit Index 2, dann Spalte 0 (== 'timestamp')
+ print("-- Zeile 2, Spalte 0:", df.iat[2,0]) 
+
+# Auswahl mehrerer Spalten
+print("-- Auswahl mehrerer Spalten")
+cols = df[['timestamp', 'X']]
+print(cols.head(2))  # Ausgabe der ersten 2 Zeilen
 ```
 @LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
 
 Filtern 
 ----------------
+
+Auswahl von Spalten und Zeilen gemäß bestimmter Bedingungen
 
 ```text -data.csv 
 timestamp;X;Y;Z
@@ -404,18 +419,51 @@ import pandas as pd
 df = pd.read_csv('data.csv', header = 0, sep=";")  
 print(df, '\n')
 
-# select columns by name
+# select columns by name (filter by items)
 df2 = df.filter(items=["timestamp", "Z"])
 print(df2, '\n')
 
-# select rows where 'Z' > 1016
-df3 = df['Z'] > 1016
-print(df3, '\n')
+# in which rows is 'Z' > 1016?
+large_zs = df['Z'] > 1016  # this is a boolean Series with True/False values
+print(large_zs, '\n')
 
-above_1016 = df[df["Z"] > 1016]
+# select rows where 'Z' > 1016 (filter by boolean mask)
+# and store the result in a new DataFrame
+above_1016 = df[df['Z'] > 1016]
 print(above_1016, '\n')
 ```
 @LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
+
+Hinzufügen von Spalten
+----------------
+
+```text -data.csv 
+timestamp;X;Y;Z
+09:28:52.353; -8; -9; 1016
+09:28:52.364; -9; -8; 1017
+09:28:52.375; -9; -8; 1017
+09:28:52.386; -8; -8; 1016
+09:28:52.397; -9; -8; 1017
+09:28:52.408; -9; -8; 1018
+09:28:52.419; -9; -8; 1016
+09:28:52.430; -9; -8; 1017
+09:28:52.441; -9; -8; 1017
+09:28:52.452; -9; -8; 1017
+```
+```python    pd_insertcol.py
+import pandas as pd
+
+df = pd.read_csv('data.csv', header = 0, sep=";")  
+
+# calculate absolute difference between consecutive sensor values
+# and add them as a new column to the DataFrame
+df['X_diff'] = df['X'].diff().abs()
+
+print(df['X_diff'].values[:10])  # [nan 1. 0. 1. 1. 0. 0. 0.  0. 0.]
+```
+@LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
+
+
 
 Statistische Beschreibung 
 ----------------
@@ -450,11 +498,17 @@ print(df.describe())
                             {{0-1}}
 **********************************************************************************************
 
-Pandas ist unmittelbar mit der Bibliothek matplotlib verknüpft. Damit können wir die matplotlib-Methoden nahtlos nutzen.
+Pandas ist unmittelbar mit der Bibliothek matplotlib verknüpft. Damit können wir die matplotlib-Methoden nahtlos nutzen, siehe [Link L11](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/11_Datenvisualisierung.md)
 
 ![](https://raw.githubusercontent.com/PatrikHlobil/Pandas-Bokeh/master/docs/Images/Startimage.gif)
 
 _Beispiele der Visualisierung von Pandas 'PatrikHlobil' [Link](https://github.com/PatrikHlobil/Pandas-Bokeh/raw/master/docs/Images/Startimage.gif)_
+
+
+Pandas-Diagramme werden mit der Methode `plot()` erzeugt. 
+Die Parameter für die Beschriftungen orientieren sich an MatPlotLib.
+Zur Anzeige des Diagrams rufen wir typischerweise die Methode `show()` von MatPlotLib auf (in LiaScript speichern wir die Datei als png).
+
 
 
 ```text -data.csv 
@@ -486,13 +540,22 @@ timestamp;X;Y;Z
 09:28:52.617; -8; -9; 1016
 09:28:52.628; -7; -9; 1018
 ```
-```python readCSV.py
+```python pd_plot.py
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# read data from CSV file and plot it using default settings
 df = pd.read_csv('data.csv', header = 0, sep=";")  
-df.plot()
+df.plot(title='Acceleration Data Over Time',
+        xlabel='Timestamp Index')
+
+# Alternative implementation:
+#df.plot()
+#plt.title('Acceleration Data Over Time')
+#plt.xlabel('Timestamp Index')
+
 plt.savefig('foo.png')
+# plt.show()
 ```
 @LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
 
@@ -522,7 +585,7 @@ vertraut gemacht haben (bzw. noch eine Woche auf die Vorlesung warten ;-) ).
 
 > Aufgabe 1:  Weisen Sie grafisch nach, dass es einen starken Zusammenhang zwischen den 3 Beschleunigungsdaten gibt! 
 >
-> Aufgabe 2: Geben Sie die Daten einer Achse in einem Histogramm aus! Schreiben Sie als Text den maximalen und den Minimalen Wert in die Mitte des Diagrams.
+> Aufgabe 2: Geben Sie die Daten einer Achse in einem Histogramm aus! Schreiben Sie als Text den maximalen und den minimalen Wert in die Mitte des Diagrams.
 
 ```text -data.csv 
 timestamp;X;Y;Z
@@ -553,7 +616,7 @@ timestamp;X;Y;Z
 09:28:52.617; -8; -9; 1016
 09:28:52.628; -7; -9; 1018
 ```
-```python ScatterPlot.py
+```python     SensorValuesPlot.py
 import pandas as pd
 import matplotlib.pyplot as plt
 
