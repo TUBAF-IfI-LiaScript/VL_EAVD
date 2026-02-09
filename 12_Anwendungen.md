@@ -170,31 +170,8 @@ $$\text{Rohwert} = \frac{U_{sensor}}{5V} \cdot 1023$$
 Zunächst ein naiver Ansatz - was wäre, wenn wir einfach Funktionen verwenden?
 
 ```cpp                     OhneOOP.cpp
-#include <iostream>```ascii
-         TEIL 1 !
-         
- Datenquelle 1: Sensoren (C++)          Datenquelle 2: Wetter (Python)
+#include <iostream>
 
- Blumentopf        Arduino              Open-Meteo API
- +--------+      +---------+            +-------------+
- | Feuchte|----->|         |            |  Regen-     |
- | oben   | A0   |  C++    |            |  vorhersage |
- |--------|      |  OOP    |            +------+------+
- | Feuchte|----->|         |                   |
- | unten  | A1   |         |                   v
- |--------|      |         |            +------+------+
- | Waage  |----->|         |            | Analyse +   |
- +--------+ A2   |         |            | Diagramm    |
-                 +----+----+            +------+------+
-                      |                        |
-                      v                        v
-               +------+------------------------+------+
-               |                                      |
-               |      Giessbedarf-Entscheidung        |
-               |   Feuchtigkeit + Gewicht + Regen     |
-               |                                      |
-               +--------------------------------------+                                                                            .
-```
 #include <cmath>
 using namespace std;
 
@@ -299,7 +276,7 @@ int main(){
 
 Welche Konzepte stecken in dieser Klasse?
 
-- [[ ]] Destruktor
+- [[X]] Destruktor
 - [[X]] Konstruktor mit Initialisierungsliste
 - [[X]] Kapselung (protected/public)
 - [[ ]] Mehrfachvererbung
@@ -342,17 +319,6 @@ class AnalogSensor {
     virtual ~AnalogSensor() {}
 };
 
-// ---- Feuchtesensor ----
-    float pct = (float)(dryVal - raw) / (dryVal - wetVal) * 100.0;
-    if (pct < 0) pct = 0;
-    if (pct > 100) pct = 100;
-    return pct;
-}
-
-float readWeight(int pin, float scaleFactor) {
-    int raw = simulateRead(pin);
-    // FSR 406: logarithmische Kennlinie!
-    // Aus Datenblatt: Widerstand sinkt logarithmisch mit Kraft
 class MoistureSensor : public AnalogSensor {
   private:
     int _dryValue;   // ADC-Wert bei trockenem Boden
@@ -371,7 +337,7 @@ class MoistureSensor : public AnalogSensor {
         if (pct < 0)   pct = 0;
         if (pct > 100) pct = 100;
         return pct;
-    }
+    } 
 
     void print() override {
         cout << _name << ": " << getValue() << " %" << endl;
@@ -438,7 +404,7 @@ Beachten Sie: Beide Klassen erben `readRaw()` und `getName()` von `AnalogSensor`
  | Waage  |----->|         |            | Analyse +   |
  +--------+ A2   |         |            | Diagramm    |
                  +----+----+            +------+------+
-                      |                        |
+                      |                        | 
                       v                        v
                +------+------------------------+------+
                |                                      |
@@ -512,19 +478,6 @@ Das Prinzip:
 
 ```python                  apiAbfrage.py
 import json
-  public:
-    PressureSensor(int pin, string name, float scaleFactor)
-        : AnalogSensor(pin, name),
-          _scaleFactor(scaleFactor) {}
-
-    float getValue() override {
-        readRaw();
-        // FSR 406: logarithmische Kennlinie!
-        // Aus Datenblatt: Widerstand sinkt logarithmisch mit Kraft
-        if (_rawValue <= 0) return 0;
-        return _scaleFactor * log(_rawValue + 1);
-        // Lineare Variante (vereinfacht, physikalisch ungenau):
-        // return (float)_rawValue / 1023.0 * _scaleFactor;
 import urllib.request
 
 # Koordinaten von Freiberg (Sachsen)
@@ -580,7 +533,7 @@ data = json.loads(response.read().decode())
 df = pd.DataFrame({
     'Datum': data['daily']['time'],
     'Niederschlag_mm': data['daily']['precipitation_sum'],
-    'Regenwahrsch_pct': data['daily']['precipitation_probability_max']
+    'Regenwahrsch_pct': data['daily']['precipitation_probability_max'] 
 })
 
 print(df)
@@ -616,7 +569,7 @@ url = ("https://api.open-meteo.com/v1/forecast?"
        "&forecast_days=7")
 
 response = urllib.request.urlopen(url)
-data = json.loads(response.read().decode())
+data = json.loads(response.read().decode()) 
 
 df = pd.DataFrame({
     'Datum': data['daily']['time'],
@@ -639,7 +592,7 @@ plt.tight_layout()
 plt.savefig('foo.png')
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
-
+ 
 > **Erinnerung VL 11:** `plt.subplots()` erzeugt eine Abbildung mit Achsen. `ax.bar()` erstellt ein Balkendiagramm. Die Farbliste wird mit einer List Comprehension (VL 8) dynamisch erzeugt.
 
 ## Teil 3: Gießen oder nicht?
@@ -656,7 +609,7 @@ plt.savefig('foo.png')
  | unten  | A1   |         |                   v
  |--------|      |         |            +------+------+
  | Waage  |----->|         |            | Analyse +   |
- +--------+ A2   |         |            | Diagramm    |
+ +--------+ A2   |         |            | Diagramm    | 
                  +----+----+            +------+------+
                       |                        |
                       v                        v
@@ -669,7 +622,19 @@ plt.savefig('foo.png')
 ```
 
 
-Jetzt verbinden wir die Sensordaten (C++) mit der Wettervorhersage (Python). In der Praxis würde der Arduino die aktuellen Messwerte per Serial oder WiFi an den PC übertragen.
+Jetzt verbinden wir die Sensordaten (C++) mit der Wettervorhe  public:
+    PressureSensor(int pin, string name, float scaleFactor)
+        : AnalogSensor(pin, name),
+          _scaleFactor(scaleFactor) {}
+
+    float getValue() override {
+        readRaw();
+        // FSR 406: logarithmische Kennlinie!
+        // Aus Datenblatt: Widerstand sinkt logarithmisch mit Kraft
+        if (_rawValue <= 0) return 0;
+        return _scaleFactor * log(_rawValue + 1);
+        // Lineare Variante (vereinfacht, physikalisch ungenau):
+        // return (float)_rawValue / 1023.0 * _scaleFactor;rsage (Python). In der Praxis würde der Arduino die aktuellen Messwerte per Serial oder WiFi an den PC übertragen.
 
 ```python                  entscheidung.py
 import json
@@ -729,11 +694,35 @@ print()
 mittlere_feuchtigkeit = (feuchtigkeit_oben + feuchtigkeit_unten) / 2
 print("=== Empfehlung ===")
 print("-> " + muss_ich_giessen(
-    mittlere_feuchtigkeit, topfgewicht, regen_2_tage))
+    mittlere_feuchtigkeit, topfgewicht, regen_2_tage))  public:
+    PressureSensor(int pin, string name, float scaleFactor)
+        : AnalogSensor(pin, name),
+          _scaleFactor(scaleFactor) {}
+
+    float getValue() override {
+        readRaw();
+        // FSR 406: logarithmische Kennlinie!
+        // Aus Datenblatt: Widerstand sinkt logarithmisch mit Kraft
+        if (_rawValue <= 0) return 0;
+        return _scaleFactor * log(_rawValue + 1);
+        // Lineare Variante (vereinfacht, physikalisch ungenau):
+        // return (float)_rawValue / 1023.0 * _scaleFactor;
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
-> **Erinnerung VL 4+7:** Funktionen kapseln wiederverwendbare Logik. `muss_ich_giessen()` nimmt Parameter entgegen, verarbeitet sie mit `if/elif/else` und gibt einen String zurück.
+> **Erinnerung VL 4+7:** Funktionen kapseln wiederverwendbare Logi  public:
+    PressureSensor(int pin, string name, float scaleFactor)
+        : AnalogSensor(pin, name),
+          _scaleFactor(scaleFactor) {}
+
+    float getValue() override {
+        readRaw();
+        // FSR 406: logarithmische Kennlinie!
+        // Aus Datenblatt: Widerstand sinkt logarithmisch mit Kraft
+        if (_rawValue <= 0) return 0;
+        return _scaleFactor * log(_rawValue + 1);
+        // Lineare Variante (vereinfacht, physikalisch ungenau):
+        // return (float)_rawValue / 1023.0 * _scaleFactor;k. `muss_ich_giessen()` nimmt Parameter entgegen, verarbeitet sie mit `if/elif/else` und gibt einen String zurück.
 
 > Verändern Sie die simulierten Sensorwerte (`feuchtigkeit_oben`, `topfgewicht`) und beobachten Sie, wie sich die Empfehlung ändert!
 
@@ -939,6 +928,8 @@ int main() {
 
 ### A3: Kurze Fragestellungen
 
+````ascii   
+
 1. Markieren Sie alle Ganzzahldatentypen in folgender Aufstellung.
 
    - [( )] std::string
@@ -948,13 +939,11 @@ int main() {
 
 2. Welchen Inhalt gibt das folgende Codefragment aus?
 
-   ```cpp
    int werte[] = {10, 20, 30, 40, 50};
    int summe = 0;
    for (int i = 0; i < 5; i += 2)
        summe += werte[i];
    std::cout << summe;
-   ```
 
    [[90]]
 
@@ -962,33 +951,33 @@ int main() {
 
    [[Die Methode kann in abgeleiteten Klassen ueberschrieben werden und der Aufruf wird zur Laufzeit aufgeloest (dynamische Bindung).]]
 
-4. Schreiben Sie den folgenden C++-Code als Python-Code:
+4. Schreiben Sie den folgenden C-Code als Python-Code:
 
-   ```cpp
    int werte[] = {10, 20, 30, 40, 50};
    int summe = 0;
    for (int i = 0; i < 5; i += 2)
        summe += werte[i];
    std::cout << summe;
-   ```
 
-   ```python
+   
    werte = [10, 20, 30, 40, 50]
-
-   ```
-   @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+   summe = 0
+   for i in range(0, 5, 2):
+      summe += werte[i]
+   print(summe)
 
 5. Welches Konzept nutzt C++, um die Member einer Klasse vor dem Zugriff aus anderen Klassen zu schützen?
 
    [[Kapselung]]
 
-6. Mit Hilfe welcher Methoden werden C++-Objekte erstellt?
+6. Mit Hilfe welcher Methoden werden C"++"-Objekte erstellt?
 
    - [( )] Destruktoren
    - [(X)] Konstruktoren
    - [( )] private Methoden
    - [( )] `new`
 
+````
 
 ## Finale Worte
 
