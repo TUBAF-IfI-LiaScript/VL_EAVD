@@ -394,10 +394,11 @@ Vorlesungszeit: **19.10.2026 – 18.12.2026** und **04.01.2027 – 12.02.2027**
 ### Phase 0 — Motivation
 
 <!-- data-type="none" -->
-| Nr. | Woche | Inhalt                     | Leitfrage                              |
-| :-- | :---- | :------------------------- | :------------------------------------- |
-| 01  | 1     | Warum programmieren?       | Wo hört die Tabellenkalkulation auf?   |
-| 02  | 2     | Erste Schritte in Python   | Wie sage ich dem Rechner, was er tun soll? |
+| Nr. | Woche | Inhalt                     | Leitfrage                                   |
+| :-- | :---- | :------------------------- | :------------------------------------------ |
+| 00  | 1     | Motivation, Organisation   | Warum programmieren? _(dieses Dokument)_    |
+| 01  | 2     | Vom Problem zum Programm   | Wo hört die Tabellenkalkulation auf?        |
+| 02  | 3     | Erste Schritte in Python   | Wie sage ich dem Rechner, was er tun soll?  |
 
 ### Phase 1 — Grundlagen am Datensatz
 
@@ -406,21 +407,26 @@ Vorlesungszeit: **19.10.2026 – 18.12.2026** und **04.01.2027 – 12.02.2027**
 <!-- data-type="none" -->
 | Nr. | Woche | Inhalt                   | Leitfrage an die Daten                      |
 | :-- | :---- | :----------------------- | :------------------------------------------ |
-| 03  | 3     | Entscheidungen           | An wie vielen Tagen gab es Frost?           |
-| 04  | 4     | Wiederholungen           | Wie warm war es im Mittel 2020?             |
-| 05  | 5     | Daten sammeln            | Welches war der wärmste Tag jedes Jahres?   |
-| 06  | 6     | Dateien lesen            | Wie kommen 27.000 Zeilen in mein Programm?  |
-| 07  | 7     | Funktionen               | Wie vermeide ich, alles dreimal zu schreiben? |
-| 08  | 8     | Programme strukturieren  | Wie organisiere ich Code, der wächst?       |
+| 03  | 4     | Entscheidungen           | An wie vielen Tagen gab es Frost?           |
+| 04  | 5     | Wiederholungen           | Wie warm war es im Mittel 2020?             |
+| 05  | 6     | Daten sammeln            | Welches war der wärmste Tag jedes Jahres?   |
+| 06  | 7     | Dateien lesen            | Wie kommen 27.000 Zeilen in mein Programm?  |
+| 07  | 8     | Funktionen               | Wie vermeide ich, alles dreimal zu schreiben? |
+| 09  | 10    | Programme strukturieren  | Wie organisiere ich Code, der wächst?       |
 
 > Ab Vorlesung 04 gehört in jede Sitzung ein Live Hacking von etwa 20 Minuten.
+
+> **Zur Reihenfolge:** Zwischen Vorlesung 07 und 09 liegen die Demonstration
+> (Woche 9) und die Weihnachtspause. Vorlesung 09 schließt Phase 1 im Januar ab
+> und bereitet zugleich den Werkzeugwechsel vor — wer eigene Module schreibt,
+> versteht `import pandas` als das, was es ist.
 
 ### Zäsur — Wo Daten herkommen
 
 <!-- data-type="none" -->
 | Nr. | Woche | Inhalt                                           |
 | :-- | :---- | :----------------------------------------------- |
-| —   | 9     | **Demonstration: Datenerhebung mit MicroPython** |
+| 08  | 9     | **Demonstration: Datenerhebung mit MicroPython** |
 
 Der Veranstaltungstitel beginnt mit *Erhebung*. Diese Sitzung zeigt, was das
 bedeutet: Ein Mikrocontroller misst, MicroPython steuert ihn — dieselbe Sprache,
@@ -440,12 +446,11 @@ inklusive der Messfehler, die wir dabei produzieren.
 <!-- data-type="none" -->
 | Nr. | Woche | Inhalt                     | Leitfrage an die Daten                     |
 | :-- | :---- | :------------------------- | :----------------------------------------- |
-| 09  | 10    | Notebooks & Bibliotheken   | Warum muss ich das Rad nicht neu erfinden?  |
-| 10  | 11    | pandas I — Einlesen        | 27.000 Zeilen in einer Zeile?               |
-| 11  | 12    | pandas II — Aggregieren    | Wie fasse ich Jahrzehnte zusammen?          |
-| 12  | 13    | Visualisierung             | Wie zeige ich, was ich gefunden habe?       |
-| 13  | 14    | Datenqualität & Auswertung | Kann ich meinem Ergebnis trauen?            |
-| 14  | 15    | Die ganze Pipeline         | Was habe ich gelernt — und was kommt danach? |
+| 10  | 11    | Notebooks & Bibliotheken   | Warum muss ich das Rad nicht neu erfinden?  |
+| 11  | 12    | pandas I — Einlesen        | 27.000 Zeilen in einer Zeile?               |
+| 12  | 13    | pandas II — Aggregieren    | Wie fasse ich Jahrzehnte zusammen?          |
+| 13  | 14    | Visualisierung             | Wie zeige ich, was ich gefunden habe?       |
+| 14  | 15    | Datenqualität, Pipeline, Ausblick | Kann ich meinem Ergebnis trauen — und wie geht es weiter? |
 
 # Prüfung
 
