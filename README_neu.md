@@ -463,7 +463,7 @@ Das hat eine Konsequenz, die wir offenlegen: Eine Klausur prüft nicht, ob Sie e
 
 Die letzte Vorlesungswoche enthält eine explizite Prüfungsvorbereitung mit Musteraufgaben.
 
-## Was sich geändert hat
+# Was sich geändert hat
 
 Die Veranstaltung wurde zum Wintersemester 2026/27 grundlegend überarbeitet.
 
