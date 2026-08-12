@@ -149,18 +149,21 @@ niemand, was zu messen ist, und ohne Dokumentation ist ein Ergebnis nicht
 *******************************************************************************
 
 Am Ende des Semesters können Sie eine wissenschaftliche Fragestellung auf eine
-Datenverarbeitung abbilden — von der Rohdatei bis zur belegten Aussage.
+Datenverarbeitung abbilden — von der Rohdatei bis zur belegten Aussage. Bevor
+Sie Daten verarbeiten können, müssen Sie sich aber ein algorithmisches Denken 
+und die Werkzeuge der Umsetzung - Variablen, Datentypen, Schleifen, Funktionen - 
+vertraut machen.
 
-Im Einzelnen:
+Die Lernziele umfassen daher beides — das Werkzeug und seine Anwendung:
 
-| Sie können ...            | Konkret heißt das                                                                                          |
-| :------------------------ | :--------------------------------------------------------------------------------------------------------- |
-| **entwickeln**            | eine vollständige Auswertung selbst schreiben — einlesen, bereinigen, auswerten, darstellen                  |
-| **beurteilen**            | einschätzen, ob ein Ergebnis belastbar ist, und erkennen, wann eine Darstellung in die Irre führt            |
-| **analysieren**           | fremden Code lesen und nachvollziehen, was er tut — auch wenn Sie ihn nicht selbst geschrieben haben         |
-| **anwenden**              | die Werkzeuge der Datenanalyse auf eigene Messreihen und Analysendaten übertragen                            |
-| **verstehen**             | erklären, was hinter den Bausteinen steckt: Schleife, Bedingung, Funktion, Modul, Objekt                    |
-| **erinnern**              | die Grundbegriffe benennen: Algorithmus, Datentyp, Bibliothek, Fehlwert                                     |
+| Sie können ...  | Handwerkszeug (Schritt 0)                                                     | Anwendung auf Daten                                                                    |
+| :-------------- | :---------------------------------------------------------------------------- | :------------------------------------------------------------------------------------- |
+| **entwickeln**  | ein eigenes Programm aus Schleifen, Bedingungen und Funktionen aufbauen        | eine vollständige Auswertung schreiben — einlesen, bereinigen, auswerten, darstellen     |
+| **beurteilen**  | einschätzen, ob ein Programm verständlich und wartbar geschrieben ist          | einschätzen, ob ein Ergebnis belastbar ist und wann eine Darstellung in die Irre führt   |
+| **analysieren** | fremden Python-Code lesen und nachvollziehen, was er tut                       | einen unbekannten Datensatz erschließen: Was steht drin, was fehlt darin?                |
+| **anwenden**    | Variablen, Datentypen, Schleifen und Funktionen zur Lösung einer Aufgabe nutzen | die Werkzeuge der Datenanalyse auf eigene Messreihen und Analysendaten übertragen        |
+| **verstehen**   | erklären, was Variable, Datentyp, Schleife, Funktion und Modul bedeuten        | erklären, warum Daten aufbereitet werden müssen, bevor man mit ihnen rechnet             |
+| **erinnern**    | die Syntax der Grundbausteine benennen                                        | die Grundbegriffe benennen: Algorithmus, Fehlwert, Bibliothek, DataFrame                 |
 
 
 *******************************************************************************
@@ -182,8 +185,7 @@ Im Einzelnen:
 
 
 > **Was ausdrücklich nicht das Ziel ist:** Sie werden keine Software-Entwickler.
-> Sie werden Fachleute, die programmieren können, wenn es ihre Arbeit
-> voranbringt.
+> Kleine Vorhaben können Sie aber selbst umsetzen, größere zumindestens einordnen.
 
 *******************************************************************************
 
@@ -209,6 +211,9 @@ sondern:  "Wir müssen 27.000 Zeilen eines Datensatzes durchgehen. Wie machen wi
 
 > Der Unterschied ist nicht kosmetisch. Wer weiß, *wozu* ein Konzept dient,
 > behält es. Wer es als Vokabel lernt, vergisst es nach der Klausur.
+
+> [!CAUTION]
+> Wir kommen aber nicht umhin uns mit den Grundlagen der Informatik und der Programmiersprachen auseinander zu setzen. Bevor wir unser neu erlangtes Wissen anwenden können.
 
 ## 2. Ein Datensatz durch das ganze Semester
 
@@ -248,13 +253,18 @@ Fehlwerte als `-999`. Semikolon als Trenner, aufgefüllt mit Leerzeichen. Eine
 ## 3. Fachbeispiele aus Ihren Disziplinen
 
 Der Wetterdatensatz trägt die Methodik. Die fachliche Verankerung leisten
-Datensätze aus den beteiligten Disziplinen — Analysendaten aus der Mineralogie,
-Bohrprofile und Korngrößenverteilungen aus der Geologie, Messreihen zur
-Wasser- und Luftqualität aus dem Umweltingenieurwesen.
+Datensätze aus den beteiligten Disziplinen:
+
+| Disziplin                  | Mögliche Datensätze                                      | Datenform      |
+| :------------------------- | :-------------------------------------------------------- | :------------- |
+| **Mineralogie**            | Analysendaten (RFA, Phasenanteile)                        | Probentabelle  |
+| **Geologie**               | Bohrprofile, Korngrößenverteilungen                       | Verteilung     |
+| **Umweltingenieurwesen**   | Wasser- und Luftqualität, Pegelstände                     | Zeitreihe      |
+| **Wirtschaftswissenschaften** | Rohstoffpreise, Energieverbrauch, Betriebskennzahlen   | Zeitreihe      |
 
 > **Der entscheidende Punkt:** Zeitreihe, Probentabelle, Verteilung — alle diese
 > Formen werden mit denselben Werkzeugen bearbeitet. Sie lernen ein Werkzeug und
-> sehen es in vier fachlichen Gestalten.
+> sehen es in mehreren fachlichen Gestalten.
 
 
 ## 4. Grafisches Verständnis
@@ -310,16 +320,15 @@ print("Frosttage in dieser Woche:", frosttage)
 
 **Was in diesem kleinen Beispiel schon alles steckt**
 
-| Element                     | Vorlesung |
-| :-------------------------- | :-------- |
-| Liste von Messwerten        | VL 05     |
-| Schleife über alle Werte    | VL 04     |
-| Bedingung mit Vergleich     | VL 03     |
-| Zähler hochzählen           | VL 04     |
-| Ausgabe des Ergebnisses     | VL 02     |
+| Element                          | Vorlesung |
+| :------------------------------- | :-------- |
+| Variable, Ausgabe mit `print`    | VL 02     |
+| Bedingung mit Vergleich          | VL 03     |
+| Schleife, Zähler hochzählen      | VL 04     |
+| Liste von Messwerten             | VL 05     |
 
 > Ersetzen Sie die sieben Werte durch 27.000 Zeilen aus einer echten Datei, und
-> Sie stehen bei Vorlesung 06. Genau das ist der Weg durch dieses Semester.
+> Sie stehen bei Vorlesung 06.
 
 *******************************************************************************
 
@@ -346,15 +355,16 @@ erlebt.
 
 ## 6. Werkzeuge mit klarer Rollenteilung
 
+<!-- data-type="none" -->
 | Zeitraum        | Werkzeug                        | Wofür es steht                         |
 | :-------------- | :------------------------------ | :------------------------------------- |
+| Woche 2 – 8     | Blöcke *oder* Text, im Browser  | Einstieg ohne Installationshürde       |
 | Woche 1 – 9     | Python nativ (Editor, Terminal) | Automatisierung, wiederholbare Abläufe |
 | Woche 10 – 15   | Jupyter Notebooks               | Exploration, Analyse, Bericht          |
 
---{{1}}--
-Der Wechsel erfolgt bewusst nach der Weihnachtspause und wird begründet.
-Notebooks sind das reale Werkzeug der Datenauswertung, Skripte das der
-Automatisierung. Wer beides kennt, kann wählen.
+> Der Wechsel erfolgt bewusst nach der Weihnachtspause und wird begründet.
+> Notebooks sind das reale Werkzeug der Datenauswertung, Skripte das der
+> Automatisierung. Wer beides kennt, kann wählen.
 
 ## 7. Von der Mühsal zum Werkzeug
 
@@ -377,12 +387,13 @@ Aufgaben mit einer Tabellenkalkulation. Die erste ist leicht, die zweite mühsam
 die dritte praktisch aussichtslos. In **Woche 12** erledigen wir genau diese
 dritte Aufgabe in vier Zeilen Code.
 
-# Ablauf des Semesters
+## Ablauf des Semesters
 
 Vorlesungszeit: **19.10.2026 – 18.12.2026** und **04.01.2027 – 12.02.2027**
 
 ### Phase 0 — Motivation
 
+<!-- data-type="none" -->
 | Nr. | Woche | Inhalt                     | Leitfrage                              |
 | :-- | :---- | :------------------------- | :------------------------------------- |
 | 01  | 1     | Warum programmieren?       | Wo hört die Tabellenkalkulation auf?   |
@@ -406,19 +417,21 @@ Vorlesungszeit: **19.10.2026 – 18.12.2026** und **04.01.2027 – 12.02.2027**
 
 ### Zäsur — Wo Daten herkommen
 
-| Nr. | Woche | Inhalt                                        |
-| :-- | :---- | :-------------------------------------------- |
+<!-- data-type="none" -->
+| Nr. | Woche | Inhalt                                           |
+| :-- | :---- | :----------------------------------------------- |
 | —   | 9     | **Demonstration: Datenerhebung mit MicroPython** |
-
 
 Der Veranstaltungstitel beginnt mit *Erhebung*. Diese Sitzung zeigt, was das
 bedeutet: Ein Mikrocontroller misst, MicroPython steuert ihn — dieselbe Sprache,
 andere Hardware.
 
-Die dabei aufgezeichneten Daten kommen im Januar als Analysebeispiel zurück.
+> **Bis hierher kamen alle Daten fertig aus einer Datei.** Jetzt entstehen sie
+> vor Ihren Augen. Jede Zahl in einer Datentabelle hatte einmal ein Messgerät,
+> eine Genauigkeit und ein Ausfallrisiko.
 
-> Die Sitzung ist **nicht prüfungsrelevant**. Sie ist bewusst vor die
-> Weihnachtspause gelegt.
+Die dabei aufgezeichneten Daten kommen im Januar als Analysebeispiel zurück —
+inklusive der Messfehler, die wir dabei produzieren.
 
 ### Phase 2 — Datenanalyse
 
@@ -476,3 +489,63 @@ Die Veranstaltung wurde zum Wintersemester 2026/27 grundlegend überarbeitet.
 | Mikrocontroller als eigener Strang | Eine Demonstration zur Datenerhebung          |
 
 > Der Verzicht auf C++ ist die weitreichendste Änderung. Ursprünglich zielte die Veranstaltung darauf ab den Bogen von der Datenerhebung mit Mikrocontrollern bis hin zu Analyse dieser Informationen zu spannen. Das Ziel bleibt zwar erhalten, gleichwohl fokussieren wir uns auf eine Sprache - Python.
+
+# Beispiel: Der Personenzähler
+
+> **Wann erscheinen Studierende in der Vorlesung?** Gibt es Muster — der frühe
+> Vogel, rechtzeitig aber knapp, in den ersten zehn Minuten passiert ohnehin
+> nichts?
+
+Ein Ultraschallsensor an der Tür zählt die Eintretenden.
+
+``` python personenzaehler.py
+RANGE_MIN = 60              # Überwachungsbereich in cm
+RANGE_MAX = 200
+DEBOUNCE_TIME = 1000        # ms zwischen zwei Zählungen
+
+while True:
+    distance = get_distance()
+    current_time = time.ticks_ms()
+
+    in_range = RANGE_MIN <= distance <= RANGE_MAX
+
+    if in_range and not person_detected:            # jemand betritt den Bereich
+        person_detected = True
+
+    if not in_range and person_detected:            # jemand verlässt ihn
+        if time.ticks_diff(current_time, last_count_time) > DEBOUNCE_TIME:
+            people_count += 1
+            last_count_time = current_time
+        person_detected = False
+
+    time.sleep_ms(STABILIZATION_DELAY)
+```
+
+**Es funktioniert. Und zählt trotzdem falsch.**
+
+<!-- data-type="none" -->
+| Im Code steht ...        | Die Annahme dahinter                               | Was schiefgeht                                   |
+| :----------------------- | :------------------------------------------------- | :------------------------------------------------ |
+| `RANGE_MIN`, `RANGE_MAX` | Personen gehen in 60–200 cm Abstand vorbei          | Wer dichter an der Wand läuft, wird nie gezählt    |
+| `DEBOUNCE_TIME = 1000`   | Zwischen zwei Personen liegt mehr als eine Sekunde  | Zwei nebeneinander sind eine Messung               |
+| kein Richtungssinn       | Wer eintritt, bleibt drin                           | Wer noch einmal hinausgeht, wird doppelt gezählt   |
+
+
+**So sehen die Rohdaten aus**
+
+``` text data.csv
+16:14:27.457 -> Person entered monitoring zone
+16:14:28.164 -> Person counted. Total = 66
+16:14:28.421 -> Person entered monitoring zone
+16:14:29.869 -> Person counted. Total = 67
+```
+
+> [!NOTE]
+> Damit läuft die gesamte Kette in einer Sprache — von der Messung auf dem
+> Mikrocontroller bis zur Auswertung im Notebook. Derselbe Aufbau trägt die
+> Demonstration in Woche 9.
+
+> [!TIP]
+> **Nächste Woche machen wir hier weiter.** Sie bekommen diese Datei und
+> versuchen, die Ankunftszeiten in einer Tabellenkalkulation auszuwerten — ohne
+> eine Zeile Code. Bringen Sie einen Laptop mit.
