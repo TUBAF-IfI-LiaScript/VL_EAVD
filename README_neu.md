@@ -104,19 +104,88 @@ Die Veranstaltung richtet sich an Studierende aus Nicht-Informatikstudiengängen
 werden in Ihrer fachlichen Praxis Messreihen auswerten, Analysendaten sortieren
 und Ergebnisse darstellen müssen. Genau darauf zielt dieser Kurs.
 
-## Was sich geändert hat
+Wissenschaftliche Daten durchlaufen dabei ein bestimmtes Muster:
 
-Die Veranstaltung wurde zum Wintersemester 2026/27 grundlegend überarbeitet.
+``` ascii
+      ┌──────────────────────── neue Frage ──────────────────────────────┐
+      │                                                                  │
+      ▼                                                                  │
+  ┌───────┐   ┌───────┐   ┌───────┐   ┌───────┐   ┌───────┐   ┌───────┐  │
+  │ FRAGE │──▶│ ERHE- │──▶│ AUFBE-│──▶│ ANALY-│──▶│ VISUA-│──▶│ DOKU- │──┘
+  │       │   │ BUNG  │   │ REITEN│   │  SE   │   │ LISIE-│   │ MENTA-│
+  └───────┘   └───────┘   └───────┘   └───────┘   │ RUNG  │   │ TION  │
+                                                  └───────┘   └───────┘
+  Hypothese   Messen      Fehlwerte   Rechnen     Diagramm    Nachvoll-
+  Messgröße   Sammeln     Einheiten   Vergleichen Karte       ziehbar
+  Methodik    Speichern   Ausreißer   Zusammen-   Tabelle     machen
+                                      fassen
+```
+<!-- style="font-size: 0.75em; line-height: 1.2;" -->
 
-| Bisher                             | Neu                                           |
-| :--------------------------------- | :-------------------------------------------- |
-| C++ (Phase 1) und Python (Phase 2) | Python durchgängig                            |
-| Datenanalyse ab der 13. Vorlesung  | Echte Daten ab der ersten Vorlesung           |
-| Sprachkonzepte als Lehrplan        | Fachliche Fragen als Lehrplan                 |
-| Konstruierte Übungsbeispiele       | Ein realer Datensatz durch das ganze Semester |
-| Mikrocontroller als eigener Strang | Eine Demonstration zur Datenerhebung          |
+> **Der Pfeil zurück ist der wichtigste.** Fast nie führt der erste Durchlauf
+> zum Ziel: Die Daten reichen nicht, die Frage war zu unscharf, oder das
+> Ergebnis wirft eine neue Frage auf. Auswerten heißt, diese Schleife mehrfach
+> zu drehen.
 
-> Der Verzicht auf C++ ist die weitreichendste Änderung. Ursprünglich zielte die Veranstaltung darauf ab den Bogen von der Datenerhebung mit Mikrocontrollern bis hin zu Analyse dieser Informationen zu spannen. Das Ziel bleibt zwar erhalten, gleichwohl fokussieren wir uns auf eine Sprache - Python.
+Der Name der Veranstaltung nennt drei dieser Schritte — **Erhebung**, **Analyse**
+und **Visualisierung**. Die übrigen kommen nicht zu kurz: Ohne klare Frage weiß
+niemand, was zu messen ist, und ohne Dokumentation ist ein Ergebnis nicht
+überprüfbar.
+
+> Das Schema fasst zwei etablierte Prozessmodelle zusammen:
+>
+> + **CRISP-DM** _(Cross-Industry Standard Process for Data Mining, 1999)_ —
+>   sechs Phasen, ausdrücklich als Kreislauf angelegt, bis heute das
+>   meistgenutzte Modell der Datenanalyse
+> + **Forschungsdatenlebenszyklus** — Planen, Erheben, Aufbereiten, Analysieren,
+>   Publizieren, Archivieren, Nachnutzen
+>
+> Wir nutzen eine vereinfachte Fassung: ohne Archivierung und ohne
+> wirtschaftliche Begriffe, dafür mit den Vorlesungen an den passenden Stellen.
+
+# Lernziele
+
+                                     {{0-1}}
+*******************************************************************************
+
+Am Ende des Semesters können Sie eine wissenschaftliche Fragestellung auf eine
+Datenverarbeitung abbilden — von der Rohdatei bis zur belegten Aussage.
+
+Im Einzelnen:
+
+| Sie können ...            | Konkret heißt das                                                                                          |
+| :------------------------ | :--------------------------------------------------------------------------------------------------------- |
+| **entwickeln**            | eine vollständige Auswertung selbst schreiben — einlesen, bereinigen, auswerten, darstellen                  |
+| **beurteilen**            | einschätzen, ob ein Ergebnis belastbar ist, und erkennen, wann eine Darstellung in die Irre führt            |
+| **analysieren**           | fremden Code lesen und nachvollziehen, was er tut — auch wenn Sie ihn nicht selbst geschrieben haben         |
+| **anwenden**              | die Werkzeuge der Datenanalyse auf eigene Messreihen und Analysendaten übertragen                            |
+| **verstehen**             | erklären, was hinter den Bausteinen steckt: Schleife, Bedingung, Funktion, Modul, Objekt                    |
+| **erinnern**              | die Grundbegriffe benennen: Algorithmus, Datentyp, Bibliothek, Fehlwert                                     |
+
+
+*******************************************************************************
+
+                                     {{1-2}}
+*******************************************************************************
+
+> [!NOTE]
+> **Drei Fähigkeiten, die über den Kurs hinaus tragen**
+>
+> 1. **Sie erkennen, wann sich Programmieren lohnt** — und wann eine
+>    Tabellenkalkulation genügt. Beides zu wissen ist mehr wert, als eine
+>    Sprache zu kennen.
+> 2. **Sie können Ergebnisse hinterfragen** — die eigenen und die anderer. Woher
+>    kommen die Daten, was fehlt darin, was trägt die Aussage wirklich?
+> 3. **Sie können sich selbst weiterhelfen** — Fehlermeldungen lesen,
+>    Dokumentation nutzen, Beispiele übertragen. Kein Kurs deckt ab, was Sie
+>    später brauchen werden.
+
+
+> **Was ausdrücklich nicht das Ziel ist:** Sie werden keine Software-Entwickler.
+> Sie werden Fachleute, die programmieren können, wenn es ihre Arbeit
+> voranbringt.
+
+*******************************************************************************
 
 # Methodik innerhalb der Vorlesung
 
@@ -203,7 +272,7 @@ als Blöcke zum Zusammenschieben oder als Text zum Tippen.
 
 *******************************************************************************
 
-                                     {{1-2}}
+                                     {{1-3}}
 *******************************************************************************
 
 Hier die Aufgabe aus Vorlesung 03: Eine Woche mit Tagestemperaturen, gezählt
@@ -323,6 +392,7 @@ Vorlesungszeit: **19.10.2026 – 18.12.2026** und **04.01.2027 – 12.02.2027**
 
 > Werkzeug: Python nativ — Editor, Terminal, `.py`-Dateien
 
+<!-- data-type="none" -->
 | Nr. | Woche | Inhalt                   | Leitfrage an die Daten                      |
 | :-- | :---- | :----------------------- | :------------------------------------------ |
 | 03  | 3     | Entscheidungen           | An wie vielen Tagen gab es Frost?           |
@@ -340,14 +410,6 @@ Vorlesungszeit: **19.10.2026 – 18.12.2026** und **04.01.2027 – 12.02.2027**
 | :-- | :---- | :-------------------------------------------- |
 | —   | 9     | **Demonstration: Datenerhebung mit MicroPython** |
 
---{{1}}--
-Bis hierher kamen alle Daten fertig aus einer Datei. Die letzte Sitzung vor
-Weihnachten schließt die Lücke: Ein Sensor erzeugt live Messwerte. Jede Zahl in
-einer Datentabelle hatte einmal ein Messgerät, eine Genauigkeit und ein
-Ausfallrisiko.
-
-                                     {{1-2}}
-*******************************************************************************
 
 Der Veranstaltungstitel beginnt mit *Erhebung*. Diese Sitzung zeigt, was das
 bedeutet: Ein Mikrocontroller misst, MicroPython steuert ihn — dieselbe Sprache,
@@ -356,14 +418,13 @@ andere Hardware.
 Die dabei aufgezeichneten Daten kommen im Januar als Analysebeispiel zurück.
 
 > Die Sitzung ist **nicht prüfungsrelevant**. Sie ist bewusst vor die
-> Weihnachtspause gelegt: Wer da ist, nimmt etwas mit; wer fehlt, hat keine Lücke.
-
-*******************************************************************************
+> Weihnachtspause gelegt.
 
 ### Phase 2 — Datenanalyse
 
 > Werkzeug: Jupyter Notebooks
 
+<!-- data-type="none" -->
 | Nr. | Woche | Inhalt                     | Leitfrage an die Daten                     |
 | :-- | :---- | :------------------------- | :----------------------------------------- |
 | 09  | 10    | Notebooks & Bibliotheken   | Warum muss ich das Rad nicht neu erfinden?  |
@@ -373,18 +434,11 @@ Die dabei aufgezeichneten Daten kommen im Januar als Analysebeispiel zurück.
 | 13  | 14    | Datenqualität & Auswertung | Kann ich meinem Ergebnis trauen?            |
 | 14  | 15    | Die ganze Pipeline         | Was habe ich gelernt — und was kommt danach? |
 
---{{1}}--
-Die letzte Vorlesung führt alles zusammen: von der Rohdatei zur belegten Aussage.
-Dazu kommt der Ausblick — andere Sprachen, Versionierung, Reproduzierbarkeit und
-der Umgang mit KI-Werkzeugen beim Programmieren.
-
 # Prüfung
 
 Die Veranstaltung schließt mit einer **schriftlichen Prüfung** ab.
 
-Das hat eine Konsequenz, die wir offenlegen: Eine Klausur prüft nicht, ob Sie
-eine Analyse *bauen* können, sondern ob Sie Code **lesen, verstehen, korrigieren
-und skizzieren** können. Darauf bereiten wir gezielt vor.
+Das hat eine Konsequenz, die wir offenlegen: Eine Klausur prüft nicht, ob Sie eine Analyse *bauen* können, sondern ob Sie Code **lesen, verstehen, korrigieren und skizzieren** können. Darauf bereiten wir gezielt vor.
 
 | Kompetenz                        | Wie sie geübt wird                                    |
 | :------------------------------- | :---------------------------------------------------- |
@@ -397,7 +451,7 @@ und skizzieren** können. Darauf bereiten wir gezielt vor.
 
 + _Welchen Wert gibt das folgende Programm in Zeile x aus?_
 + _Finden Sie alle syntaktischen und logischen Fehler im nachfolgenden Code._
-+ _Schreiben Sie eine Funktion, die ..._ (Schwerpunkt Grundlagen)
++ _Schreiben Sie eine Funktion, die ..._
 + _Was macht `groupby` mit dieser Tabelle? Skizzieren Sie das Ergebnis._
 + _Warum ist diese Darstellung irreführend?_
 + _Warum ist `-999` in diesem Datensatz ein Problem?_
@@ -407,5 +461,18 @@ und skizzieren** können. Darauf bereiten wir gezielt vor.
 + Auswendig gelernte Bibliothekssyntax
 + Inhalte der Mikrocontroller-Demonstration
 
-Die letzte Vorlesungswoche enthält eine explizite Prüfungsvorbereitung mit
-Musteraufgaben.
+Die letzte Vorlesungswoche enthält eine explizite Prüfungsvorbereitung mit Musteraufgaben.
+
+## Was sich geändert hat
+
+Die Veranstaltung wurde zum Wintersemester 2026/27 grundlegend überarbeitet.
+
+| Bisher                             | Neu                                           |
+| :--------------------------------- | :-------------------------------------------- |
+| C++ (Phase 1) und Python (Phase 2) | Python durchgängig                            |
+| Datenanalyse ab der 13. Vorlesung  | Echte Daten ab der ersten Vorlesung           |
+| Sprachkonzepte als Lehrplan        | Fachliche Fragen als Lehrplan                 |
+| Konstruierte Übungsbeispiele       | Ein realer Datensatz durch das ganze Semester |
+| Mikrocontroller als eigener Strang | Eine Demonstration zur Datenerhebung          |
+
+> Der Verzicht auf C++ ist die weitreichendste Änderung. Ursprünglich zielte die Veranstaltung darauf ab den Bogen von der Datenerhebung mit Mikrocontrollern bis hin zu Analyse dieser Informationen zu spannen. Das Ziel bleibt zwar erhalten, gleichwohl fokussieren wir uns auf eine Sprache - Python.
