@@ -224,12 +224,12 @@ Derselbe Datensatz, wachsende Werkzeuge:
 
 | VL  | Was wir damit tun                                       | Womit          |
 | --- | :------------------------------------------------------ | :------------- |
-| 03  | Tag für Tag prüfen und zählen: Wie viele Frosttage?      | `if`, `for`    |
-| 04  | Muster erkennen: Mittelwert, längste Frostperiode        | Zustand, `while` |
-| 05  | Den wärmsten Tag jedes Jahres sammeln                    | Listen         |
-| 06  | Die Rohdatei einlesen — mit Fehlwerten und Umlauten      | Dateizugriff   |
-| 11  | Alle Jahre einlesen, gruppieren und vergleichen          | `pandas`       |
-| 13  | Einen Klimatrend belegen — und seine Grenzen benennen    | Statistik, Diagramm |
+| [03](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/03_PruefenUndWiederholen.md) | Tag für Tag prüfen und zählen: Wie viele Frosttage?      | `if`, `for`    |
+| [04](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/04_MusterInMessreihen.md) | Muster erkennen: Mittelwert, längste Frostperiode        | Zustand, `while` |
+| [05](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/05_DatenSammeln.md) | Den wärmsten Tag jedes Jahres sammeln                    | Listen         |
+| [06](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/06_DateienLesen.md) | Die Rohdatei einlesen — mit Fehlwerten und Umlauten      | Dateizugriff   |
+| [11](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/11_PandasEinlesen.md) | Alle Jahre einlesen, gruppieren und vergleichen          | `pandas`       |
+| [13](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/13_Visualisierung.md) | Einen Klimatrend belegen — und seine Grenzen benennen    | Statistik, Diagramm |
 
                                      {{1-2}}
 *******************************************************************************
@@ -400,8 +400,8 @@ Vorlesungszeit: **19.10.2026 – 18.12.2026** und **04.01.2027 – 12.02.2027**
 | Nr. | Woche | Inhalt                     | Leitfrage                                   |
 | :-- | :---- | :------------------------- | :------------------------------------------ |
 | 00  | 1     | Motivation, Organisation   | Warum programmieren? _(dieses Dokument)_    |
-| 01  | 2     | Vom Problem zum Programm   | Wo hört die Tabellenkalkulation auf?        |
-| 02  | 3     | Erste Schritte in Python   | Wie sage ich dem Rechner, was er tun soll?  |
+| [01](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/01_VomProblemZumProgramm.md) | 2     | Vom Problem zum Programm   | Wo hört die Tabellenkalkulation auf?        |
+| [02](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/02_ErsteSchritte.md) | 3     | Erste Schritte in Python   | Wie sage ich dem Rechner, was er tun soll?  |
 
 ### Phase 1 — Grundlagen am Datensatz
 
@@ -410,12 +410,12 @@ Vorlesungszeit: **19.10.2026 – 18.12.2026** und **04.01.2027 – 12.02.2027**
 <!-- data-type="none" -->
 | Nr. | Woche | Inhalt                   | Leitfrage an die Daten                      |
 | :-- | :---- | :----------------------- | :------------------------------------------ |
-| 03  | 4     | Prüfen und Wiederholen   | An wie vielen Tagen gab es 2024 Frost?      |
-| 04  | 5     | Muster in Messreihen     | Wie lang war die längste Frostperiode?      |
-| 05  | 6     | Daten sammeln            | Welches war der wärmste Tag jedes Jahres?   |
-| 06  | 7     | Dateien lesen            | Wie kommen 48.000 Zeilen in mein Programm?  |
-| 07  | 8     | Funktionen               | Wie vermeide ich, alles dreimal zu schreiben? |
-| 09  | 10    | Programme strukturieren  | Wie organisiere ich Code, der wächst?       |
+| [03](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/03_PruefenUndWiederholen.md) | 4     | Prüfen und Wiederholen   | An wie vielen Tagen gab es 2024 Frost?      |
+| [04](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/04_MusterInMessreihen.md) | 5     | Muster in Messreihen     | Wie lang war die längste Frostperiode?      |
+| [05](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/05_DatenSammeln.md) | 6     | Daten sammeln            | Welches war der wärmste Tag jedes Jahres?   |
+| [06](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/06_DateienLesen.md) | 7     | Dateien lesen            | Wie kommen 48.000 Zeilen in mein Programm?  |
+| [07](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/07_Funktionen.md) | 8     | Funktionen               | Wie vermeide ich, alles dreimal zu schreiben? |
+| [09](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/09_ProgrammeStrukturieren.md) | 10    | Programme strukturieren  | Wie organisiere ich Code, der wächst?       |
 
 > Ab Vorlesung 04 gehört in jede Sitzung ein Live Hacking von etwa 20 Minuten.
 
@@ -429,7 +429,7 @@ Vorlesungszeit: **19.10.2026 – 18.12.2026** und **04.01.2027 – 12.02.2027**
 <!-- data-type="none" -->
 | Nr. | Woche | Inhalt                                           |
 | :-- | :---- | :----------------------------------------------- |
-| 08  | 9     | **Demonstration: Datenerhebung mit MicroPython** |
+| [08](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/08_DemoMicroPython.md) | 9     | **Demonstration: Datenerhebung mit MicroPython** |
 
 Der Veranstaltungstitel beginnt mit *Erhebung*. Diese Sitzung zeigt, was das
 bedeutet: Ein Mikrocontroller misst, MicroPython steuert ihn — dieselbe Sprache,
@@ -449,11 +449,11 @@ inklusive der Messfehler, die wir dabei produzieren.
 <!-- data-type="none" -->
 | Nr. | Woche | Inhalt                     | Leitfrage an die Daten                     |
 | :-- | :---- | :------------------------- | :----------------------------------------- |
-| 10  | 11    | Notebooks & Bibliotheken   | Warum muss ich das Rad nicht neu erfinden?  |
-| 11  | 12    | pandas I — Einlesen        | 48.000 Zeilen in einer Zeile?               |
-| 12  | 13    | pandas II — Aggregieren    | Wie fasse ich Jahrzehnte zusammen?          |
-| 13  | 14    | Visualisierung             | Wie zeige ich, was ich gefunden habe?       |
-| 14  | 15    | Datenqualität, Ausblick, Prüfungsvorbereitung | Kann ich meinem Ergebnis trauen — und wie geht es weiter? |
+| [10](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/10_NotebooksBibliotheken.md) | 11    | Notebooks & Bibliotheken   | Warum muss ich das Rad nicht neu erfinden?  |
+| [11](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/11_PandasEinlesen.md) | 12    | pandas I — Einlesen        | 48.000 Zeilen in einer Zeile?               |
+| [12](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/12_PandasAggregieren.md) | 13    | pandas II — Aggregieren    | Wie fasse ich Jahrzehnte zusammen?          |
+| [13](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/13_Visualisierung.md) | 14    | Visualisierung             | Wie zeige ich, was ich gefunden habe?       |
+| [14](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/14_Datenqualitaet.md) | 15    | Datenqualität, Ausblick, Prüfungsvorbereitung | Kann ich meinem Ergebnis trauen — und wie geht es weiter? |
 
 > **Beispiel für Vorlesung 14: Freiberg zieht um.** Die DWD-Station Freiberg
 > misst Niederschlag bis 1993 und wieder ab 2015 — unter derselben Nummer, im
