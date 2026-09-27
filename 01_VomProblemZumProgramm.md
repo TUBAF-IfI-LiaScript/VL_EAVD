@@ -163,11 +163,12 @@ Die vollständige Datei finden Sie unter `examples/00_Einfuehrungsbeispiele/Pyth
 4. Den Text `16:15:07.925` in eine Uhrzeit umwandeln, mit der man vergleichen kann.
 5. Minuten bilden und zählen.
 
-Nach Vorlesungsbeginn kamen noch [[9]] Personen.
-[[?]] Zählen Sie nur die Zeilen mit `Person counted`, deren Uhrzeit ab 16:15 liegt.
-***
-Die Zählerstände 71 bis 79 liegen nach 16:15 Uhr — das sind 9 Personen. Ob das stimmt, ist eine andere Frage: Achten Sie auf die vielen `entered`-Zeilen ohne anschließendes `counted`.
-***
+<details>
+<summary>**Lösung zu a)**</summary>
+
+Die Zählerstände 71 bis 79 liegen nach 16:15 Uhr — das sind **9 Personen**. Ob das stimmt, ist eine andere Frage: Achten Sie auf die vielen `entered`-Zeilen ohne anschließendes `counted`.
+
+</details>
 
 > **Mühsam.** Die eigentliche Frage ist einfach. Der Aufwand steckt darin, die Daten in eine Form zu bringen, mit der die Tabellenkalkulation umgehen kann.
 >
