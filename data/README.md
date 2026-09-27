@@ -12,6 +12,8 @@ Roter Faden der Veranstaltung.
 | :------------------------------------------------ | :------------------------------------------ | :------------------ | -----: |
 | `produkt_klima_tag_18900801_20251231_01358.txt`   | Klima-Tageswerte (KL), Rohformat            | 01.08.1890 – 31.12.2025 | 47.595 |
 | `fichtelberg_2024.csv`                            | **abgeleitet:** Jahr 2024, Spalten Datum, Tagesmittel (`TMK`), Minimum (`TNK`), Maximum (`TXK`), Dezimalkomma — für die Tabellenkalkulation in Vorlesung 01 | 2024 | 366 |
+| `2024_tagesmittel.txt`, `2024_minimum.txt`, `2024_maximum.txt` | **abgeleitet:** je eine Spalte 2024, ein Wert pro Zeile, Dezimalpunkt — für VL 03/04 | 2024 | 366 |
+| `2015_2024_datum.txt`, `2015_2024_maximum.txt` | **abgeleitet:** Datum (JJJJ-MM-TT) und Tagesmaximum `TXK`, ein Wert pro Zeile — für VL 05 | 2015–2024 | 3.653 |
 | `Metadaten_Geographie_01358.txt`                  | Stationshistorie (Lage, Höhe)               |                     |        |
 
 Besonderheiten: Lücken vom 11.12.1890 bis 31.03.1891 und vom 11.12.1910 bis 30.09.1915; einzelne `-999` in den Temperaturspalten.
