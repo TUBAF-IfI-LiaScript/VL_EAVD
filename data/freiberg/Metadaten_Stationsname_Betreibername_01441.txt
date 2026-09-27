@@ -1,0 +1,10 @@
+Stations_ID;Stationsname;Von_Datum;Bis_Datum
+  1441;Freiberg;18290106;19930430
+  1441;Freiberg;20141218;
+
+Stations_ID;Betreibername;Von_Datum;Bis_Datum
+  1441;Wetterdienst;18290106;19491231
+  1441;Meteorologischer Dienst der DDR;19500101;19901231
+  1441;DWD;19910101;19930430
+  1441;DWD;20141218;
+generiert: 28.04.2026 --  Deutscher Wetterdienst  --

@@ -1,0 +1,8 @@
+Stations_ID;Stationsname;Von_Datum;Bis_Datum
+   853;Chemnitz;19280401;
+
+Stations_ID;Betreibername;Von_Datum;Bis_Datum
+   853;Wetterdienst;19280401;19491231
+   853;Meteorologischer Dienst der DDR;19500101;19901231
+   853;DWD;19910101;
+generiert: 17.06.2026 --  Deutscher Wetterdienst  --

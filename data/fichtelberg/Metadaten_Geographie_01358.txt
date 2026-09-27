@@ -1,0 +1,5 @@
+Stations_id;Stationshoehe;Geogr.Breite;Geogr.Laenge;von_datum;bis_datum;Stationsname
+  1358; 1213.00; 50.4291; 12.9540;18900801;19150930;Fichtelberg
+  1358; 1213.00; 50.4283; 12.9536;19151001;19530630;Fichtelberg
+  1358; 1213.00; 50.4283; 12.9536;19530701;20080731;Fichtelberg
+  1358; 1213.00; 50.4283; 12.9536;20080801;        ;Fichtelberg
