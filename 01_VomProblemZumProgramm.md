@@ -58,9 +58,6 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 
 ## Unser Datensatz
 
-    --{{0}}--
-Heute lernen Sie den Datensatz kennen, der uns durch das ganze Semester begleitet: die Klimamessreihe vom Fichtelberg.
-
 ![Wetterstation](./images/Readme/Wetterstation.png "Eine Wetterstation misst Temperatur, Niederschlag, Wind und vieles mehr.")<!-- style="width: 60%;" -->
 
 Der Deutsche Wetterdienst (DWD) betreibt auf dem **Fichtelberg** (1213 m, höchster Berg Sachsens) eine Wetterstation. Seit dem 1. August 1890 wird dort jeden Tag gemessen. Die Daten sind frei verfügbar.
@@ -74,9 +71,6 @@ Der Deutsche Wetterdienst (DWD) betreibt auf dem **Fichtelberg** (1213 m, höchs
 > Quelle: Deutscher Wetterdienst, [Climate Data Center](https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/kl/historical/), Station 01358, Lizenz [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 ## Drei Aufgaben
-
-    --{{0}}--
-Wir lösen heute drei Aufgaben mit der Tabellenkalkulation. Achten Sie darauf, wie sich Ihr Aufwand von Aufgabe zu Aufgabe verändert — darum geht es eigentlich.
 
 Wir lösen heute drei Aufgaben — ohne eine Zeile Code. Notieren Sie sich bei jeder Aufgabe:
 
@@ -212,9 +206,6 @@ STATIONS_ID;MESS_DATUM;QN_3;  FX;  FM;QN_4; RSK;RSKF; SDK;SHK_TAG;  NM; VPM;  PM
 
 ## Was ist hier passiert?
 
-    --{{0}}--
-Schauen wir uns an, woran es gelegen hat. Die Fragen selbst waren nicht schwieriger geworden — Aufgabe 3 fragt eigentlich dasselbe wie Aufgabe 1b.
-
                                      {{0-1}}
 *******************************************************************************
 
@@ -249,9 +240,6 @@ Diese Handlungsvorschrift ist unabhängig davon, ob es um 7 oder 47.595 Tage geh
 *******************************************************************************
 
 ## Algorithmen
-
-    --{{0}}--
-Algorithmen sind nichts Exotisches. Sie folgen jeden Tag welchen — beim Kochen, beim Zusammenbauen eines Regals, bei einer Laboranleitung.
 
 > Ein **Algorithmus** ist eine eindeutige Handlungsvorschrift zur Lösung eines Problems, die aus endlich vielen, wohldefinierten Einzelschritten besteht.
 
@@ -301,9 +289,6 @@ Programmiersprachen sind deshalb ein Kompromiss:
 
 ### Algorithmen darstellen
 
-    --{{0}}--
-Bevor wir eine Programmiersprache verwenden, gibt es zwei Zwischenschritte, die Ihnen beim Planen helfen: Pseudocode und Ablaufdiagramme.
-
 Bevor man programmiert, hilft es, den Algorithmus aufzuschreiben — noch ohne sich um die Regeln einer Sprache zu kümmern.
 
 <div class="flex-container">
@@ -334,22 +319,21 @@ Gib frosttage aus.
             |
             v
      .-------------.   nein
-    < noch ein Tag? >-----------.
-     '-------------'            |
-            | ja                v
-            v            +-------------+
-     .-------------.     | Ausgabe:    |
-    < Minimum < 0 ? >    | frosttage   |
-     '-------------'     +-------------+
-      | ja       | nein         |
-      v          |              v
- +-----------+   |          ( Ende )
- | frosttage |   |
- |  + 1      |   |
- +-----------+   |
-      |          |
-      '----+-----'
-           | zurück zur Frage "noch ein Tag?"
++-->< noch ein Tag? >---------.
+|    '-------------'          |
+|           | ja              v
+|           v          +-------------+
+|    .-------------.   | Ausgabe:    |
+|   < Minimum < 0 ? >  | frosttage   |
+|    '-------------'   +-------------+
+|     | ja      | nein        |
+|     v         |             v
+| +-----------+ |         ( Ende )
+| | frosttage | |
+| |   + 1     | |
+| +-----------+ |
+|     |         |
++-----+---------+
 ```
 
 </div>
@@ -388,9 +372,6 @@ Ordnen Sie die drei Aufgaben von heute zu:
 
 ## Wann lohnt sich ein Programm?
 
-    --{{0}}--
-Wir wollen Ihnen die Tabellenkalkulation nicht ausreden. Sie ist für viele Aufgaben genau das richtige Werkzeug. Es geht darum, zu erkennen, wann sie es nicht mehr ist.
-
 Die Tabellenkalkulation ist ein hervorragendes Werkzeug. Ein Programm lohnt sich, wenn mindestens eines davon zutrifft:
 
 <!-- data-type="none" -->
@@ -412,12 +393,13 @@ So sieht die Lösung von Aufgabe 3 in Vorlesung 12 aus:
 
 ```python
 import pandas as pd
-df = pd.read_csv("produkt_klima_tag_18900801_20251231_01358.txt", sep=";", skipinitialspace=True, na_values=-999)
+df = pd.read_csv("produkt_klima_tag_18900801_20251231_01358.txt",
+                 sep=";", skipinitialspace=True, na_values=-999)
 df["Jahr"] = df["MESS_DATUM"] // 10000
 print((df["TNK"] < 0).groupby(df["Jahr"]).sum())
 ```
 
-Vier Zeilen. Sie müssen heute noch keine davon verstehen.
+Vier Anweisungen. Sie müssen heute noch keine davon verstehen.
 
 *******************************************************************************
 
@@ -426,7 +408,7 @@ Vier Zeilen. Sie müssen heute noch keine davon verstehen.
 
 Und das Ergebnis, gemittelt über die vollständig gemessenen Jahre jedes Jahrzehnts:
 
-<!-- data-type="barchart" data-title="Mittlere Zahl der Frosttage pro Jahr, Fichtelberg" data-xlabel="Jahrzehnt" data-ylabel="Frosttage" -->
+<!-- data-type="barchart" data-show data-title="Mittlere Zahl der Frosttage pro Jahr, Fichtelberg" data-xlabel="Jahrzehnt" data-ylabel="Frosttage" -->
 | Jahrzehnt | Frosttage |
 | :-------- | --------: |
 | 1890er    |     177.6 |

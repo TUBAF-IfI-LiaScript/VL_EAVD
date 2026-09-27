@@ -58,9 +58,6 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 
 ## Rückblick
 
-    --{{0}}--
-Letzte Woche haben wir gesehen, dass ein Vergleich wie minimum kleiner null einen Wahrheitswert liefert. Heute nutzen wir diese Wahrheitswerte, um Entscheidungen zu treffen.
-
 Aus der letzten Vorlesung wissen Sie: Ein Vergleich liefert einen Wahrheitswert.
 
 ```python
@@ -76,9 +73,6 @@ Die Frage aus Vorlesung 01 war aber nicht "Ist dieser Wert kleiner als 0?", sond
 Dafür brauchen wir zwei neue Werkzeuge: eines, das abhängig von einem Wahrheitswert **etwas tut oder lässt**, und eines, das dieselbe Prüfung **für jeden Wert wiederholt**.
 
 ## Python auf Ihrem Rechner
-
-    --{{0}}--
-Ab heute arbeiten Sie zusätzlich mit Python auf Ihrem eigenen Rechner. Die Beispiele im Browser bleiben, aber Übungsaufgaben lösen Sie in Dateien.
 
 Ab heute arbeiten wir zusätzlich mit Python-Dateien auf Ihrem Rechner. Die Browserbeispiele bleiben — für die Übungen schreiben Sie aber `.py`-Dateien.
 
@@ -113,9 +107,6 @@ Unter Windows heißt der Befehl gegebenenfalls `py frost.py`.
 > Warum der Umweg über Dateien? Ein Programm in einer Datei können Sie **speichern, wieder ausführen, weitergeben und verbessern**. Genau das unterscheidet es von einer Formel, die man einmal in eine Zelle tippt.
 
 ## Entscheidungen: `if`
-
-    --{{0}}--
-Die einfachste Entscheidung lautet: Wenn eine Bedingung zutrifft, tu etwas. Sonst tu nichts.
 
 ```` @BlocklyId(ifeinfach, runner=ifeinfach hideRunner height=260)
 minimum = -3.5
@@ -203,9 +194,6 @@ Genau **einer** der beiden Blöcke wird ausgeführt — nie beide, nie keiner.
 
 ### Mehrere Fälle: `elif`
 
-    --{{0}}--
-Der Deutsche Wetterdienst unterscheidet mehrere Arten von Tagen. Das ist ein schönes Beispiel für mehrere Fälle, die sich gegenseitig ausschließen.
-
 Der Deutsche Wetterdienst kennt feste Begriffe für besondere Tage, alle definiert über das **Tagesmaximum**:
 
 <!-- data-type="none" -->
@@ -244,6 +232,8 @@ elif maximum >= 30:
     print("Heißer Tag")
 ```
 @Pyodide.eval
+
+Legen Sie sich fest, **bevor** Sie das Programm ausführen:
 
 [( )] `Heißer Tag`
 [(X)] `Sommertag`
@@ -307,9 +297,6 @@ Kein Programm erkennt einen Fehlwert von selbst. Sie müssen wissen, wie er im D
 
 ## Wiederholen: `for`
 
-    --{{0}}--
-Jetzt können wir einen einzelnen Tag prüfen. Aber wir haben 366 Tage. Wir brauchen eine Möglichkeit, dieselbe Prüfung für jeden Wert zu wiederholen.
-
 Eine Prüfung für einen Wert können wir jetzt. Für 366 Werte brauchen wir eine **Schleife**.
 
 In Python schreibt man mehrere Werte als **Liste** in eckige Klammern. Die `for`-Schleife nimmt sich dann **jeden Wert der Reihe nach** vor:
@@ -329,9 +316,6 @@ Lesen Sie die Schleife als: _"Für jedes `minimum` in `minima`: führe den einge
 > Listen lernen Sie in Vorlesung 05 genauer kennen. Heute reicht: Eine Liste enthält mehrere Werte, und `for` geht sie der Reihe nach durch.
 
 ### Das Zählmuster
-
-    --{{0}}--
-Jetzt kombinieren wir die Schleife mit einer Bedingung und einer Variable, die mitzählt. Dieses Muster werden Sie in diesem Kurs dutzendfach sehen.
 
 Jetzt setzen wir alles zusammen — Schleife, Bedingung und eine Variable, die mitzählt:
 
@@ -443,55 +427,28 @@ print(frosttage)
 
 ## Die Antwort auf die Leitfrage
 
-    --{{0}}--
-Jetzt haben wir alles, um die Leitfrage zu beantworten. Hier sind alle 366 Tiefsttemperaturen des Jahres 2024.
-
-Hier sind alle 366 Tiefsttemperaturen des Jahres 2024. Wie man sie direkt aus der Datei liest, zeigen wir in Vorlesung 06 — heute stehen sie als Liste im Programm.
+Die 366 Tiefsttemperaturen des Jahres 2024 liegen in unserem Repository, ein Wert pro Zeile. Statt sie abzutippen, holen wir sie direkt von dort:
 
 ```python
-minima_2024 = [
-     -1.9,  -2.4,   0.1,  -1.7,  -1.7,  -4.2, -11.9, -14.1, -12.1, -11.1, -10.2,  -8.3,
-     -7.5,  -6.5,  -8.3,  -9.0,  -9.5,  -8.5, -10.6, -10.5,  -7.8,  -1.9,  -2.4,  -0.9,
-     -3.1,  -3.3,  -4.4,  -4.4,   1.8,   2.3,  -2.4,  -3.3,  -3.8,   0.2,   1.4,   0.0,
-     -1.0,  -4.1,  -3.0,   2.4,   2.6,   0.2,  -0.8,  -3.2,  -2.4,   3.5,   4.6,   1.1,
-     -0.7,  -0.4,  -0.6,  -0.8,   0.4,  -3.0,  -3.2,  -1.8,  -1.8,  -1.5,  -1.7,  -2.1,
-      2.6,   1.3,   1.2,   2.5,   0.1,  -4.7,  -5.2,  -5.4,  -3.4,  -0.5,   0.2,   0.1,
-     -0.7,   2.4,   4.1,  -2.4,  -2.6,  -2.1,  -0.9,   1.6,   1.0,  -0.2,  -3.7,  -4.2,
-     -2.8,  -3.7,   1.4,  -1.0,  -0.6,   9.7,   8.8,   0.5,   0.9,   0.4,   1.5,   3.1,
-      7.8,  14.4,  14.0,   0.4,   0.4,   1.5,   5.0,   6.8,   6.0,  -2.7,  -3.2,  -3.1,
-     -3.0,  -2.6,  -3.6,  -5.4,  -6.9,  -7.6,  -4.0,  -3.8,  -2.6,   3.1,   4.7,   5.4,
-      8.4,   7.0,   6.3,   5.3,   4.9,   6.5,   6.4,   3.2,   3.3,   4.0,   5.4,   7.2,
-      6.8,   6.7,   5.9,   5.5,   5.9,   5.7,   5.3,   6.6,   6.7,   9.2,   7.8,   6.9,
-      8.3,   8.1,   8.3,   9.9,   4.9,   4.8,   7.9,   7.4,   9.4,   8.4,   5.6,   4.9,
-      8.8,   7.1,   8.8,   9.0,   6.1,   6.5,   2.7,   2.8,   4.0,   5.5,   7.8,   6.6,
-      9.9,  10.2,   7.2,   6.3,  11.4,   8.4,   9.9,   9.2,   9.4,  12.9,  14.3,  13.6,
-     12.9,  10.4,   6.5,   5.9,   5.6,   4.5,   7.7,  11.1,   6.8,   7.9,  13.2,  14.3,
-     13.5,  14.1,   9.5,   9.2,  13.5,  10.2,   9.6,  10.5,  13.3,  14.7,  15.8,  11.0,
-     10.6,   9.1,   7.7,  11.8,  12.8,   8.9,   8.4,  10.0,  14.6,  14.0,   9.7,   9.0,
-      9.9,   8.0,   9.6,  14.3,  11.6,  10.9,  10.8,  12.5,  12.2,  16.9,  15.2,  14.8,
-     13.9,  14.7,  13.0,   8.7,  10.6,   7.1,   7.0,  11.7,  14.2,  10.0,   8.9,  10.3,
-     13.2,  15.8,  14.1,  13.0,  14.6,  15.1,  15.1,  16.1,  13.9,  12.7,  12.8,  13.8,
-      8.2,   6.6,   3.6,   2.3,   1.7,   2.7,   1.9,   3.8,   9.0,   9.4,   8.0,   7.0,
-      7.3,  10.5,  10.4,   7.5,   7.5,   7.7,   4.5,   1.0,   0.9,   0.8,   4.3,   3.4,
-      2.4,   3.1,   1.8,   1.2,   4.1,   8.0,   6.5,   3.8,  -0.2,  -0.1,   1.0,  -0.3,
-     -0.4,   0.8,   2.5,   4.7,   7.0,   6.4,   8.5,   3.2,   2.4,   3.4,   8.9,   5.4,
-      7.6,   7.2,   6.7,   5.9,   3.8,   2.6,  -1.9,  -2.0,   3.3,   5.7,  -1.7,  -1.8,
-     -1.4,   3.1,   1.4,   1.0,  -3.9,  -3.2,  -2.9,  -1.8,  -3.4,  -3.6,  -3.9,  -3.3,
-     -5.8,  -8.3,  -9.2,  -9.0,  -4.3,   6.3,   0.6,  -1.0,  -2.0,  -5.2,  -5.2,   1.2,
-      1.2,  -3.6,  -5.0,  -6.2,  -3.7,  -3.8,  -2.7,  -4.6,  -4.2,  -6.2,  -4.0,  -3.1,
-     -7.6,  -4.5,   0.1,  -0.8,  -0.8,  -2.5,  -5.0,  -5.5,  -4.9,  -6.0,  -5.2,  -5.7,
-     -1.1,   4.4,   5.0,   0.2,  -0.6,  -1.9
-]
+from pyodide.http import open_url
+
+url = ("https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/"
+       "VL_EAVD/master/data/fichtelberg/2024_minimum.txt")
+text = open_url(url).read()
 
 frosttage = 0
-
-for minimum in minima_2024:
-    if minimum < 0:
+for wert in text.split():
+    if float(wert) < 0:
         frosttage = frosttage + 1
 
 print("Frosttage 2024:", frosttage)
 ```
 @Pyodide.eval
+
+Zwei Zeilen sind neu:
+
+* `open_url(url).read()` holt die Datei als einen einzigen langen **Text**. Wie man Dateien liest, behandeln wir ausführlich in Vorlesung 06.
+* `text.split()` zerlegt diesen Text an Zeilenumbrüchen und Leerzeichen in eine Liste einzelner Texte: `"-1.9\n-2.4\n0.1"` wird zu `["-1.9", "-2.4", "0.1"]`. Aus jedem macht `float(wert)` eine Zahl — genau wie in Vorlesung 02.
 
 > Dieselben fünf Zeilen zählen 7 oder 366 oder 47.595 Werte. Das Programm wird nicht länger, wenn die Daten mehr werden. Genau das war in der Tabellenkalkulation das Problem.
 

@@ -46,9 +46,6 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 
 ## Rückblick
 
-    --{{0}}--
-Letzte Woche haben Sie gesehen, wo die Tabellenkalkulation an ihre Grenzen kommt. Als Vorbereitung sollten Sie beschreiben, wie man den wärmsten Tag findet.
-
 Ihre Hausaufgabe: _Den wärmsten Tag in `fichtelberg_2024.csv` finden, ohne `MAX` zu benutzen._ Eine mögliche Lösung:
 
 ``` text
@@ -62,9 +59,6 @@ Gib den bisher wärmsten Tag aus.
 > Darin stecken schon fast alle Zutaten eines Programms: Man muss sich etwas **merken** (heute), etwas **vergleichen** und etwas **wiederholen** (nächste Woche). Heute kümmern wir uns um das Merken und Rechnen.
 
 ## Vom Text zur Ausführung
-
-    --{{0}}--
-Ein Prozessor versteht nur sehr einfache Befehle in Form von Nullen und Einsen. Irgendjemand muss unseren Programmtext also übersetzen.
 
 Ein Prozessor versteht nur **Maschinenbefehle** — sehr einfache Anweisungen wie "lade Wert", "addiere", "springe", codiert als Bitmuster. Zwischen Ihrem Programmtext und dem Prozessor steht deshalb ein Übersetzer. Bei Python ist das der **Interpreter**:
 
@@ -100,9 +94,6 @@ Zwei Dinge sollten Sie sich merken:
 
 ## Die erste Anweisung
 
-    --{{0}}--
-Beginnen wir mit der einfachsten Anweisung überhaupt: etwas auf den Bildschirm schreiben.
-
 Die Anweisung `print` gibt etwas aus. Was ausgegeben werden soll, steht in runden Klammern. Text steht in Anführungszeichen.
 
 > Nutzen Sie die Schaltflächen über dem Editor, um zwischen **Blöcken** und **Text** zu wechseln. Beide zeigen dasselbe Programm.
@@ -125,9 +116,6 @@ print(1213)
 * `print` kann mehrere Dinge auf einmal ausgeben, getrennt durch Kommas: `print("Höhe:", 1213, "m")`
 
 ## Rechnen
-
-    --{{0}}--
-Python ist auch ein ziemlich guter Taschenrechner. Die Rechenzeichen sind die, die Sie erwarten, mit ein paar Ergänzungen.
 
 <!-- data-type="none" -->
 | Operator | Bedeutung             | Beispiel   | Ergebnis |
@@ -170,9 +158,6 @@ Die zweite Zeile gibt `6 27` aus. Python hat zwei Werte gesehen — `6` und `26 
 *******************************************************************************
 
 ## Variablen
-
-    --{{0}}--
-Um sich etwas zu merken, braucht ein Programm Variablen. Eine Variable ist ein Name für einen Wert.
 
 Eine **Variable** ist ein Name, unter dem sich ein Programm einen Wert merkt.
 
@@ -257,9 +242,6 @@ Ein Variablenname
 > Ein guter Name spart einen Kommentar. `x = 1213` erklärt nichts, `stationshoehe_m = 1213` alles.
 
 ## Datentypen
-
-    --{{0}}--
-Jeder Wert in Python hat einen Typ. Der Typ bestimmt, was man mit dem Wert tun kann.
 
 Jeder Wert hat einen **Datentyp**. Der Typ entscheidet, was man mit dem Wert tun kann.
 
@@ -397,9 +379,6 @@ print(minimum < 0)
 > Gute Kommentare erklären, **warum** etwas so ist — nicht **was** dasteht. `zaehler = zaehler + 1  # erhöhe zaehler um 1` hilft niemandem.
 
 ## Fehlermeldungen lesen
-
-    --{{0}}--
-Fehlermeldungen sind kein Zeichen von Versagen. Sie sind die Art, wie der Interpreter mit Ihnen spricht. Wer sie lesen kann, hilft sich selbst.
 
 Fehler sind normal — auch nach Jahren der Programmiererfahrung. Entscheidend ist, die Meldung zu **lesen**, statt sie wegzuklicken.
 
