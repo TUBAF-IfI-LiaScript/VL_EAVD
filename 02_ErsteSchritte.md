@@ -221,6 +221,30 @@ Die Ausgabe lautet also `15 9`.
 
 *******************************************************************************
 
+### Typische Fehlvorstellung: Variablen rechnen nach
+
+> **Typische Fehlvorstellung:** _„Eine Variable merkt sich die Rechnung — wie eine Formel in der Tabellenkalkulation.“_
+
+```python
+minimum = -3.5
+maximum = 2.6
+spanne = maximum - minimum
+maximum = 8.0
+print(spanne)
+```
+@Pyodide.eval
+
+Legen Sie sich fest, **bevor** Sie das Programm ausführen: Was wird ausgegeben?
+
+[(X)] `6.1`
+[( )] `11.5`
+[( )] eine Fehlermeldung, weil `maximum` zweimal belegt wird
+***
+In der Tabellenkalkulation würde `=B2-B1` sofort neu rechnen, wenn sich `B2` ändert. In Python nicht: In Zeile 3 wird die Differenz **einmal** ausgerechnet und das Ergebnis `6.1` unter `spanne` abgelegt. Welche Rechnung dahintersteckt, weiß `spanne` danach nicht mehr — und dass sich `maximum` später ändert, bemerkt sie nicht.
+
+Soll `spanne` den neuen Wert berücksichtigen, muss man die Zeile `spanne = maximum - minimum` erneut ausführen.
+***
+
 ### Namen wählen
 
 Ein Variablenname
@@ -240,6 +264,10 @@ Ein Variablenname
 | `höhe`          | ja       | besser `hoehe` — Umlaute machen früher oder später Ärger |
 
 > Ein guter Name spart einen Kommentar. `x = 1213` erklärt nichts, `stationshoehe_m = 1213` alles.
+
+> **Typische Fehlvorstellung:** _„Der Rechner versteht, was ein Name bedeutet.“_
+>
+> `frosttage = 0` zählt keine Frosttage. `mittelwert = 0` berechnet keinen Mittelwert. Namen sind nur Etiketten für Sie und andere Menschen. Was in einer Variable steht, bestimmen ausschließlich die Anweisungen, die Sie schreiben.
 
 ## Datentypen
 
@@ -451,6 +479,17 @@ In Zeile 4 wird `y` zu `14 - 7 = 7` — der Wert bleibt also zufällig gleich.
 [( )] `ValueError`
 ***
 Text und Zahl lassen sich nicht mit `+` verbinden. Richtig wäre `print("Frosttage: " + str(127))` oder einfacher `print("Frosttage:", 127)`.
+***
+
+**Welche Zeilen sind gültige Zuweisungen?**
+
+[[X]] `hoehe = 1213`
+[[ ]] `1213 = hoehe`
+[[ ]] `hoehe + 1 = neue_hoehe`
+[[X]] `neue_hoehe = hoehe + 1`
+[[X]] `hoehe = hoehe + 1`
+***
+Links vom `=` steht immer **genau ein Name** — dort wird das Ergebnis abgelegt. Rechts steht der Ausdruck, der zuerst ausgerechnet wird. Anders als in der Mathematik lässt sich eine Zuweisung nicht "umdrehen".
 ***
 
 **Finden Sie alle Fehler.**

@@ -47,7 +47,7 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 
 ## Von der Mühsal zum Werkzeug
 
-> **Geplant:** Die 60–80 Zeilen aus VL 06 neben `pd.read_csv(url, sep=";", skipinitialspace=True, na_values=-999)` stellen.
+> **Geplant:** Die rund 50 Zeilen aus VL 06 neben `pd.read_csv(url, sep=";", skipinitialspace=True, na_values=-999)` stellen.
 
 ## Der DataFrame
 

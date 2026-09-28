@@ -374,7 +374,7 @@ erlebt.
 Das didaktische Rückgrat des Kurses ist eine bewusste Reihenfolge: **erst
 mühsam selbst, dann elegant mit Werkzeug.**
 
-In Vorlesung 06 lesen Sie die Rohdatei mit Bordmitteln ein. Das kostet 60 bis 80
+In Vorlesung 06 lesen Sie die Rohdatei mit Bordmitteln ein. Das kostet rund 50
 Zeilen und ist unangenehm. In Vorlesung 11 tut dasselbe eine einzige Zeile:
 
 ```python

@@ -183,11 +183,27 @@ print("Wärmster Tag:", daten[bester], "mit", maxima[bester], "°C")
 
 > Statt Wert **und** Datum merken wir uns nur den **Index** des bisher wärmsten Tages. Über ihn kommen wir an beides.
 
+### Typische Fehlvorstellung: Index oder Wert?
+
+> **Typische Fehlvorstellung:** _„`bester` enthält die höchste Temperatur.“_
+
+Was gibt `print(bester)` nach der Schleife im Beispiel oben aus?
+
+[( )] `26.9`
+[(X)] `2`
+[( )] `"2024-08-13"`
+***
+`bester` ist ein **Index**, keine Temperatur: die Position des wärmsten Tages in beiden Listen. Die Temperatur steht in `maxima[bester]`, das Datum in `daten[bester]`. Wer Index und Inhalt verwechselt, vergleicht Positionen mit Temperaturen — und Python meldet keinen Fehler, weil beides Zahlen sind.
+***
+
 ## Ein Ergebnis pro Jahr
 
 Für die Jahre 2015 bis 2024 liegen Datum und Tagesmaximum als zwei Dateien im Repository — 3.653 Tage, ein Wert pro Zeile, wie in Vorlesung 03.
 
 > **Live Hacking.** Diesen Abschnitt entwickeln wir in der Vorlesung gemeinsam. Die Versuche unten zeigen die typischen Irrwege.
+
+> [!NOTE]
+> Wie in Vorlesung 03: `open_url` funktioniert nur hier im Browser. Auf Ihrem Rechner lesen Sie Dateien ab Vorlesung 06 mit `open()`.
 
 ### Versuch 1
 
@@ -224,6 +240,31 @@ Jedes Jahr: -100,0 °C. **Was ist passiert?**
 Die Lösung: `daten[i][0:4] == str(jahr)`. Genau der Unterschied zwischen `"-14.1"` und `-14.1` aus Vorlesung 02.
 
 *******************************************************************************
+
+### Typische Fehlvorstellung: Zahlen als Text vergleichen
+
+> **Typische Fehlvorstellung:** _„Was wie eine Zahl aussieht, wird wie eine Zahl verglichen.“_
+
+Nach `split()` sind alle Werte **Text**. Was passiert, wenn man `float()` vergisst?
+
+```python
+maxima = "28.1 24.8 9.5".split()
+print(maxima)
+print("9.5" > "28.1")
+print(max(maxima))
+```
+@Pyodide.eval
+
+Legen Sie sich fest, **bevor** Sie das Programm ausführen: Welchen Wert liefert `max(maxima)`?
+
+[( )] `"28.1"`
+[(X)] `"9.5"`
+[( )] eine Fehlermeldung, weil man Texte nicht vergleichen kann
+***
+Texte werden **Zeichen für Zeichen** verglichen, wie Wörter im Wörterbuch. Das erste Zeichen von `"9.5"` ist `9`, das von `"28.1"` ist `2` — und `9` kommt nach `2`. Also gilt `"9.5" > "28.1"`.
+
+Das Programm läuft ohne Fehlermeldung und liefert ein plausibel aussehendes, aber falsches Ergebnis. In Versuch 1 wäre dieser Fehler aufgefallen, weil `float(maxima[i])` die Umwandlung erzwingt.
+***
 
 ### Versuch 2
 

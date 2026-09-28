@@ -265,7 +265,7 @@ Ergebnis: 1. **Was ist jetzt passiert?**
 
 Wir brauchen **zwei** Variablen: die laufende Serie und die längste bisher.
 
-```` @BlocklyId(serie, runner=serie hideRunner height=440)
+```python
 minima = [-1.9, -2.4, 0.1, -1.7, -1.7, -4.2, 0.3, -2.0]
 
 serie = 0
@@ -280,10 +280,6 @@ for minimum in minima:
         serie = 0
 
 print("Längste Frostperiode:", laengste, "Tage")
-````
-
-```python
-# runner: serie
 ```
 @Pyodide.eval
 
@@ -335,6 +331,9 @@ for wert in text.split():
 print("Längste Frostperiode 2024:", laengste, "Tage")
 ```
 @Pyodide.eval
+
+> [!NOTE]
+> Wie in Vorlesung 03: `open_url` funktioniert nur hier im Browser. Auf Ihrem Rechner lesen Sie Dateien ab Vorlesung 06 mit `open()`.
 
 Lesen Sie das Ergebnis ab und tragen Sie es ein:
 

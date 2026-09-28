@@ -425,6 +425,29 @@ print(frosttage)
 
 *******************************************************************************
 
+### Typische Fehlvorstellung: Die Schleifenvariable
+
+> **Typische Fehlvorstellung:** _„Nach der Schleife ist die Schleifenvariable weg — oder sie steht wieder am Anfang.“_
+
+```python
+minima = [-1.9, -2.4, 0.1, -1.7]
+
+for minimum in minima:
+    print("in der Schleife:", minimum)
+
+print("nach der Schleife:", minimum)
+```
+@Pyodide.eval
+
+Legen Sie sich fest, **bevor** Sie das Programm ausführen: Was gibt die letzte Zeile aus?
+
+[( )] eine Fehlermeldung, weil `minimum` nur in der Schleife existiert
+[( )] `nach der Schleife: -1.9`
+[(X)] `nach der Schleife: -1.7`
+***
+`minimum` ist eine ganz gewöhnliche Variable. Die Schleife weist ihr nacheinander jeden Wert der Liste zu — nach dem letzten Durchlauf bleibt der **letzte** Wert stehen. Wer nach der Schleife mit `minimum` weiterrechnet, rechnet also nur mit dem letzten Tag.
+***
+
 ## Die Antwort auf die Leitfrage
 
 Die 366 Tiefsttemperaturen des Jahres 2024 liegen in unserem Repository, ein Wert pro Zeile. Statt sie abzutippen, holen wir sie direkt von dort:
@@ -449,6 +472,9 @@ Zwei Zeilen sind neu:
 
 * `open_url(url).read()` holt die Datei als einen einzigen langen **Text**. Wie man Dateien liest, behandeln wir ausführlich in Vorlesung 06.
 * `text.split()` zerlegt diesen Text an Zeilenumbrüchen und Leerzeichen in eine Liste einzelner Texte: `"-1.9\n-2.4\n0.1"` wird zu `["-1.9", "-2.4", "0.1"]`. Aus jedem macht `float(wert)` eine Zahl — genau wie in Vorlesung 02.
+
+> [!NOTE]
+> **Nur im Browser:** `pyodide.http.open_url` gibt es nur in der Python-Umgebung dieser Webseite. In Visual Studio Code auf Ihrem Rechner führt die Zeile zu einem `ModuleNotFoundError`. Dort lesen Sie die Datei direkt — wie das geht, zeigt Vorlesung 06.
 
 > Dieselben fünf Zeilen zählen 7 oder 366 oder 47.595 Werte. Das Programm wird nicht länger, wenn die Daten mehr werden. Genau das war in der Tabellenkalkulation das Problem.
 
