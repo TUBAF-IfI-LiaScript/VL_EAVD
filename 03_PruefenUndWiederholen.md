@@ -72,39 +72,39 @@ Die Frage aus Vorlesung 01 war aber nicht "Ist dieser Wert kleiner als 0?", sond
 
 Dafür brauchen wir zwei neue Werkzeuge: eines, das abhängig von einem Wahrheitswert **etwas tut oder lässt**, und eines, das dieselbe Prüfung **für jeden Wert wiederholt**.
 
-## Python auf Ihrem Rechner
+## Dieselben Beispiele auf Ihrem Rechner
 
-Ab heute arbeiten wir zusätzlich mit Python-Dateien auf Ihrem Rechner. Die Browserbeispiele bleiben — für die Übungen schreiben Sie aber `.py`-Dateien.
+Alle Codebeispiele laufen hier direkt im Browser. Sie sind aber **gewöhnliches Python**: Kopieren Sie ein Beispiel in eine Datei, führen Sie sie auf Ihrem Rechner aus — das Ergebnis ist dasselbe.
 
 <div class="flex-container">
 <div class="flex-child">
 
-**1. Datei anlegen**
+**Im Browser**
 
-In Visual Studio Code: _Datei → Neue Datei_, speichern als `frost.py`.
-
-```python frost.py
+```python
 minimum = -3.5
 print("Minimum:", minimum)
+print("Frost?", minimum < 0)
 ```
+@Pyodide.eval
 
 </div>
 <div class="flex-child">
 
-**2. Ausführen**
-
-Entweder über den ▷-Knopf oben rechts, oder im Terminal:
+**Auf Ihrem Rechner**, als Datei `frost.py`:
 
 ```bash
-python frost.py
+$ python frost.py
+Minimum: -3.5
+Frost? True
 ```
 
-Unter Windows heißt der Befehl gegebenenfalls `py frost.py`.
-
 </div>
 </div>
 
-> Warum der Umweg über Dateien? Ein Programm in einer Datei können Sie **speichern, wieder ausführen, weitergeben und verbessern**. Genau das unterscheidet es von einer Formel, die man einmal in eine Zelle tippt.
+> Nutzen Sie das: Jedes Beispiel dieser Vorlesung ist ein Ausgangspunkt für eigene Versuche in Visual Studio Code. Eine Datei können Sie speichern, verändern, erneut ausführen und weitergeben — genau das unterscheidet ein Programm von einer Formel, die man einmal in eine Zelle tippt.
+
+Es gibt eine einzige Ausnahme: Zeilen mit `open_url`, mit denen wir Daten aus dem Repository in den Browser holen. Sie sind im Text jeweils markiert.
 
 ## Entscheidungen: `if`
 
