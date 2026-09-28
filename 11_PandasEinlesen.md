@@ -33,7 +33,7 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 > [!WARNING]
 > **Diese Vorlesung ist in Vorbereitung.** Das Dokument enthält bisher nur die geplante Gliederung.
 
-**Leitfrage:** _48.000 Zeilen in einer Zeile?_
+**Leitfrage:** _48.000 Zeilen in einer Anweisung?_
 
 **Fragen an die heutige Veranstaltung ...**
 

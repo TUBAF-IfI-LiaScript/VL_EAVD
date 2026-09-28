@@ -63,7 +63,7 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 
 ## Kontrollfragen
 
-> **Geplant:** Ergebnis eines `groupby` skizzieren (Klausurformat aus der README).
+> **Geplant:** Ergebnis eines `groupby` skizzieren (Klausurformat aus VL 00, Abschnitt _Prüfung_).
 
 ## Nächste Woche
 

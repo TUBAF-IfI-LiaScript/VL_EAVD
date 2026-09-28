@@ -47,7 +47,7 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 
 ## Skript oder Notebook?
 
-> **Geplant:** Begründeter Werkzeugwechsel (README, Methodik Punkt 6).
+> **Geplant:** Begründeter Werkzeugwechsel (VL 00, Abschnitt _Werkzeuge_; README, Prinzip _Klare Werkzeugwahl_).
 
 ## Arbeiten mit Zellen
 

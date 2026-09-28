@@ -63,7 +63,7 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 
 ## Prüfungsvorbereitung
 
-> **Geplant:** Musteraufgaben zu allen Aufgabentypen aus der README.
+> **Geplant:** Musteraufgaben zu allen Aufgabentypen aus VL 00, Abschnitt _Prüfung_.
 
 ## Material
 

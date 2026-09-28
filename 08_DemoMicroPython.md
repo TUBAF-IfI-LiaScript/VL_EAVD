@@ -57,7 +57,7 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 <!-- data-type="none" -->
 | Kriterium                   | ESP32 + Ultraschallsensor HC-SR04                            | Calliope mini                                                  |
 | :-------------------------- | :----------------------------------------------------------- | :------------------------------------------------------------- |
-| Szenario                    | Personenzähler an der Hörsaaltür (README, VL 00/01)          | z. B. Temperatur, Licht oder Bewegung im Hörsaal               |
+| Szenario                    | Personenzähler an der Hörsaaltür (VL 00/01)          | z. B. Temperatur, Licht oder Bewegung im Hörsaal               |
 | Aufbau                      | Verkabelung nötig                                            | Sensoren auf der Platine, sofort einsatzbereit                 |
 | Code                        | liegt vor: `examples/00_Einfuehrungsbeispiele/Personenzaehler/personenzaehler.py`, auf Hardware noch **ungetestet** | neu zu schreiben; MicroPython-Unterstützung für das eingesetzte Modell prüfen |
 | Bezug zum Datensatz         | Zählen, Entprellen, Zeitstempel                              | Temperatur — direkter Bezug zur Fichtelberg-Reihe              |
@@ -70,7 +70,7 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 
 ## Was schiefgeht
 
-> **Geplant:** Die Annahmen im Messprogramm live verletzen und im Datenstrom sichtbar machen. Für den Personenzähler steht die Tabelle in der README (Messbereich, Entprellzeit, Richtungssinn).
+> **Geplant:** Die Annahmen im Messprogramm live verletzen und im Datenstrom sichtbar machen. Für den Personenzähler steht die Tabelle in VL 00, Abschnitt _Zurück zum Personenzähler_ (Messbereich, Entprellzeit, Richtungssinn).
 >
 > * **Typische Fehlvorstellung: „Ein Sensor misst, was draufsteht.“** — Beispiele je nach Hardware (Chiptemperatur statt Raumtemperatur; zwei Personen nebeneinander = eine Zählung).
 > * **Typische Fehlvorstellung: „Ein Zeitstempel ist die Zeit des Ereignisses.“** — Zeitstempel entsteht beim Empfang am Rechner bzw. beim Schreiben; Verzögerung, Uhr des Controllers ohne Echtzeituhr.
