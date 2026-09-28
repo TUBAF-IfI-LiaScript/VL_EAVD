@@ -55,7 +55,11 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 
 ## NumPy
 
-> **Geplant:** Frosttage 2024 als Array: `(minima < 0).sum()` statt Zählmuster. Vergleich Liste vs. Array.
+> **Geplant:** Arrays als Kern der Vorlesung (Hinweis darauf steht in VL 05).
+>
+> * **Typische Fehlvorstellung: „Ein Array ist dasselbe wie eine Liste“** — Vorhersage-Quiz mit `werte * 2` (Liste: wiederholt, Array: verdoppelt), `werte + werte` (aneinanderhängen vs. elementweise addieren), `werte < 0` (Liste: `TypeError`, Array: `[False, True]`), gemischte Typen.
+> * Von der Mühsal zum Werkzeug: Zählmuster (VL 03) und Mittelwert (VL 04) gegenüber `(minima < 0).sum()` und `minima.mean()`.
+> * Überleitung: Eine pandas-Spalte ist ein Array mit Beschriftung.
 
 ## Kontrollfragen
 

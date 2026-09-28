@@ -116,6 +116,8 @@ print(minima[:3])     # die ersten drei
 
 > Das kennen Sie schon: `datum[0:4]` aus Vorlesung 02 funktioniert bei Texten genauso. Auch dort ist der Endindex **nicht** enthalten.
 
+> In vielen anderen Programmiersprachen und in der Bibliothek NumPy heißt eine solche Folge von Werten mit Index ein **Array**. Arrays sehen aus wie Listen, verhalten sich beim Rechnen aber anders — mehr dazu in Vorlesung 10.
+
                                      {{1}}
 *******************************************************************************
 
@@ -158,7 +160,30 @@ for i in range(len(minima)):
 
 > Wozu der Umweg über den Index, wenn `for minimum in minima` einfacher ist? Weil man manchmal **zwei Listen gleichzeitig** durchlaufen muss.
 
-## Zusammengehörige Werte
+### Typische Fehlvorstellung: `range` ist eine Liste
+
+> **Typische Fehlvorstellung:** _„`range(2015, 2025)` erzeugt die Liste aller Jahre von 2015 bis 2025.“_
+
+```python
+jahre = range(2015, 2025)
+print(jahre)
+print(list(jahre))
+print(len(jahre), 2025 in jahre)
+```
+@Pyodide.eval
+
+Legen Sie sich fest, **bevor** Sie das Programm ausführen: Was gibt die zweite Zeile aus?
+
+[( )] `range(2015, 2025)`
+[(X)] `[2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]`
+[( )] `[2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]`
+***
+Zwei Fehlvorstellungen auf einmal:
+
+* `range` ist **keine Liste**, sondern ein eigener Datentyp. Er erzeugt die Zahlen erst, wenn man sie braucht — deshalb gibt die erste Zeile nur `range(2015, 2025)` aus. Eine echte Liste entsteht mit `list(...)`.
+* Der Endwert **2025 ist nicht enthalten**. Wer die Jahre 2015 bis 2025 will, schreibt `range(2015, 2026)`.
+***
+
 
 Für die Leitfrage brauchen wir zu jeder Temperatur das **Datum**. Wir halten beides in zwei Listen gleicher Länge — Index `i` gehört in beiden Listen zum selben Tag:
 

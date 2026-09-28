@@ -365,7 +365,7 @@ print("Im Jahr", jahr, "läge das Mittel bei", round(mittel, 2), "°C")
 ```
 @Pyodide.eval
 
-`round(mittel, 2)` rundet auf zwei Nachkommastellen — ohne sehen Sie Werte wie `8.009999999999994`. Warum das so ist, klären wir in einer späteren Vorlesung.
+`round(mittel, 2)` rundet auf zwei Nachkommastellen — ohne sehen Sie Werte wie `8.009999999999994`. Warum das so ist, klärt der nächste Abschnitt.
 
                                      {{1}}
 *******************************************************************************
@@ -385,7 +385,31 @@ print("Im Jahr", jahr, "läge das Mittel bei", round(mittel, 2), "°C")
 
 *******************************************************************************
 
-## Kontrollfragen
+### Typische Fehlvorstellung: Kommazahlen sind exakt
+
+> **Typische Fehlvorstellung:** _„Der Rechner rechnet mit Kommazahlen genau so exakt wie mit ganzen Zahlen.“_
+
+```python
+print(0.1 + 0.2)
+print(0.1 + 0.2 == 0.3)
+print(round(0.1 + 0.2, 2) == 0.3)
+```
+@Pyodide.eval
+
+Legen Sie sich fest, **bevor** Sie das Programm ausführen: Was gibt die zweite Zeile aus?
+
+[( )] `True`
+[(X)] `False`
+[( )] eine Fehlermeldung
+***
+Der Rechner speichert Kommazahlen im **Binärsystem**. Viele Zahlen, die im Dezimalsystem kurz sind, lassen sich dort nicht exakt darstellen — so wie 1/3 im Dezimalsystem nicht: 0,3333… bricht irgendwo ab. `0.1` ist intern also ein ganz klein wenig mehr oder weniger als 0,1, und diese winzigen Abweichungen summieren sich. Daher auch das `8.009999999999994` im `while`-Beispiel.
+
+Zwei Konsequenzen für die Praxis:
+
+* **Zur Ausgabe runden:** `round(wert, 2)`.
+* **Kommazahlen nicht mit `==` vergleichen.** Stattdessen prüfen, ob der Abstand klein genug ist: `abs(a - b) < 0.001`.
+***
+
 
 **Was gibt dieses Programm aus?**
 

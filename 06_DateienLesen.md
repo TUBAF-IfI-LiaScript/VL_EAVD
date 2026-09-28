@@ -173,9 +173,46 @@ Auf den 10. Dezember 1910 folgt direkt der 1. Oktober 1915. Die Tage dazwischen 
 Die zweite Art bemerkt kein Programm von selbst. Man muss das Datum der Folgezeile prüfen — oder zählen, wie viele Tage ein Jahr hat.
 ***
 
+## Das Dictionary
+
+In Vorlesung 05 haben wir für jedes Jahr alle Tage erneut durchlaufen. Bei 48.000 Zeilen und 135 Jahren wären das über sechs Millionen Durchläufe. Besser: **ein** Durchlauf, und für jedes Jahr ein Fach, in das wir das Ergebnis legen.
+
+Genau das ist ein **Dictionary** (Wörterbuch): Es ordnet jedem **Schlüssel** einen **Wert** zu.
+
+``` ascii
+          Schlüssel      Wert
+        +----------+----------+
+        |  "1900"  |   24.9   |
+        |  "1950"  |   26.0   |
+        |  "2024"  |   26.9   |
+        +----------+----------+
+```
+
+<!-- data-type="none" -->
+| Was                    | Code                    | Bei einer Liste wäre das ...   |
+| :--------------------- | :---------------------- | :----------------------------- |
+| leer anlegen           | `hoechst = {}`          | `[]`                           |
+| Wert eintragen/ändern  | `hoechst["2024"] = 26.9` | `liste[3] = 26.9`             |
+| Wert nachschlagen      | `hoechst["2024"]`       | `liste[3]`                     |
+| Gibt es den Schlüssel? | `"2024" in hoechst`     | –                              |
+| alle Schlüssel durchlaufen | `for jahr in hoechst:` | `for wert in liste:`        |
+| Anzahl der Einträge    | `len(hoechst)`          | `len(liste)`                   |
+
+```python main.py
+frost = {}
+frost["1947"] = 119
+frost["1949"] = 97
+print(frost)
+print("1948" in frost)
+print(frost["1948"])
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+Die letzte Zeile scheitert mit `KeyError`: Nach einem Schlüssel, der nicht existiert, kann man nicht fragen. Deshalb prüfen die Programme unten vorher mit `in`, ob ein Jahr schon einen Eintrag hat.
+
 ## Die ganze Datei
 
-Jetzt die Leitfrage aus Vorlesung 05 — für **alle** Jahre. Statt für jedes Jahr alle Zeilen erneut zu durchlaufen, nutzen wir ein **Dictionary**: ein Durchlauf, ein Eintrag pro Jahr.
+Jetzt die Leitfrage aus Vorlesung 05 — für **alle** Jahre, in einem einzigen Durchlauf mit einem Dictionary.
 
 Die Datei liegt im Repository unter `data/fichtelberg/`. Auf Ihrem Rechner öffnen Sie sie dort direkt. Hier auf dem Server holt die eingeklappte Datei `hole_daten.py` sie vorher aus dem Repository.
 
@@ -363,7 +400,23 @@ Klappen Sie `auswertung.py` auf. Das Programm funktioniert — aber:
 
 > Dieses Skript ist absichtlich so geschrieben. Nächste Woche zerlegen wir es in Funktionen.
 
-## Kontrollfragen
+## Zwischenbilanz: Datentypen
+
+Mit dieser Vorlesung haben Sie alle Datentypen kennengelernt, die Sie für die erste Hälfte des Kurses brauchen:
+
+<!-- data-type="none" -->
+| Typ     | Beispiel                     | Woher er im Datensatz kommt              | Typische Falle                                  |
+| :------ | :--------------------------- | :--------------------------------------- | :---------------------------------------------- |
+| `int`   | `1358`, `2024`               | Stations-ID, Jahr nach `int(...)`        | `int("2024") == 2024`, aber `"2024" != 2024`    |
+| `float` | `-14.1`                      | Temperaturen nach `float(...)`           | nicht exakt: kein `==` (VL 04)                  |
+| `str`   | `"18930310"`                 | alles, was aus einer Datei gelesen wird  | `"9.5" > "28.1"` (VL 05)                        |
+| `bool`  | `True`                       | Ergebnis jedes Vergleichs                | `=` statt `==` (VL 02)                          |
+| `list`  | `[-1.9, -2.4, 0.1]`          | `zeile.split(";")`, gesammelte Ergebnisse | Index ab 0, `IndexError` (VL 05)              |
+| `range` | `range(2015, 2025)`          | Jahre, Indizes                           | Endwert nicht enthalten (VL 05)                 |
+| `dict`  | `{"1947": 119}`              | ein Ergebnis pro Jahr                    | `KeyError`, fehlender Eintrag ≠ 0 (VL 06)       |
+
+> **Ausblick:** In Vorlesung 10 kommt mit dem NumPy-**Array** ein Typ hinzu, der aussieht wie eine Liste, aber elementweise rechnet. In Vorlesung 11 lernen Sie `NaN` kennen — die Art, wie pandas "kein Wert" darstellt.
+
 
 **Was gibt dieses Programm aus?**
 

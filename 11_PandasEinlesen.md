@@ -53,6 +53,12 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 
 > **Geplant:** `head`, `shape`, `dtypes`, `describe`.
 
+## Fehlende Werte: `NaN`
+
+> **Geplant:** `na_values=-999` macht aus `-999` den Wert `NaN` ("not a number"). `isna()`, `count()` vs. `len()`, `dropna()`.
+>
+> * **Typische Fehlvorstellung: „`NaN` ist null“** — Rückbezug auf Freiberg 1948 (VL 06): `mean()` und `sum()` überspringen `NaN` stillschweigend; `(df["TNK"] < 0).sum()` zählt für 1948 wieder 0 Frosttage. Abhilfe: gemessene Tage mitzählen (`count()`).
+
 ## Auswählen und Filtern
 
 > **Geplant:** `df["TNK"]`, `df[df["TNK"] < 0]`.
