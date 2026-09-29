@@ -184,6 +184,7 @@ Zwei Fehlvorstellungen auf einmal:
 * Der Endwert **2025 ist nicht enthalten**. Wer die Jahre 2015 bis 2025 will, schreibt `range(2015, 2026)`.
 ***
 
+## Zusammengehörige Werte
 
 Für die Leitfrage brauchen wir zu jeder Temperatur das **Datum**. Wir halten beides in zwei Listen gleicher Länge — Index `i` gehört in beiden Listen zum selben Tag:
 
