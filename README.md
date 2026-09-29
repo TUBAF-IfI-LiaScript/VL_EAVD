@@ -20,6 +20,12 @@ logo: ./images/Readme/Wetterstation.png
 
 # Erhebung, Analyse und Visualisierung digitaler Daten
 
+> **Dieser Kurs wird gerade überarbeitet.** Zum Wintersemester 2026/27 bauen wir die Veranstaltung grundlegend um — Inhalte, Reihenfolge und Beispiele können sich noch ändern.
+>
+> **Stand 29.09.2026:** Vorlesungen 00–07 und 09 sind ausgearbeitet, Vorlesung 08 liegt als Rumpf vor, Vorlesungen 10–14 sind in Planung. Die Materialien des bisherigen Kurses (C++/Python) sind in der Git-Historie erreichbar (Commit `21d3061`).
+>
+> Hinweise und Fehler gern als [Issue](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/issues).
+
 > Prof. Dr. Sebastian Zug · Prof. Dr. Bernhard Jung
 >
 > TU Bergakademie Freiberg, Wintersemester 2026/27
