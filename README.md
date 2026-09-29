@@ -34,6 +34,8 @@ Die Veranstaltung führt Studierende aus Nicht-Informatikstudiengängen in die P
 
 **Für Studierende:** Der Einstieg ist die erste Vorlesung, [00 Motivation](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/00_Motivation.md). Dort finden Sie Lernziele, Arbeitsweise, Prüfung und Organisatorisches.
 
+**Kurslandkarte (Entwurf zur Diskussion):** [tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) — Begriffe, Zusammenhänge und didaktische Fäden über das Semester. Quelle und Anleitung: [`kurslandkarte/`](kurslandkarte/README.md).
+
 ## Intention
 
 Wissenschaftliche Daten durchlaufen einen Kreislauf aus Frage, Erhebung, Aufbereitung, Analyse, Visualisierung und Dokumentation — und meist mehrere Runden davon. Der Kurs folgt diesem Kreislauf; das Schema fasst CRISP-DM und den Forschungsdatenlebenszyklus in vereinfachter Form zusammen.
