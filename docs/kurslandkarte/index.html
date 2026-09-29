@@ -1,0 +1,3083 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Kurslandkarte der Vorlesung Erhebung, Analyse und Visualisierung digitaler Daten (TU Bergakademie Freiberg): Begriffe, Zusammenhänge und didaktische Fäden über das Semester.">
+<title>EAVD Kurslandkarte</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+html { color-scheme: light; }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root {
+  --bg: #f3f5f2;
+  --surface: #ffffff;
+  --ink: #1d2a2c;
+  --muted: #5d6c6f;
+  --faint: #c9d1cf;
+  --grid: #e3e8e5;
+  --phase-einstieg: #e7eee9;
+  --phase-grundlagen: #edf1f5;
+  --phase-zaesur: #f6ece7;
+  --phase-analyse: #eeecf5;
+  --l-denken: #1f7a8c;
+  --l-typen: #b7800f;
+  --l-daten: #7a4e9c;
+  --l-erhebung: #c2462e;
+  --l-analyse: #2f5da8;
+  --t1: #d4502b;
+  --t2: #1b8a5a;
+  --t3: #b08400;
+  --t4: #2d63c8;
+  --t5: #8e44ad;
+  --t6: #1596a8;
+  --edge: #7d8b8e;
+  --focus: #1d2a2c;
+  --here: #c2462e;
+  --note-bg: #fff7e6;
+  --note-ink: #6b4a00;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141a1b;
+    --surface: #1c2426;
+    --ink: #e4ebe9;
+    --muted: #9aa9ab;
+    --faint: #3a4648;
+    --grid: #263032;
+    --phase-einstieg: #1b2a23;
+    --phase-grundlagen: #1b2330;
+    --phase-zaesur: #2d201c;
+    --phase-analyse: #231f31;
+    --l-denken: #4fb3c6;
+    --l-typen: #e0ab3d;
+    --l-daten: #b58ad6;
+    --l-erhebung: #ee7a60;
+    --l-analyse: #6f98e0;
+    --t1: #f07a55;
+    --t2: #3fbf86;
+    --t3: #e0b53a;
+    --t4: #6e9bf0;
+    --t5: #c08ae0;
+    --t6: #45c3d4;
+    --edge: #8a999b;
+    --focus: #e4ebe9;
+    --here: #ee7a60;
+    --note-bg: #2e2716;
+    --note-ink: #f0d49a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141a1b;
+  --surface: #1c2426;
+  --ink: #e4ebe9;
+  --muted: #9aa9ab;
+  --faint: #3a4648;
+  --grid: #263032;
+  --phase-einstieg: #1b2a23;
+  --phase-grundlagen: #1b2330;
+  --phase-zaesur: #2d201c;
+  --phase-analyse: #231f31;
+  --l-denken: #4fb3c6;
+  --l-typen: #e0ab3d;
+  --l-daten: #b58ad6;
+  --l-erhebung: #ee7a60;
+  --l-analyse: #6f98e0;
+  --t1: #f07a55;
+  --t2: #3fbf86;
+  --t3: #e0b53a;
+  --t4: #6e9bf0;
+  --t5: #c08ae0;
+  --t6: #45c3d4;
+  --edge: #8a999b;
+  --focus: #e4ebe9;
+  --here: #ee7a60;
+  --note-bg: #2e2716;
+  --note-ink: #f0d49a;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.wrap {
+  padding-inline: 16px;
+  padding-block: 20px 32px;
+  max-width: 1480px;
+  margin: 0 auto;
+  display: grid;
+  gap: 16px;
+}
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+.titleblock { display: grid; gap: 2px; }
+.eyebrow {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-size: 13px;
+}
+h1 {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.05;
+  margin: 0;
+  text-wrap: balance;
+}
+.sample {
+  display: inline-block;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: var(--note-bg);
+  color: var(--note-ink);
+  margin-top: 4px;
+  width: fit-content;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+}
+.control { display: grid; gap: 4px; }
+.control label, .control .lbl {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.here-row { display: flex; align-items: center; gap: 10px; }
+input[type=range] { width: 200px; accent-color: var(--here); }
+.here-val {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 13px;
+  min-width: 118px;
+  font-variant-numeric: tabular-nums;
+}
+.seg {
+  display: inline-flex;
+  border: 1px solid var(--faint);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.seg button {
+  font: inherit;
+  font-size: 13px;
+  padding: 5px 12px;
+  background: var(--surface);
+  color: var(--ink);
+  border: 0;
+  cursor: pointer;
+}
+.seg button + button { border-left: 1px solid var(--faint); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.seg button:focus-visible, .legend button:focus-visible { outline: 2px solid var(--here); outline-offset: 2px; }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  align-items: center;
+}
+.legend button {
+  font: inherit;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 0;
+  padding: 2px 0;
+  color: var(--ink);
+  cursor: pointer;
+}
+.legend button[aria-pressed="false"] { color: var(--muted); text-decoration: line-through; }
+.legend .swatch { width: 22px; height: 6px; border-radius: 3px; display: inline-block; }
+.legend button[aria-pressed="false"] .swatch { opacity: .3; }
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 980px) {
+  .stage { grid-template-columns: minmax(0, 1fr); }
+}
+.mapbox {
+  background: var(--surface);
+  border: 1px solid var(--faint);
+  border-radius: 6px;
+  display: flex;
+  overflow: hidden;
+  min-width: 0;
+}
+.mapbox #side { flex: none; }
+.scroller { overflow-x: auto; overflow-y: hidden; min-width: 0; flex: 1; }
+@media (max-width: 600px) { .mapbox #side { display: none; } }
+svg { display: block; }
+.lane-title {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.col-head {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  fill: var(--ink);
+}
+.col-short {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  fill: var(--muted);
+}
+.col-date {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10.5px;
+  fill: var(--muted);
+}
+.phase-label {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  fill: var(--muted);
+}
+.station { cursor: pointer; }
+.station text {
+  font-size: 12.5px;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+.station.code text { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11.5px; }
+.station .dot { stroke-width: 3; fill: var(--surface); }
+.station.future { opacity: .28; }
+.station.dim { opacity: .18; }
+.station.nb .dot { fill: currentColor; }
+.station.sel .dot { fill: currentColor; stroke: var(--focus); stroke-width: 3.5; }
+.station.sel text { font-weight: 700; }
+.station.detail text { font-size: 11.5px; }
+.station.code.detail text { font-size: 11px; }
+.col-status {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 11px;
+  font-style: italic;
+  fill: var(--muted);
+}
+.goto { display: grid; gap: 4px; }
+.station:focus { outline: none; }
+.station:focus-visible .ring { stroke: var(--here); stroke-width: 2; stroke-dasharray: 3 2; }
+.line { fill: none; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+.line.dim { opacity: .15; }
+.stub { stroke-width: 3; stroke-linecap: round; }
+.rail { stroke-width: 2; opacity: .35; }
+.mline { fill: none; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+.mline.dim { opacity: .14; }
+.station.metro text { font-size: 12.5px; font-weight: 400; }
+.station.metro text.xlabel { font-weight: 700; }
+.mstop { fill: var(--surface); stroke-width: 3; }
+.xchg { fill: var(--surface); stroke: var(--ink); stroke-width: 3; }
+.station.metro.sel .xchg, .station.metro.sel .mstop { stroke: var(--here); stroke-width: 4; }
+[hidden] { display: none !important; }
+.feedback { font-size: 13px; color: var(--muted); }
+.feedback:hover { color: var(--ink); }
+.legendrow { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
+.threads li { display: grid; gap: 2px; }
+.tname { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+.tname i { width: 16px; height: 5px; border-radius: 3px; display: inline-block; }
+.hop { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; }
+.hop button { font: inherit; font-size: 14px; background: none; border: 0; padding: 0; color: var(--ink); cursor: pointer; }
+.hop button:hover, .hop button:focus-visible { text-decoration: underline; }
+ol.steps { list-style: decimal; padding-left: 22px; }
+.edge { fill: none; stroke: var(--edge); stroke-width: 1.4; }
+.edge.hi { stroke: var(--ink); stroke-width: 2; }
+.edge-label {
+  font-size: 11px;
+  font-style: italic;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+.here-band { fill: var(--here); opacity: .07; }
+.here-tag {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  fill: var(--here);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .station, .line, .edge { transition: opacity .2s ease; }
+}
+
+aside.panel {
+  background: var(--surface);
+  border: 1px solid var(--faint);
+  border-radius: 6px;
+  padding-inline: 18px;
+  padding-block: 16px 18px;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+.panel h2 {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 26px;
+  line-height: 1.1;
+  margin: 0;
+}
+.panel h2.code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 21px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; font-size: 13px; color: var(--muted); }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12.5px; padding: 1px 8px; border-radius: 10px;
+  border: 1px solid var(--faint); color: var(--ink);
+}
+.chip i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.panel p { margin: 0; }
+.panel h3 {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+}
+.rels { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.rels button {
+  font: inherit; font-size: 14px; text-align: left;
+  background: none; border: 0; padding: 2px 0; cursor: pointer; color: var(--ink);
+  display: flex; gap: 6px; align-items: baseline;
+}
+.rels button:hover span.t, .rels button:focus-visible span.t { text-decoration: underline; }
+.rels .v { color: var(--muted); font-style: italic; }
+.misc {
+  background: var(--note-bg);
+  color: var(--note-ink);
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+.misc strong { display: block; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 2px; }
+.golink {
+  display: inline-block;
+  width: fit-content;
+  font-weight: 700;
+  color: var(--l-denken);
+  text-decoration: none;
+  border-bottom: 2px solid currentColor;
+}
+.hint { font-size: 13px; color: var(--muted); }
+footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="titleblock">
+      <span class="eyebrow">Erhebung, Analyse und Visualisierung digitaler Daten · WiSe 2026/27</span>
+      <h1>Kurslandkarte</h1>
+      <span class="sample">Entwurf zur Diskussion · Stand 29.09.2026 · <span id="count"></span></span>
+      <a class="feedback" href="https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/issues/new?title=Kurslandkarte%3A%20&amp;labels=kurslandkarte" target="_blank" rel="noopener">Anmerkung als GitHub-Issue ↗</a>
+    </div>
+    <div class="controls">
+      <div class="control">
+        <span class="lbl" id="modeLbl">Variante</span>
+        <div class="seg" role="group" aria-labelledby="modeLbl">
+          <button id="mMetro" aria-pressed="true">Metrokarte</button>
+          <button id="mZeit" aria-pressed="false">Zeitleiste</button>
+        </div>
+      </div>
+      <div class="control">
+        <label for="here">Sie sind hier</label>
+        <div class="here-row">
+          <input id="here" type="range" min="0" max="14" step="1" value="5">
+          <span class="here-val" id="hereVal"></span>
+        </div>
+      </div>
+      <div class="control" id="ctlLevel">
+        <span class="lbl" id="lvlLbl">Begriffe</span>
+        <div class="seg" role="group" aria-labelledby="lvlLbl">
+          <button id="eKern" aria-pressed="true">Kernbegriffe</button>
+          <button id="eAlle" aria-pressed="false">Alle</button>
+        </div>
+      </div>
+      <div class="control" id="ctlEdges">
+        <span class="lbl" id="viewLbl">Verbindungen</span>
+        <div class="seg" role="group" aria-labelledby="viewLbl">
+          <button id="vNb" aria-pressed="true">Nur Nachbarn</button>
+          <button id="vAll" aria-pressed="false">Ganzes Netz</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="legendrow"><span class="hint" id="legendHint"></span><div class="legend" id="legend"></div></div>
+
+  <div class="stage">
+    <div class="mapbox">
+      <svg id="side" aria-hidden="true"></svg>
+      <div class="scroller" id="mapbox">
+        <svg id="map" role="img" aria-labelledby="mapTitle"><title id="mapTitle">Kurslandkarte: Begriffe der Vorlesung auf fünf Linien über 15 Termine</title></svg>
+      </div>
+    </div>
+    <aside class="panel" id="panel" aria-live="polite"></aside>
+  </div>
+
+  <footer>
+    <strong>Metrokarte:</strong> Jede Linie ist ein didaktischer Faden durch das Semester; jedes Segment ist ein Schritt, der auf dem vorigen aufbaut. Weiße Stationen mit dunklem Rand sind Umsteigestationen, an denen sich Fäden kreuzen. <strong>Zeitleiste:</strong> Jede Station ist ein Begriff in seiner Kategorie, platziert bei der Vorlesung, in der er eingeführt wird; große Stationen sind Kernbegriffe, kleine Detailbegriffe; die Schienen dienen nur der Orientierung. Ein Klick zeigt die direkten Zusammenhänge und springt auf Wunsch in den passenden Abschnitt der Vorlesung. Begriffe nach dem eingestellten Stand erscheinen blass. Für VL 10–14 stammen die Begriffe aus den Gerüsten der geplanten Vorlesungen. Die Stationen sind auch per Tabulator und Eingabetaste erreichbar.
+  </footer>
+</div>
+
+<script id="kartendaten" type="application/json">
+{
+ "stand": "29.09.2026",
+ "vorlesungen": [
+  {
+   "vl": 0,
+   "datei": "00_Motivation.md",
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Herzlich willkommen!",
+    "Wann erscheinen Sie?",
+    "Wo stehen Sie?",
+    "Warum programmieren?",
+    "Lernziele",
+    "Wie diese Vorlesung funktioniert",
+    "Die Frage kommt zuerst",
+    "Ein Datensatz durch das ganze Semester",
+    "Blöcke oder Text",
+    "Live Hacking und typische Fehlvorstellungen",
+    "Werkzeuge",
+    "Erst mühsam, dann mit Werkzeug",
+    "Semesterplan",
+    "Prüfung",
+    "Organisatorisches",
+    "Zurück zum Personenzähler",
+    "Nächste Woche"
+   ]
+  },
+  {
+   "vl": 1,
+   "datei": "01_VomProblemZumProgramm.md",
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Vom Problem zum Programm",
+    "Unser Datensatz",
+    "Drei Aufgaben",
+    "Aufgabe 1: Ein Jahr auf dem Fichtelberg",
+    "Aufgabe 2: Der Personenzähler",
+    "Aufgabe 3: 135 Jahre Frost",
+    "Was ist hier passiert?",
+    "Algorithmen",
+    "Warum der Rechner keine Alltagssprache versteht",
+    "Algorithmen darstellen",
+    "Kontrollfragen",
+    "Wann lohnt sich ein Programm?",
+    "Ein Blick voraus",
+    "Nächste Woche"
+   ]
+  },
+  {
+   "vl": 2,
+   "datei": "02_ErsteSchritte.md",
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Erste Schritte in Python",
+    "Rückblick",
+    "Vom Text zur Ausführung",
+    "Warum Python?",
+    "Die erste Anweisung",
+    "Rechnen",
+    "Variablen",
+    "Das Gleichheitszeichen ist keine Gleichung",
+    "Typische Fehlvorstellung: Variablen rechnen nach",
+    "Namen wählen",
+    "Datentypen",
+    "Text ist nicht Zahl",
+    "Mit Text arbeiten",
+    "Vergleiche",
+    "Kommentare",
+    "Fehlermeldungen lesen",
+    "Kontrollfragen",
+    "Nächste Woche"
+   ]
+  },
+  {
+   "vl": 3,
+   "datei": "03_PruefenUndWiederholen.md",
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Prüfen und Wiederholen",
+    "Rückblick",
+    "Dieselben Beispiele auf Ihrem Rechner",
+    "Entscheidungen: if",
+    "Einrückung ist Syntax",
+    "Entweder – oder: else",
+    "Mehrere Fälle: elif",
+    "Bedingungen verknüpfen",
+    "Wiederholen: for",
+    "Das Zählmuster",
+    "Schleifen im Kopf ausführen",
+    "Typische Fehlvorstellung: Die Schleifenvariable",
+    "Die Antwort auf die Leitfrage",
+    "Kontrollfragen",
+    "Nächste Woche"
+   ]
+  },
+  {
+   "vl": 4,
+   "datei": "04_MusterInMessreihen.md",
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Muster in Messreihen",
+    "Rückblick",
+    "Muster 1: Aufsummieren",
+    "Mittelwert mit Fehlwerten",
+    "Muster 2: Extremwert suchen",
+    "Muster 3: Zustand verfolgen",
+    "Versuch 1",
+    "Versuch 2",
+    "Versuch 3",
+    "Die Antwort",
+    "while: Wiederholen, solange ...",
+    "Typische Fehlvorstellung: Kommazahlen sind exakt",
+    "Kontrollfragen",
+    "Nächste Woche"
+   ]
+  },
+  {
+   "vl": 5,
+   "datei": "05_DatenSammeln.md",
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Daten sammeln",
+    "Rückblick",
+    "Listen anlegen und füllen",
+    "Zugriff über den Index",
+    "Zahlenfolgen mit range",
+    "Typische Fehlvorstellung: range ist eine Liste",
+    "Zusammengehörige Werte",
+    "Typische Fehlvorstellung: Index oder Wert?",
+    "Ein Ergebnis pro Jahr",
+    "Versuch 1",
+    "Typische Fehlvorstellung: Zahlen als Text vergleichen",
+    "Versuch 2",
+    "Versuch 3",
+    "Mit dem Ergebnis weiterarbeiten",
+    "Ausblick: Dictionary",
+    "Kontrollfragen",
+    "Nächste Woche"
+   ]
+  },
+  {
+   "vl": 6,
+   "datei": "06_DateienLesen.md",
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Dateien lesen",
+    "Rückblick",
+    "Eine Datei öffnen",
+    "Eine Zeile zerlegen",
+    "Typische Fehlvorstellung: Die Zeile ist schon eine Tabelle",
+    "Kopfzeile und Fehlwerte",
+    "Typische Fehlvorstellung: Jeder Tag hat eine Zeile",
+    "Das Dictionary",
+    "Die ganze Datei",
+    "Typische Fehlvorstellung: Kein Wert heißt null",
+    "Ergebnisse schreiben",
+    "Live Hacking: Das lange Skript",
+    "Zwischenbilanz: Datentypen",
+    "Kontrollfragen",
+    "Nächste Woche"
+   ]
+  },
+  {
+   "vl": 7,
+   "datei": "07_Funktionen.md",
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Funktionen",
+    "Rückblick",
+    "Eine Funktion definieren",
+    "Typische Fehlvorstellung: def führt die Funktion aus",
+    "Parameter und Rückgabewert",
+    "Typische Fehlvorstellung: print gibt etwas zurück",
+    "Typische Fehlvorstellung: Namen müssen passen",
+    "Lokale Variablen",
+    "Mehrere Rückgabewerte",
+    "Live Hacking: Das lange Skript zerlegen",
+    "Funktionen prüfen",
+    "Kontrollfragen",
+    "Nächste Woche"
+   ]
+  },
+  {
+   "vl": 8,
+   "datei": "08_DemoMicroPython.md",
+   "status": "Rumpf",
+   "abschnitte": [
+    "Demonstration: Datenerhebung mit MicroPython",
+    "Bis hierher kamen alle Daten fertig aus einer Datei",
+    "Der Aufbau",
+    "Live: Wir messen",
+    "Was schiefgeht",
+    "Die Daten kommen wieder",
+    "Material"
+   ]
+  },
+  {
+   "vl": 9,
+   "datei": "09_ProgrammeStrukturieren.md",
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Programme strukturieren",
+    "Rückblick",
+    "Ein eigenes Modul",
+    "Typische Fehlvorstellung: import kopiert nur Funktionen",
+    "Live Hacking: Das Modul dwd.py",
+    "Die Standardbibliothek",
+    "Externe Pakete",
+    "Typische Fehlvorstellung: Pfade",
+    "Kontrollfragen",
+    "Nächste Woche"
+   ]
+  },
+  {
+   "vl": 10,
+   "datei": "10_NotebooksBibliotheken.md",
+   "status": "Gerüst",
+   "abschnitte": [
+    "Notebooks & Bibliotheken",
+    "Skript oder Notebook?",
+    "Arbeiten mit Zellen",
+    "NumPy",
+    "Kontrollfragen",
+    "Nächste Woche",
+    "Material"
+   ]
+  },
+  {
+   "vl": 11,
+   "datei": "11_PandasEinlesen.md",
+   "status": "Gerüst",
+   "abschnitte": [
+    "pandas I — Einlesen",
+    "Von der Mühsal zum Werkzeug",
+    "Der DataFrame",
+    "Fehlende Werte: NaN",
+    "Auswählen und Filtern",
+    "Datum",
+    "Kontrollfragen",
+    "Nächste Woche",
+    "Material"
+   ]
+  },
+  {
+   "vl": 12,
+   "datei": "12_PandasAggregieren.md",
+   "status": "Gerüst",
+   "abschnitte": [
+    "pandas II — Aggregieren",
+    "Aufgabe 3 aus Vorlesung 01",
+    "groupby",
+    "Vollständige Jahre",
+    "Zwei Stationen",
+    "Kontrollfragen",
+    "Nächste Woche",
+    "Material"
+   ]
+  },
+  {
+   "vl": 13,
+   "datei": "13_Visualisierung.md",
+   "status": "Gerüst",
+   "abschnitte": [
+    "Visualisierung",
+    "Die richtige Form",
+    "Ein Diagramm bauen",
+    "Trend",
+    "Irreführende Darstellungen",
+    "Kontrollfragen",
+    "Nächste Woche",
+    "Material"
+   ]
+  },
+  {
+   "vl": 14,
+   "datei": "14_Datenqualitaet.md",
+   "status": "Gerüst",
+   "abschnitte": [
+    "Datenqualität, Ausblick, Prüfungsvorbereitung",
+    "Freiberg zieht um",
+    "Die Metadaten",
+    "Die Referenzstation",
+    "Ausblick",
+    "Prüfungsvorbereitung",
+    "Material"
+   ]
+  }
+ ],
+ "begriffe": [
+  {
+   "id": "zaehler",
+   "name": "Personenzähler",
+   "linie": "erhebung",
+   "vl": 0,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Ein Ultraschallsensor an der Hörsaaltür zählt Eintretende — das Einstiegsbeispiel mit echten Messdaten.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "annahmen",
+   "name": "Annahmen im Messprogramm",
+   "linie": "erhebung",
+   "vl": 0,
+   "abschnitt": 16,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Messbereich, Entprellzeit, fehlender Richtungssinn: Was im Code steht, bestimmt, was gezählt wird.",
+   "fehlvorstellung": "„Es funktioniert, also zählt es richtig.“"
+  },
+  {
+   "id": "sensorlog",
+   "name": "Sensorprotokoll",
+   "linie": "erhebung",
+   "vl": 1,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Die Textzeilen des Personenzählers — mühsam in der Tabellenkalkulation auszuwerten (Aufgabe 2).",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "micropy",
+   "name": "MicroPython",
+   "linie": "erhebung",
+   "vl": 8,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Python auf dem Mikrocontroller — dieselbe Sprache, andere Hardware.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "sensor",
+   "name": "Sensor",
+   "linie": "erhebung",
+   "vl": 8,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Wandelt eine physikalische Größe in eine Zahl um — mit Genauigkeit, Messort und Ausfallrisiko.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "seriell",
+   "name": "serielle Ausgabe",
+   "linie": "erhebung",
+   "vl": 8,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Der Mikrocontroller schickt Messwerte als Textzeilen an den Rechner, dort werden sie mitgeschrieben.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "messfehler",
+   "name": "Messfehler",
+   "linie": "erhebung",
+   "vl": 8,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Annahmen im Messprogramm werden verletzt — sichtbar im Datenstrom, aber ohne Fehlermeldung.",
+   "fehlvorstellung": "„Ein Sensor misst, was draufsteht.“"
+  },
+  {
+   "id": "zeitstempel",
+   "name": "Zeitstempel",
+   "linie": "erhebung",
+   "vl": 8,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Entsteht beim Empfang oder Schreiben — nicht unbedingt im Moment des Ereignisses.",
+   "fehlvorstellung": "„Ein Zeitstempel ist die Zeit des Ereignisses.“"
+  },
+  {
+   "id": "messdatei",
+   "name": "eigene Messdatei",
+   "linie": "erhebung",
+   "vl": 8,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Die in der Demonstration aufgezeichneten Daten kommen im Januar als Analysebeispiel zurück.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "blockly",
+   "name": "Blöcke oder Text",
+   "linie": "denken",
+   "vl": 0,
+   "abschnitt": 9,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Zwei Ansichten auf dasselbe Programm: Blöcke zusammenschieben oder Python tippen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "algo",
+   "name": "Algorithmus",
+   "linie": "denken",
+   "vl": 1,
+   "abschnitt": 8,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Eindeutige, ausführbare Handlungsvorschrift aus endlich vielen Schritten.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "terminierung",
+   "name": "Eindeutigkeit & Terminierung",
+   "linie": "denken",
+   "vl": 1,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Jeder Schritt hat genau eine Auslegung; die Ausführung endet nach endlich vielen Schritten.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "sprache",
+   "name": "Programmiersprache",
+   "linie": "denken",
+   "vl": 1,
+   "abschnitt": 9,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Kompromiss zwischen menschlicher Lesbarkeit und maschineller Eindeutigkeit.",
+   "fehlvorstellung": "„Der Rechner versteht, was ich meine.“"
+  },
+  {
+   "id": "pseudo",
+   "name": "Pseudocode",
+   "linie": "denken",
+   "vl": 1,
+   "abschnitt": 10,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Algorithmus in strukturierter Alltagssprache, bevor man ihn programmiert.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "ablauf",
+   "name": "Ablaufdiagramm",
+   "linie": "denken",
+   "vl": 1,
+   "abschnitt": 10,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Grafische Form eines Algorithmus mit Entscheidungen und Rücksprüngen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "interpreter",
+   "name": "Interpreter",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Liest das Programm Zeile für Zeile, führt aus — oder bricht mit einer Fehlermeldung ab.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "print",
+   "name": "print",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Gibt Werte auf dem Bildschirm aus.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "operatoren",
+   "name": "Rechenoperatoren",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "+ - * / sowie // (ganzzahlig), % (Rest), ** (Potenz). 18900801 // 10000 ergibt das Jahr.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "variable",
+   "name": "Variable",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 7,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Ein Name, unter dem sich ein Programm einen Wert merkt.",
+   "fehlvorstellung": "„Eine Variable merkt sich die Rechnung — wie eine Formel in der Tabellenkalkulation.“"
+  },
+  {
+   "id": "zuweisung",
+   "name": "Zuweisung =",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 8,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Rechts wird gerechnet, links wird das Ergebnis abgelegt. Lies = als „wird zu“.",
+   "fehlvorstellung": "„= ist eine Gleichung.“"
+  },
+  {
+   "id": "trace",
+   "name": "Programm im Kopf ausführen",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Tabelle mit einer Spalte pro Variable, eine Zeile pro Schritt — die zentrale Klausurfähigkeit.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "namen",
+   "name": "Variablennamen",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 10,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Buchstaben, Ziffern, Unterstrich; nicht mit Ziffer beginnen; sprechend wählen.",
+   "fehlvorstellung": "„Der Rechner versteht, was ein Name bedeutet.“"
+  },
+  {
+   "id": "vergleich",
+   "name": "Vergleich / bool",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 14,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Vergleiche wie minimum < 0 liefern True oder False.",
+   "fehlvorstellung": "= weist zu, == vergleicht."
+  },
+  {
+   "id": "kommentar",
+   "name": "Kommentar",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 15,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Alles hinter # ist für Menschen. Gute Kommentare erklären das Warum.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "fehlermeldung",
+   "name": "Fehlermeldung",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 16,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Von unten nach oben lesen: was (NameError, TypeError, ValueError, SyntaxError) und wo.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "uebertragbar",
+   "name": "Browser = eigener Rechner",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Die Beispiele laufen eins zu eins in Visual Studio Code — einzige Ausnahme ist open_url.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "if",
+   "name": "if",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Führt Anweisungen nur aus, wenn eine Bedingung gilt.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "einrueckung",
+   "name": "Einrückung",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "In Python ist die Einrückung die Struktur: Sie bestimmt, was zu if oder for gehört.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "else",
+   "name": "else",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Genau einer von zwei Blöcken wird ausgeführt.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "elif",
+   "name": "elif",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Mehrere Fälle nacheinander prüfen; der erste zutreffende gewinnt.",
+   "fehlvorstellung": "Die Reihenfolge der Fälle zählt: ein spezieller Fall hinter einem allgemeinen wird nie erreicht."
+  },
+  {
+   "id": "logik",
+   "name": "and / or / not",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Bedingungen verknüpfen, z. B. minimum != -999 and minimum < 0.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "for",
+   "name": "for-Schleife",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 9,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Wiederholt einen Block für jeden Wert einer Folge.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "zaehlmuster",
+   "name": "Zählmuster",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 10,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Zähler vor der Schleife anlegen, in der Schleife bedingt erhöhen, danach ausgeben.",
+   "fehlvorstellung": "Zähler in der Schleife anlegen: Er wird in jedem Durchlauf zurückgesetzt."
+  },
+  {
+   "id": "schleifenvar",
+   "name": "Schleifenvariable",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 12,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Bekommt in jedem Durchlauf den nächsten Wert — und behält nach der Schleife den letzten.",
+   "fehlvorstellung": "„Nach der Schleife ist die Schleifenvariable weg.“"
+  },
+  {
+   "id": "summe",
+   "name": "Aufsummieren",
+   "linie": "denken",
+   "vl": 4,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Summe und Anzahl in der Schleife fortschreiben.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "extrem",
+   "name": "Extremwert suchen",
+   "linie": "denken",
+   "vl": 4,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Den bisher besten Wert (und seine Position) merken und bei Bedarf ersetzen.",
+   "fehlvorstellung": "Startwert 0 statt erstem Wert — im Juli findet man so keinen kältesten Tag."
+  },
+  {
+   "id": "zustand",
+   "name": "Zustand verfolgen",
+   "linie": "denken",
+   "vl": 4,
+   "abschnitt": 6,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Laufende Serie und längste Serie getrennt merken. Längste Frostperiode 2024: 25 Tage.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "while",
+   "name": "while",
+   "linie": "denken",
+   "vl": 4,
+   "abschnitt": 11,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Wiederholt, solange eine Bedingung gilt.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "endlos",
+   "name": "Endlosschleife",
+   "linie": "denken",
+   "vl": 4,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Wird die Bedingung nie falsch, endet while nie — die Terminierung aus VL 01.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "funktion",
+   "name": "Funktion",
+   "linie": "denken",
+   "vl": 7,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Benannter, wiederverwendbarer Block: def ist_frosttag(minimum).",
+   "fehlvorstellung": "„def führt die Funktion aus.“"
+  },
+  {
+   "id": "parameter",
+   "name": "Parameter & Argument",
+   "linie": "denken",
+   "vl": 7,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Beim Aufruf wird der Wert übergeben, nicht der Name.",
+   "fehlvorstellung": "„Der übergebene Wert muss so heißen wie der Parameter.“"
+  },
+  {
+   "id": "return",
+   "name": "return",
+   "linie": "denken",
+   "vl": 7,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Gibt ein Ergebnis an den Aufrufer zurück; danach endet die Funktion.",
+   "fehlvorstellung": "„print gibt etwas zurück.“"
+  },
+  {
+   "id": "lokal",
+   "name": "lokale Variable",
+   "linie": "denken",
+   "vl": 7,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Variablen in einer Funktion existieren nur während des Aufrufs.",
+   "fehlvorstellung": "„Lokale Variablen gibt es auch nach dem Aufruf.“"
+  },
+  {
+   "id": "mehrrueck",
+   "name": "mehrere Rückgabewerte",
+   "linie": "denken",
+   "vl": 7,
+   "abschnitt": 9,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "jahr, maximum, minimum = zerlege_zeile(zeile) — die Reihenfolge muss stimmen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "assert",
+   "name": "assert",
+   "linie": "denken",
+   "vl": 7,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Prüft eine Funktion an den Grenzen: genau 0,0 °C, knapp darunter, Fehlwert.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "modul",
+   "name": "Modul / import",
+   "linie": "denken",
+   "vl": 9,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Eine Python-Datei, deren Funktionen andere Programme nutzen: import dwd.",
+   "fehlvorstellung": "„import holt nur die Funktionen.“"
+  },
+  {
+   "id": "namemain",
+   "name": "__name__",
+   "linie": "denken",
+   "vl": 9,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "if __name__ == \"__main__\": — Testcode, der beim Import nicht läuft.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "stdlib",
+   "name": "Standardbibliothek",
+   "linie": "denken",
+   "vl": 9,
+   "abschnitt": 6,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Module, die Python mitbringt: statistics, datetime, math, os.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "datetime",
+   "name": "datetime",
+   "linie": "denken",
+   "vl": 9,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Aus \"19101210\" wird ein Datum, mit dem man rechnen kann — die Lücke umfasst 1756 Tage.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "pip",
+   "name": "Pakete & pip",
+   "linie": "denken",
+   "vl": 9,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Externe Pakete installiert man mit pip install; fehlt eines: ModuleNotFoundError.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "zellen",
+   "name": "Notebook-Zellen",
+   "linie": "denken",
+   "vl": 10,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Ausführungsreihenfolge und typische Fallen, etwa eine nicht erneut ausgeführte Zelle.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "dezimalpunkt",
+   "name": "Dezimalpunkt",
+   "linie": "typen",
+   "vl": 2,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Python schreibt 6.26. print(6,26 + 1) gibt ohne Fehlermeldung 6 27 aus.",
+   "fehlvorstellung": "„6,26 ist eine Zahl.“"
+  },
+  {
+   "id": "typ",
+   "name": "Datentyp",
+   "linie": "typen",
+   "vl": 2,
+   "abschnitt": 11,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "int, float, str, bool — der Typ bestimmt, was man mit einem Wert tun kann.",
+   "fehlvorstellung": "„Was wie eine Zahl aussieht, ist eine Zahl.“"
+  },
+  {
+   "id": "umwandlung",
+   "name": "Typumwandlung",
+   "linie": "typen",
+   "vl": 2,
+   "abschnitt": 12,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "float(\"-14.1\"), int(\"1890\"), str(1213) — nötig, weil aus Dateien immer Text kommt.",
+   "fehlvorstellung": "float(\"6,26\") scheitert."
+  },
+  {
+   "id": "text",
+   "name": "Text (str)",
+   "linie": "typen",
+   "vl": 2,
+   "abschnitt": 13,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Zusammensetzen, len, Zeichen herausschneiden: datum[0:4] ist das Jahr.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "round",
+   "name": "round",
+   "linie": "typen",
+   "vl": 4,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Rundet für die Ausgabe: round(mittel, 2).",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "float",
+   "name": "Gleitkommazahl",
+   "linie": "typen",
+   "vl": 4,
+   "abschnitt": 12,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Kommazahlen werden binär gespeichert und sind nicht exakt: 0.1 + 0.2 == 0.3 ist False.",
+   "fehlvorstellung": "„Kommazahlen sind exakt.“"
+  },
+  {
+   "id": "liste",
+   "name": "Liste",
+   "linie": "typen",
+   "vl": 5,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Mehrere Werte in fester Reihenfolge.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "append",
+   "name": "append",
+   "linie": "typen",
+   "vl": 5,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Hängt einen Wert an — das Sammelmuster.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "index",
+   "name": "Index & Slice",
+   "linie": "typen",
+   "vl": 5,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "liste[0] erster, liste[-1] letzter Wert, liste[2:5] die Indizes 2 bis 4.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "indexerror",
+   "name": "IndexError",
+   "linie": "typen",
+   "vl": 5,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Zugriff außerhalb der Liste — der häufigste Listenfehler.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "range",
+   "name": "range",
+   "linie": "typen",
+   "vl": 5,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Folge ganzer Zahlen, z. B. range(2015, 2025). Der Endwert ist nicht enthalten.",
+   "fehlvorstellung": "„range ist eine Liste.“"
+  },
+  {
+   "id": "parallel",
+   "name": "zusammengehörige Listen",
+   "linie": "typen",
+   "vl": 5,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "daten[i] und maxima[i] gehören zum selben Tag.",
+   "fehlvorstellung": "„bester enthält die höchste Temperatur“ — es ist ein Index."
+  },
+  {
+   "id": "textvergleich",
+   "name": "Text vergleichen",
+   "linie": "typen",
+   "vl": 5,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Texte werden Zeichen für Zeichen verglichen.",
+   "fehlvorstellung": "„\"9.5\" > \"28.1\" ist falsch.“ Es ist wahr."
+  },
+  {
+   "id": "dict",
+   "name": "Dictionary",
+   "linie": "typen",
+   "vl": 6,
+   "abschnitt": 8,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Ordnet Schlüsseln Werte zu: {\"1947\": 119}. Ein Durchlauf, ein Eintrag pro Jahr.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "keyerror",
+   "name": "KeyError, in, get",
+   "linie": "typen",
+   "vl": 6,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Nach einem fehlenden Schlüssel kann man nicht fragen; vorher mit in prüfen oder get verwenden.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "typbilanz",
+   "name": "Zwischenbilanz Datentypen",
+   "linie": "typen",
+   "vl": 6,
+   "abschnitt": 13,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "int, float, str, bool, list, range, dict — mit Herkunft im Datensatz und typischer Falle.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "none",
+   "name": "None",
+   "linie": "typen",
+   "vl": 7,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Der Wert „nichts“ — Rückgabe einer Funktion ohne return.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "array",
+   "name": "NumPy-Array",
+   "linie": "typen",
+   "vl": 10,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Rechnet elementweise: (minima < 0).sum() ersetzt das Zählmuster.",
+   "fehlvorstellung": "„Ein Array ist dasselbe wie eine Liste.“"
+  },
+  {
+   "id": "dataframe",
+   "name": "DataFrame",
+   "linie": "typen",
+   "vl": 11,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Tabelle aus beschrifteten Spalten; jede Spalte verhält sich wie ein Array.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "nan",
+   "name": "NaN",
+   "linie": "typen",
+   "vl": 11,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "So stellt pandas „kein Wert“ dar, z. B. aus -999 per na_values.",
+   "fehlvorstellung": "„NaN ist null.“"
+  },
+  {
+   "id": "datumstyp",
+   "name": "Datumsspalte",
+   "linie": "typen",
+   "vl": 11,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "MESS_DATUM mit pd.to_datetime in ein Datum umwandeln.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "dwd",
+   "name": "DWD-Datensatz",
+   "linie": "daten",
+   "vl": 1,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Klimareihe Fichtelberg seit 1890, rund 48.000 Zeilen — der rote Faden.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "tabkalk",
+   "name": "Tabellenkalkulation",
+   "linie": "daten",
+   "vl": 1,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Drei Aufgaben: leicht, mühsam, praktisch aussichtslos.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "rohformat",
+   "name": "Rohformat",
+   "linie": "daten",
+   "vl": 1,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Semikolons, Leerzeichen, Datum ohne Trennzeichen, Dezimalpunkt, eor-Spalte.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "fehlwert",
+   "name": "Fehlwert -999",
+   "linie": "daten",
+   "vl": 3,
+   "abschnitt": 8,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "So kennzeichnet der DWD „nicht gemessen“. -999 < 0 ist wahr — und trotzdem kein Frosttag.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "openurl",
+   "name": "open_url",
+   "linie": "daten",
+   "vl": 3,
+   "abschnitt": 13,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Holt eine Datei aus dem Repository in den Browser — funktioniert nur dort.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "open",
+   "name": "Datei öffnen",
+   "linie": "daten",
+   "vl": 6,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "with open(datei) as f: — Zeile für Zeile, jede als Text.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "strip",
+   "name": "readline & strip",
+   "linie": "daten",
+   "vl": 6,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Eine Zeile lesen; Leerzeichen und Zeilenumbruch am Rand entfernen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "split",
+   "name": "split",
+   "linie": "daten",
+   "vl": 6,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Zerlegt eine Zeile am Trennzeichen in eine Liste von Texten.",
+   "fehlvorstellung": "„Die Zeile ist schon eine Tabelle.“"
+  },
+  {
+   "id": "kopfzeile",
+   "name": "Kopfzeile",
+   "linie": "daten",
+   "vl": 6,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Mit f.readline() überspringen — sonst scheitert float an \"TXK\".",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "luecke",
+   "name": "Lücke",
+   "linie": "daten",
+   "vl": 6,
+   "abschnitt": 7,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Fehlende Tage fehlen ganz, statt als -999 zu erscheinen. Fichtelberg: 1910 bis 1915.",
+   "fehlvorstellung": "„Jeder Tag hat eine Zeile.“"
+  },
+  {
+   "id": "schreiben",
+   "name": "Datei schreiben",
+   "linie": "daten",
+   "vl": 6,
+   "abschnitt": 11,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "open(..., \"w\") und f.write — ohne automatischen Zeilenumbruch.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "langesskript",
+   "name": "das lange Skript",
+   "linie": "daten",
+   "vl": 6,
+   "abschnitt": 12,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Fichtelberg und Freiberg als kopierte Blöcke — funktioniert, ist aber schwer zu ändern.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "pfad",
+   "name": "Pfad",
+   "linie": "daten",
+   "vl": 9,
+   "abschnitt": 8,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Relative Pfade gelten ab dem aktuellen Arbeitsverzeichnis.",
+   "fehlvorstellung": "„Ein Dateiname bezieht sich auf den Ordner des Programms.“"
+  },
+  {
+   "id": "readcsv",
+   "name": "read_csv",
+   "linie": "daten",
+   "vl": 11,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Liest die Rohdatei in einer Anweisung — was in VL 06 rund 50 Zeilen gekostet hat.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "vollstaendig",
+   "name": "vollständige Jahre",
+   "linie": "daten",
+   "vl": 12,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Jahre mit Lücken erkennen und ausschließen, bevor man vergleicht.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "merge",
+   "name": "Stationen verbinden",
+   "linie": "daten",
+   "vl": 12,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Fichtelberg und Chemnitz über das Datum zusammenführen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "stationswechsel",
+   "name": "Stationswechsel",
+   "linie": "daten",
+   "vl": 14,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Freiberg misst ab 2015 an anderem Ort mit anderem Gerät — gleiche Datei, andere Messung.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "metadaten",
+   "name": "Metadaten",
+   "linie": "daten",
+   "vl": 14,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Gerät, Messtag, Betreiber, Qualitätsstufe — was die Daten selbst verschweigen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "referenz",
+   "name": "Referenzstation",
+   "linie": "daten",
+   "vl": 14,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Chemnitz als Vergleich: Verhältnis Freiberg/Chemnitz 1,13 vorher, 0,96 nachher.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "kreislauf",
+   "name": "Datenkreislauf",
+   "linie": "analyse",
+   "vl": 0,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Frage, Erhebung, Aufbereitung, Analyse, Visualisierung, Dokumentation — meist mehrere Runden.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "lohnt",
+   "name": "Programm oder Tabelle?",
+   "linie": "analyse",
+   "vl": 1,
+   "abschnitt": 12,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Viele Daten, sperrige Formate, Wiederholung, Nachvollziehbarkeit: dann lohnt ein Programm.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "kenntage",
+   "name": "Frost-, Eis-, Sommertag",
+   "linie": "analyse",
+   "vl": 3,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "DWD-Kenntage: Frosttag = Minimum unter 0 °C, Eistag = Maximum unter 0 °C, Sommertag = Maximum ab 25 °C.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "mittel",
+   "name": "Mittelwert",
+   "linie": "analyse",
+   "vl": 4,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Summe durch Anzahl — nur über gültige Werte, und die Anzahl gehört dazu.",
+   "fehlvorstellung": "„Ein Mittelwert gilt, egal wie viele Werte fehlen.“"
+  },
+  {
+   "id": "hochrechnung",
+   "name": "Hochrechnung",
+   "linie": "analyse",
+   "vl": 4,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Bei +0,05 °C pro Jahr läge das Mittel 2059 bei 8 °C — nur unter dieser Annahme.",
+   "fehlvorstellung": "„Rechnerisch korrekt heißt inhaltlich richtig.“"
+  },
+  {
+   "id": "statistik",
+   "name": "statistics",
+   "linie": "analyse",
+   "vl": 9,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "mean, median, stdev für Listen von Messwerten.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "notebook",
+   "name": "Jupyter Notebook",
+   "linie": "analyse",
+   "vl": 10,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Code, Ergebnis und Text in Zellen — das Werkzeug für Exploration und Bericht.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "vektor",
+   "name": "elementweise rechnen",
+   "linie": "analyse",
+   "vl": 10,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Eine Anweisung für alle Werte statt einer Schleife: minima.mean().",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "filter",
+   "name": "Filtern",
+   "linie": "analyse",
+   "vl": 11,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "df[df[\"TNK\"] < 0] — Zeilen nach einer Bedingung auswählen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "groupby",
+   "name": "groupby",
+   "linie": "analyse",
+   "vl": 12,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Gruppiert Zeilen, z. B. nach Jahr, und fasst jede Gruppe zusammen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "diagrammform",
+   "name": "Diagrammform",
+   "linie": "analyse",
+   "vl": 13,
+   "abschnitt": 2,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Zeitreihe als Linie, Vergleich als Balken, Verteilung als Histogramm.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "diagramm",
+   "name": "Diagramm",
+   "linie": "analyse",
+   "vl": 13,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Achsen, Einheiten, Titel — ein Diagramm muss ohne Begleittext lesbar sein.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "trend",
+   "name": "Trend",
+   "linie": "analyse",
+   "vl": 13,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Lineare Trendlinie — die Herleitung der 0,05 °C pro Jahr aus VL 04.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "irref",
+   "name": "Irreführende Darstellung",
+   "linie": "analyse",
+   "vl": 13,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Abgeschnittene Achsen, ausgewählte Zeiträume.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "qualitaet",
+   "name": "Datenqualität",
+   "linie": "analyse",
+   "vl": 14,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Kann ich meinem Ergebnis trauen? Lücken, Brüche, Metadaten, Referenz.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "pruefung",
+   "name": "Prüfungsvorbereitung",
+   "linie": "analyse",
+   "vl": 14,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Musteraufgaben zu allen Aufgabentypen aus VL 00.",
+   "fehlvorstellung": null
+  }
+ ],
+ "beziehungen": [
+  {
+   "von": "zaehler",
+   "nach": "sensorlog",
+   "text": "erzeugt"
+  },
+  {
+   "von": "zaehler",
+   "nach": "annahmen",
+   "text": "beruht auf"
+  },
+  {
+   "von": "sensorlog",
+   "nach": "tabkalk",
+   "text": "ausgewertet mit"
+  },
+  {
+   "von": "kreislauf",
+   "nach": "lohnt",
+   "text": "je Runde die Frage"
+  },
+  {
+   "von": "tabkalk",
+   "nach": "lohnt",
+   "text": "Grenzen zeigen"
+  },
+  {
+   "von": "dwd",
+   "nach": "rohformat",
+   "text": "liegt vor im"
+  },
+  {
+   "von": "tabkalk",
+   "nach": "algo",
+   "text": "motiviert"
+  },
+  {
+   "von": "algo",
+   "nach": "terminierung",
+   "text": "erfordert"
+  },
+  {
+   "von": "algo",
+   "nach": "pseudo",
+   "text": "notiert als"
+  },
+  {
+   "von": "pseudo",
+   "nach": "ablauf",
+   "text": "oder als"
+  },
+  {
+   "von": "algo",
+   "nach": "sprache",
+   "text": "formuliert in"
+  },
+  {
+   "von": "blockly",
+   "nach": "print",
+   "text": "gleiches Programm wie"
+  },
+  {
+   "von": "sprache",
+   "nach": "interpreter",
+   "text": "ausgeführt vom"
+  },
+  {
+   "von": "interpreter",
+   "nach": "fehlermeldung",
+   "text": "meldet"
+  },
+  {
+   "von": "variable",
+   "nach": "zuweisung",
+   "text": "entsteht durch"
+  },
+  {
+   "von": "variable",
+   "nach": "namen",
+   "text": "braucht"
+  },
+  {
+   "von": "variable",
+   "nach": "print",
+   "text": "ausgegeben mit"
+  },
+  {
+   "von": "zuweisung",
+   "nach": "trace",
+   "text": "nachvollziehen mit"
+  },
+  {
+   "von": "operatoren",
+   "nach": "zuweisung",
+   "text": "rechts vom ="
+  },
+  {
+   "von": "dezimalpunkt",
+   "nach": "operatoren",
+   "text": "Voraussetzung für"
+  },
+  {
+   "von": "variable",
+   "nach": "typ",
+   "text": "hat einen"
+  },
+  {
+   "von": "typ",
+   "nach": "umwandlung",
+   "text": "ändern durch"
+  },
+  {
+   "von": "typ",
+   "nach": "text",
+   "text": "z. B."
+  },
+  {
+   "von": "umwandlung",
+   "nach": "fehlermeldung",
+   "text": "ValueError bei"
+  },
+  {
+   "von": "typ",
+   "nach": "vergleich",
+   "text": "bool ist ein"
+  },
+  {
+   "von": "kommentar",
+   "nach": "variable",
+   "text": "erklärt"
+  },
+  {
+   "von": "pseudo",
+   "nach": "if",
+   "text": "wird zu"
+  },
+  {
+   "von": "pseudo",
+   "nach": "for",
+   "text": "wird zu"
+  },
+  {
+   "von": "vergleich",
+   "nach": "if",
+   "text": "steuert"
+  },
+  {
+   "von": "if",
+   "nach": "einrueckung",
+   "text": "Block per"
+  },
+  {
+   "von": "if",
+   "nach": "else",
+   "text": "ergänzt durch"
+  },
+  {
+   "von": "else",
+   "nach": "elif",
+   "text": "erweitert zu"
+  },
+  {
+   "von": "vergleich",
+   "nach": "logik",
+   "text": "verknüpft mit"
+  },
+  {
+   "von": "elif",
+   "nach": "kenntage",
+   "text": "unterscheidet"
+  },
+  {
+   "von": "for",
+   "nach": "einrueckung",
+   "text": "Block per"
+  },
+  {
+   "von": "if",
+   "nach": "zaehlmuster",
+   "text": "Teil von"
+  },
+  {
+   "von": "for",
+   "nach": "zaehlmuster",
+   "text": "Teil von"
+  },
+  {
+   "von": "for",
+   "nach": "schleifenvar",
+   "text": "belegt"
+  },
+  {
+   "von": "zaehlmuster",
+   "nach": "trace",
+   "text": "nachvollziehen mit"
+  },
+  {
+   "von": "dwd",
+   "nach": "fehlwert",
+   "text": "enthält"
+  },
+  {
+   "von": "fehlwert",
+   "nach": "logik",
+   "text": "ausschließen mit"
+  },
+  {
+   "von": "openurl",
+   "nach": "uebertragbar",
+   "text": "Ausnahme von"
+  },
+  {
+   "von": "zaehlmuster",
+   "nach": "summe",
+   "text": "verallgemeinert zu"
+  },
+  {
+   "von": "zaehlmuster",
+   "nach": "extrem",
+   "text": "verallgemeinert zu"
+  },
+  {
+   "von": "summe",
+   "nach": "mittel",
+   "text": "liefert"
+  },
+  {
+   "von": "fehlwert",
+   "nach": "mittel",
+   "text": "verfälscht"
+  },
+  {
+   "von": "extrem",
+   "nach": "zustand",
+   "text": "steckt in"
+  },
+  {
+   "von": "for",
+   "nach": "while",
+   "text": "Alternative"
+  },
+  {
+   "von": "while",
+   "nach": "endlos",
+   "text": "Gefahr"
+  },
+  {
+   "von": "terminierung",
+   "nach": "endlos",
+   "text": "verletzt durch"
+  },
+  {
+   "von": "while",
+   "nach": "hochrechnung",
+   "text": "berechnet"
+  },
+  {
+   "von": "float",
+   "nach": "round",
+   "text": "ausgeben mit"
+  },
+  {
+   "von": "float",
+   "nach": "vergleich",
+   "text": "kein == bei"
+  },
+  {
+   "von": "liste",
+   "nach": "for",
+   "text": "durchlaufen von"
+  },
+  {
+   "von": "liste",
+   "nach": "append",
+   "text": "wächst mit"
+  },
+  {
+   "von": "zaehlmuster",
+   "nach": "append",
+   "text": "Sammelmuster statt Zähler"
+  },
+  {
+   "von": "liste",
+   "nach": "index",
+   "text": "Zugriff per"
+  },
+  {
+   "von": "text",
+   "nach": "index",
+   "text": "gleiche Schreibweise"
+  },
+  {
+   "von": "index",
+   "nach": "indexerror",
+   "text": "außerhalb:"
+  },
+  {
+   "von": "index",
+   "nach": "range",
+   "text": "gültige Indizes"
+  },
+  {
+   "von": "range",
+   "nach": "parallel",
+   "text": "durchläuft"
+  },
+  {
+   "von": "index",
+   "nach": "parallel",
+   "text": "verbindet"
+  },
+  {
+   "von": "split",
+   "nach": "textvergleich",
+   "text": "liefert Text für"
+  },
+  {
+   "von": "textvergleich",
+   "nach": "umwandlung",
+   "text": "vermeiden durch"
+  },
+  {
+   "von": "liste",
+   "nach": "dict",
+   "text": "Schlüssel statt Position"
+  },
+  {
+   "von": "openurl",
+   "nach": "open",
+   "text": "ersetzt durch"
+  },
+  {
+   "von": "open",
+   "nach": "strip",
+   "text": "mit"
+  },
+  {
+   "von": "open",
+   "nach": "split",
+   "text": "Zeile zerlegen mit"
+  },
+  {
+   "von": "split",
+   "nach": "liste",
+   "text": "liefert eine"
+  },
+  {
+   "von": "split",
+   "nach": "umwandlung",
+   "text": "liefert Text für"
+  },
+  {
+   "von": "open",
+   "nach": "kopfzeile",
+   "text": "überspringt"
+  },
+  {
+   "von": "dwd",
+   "nach": "luecke",
+   "text": "enthält"
+  },
+  {
+   "von": "dict",
+   "nach": "keyerror",
+   "text": "Falle"
+  },
+  {
+   "von": "dict",
+   "nach": "luecke",
+   "text": "fehlender Eintrag bei"
+  },
+  {
+   "von": "open",
+   "nach": "schreiben",
+   "text": "Gegenstück"
+  },
+  {
+   "von": "schreiben",
+   "nach": "tabkalk",
+   "text": "öffnen in"
+  },
+  {
+   "von": "open",
+   "nach": "langesskript",
+   "text": "Teil von"
+  },
+  {
+   "von": "dict",
+   "nach": "typbilanz",
+   "text": "vervollständigt"
+  },
+  {
+   "von": "langesskript",
+   "nach": "funktion",
+   "text": "zerlegt in"
+  },
+  {
+   "von": "funktion",
+   "nach": "parameter",
+   "text": "hat"
+  },
+  {
+   "von": "funktion",
+   "nach": "return",
+   "text": "liefert mit"
+  },
+  {
+   "von": "return",
+   "nach": "none",
+   "text": "ohne return:"
+  },
+  {
+   "von": "funktion",
+   "nach": "lokal",
+   "text": "hat"
+  },
+  {
+   "von": "return",
+   "nach": "mehrrueck",
+   "text": "auch"
+  },
+  {
+   "von": "funktion",
+   "nach": "assert",
+   "text": "geprüft mit"
+  },
+  {
+   "von": "kenntage",
+   "nach": "funktion",
+   "text": "z. B. ist_frosttag"
+  },
+  {
+   "von": "zaehler",
+   "nach": "micropy",
+   "text": "läuft auf"
+  },
+  {
+   "von": "micropy",
+   "nach": "while",
+   "text": "while True"
+  },
+  {
+   "von": "micropy",
+   "nach": "sensor",
+   "text": "steuert"
+  },
+  {
+   "von": "sensor",
+   "nach": "seriell",
+   "text": "sendet über"
+  },
+  {
+   "von": "sensor",
+   "nach": "messfehler",
+   "text": "Risiko"
+  },
+  {
+   "von": "annahmen",
+   "nach": "messfehler",
+   "text": "verletzt ergibt"
+  },
+  {
+   "von": "seriell",
+   "nach": "zeitstempel",
+   "text": "erhält"
+  },
+  {
+   "von": "seriell",
+   "nach": "messdatei",
+   "text": "mitgeschrieben als"
+  },
+  {
+   "von": "funktion",
+   "nach": "modul",
+   "text": "wandert in"
+  },
+  {
+   "von": "modul",
+   "nach": "namemain",
+   "text": "Testcode unter"
+  },
+  {
+   "von": "modul",
+   "nach": "stdlib",
+   "text": "gleiches Prinzip"
+  },
+  {
+   "von": "stdlib",
+   "nach": "datetime",
+   "text": "enthält"
+  },
+  {
+   "von": "stdlib",
+   "nach": "statistik",
+   "text": "enthält"
+  },
+  {
+   "von": "datetime",
+   "nach": "luecke",
+   "text": "findet"
+  },
+  {
+   "von": "mittel",
+   "nach": "statistik",
+   "text": "fertig in"
+  },
+  {
+   "von": "modul",
+   "nach": "pip",
+   "text": "externe per"
+  },
+  {
+   "von": "pfad",
+   "nach": "open",
+   "text": "entscheidet über"
+  },
+  {
+   "von": "pip",
+   "nach": "notebook",
+   "text": "installiert"
+  },
+  {
+   "von": "notebook",
+   "nach": "zellen",
+   "text": "besteht aus"
+  },
+  {
+   "von": "modul",
+   "nach": "array",
+   "text": "import wie"
+  },
+  {
+   "von": "liste",
+   "nach": "array",
+   "text": "wird zu"
+  },
+  {
+   "von": "zaehlmuster",
+   "nach": "vektor",
+   "text": "ersetzt durch"
+  },
+  {
+   "von": "array",
+   "nach": "vektor",
+   "text": "ermöglicht"
+  },
+  {
+   "von": "array",
+   "nach": "dataframe",
+   "text": "Spalte ist ein"
+  },
+  {
+   "von": "open",
+   "nach": "readcsv",
+   "text": "in einer Anweisung"
+  },
+  {
+   "von": "notebook",
+   "nach": "readcsv",
+   "text": "Werkzeug für"
+  },
+  {
+   "von": "readcsv",
+   "nach": "dataframe",
+   "text": "erzeugt"
+  },
+  {
+   "von": "fehlwert",
+   "nach": "nan",
+   "text": "wird zu"
+  },
+  {
+   "von": "none",
+   "nach": "nan",
+   "text": "ähnlich:"
+  },
+  {
+   "von": "datetime",
+   "nach": "datumstyp",
+   "text": "in pandas:"
+  },
+  {
+   "von": "dataframe",
+   "nach": "filter",
+   "text": "auswählen mit"
+  },
+  {
+   "von": "dict",
+   "nach": "groupby",
+   "text": "Prinzip hinter"
+  },
+  {
+   "von": "tabkalk",
+   "nach": "groupby",
+   "text": "Aufgabe 3 gelöst mit"
+  },
+  {
+   "von": "luecke",
+   "nach": "vollstaendig",
+   "text": "prüfen auf"
+  },
+  {
+   "von": "groupby",
+   "nach": "vollstaendig",
+   "text": "nur über"
+  },
+  {
+   "von": "vollstaendig",
+   "nach": "merge",
+   "text": "dann"
+  },
+  {
+   "von": "diagrammform",
+   "nach": "diagramm",
+   "text": "bestimmt"
+  },
+  {
+   "von": "groupby",
+   "nach": "diagramm",
+   "text": "Ergebnis als"
+  },
+  {
+   "von": "diagramm",
+   "nach": "trend",
+   "text": "zeigt"
+  },
+  {
+   "von": "hochrechnung",
+   "nach": "trend",
+   "text": "Grundlage"
+  },
+  {
+   "von": "trend",
+   "nach": "irref",
+   "text": "Gefahr"
+  },
+  {
+   "von": "merge",
+   "nach": "referenz",
+   "text": "Grundlage für"
+  },
+  {
+   "von": "stationswechsel",
+   "nach": "metadaten",
+   "text": "belegt durch"
+  },
+  {
+   "von": "referenz",
+   "nach": "stationswechsel",
+   "text": "entlarvt"
+  },
+  {
+   "von": "stationswechsel",
+   "nach": "qualitaet",
+   "text": "Beispiel für"
+  },
+  {
+   "von": "luecke",
+   "nach": "qualitaet",
+   "text": "prüfen"
+  },
+  {
+   "von": "nan",
+   "nach": "qualitaet",
+   "text": "zählen, nicht ignorieren"
+  },
+  {
+   "von": "messfehler",
+   "nach": "qualitaet",
+   "text": "Ursache für"
+  },
+  {
+   "von": "messdatei",
+   "nach": "readcsv",
+   "text": "eingelesen mit"
+  },
+  {
+   "von": "trace",
+   "nach": "pruefung",
+   "text": "Aufgabentyp"
+  }
+ ],
+ "faeden": [
+  {
+   "id": "wiederverwenden",
+   "name": "Wiederverwenden",
+   "beschreibung": "Vom Muster über die Funktion zum Modul und zur fremden Bibliothek.",
+   "stationen": [
+    "pseudo",
+    "zaehlmuster",
+    "langesskript",
+    "funktion",
+    "modul",
+    "pip",
+    "array"
+   ]
+  },
+  {
+   "id": "struktur",
+   "name": "Daten ordnen",
+   "beschreibung": "Vom einzelnen Wert über Listen und Dictionaries bis zum DataFrame.",
+   "stationen": [
+    "variable",
+    "liste",
+    "index",
+    "dict",
+    "array",
+    "dataframe"
+   ]
+  },
+  {
+   "id": "zaehlen",
+   "name": "Vom Zählen zur Aggregation",
+   "beschreibung": "Wie aus einer Schleife mit Zähler am Ende eine Zeile groupby wird.",
+   "stationen": [
+    "zaehlmuster",
+    "summe",
+    "mittel",
+    "dict",
+    "vektor",
+    "groupby",
+    "diagramm"
+   ]
+  },
+  {
+   "id": "fehlwert",
+   "name": "Der Fehlwert",
+   "beschreibung": "Wie „nicht gemessen“ in jeder Phase anders aussieht — und jedes Mal behandelt werden muss.",
+   "stationen": [
+    "dwd",
+    "fehlwert",
+    "logik",
+    "mittel",
+    "luecke",
+    "nan",
+    "vollstaendig",
+    "qualitaet"
+   ]
+  },
+  {
+   "id": "tabelle",
+   "name": "Vom Text zur Tabelle",
+   "beschreibung": "Wie aus Textzeilen einer Datei eine Tabelle mit Spalten und Typen wird.",
+   "stationen": [
+    "dwd",
+    "text",
+    "umwandlung",
+    "open",
+    "split",
+    "readcsv",
+    "dataframe"
+   ]
+  },
+  {
+   "id": "messung",
+   "name": "Von der Messung zum Urteil",
+   "beschreibung": "Wie Messdaten entstehen — und warum man ihnen nicht blind trauen darf.",
+   "stationen": [
+    "zaehler",
+    "sensorlog",
+    "sensor",
+    "messfehler",
+    "messdatei",
+    "readcsv",
+    "stationswechsel",
+    "qualitaet"
+   ]
+  }
+ ]
+}
+</script>
+<script>
+const DATA = JSON.parse(document.getElementById("kartendaten").textContent);
+const BASE = "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/";
+const LECT = [
+  ["19.10.", "Motivation"], ["26.10.", "Problem → Programm"], ["02.11.", "Erste Schritte"],
+  ["09.11.", "Prüfen & Wiederholen"], ["16.11.", "Muster"], ["23.11.", "Daten sammeln"],
+  ["30.11.", "Dateien lesen"], ["07.12.", "Funktionen"], ["14.12.", "Demo MicroPython"],
+  ["04.01.", "Strukturieren"], ["11.01.", "Notebooks"], ["18.01.", "pandas I"],
+  ["25.01.", "pandas II"], ["01.02.", "Visualisierung"], ["08.02.", "Datenqualität"]
+];
+const LECTURES = DATA.vorlesungen.map((v, i) => ({ nr: String(v.vl).padStart(2, "0"), date: LECT[i][0], short: LECT[i][1], file: v.datei, status: v.status, sections: v.abschnitte }));
+const PHASES = [
+  { from: 0, to: 2, name: "Einstieg", v: "--phase-einstieg" },
+  { from: 3, to: 7, name: "Grundlagen am Datensatz", v: "--phase-grundlagen" },
+  { from: 8, to: 8, name: "Zäsur", v: "--phase-zaesur" },
+  { from: 9, to: 9, name: "Grundlagen", v: "--phase-grundlagen" },
+  { from: 10, to: 14, name: "Datenanalyse", v: "--phase-analyse" }
+];
+const LINES = [
+  { id: "denken", name: "Denken & Kontrollfluss", v: "--l-denken" },
+  { id: "typen", name: "Datentypen & -strukturen", v: "--l-typen" },
+  { id: "daten", name: "Daten & Dateien", v: "--l-daten" },
+  { id: "erhebung", name: "Erhebung", v: "--l-erhebung" },
+  { id: "analyse", name: "Analyse & Darstellung", v: "--l-analyse" }
+];
+const THREADV = ["--t1", "--t2", "--t3", "--t4", "--t5", "--t6"];
+const THREADS = DATA.faeden.map((f, i) => ({ id: f.id, name: f.name, text: f.beschreibung, st: f.stationen, v: THREADV[i] }));
+const ALL = DATA.begriffe.map(b => ({ id: b.id, name: b.name, line: b.linie, vl: b.vl, sec: b.abschnitt, level: b.ebene, code: b.code, text: b.erklaerung, mis: b.fehlvorstellung }));
+const EDGES = DATA.beziehungen.map(r => [r.von, r.nach, r.text]);
+const byId = Object.fromEntries(ALL.map(n => [n.id, n]));
+const lineById = Object.fromEntries(LINES.map(l => [l.id, l]));
+const threadById = Object.fromEntries(THREADS.map(t => [t.id, t]));
+const threadsOf = {};
+THREADS.forEach(t => t.st.forEach(s => (threadsOf[s] = threadsOf[s] || []).push(t.id)));
+const nbs = {};
+ALL.forEach(n => nbs[n.id] = []);
+EDGES.forEach(([a, b, t]) => { nbs[a].push({ id: b, t, dir: "out" }); nbs[b].push({ id: a, t, dir: "in" }); });
+
+const $ = (s) => document.querySelector(s);
+const svgNS = "http://www.w3.org/2000/svg";
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const state = { mode: "metro", here: 5, view: "nb", detail: false, sel: "dict", thread: null, hidden: new Set() };
+try {
+  const saved = JSON.parse(localStorage.getItem("eavd-map") || "{}");
+  if (Number.isInteger(saved.here)) state.here = saved.here;
+  if (typeof saved.detail === "boolean") state.detail = saved.detail;
+  if (saved.mode === "metro" || saved.mode === "zeit") state.mode = saved.mode;
+} catch (e) {}
+function save() { try { localStorage.setItem("eavd-map", JSON.stringify({ here: state.here, detail: state.detail, mode: state.mode })); } catch (e) {} }
+
+const TOP = 108, SIDE = 150;
+let COL = 118, W = 0, H = 0, pos = {}, shown = [], laneY = {}, trackY = {};
+
+function el(name, attrs, parent) {
+  const e = document.createElementNS(svgNS, name);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+const svg = $("#map"), side = $("#side");
+const defs = el("defs", {}, svg);
+const mk = el("marker", { id: "arrow", viewBox: "0 0 10 10", refX: 17, refY: 5, markerWidth: 7, markerHeight: 7, orient: "auto-start-reverse" }, defs);
+el("path", { d: "M0,0 L10,5 L0,10 z", fill: "var(--edge)" }, mk);
+const gBack = el("g", {}, svg), gLines = el("g", {}, svg), gEdges = el("g", {}, svg), gSt = el("g", {}, svg), gLabels = el("g", {}, svg);
+
+function setSize() {
+  W = COL * LECTURES.length + 60;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.setAttribute("width", W); svg.setAttribute("height", H);
+  side.setAttribute("viewBox", `0 0 ${SIDE} ${H}`); side.setAttribute("width", SIDE); side.setAttribute("height", H);
+}
+
+/* ---------- Layout: Zeitleiste ---------- */
+function layoutZeit() {
+  COL = 118;
+  const ROW = 30, PAD = 18;
+  shown = ALL.filter(n => !state.hidden.has(n.line) && (state.detail || n.level === 1 || n.id === state.sel));
+  const count = {};
+  shown.forEach(n => { const k = n.line + "|" + n.vl; count[k] = (count[k] || 0) + 1; });
+  let y = TOP;
+  laneY = {};
+  LINES.forEach(l => {
+    laneY[l.id] = y;
+    if (state.hidden.has(l.id)) return;
+    y += Math.max(1, ...LECTURES.map((_, i) => count[l.id + "|" + i] || 0)) * ROW + PAD * 2;
+  });
+  H = y + 8;
+  pos = {};
+  const used = {};
+  shown.slice().sort((a, b) => a.level - b.level || a.sec - b.sec).forEach(n => {
+    const k = n.line + "|" + n.vl;
+    const i = used[k] = (used[k] || 0); used[k]++;
+    pos[n.id] = { x: COL * n.vl + 22, y: laneY[n.line] + PAD + 10 + i * ROW };
+  });
+}
+
+/* ---------- Layout: Metrokarte ---------- */
+function layoutMetro() {
+  COL = 150;
+  const TRACK = 70;
+  trackY = {};
+  THREADS.forEach((t, i) => trackY[t.id] = TOP + 40 + i * TRACK);
+  H = TOP + 40 + THREADS.length * TRACK + 10;
+  const ids = [...new Set(THREADS.flatMap(t => t.st))];
+  shown = ids.map(id => byId[id]);
+  pos = {};
+  for (let v = 0; v < LECTURES.length; v++) {
+    const col = ids.filter(id => byId[id].vl === v);
+    if (!col.length) continue;
+    // Reihenfolge in der Spalte: topologisch entlang der Fäden
+    const succ = {}, indeg = {};
+    col.forEach(id => { succ[id] = []; indeg[id] = 0; });
+    THREADS.forEach(t => t.st.forEach((s, k) => {
+      const nx = t.st[k + 1];
+      if (nx && succ[s] && succ[nx] !== undefined && !succ[s].includes(nx)) { succ[s].push(nx); indeg[nx]++; }
+    }));
+    const order = [], queue = col.filter(id => indeg[id] === 0);
+    while (queue.length) { const u = queue.shift(); order.push(u); succ[u].forEach(w => { if (--indeg[w] === 0) queue.push(w); }); }
+    const step = col.length > 1 ? Math.min(46, (COL - 40) / (col.length - 1)) : 0;
+    order.forEach((id, k) => {
+      const ys = threadsOf[id].map(t => trackY[t]);
+      const spread = Math.max(...ys) - Math.min(...ys);
+      const y = spread <= TRACK ? ys.reduce((a, b) => a + b, 0) / ys.length : ys[0];
+      pos[id] = { x: COL * v + 24 + k * step, y };
+    });
+  }
+}
+
+function octi(p, q) {
+  const dx = q.x - p.x, dy = q.y - p.y, ady = Math.abs(dy);
+  if (ady < 0.5) return ` L${q.x},${q.y}`;
+  if (dx <= ady + 2) return ` L${q.x},${q.y}`;
+  const flat = (dx - ady) / 2;
+  return ` L${p.x + flat},${p.y} L${p.x + flat + ady},${q.y} L${q.x},${q.y}`;
+}
+
+/* ---------- Hintergrund (beide Ansichten) ---------- */
+function drawBackground() {
+  gBack.innerHTML = "";
+  PHASES.forEach(p => {
+    const x = COL * p.from, w = COL * (p.to - p.from + 1);
+    el("rect", { x, y: 0, width: w, height: H, fill: css(p.v) }, gBack);
+    el("text", { x: x + 8, y: 16, class: "phase-label" }, gBack).textContent = p.name;
+  });
+  LECTURES.forEach((l, i) => {
+    const x = COL * i;
+    el("line", { x1: x, y1: 24, x2: x, y2: H, stroke: css("--grid"), "stroke-width": 1 }, gBack);
+    el("text", { x: x + 8, y: 46, class: "col-head" }, gBack).textContent = "VL " + l.nr;
+    el("text", { x: x + 8, y: 62, class: "col-date" }, gBack).textContent = l.date;
+    el("text", { x: x + 8, y: 78, class: "col-short" }, gBack).textContent = l.short;
+    if (l.status !== "ausgearbeitet") el("text", { x: x + 8, y: 94, class: "col-status" }, gBack).textContent = l.status === "Rumpf" ? "Rumpf" : "in Planung";
+  });
+  const hx = COL * state.here;
+  el("rect", { x: hx, y: 24, width: COL, height: H - 24, class: "here-band" }, gBack);
+  el("text", { x: hx + COL - 8, y: 16, "text-anchor": "end", class: "here-tag" }, gBack).textContent = "▼ Sie sind hier";
+  side.innerHTML = "";
+  el("rect", { x: 0, y: 0, width: SIDE, height: H, fill: css("--surface") }, side);
+  el("line", { x1: SIDE - 0.5, y1: 0, x2: SIDE - 0.5, y2: H, stroke: css("--faint") }, side);
+  const titles = state.mode === "metro"
+    ? THREADS.map(t => ({ name: t.name, v: t.v, y: trackY[t.id] - 8, dim: state.thread && state.thread !== t.id }))
+    : LINES.filter(l => !state.hidden.has(l.id)).map(l => ({ name: l.name, v: l.v, y: laneY[l.id] + 22 }));
+  titles.forEach(t => {
+    el("rect", { x: 12, y: t.y - 4, width: 18, height: 6, rx: 3, fill: css(t.v), opacity: t.dim ? .3 : 1 }, side);
+    const tx = el("text", { x: 12, y: t.y + 20, class: "lane-title", fill: css(t.v), opacity: t.dim ? .35 : 1 }, side);
+    const words = t.name.includes(" & ") ? t.name.split(" & ").map((w, i, a) => w + (i < a.length - 1 ? " &" : "")) : wrap(t.name, 18);
+    words.forEach((w, i) => { el("tspan", { x: 12, dy: i ? 16 : 0 }, tx).textContent = w; });
+  });
+}
+function wrap(s, n) {
+  const out = []; let cur = "";
+  s.split(" ").forEach(w => { if ((cur + " " + w).trim().length > n) { out.push(cur); cur = w; } else cur = (cur + " " + w).trim(); });
+  if (cur) out.push(cur);
+  return out;
+}
+
+/* ---------- Zeitleiste: Schienen, Kanten, Stationen ---------- */
+function drawZeit() {
+  gLines.innerHTML = ""; gEdges.innerHTML = ""; gLabels.innerHTML = ""; gSt.innerHTML = "";
+  LINES.forEach(l => {
+    if (state.hidden.has(l.id)) return;
+    const y = laneY[l.id] + 28;
+    el("line", { x1: 0, y1: y, x2: W, y2: y, class: "rail", stroke: css(l.v) }, gLines);
+  });
+  const placed = [];
+  const free = (x, y, w) => !placed.some(r => Math.abs(r.x - x) < (r.w + w) / 2 + 4 && Math.abs(r.y - y) < 14);
+  const list = state.view === "all" ? EDGES : EDGES.filter(([a, b]) => a === state.sel || b === state.sel);
+  list.forEach(([a, b, t]) => {
+    if (!pos[a] || !pos[b]) return;
+    const hi = a === state.sel || b === state.sel;
+    const p = pos[a], q = pos[b], dx = (q.x - p.x) * 0.5, bend = p.x === q.x ? 60 : 0;
+    el("path", { d: `M${p.x},${p.y} C${p.x + dx + bend},${p.y} ${q.x - dx + bend},${q.y} ${q.x},${q.y}`, class: "edge" + (hi ? " hi" : ""), "marker-end": "url(#arrow)", opacity: hi || state.view === "nb" ? 1 : 0.3 }, gEdges);
+    if (hi) {
+      const lx = (p.x + q.x) / 2 + (p.x === q.x ? 46 : 0), w = t.length * 5.6, base = (p.y + q.y) / 2 - 4;
+      let ly = base;
+      for (const o of [0, 14, -14, 28, -28, 42, -42, 56, -56]) { if (free(lx, base + o, w)) { ly = base + o; break; } }
+      placed.push({ x: lx, y: ly, w });
+      el("text", { x: lx, y: ly, "text-anchor": "middle", class: "edge-label" }, gLabels).textContent = t;
+    }
+  });
+  const nbSet = new Set((nbs[state.sel] || []).map(n => n.id));
+  shown.forEach(n => {
+    const p = pos[n.id];
+    const cls = ["station"];
+    if (n.code) cls.push("code");
+    if (n.level === 2) cls.push("detail");
+    if (n.vl > state.here) cls.push("future");
+    if (n.id === state.sel) cls.push("sel");
+    else if (nbSet.has(n.id)) cls.push("nb");
+    else if (state.view === "nb" && state.sel) cls.push("dim");
+    const g = stationGroup(n, cls);
+    el("circle", { cx: p.x, cy: p.y, r: n.level === 1 ? 7 : 4.5, class: "dot", stroke: css(lineById[n.line].v) }, g);
+    el("text", { x: p.x + 12, y: p.y + 4 }, g).textContent = n.name;
+  });
+}
+
+function stationGroup(n, cls) {
+  const p = pos[n.id];
+  const g = el("g", { class: cls.join(" "), tabindex: 0, role: "button", "aria-label": `${n.name}, eingeführt in VL ${LECTURES[n.vl].nr}`, style: `color:${css(lineById[n.line].v)}` }, gSt);
+  el("circle", { cx: p.x, cy: p.y, r: 14, fill: "transparent", class: "ring", stroke: "none" }, g);
+  g.addEventListener("click", () => select(n.id));
+  g.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); select(n.id); } });
+  return g;
+}
+
+/* ---------- Metrokarte: Linien, Stationen ---------- */
+function drawMetro() {
+  gLines.innerHTML = ""; gEdges.innerHTML = ""; gLabels.innerHTML = ""; gSt.innerHTML = "";
+  const selThreads = state.sel ? (threadsOf[state.sel] || []) : [];
+  const active = state.thread ? [state.thread] : selThreads;
+  THREADS.forEach(t => {
+    const pts = t.st.map(s => pos[s]);
+    let d = `M${pts[0].x - 18},${pts[0].y} L${pts[0].x},${pts[0].y}`;
+    for (let i = 1; i < pts.length; i++) d += octi(pts[i - 1], pts[i]);
+    const last = pts[pts.length - 1];
+    d += ` L${last.x + 18},${last.y}`;
+    const dim = active.length && !active.includes(t.id);
+    el("path", { d, class: "mline" + (dim ? " dim" : ""), stroke: css(t.v) }, gLines);
+  });
+  shown.forEach(n => {
+    const p = pos[n.id];
+    const multi = (threadsOf[n.id] || []).length > 1;
+    const onActive = !active.length || (threadsOf[n.id] || []).some(t => active.includes(t));
+    const cls = ["station", "metro"];
+    if (n.code) cls.push("code");
+    if (n.vl > state.here) cls.push("future");
+    if (n.id === state.sel) cls.push("sel");
+    if (!onActive) cls.push("dim");
+    const g = stationGroup(n, cls);
+    if (multi) {
+      el("circle", { cx: p.x, cy: p.y, r: 9, class: "xchg" }, g);
+    } else {
+      el("circle", { cx: p.x, cy: p.y, r: 5.5, class: "mstop", stroke: css(threadById[threadsOf[n.id][0]].v) }, g);
+    }
+    el("text", { x: p.x + 6, y: p.y - 12, transform: `rotate(-32 ${p.x + 6} ${p.y - 12})`, class: multi ? "xlabel" : "" }, g).textContent = n.name;
+  });
+}
+
+/* ---------- Seitenfeld ---------- */
+function relItem(r, arrow) {
+  const m = byId[r.id];
+  return `<li><button data-id="${r.id}">${arrow} <span class="t">${m.name}</span> <span class="v">${r.t} · VL ${LECTURES[m.vl].nr}</span></button></li>`;
+}
+function renderPanel() {
+  const p = $("#panel");
+  if (state.mode === "metro" && state.thread && !state.sel) {
+    const t = threadById[state.thread];
+    p.innerHTML = `
+      <h2>${t.name}</h2>
+      <div class="meta"><span class="chip"><i style="background:${css(t.v)}"></i>Faden · ${t.st.length} Stationen</span></div>
+      <p>${t.text}</p>
+      <h3>Stationen</h3>
+      <ol class="rels steps">${t.st.map(s => `<li><button data-id="${s}"><span class="t">${byId[s].name}</span> <span class="v">VL ${LECTURES[byId[s].vl].nr}${(threadsOf[s] || []).length > 1 ? " · Umstieg" : ""}</span></button></li>`).join("")}</ol>`;
+    p.querySelectorAll(".rels button").forEach(b => b.addEventListener("click", () => select(b.dataset.id, true)));
+    return;
+  }
+  const n = byId[state.sel];
+  if (!n) { p.innerHTML = '<p class="hint">Wählen Sie eine Station oder einen Faden.</p>'; return; }
+  const l = lineById[n.line], lec = LECTURES[n.vl];
+  const status = n.vl < state.here ? "bereits behandelt" : n.vl === state.here ? "diese Woche" : "kommt noch";
+  const back = nbs[n.id].filter(r => r.dir === "in").sort((a, b) => byId[a.id].vl - byId[b.id].vl);
+  const fwd = nbs[n.id].filter(r => r.dir === "out").sort((a, b) => byId[a.id].vl - byId[b.id].vl);
+  const ths = threadsOf[n.id] || [];
+  const threadHtml = ths.length ? `<h3>${ths.length > 1 ? "Umsteigestation" : "Auf dem Faden"}</h3><ul class="rels threads">${ths.map(tid => {
+    const t = threadById[tid], k = t.st.indexOf(n.id), pv = t.st[k - 1], nx = t.st[k + 1];
+    return `<li><span class="tname"><i style="background:${css(t.v)}"></i>${t.name}</span>
+      <span class="hop">${pv ? `<button data-id="${pv}">← ${byId[pv].name}</button>` : `<span class="v">Anfang</span>`}
+      ${nx ? `<button data-id="${nx}">${byId[nx].name} →</button>` : `<span class="v">Endstation</span>`}</span></li>`;
+  }).join("")}</ul>` : "";
+  p.innerHTML = `
+    <h2 class="${n.code ? "code" : ""}">${n.name}</h2>
+    <div class="meta">
+      <span class="chip"><i style="background:${css(l.v)}"></i>${l.name}</span>
+      <span class="chip">${n.level === 1 ? "Kernbegriff" : "Detailbegriff"}</span>
+      <span>VL ${lec.nr} · ${lec.date} · ${status}</span>
+    </div>
+    <p>${n.text}</p>
+    ${n.mis ? `<div class="misc"><strong>Typische Fehlvorstellung</strong>${n.mis}</div>` : ""}
+    ${threadHtml}
+    ${back.length ? `<h3>Baut auf</h3><ul class="rels">${back.map(r => relItem(r, "←")).join("")}</ul>` : ""}
+    ${fwd.length ? `<h3>Führt weiter zu</h3><ul class="rels">${fwd.map(r => relItem(r, "→")).join("")}</ul>` : ""}
+    <div class="goto">
+      <span class="hint">Eingeführt in Abschnitt ${n.sec}: ${lec.sections[n.sec - 1] || ""}${lec.status !== "ausgearbeitet" ? " — Vorlesung in Vorbereitung" : ""}</span>
+      <a class="golink" href="${BASE + lec.file}#${n.sec}" target="_blank" rel="noopener">Zur Vorlesung ${lec.nr}, Abschnitt ${n.sec} ↗</a>
+    </div>`;
+  p.querySelectorAll(".rels button, .hop button").forEach(b => b.addEventListener("click", () => select(b.dataset.id, true)));
+}
+
+function select(id, scroll) {
+  state.sel = id;
+  state.thread = null;
+  state.hidden.delete(byId[id].line);
+  if (state.mode === "metro" && !threadsOf[id]) { state.mode = "zeit"; save(); }
+  render();
+  if (scroll && pos[id]) {
+    const box = $("#mapbox");
+    box.scrollTo({ left: Math.max(0, pos[id].x - box.clientWidth / 2), behavior: reduce() ? "auto" : "smooth" });
+  }
+}
+
+function renderLegend() {
+  const lg = $("#legend");
+  lg.innerHTML = "";
+  const items = state.mode === "metro" ? THREADS : LINES;
+  items.forEach(it => {
+    const b = document.createElement("button");
+    const on = state.mode === "metro" ? (!state.thread || state.thread === it.id) : !state.hidden.has(it.id);
+    b.setAttribute("aria-pressed", String(on));
+    b.innerHTML = `<span class="swatch" style="background:${css(it.v)}"></span>${it.name}`;
+    b.addEventListener("click", () => {
+      if (state.mode === "metro") { state.thread = state.thread === it.id ? null : it.id; state.sel = state.thread ? null : state.sel; }
+      else { state.hidden.has(it.id) ? state.hidden.delete(it.id) : state.hidden.add(it.id); }
+      render();
+    });
+    lg.appendChild(b);
+  });
+  $("#legendHint").textContent = state.mode === "metro" ? "Faden anklicken, um ihn hervorzuheben:" : "Kategorien ein- und ausblenden:";
+}
+
+function render() {
+  const lec = LECTURES[state.here];
+  $("#hereVal").textContent = `VL ${lec.nr} · ${lec.date}`;
+  $("#here").value = state.here;
+  const pressed = [["mMetro", state.mode === "metro"], ["mZeit", state.mode === "zeit"], ["vNb", state.view === "nb"], ["vAll", state.view === "all"], ["eKern", !state.detail], ["eAlle", state.detail]];
+  for (const [id, on] of pressed) $("#" + id).setAttribute("aria-pressed", String(on));
+  $("#ctlLevel").hidden = state.mode === "metro";
+  $("#ctlEdges").hidden = state.mode === "metro";
+  const nStations = new Set(THREADS.flatMap(t => t.st)).size;
+  $("#count").textContent = state.mode === "metro"
+    ? `${THREADS.length} Fäden · ${nStations} Stationen`
+    : state.detail ? `${ALL.length} Begriffe · ${EDGES.length} Beziehungen` : `${ALL.filter(n => n.level === 1).length} Kernbegriffe von ${ALL.length}`;
+  if (state.mode === "metro") layoutMetro(); else layoutZeit();
+  setSize();
+  drawBackground();
+  if (state.mode === "metro") drawMetro(); else drawZeit();
+  renderPanel(); renderLegend();
+}
+
+$("#here").addEventListener("input", (e) => {
+  state.here = +e.target.value; save(); render();
+  const box = $("#mapbox"), hx = COL * state.here;
+  if (hx < box.scrollLeft || hx + COL > box.scrollLeft + box.clientWidth) box.scrollLeft = hx - box.clientWidth / 2;
+});
+$("#mMetro").addEventListener("click", () => { state.mode = "metro"; if (state.sel && !threadsOf[state.sel]) state.sel = null; save(); render(); });
+$("#mZeit").addEventListener("click", () => { state.mode = "zeit"; state.thread = null; if (!state.sel) state.sel = "dict"; save(); render(); });
+$("#vNb").addEventListener("click", () => { state.view = "nb"; render(); });
+$("#vAll").addEventListener("click", () => { state.view = "all"; render(); });
+$("#eKern").addEventListener("click", () => { state.detail = false; save(); render(); });
+$("#eAlle").addEventListener("click", () => { state.detail = true; save(); render(); });
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+render();
+{ const box = $("#mapbox"); const hx = COL * state.here; if (hx + COL > box.clientWidth) box.scrollLeft = hx - box.clientWidth / 2; }
+</script>
+</body>
+</html>

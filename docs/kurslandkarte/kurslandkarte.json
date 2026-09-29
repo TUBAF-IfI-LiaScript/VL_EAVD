@@ -1,0 +1,2237 @@
+{
+ "stand": "29.09.2026",
+ "vorlesungen": [
+  {
+   "vl": 0,
+   "datei": "00_Motivation.md",
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Herzlich willkommen!",
+    "Wann erscheinen Sie?",
+    "Wo stehen Sie?",
+    "Warum programmieren?",
+    "Lernziele",
+    "Wie diese Vorlesung funktioniert",
+    "Die Frage kommt zuerst",
+    "Ein Datensatz durch das ganze Semester",
+    "Blöcke oder Text",
+    "Live Hacking und typische Fehlvorstellungen",
+    "Werkzeuge",
+    "Erst mühsam, dann mit Werkzeug",
+    "Semesterplan",
+    "Prüfung",
+    "Organisatorisches",
+    "Zurück zum Personenzähler",
+    "Nächste Woche"
+   ]
+  },
+  {
+   "vl": 1,
+   "datei": "01_VomProblemZumProgramm.md",
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Vom Problem zum Programm",
+    "Unser Datensatz",
+    "Drei Aufgaben",
+    "Aufgabe 1: Ein Jahr auf dem Fichtelberg",
+    "Aufgabe 2: Der Personenzähler",
+    "Aufgabe 3: 135 Jahre Frost",
+    "Was ist hier passiert?",
+    "Algorithmen",
+    "Warum der Rechner keine Alltagssprache versteht",
+    "Algorithmen darstellen",
+    "Kontrollfragen",
+    "Wann lohnt sich ein Programm?",
+    "Ein Blick voraus",
+    "Nächste Woche"
+   ]
+  },
+  {
+   "vl": 2,
+   "datei": "02_ErsteSchritte.md",
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Erste Schritte in Python",
+    "Rückblick",
+    "Vom Text zur Ausführung",
+    "Warum Python?",
+    "Die erste Anweisung",
+    "Rechnen",
+    "Variablen",
+    "Das Gleichheitszeichen ist keine Gleichung",
+    "Typische Fehlvorstellung: Variablen rechnen nach",
+    "Namen wählen",
+    "Datentypen",
+    "Text ist nicht Zahl",
+    "Mit Text arbeiten",
+    "Vergleiche",
+    "Kommentare",
+    "Fehlermeldungen lesen",
+    "Kontrollfragen",
+    "Nächste Woche"
+   ]
+  },
+  {
+   "vl": 3,
+   "datei": "03_PruefenUndWiederholen.md",
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Prüfen und Wiederholen",
+    "Rückblick",
+    "Dieselben Beispiele auf Ihrem Rechner",
+    "Entscheidungen: if",
+    "Einrückung ist Syntax",
+    "Entweder – oder: else",
+    "Mehrere Fälle: elif",
+    "Bedingungen verknüpfen",
+    "Wiederholen: for",
+    "Das Zählmuster",
+    "Schleifen im Kopf ausführen",
+    "Typische Fehlvorstellung: Die Schleifenvariable",
+    "Die Antwort auf die Leitfrage",
+    "Kontrollfragen",
+    "Nächste Woche"
+   ]
+  },
+  {
+   "vl": 4,
+   "datei": "04_MusterInMessreihen.md",
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Muster in Messreihen",
+    "Rückblick",
+    "Muster 1: Aufsummieren",
+    "Mittelwert mit Fehlwerten",
+    "Muster 2: Extremwert suchen",
+    "Muster 3: Zustand verfolgen",
+    "Versuch 1",
+    "Versuch 2",
+    "Versuch 3",
+    "Die Antwort",
+    "while: Wiederholen, solange ...",
+    "Typische Fehlvorstellung: Kommazahlen sind exakt",
+    "Kontrollfragen",
+    "Nächste Woche"
+   ]
+  },
+  {
+   "vl": 5,
+   "datei": "05_DatenSammeln.md",
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Daten sammeln",
+    "Rückblick",
+    "Listen anlegen und füllen",
+    "Zugriff über den Index",
+    "Zahlenfolgen mit range",
+    "Typische Fehlvorstellung: range ist eine Liste",
+    "Zusammengehörige Werte",
+    "Typische Fehlvorstellung: Index oder Wert?",
+    "Ein Ergebnis pro Jahr",
+    "Versuch 1",
+    "Typische Fehlvorstellung: Zahlen als Text vergleichen",
+    "Versuch 2",
+    "Versuch 3",
+    "Mit dem Ergebnis weiterarbeiten",
+    "Ausblick: Dictionary",
+    "Kontrollfragen",
+    "Nächste Woche"
+   ]
+  },
+  {
+   "vl": 6,
+   "datei": "06_DateienLesen.md",
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Dateien lesen",
+    "Rückblick",
+    "Eine Datei öffnen",
+    "Eine Zeile zerlegen",
+    "Typische Fehlvorstellung: Die Zeile ist schon eine Tabelle",
+    "Kopfzeile und Fehlwerte",
+    "Typische Fehlvorstellung: Jeder Tag hat eine Zeile",
+    "Das Dictionary",
+    "Die ganze Datei",
+    "Typische Fehlvorstellung: Kein Wert heißt null",
+    "Ergebnisse schreiben",
+    "Live Hacking: Das lange Skript",
+    "Zwischenbilanz: Datentypen",
+    "Kontrollfragen",
+    "Nächste Woche"
+   ]
+  },
+  {
+   "vl": 7,
+   "datei": "07_Funktionen.md",
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Funktionen",
+    "Rückblick",
+    "Eine Funktion definieren",
+    "Typische Fehlvorstellung: def führt die Funktion aus",
+    "Parameter und Rückgabewert",
+    "Typische Fehlvorstellung: print gibt etwas zurück",
+    "Typische Fehlvorstellung: Namen müssen passen",
+    "Lokale Variablen",
+    "Mehrere Rückgabewerte",
+    "Live Hacking: Das lange Skript zerlegen",
+    "Funktionen prüfen",
+    "Kontrollfragen",
+    "Nächste Woche"
+   ]
+  },
+  {
+   "vl": 8,
+   "datei": "08_DemoMicroPython.md",
+   "status": "Rumpf",
+   "abschnitte": [
+    "Demonstration: Datenerhebung mit MicroPython",
+    "Bis hierher kamen alle Daten fertig aus einer Datei",
+    "Der Aufbau",
+    "Live: Wir messen",
+    "Was schiefgeht",
+    "Die Daten kommen wieder",
+    "Material"
+   ]
+  },
+  {
+   "vl": 9,
+   "datei": "09_ProgrammeStrukturieren.md",
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Programme strukturieren",
+    "Rückblick",
+    "Ein eigenes Modul",
+    "Typische Fehlvorstellung: import kopiert nur Funktionen",
+    "Live Hacking: Das Modul dwd.py",
+    "Die Standardbibliothek",
+    "Externe Pakete",
+    "Typische Fehlvorstellung: Pfade",
+    "Kontrollfragen",
+    "Nächste Woche"
+   ]
+  },
+  {
+   "vl": 10,
+   "datei": "10_NotebooksBibliotheken.md",
+   "status": "Gerüst",
+   "abschnitte": [
+    "Notebooks & Bibliotheken",
+    "Skript oder Notebook?",
+    "Arbeiten mit Zellen",
+    "NumPy",
+    "Kontrollfragen",
+    "Nächste Woche",
+    "Material"
+   ]
+  },
+  {
+   "vl": 11,
+   "datei": "11_PandasEinlesen.md",
+   "status": "Gerüst",
+   "abschnitte": [
+    "pandas I — Einlesen",
+    "Von der Mühsal zum Werkzeug",
+    "Der DataFrame",
+    "Fehlende Werte: NaN",
+    "Auswählen und Filtern",
+    "Datum",
+    "Kontrollfragen",
+    "Nächste Woche",
+    "Material"
+   ]
+  },
+  {
+   "vl": 12,
+   "datei": "12_PandasAggregieren.md",
+   "status": "Gerüst",
+   "abschnitte": [
+    "pandas II — Aggregieren",
+    "Aufgabe 3 aus Vorlesung 01",
+    "groupby",
+    "Vollständige Jahre",
+    "Zwei Stationen",
+    "Kontrollfragen",
+    "Nächste Woche",
+    "Material"
+   ]
+  },
+  {
+   "vl": 13,
+   "datei": "13_Visualisierung.md",
+   "status": "Gerüst",
+   "abschnitte": [
+    "Visualisierung",
+    "Die richtige Form",
+    "Ein Diagramm bauen",
+    "Trend",
+    "Irreführende Darstellungen",
+    "Kontrollfragen",
+    "Nächste Woche",
+    "Material"
+   ]
+  },
+  {
+   "vl": 14,
+   "datei": "14_Datenqualitaet.md",
+   "status": "Gerüst",
+   "abschnitte": [
+    "Datenqualität, Ausblick, Prüfungsvorbereitung",
+    "Freiberg zieht um",
+    "Die Metadaten",
+    "Die Referenzstation",
+    "Ausblick",
+    "Prüfungsvorbereitung",
+    "Material"
+   ]
+  }
+ ],
+ "begriffe": [
+  {
+   "id": "zaehler",
+   "name": "Personenzähler",
+   "linie": "erhebung",
+   "vl": 0,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Ein Ultraschallsensor an der Hörsaaltür zählt Eintretende — das Einstiegsbeispiel mit echten Messdaten.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "annahmen",
+   "name": "Annahmen im Messprogramm",
+   "linie": "erhebung",
+   "vl": 0,
+   "abschnitt": 16,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Messbereich, Entprellzeit, fehlender Richtungssinn: Was im Code steht, bestimmt, was gezählt wird.",
+   "fehlvorstellung": "„Es funktioniert, also zählt es richtig.“"
+  },
+  {
+   "id": "sensorlog",
+   "name": "Sensorprotokoll",
+   "linie": "erhebung",
+   "vl": 1,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Die Textzeilen des Personenzählers — mühsam in der Tabellenkalkulation auszuwerten (Aufgabe 2).",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "micropy",
+   "name": "MicroPython",
+   "linie": "erhebung",
+   "vl": 8,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Python auf dem Mikrocontroller — dieselbe Sprache, andere Hardware.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "sensor",
+   "name": "Sensor",
+   "linie": "erhebung",
+   "vl": 8,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Wandelt eine physikalische Größe in eine Zahl um — mit Genauigkeit, Messort und Ausfallrisiko.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "seriell",
+   "name": "serielle Ausgabe",
+   "linie": "erhebung",
+   "vl": 8,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Der Mikrocontroller schickt Messwerte als Textzeilen an den Rechner, dort werden sie mitgeschrieben.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "messfehler",
+   "name": "Messfehler",
+   "linie": "erhebung",
+   "vl": 8,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Annahmen im Messprogramm werden verletzt — sichtbar im Datenstrom, aber ohne Fehlermeldung.",
+   "fehlvorstellung": "„Ein Sensor misst, was draufsteht.“"
+  },
+  {
+   "id": "zeitstempel",
+   "name": "Zeitstempel",
+   "linie": "erhebung",
+   "vl": 8,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Entsteht beim Empfang oder Schreiben — nicht unbedingt im Moment des Ereignisses.",
+   "fehlvorstellung": "„Ein Zeitstempel ist die Zeit des Ereignisses.“"
+  },
+  {
+   "id": "messdatei",
+   "name": "eigene Messdatei",
+   "linie": "erhebung",
+   "vl": 8,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Die in der Demonstration aufgezeichneten Daten kommen im Januar als Analysebeispiel zurück.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "blockly",
+   "name": "Blöcke oder Text",
+   "linie": "denken",
+   "vl": 0,
+   "abschnitt": 9,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Zwei Ansichten auf dasselbe Programm: Blöcke zusammenschieben oder Python tippen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "algo",
+   "name": "Algorithmus",
+   "linie": "denken",
+   "vl": 1,
+   "abschnitt": 8,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Eindeutige, ausführbare Handlungsvorschrift aus endlich vielen Schritten.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "terminierung",
+   "name": "Eindeutigkeit & Terminierung",
+   "linie": "denken",
+   "vl": 1,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Jeder Schritt hat genau eine Auslegung; die Ausführung endet nach endlich vielen Schritten.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "sprache",
+   "name": "Programmiersprache",
+   "linie": "denken",
+   "vl": 1,
+   "abschnitt": 9,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Kompromiss zwischen menschlicher Lesbarkeit und maschineller Eindeutigkeit.",
+   "fehlvorstellung": "„Der Rechner versteht, was ich meine.“"
+  },
+  {
+   "id": "pseudo",
+   "name": "Pseudocode",
+   "linie": "denken",
+   "vl": 1,
+   "abschnitt": 10,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Algorithmus in strukturierter Alltagssprache, bevor man ihn programmiert.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "ablauf",
+   "name": "Ablaufdiagramm",
+   "linie": "denken",
+   "vl": 1,
+   "abschnitt": 10,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Grafische Form eines Algorithmus mit Entscheidungen und Rücksprüngen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "interpreter",
+   "name": "Interpreter",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Liest das Programm Zeile für Zeile, führt aus — oder bricht mit einer Fehlermeldung ab.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "print",
+   "name": "print",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Gibt Werte auf dem Bildschirm aus.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "operatoren",
+   "name": "Rechenoperatoren",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "+ - * / sowie // (ganzzahlig), % (Rest), ** (Potenz). 18900801 // 10000 ergibt das Jahr.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "variable",
+   "name": "Variable",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 7,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Ein Name, unter dem sich ein Programm einen Wert merkt.",
+   "fehlvorstellung": "„Eine Variable merkt sich die Rechnung — wie eine Formel in der Tabellenkalkulation.“"
+  },
+  {
+   "id": "zuweisung",
+   "name": "Zuweisung =",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 8,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Rechts wird gerechnet, links wird das Ergebnis abgelegt. Lies = als „wird zu“.",
+   "fehlvorstellung": "„= ist eine Gleichung.“"
+  },
+  {
+   "id": "trace",
+   "name": "Programm im Kopf ausführen",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Tabelle mit einer Spalte pro Variable, eine Zeile pro Schritt — die zentrale Klausurfähigkeit.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "namen",
+   "name": "Variablennamen",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 10,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Buchstaben, Ziffern, Unterstrich; nicht mit Ziffer beginnen; sprechend wählen.",
+   "fehlvorstellung": "„Der Rechner versteht, was ein Name bedeutet.“"
+  },
+  {
+   "id": "vergleich",
+   "name": "Vergleich / bool",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 14,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Vergleiche wie minimum < 0 liefern True oder False.",
+   "fehlvorstellung": "= weist zu, == vergleicht."
+  },
+  {
+   "id": "kommentar",
+   "name": "Kommentar",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 15,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Alles hinter # ist für Menschen. Gute Kommentare erklären das Warum.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "fehlermeldung",
+   "name": "Fehlermeldung",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 16,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Von unten nach oben lesen: was (NameError, TypeError, ValueError, SyntaxError) und wo.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "uebertragbar",
+   "name": "Browser = eigener Rechner",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Die Beispiele laufen eins zu eins in Visual Studio Code — einzige Ausnahme ist open_url.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "if",
+   "name": "if",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Führt Anweisungen nur aus, wenn eine Bedingung gilt.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "einrueckung",
+   "name": "Einrückung",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "In Python ist die Einrückung die Struktur: Sie bestimmt, was zu if oder for gehört.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "else",
+   "name": "else",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Genau einer von zwei Blöcken wird ausgeführt.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "elif",
+   "name": "elif",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Mehrere Fälle nacheinander prüfen; der erste zutreffende gewinnt.",
+   "fehlvorstellung": "Die Reihenfolge der Fälle zählt: ein spezieller Fall hinter einem allgemeinen wird nie erreicht."
+  },
+  {
+   "id": "logik",
+   "name": "and / or / not",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Bedingungen verknüpfen, z. B. minimum != -999 and minimum < 0.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "for",
+   "name": "for-Schleife",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 9,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Wiederholt einen Block für jeden Wert einer Folge.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "zaehlmuster",
+   "name": "Zählmuster",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 10,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Zähler vor der Schleife anlegen, in der Schleife bedingt erhöhen, danach ausgeben.",
+   "fehlvorstellung": "Zähler in der Schleife anlegen: Er wird in jedem Durchlauf zurückgesetzt."
+  },
+  {
+   "id": "schleifenvar",
+   "name": "Schleifenvariable",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 12,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Bekommt in jedem Durchlauf den nächsten Wert — und behält nach der Schleife den letzten.",
+   "fehlvorstellung": "„Nach der Schleife ist die Schleifenvariable weg.“"
+  },
+  {
+   "id": "summe",
+   "name": "Aufsummieren",
+   "linie": "denken",
+   "vl": 4,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Summe und Anzahl in der Schleife fortschreiben.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "extrem",
+   "name": "Extremwert suchen",
+   "linie": "denken",
+   "vl": 4,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Den bisher besten Wert (und seine Position) merken und bei Bedarf ersetzen.",
+   "fehlvorstellung": "Startwert 0 statt erstem Wert — im Juli findet man so keinen kältesten Tag."
+  },
+  {
+   "id": "zustand",
+   "name": "Zustand verfolgen",
+   "linie": "denken",
+   "vl": 4,
+   "abschnitt": 6,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Laufende Serie und längste Serie getrennt merken. Längste Frostperiode 2024: 25 Tage.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "while",
+   "name": "while",
+   "linie": "denken",
+   "vl": 4,
+   "abschnitt": 11,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Wiederholt, solange eine Bedingung gilt.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "endlos",
+   "name": "Endlosschleife",
+   "linie": "denken",
+   "vl": 4,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Wird die Bedingung nie falsch, endet while nie — die Terminierung aus VL 01.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "funktion",
+   "name": "Funktion",
+   "linie": "denken",
+   "vl": 7,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Benannter, wiederverwendbarer Block: def ist_frosttag(minimum).",
+   "fehlvorstellung": "„def führt die Funktion aus.“"
+  },
+  {
+   "id": "parameter",
+   "name": "Parameter & Argument",
+   "linie": "denken",
+   "vl": 7,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Beim Aufruf wird der Wert übergeben, nicht der Name.",
+   "fehlvorstellung": "„Der übergebene Wert muss so heißen wie der Parameter.“"
+  },
+  {
+   "id": "return",
+   "name": "return",
+   "linie": "denken",
+   "vl": 7,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Gibt ein Ergebnis an den Aufrufer zurück; danach endet die Funktion.",
+   "fehlvorstellung": "„print gibt etwas zurück.“"
+  },
+  {
+   "id": "lokal",
+   "name": "lokale Variable",
+   "linie": "denken",
+   "vl": 7,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Variablen in einer Funktion existieren nur während des Aufrufs.",
+   "fehlvorstellung": "„Lokale Variablen gibt es auch nach dem Aufruf.“"
+  },
+  {
+   "id": "mehrrueck",
+   "name": "mehrere Rückgabewerte",
+   "linie": "denken",
+   "vl": 7,
+   "abschnitt": 9,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "jahr, maximum, minimum = zerlege_zeile(zeile) — die Reihenfolge muss stimmen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "assert",
+   "name": "assert",
+   "linie": "denken",
+   "vl": 7,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Prüft eine Funktion an den Grenzen: genau 0,0 °C, knapp darunter, Fehlwert.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "modul",
+   "name": "Modul / import",
+   "linie": "denken",
+   "vl": 9,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Eine Python-Datei, deren Funktionen andere Programme nutzen: import dwd.",
+   "fehlvorstellung": "„import holt nur die Funktionen.“"
+  },
+  {
+   "id": "namemain",
+   "name": "__name__",
+   "linie": "denken",
+   "vl": 9,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "if __name__ == \"__main__\": — Testcode, der beim Import nicht läuft.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "stdlib",
+   "name": "Standardbibliothek",
+   "linie": "denken",
+   "vl": 9,
+   "abschnitt": 6,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Module, die Python mitbringt: statistics, datetime, math, os.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "datetime",
+   "name": "datetime",
+   "linie": "denken",
+   "vl": 9,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Aus \"19101210\" wird ein Datum, mit dem man rechnen kann — die Lücke umfasst 1756 Tage.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "pip",
+   "name": "Pakete & pip",
+   "linie": "denken",
+   "vl": 9,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Externe Pakete installiert man mit pip install; fehlt eines: ModuleNotFoundError.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "zellen",
+   "name": "Notebook-Zellen",
+   "linie": "denken",
+   "vl": 10,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Ausführungsreihenfolge und typische Fallen, etwa eine nicht erneut ausgeführte Zelle.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "dezimalpunkt",
+   "name": "Dezimalpunkt",
+   "linie": "typen",
+   "vl": 2,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Python schreibt 6.26. print(6,26 + 1) gibt ohne Fehlermeldung 6 27 aus.",
+   "fehlvorstellung": "„6,26 ist eine Zahl.“"
+  },
+  {
+   "id": "typ",
+   "name": "Datentyp",
+   "linie": "typen",
+   "vl": 2,
+   "abschnitt": 11,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "int, float, str, bool — der Typ bestimmt, was man mit einem Wert tun kann.",
+   "fehlvorstellung": "„Was wie eine Zahl aussieht, ist eine Zahl.“"
+  },
+  {
+   "id": "umwandlung",
+   "name": "Typumwandlung",
+   "linie": "typen",
+   "vl": 2,
+   "abschnitt": 12,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "float(\"-14.1\"), int(\"1890\"), str(1213) — nötig, weil aus Dateien immer Text kommt.",
+   "fehlvorstellung": "float(\"6,26\") scheitert."
+  },
+  {
+   "id": "text",
+   "name": "Text (str)",
+   "linie": "typen",
+   "vl": 2,
+   "abschnitt": 13,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Zusammensetzen, len, Zeichen herausschneiden: datum[0:4] ist das Jahr.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "round",
+   "name": "round",
+   "linie": "typen",
+   "vl": 4,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Rundet für die Ausgabe: round(mittel, 2).",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "float",
+   "name": "Gleitkommazahl",
+   "linie": "typen",
+   "vl": 4,
+   "abschnitt": 12,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Kommazahlen werden binär gespeichert und sind nicht exakt: 0.1 + 0.2 == 0.3 ist False.",
+   "fehlvorstellung": "„Kommazahlen sind exakt.“"
+  },
+  {
+   "id": "liste",
+   "name": "Liste",
+   "linie": "typen",
+   "vl": 5,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Mehrere Werte in fester Reihenfolge.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "append",
+   "name": "append",
+   "linie": "typen",
+   "vl": 5,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Hängt einen Wert an — das Sammelmuster.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "index",
+   "name": "Index & Slice",
+   "linie": "typen",
+   "vl": 5,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "liste[0] erster, liste[-1] letzter Wert, liste[2:5] die Indizes 2 bis 4.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "indexerror",
+   "name": "IndexError",
+   "linie": "typen",
+   "vl": 5,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Zugriff außerhalb der Liste — der häufigste Listenfehler.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "range",
+   "name": "range",
+   "linie": "typen",
+   "vl": 5,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Folge ganzer Zahlen, z. B. range(2015, 2025). Der Endwert ist nicht enthalten.",
+   "fehlvorstellung": "„range ist eine Liste.“"
+  },
+  {
+   "id": "parallel",
+   "name": "zusammengehörige Listen",
+   "linie": "typen",
+   "vl": 5,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "daten[i] und maxima[i] gehören zum selben Tag.",
+   "fehlvorstellung": "„bester enthält die höchste Temperatur“ — es ist ein Index."
+  },
+  {
+   "id": "textvergleich",
+   "name": "Text vergleichen",
+   "linie": "typen",
+   "vl": 5,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Texte werden Zeichen für Zeichen verglichen.",
+   "fehlvorstellung": "„\"9.5\" > \"28.1\" ist falsch.“ Es ist wahr."
+  },
+  {
+   "id": "dict",
+   "name": "Dictionary",
+   "linie": "typen",
+   "vl": 6,
+   "abschnitt": 8,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Ordnet Schlüsseln Werte zu: {\"1947\": 119}. Ein Durchlauf, ein Eintrag pro Jahr.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "keyerror",
+   "name": "KeyError, in, get",
+   "linie": "typen",
+   "vl": 6,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Nach einem fehlenden Schlüssel kann man nicht fragen; vorher mit in prüfen oder get verwenden.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "typbilanz",
+   "name": "Zwischenbilanz Datentypen",
+   "linie": "typen",
+   "vl": 6,
+   "abschnitt": 13,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "int, float, str, bool, list, range, dict — mit Herkunft im Datensatz und typischer Falle.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "none",
+   "name": "None",
+   "linie": "typen",
+   "vl": 7,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Der Wert „nichts“ — Rückgabe einer Funktion ohne return.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "array",
+   "name": "NumPy-Array",
+   "linie": "typen",
+   "vl": 10,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Rechnet elementweise: (minima < 0).sum() ersetzt das Zählmuster.",
+   "fehlvorstellung": "„Ein Array ist dasselbe wie eine Liste.“"
+  },
+  {
+   "id": "dataframe",
+   "name": "DataFrame",
+   "linie": "typen",
+   "vl": 11,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Tabelle aus beschrifteten Spalten; jede Spalte verhält sich wie ein Array.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "nan",
+   "name": "NaN",
+   "linie": "typen",
+   "vl": 11,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "So stellt pandas „kein Wert“ dar, z. B. aus -999 per na_values.",
+   "fehlvorstellung": "„NaN ist null.“"
+  },
+  {
+   "id": "datumstyp",
+   "name": "Datumsspalte",
+   "linie": "typen",
+   "vl": 11,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "MESS_DATUM mit pd.to_datetime in ein Datum umwandeln.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "dwd",
+   "name": "DWD-Datensatz",
+   "linie": "daten",
+   "vl": 1,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Klimareihe Fichtelberg seit 1890, rund 48.000 Zeilen — der rote Faden.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "tabkalk",
+   "name": "Tabellenkalkulation",
+   "linie": "daten",
+   "vl": 1,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Drei Aufgaben: leicht, mühsam, praktisch aussichtslos.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "rohformat",
+   "name": "Rohformat",
+   "linie": "daten",
+   "vl": 1,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Semikolons, Leerzeichen, Datum ohne Trennzeichen, Dezimalpunkt, eor-Spalte.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "fehlwert",
+   "name": "Fehlwert -999",
+   "linie": "daten",
+   "vl": 3,
+   "abschnitt": 8,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "So kennzeichnet der DWD „nicht gemessen“. -999 < 0 ist wahr — und trotzdem kein Frosttag.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "openurl",
+   "name": "open_url",
+   "linie": "daten",
+   "vl": 3,
+   "abschnitt": 13,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Holt eine Datei aus dem Repository in den Browser — funktioniert nur dort.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "open",
+   "name": "Datei öffnen",
+   "linie": "daten",
+   "vl": 6,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "with open(datei) as f: — Zeile für Zeile, jede als Text.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "strip",
+   "name": "readline & strip",
+   "linie": "daten",
+   "vl": 6,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Eine Zeile lesen; Leerzeichen und Zeilenumbruch am Rand entfernen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "split",
+   "name": "split",
+   "linie": "daten",
+   "vl": 6,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Zerlegt eine Zeile am Trennzeichen in eine Liste von Texten.",
+   "fehlvorstellung": "„Die Zeile ist schon eine Tabelle.“"
+  },
+  {
+   "id": "kopfzeile",
+   "name": "Kopfzeile",
+   "linie": "daten",
+   "vl": 6,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Mit f.readline() überspringen — sonst scheitert float an \"TXK\".",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "luecke",
+   "name": "Lücke",
+   "linie": "daten",
+   "vl": 6,
+   "abschnitt": 7,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Fehlende Tage fehlen ganz, statt als -999 zu erscheinen. Fichtelberg: 1910 bis 1915.",
+   "fehlvorstellung": "„Jeder Tag hat eine Zeile.“"
+  },
+  {
+   "id": "schreiben",
+   "name": "Datei schreiben",
+   "linie": "daten",
+   "vl": 6,
+   "abschnitt": 11,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "open(..., \"w\") und f.write — ohne automatischen Zeilenumbruch.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "langesskript",
+   "name": "das lange Skript",
+   "linie": "daten",
+   "vl": 6,
+   "abschnitt": 12,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Fichtelberg und Freiberg als kopierte Blöcke — funktioniert, ist aber schwer zu ändern.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "pfad",
+   "name": "Pfad",
+   "linie": "daten",
+   "vl": 9,
+   "abschnitt": 8,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Relative Pfade gelten ab dem aktuellen Arbeitsverzeichnis.",
+   "fehlvorstellung": "„Ein Dateiname bezieht sich auf den Ordner des Programms.“"
+  },
+  {
+   "id": "readcsv",
+   "name": "read_csv",
+   "linie": "daten",
+   "vl": 11,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Liest die Rohdatei in einer Anweisung — was in VL 06 rund 50 Zeilen gekostet hat.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "vollstaendig",
+   "name": "vollständige Jahre",
+   "linie": "daten",
+   "vl": 12,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Jahre mit Lücken erkennen und ausschließen, bevor man vergleicht.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "merge",
+   "name": "Stationen verbinden",
+   "linie": "daten",
+   "vl": 12,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Fichtelberg und Chemnitz über das Datum zusammenführen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "stationswechsel",
+   "name": "Stationswechsel",
+   "linie": "daten",
+   "vl": 14,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Freiberg misst ab 2015 an anderem Ort mit anderem Gerät — gleiche Datei, andere Messung.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "metadaten",
+   "name": "Metadaten",
+   "linie": "daten",
+   "vl": 14,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Gerät, Messtag, Betreiber, Qualitätsstufe — was die Daten selbst verschweigen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "referenz",
+   "name": "Referenzstation",
+   "linie": "daten",
+   "vl": 14,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Chemnitz als Vergleich: Verhältnis Freiberg/Chemnitz 1,13 vorher, 0,96 nachher.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "kreislauf",
+   "name": "Datenkreislauf",
+   "linie": "analyse",
+   "vl": 0,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Frage, Erhebung, Aufbereitung, Analyse, Visualisierung, Dokumentation — meist mehrere Runden.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "lohnt",
+   "name": "Programm oder Tabelle?",
+   "linie": "analyse",
+   "vl": 1,
+   "abschnitt": 12,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Viele Daten, sperrige Formate, Wiederholung, Nachvollziehbarkeit: dann lohnt ein Programm.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "kenntage",
+   "name": "Frost-, Eis-, Sommertag",
+   "linie": "analyse",
+   "vl": 3,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "DWD-Kenntage: Frosttag = Minimum unter 0 °C, Eistag = Maximum unter 0 °C, Sommertag = Maximum ab 25 °C.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "mittel",
+   "name": "Mittelwert",
+   "linie": "analyse",
+   "vl": 4,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Summe durch Anzahl — nur über gültige Werte, und die Anzahl gehört dazu.",
+   "fehlvorstellung": "„Ein Mittelwert gilt, egal wie viele Werte fehlen.“"
+  },
+  {
+   "id": "hochrechnung",
+   "name": "Hochrechnung",
+   "linie": "analyse",
+   "vl": 4,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Bei +0,05 °C pro Jahr läge das Mittel 2059 bei 8 °C — nur unter dieser Annahme.",
+   "fehlvorstellung": "„Rechnerisch korrekt heißt inhaltlich richtig.“"
+  },
+  {
+   "id": "statistik",
+   "name": "statistics",
+   "linie": "analyse",
+   "vl": 9,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "mean, median, stdev für Listen von Messwerten.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "notebook",
+   "name": "Jupyter Notebook",
+   "linie": "analyse",
+   "vl": 10,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Code, Ergebnis und Text in Zellen — das Werkzeug für Exploration und Bericht.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "vektor",
+   "name": "elementweise rechnen",
+   "linie": "analyse",
+   "vl": 10,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Eine Anweisung für alle Werte statt einer Schleife: minima.mean().",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "filter",
+   "name": "Filtern",
+   "linie": "analyse",
+   "vl": 11,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "df[df[\"TNK\"] < 0] — Zeilen nach einer Bedingung auswählen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "groupby",
+   "name": "groupby",
+   "linie": "analyse",
+   "vl": 12,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Gruppiert Zeilen, z. B. nach Jahr, und fasst jede Gruppe zusammen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "diagrammform",
+   "name": "Diagrammform",
+   "linie": "analyse",
+   "vl": 13,
+   "abschnitt": 2,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Zeitreihe als Linie, Vergleich als Balken, Verteilung als Histogramm.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "diagramm",
+   "name": "Diagramm",
+   "linie": "analyse",
+   "vl": 13,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Achsen, Einheiten, Titel — ein Diagramm muss ohne Begleittext lesbar sein.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "trend",
+   "name": "Trend",
+   "linie": "analyse",
+   "vl": 13,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Lineare Trendlinie — die Herleitung der 0,05 °C pro Jahr aus VL 04.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "irref",
+   "name": "Irreführende Darstellung",
+   "linie": "analyse",
+   "vl": 13,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Abgeschnittene Achsen, ausgewählte Zeiträume.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "qualitaet",
+   "name": "Datenqualität",
+   "linie": "analyse",
+   "vl": 14,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Kann ich meinem Ergebnis trauen? Lücken, Brüche, Metadaten, Referenz.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "pruefung",
+   "name": "Prüfungsvorbereitung",
+   "linie": "analyse",
+   "vl": 14,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Musteraufgaben zu allen Aufgabentypen aus VL 00.",
+   "fehlvorstellung": null
+  }
+ ],
+ "beziehungen": [
+  {
+   "von": "zaehler",
+   "nach": "sensorlog",
+   "text": "erzeugt"
+  },
+  {
+   "von": "zaehler",
+   "nach": "annahmen",
+   "text": "beruht auf"
+  },
+  {
+   "von": "sensorlog",
+   "nach": "tabkalk",
+   "text": "ausgewertet mit"
+  },
+  {
+   "von": "kreislauf",
+   "nach": "lohnt",
+   "text": "je Runde die Frage"
+  },
+  {
+   "von": "tabkalk",
+   "nach": "lohnt",
+   "text": "Grenzen zeigen"
+  },
+  {
+   "von": "dwd",
+   "nach": "rohformat",
+   "text": "liegt vor im"
+  },
+  {
+   "von": "tabkalk",
+   "nach": "algo",
+   "text": "motiviert"
+  },
+  {
+   "von": "algo",
+   "nach": "terminierung",
+   "text": "erfordert"
+  },
+  {
+   "von": "algo",
+   "nach": "pseudo",
+   "text": "notiert als"
+  },
+  {
+   "von": "pseudo",
+   "nach": "ablauf",
+   "text": "oder als"
+  },
+  {
+   "von": "algo",
+   "nach": "sprache",
+   "text": "formuliert in"
+  },
+  {
+   "von": "blockly",
+   "nach": "print",
+   "text": "gleiches Programm wie"
+  },
+  {
+   "von": "sprache",
+   "nach": "interpreter",
+   "text": "ausgeführt vom"
+  },
+  {
+   "von": "interpreter",
+   "nach": "fehlermeldung",
+   "text": "meldet"
+  },
+  {
+   "von": "variable",
+   "nach": "zuweisung",
+   "text": "entsteht durch"
+  },
+  {
+   "von": "variable",
+   "nach": "namen",
+   "text": "braucht"
+  },
+  {
+   "von": "variable",
+   "nach": "print",
+   "text": "ausgegeben mit"
+  },
+  {
+   "von": "zuweisung",
+   "nach": "trace",
+   "text": "nachvollziehen mit"
+  },
+  {
+   "von": "operatoren",
+   "nach": "zuweisung",
+   "text": "rechts vom ="
+  },
+  {
+   "von": "dezimalpunkt",
+   "nach": "operatoren",
+   "text": "Voraussetzung für"
+  },
+  {
+   "von": "variable",
+   "nach": "typ",
+   "text": "hat einen"
+  },
+  {
+   "von": "typ",
+   "nach": "umwandlung",
+   "text": "ändern durch"
+  },
+  {
+   "von": "typ",
+   "nach": "text",
+   "text": "z. B."
+  },
+  {
+   "von": "umwandlung",
+   "nach": "fehlermeldung",
+   "text": "ValueError bei"
+  },
+  {
+   "von": "typ",
+   "nach": "vergleich",
+   "text": "bool ist ein"
+  },
+  {
+   "von": "kommentar",
+   "nach": "variable",
+   "text": "erklärt"
+  },
+  {
+   "von": "pseudo",
+   "nach": "if",
+   "text": "wird zu"
+  },
+  {
+   "von": "pseudo",
+   "nach": "for",
+   "text": "wird zu"
+  },
+  {
+   "von": "vergleich",
+   "nach": "if",
+   "text": "steuert"
+  },
+  {
+   "von": "if",
+   "nach": "einrueckung",
+   "text": "Block per"
+  },
+  {
+   "von": "if",
+   "nach": "else",
+   "text": "ergänzt durch"
+  },
+  {
+   "von": "else",
+   "nach": "elif",
+   "text": "erweitert zu"
+  },
+  {
+   "von": "vergleich",
+   "nach": "logik",
+   "text": "verknüpft mit"
+  },
+  {
+   "von": "elif",
+   "nach": "kenntage",
+   "text": "unterscheidet"
+  },
+  {
+   "von": "for",
+   "nach": "einrueckung",
+   "text": "Block per"
+  },
+  {
+   "von": "if",
+   "nach": "zaehlmuster",
+   "text": "Teil von"
+  },
+  {
+   "von": "for",
+   "nach": "zaehlmuster",
+   "text": "Teil von"
+  },
+  {
+   "von": "for",
+   "nach": "schleifenvar",
+   "text": "belegt"
+  },
+  {
+   "von": "zaehlmuster",
+   "nach": "trace",
+   "text": "nachvollziehen mit"
+  },
+  {
+   "von": "dwd",
+   "nach": "fehlwert",
+   "text": "enthält"
+  },
+  {
+   "von": "fehlwert",
+   "nach": "logik",
+   "text": "ausschließen mit"
+  },
+  {
+   "von": "openurl",
+   "nach": "uebertragbar",
+   "text": "Ausnahme von"
+  },
+  {
+   "von": "zaehlmuster",
+   "nach": "summe",
+   "text": "verallgemeinert zu"
+  },
+  {
+   "von": "zaehlmuster",
+   "nach": "extrem",
+   "text": "verallgemeinert zu"
+  },
+  {
+   "von": "summe",
+   "nach": "mittel",
+   "text": "liefert"
+  },
+  {
+   "von": "fehlwert",
+   "nach": "mittel",
+   "text": "verfälscht"
+  },
+  {
+   "von": "extrem",
+   "nach": "zustand",
+   "text": "steckt in"
+  },
+  {
+   "von": "for",
+   "nach": "while",
+   "text": "Alternative"
+  },
+  {
+   "von": "while",
+   "nach": "endlos",
+   "text": "Gefahr"
+  },
+  {
+   "von": "terminierung",
+   "nach": "endlos",
+   "text": "verletzt durch"
+  },
+  {
+   "von": "while",
+   "nach": "hochrechnung",
+   "text": "berechnet"
+  },
+  {
+   "von": "float",
+   "nach": "round",
+   "text": "ausgeben mit"
+  },
+  {
+   "von": "float",
+   "nach": "vergleich",
+   "text": "kein == bei"
+  },
+  {
+   "von": "liste",
+   "nach": "for",
+   "text": "durchlaufen von"
+  },
+  {
+   "von": "liste",
+   "nach": "append",
+   "text": "wächst mit"
+  },
+  {
+   "von": "zaehlmuster",
+   "nach": "append",
+   "text": "Sammelmuster statt Zähler"
+  },
+  {
+   "von": "liste",
+   "nach": "index",
+   "text": "Zugriff per"
+  },
+  {
+   "von": "text",
+   "nach": "index",
+   "text": "gleiche Schreibweise"
+  },
+  {
+   "von": "index",
+   "nach": "indexerror",
+   "text": "außerhalb:"
+  },
+  {
+   "von": "index",
+   "nach": "range",
+   "text": "gültige Indizes"
+  },
+  {
+   "von": "range",
+   "nach": "parallel",
+   "text": "durchläuft"
+  },
+  {
+   "von": "index",
+   "nach": "parallel",
+   "text": "verbindet"
+  },
+  {
+   "von": "split",
+   "nach": "textvergleich",
+   "text": "liefert Text für"
+  },
+  {
+   "von": "textvergleich",
+   "nach": "umwandlung",
+   "text": "vermeiden durch"
+  },
+  {
+   "von": "liste",
+   "nach": "dict",
+   "text": "Schlüssel statt Position"
+  },
+  {
+   "von": "openurl",
+   "nach": "open",
+   "text": "ersetzt durch"
+  },
+  {
+   "von": "open",
+   "nach": "strip",
+   "text": "mit"
+  },
+  {
+   "von": "open",
+   "nach": "split",
+   "text": "Zeile zerlegen mit"
+  },
+  {
+   "von": "split",
+   "nach": "liste",
+   "text": "liefert eine"
+  },
+  {
+   "von": "split",
+   "nach": "umwandlung",
+   "text": "liefert Text für"
+  },
+  {
+   "von": "open",
+   "nach": "kopfzeile",
+   "text": "überspringt"
+  },
+  {
+   "von": "dwd",
+   "nach": "luecke",
+   "text": "enthält"
+  },
+  {
+   "von": "dict",
+   "nach": "keyerror",
+   "text": "Falle"
+  },
+  {
+   "von": "dict",
+   "nach": "luecke",
+   "text": "fehlender Eintrag bei"
+  },
+  {
+   "von": "open",
+   "nach": "schreiben",
+   "text": "Gegenstück"
+  },
+  {
+   "von": "schreiben",
+   "nach": "tabkalk",
+   "text": "öffnen in"
+  },
+  {
+   "von": "open",
+   "nach": "langesskript",
+   "text": "Teil von"
+  },
+  {
+   "von": "dict",
+   "nach": "typbilanz",
+   "text": "vervollständigt"
+  },
+  {
+   "von": "langesskript",
+   "nach": "funktion",
+   "text": "zerlegt in"
+  },
+  {
+   "von": "funktion",
+   "nach": "parameter",
+   "text": "hat"
+  },
+  {
+   "von": "funktion",
+   "nach": "return",
+   "text": "liefert mit"
+  },
+  {
+   "von": "return",
+   "nach": "none",
+   "text": "ohne return:"
+  },
+  {
+   "von": "funktion",
+   "nach": "lokal",
+   "text": "hat"
+  },
+  {
+   "von": "return",
+   "nach": "mehrrueck",
+   "text": "auch"
+  },
+  {
+   "von": "funktion",
+   "nach": "assert",
+   "text": "geprüft mit"
+  },
+  {
+   "von": "kenntage",
+   "nach": "funktion",
+   "text": "z. B. ist_frosttag"
+  },
+  {
+   "von": "zaehler",
+   "nach": "micropy",
+   "text": "läuft auf"
+  },
+  {
+   "von": "micropy",
+   "nach": "while",
+   "text": "while True"
+  },
+  {
+   "von": "micropy",
+   "nach": "sensor",
+   "text": "steuert"
+  },
+  {
+   "von": "sensor",
+   "nach": "seriell",
+   "text": "sendet über"
+  },
+  {
+   "von": "sensor",
+   "nach": "messfehler",
+   "text": "Risiko"
+  },
+  {
+   "von": "annahmen",
+   "nach": "messfehler",
+   "text": "verletzt ergibt"
+  },
+  {
+   "von": "seriell",
+   "nach": "zeitstempel",
+   "text": "erhält"
+  },
+  {
+   "von": "seriell",
+   "nach": "messdatei",
+   "text": "mitgeschrieben als"
+  },
+  {
+   "von": "funktion",
+   "nach": "modul",
+   "text": "wandert in"
+  },
+  {
+   "von": "modul",
+   "nach": "namemain",
+   "text": "Testcode unter"
+  },
+  {
+   "von": "modul",
+   "nach": "stdlib",
+   "text": "gleiches Prinzip"
+  },
+  {
+   "von": "stdlib",
+   "nach": "datetime",
+   "text": "enthält"
+  },
+  {
+   "von": "stdlib",
+   "nach": "statistik",
+   "text": "enthält"
+  },
+  {
+   "von": "datetime",
+   "nach": "luecke",
+   "text": "findet"
+  },
+  {
+   "von": "mittel",
+   "nach": "statistik",
+   "text": "fertig in"
+  },
+  {
+   "von": "modul",
+   "nach": "pip",
+   "text": "externe per"
+  },
+  {
+   "von": "pfad",
+   "nach": "open",
+   "text": "entscheidet über"
+  },
+  {
+   "von": "pip",
+   "nach": "notebook",
+   "text": "installiert"
+  },
+  {
+   "von": "notebook",
+   "nach": "zellen",
+   "text": "besteht aus"
+  },
+  {
+   "von": "modul",
+   "nach": "array",
+   "text": "import wie"
+  },
+  {
+   "von": "liste",
+   "nach": "array",
+   "text": "wird zu"
+  },
+  {
+   "von": "zaehlmuster",
+   "nach": "vektor",
+   "text": "ersetzt durch"
+  },
+  {
+   "von": "array",
+   "nach": "vektor",
+   "text": "ermöglicht"
+  },
+  {
+   "von": "array",
+   "nach": "dataframe",
+   "text": "Spalte ist ein"
+  },
+  {
+   "von": "open",
+   "nach": "readcsv",
+   "text": "in einer Anweisung"
+  },
+  {
+   "von": "notebook",
+   "nach": "readcsv",
+   "text": "Werkzeug für"
+  },
+  {
+   "von": "readcsv",
+   "nach": "dataframe",
+   "text": "erzeugt"
+  },
+  {
+   "von": "fehlwert",
+   "nach": "nan",
+   "text": "wird zu"
+  },
+  {
+   "von": "none",
+   "nach": "nan",
+   "text": "ähnlich:"
+  },
+  {
+   "von": "datetime",
+   "nach": "datumstyp",
+   "text": "in pandas:"
+  },
+  {
+   "von": "dataframe",
+   "nach": "filter",
+   "text": "auswählen mit"
+  },
+  {
+   "von": "dict",
+   "nach": "groupby",
+   "text": "Prinzip hinter"
+  },
+  {
+   "von": "tabkalk",
+   "nach": "groupby",
+   "text": "Aufgabe 3 gelöst mit"
+  },
+  {
+   "von": "luecke",
+   "nach": "vollstaendig",
+   "text": "prüfen auf"
+  },
+  {
+   "von": "groupby",
+   "nach": "vollstaendig",
+   "text": "nur über"
+  },
+  {
+   "von": "vollstaendig",
+   "nach": "merge",
+   "text": "dann"
+  },
+  {
+   "von": "diagrammform",
+   "nach": "diagramm",
+   "text": "bestimmt"
+  },
+  {
+   "von": "groupby",
+   "nach": "diagramm",
+   "text": "Ergebnis als"
+  },
+  {
+   "von": "diagramm",
+   "nach": "trend",
+   "text": "zeigt"
+  },
+  {
+   "von": "hochrechnung",
+   "nach": "trend",
+   "text": "Grundlage"
+  },
+  {
+   "von": "trend",
+   "nach": "irref",
+   "text": "Gefahr"
+  },
+  {
+   "von": "merge",
+   "nach": "referenz",
+   "text": "Grundlage für"
+  },
+  {
+   "von": "stationswechsel",
+   "nach": "metadaten",
+   "text": "belegt durch"
+  },
+  {
+   "von": "referenz",
+   "nach": "stationswechsel",
+   "text": "entlarvt"
+  },
+  {
+   "von": "stationswechsel",
+   "nach": "qualitaet",
+   "text": "Beispiel für"
+  },
+  {
+   "von": "luecke",
+   "nach": "qualitaet",
+   "text": "prüfen"
+  },
+  {
+   "von": "nan",
+   "nach": "qualitaet",
+   "text": "zählen, nicht ignorieren"
+  },
+  {
+   "von": "messfehler",
+   "nach": "qualitaet",
+   "text": "Ursache für"
+  },
+  {
+   "von": "messdatei",
+   "nach": "readcsv",
+   "text": "eingelesen mit"
+  },
+  {
+   "von": "trace",
+   "nach": "pruefung",
+   "text": "Aufgabentyp"
+  }
+ ],
+ "faeden": [
+  {
+   "id": "wiederverwenden",
+   "name": "Wiederverwenden",
+   "beschreibung": "Vom Muster über die Funktion zum Modul und zur fremden Bibliothek.",
+   "stationen": [
+    "pseudo",
+    "zaehlmuster",
+    "langesskript",
+    "funktion",
+    "modul",
+    "pip",
+    "array"
+   ]
+  },
+  {
+   "id": "struktur",
+   "name": "Daten ordnen",
+   "beschreibung": "Vom einzelnen Wert über Listen und Dictionaries bis zum DataFrame.",
+   "stationen": [
+    "variable",
+    "liste",
+    "index",
+    "dict",
+    "array",
+    "dataframe"
+   ]
+  },
+  {
+   "id": "zaehlen",
+   "name": "Vom Zählen zur Aggregation",
+   "beschreibung": "Wie aus einer Schleife mit Zähler am Ende eine Zeile groupby wird.",
+   "stationen": [
+    "zaehlmuster",
+    "summe",
+    "mittel",
+    "dict",
+    "vektor",
+    "groupby",
+    "diagramm"
+   ]
+  },
+  {
+   "id": "fehlwert",
+   "name": "Der Fehlwert",
+   "beschreibung": "Wie „nicht gemessen“ in jeder Phase anders aussieht — und jedes Mal behandelt werden muss.",
+   "stationen": [
+    "dwd",
+    "fehlwert",
+    "logik",
+    "mittel",
+    "luecke",
+    "nan",
+    "vollstaendig",
+    "qualitaet"
+   ]
+  },
+  {
+   "id": "tabelle",
+   "name": "Vom Text zur Tabelle",
+   "beschreibung": "Wie aus Textzeilen einer Datei eine Tabelle mit Spalten und Typen wird.",
+   "stationen": [
+    "dwd",
+    "text",
+    "umwandlung",
+    "open",
+    "split",
+    "readcsv",
+    "dataframe"
+   ]
+  },
+  {
+   "id": "messung",
+   "name": "Von der Messung zum Urteil",
+   "beschreibung": "Wie Messdaten entstehen — und warum man ihnen nicht blind trauen darf.",
+   "stationen": [
+    "zaehler",
+    "sensorlog",
+    "sensor",
+    "messfehler",
+    "messdatei",
+    "readcsv",
+    "stationswechsel",
+    "qualitaet"
+   ]
+  }
+ ]
+}
