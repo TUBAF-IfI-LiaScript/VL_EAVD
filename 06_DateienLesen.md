@@ -417,6 +417,7 @@ Mit dieser Vorlesung haben Sie alle Datentypen kennengelernt, die Sie für die e
 
 > **Ausblick:** In Vorlesung 10 kommt mit dem NumPy-**Array** ein Typ hinzu, der aussieht wie eine Liste, aber elementweise rechnet. In Vorlesung 11 lernen Sie `NaN` kennen — die Art, wie pandas "kein Wert" darstellt.
 
+## Kontrollfragen
 
 **Was gibt dieses Programm aus?**
 

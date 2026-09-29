@@ -410,6 +410,7 @@ Zwei Konsequenzen für die Praxis:
 * **Kommazahlen nicht mit `==` vergleichen.** Stattdessen prüfen, ob der Abstand klein genug ist: `abs(a - b) < 0.001`.
 ***
 
+## Kontrollfragen
 
 **Was gibt dieses Programm aus?**
 
