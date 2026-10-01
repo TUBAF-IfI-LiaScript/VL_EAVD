@@ -309,7 +309,7 @@ Jetzt erzählt das Diagramm, was die Zahlen sagen: lange Zeit um 175–190 Frost
 
 **Warum ist diese Darstellung irreführend?** (Klausurformat)
 
-> Ein Balkendiagramm zeigt die Jahresniederschläge in Freiberg: 758 mm (1946–1992) und 668 mm (2016–2025). Die y-Achse beginnt bei 650 mm, der zweite Balken ist kaum zu sehen.
+> Ein Balkendiagramm zeigt die Jahresniederschläge in Freiberg: 754 mm (1946–1992) und 664 mm (2016–2025). Die y-Achse beginnt bei 650 mm, der zweite Balken ist kaum zu sehen.
 
 <details>
 <summary>**Lösung**</summary>

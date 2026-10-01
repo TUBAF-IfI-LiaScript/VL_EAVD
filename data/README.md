@@ -48,9 +48,9 @@ Besonderheiten:
 | Qualitätsniveau `QN_6`     | 1, 5, 9, 10                                     | 3, 9                                             |
 | Niederschlagsform `RSF`    | Codes 0, 1, 4, 6, 7, 8                          | nur 0 und 4                                      |
 | Schneehöhe `SH_TAG`        | nahezu vollständig                              | an 43 % der Tage `-999`                          |
-| mittlere Jahressumme       | 758 mm (1946–1992)                              | 668 mm (2016–2025)                               |
+| mittlere Jahressumme       | 754 mm (45 vollständige Jahre 1946–1992)        | 664 mm (10 vollständige Jahre 2016–2025)         |
 
-Ob der Rückgang Klima oder Messung ist, lässt sich mit Freiberg allein nicht entscheiden. Der Vergleich mit Chemnitz (`../chemnitz/`) klärt es: In 1976–1987, als beide Stationen Hellmann-Geräte nutzten und Chemnitz bereits am heutigen Ort stand, lag Freiberg in jedem Jahr über Chemnitz (Verhältnis 1,02–1,26, Mittel 1,13). Für 2016–2025 liegt das Verhältnis bei 0,96 — bei praktisch unveränderter Chemnitzer Jahressumme (1976–1992: 686 mm, 2016–2025: 691 mm).
+Ob der Rückgang Klima oder Messung ist, lässt sich mit Freiberg allein nicht entscheiden. Der Vergleich mit Chemnitz (`../chemnitz/`) klärt es: In 1976–1987, als beide Stationen Hellmann-Geräte nutzten und Chemnitz bereits am heutigen Ort stand, lag Freiberg in jedem Jahr über Chemnitz (Verhältnis 1,02–1,26, Mittel 1,13). Für 2016–2025 liegt das Verhältnis bei 0,95 — bei praktisch unveränderter Chemnitzer Jahressumme (1976–1992: 686 mm, 2016–2025: 703 mm). Berechnet aus den Jahressummen vollständiger Jahre (mindestens 360 Messtage), wie in Vorlesung 14.
 
 ## `chemnitz/` — Station 00853
 

@@ -22,7 +22,7 @@ logo: ./images/Readme/Wetterstation.png
 
 > **Dieser Kurs wird gerade überarbeitet.** Zum Wintersemester 2026/27 bauen wir die Veranstaltung grundlegend um — Inhalte, Reihenfolge und Beispiele können sich noch ändern.
 >
-> **Stand 29.09.2026:** Vorlesungen 00–07 und 09 sind ausgearbeitet, Vorlesung 08 liegt als Rumpf vor, Vorlesungen 10–14 sind in Planung. Die Materialien des bisherigen Kurses (C++/Python) sind in der Git-Historie erreichbar (Commit `21d3061`).
+> **Stand 01.10.2026:** Vorlesungen 00–07 und 09–14 sind ausgearbeitet, Vorlesung 08 (Demonstration Datenerhebung) liegt als Rumpf vor. Die Materialien des bisherigen Kurses (C++/Python) sind in der Git-Historie erreichbar (Commit `21d3061`).
 >
 > Hinweise und Fehler gern als [Issue](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/issues).
 
@@ -87,7 +87,7 @@ Alle Messreihen liegen unter [`data/`](data/README.md), mit Quellen, Lizenz (DWD
 * **Freiberg** (01441) — lokales Beispiel; Klimawerte 1945–1993, Niederschlag bis heute
 * **Chemnitz** (00853) — Referenzstation
 
-> **Beispiel für Vorlesung 14: Freiberg zieht um.** Die DWD-Station Freiberg misst Niederschlag bis 1993 und wieder ab 2015 — unter derselben Nummer, im selben Dateiformat, aber an einem anderen Ort, mit anderem Gerät und anderer Definition des Messtags. Die mittlere Jahressumme fällt von 758 mm auf 668 mm. Hat sich das Klima geändert? Die Nachbarstation Chemnitz sagt: nein. Ihre Jahressumme bleibt gleich, nur das Verhältnis Freiberg/Chemnitz springt von 1,13 auf 0,96.
+> **Beispiel für Vorlesung 14: Freiberg zieht um.** Die DWD-Station Freiberg misst Niederschlag bis 1993 und wieder ab 2015 — unter derselben Nummer, im selben Dateiformat, aber an einem anderen Ort, mit anderem Gerät und anderer Definition des Messtags. Die mittlere Jahressumme (vollständige Jahre) fällt von 754 mm auf 664 mm. Hat sich das Klima geändert? Die Nachbarstation Chemnitz sagt: nein. Ihre Jahressumme bleibt praktisch gleich, nur das Verhältnis Freiberg/Chemnitz springt von 1,13 (1976–1987) auf 0,95 (2016–2025).
 
 ## Was sich geändert hat
 

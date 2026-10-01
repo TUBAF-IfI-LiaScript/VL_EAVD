@@ -135,7 +135,8 @@ B = [
     ("merge", "Stationen verbinden", "daten", 12, 'Zwei Stationen verbinden', 2, 0, "Fichtelberg und Chemnitz über das Datum zusammenführen.", None),
     ("stationswechsel", "Stationswechsel", "daten", 14, 'Freiberg zieht um', 1, 0, "Freiberg misst ab 2015 an anderem Ort mit anderem Gerät — gleiche Datei, andere Messung.", None),
     ("metadaten", "Metadaten", "daten", 14, 'Die Metadaten', 1, 0, "Gerät, Messtag, Betreiber, Qualitätsstufe — was die Daten selbst verschweigen.", None),
-    ("referenz", "Referenzstation", "daten", 14, 'Die Referenzstation', 2, 0, "Chemnitz als Vergleich: Verhältnis Freiberg/Chemnitz 1,13 vorher, 0,96 nachher.", None),
+    ("referenz", "Referenzstation", "daten", 14, 'Die Referenzstation', 2, 0, "Chemnitz als Vergleich: Verhältnis Freiberg/Chemnitz 1,13 (1976–1987), 0,95 (2016–2025) — bei gleichbleibendem Chemnitzer Niederschlag.", None),
+    ("inhomogen", "Inhomogenität", "daten", 14, 'Typische Fehlvorstellung: Gleiche Station, gleiche Messung', 2, 0, "Ein Bruch in einer Messreihe durch Ortswechsel, Gerätewechsel oder geänderte Messvorschrift — in den Daten selbst unsichtbar.", "„Dieselbe Stationsnummer und dasselbe Dateiformat bedeuten dieselbe Messung.“"),
 
     # --- Analyse & Darstellung
     ("kreislauf", "Datenkreislauf", "analyse", 0, 'Warum programmieren?', 2, 0, "Frage, Erhebung, Aufbereitung, Analyse, Visualisierung, Dokumentation — meist mehrere Runden.", None),
@@ -157,7 +158,7 @@ B = [
     ("irref", "Irreführende Darstellung", "analyse", 13, 'Irreführende Darstellungen', 1, 0, "Balkenachse nicht ab null, ausgewählte Zeiträume, überbrückte Lücken, fehlende Einheit oder Quelle.", None),
     ("glatt", "gleitendes Mittel", "analyse", 13, 'Versuch 3', 2, 0, "Jeder Wert wird durch das Mittel der umliegenden Jahre ersetzt — Ausreißer mitteln sich heraus, der langfristige Verlauf bleibt.", None),
     ("diagrammluecke", "Lücken im Diagramm", "analyse", 13, 'Versuch 2', 2, 0, "Eine Linie verbindet Punkte auch über fehlende Jahre hinweg; reindex setzt NaN ein und unterbricht sie.", "„Eine durchgehende Linie zeigt durchgehende Daten.“"),
-    ("qualitaet", "Datenqualität", "analyse", 14, 'Freiberg zieht um', 1, 0, "Kann ich meinem Ergebnis trauen? Lücken, Brüche, Metadaten, Referenz.", None),
+    ("qualitaet", "Datenqualität", "analyse", 14, 'Kann ich meinem Ergebnis trauen?', 1, 0, "Sechs Prüffragen: Fehlwerte, fehlende Zeilen, Zahl der Werte, vergleichbare Gruppen, Messänderungen, ehrliche Grafik.", None),
     ("reproduzierbar", "Reproduzierbarkeit", "analyse", 14, 'Reproduzierbarkeit', 2, 0, "Kann ich meine eigene Rechnung wiederholen? Skript statt Handarbeit.", None),
     ("pruefung", "Prüfungsvorbereitung", "analyse", 14, 'Prüfungsvorbereitung', 2, 0, "Musteraufgaben zu allen Aufgabentypen aus VL 00.", None),
 ]
@@ -218,7 +219,7 @@ R = [
     ("tabkalk", "groupby", "Aufgabe 3 gelöst mit"), ("luecke", "vollstaendig", "prüfen auf"), ("groupby", "vollstaendig", "nur über"),
     ("vollstaendig", "merge", "dann"), ("groupby", "summemittel", "Falle"), ("merge", "inversion", "zeigt"), ("mittel", "summemittel", "statt Summe:"), ("diagrammform", "diagramm", "bestimmt"), ("groupby", "diagramm", "Ergebnis als"),
     ("diagramm", "trend", "zeigt"), ("hochrechnung", "trend", "Grundlage"), ("trend", "irref", "Gefahr"), ("diagramm", "glatt", "ergänzt durch"), ("luecke", "diagrammluecke", "im Diagramm:"), ("diagrammluecke", "irref", "Beispiel für"),
-    ("merge", "referenz", "Grundlage für"), ("stationswechsel", "metadaten", "belegt durch"), ("referenz", "stationswechsel", "entlarvt"),
+    ("merge", "referenz", "Grundlage für"), ("stationswechsel", "metadaten", "belegt durch"), ("referenz", "stationswechsel", "entlarvt"), ("stationswechsel", "inhomogen", "erzeugt"), ("inhomogen", "referenz", "erkennbar mit"),
     ("stationswechsel", "qualitaet", "Beispiel für"), ("luecke", "qualitaet", "prüfen"), ("nan", "qualitaet", "zählen, nicht ignorieren"),
     ("messfehler", "qualitaet", "Ursache für"), ("messdatei", "readcsv", "eingelesen mit"), ("notebook", "reproduzierbar", "Gefahr für"), ("reproduzierbar", "qualitaet", "Teil von"), ("trace", "pruefung", "Aufgabentyp"),
 ]

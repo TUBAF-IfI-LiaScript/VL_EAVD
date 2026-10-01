@@ -770,13 +770,18 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "status": "Gerüst",
    "abschnitte": [
     "Datenqualität, Ausblick, Prüfungsvorbereitung",
+    "Rückblick",
     "Freiberg zieht um",
+    "Versuch 1",
+    "Versuch 2",
     "Die Metadaten",
+    "Typische Fehlvorstellung: Gleiche Station, gleiche Messung",
     "Die Referenzstation",
+    "Versuch 3",
+    "Kann ich meinem Ergebnis trauen?",
     "Reproduzierbarkeit",
     "Ausblick",
-    "Prüfungsvorbereitung",
-    "Material"
+    "Prüfungsvorbereitung"
    ]
   }
  ],
@@ -1809,7 +1814,7 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "name": "Stationswechsel",
    "linie": "daten",
    "vl": 14,
-   "abschnitt": 2,
+   "abschnitt": 3,
    "ebene": 1,
    "code": false,
    "erklaerung": "Freiberg misst ab 2015 an anderem Ort mit anderem Gerät — gleiche Datei, andere Messung.",
@@ -1820,7 +1825,7 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "name": "Metadaten",
    "linie": "daten",
    "vl": 14,
-   "abschnitt": 3,
+   "abschnitt": 6,
    "ebene": 1,
    "code": false,
    "erklaerung": "Gerät, Messtag, Betreiber, Qualitätsstufe — was die Daten selbst verschweigen.",
@@ -1831,11 +1836,22 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "name": "Referenzstation",
    "linie": "daten",
    "vl": 14,
-   "abschnitt": 4,
+   "abschnitt": 8,
    "ebene": 2,
    "code": false,
-   "erklaerung": "Chemnitz als Vergleich: Verhältnis Freiberg/Chemnitz 1,13 vorher, 0,96 nachher.",
+   "erklaerung": "Chemnitz als Vergleich: Verhältnis Freiberg/Chemnitz 1,13 (1976–1987), 0,95 (2016–2025) — bei gleichbleibendem Chemnitzer Niederschlag.",
    "fehlvorstellung": null
+  },
+  {
+   "id": "inhomogen",
+   "name": "Inhomogenität",
+   "linie": "daten",
+   "vl": 14,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Ein Bruch in einer Messreihe durch Ortswechsel, Gerätewechsel oder geänderte Messvorschrift — in den Daten selbst unsichtbar.",
+   "fehlvorstellung": "„Dieselbe Stationsnummer und dasselbe Dateiformat bedeuten dieselbe Messung.“"
   },
   {
    "id": "kreislauf",
@@ -2051,10 +2067,10 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "name": "Datenqualität",
    "linie": "analyse",
    "vl": 14,
-   "abschnitt": 2,
+   "abschnitt": 10,
    "ebene": 1,
    "code": false,
-   "erklaerung": "Kann ich meinem Ergebnis trauen? Lücken, Brüche, Metadaten, Referenz.",
+   "erklaerung": "Sechs Prüffragen: Fehlwerte, fehlende Zeilen, Zahl der Werte, vergleichbare Gruppen, Messänderungen, ehrliche Grafik.",
    "fehlvorstellung": null
   },
   {
@@ -2062,7 +2078,7 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "name": "Reproduzierbarkeit",
    "linie": "analyse",
    "vl": 14,
-   "abschnitt": 5,
+   "abschnitt": 11,
    "ebene": 2,
    "code": false,
    "erklaerung": "Kann ich meine eigene Rechnung wiederholen? Skript statt Handarbeit.",
@@ -2073,7 +2089,7 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "name": "Prüfungsvorbereitung",
    "linie": "analyse",
    "vl": 14,
-   "abschnitt": 7,
+   "abschnitt": 13,
    "ebene": 2,
    "code": false,
    "erklaerung": "Musteraufgaben zu allen Aufgabentypen aus VL 00.",
@@ -2820,6 +2836,16 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "von": "referenz",
    "nach": "stationswechsel",
    "text": "entlarvt"
+  },
+  {
+   "von": "stationswechsel",
+   "nach": "inhomogen",
+   "text": "erzeugt"
+  },
+  {
+   "von": "inhomogen",
+   "nach": "referenz",
+   "text": "erkennbar mit"
   },
   {
    "von": "stationswechsel",
