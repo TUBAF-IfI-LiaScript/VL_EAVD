@@ -750,13 +750,18 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "status": "Gerüst",
    "abschnitte": [
     "Visualisierung",
+    "Rückblick",
     "Die richtige Form",
     "Ein Diagramm bauen",
     "Trend",
+    "Typische Fehlvorstellung: Ein Trend ist ein Trend",
     "Irreführende Darstellungen",
+    "Live Hacking: Frosttage pro Jahr",
+    "Versuch 1",
+    "Versuch 2",
+    "Versuch 3",
     "Kontrollfragen",
-    "Nächste Woche",
-    "Material"
+    "Nächste Woche"
    ]
   },
   {
@@ -1980,7 +1985,7 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "name": "Diagrammform",
    "linie": "analyse",
    "vl": 13,
-   "abschnitt": 2,
+   "abschnitt": 3,
    "ebene": 2,
    "code": false,
    "erklaerung": "Zeitreihe als Linie, Vergleich als Balken, Verteilung als Histogramm.",
@@ -1991,7 +1996,7 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "name": "Diagramm",
    "linie": "analyse",
    "vl": 13,
-   "abschnitt": 3,
+   "abschnitt": 4,
    "ebene": 1,
    "code": false,
    "erklaerung": "Achsen, Einheiten, Titel — ein Diagramm muss ohne Begleittext lesbar sein.",
@@ -2002,22 +2007,44 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "name": "Trend",
    "linie": "analyse",
    "vl": 13,
-   "abschnitt": 4,
+   "abschnitt": 5,
    "ebene": 1,
    "code": false,
    "erklaerung": "Lineare Trendlinie — die Herleitung der 0,05 °C pro Jahr aus VL 04.",
-   "fehlvorstellung": null
+   "fehlvorstellung": "„Die Daten haben einen Trend.“ Ab 1891: 0,15 °C, ab 1975: 0,50 °C, ab 2010: 1,18 °C pro Jahrzehnt — der Zeitraum gehört immer dazu."
   },
   {
    "id": "irref",
    "name": "Irreführende Darstellung",
    "linie": "analyse",
    "vl": 13,
-   "abschnitt": 5,
+   "abschnitt": 7,
    "ebene": 1,
    "code": false,
-   "erklaerung": "Abgeschnittene Achsen, ausgewählte Zeiträume.",
+   "erklaerung": "Balkenachse nicht ab null, ausgewählte Zeiträume, überbrückte Lücken, fehlende Einheit oder Quelle.",
    "fehlvorstellung": null
+  },
+  {
+   "id": "glatt",
+   "name": "gleitendes Mittel",
+   "linie": "analyse",
+   "vl": 13,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Jeder Wert wird durch das Mittel der umliegenden Jahre ersetzt — Ausreißer mitteln sich heraus, der langfristige Verlauf bleibt.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "diagrammluecke",
+   "name": "Lücken im Diagramm",
+   "linie": "analyse",
+   "vl": 13,
+   "abschnitt": 10,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Eine Linie verbindet Punkte auch über fehlende Jahre hinweg; reindex setzt NaN ein und unterbricht sie.",
+   "fehlvorstellung": "„Eine durchgehende Linie zeigt durchgehende Daten.“"
   },
   {
    "id": "qualitaet",
@@ -2763,6 +2790,21 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "von": "trend",
    "nach": "irref",
    "text": "Gefahr"
+  },
+  {
+   "von": "diagramm",
+   "nach": "glatt",
+   "text": "ergänzt durch"
+  },
+  {
+   "von": "luecke",
+   "nach": "diagrammluecke",
+   "text": "im Diagramm:"
+  },
+  {
+   "von": "diagrammluecke",
+   "nach": "irref",
+   "text": "Beispiel für"
   },
   {
    "von": "merge",
