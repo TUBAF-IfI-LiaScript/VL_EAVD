@@ -41,7 +41,7 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 * Was gehört an jedes Diagramm?
 * Wie kann eine korrekte Grafik trotzdem täuschen?
 
-**Einordnung:** Vorlesung 13, Woche 14 · Werkzeug: Jupyter Notebooks
+**Einordnung:** Vorlesung 13, Woche 14 · Werkzeug: Vorlesung im Browser (Pyodide); Übung in Visual Studio Code mit Zellen (`# %%`)
 
 --------------------------------------------------------------------------------
 

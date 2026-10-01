@@ -86,7 +86,7 @@ B = [
     ("stdlib", "Standardbibliothek", "denken", 9, 6, 1, 0, "Module, die Python mitbringt: statistics, datetime, math, os.", None),
     ("datetime", "datetime", "denken", 9, 6, 2, 1, "Aus \"19101210\" wird ein Datum, mit dem man rechnen kann — die Lücke umfasst 1756 Tage.", None),
     ("pip", "Pakete & pip", "denken", 9, 7, 2, 0, "Externe Pakete installiert man mit pip install; fehlt eines: ModuleNotFoundError.", None),
-    ("zellen", "Notebook-Zellen", "denken", 10, 3, 2, 0, "Ausführungsreihenfolge und typische Fallen, etwa eine nicht erneut ausgeführte Zelle.", None),
+    ("zellen", "Zellen in VS Code", "denken", 10, 3, 2, 0, "Mit # %% markierte Abschnitte einzeln ausführen, Diagramme im interaktiven Fenster — die Datei bleibt ein normales Skript.", None),
 
     # --- Datentypen & -strukturen
     ("dezimalpunkt", "Dezimalpunkt", "typen", 2, 6, 2, 0, "Python schreibt 6.26. print(6,26 + 1) gibt ohne Fehlermeldung 6 27 aus.", "„6,26 ist eine Zahl.“"),
@@ -106,7 +106,7 @@ B = [
     ("keyerror", "KeyError, in, get", "typen", 6, 8, 2, 0, "Nach einem fehlenden Schlüssel kann man nicht fragen; vorher mit in prüfen oder get verwenden.", None),
     ("typbilanz", "Zwischenbilanz Datentypen", "typen", 6, 13, 2, 0, "int, float, str, bool, list, range, dict — mit Herkunft im Datensatz und typischer Falle.", None),
     ("none", "None", "typen", 7, 6, 2, 1, "Der Wert „nichts“ — Rückgabe einer Funktion ohne return.", None),
-    ("array", "NumPy-Array", "typen", 10, 4, 1, 0, "Rechnet elementweise: (minima < 0).sum() ersetzt das Zählmuster.", "„Ein Array ist dasselbe wie eine Liste.“"),
+    ("array", "NumPy-Array", "typen", 10, 2, 1, 0, "Rechnet elementweise: (minima < 0).sum() ersetzt das Zählmuster.", "„Ein Array ist dasselbe wie eine Liste.“"),
     ("dataframe", "DataFrame", "typen", 11, 3, 1, 0, "Tabelle aus beschrifteten Spalten; jede Spalte verhält sich wie ein Array.", None),
     ("nan", "NaN", "typen", 11, 4, 1, 1, "So stellt pandas „kein Wert“ dar, z. B. aus -999 per na_values.", "„NaN ist null.“"),
     ("datumstyp", "Datumsspalte", "typen", 11, 6, 2, 0, "MESS_DATUM mit pd.to_datetime in ein Datum umwandeln.", None),
@@ -139,8 +139,8 @@ B = [
     ("mittel", "Mittelwert", "analyse", 4, 4, 1, 0, "Summe durch Anzahl — nur über gültige Werte, und die Anzahl gehört dazu.", "„Ein Mittelwert gilt, egal wie viele Werte fehlen.“"),
     ("hochrechnung", "Hochrechnung", "analyse", 4, 11, 2, 0, "Bei +0,05 °C pro Jahr läge das Mittel 2059 bei 8 °C — nur unter dieser Annahme.", "„Rechnerisch korrekt heißt inhaltlich richtig.“"),
     ("statistik", "statistics", "analyse", 9, 6, 2, 1, "mean, median, stdev für Listen von Messwerten.", None),
-    ("notebook", "Jupyter Notebook", "analyse", 10, 2, 1, 0, "Code, Ergebnis und Text in Zellen — das Werkzeug für Exploration und Bericht.", None),
-    ("vektor", "elementweise rechnen", "analyse", 10, 4, 2, 0, "Eine Anweisung für alle Werte statt einer Schleife: minima.mean().", None),
+    ("notebook", "Jupyter Notebook lesen", "analyse", 10, 4, 2, 0, "Verbreitetes Format in Wissenschaft und Projekten; in der Vorlesung nur zum Lesen vorgestellt, nicht als Werkzeug.", "„Was im Notebook steht, ist das, was gerechnet wurde.“"),
+    ("vektor", "elementweise rechnen", "analyse", 10, 2, 2, 0, "Eine Anweisung für alle Werte statt einer Schleife: minima.mean().", None),
     ("filter", "Filtern", "analyse", 11, 5, 1, 0, "df[df[\"TNK\"] < 0] — Zeilen nach einer Bedingung auswählen.", None),
     ("groupby", "groupby", "analyse", 12, 3, 1, 1, "Gruppiert Zeilen, z. B. nach Jahr, und fasst jede Gruppe zusammen.", None),
     ("diagrammform", "Diagrammform", "analyse", 13, 2, 2, 0, "Zeitreihe als Linie, Vergleich als Balken, Verteilung als Histogramm.", None),
@@ -148,7 +148,8 @@ B = [
     ("trend", "Trend", "analyse", 13, 4, 1, 0, "Lineare Trendlinie — die Herleitung der 0,05 °C pro Jahr aus VL 04.", None),
     ("irref", "Irreführende Darstellung", "analyse", 13, 5, 1, 0, "Abgeschnittene Achsen, ausgewählte Zeiträume.", None),
     ("qualitaet", "Datenqualität", "analyse", 14, 2, 1, 0, "Kann ich meinem Ergebnis trauen? Lücken, Brüche, Metadaten, Referenz.", None),
-    ("pruefung", "Prüfungsvorbereitung", "analyse", 14, 6, 2, 0, "Musteraufgaben zu allen Aufgabentypen aus VL 00.", None),
+    ("reproduzierbar", "Reproduzierbarkeit", "analyse", 14, 5, 2, 0, "Kann ich meine eigene Rechnung wiederholen? Skript statt Handarbeit.", None),
+    ("pruefung", "Prüfungsvorbereitung", "analyse", 14, 7, 2, 0, "Musteraufgaben zu allen Aufgabentypen aus VL 00.", None),
 ]
 
 # ---- Beziehungen: von, nach, Beschriftung
@@ -199,9 +200,9 @@ R = [
     ("stdlib", "datetime", "enthält"), ("stdlib", "statistik", "enthält"), ("datetime", "luecke", "findet"),
     ("mittel", "statistik", "fertig in"), ("modul", "pip", "externe per"), ("pfad", "open", "entscheidet über"),
     # Phase 2
-    ("pip", "notebook", "installiert"), ("notebook", "zellen", "besteht aus"), ("modul", "array", "import wie"),
+    ("pip", "array", "installiert"), ("zellen", "notebook", "ähnlich, aber ohne versteckten Zustand:"), ("modul", "array", "import wie"),
     ("liste", "array", "wird zu"), ("zaehlmuster", "vektor", "ersetzt durch"), ("array", "vektor", "ermöglicht"),
-    ("array", "dataframe", "Spalte ist ein"), ("open", "readcsv", "in einer Anweisung"), ("notebook", "readcsv", "Werkzeug für"),
+    ("array", "dataframe", "Spalte ist ein"), ("open", "readcsv", "in einer Anweisung"), ("zellen", "readcsv", "Arbeitsweise für"),
     ("readcsv", "dataframe", "erzeugt"), ("fehlwert", "nan", "wird zu"), ("none", "nan", "ähnlich:"),
     ("datetime", "datumstyp", "in pandas:"), ("dataframe", "filter", "auswählen mit"), ("dict", "groupby", "Prinzip hinter"),
     ("tabkalk", "groupby", "Aufgabe 3 gelöst mit"), ("luecke", "vollstaendig", "prüfen auf"), ("groupby", "vollstaendig", "nur über"),
@@ -209,7 +210,7 @@ R = [
     ("diagramm", "trend", "zeigt"), ("hochrechnung", "trend", "Grundlage"), ("trend", "irref", "Gefahr"),
     ("merge", "referenz", "Grundlage für"), ("stationswechsel", "metadaten", "belegt durch"), ("referenz", "stationswechsel", "entlarvt"),
     ("stationswechsel", "qualitaet", "Beispiel für"), ("luecke", "qualitaet", "prüfen"), ("nan", "qualitaet", "zählen, nicht ignorieren"),
-    ("messfehler", "qualitaet", "Ursache für"), ("messdatei", "readcsv", "eingelesen mit"), ("trace", "pruefung", "Aufgabentyp"),
+    ("messfehler", "qualitaet", "Ursache für"), ("messdatei", "readcsv", "eingelesen mit"), ("notebook", "reproduzierbar", "Gefahr für"), ("reproduzierbar", "qualitaet", "Teil von"), ("trace", "pruefung", "Aufgabentyp"),
 ]
 
 # ---- Didaktische Fäden (Metrolinien): jede Folge ist eine Kette von „baut auf“-Schritten

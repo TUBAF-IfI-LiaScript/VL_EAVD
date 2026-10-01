@@ -50,7 +50,7 @@ Sechs Prinzipien tragen die Konzeption:
 | **Erst mühsam, dann mit Werkzeug** | Tabellenkalkulation (VL 01) → eigene Schleifen (VL 03–07) → pandas (VL 11–12) für dieselben Fragen. |
 | **Live Hacking**                 | Ab VL 04 entsteht in jeder Sitzung ein Programm live, inklusive Irrwegen. Ein Skript wächst über VL 06 (lang), VL 07 (Funktionen) und VL 09 (Modul). |
 | **Typische Fehlvorstellungen**   | Eigene Abschnitte mit Vorhersage-Quiz, angelehnt an [PD4CS](https://www.pd4cs.org/mc-index/) und ergänzt um datenspezifische Fehlvorstellungen. |
-| **Klare Werkzeugwahl**           | Blöcke oder Text für Einführungsbeispiele (VL 02–07), Python im Browser (Pyodide) und auf dem Server (CodeRunner) — eins zu eins übertragbar auf den eigenen Rechner —, Jupyter Notebooks ab VL 10. |
+| **Klare Werkzeugwahl**           | Blöcke oder Text für Einführungsbeispiele (VL 02–07), Python im Browser (Pyodide) und auf dem Server (CodeRunner) — eins zu eins übertragbar auf den eigenen Rechner. Zum Arbeiten durchgehend Visual Studio Code mit `.py`-Dateien, ab VL 10 mit Zellen (`# %%`). Jupyter Notebooks werden bewusst nicht als Werkzeug eingeführt (zusätzliches Denkmodell, versteckter Zustand), sondern nur zum Lesen vorgestellt. |
 
 Die Prüfung ist schriftlich. Geübt wird deshalb vor allem das Lesen, Vorhersagen und Korrigieren von Code.
 
@@ -71,13 +71,13 @@ Vorlesung montags; Vorlesungszeit 19.10.–18.12.2026 und 04.01.–12.02.2027.
 | 07.12. | [07](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/07_Funktionen.md) | Funktionen                                    | Grundlagen am Datensatz      |
 | 14.12. | [08](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/08_DemoMicroPython.md) | Demonstration: Datenerhebung mit MicroPython  | Zäsur: Wo Daten herkommen    |
 | 04.01. | [09](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/09_ProgrammeStrukturieren.md) | Programme strukturieren                       | Grundlagen am Datensatz      |
-| 11.01. | [10](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/10_NotebooksBibliotheken.md) | Notebooks & Bibliotheken                      | Datenanalyse                 |
+| 11.01. | [10](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/10_Bibliotheken.md) | Bibliotheken: NumPy                           | Datenanalyse                 |
 | 18.01. | [11](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/11_PandasEinlesen.md) | pandas I — Einlesen                           | Datenanalyse                 |
 | 25.01. | [12](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/12_PandasAggregieren.md) | pandas II — Aggregieren                       | Datenanalyse                 |
 | 01.02. | [13](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/13_Visualisierung.md) | Visualisierung                                | Datenanalyse                 |
 | 08.02. | [14](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/14_Datenqualitaet.md) | Datenqualität, Ausblick, Prüfungsvorbereitung | Datenanalyse                 |
 
-> Die Demonstration (VL 08) ist bewusst der letzte Termin vor Weihnachten: Nach sieben Vorlesungen mit fertigen Dateien sehen die Studierenden, wie Messdaten entstehen. Die dabei aufgezeichneten Daten kommen im Januar als Analysebeispiel zurück. VL 09 schließt die Grundlagen ab und bereitet mit eigenen Modulen den Wechsel zu Bibliotheken und Notebooks vor.
+> Die Demonstration (VL 08) ist bewusst der letzte Termin vor Weihnachten: Nach sieben Vorlesungen mit fertigen Dateien sehen die Studierenden, wie Messdaten entstehen. Die dabei aufgezeichneten Daten kommen im Januar als Analysebeispiel zurück. VL 09 schließt die Grundlagen ab und bereitet mit eigenen Modulen den Schritt zu fremden Bibliotheken vor.
 
 ## Datensätze
 

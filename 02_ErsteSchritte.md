@@ -87,7 +87,7 @@ Zwei Dinge sollten Sie sich merken:
 | :------------------------------------ | :---------------------------------------------------------------- |
 | gut lesbar                            | Programme sehen fast aus wie der Pseudocode von letzter Woche      |
 | in der Wissenschaft verbreitet        | Für fast jede Fachfrage gibt es eine fertige Bibliothek            |
-| eine Sprache für die ganze Kette      | Vom Mikrocontroller (Vorlesung 08) bis zur Auswertung im Notebook  |
+| eine Sprache für die ganze Kette      | Vom Mikrocontroller (Vorlesung 08) bis zur Datenanalyse mit pandas |
 | frei verfügbar                        | Keine Lizenzkosten, läuft auf jedem Rechner                        |
 
 > Python ist nicht die schnellste Sprache und nicht die einzige. Für unsere Zwecke — Daten einlesen, aufbereiten, auswerten, darstellen — ist sie aber die naheliegendste.

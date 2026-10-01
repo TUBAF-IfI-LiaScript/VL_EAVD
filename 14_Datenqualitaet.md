@@ -41,7 +41,7 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 * Wie prüft man einen Messreihenbruch mit einer Referenzstation?
 * Welche Aufgabentypen kommen in der Klausur?
 
-**Einordnung:** Vorlesung 14, Woche 15 · Werkzeug: Jupyter Notebooks
+**Einordnung:** Vorlesung 14, Woche 15 · Werkzeug: Vorlesung im Browser (Pyodide); Übung in Visual Studio Code mit Zellen (`# %%`)
 
 --------------------------------------------------------------------------------
 
@@ -56,6 +56,10 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 ## Die Referenzstation
 
 > **Geplant:** Verhältnis Freiberg/Chemnitz: 1,13 (1976–1987, beide Hellmann) vs. 0,96 (2016–2025). Auch Chemnitz hat Brüche (Umzug 1976).
+
+## Reproduzierbarkeit
+
+> **Geplant:** Kann ich meine eigene Rechnung wiederholen? Skript statt Handarbeit, Rückbezug auf die Notebook-Fehlvorstellung aus VL 10.
 
 ## Ausblick
 

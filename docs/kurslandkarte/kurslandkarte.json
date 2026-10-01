@@ -1,5 +1,5 @@
 {
- "stand": "29.09.2026",
+ "stand": "01.10.2026",
  "vorlesungen": [
   {
    "vl": 0,
@@ -213,13 +213,13 @@
   },
   {
    "vl": 10,
-   "datei": "10_NotebooksBibliotheken.md",
+   "datei": "10_Bibliotheken.md",
    "status": "Gerüst",
    "abschnitte": [
-    "Notebooks & Bibliotheken",
-    "Skript oder Notebook?",
-    "Arbeiten mit Zellen",
+    "Bibliotheken: NumPy",
     "NumPy",
+    "Zellen in Visual Studio Code",
+    "Exkurs: Jupyter Notebooks lesen",
     "Kontrollfragen",
     "Nächste Woche",
     "Material"
@@ -280,6 +280,7 @@
     "Freiberg zieht um",
     "Die Metadaten",
     "Die Referenzstation",
+    "Reproduzierbarkeit",
     "Ausblick",
     "Prüfungsvorbereitung",
     "Material"
@@ -839,13 +840,13 @@
   },
   {
    "id": "zellen",
-   "name": "Notebook-Zellen",
+   "name": "Zellen in VS Code",
    "linie": "denken",
    "vl": 10,
    "abschnitt": 3,
    "ebene": 2,
    "code": false,
-   "erklaerung": "Ausführungsreihenfolge und typische Fallen, etwa eine nicht erneut ausgeführte Zelle.",
+   "erklaerung": "Mit # %% markierte Abschnitte einzeln ausführen, Diagramme im interaktiven Fenster — die Datei bleibt ein normales Skript.",
    "fehlvorstellung": null
   },
   {
@@ -1040,7 +1041,7 @@
    "name": "NumPy-Array",
    "linie": "typen",
    "vl": 10,
-   "abschnitt": 4,
+   "abschnitt": 2,
    "ebene": 1,
    "code": false,
    "erklaerung": "Rechnet elementweise: (minima < 0).sum() ersetzt das Zählmuster.",
@@ -1356,21 +1357,21 @@
   },
   {
    "id": "notebook",
-   "name": "Jupyter Notebook",
+   "name": "Jupyter Notebook lesen",
    "linie": "analyse",
    "vl": 10,
-   "abschnitt": 2,
-   "ebene": 1,
+   "abschnitt": 4,
+   "ebene": 2,
    "code": false,
-   "erklaerung": "Code, Ergebnis und Text in Zellen — das Werkzeug für Exploration und Bericht.",
-   "fehlvorstellung": null
+   "erklaerung": "Verbreitetes Format in Wissenschaft und Projekten; in der Vorlesung nur zum Lesen vorgestellt, nicht als Werkzeug.",
+   "fehlvorstellung": "„Was im Notebook steht, ist das, was gerechnet wurde.“"
   },
   {
    "id": "vektor",
    "name": "elementweise rechnen",
    "linie": "analyse",
    "vl": 10,
-   "abschnitt": 4,
+   "abschnitt": 2,
    "ebene": 2,
    "code": false,
    "erklaerung": "Eine Anweisung für alle Werte statt einer Schleife: minima.mean().",
@@ -1454,11 +1455,22 @@
    "fehlvorstellung": null
   },
   {
+   "id": "reproduzierbar",
+   "name": "Reproduzierbarkeit",
+   "linie": "analyse",
+   "vl": 14,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Kann ich meine eigene Rechnung wiederholen? Skript statt Handarbeit.",
+   "fehlvorstellung": null
+  },
+  {
    "id": "pruefung",
    "name": "Prüfungsvorbereitung",
    "linie": "analyse",
    "vl": 14,
-   "abschnitt": 6,
+   "abschnitt": 7,
    "ebene": 2,
    "code": false,
    "erklaerung": "Musteraufgaben zu allen Aufgabentypen aus VL 00.",
@@ -1983,13 +1995,13 @@
   },
   {
    "von": "pip",
-   "nach": "notebook",
+   "nach": "array",
    "text": "installiert"
   },
   {
-   "von": "notebook",
-   "nach": "zellen",
-   "text": "besteht aus"
+   "von": "zellen",
+   "nach": "notebook",
+   "text": "ähnlich, aber ohne versteckten Zustand:"
   },
   {
    "von": "modul",
@@ -2022,9 +2034,9 @@
    "text": "in einer Anweisung"
   },
   {
-   "von": "notebook",
+   "von": "zellen",
    "nach": "readcsv",
-   "text": "Werkzeug für"
+   "text": "Arbeitsweise für"
   },
   {
    "von": "readcsv",
@@ -2140,6 +2152,16 @@
    "von": "messdatei",
    "nach": "readcsv",
    "text": "eingelesen mit"
+  },
+  {
+   "von": "notebook",
+   "nach": "reproduzierbar",
+   "text": "Gefahr für"
+  },
+  {
+   "von": "reproduzierbar",
+   "nach": "qualitaet",
+   "text": "Teil von"
   },
   {
    "von": "trace",

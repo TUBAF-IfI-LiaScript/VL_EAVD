@@ -41,7 +41,7 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 * Wie legt man abgeleitete Spalten an?
 * Wie verbindet man zwei Datensätze?
 
-**Einordnung:** Vorlesung 12, Woche 13 · Werkzeug: Jupyter Notebooks
+**Einordnung:** Vorlesung 12, Woche 13 · Werkzeug: Vorlesung im Browser (Pyodide); Übung in Visual Studio Code mit Zellen (`# %%`)
 
 --------------------------------------------------------------------------------
 

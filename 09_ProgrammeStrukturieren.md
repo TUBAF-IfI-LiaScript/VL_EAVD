@@ -328,10 +328,10 @@ print(stationen.get("chemnitz"), stationen.get("freiberg"))
 
 ## Nächste Woche
 
-Mit dieser Vorlesung endet Phase 1. Ab nächster Woche arbeiten wir mit **Jupyter Notebooks** — und mit Paketen, die andere für genau unsere Art von Aufgaben geschrieben haben.
+Mit dieser Vorlesung endet Phase 1. Ab nächster Woche arbeiten wir mit Paketen, die andere für genau unsere Art von Aufgaben geschrieben haben — weiter in Visual Studio Code, ergänzt um Zellen für die schrittweise Datenanalyse.
 
 **Zur Vorbereitung**
 
 - [ ] Legen Sie `dwd.py` und `auswertung.py` im Repository-Ordner an und bringen Sie das Programm auf Ihrem Rechner zum Laufen.
 - [ ] Ergänzen Sie `dwd.py` um eine Funktion `finde_luecken(datei)`, die mit `datetime` alle Stellen meldet, an denen zwischen zwei Zeilen mehr als ein Tag liegt. Wie viele Lücken hat Chemnitz?
-- [ ] Installieren Sie mit `pip install jupyter numpy pandas matplotlib` die Pakete für Phase 2.
+- [ ] Installieren Sie mit `pip install numpy pandas matplotlib` die Pakete für Phase 2.

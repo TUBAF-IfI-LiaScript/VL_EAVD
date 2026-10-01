@@ -41,7 +41,7 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 * Wie wählt man Spalten und Zeilen aus?
 * Wie filtert man nach Bedingungen?
 
-**Einordnung:** Vorlesung 11, Woche 12 · Werkzeug: Jupyter Notebooks
+**Einordnung:** Vorlesung 11, Woche 12 · Werkzeug: Vorlesung im Browser (Pyodide); Übung in Visual Studio Code mit Zellen (`# %%`)
 
 --------------------------------------------------------------------------------
 
