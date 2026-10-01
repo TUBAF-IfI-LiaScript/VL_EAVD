@@ -733,12 +733,15 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "abschnitte": [
     "pandas II — Aggregieren",
     "Aufgabe 3 aus Vorlesung 01",
-    "groupby",
-    "Vollständige Jahre",
-    "Zwei Stationen",
+    "groupby: Teilen, Anwenden, Zusammenfügen",
+    "Live Hacking: Frosttage pro Jahrzehnt",
+    "Versuch 1",
+    "Typische Fehlvorstellung: Jedes Jahr zählt gleich",
+    "Versuch 2",
+    "Versuch 3",
+    "Zwei Stationen verbinden",
     "Kontrollfragen",
-    "Nächste Woche",
-    "Material"
+    "Nächste Woche"
    ]
   },
   {
@@ -1779,18 +1782,18 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "name": "vollständige Jahre",
    "linie": "daten",
    "vl": 12,
-   "abschnitt": 4,
+   "abschnitt": 6,
    "ebene": 2,
    "code": false,
-   "erklaerung": "Jahre mit Lücken erkennen und ausschließen, bevor man vergleicht.",
-   "fehlvorstellung": null
+   "erklaerung": "Jahre mit Lücken erkennen und ausschließen, bevor man vergleicht: 1890 hat nur 132 gemessene Tage.",
+   "fehlvorstellung": "„Jede Zeile der Ergebnistabelle ist ein vergleichbares Jahr.“"
   },
   {
    "id": "merge",
    "name": "Stationen verbinden",
    "linie": "daten",
    "vl": 12,
-   "abschnitt": 5,
+   "abschnitt": 9,
    "ebene": 2,
    "code": false,
    "erklaerung": "Fichtelberg und Chemnitz über das Datum zusammenführen.",
@@ -1948,6 +1951,28 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "ebene": 1,
    "code": true,
    "erklaerung": "Gruppiert Zeilen, z. B. nach Jahr, und fasst jede Gruppe zusammen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "summemittel",
+   "name": "Mittel statt Summe",
+   "linie": "analyse",
+   "vl": 12,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Gruppen mit unterschiedlich vielen Elementen vergleicht man über das Mittel, nicht die Summe — die 2020er haben erst sechs Jahre.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "inversion",
+   "name": "Inversionswetterlage",
+   "linie": "analyse",
+   "vl": 12,
+   "abschnitt": 9,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Im Mittel ist Chemnitz 5 °C wärmer als der Fichtelberg — am 12.01.1964 war der Gipfel 11,9 °C wärmer. Mittelwerte verdecken Extreme.",
    "fehlvorstellung": null
   },
   {
@@ -2698,6 +2723,21 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "von": "vollstaendig",
    "nach": "merge",
    "text": "dann"
+  },
+  {
+   "von": "groupby",
+   "nach": "summemittel",
+   "text": "Falle"
+  },
+  {
+   "von": "merge",
+   "nach": "inversion",
+   "text": "zeigt"
+  },
+  {
+   "von": "mittel",
+   "nach": "summemittel",
+   "text": "statt Summe:"
   },
   {
    "von": "diagrammform",
