@@ -242,14 +242,20 @@
    "status": "Gerüst",
    "abschnitte": [
     "pandas I — Einlesen",
+    "Rückblick",
     "Von der Mühsal zum Werkzeug",
     "Der DataFrame",
     "Fehlende Werte: NaN",
+    "Typische Fehlvorstellung: NaN ist null",
     "Auswählen und Filtern",
     "Datum",
+    "Live Hacking: Die Extremwerte der Messreihe",
+    "Versuch 1",
+    "Versuch 2",
+    "Versuch 3",
+    "Versuch 4",
     "Kontrollfragen",
-    "Nächste Woche",
-    "Material"
+    "Nächste Woche"
    ]
   },
   {
@@ -1085,7 +1091,7 @@
    "name": "DataFrame",
    "linie": "typen",
    "vl": 11,
-   "abschnitt": 3,
+   "abschnitt": 4,
    "ebene": 1,
    "code": false,
    "erklaerung": "Tabelle aus beschrifteten Spalten; jede Spalte verhält sich wie ein Array.",
@@ -1096,7 +1102,7 @@
    "name": "NaN",
    "linie": "typen",
    "vl": 11,
-   "abschnitt": 4,
+   "abschnitt": 5,
    "ebene": 1,
    "code": true,
    "erklaerung": "So stellt pandas „kein Wert“ dar, z. B. aus -999 per na_values.",
@@ -1107,7 +1113,7 @@
    "name": "Datumsspalte",
    "linie": "typen",
    "vl": 11,
-   "abschnitt": 6,
+   "abschnitt": 8,
    "ebene": 2,
    "code": false,
    "erklaerung": "MESS_DATUM mit pd.to_datetime in ein Datum umwandeln.",
@@ -1283,11 +1289,22 @@
    "name": "read_csv",
    "linie": "daten",
    "vl": 11,
-   "abschnitt": 2,
+   "abschnitt": 3,
    "ebene": 1,
    "code": true,
    "erklaerung": "Liest die Rohdatei in einer Anweisung — was in VL 06 rund 50 Zeilen gekostet hat.",
    "fehlvorstellung": null
+  },
+  {
+   "id": "spaltenname",
+   "name": "Spaltennamen",
+   "linie": "daten",
+   "vl": 11,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Jedes Zeichen zählt, auch Leerzeichen: \" TNK\" ist nicht \"TNK\". skipinitialspace=True entfernt sie.",
+   "fehlvorstellung": "„Eine Spalte heißt so, wie ich sie lese.“"
   },
   {
    "id": "vollstaendig",
@@ -1437,10 +1454,21 @@
    "name": "Filtern",
    "linie": "analyse",
    "vl": 11,
-   "abschnitt": 5,
+   "abschnitt": 7,
    "ebene": 1,
    "code": false,
    "erklaerung": "df[df[\"TNK\"] < 0] — Zeilen nach einer Bedingung auswählen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "idxmin",
+   "name": "idxmin & loc",
+   "linie": "analyse",
+   "vl": 11,
+   "abschnitt": 13,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Zeile des kleinsten Werts finden und einzelne Werte über Zeile und Spaltenname holen.",
    "fehlvorstellung": null
   },
   {
@@ -2112,6 +2140,21 @@
    "von": "loadtxt",
    "nach": "readcsv",
    "text": "mit Spaltennamen:"
+  },
+  {
+   "von": "readcsv",
+   "nach": "spaltenname",
+   "text": "Falle"
+  },
+  {
+   "von": "extrem",
+   "nach": "idxmin",
+   "text": "in pandas:"
+  },
+  {
+   "von": "dataframe",
+   "nach": "idxmin",
+   "text": "nutzt"
   },
   {
    "von": "zaehlmuster",
