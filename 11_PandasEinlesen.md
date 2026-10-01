@@ -11,7 +11,7 @@ comment:  pandas I: Die DWD-Rohdatei mit read_csv einlesen, Spalten auswählen, 
 logo:     ./images/Readme/Wetterstation.png
 
 import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/config.md
-          https://raw.githubusercontent.com/LiaTemplates/Pyodide/master/README.md
+          https://raw.githubusercontent.com/LiaTemplates/Pyodide/a9680241e4/README.md
 
 -->
 

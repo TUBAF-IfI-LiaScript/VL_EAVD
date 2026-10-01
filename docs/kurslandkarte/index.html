@@ -688,12 +688,20 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "status": "Gerüst",
    "abschnitte": [
     "Bibliotheken: NumPy",
-    "NumPy",
+    "Rückblick",
+    "NumPy-Arrays",
+    "Typische Fehlvorstellung: Ein Array ist eine Liste",
+    "Zählen und Filtern mit Masken",
+    "Von der Mühsal zum Werkzeug",
+    "Live Hacking: Wie viel wärmer ist es geworden?",
+    "Versuch 1",
+    "Versuch 2",
+    "Versuch 3",
     "Zellen in Visual Studio Code",
     "Exkurs: Jupyter Notebooks lesen",
+    "Typische Fehlvorstellung: Ein Notebook zeigt, was gerechnet wurde",
     "Kontrollfragen",
-    "Nächste Woche",
-    "Material"
+    "Nächste Woche"
    ]
   },
   {
@@ -1314,7 +1322,7 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "name": "Zellen in VS Code",
    "linie": "denken",
    "vl": 10,
-   "abschnitt": 3,
+   "abschnitt": 11,
    "ebene": 2,
    "code": false,
    "erklaerung": "Mit # %% markierte Abschnitte einzeln ausführen, Diagramme im interaktiven Fenster — die Datei bleibt ein normales Skript.",
@@ -1512,11 +1520,33 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "name": "NumPy-Array",
    "linie": "typen",
    "vl": 10,
-   "abschnitt": 2,
+   "abschnitt": 3,
    "ebene": 1,
    "code": false,
    "erklaerung": "Rechnet elementweise: (minima < 0).sum() ersetzt das Zählmuster.",
    "fehlvorstellung": "„Ein Array ist dasselbe wie eine Liste.“"
+  },
+  {
+   "id": "maske",
+   "name": "Maske",
+   "linie": "typen",
+   "vl": 10,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Ein Vergleich mit einem Array liefert True/False pro Wert: (minima < 0).sum() zählt, minima[minima < 0] filtert.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "maskenlogik",
+   "name": "& statt and",
+   "linie": "typen",
+   "vl": 10,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Masken verknüpft man elementweise mit & und |, jeweils mit Klammern.",
+   "fehlvorstellung": "„and funktioniert auch mit Arrays.“ — ValueError: truth value … is ambiguous."
   },
   {
    "id": "dataframe",
@@ -1706,6 +1736,17 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "fehlvorstellung": "„Ein Dateiname bezieht sich auf den Ordner des Programms.“"
   },
   {
+   "id": "loadtxt",
+   "name": "loadtxt",
+   "linie": "daten",
+   "vl": 10,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "NumPy liest die Rohdatei direkt: Trennzeichen, Kopfzeile überspringen, Spalten auswählen — aber ohne Spaltennamen.",
+   "fehlvorstellung": null
+  },
+  {
    "id": "readcsv",
    "name": "read_csv",
    "linie": "daten",
@@ -1842,7 +1883,7 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "name": "Jupyter Notebook lesen",
    "linie": "analyse",
    "vl": 10,
-   "abschnitt": 4,
+   "abschnitt": 12,
    "ebene": 2,
    "code": false,
    "erklaerung": "Verbreitetes Format in Wissenschaft und Projekten; in der Vorlesung nur zum Lesen vorgestellt, nicht als Werkzeug.",
@@ -1853,7 +1894,7 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "name": "elementweise rechnen",
    "linie": "analyse",
    "vl": 10,
-   "abschnitt": 2,
+   "abschnitt": 3,
    "ebene": 2,
    "code": false,
    "erklaerung": "Eine Anweisung für alle Werte statt einer Schleife: minima.mean().",
@@ -2504,6 +2545,41 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "von": "liste",
    "nach": "array",
    "text": "wird zu"
+  },
+  {
+   "von": "array",
+   "nach": "maske",
+   "text": "Vergleich liefert"
+  },
+  {
+   "von": "logik",
+   "nach": "maskenlogik",
+   "text": "für Arrays:"
+  },
+  {
+   "von": "maske",
+   "nach": "maskenlogik",
+   "text": "verknüpft mit"
+  },
+  {
+   "von": "maske",
+   "nach": "filter",
+   "text": "gleiche Idee in pandas"
+  },
+  {
+   "von": "fehlwert",
+   "nach": "maske",
+   "text": "ausschließen mit"
+  },
+  {
+   "von": "open",
+   "nach": "loadtxt",
+   "text": "in einer Anweisung:"
+  },
+  {
+   "von": "loadtxt",
+   "nach": "readcsv",
+   "text": "mit Spaltennamen:"
   },
   {
    "von": "zaehlmuster",

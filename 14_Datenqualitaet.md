@@ -11,7 +11,7 @@ comment:  Datenqualität: Freiberg zieht um — gleiche Datei, andere Messung. D
 logo:     ./images/Readme/Wetterstation.png
 
 import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/config.md
-          https://raw.githubusercontent.com/LiaTemplates/Pyodide/master/README.md
+          https://raw.githubusercontent.com/LiaTemplates/Pyodide/a9680241e4/README.md
 
 -->
 
