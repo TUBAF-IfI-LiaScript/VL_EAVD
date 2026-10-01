@@ -17,10 +17,10 @@ Nach Änderungen an Vorlesungen oder Begriffen im Wurzelverzeichnis des Reposito
 python3 kurslandkarte/erzeuge.py
 ```
 
-Das Skript liest die Abschnitte (LiaScript-Foliennummern) automatisch aus den Vorlesungsdateien und bricht ab, wenn ein Begriff auf einen nicht vorhandenen Abschnitt zeigt, eine Beziehung auf einen unbekannten Begriff verweist oder ein Faden nicht chronologisch verläuft. Die erzeugten Dateien in `docs/` werden mit eingecheckt.
+Begriffe verweisen in `erzeuge.py` auf den **Titel** ihres Abschnitts (ohne Backticks); das Skript liest die Abschnitte automatisch aus den Vorlesungsdateien und ermittelt daraus die LiaScript-Foliennummer. Verschieben sich Abschnitte, bleiben die Links deshalb richtig. Das Skript bricht ab, wenn ein Abschnittstitel nicht mehr existiert, eine Beziehung auf einen unbekannten Begriff verweist oder ein Faden nicht chronologisch verläuft. Die erzeugten Dateien in `docs/` werden mit eingecheckt.
 
 ## Datenmodell
 
-* **Begriff:** `id`, `name`, `linie` (Kategorie), `vl`, `abschnitt` (Foliennummer), `ebene` (1 = Kernbegriff, 2 = Detailbegriff), `code`, `erklaerung`, `fehlvorstellung`
+* **Begriff:** `id`, `name`, `linie` (Kategorie), `vl`, `abschnitt` (in `erzeuge.py` der Abschnittstitel, im JSON die Foliennummer), `ebene` (1 = Kernbegriff, 2 = Detailbegriff), `code`, `erklaerung`, `fehlvorstellung`
 * **Beziehung:** `von`, `nach`, `text` (Beschriftung der Kante, gelesen als „von … text … nach“)
 * **Faden:** `id`, `name`, `beschreibung`, `stationen` (chronologische Folge von Begriffs-ids)

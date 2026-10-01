@@ -25,7 +25,7 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 | **Veranstaltung:**       | @config.lecture                                                                                                                                                  |
 | **Semester**             | @config.semester                                                                                                                                                 |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                |
-| **Inhalte:**             | `Module, import, __name__, Standardbibliothek (statistics, datetime), externe Pakete, pip, Pfade`                                                                |
+| **Inhalte:**             | `Module, import, __name__, Standardbibliothek (statistics, datetime), Lücken finden, externe Pakete, pip, Pfade`                                                                |
 | **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/09_ProgrammeStrukturieren.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/09_ProgrammeStrukturieren.md) |
 | **Autoren**              | @author                                                                                                                                                          |
 
@@ -249,6 +249,98 @@ print("Lücke:", luecke.days, "Tage")
 
 > `strptime` übersetzt einen Text anhand eines Formats in ein Datum: `%Y` Jahr, `%m` Monat, `%d` Tag. Mit Daten kann man rechnen — mit Texten wie `"19101210"` nicht. So lassen sich Lücken in jeder Messreihe automatisch finden: Wenn der Abstand zweier Folgezeilen größer als ein Tag ist, fehlt etwas.
 
+## Live Hacking: Lücken finden
+
+In Vorlesung 06 haben wir eine Lücke in den Fichtelberg-Daten **zufällig** im Ausschnitt entdeckt. Gibt es weitere — und wie steht es um Freiberg und Chemnitz? Durchsehen kann man 48.000 Zeilen nicht. Ein Programm schon.
+
+> **Live Hacking.** In der Vorlesung erweitern wir `dwd.py` um eine Funktion, die alle Lücken meldet. Die Versuche unten zeigen den typischen Irrweg.
+
+### Typische Fehlvorstellung: Ein Datum ist eine Zahl
+
+> **Typische Fehlvorstellung:** _„`19101231` ist eine Zahl — also kann ich zwei Daten einfach voneinander abziehen.“_
+
+```python
+vorher = 19101231
+nachher = 19110101
+print(nachher - vorher)
+```
+@Pyodide.eval
+
+Legen Sie sich fest, **bevor** Sie das Programm ausführen: Was wird ausgegeben?
+
+[( )] `1`
+[(X)] `8870`
+[( )] eine Fehlermeldung
+***
+Python rechnet mit der Zahl neunzehn Millionen hunderteinunddreißigtausend… — nicht mit einem Datum. Silvester und Neujahr liegen einen Tag auseinander, die Zahlen aber 8870. Monatslängen, Schaltjahre und Jahreswechsel kennt nur ein echter Datumstyp. Deshalb `datetime`.
+***
+
+### Die Funktion `finde_luecken`
+
+```python dwd.py
+from datetime import datetime
+
+
+def finde_luecken(datei):
+    """Liefert (vorher, nachher, fehlende Tage) für jede Lücke."""
+    luecken = []
+    vorher = None
+    with open(datei) as f:
+        f.readline()
+        for zeile in f:
+            datum = datetime.strptime(zeile.split(";")[1], "%Y%m%d")
+            if vorher is not None and (datum - vorher).days > 1:
+                luecken.append((vorher, datum, (datum - vorher).days - 1))
+            vorher = datum
+    return luecken
+```
+```python auswertung.py
+import dwd
+
+STATIONEN = {
+    "fichtelberg": "data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt",
+    "freiberg":    "data/freiberg/produkt_klima_tag_19450701_19930430_01441.txt",
+    "chemnitz":    "data/chemnitz/produkt_klima_tag_18820101_20251231_00853.txt",
+}
+
+for station in STATIONEN:
+    for vorher, nachher, tage in dwd.finde_luecken(STATIONEN[station]):
+        print(station, vorher.date(), "bis", nachher.date(), "— fehlende Tage:", tage)
+```
+```python -hole_daten.py
+import os
+import urllib.request
+
+basis = "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/"
+for datei in ["data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt",
+              "data/freiberg/produkt_klima_tag_19450701_19930430_01441.txt",
+              "data/chemnitz/produkt_klima_tag_18820101_20251231_00853.txt"]:
+    os.makedirs(os.path.dirname(datei), exist_ok=True)
+    urllib.request.urlretrieve(basis + datei, datei)
+```
+@LIA.eval(`["dwd.py", "auswertung.py", "hole_daten.py"]`, `none`, `sh -c "python3 hole_daten.py && python3 auswertung.py"`)
+
+Drei Ideen stecken darin:
+
+* **`vorher = None`** — beim ersten Datum gibt es noch kein vorheriges. `None` kennen Sie aus Vorlesung 07.
+* **`(datum - vorher).days`** — die Differenz zweier Daten ist eine Zeitspanne; `.days` liefert sie in Tagen.
+* **Eine Liste von Tupeln** — jede Lücke besteht aus drei zusammengehörigen Werten, die die Schleife unten mit `vorher, nachher, tage` wieder auspackt (Vorlesung 07: mehrere Rückgabewerte).
+
+**Was das Programm findet**
+
+Sieben Lücken in drei Stationen. Zwei davon kennen wir, eine ist spektakulär, eine ist winzig:
+
+* Chemnitz: von Juni 1901 bis Ende 1934 fehlen **33 Jahre** — 12.267 Tage.
+* Freiberg: am 30. August 1977 fehlt **ein einziger Tag**. Unter 17.000 Zeilen hätte ihn niemand mit bloßem Auge gefunden.
+
+Zwischen dem 10.12.1910 und dem 01.10.1915 liegen 1756 Tage Abstand. Wie viele Tage fehlen in der Datei?
+
+[[1755]]
+[[?]] Der 10.12.1910 und der 01.10.1915 sind selbst in der Datei enthalten.
+***
+Der Abstand zweier Tage ist um eins größer als die Zahl der Tage dazwischen — deshalb `(datum - vorher).days - 1`. Derselbe Fehler um eins wie bei `range` und Slices in Vorlesung 05.
+***
+
 ## Externe Pakete
 
 Was nicht in der Standardbibliothek steht, installiert man als **Paket** aus dem Python Package Index (PyPI). Im Terminal:
@@ -333,5 +425,5 @@ Mit dieser Vorlesung endet Phase 1. Ab nächster Woche arbeiten wir mit Paketen,
 **Zur Vorbereitung**
 
 - [ ] Legen Sie `dwd.py` und `auswertung.py` im Repository-Ordner an und bringen Sie das Programm auf Ihrem Rechner zum Laufen.
-- [ ] Ergänzen Sie `dwd.py` um eine Funktion `finde_luecken(datei)`, die mit `datetime` alle Stellen meldet, an denen zwischen zwei Zeilen mehr als ein Tag liegt. Wie viele Lücken hat Chemnitz?
+- [ ] Ändern Sie `finde_luecken` so, dass nur Lücken von mehr als 30 Tagen gemeldet werden. Wie viele Tage fehlen bei Chemnitz insgesamt?
 - [ ] Installieren Sie mit `pip install numpy pandas matplotlib` die Pakete für Phase 2.

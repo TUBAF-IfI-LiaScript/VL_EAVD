@@ -205,6 +205,9 @@
     "Typische Fehlvorstellung: import kopiert nur Funktionen",
     "Live Hacking: Das Modul dwd.py",
     "Die Standardbibliothek",
+    "Live Hacking: Lücken finden",
+    "Typische Fehlvorstellung: Ein Datum ist eine Zahl",
+    "Die Funktion finde_luecken",
     "Externe Pakete",
     "Typische Fehlvorstellung: Pfade",
     "Kontrollfragen",
@@ -825,14 +828,14 @@
    "ebene": 2,
    "code": true,
    "erklaerung": "Aus \"19101210\" wird ein Datum, mit dem man rechnen kann — die Lücke umfasst 1756 Tage.",
-   "fehlvorstellung": null
+   "fehlvorstellung": "„Ein Datum ist eine Zahl.“ 19110101 - 19101231 ergibt 8870."
   },
   {
    "id": "pip",
    "name": "Pakete & pip",
    "linie": "denken",
    "vl": 9,
-   "abschnitt": 7,
+   "abschnitt": 10,
    "ebene": 2,
    "code": false,
    "erklaerung": "Externe Pakete installiert man mit pip install; fehlt eines: ModuleNotFoundError.",
@@ -1213,11 +1216,22 @@
    "fehlvorstellung": null
   },
   {
+   "id": "lueckensuche",
+   "name": "Lücken finden",
+   "linie": "daten",
+   "vl": 9,
+   "abschnitt": 9,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Mit datetime alle Stellen melden, an denen mehr als ein Tag fehlt — Chemnitz: 33 Jahre, Freiberg: ein einzelner Tag 1977.",
+   "fehlvorstellung": null
+  },
+  {
    "id": "pfad",
    "name": "Pfad",
    "linie": "daten",
    "vl": 9,
-   "abschnitt": 8,
+   "abschnitt": 11,
    "ebene": 1,
    "code": false,
    "erklaerung": "Relative Pfade gelten ab dem aktuellen Arbeitsverzeichnis.",
@@ -1975,8 +1989,18 @@
   },
   {
    "von": "datetime",
-   "nach": "luecke",
-   "text": "findet"
+   "nach": "lueckensuche",
+   "text": "ermöglicht"
+  },
+  {
+   "von": "luecke",
+   "nach": "lueckensuche",
+   "text": "systematisch:"
+  },
+  {
+   "von": "lueckensuche",
+   "nach": "vollstaendig",
+   "text": "Grundlage für"
   },
   {
    "von": "mittel",
