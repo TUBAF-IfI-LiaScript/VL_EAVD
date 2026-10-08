@@ -28,8 +28,19 @@ for f in sorted(glob.glob(os.path.join(REPO, "[01][0-9]_*.md"))):
 
 STATUS = {v: "ausgearbeitet" for v in range(15)}
 STATUS[8] = "Rumpf"
-for v in range(10, 15):
-    STATUS[v] = "Gerüst"
+
+# ---- Termine (Montag der Vorlesung) und Kurztitel für die Karte
+TERMINE = [
+    ("2026-10-19", "Motivation"), ("2026-10-26", "Problem → Programm"),
+    ("2026-11-02", "Erste Schritte"), ("2026-11-09", "Prüfen & Wiederholen"),
+    ("2026-11-16", "Muster"), ("2026-11-23", "Daten sammeln"),
+    ("2026-11-30", "Dateien lesen"), ("2026-12-07", "Funktionen"),
+    ("2026-12-14", "Demo MicroPython"), ("2027-01-04", "Strukturieren"),
+    ("2027-01-11", "NumPy"), ("2027-01-18", "pandas I"),
+    ("2027-01-25", "pandas II"), ("2027-02-01", "Visualisierung"),
+    ("2027-02-08", "Datenqualität"),
+]
+assert len(TERMINE) == 15
 
 # ---- Begriffe: id, Name, Linie, VL, Abschnitt, Ebene, Code?, Erklärung, Fehlvorstellung
 B = [
@@ -226,17 +237,17 @@ R = [
 
 # ---- Didaktische Fäden (Metrolinien): jede Folge ist eine Kette von „baut auf“-Schritten
 F = [
-    ("wiederverwenden", "Wiederverwenden", "Vom Muster über die Funktion zum Modul und zur fremden Bibliothek.",
+    ("wiederverwenden", "Nicht alles neu schreiben", "Einmal gelösten Code wiederverwenden: erst als Muster, dann als eigene Funktion, als eigene Datei und schließlich als fertiges Paket von anderen.",
      ["pseudo", "zaehlmuster", "langesskript", "funktion", "modul", "pip", "array"]),
-    ("struktur", "Daten ordnen", "Vom einzelnen Wert über Listen und Dictionaries bis zum DataFrame.",
+    ("struktur", "Viele Werte aufbewahren", "Vom einzelnen Wert über die Liste und das Nachschlagen per Schlüssel bis zur Tabelle mit benannten Spalten.",
      ["variable", "liste", "index", "dict", "array", "dataframe"]),
-    ("zaehlen", "Vom Zählen zur Aggregation", "Wie aus einer Schleife mit Zähler am Ende eine Zeile groupby wird.",
+    ("zaehlen", "Vom Zählen zur Zusammenfassung", "Wie aus einer Schleife, die von Hand mitzählt, am Ende eine einzige Zeile wird, die Werte pro Jahr zusammenfasst.",
      ["zaehlmuster", "summe", "mittel", "dict", "vektor", "groupby", "diagramm"]),
-    ("fehlwert", "Der Fehlwert", "Wie „nicht gemessen“ in jeder Phase anders aussieht — und jedes Mal behandelt werden muss.",
+    ("fehlwert", "Wenn ein Wert fehlt", "„Nicht gemessen“ sieht jedes Mal anders aus: als -999, als fehlende Zeile, als NaN. Und jedes Mal muss man es behandeln.",
      ["dwd", "fehlwert", "logik", "mittel", "luecke", "nan", "vollstaendig", "qualitaet"]),
-    ("tabelle", "Vom Text zur Tabelle", "Wie aus Textzeilen einer Datei eine Tabelle mit Spalten und Typen wird.",
+    ("tabelle", "Vom Text zur Tabelle", "Eine Datei ist zunächst nur Text. Wie daraus eine Tabelle mit Spalten und Zahlen wird.",
      ["dwd", "text", "umwandlung", "open", "split", "readcsv", "dataframe"]),
-    ("messung", "Von der Messung zum Urteil", "Wie Messdaten entstehen — und warum man ihnen nicht blind trauen darf.",
+    ("messung", "Kann ich den Daten trauen?", "Wie Messdaten entstehen und warum man ihnen nicht blind trauen darf.",
      ["zaehler", "sensorlog", "sensor", "messfehler", "messdatei", "readcsv", "stationswechsel", "qualitaet"]),
 ]
 
@@ -261,7 +272,8 @@ B = [(b[0], b[1], b[2], b[3], abschnitt_nr(b[3], b[4])) + tuple(b[5:]) for b in 
 out = {
     "stand": STAND,
     "vorlesungen": [
-        {"vl": v, "datei": sections[v]["datei"], "status": STATUS[v], "abschnitte": sections[v]["abschnitte"]}
+        {"vl": v, "datei": sections[v]["datei"], "datum": TERMINE[v][0], "kurz": TERMINE[v][1],
+         "status": STATUS[v], "abschnitte": sections[v]["abschnitte"]}
         for v in range(15)
     ],
     "begriffe": [

@@ -238,7 +238,6 @@ input[type=range] { width: 200px; accent-color: var(--here); }
 }
 .mapbox #side { flex: none; }
 .scroller { overflow-x: auto; overflow-y: hidden; min-width: 0; flex: 1; }
-@media (max-width: 600px) { .mapbox #side { display: none; } }
 svg { display: block; }
 .lane-title {
   font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
@@ -405,6 +404,49 @@ aside.panel {
 }
 .hint { font-size: 13px; color: var(--muted); }
 footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
+footer p { margin: 0 0 6px; }
+/* ---------- Liste ---------- */
+.today { font: inherit; font-size: 12px; padding: 2px 8px; border: 1px solid var(--faint); border-radius: 4px; background: var(--surface); color: var(--ink); cursor: pointer; }
+.liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; min-width: 0; }
+.liste > li.vl {
+  background: var(--surface);
+  border: 1px solid var(--faint);
+  border-radius: 6px;
+  padding: 10px 14px 12px;
+  display: grid;
+  gap: 8px;
+}
+.liste > li.vl.now { border-color: var(--here); box-shadow: inset 4px 0 0 var(--here); }
+.liste > li.vl.future .chips { opacity: .6; }
+.vlhead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.vlhead b { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-size: 20px; }
+.vlhead .d { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: var(--muted); }
+.vlhead .s { font-size: 15px; }
+.vlhead .tag { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--here); }
+.vlhead .tag.muted { color: var(--muted); }
+.vlhead a { margin-left: auto; font-size: 13px; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips button {
+  font: inherit; font-size: 14px;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px; border-radius: 14px;
+  border: 1px solid var(--faint); background: var(--surface); color: var(--ink); cursor: pointer;
+}
+.chips button i { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+.chips button.detail { font-size: 13px; padding: 2px 8px; color: var(--muted); }
+.chips button.code .n { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 13px; }
+.chips button[aria-pressed="true"] { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); font-weight: 700; }
+.chips button:focus-visible { outline: 2px solid var(--here); outline-offset: 2px; }
+.liste .panel { margin-top: 2px; }
+@media (min-width: 981px) {
+  aside.panel { position: sticky; top: 12px; max-height: calc(100vh - 24px); overflow-y: auto; }
+}
+@media (max-width: 600px) {
+  .lane-title { font-size: 11px; letter-spacing: .02em; }
+  input[type=range] { width: 150px; }
+  .here-val { min-width: 0; }
+}
+
 </style>
 </head>
 <body>
@@ -413,13 +455,14 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
     <div class="titleblock">
       <span class="eyebrow">Erhebung, Analyse und Visualisierung digitaler Daten · WiSe 2026/27</span>
       <h1>Kurslandkarte</h1>
-      <span class="sample">Entwurf zur Diskussion · Stand 01.10.2026 · <span id="count"></span></span>
-      <a class="feedback" href="https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/issues/new?title=Kurslandkarte%3A%20&amp;labels=kurslandkarte" target="_blank" rel="noopener">Anmerkung als GitHub-Issue ↗</a>
+      <span class="sample">Stand 08.10.2026 · <span id="count"></span></span>
+      <a class="feedback" href="https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/issues/new?title=Kurslandkarte%3A%20&amp;labels=kurslandkarte" target="_blank" rel="noopener">Fehler oder Wunsch melden (GitHub) ↗</a>
     </div>
     <div class="controls">
       <div class="control">
         <span class="lbl" id="modeLbl">Variante</span>
         <div class="seg" role="group" aria-labelledby="modeLbl">
+          <button id="mListe" aria-pressed="false">Vorlesungen</button>
           <button id="mMetro" aria-pressed="true">Metrokarte</button>
           <button id="mZeit" aria-pressed="false">Zeitleiste</button>
         </div>
@@ -427,8 +470,9 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
       <div class="control">
         <label for="here">Sie sind hier</label>
         <div class="here-row">
-          <input id="here" type="range" min="0" max="14" step="1" value="5">
+          <input id="here" type="range" min="0" max="14" step="1" value="0">
           <span class="here-val" id="hereVal"></span>
+          <button class="today" id="today" hidden>heute</button>
         </div>
       </div>
       <div class="control" id="ctlLevel">
@@ -451,27 +495,31 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   <div class="legendrow"><span class="hint" id="legendHint"></span><div class="legend" id="legend"></div></div>
 
   <div class="stage">
-    <div class="mapbox">
+    <div class="mapbox" id="mapwrap">
       <svg id="side" aria-hidden="true"></svg>
       <div class="scroller" id="mapbox">
-        <svg id="map" role="img" aria-labelledby="mapTitle"><title id="mapTitle">Kurslandkarte: Begriffe der Vorlesung auf fünf Linien über 15 Termine</title></svg>
+        <svg id="map" role="img" aria-labelledby="mapTitle"><title id="mapTitle">Kurslandkarte: Begriffe der Vorlesung über 15 Termine</title></svg>
       </div>
     </div>
+    <ol class="liste" id="liste" hidden></ol>
     <aside class="panel" id="panel" aria-live="polite"></aside>
   </div>
 
   <footer>
-    <strong>Metrokarte:</strong> Jede Linie ist ein didaktischer Faden durch das Semester; jedes Segment ist ein Schritt, der auf dem vorigen aufbaut. Weiße Stationen mit dunklem Rand sind Umsteigestationen, an denen sich Fäden kreuzen. <strong>Zeitleiste:</strong> Jede Station ist ein Begriff in seiner Kategorie, platziert bei der Vorlesung, in der er eingeführt wird; große Stationen sind Kernbegriffe, kleine Detailbegriffe; die Schienen dienen nur der Orientierung. Ein Klick zeigt die direkten Zusammenhänge und springt auf Wunsch in den passenden Abschnitt der Vorlesung. Begriffe nach dem eingestellten Stand erscheinen blass. Für VL 10–14 stammen die Begriffe aus den Gerüsten der geplanten Vorlesungen. Die Stationen sind auch per Tabulator und Eingabetaste erreichbar.
+    <p><strong>Wozu die Karte?</strong> Sie zeigt, welche Begriffe in welcher Vorlesung neu dazukommen und worauf sie aufbauen. Ein Klick auf einen Begriff erklärt ihn in einem Satz, nennt die typische Stolperfalle und führt direkt zur passenden Folie. Begriffe aus kommenden Vorlesungen erscheinen blass. „Sie sind hier“ richtet sich nach dem heutigen Datum, mit dem Schieberegler können Sie vor- und zurückblättern.</p>
+    <p><strong>Vorlesungen:</strong> alle Vorlesungen untereinander, mit ihren Begriffen. <strong>Metrokarte:</strong> Jede Linie ist ein roter Faden durch das Semester, jede Station baut auf der vorigen auf. Weiße Stationen mit dunklem Rand liegen auf mehreren Fäden. <strong>Zeitleiste:</strong> alle Begriffe nach Themengebiet, mit ihren Verbindungen. Große Punkte sind Kernbegriffe, kleine Detailbegriffe.</p>
   </footer>
 </div>
 
 <script id="kartendaten" type="application/json">
 {
- "stand": "01.10.2026",
+ "stand": "08.10.2026",
  "vorlesungen": [
   {
    "vl": 0,
    "datei": "00_Motivation.md",
+   "datum": "2026-10-19",
+   "kurz": "Motivation",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Herzlich willkommen!",
@@ -496,6 +544,8 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   {
    "vl": 1,
    "datei": "01_VomProblemZumProgramm.md",
+   "datum": "2026-10-26",
+   "kurz": "Problem → Programm",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Vom Problem zum Programm",
@@ -508,8 +558,12 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
     "Algorithmen",
     "Warum der Rechner keine Alltagssprache versteht",
     "Algorithmen darstellen",
+    "Drei Bausteine",
+    "Einen Algorithmus von Hand ausführen",
+    "Typische Fehlvorstellung: Kein Fehler heißt richtiges Ergebnis",
     "Kontrollfragen",
     "Wann lohnt sich ein Programm?",
+    "Tabelle und Skript im Vergleich",
     "Ein Blick voraus",
     "Nächste Woche"
    ]
@@ -517,6 +571,8 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   {
    "vl": 2,
    "datei": "02_ErsteSchritte.md",
+   "datum": "2026-11-02",
+   "kurz": "Erste Schritte",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Erste Schritte in Python",
@@ -542,6 +598,8 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   {
    "vl": 3,
    "datei": "03_PruefenUndWiederholen.md",
+   "datum": "2026-11-09",
+   "kurz": "Prüfen & Wiederholen",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Prüfen und Wiederholen",
@@ -564,6 +622,8 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   {
    "vl": 4,
    "datei": "04_MusterInMessreihen.md",
+   "datum": "2026-11-16",
+   "kurz": "Muster",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Muster in Messreihen",
@@ -585,6 +645,8 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   {
    "vl": 5,
    "datei": "05_DatenSammeln.md",
+   "datum": "2026-11-23",
+   "kurz": "Daten sammeln",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Daten sammeln",
@@ -609,6 +671,8 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   {
    "vl": 6,
    "datei": "06_DateienLesen.md",
+   "datum": "2026-11-30",
+   "kurz": "Dateien lesen",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Dateien lesen",
@@ -631,6 +695,8 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   {
    "vl": 7,
    "datei": "07_Funktionen.md",
+   "datum": "2026-12-07",
+   "kurz": "Funktionen",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Funktionen",
@@ -651,6 +717,8 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   {
    "vl": 8,
    "datei": "08_DemoMicroPython.md",
+   "datum": "2026-12-14",
+   "kurz": "Demo MicroPython",
    "status": "Rumpf",
    "abschnitte": [
     "Demonstration: Datenerhebung mit MicroPython",
@@ -665,6 +733,8 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   {
    "vl": 9,
    "datei": "09_ProgrammeStrukturieren.md",
+   "datum": "2027-01-04",
+   "kurz": "Strukturieren",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Programme strukturieren",
@@ -685,7 +755,9 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   {
    "vl": 10,
    "datei": "10_Bibliotheken.md",
-   "status": "Gerüst",
+   "datum": "2027-01-11",
+   "kurz": "NumPy",
+   "status": "ausgearbeitet",
    "abschnitte": [
     "Bibliotheken: NumPy",
     "Rückblick",
@@ -707,7 +779,9 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   {
    "vl": 11,
    "datei": "11_PandasEinlesen.md",
-   "status": "Gerüst",
+   "datum": "2027-01-18",
+   "kurz": "pandas I",
+   "status": "ausgearbeitet",
    "abschnitte": [
     "pandas I — Einlesen",
     "Rückblick",
@@ -729,7 +803,9 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   {
    "vl": 12,
    "datei": "12_PandasAggregieren.md",
-   "status": "Gerüst",
+   "datum": "2027-01-25",
+   "kurz": "pandas II",
+   "status": "ausgearbeitet",
    "abschnitte": [
     "pandas II — Aggregieren",
     "Aufgabe 3 aus Vorlesung 01",
@@ -747,7 +823,9 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   {
    "vl": 13,
    "datei": "13_Visualisierung.md",
-   "status": "Gerüst",
+   "datum": "2027-02-01",
+   "kurz": "Visualisierung",
+   "status": "ausgearbeitet",
    "abschnitte": [
     "Visualisierung",
     "Rückblick",
@@ -767,7 +845,9 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   {
    "vl": 14,
    "datei": "14_Datenqualitaet.md",
-   "status": "Gerüst",
+   "datum": "2027-02-08",
+   "kurz": "Datenqualität",
+   "status": "ausgearbeitet",
    "abschnitte": [
     "Datenqualität, Ausblick, Prüfungsvorbereitung",
     "Rückblick",
@@ -1869,7 +1949,7 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
    "name": "Programm oder Tabelle?",
    "linie": "analyse",
    "vl": 1,
-   "abschnitt": 12,
+   "abschnitt": 15,
    "ebene": 1,
    "code": false,
    "erklaerung": "Viele Daten, sperrige Formate, Wiederholung, Nachvollziehbarkeit: dann lohnt ein Programm.",
@@ -2891,8 +2971,8 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
  "faeden": [
   {
    "id": "wiederverwenden",
-   "name": "Wiederverwenden",
-   "beschreibung": "Vom Muster über die Funktion zum Modul und zur fremden Bibliothek.",
+   "name": "Nicht alles neu schreiben",
+   "beschreibung": "Einmal gelösten Code wiederverwenden: erst als Muster, dann als eigene Funktion, als eigene Datei und schließlich als fertiges Paket von anderen.",
    "stationen": [
     "pseudo",
     "zaehlmuster",
@@ -2905,8 +2985,8 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   },
   {
    "id": "struktur",
-   "name": "Daten ordnen",
-   "beschreibung": "Vom einzelnen Wert über Listen und Dictionaries bis zum DataFrame.",
+   "name": "Viele Werte aufbewahren",
+   "beschreibung": "Vom einzelnen Wert über die Liste und das Nachschlagen per Schlüssel bis zur Tabelle mit benannten Spalten.",
    "stationen": [
     "variable",
     "liste",
@@ -2918,8 +2998,8 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   },
   {
    "id": "zaehlen",
-   "name": "Vom Zählen zur Aggregation",
-   "beschreibung": "Wie aus einer Schleife mit Zähler am Ende eine Zeile groupby wird.",
+   "name": "Vom Zählen zur Zusammenfassung",
+   "beschreibung": "Wie aus einer Schleife, die von Hand mitzählt, am Ende eine einzige Zeile wird, die Werte pro Jahr zusammenfasst.",
    "stationen": [
     "zaehlmuster",
     "summe",
@@ -2932,8 +3012,8 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   },
   {
    "id": "fehlwert",
-   "name": "Der Fehlwert",
-   "beschreibung": "Wie „nicht gemessen“ in jeder Phase anders aussieht — und jedes Mal behandelt werden muss.",
+   "name": "Wenn ein Wert fehlt",
+   "beschreibung": "„Nicht gemessen“ sieht jedes Mal anders aus: als -999, als fehlende Zeile, als NaN. Und jedes Mal muss man es behandeln.",
    "stationen": [
     "dwd",
     "fehlwert",
@@ -2948,7 +3028,7 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   {
    "id": "tabelle",
    "name": "Vom Text zur Tabelle",
-   "beschreibung": "Wie aus Textzeilen einer Datei eine Tabelle mit Spalten und Typen wird.",
+   "beschreibung": "Eine Datei ist zunächst nur Text. Wie daraus eine Tabelle mit Spalten und Zahlen wird.",
    "stationen": [
     "dwd",
     "text",
@@ -2961,8 +3041,8 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
   },
   {
    "id": "messung",
-   "name": "Von der Messung zum Urteil",
-   "beschreibung": "Wie Messdaten entstehen — und warum man ihnen nicht blind trauen darf.",
+   "name": "Kann ich den Daten trauen?",
+   "beschreibung": "Wie Messdaten entstehen und warum man ihnen nicht blind trauen darf.",
    "stationen": [
     "zaehler",
     "sensorlog",
@@ -2980,14 +3060,14 @@ footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
 <script>
 const DATA = JSON.parse(document.getElementById("kartendaten").textContent);
 const BASE = "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/";
-const LECT = [
-  ["19.10.", "Motivation"], ["26.10.", "Problem → Programm"], ["02.11.", "Erste Schritte"],
-  ["09.11.", "Prüfen & Wiederholen"], ["16.11.", "Muster"], ["23.11.", "Daten sammeln"],
-  ["30.11.", "Dateien lesen"], ["07.12.", "Funktionen"], ["14.12.", "Demo MicroPython"],
-  ["04.01.", "Strukturieren"], ["11.01.", "Notebooks"], ["18.01.", "pandas I"],
-  ["25.01.", "pandas II"], ["01.02.", "Visualisierung"], ["08.02.", "Datenqualität"]
-];
-const LECTURES = DATA.vorlesungen.map((v, i) => ({ nr: String(v.vl).padStart(2, "0"), date: LECT[i][0], short: LECT[i][1], file: v.datei, status: v.status, sections: v.abschnitte }));
+const LECTURES = DATA.vorlesungen.map(v => {
+  const [y, m, d] = v.datum.split("-");
+  return { nr: String(v.vl).padStart(2, "0"), iso: v.datum, date: `${d}.${m}.`, short: v.kurz, file: v.datei, status: v.status, sections: v.abschnitte };
+});
+// Aktuelle Vorlesung: die letzte, deren Termin erreicht ist (vor Semesterbeginn: VL 00)
+const TODAY = new Date().toISOString().slice(0, 10);
+const HERE_TODAY = Math.max(0, LECTURES.filter(l => l.iso <= TODAY).length - 1);
+const BEFORE_START = TODAY < LECTURES[0].iso;
 const PHASES = [
   { from: 0, to: 2, name: "Einstieg", v: "--phase-einstieg" },
   { from: 3, to: 7, name: "Grundlagen am Datensatz", v: "--phase-grundlagen" },
@@ -2996,11 +3076,11 @@ const PHASES = [
   { from: 10, to: 14, name: "Datenanalyse", v: "--phase-analyse" }
 ];
 const LINES = [
-  { id: "denken", name: "Denken & Kontrollfluss", v: "--l-denken" },
-  { id: "typen", name: "Datentypen & -strukturen", v: "--l-typen" },
+  { id: "denken", name: "Programme & Abläufe", v: "--l-denken" },
+  { id: "typen", name: "Werte & Sammlungen", v: "--l-typen" },
   { id: "daten", name: "Daten & Dateien", v: "--l-daten" },
-  { id: "erhebung", name: "Erhebung", v: "--l-erhebung" },
-  { id: "analyse", name: "Analyse & Darstellung", v: "--l-analyse" }
+  { id: "erhebung", name: "Daten erheben", v: "--l-erhebung" },
+  { id: "analyse", name: "Auswerten & Darstellen", v: "--l-analyse" }
 ];
 const THREADV = ["--t1", "--t2", "--t3", "--t4", "--t5", "--t6"];
 const THREADS = DATA.faeden.map((f, i) => ({ id: f.id, name: f.name, text: f.beschreibung, st: f.stationen, v: THREADV[i] }));
@@ -3020,17 +3100,18 @@ const svgNS = "http://www.w3.org/2000/svg";
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const state = { mode: "metro", here: 5, view: "nb", detail: false, sel: "dict", thread: null, hidden: new Set() };
+const narrow = () => matchMedia("(max-width: 980px)").matches;
+const state = { mode: narrow() ? "liste" : "metro", here: HERE_TODAY, view: "nb", detail: false, sel: null, thread: null, hidden: new Set() };
 try {
   const saved = JSON.parse(localStorage.getItem("eavd-map") || "{}");
-  if (Number.isInteger(saved.here)) state.here = saved.here;
   if (typeof saved.detail === "boolean") state.detail = saved.detail;
-  if (saved.mode === "metro" || saved.mode === "zeit") state.mode = saved.mode;
+  if (["liste", "metro", "zeit"].includes(saved.mode)) state.mode = saved.mode;
 } catch (e) {}
-function save() { try { localStorage.setItem("eavd-map", JSON.stringify({ here: state.here, detail: state.detail, mode: state.mode })); } catch (e) {} }
+// „Sie sind hier“ wird bewusst nicht gespeichert: Es folgt immer dem Datum.
+function save() { try { localStorage.setItem("eavd-map", JSON.stringify({ detail: state.detail, mode: state.mode })); } catch (e) {} }
 
-const TOP = 108, SIDE = 150;
-let COL = 118, W = 0, H = 0, pos = {}, shown = [], laneY = {}, trackY = {};
+const TOP = 108;
+let SIDE = 150, COL = 118, W = 0, H = 0, pos = {}, shown = [], laneY = {}, trackY = {};
 
 function el(name, attrs, parent) {
   const e = document.createElementNS(svgNS, name);
@@ -3045,6 +3126,7 @@ el("path", { d: "M0,0 L10,5 L0,10 z", fill: "var(--edge)" }, mk);
 const gBack = el("g", {}, svg), gLines = el("g", {}, svg), gEdges = el("g", {}, svg), gSt = el("g", {}, svg), gLabels = el("g", {}, svg);
 
 function setSize() {
+  SIDE = matchMedia("(max-width: 600px)").matches ? 118 : 150;
   W = COL * LECTURES.length + 60;
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.setAttribute("width", W); svg.setAttribute("height", H);
   side.setAttribute("viewBox", `0 0 ${SIDE} ${H}`); side.setAttribute("width", SIDE); side.setAttribute("height", H);
@@ -3142,8 +3224,8 @@ function drawBackground() {
   titles.forEach(t => {
     el("rect", { x: 12, y: t.y - 4, width: 18, height: 6, rx: 3, fill: css(t.v), opacity: t.dim ? .3 : 1 }, side);
     const tx = el("text", { x: 12, y: t.y + 20, class: "lane-title", fill: css(t.v), opacity: t.dim ? .35 : 1 }, side);
-    const words = t.name.includes(" & ") ? t.name.split(" & ").map((w, i, a) => w + (i < a.length - 1 ? " &" : "")) : wrap(t.name, 18);
-    words.forEach((w, i) => { el("tspan", { x: 12, dy: i ? 16 : 0 }, tx).textContent = w; });
+    const words = t.name.includes(" & ") ? t.name.split(" & ").map((w, i, a) => w + (i < a.length - 1 ? " &" : "")) : wrap(t.name, SIDE < 150 ? 11 : 18);
+    words.forEach((w, i) => { el("tspan", { x: 12, dy: i ? (SIDE < 150 ? 13 : 16) : 0 }, tx).textContent = w; });
   });
 }
 function wrap(s, n) {
@@ -3235,6 +3317,45 @@ function drawMetro() {
   });
 }
 
+
+/* ---------- Liste ---------- */
+function drawListe() {
+  const ol = $("#liste");
+  ol.innerHTML = "";
+  LECTURES.forEach((lec, v) => {
+    const items = ALL.filter(n => n.vl === v && !state.hidden.has(n.line) && (state.detail || n.level === 1 || n.id === state.sel))
+      .sort((a, b) => a.level - b.level || a.sec - b.sec);
+    const li = document.createElement("li");
+    li.className = "vl" + (v === state.here ? " now" : v > state.here ? " future" : "");
+    li.dataset.vl = v;
+    const tag = v === state.here
+      ? (BEFORE_START && v === HERE_TODAY ? `<span class="tag">Start am ${lec.date}</span>` : `<span class="tag">Sie sind hier</span>`)
+      : lec.status !== "ausgearbeitet" ? `<span class="tag muted">in Vorbereitung</span>` : "";
+    li.innerHTML = `<div class="vlhead"><b>VL ${lec.nr}</b><span class="d">${lec.date}</span><span class="s">${lec.short}</span>${tag}
+      <a href="${BASE + lec.file}" target="_blank" rel="noopener">Folien ↗</a></div>
+      <div class="chips">${items.map(n => `<button data-id="${n.id}" class="${n.level === 2 ? "detail" : ""}${n.code ? " code" : ""}" aria-pressed="${n.id === state.sel}"><i style="background:${css(lineById[n.line].v)}"></i><span class="n">${n.name}</span></button>`).join("") || '<span class="hint">keine Begriffe in den gewählten Gebieten</span>'}</div>`;
+    li.querySelectorAll(".chips button").forEach(b => b.addEventListener("click", () => {
+      if (state.sel === b.dataset.id && narrow()) { state.sel = null; render(); return; }
+      select(b.dataset.id);
+      if (narrow()) $("#panel").scrollIntoView({ block: "nearest", behavior: reduce() ? "auto" : "smooth" });
+    }));
+    ol.appendChild(li);
+  });
+}
+function placePanel() {
+  const panel = $("#panel"), stage = $(".stage");
+  const inline = state.mode === "liste" && narrow() && state.sel;
+  if (inline) {
+    const li = $(`#liste li.vl[data-vl="${byId[state.sel].vl}"]`);
+    if (panel.parentNode !== li) li.appendChild(panel);
+  } else if (panel.parentNode !== stage) stage.appendChild(panel);
+  panel.hidden = state.mode === "liste" && narrow() && !state.sel;
+}
+function defaultSel() {
+  const cand = ALL.filter(n => n.level === 1 && n.vl === state.here && (state.mode !== "metro" || threadsOf[n.id]));
+  return cand.length ? cand[0].id : null;
+}
+
 /* ---------- Seitenfeld ---------- */
 function relItem(r, arrow) {
   const m = byId[r.id];
@@ -3256,7 +3377,7 @@ function renderPanel() {
   const n = byId[state.sel];
   if (!n) { p.innerHTML = '<p class="hint">Wählen Sie eine Station oder einen Faden.</p>'; return; }
   const l = lineById[n.line], lec = LECTURES[n.vl];
-  const status = n.vl < state.here ? "bereits behandelt" : n.vl === state.here ? "diese Woche" : "kommt noch";
+  const status = n.vl < state.here ? "bereits behandelt" : n.vl === state.here ? (BEFORE_START && state.here === HERE_TODAY ? "erste Vorlesung" : "diese Woche") : "kommt noch";
   const back = nbs[n.id].filter(r => r.dir === "in").sort((a, b) => byId[a.id].vl - byId[b.id].vl);
   const fwd = nbs[n.id].filter(r => r.dir === "out").sort((a, b) => byId[a.id].vl - byId[b.id].vl);
   const ths = threadsOf[n.id] || [];
@@ -3313,35 +3434,49 @@ function renderLegend() {
     });
     lg.appendChild(b);
   });
-  $("#legendHint").textContent = state.mode === "metro" ? "Faden anklicken, um ihn hervorzuheben:" : "Kategorien ein- und ausblenden:";
+  $("#legendHint").textContent = state.mode === "metro" ? "Faden anklicken, um ihn hervorzuheben:" : "Themengebiete ein- und ausblenden:";
 }
 
 function render() {
   const lec = LECTURES[state.here];
   $("#hereVal").textContent = `VL ${lec.nr} · ${lec.date}`;
   $("#here").value = state.here;
-  const pressed = [["mMetro", state.mode === "metro"], ["mZeit", state.mode === "zeit"], ["vNb", state.view === "nb"], ["vAll", state.view === "all"], ["eKern", !state.detail], ["eAlle", state.detail]];
+  $("#today").hidden = state.here === HERE_TODAY;
+  const pressed = [["mListe", state.mode === "liste"], ["mMetro", state.mode === "metro"], ["mZeit", state.mode === "zeit"], ["vNb", state.view === "nb"], ["vAll", state.view === "all"], ["eKern", !state.detail], ["eAlle", state.detail]];
   for (const [id, on] of pressed) $("#" + id).setAttribute("aria-pressed", String(on));
   $("#ctlLevel").hidden = state.mode === "metro";
-  $("#ctlEdges").hidden = state.mode === "metro";
+  $("#ctlEdges").hidden = state.mode !== "zeit";
+  $("#mapwrap").hidden = state.mode === "liste";
+  $("#liste").hidden = state.mode !== "liste";
   const nStations = new Set(THREADS.flatMap(t => t.st)).size;
   $("#count").textContent = state.mode === "metro"
     ? `${THREADS.length} Fäden · ${nStations} Stationen`
     : state.detail ? `${ALL.length} Begriffe · ${EDGES.length} Beziehungen` : `${ALL.filter(n => n.level === 1).length} Kernbegriffe von ${ALL.length}`;
-  if (state.mode === "metro") layoutMetro(); else layoutZeit();
-  setSize();
-  drawBackground();
-  if (state.mode === "metro") drawMetro(); else drawZeit();
-  renderPanel(); renderLegend();
+  if (state.mode === "liste") drawListe();
+  else {
+    if (state.mode === "metro") layoutMetro(); else layoutZeit();
+    setSize();
+    drawBackground();
+    if (state.mode === "metro") drawMetro(); else drawZeit();
+  }
+  placePanel(); renderPanel(); renderLegend();
 }
 
 $("#here").addEventListener("input", (e) => {
-  state.here = +e.target.value; save(); render();
+  state.here = +e.target.value; render();
+  if (state.mode === "liste") return;
   const box = $("#mapbox"), hx = COL * state.here;
   if (hx < box.scrollLeft || hx + COL > box.scrollLeft + box.clientWidth) box.scrollLeft = hx - box.clientWidth / 2;
 });
-$("#mMetro").addEventListener("click", () => { state.mode = "metro"; if (state.sel && !threadsOf[state.sel]) state.sel = null; save(); render(); });
-$("#mZeit").addEventListener("click", () => { state.mode = "zeit"; state.thread = null; if (!state.sel) state.sel = "dict"; save(); render(); });
+function scrollToHere() {
+  if (state.mode === "liste") { const now = $(`#liste li.vl[data-vl="${state.here}"]`); if (now && state.here > 0) now.scrollIntoView({ block: "start" }); return; }
+  const box = $("#mapbox"), hx = COL * state.here;
+  box.scrollLeft = hx + COL > box.clientWidth ? hx - box.clientWidth / 2 : 0;
+}
+$("#mListe").addEventListener("click", () => { state.mode = "liste"; state.thread = null; save(); render(); });
+$("#mMetro").addEventListener("click", () => { state.mode = "metro"; if (!state.sel || !threadsOf[state.sel]) state.sel = defaultSel(); save(); render(); scrollToHere(); });
+$("#mZeit").addEventListener("click", () => { state.mode = "zeit"; state.thread = null; if (!state.sel) state.sel = defaultSel(); save(); render(); scrollToHere(); });
+$("#today").addEventListener("click", () => { state.here = HERE_TODAY; render(); scrollToHere(); });
 $("#vNb").addEventListener("click", () => { state.view = "nb"; render(); });
 $("#vAll").addEventListener("click", () => { state.view = "all"; render(); });
 $("#eKern").addEventListener("click", () => { state.detail = false; save(); render(); });
@@ -3349,8 +3484,11 @@ $("#eAlle").addEventListener("click", () => { state.detail = true; save(); rende
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
 new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
+if (!(state.mode === "liste" && narrow())) state.sel = defaultSel();
+let lastW = innerWidth;  // nur auf Breitenänderung reagieren (mobile Adressleiste ändert die Höhe)
+addEventListener("resize", () => { if (innerWidth === lastW) return; lastW = innerWidth; clearTimeout(window._rs); window._rs = setTimeout(render, 150); });
 render();
-{ const box = $("#mapbox"); const hx = COL * state.here; if (hx + COL > box.clientWidth) box.scrollLeft = hx - box.clientWidth / 2; }
+scrollToHere();
 </script>
 </body>
 </html>

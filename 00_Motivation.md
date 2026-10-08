@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.0
+version:  2.0.1
 language: de
 narrator: Deutsch Female
 
@@ -82,7 +82,6 @@ bernhard.jung@informatik.tu-freiberg.de
 Ein Ultraschallsensor an der Hörsaaltür zählt die Eintretenden. So sehen seine Aufzeichnungen aus:
 
 ``` text data.csv
-16:14:27.457 -> Person entered monitoring zone
 16:14:28.164 -> Person counted. Total = 66
 16:14:28.421 -> Person entered monitoring zone
 16:14:29.869 -> Person counted. Total = 67

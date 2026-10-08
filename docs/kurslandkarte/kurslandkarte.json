@@ -1,9 +1,11 @@
 {
- "stand": "01.10.2026",
+ "stand": "08.10.2026",
  "vorlesungen": [
   {
    "vl": 0,
    "datei": "00_Motivation.md",
+   "datum": "2026-10-19",
+   "kurz": "Motivation",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Herzlich willkommen!",
@@ -28,6 +30,8 @@
   {
    "vl": 1,
    "datei": "01_VomProblemZumProgramm.md",
+   "datum": "2026-10-26",
+   "kurz": "Problem → Programm",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Vom Problem zum Programm",
@@ -40,8 +44,12 @@
     "Algorithmen",
     "Warum der Rechner keine Alltagssprache versteht",
     "Algorithmen darstellen",
+    "Drei Bausteine",
+    "Einen Algorithmus von Hand ausführen",
+    "Typische Fehlvorstellung: Kein Fehler heißt richtiges Ergebnis",
     "Kontrollfragen",
     "Wann lohnt sich ein Programm?",
+    "Tabelle und Skript im Vergleich",
     "Ein Blick voraus",
     "Nächste Woche"
    ]
@@ -49,6 +57,8 @@
   {
    "vl": 2,
    "datei": "02_ErsteSchritte.md",
+   "datum": "2026-11-02",
+   "kurz": "Erste Schritte",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Erste Schritte in Python",
@@ -74,6 +84,8 @@
   {
    "vl": 3,
    "datei": "03_PruefenUndWiederholen.md",
+   "datum": "2026-11-09",
+   "kurz": "Prüfen & Wiederholen",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Prüfen und Wiederholen",
@@ -96,6 +108,8 @@
   {
    "vl": 4,
    "datei": "04_MusterInMessreihen.md",
+   "datum": "2026-11-16",
+   "kurz": "Muster",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Muster in Messreihen",
@@ -117,6 +131,8 @@
   {
    "vl": 5,
    "datei": "05_DatenSammeln.md",
+   "datum": "2026-11-23",
+   "kurz": "Daten sammeln",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Daten sammeln",
@@ -141,6 +157,8 @@
   {
    "vl": 6,
    "datei": "06_DateienLesen.md",
+   "datum": "2026-11-30",
+   "kurz": "Dateien lesen",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Dateien lesen",
@@ -163,6 +181,8 @@
   {
    "vl": 7,
    "datei": "07_Funktionen.md",
+   "datum": "2026-12-07",
+   "kurz": "Funktionen",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Funktionen",
@@ -183,6 +203,8 @@
   {
    "vl": 8,
    "datei": "08_DemoMicroPython.md",
+   "datum": "2026-12-14",
+   "kurz": "Demo MicroPython",
    "status": "Rumpf",
    "abschnitte": [
     "Demonstration: Datenerhebung mit MicroPython",
@@ -197,6 +219,8 @@
   {
    "vl": 9,
    "datei": "09_ProgrammeStrukturieren.md",
+   "datum": "2027-01-04",
+   "kurz": "Strukturieren",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Programme strukturieren",
@@ -217,7 +241,9 @@
   {
    "vl": 10,
    "datei": "10_Bibliotheken.md",
-   "status": "Gerüst",
+   "datum": "2027-01-11",
+   "kurz": "NumPy",
+   "status": "ausgearbeitet",
    "abschnitte": [
     "Bibliotheken: NumPy",
     "Rückblick",
@@ -239,7 +265,9 @@
   {
    "vl": 11,
    "datei": "11_PandasEinlesen.md",
-   "status": "Gerüst",
+   "datum": "2027-01-18",
+   "kurz": "pandas I",
+   "status": "ausgearbeitet",
    "abschnitte": [
     "pandas I — Einlesen",
     "Rückblick",
@@ -261,7 +289,9 @@
   {
    "vl": 12,
    "datei": "12_PandasAggregieren.md",
-   "status": "Gerüst",
+   "datum": "2027-01-25",
+   "kurz": "pandas II",
+   "status": "ausgearbeitet",
    "abschnitte": [
     "pandas II — Aggregieren",
     "Aufgabe 3 aus Vorlesung 01",
@@ -279,7 +309,9 @@
   {
    "vl": 13,
    "datei": "13_Visualisierung.md",
-   "status": "Gerüst",
+   "datum": "2027-02-01",
+   "kurz": "Visualisierung",
+   "status": "ausgearbeitet",
    "abschnitte": [
     "Visualisierung",
     "Rückblick",
@@ -299,7 +331,9 @@
   {
    "vl": 14,
    "datei": "14_Datenqualitaet.md",
-   "status": "Gerüst",
+   "datum": "2027-02-08",
+   "kurz": "Datenqualität",
+   "status": "ausgearbeitet",
    "abschnitte": [
     "Datenqualität, Ausblick, Prüfungsvorbereitung",
     "Rückblick",
@@ -1401,7 +1435,7 @@
    "name": "Programm oder Tabelle?",
    "linie": "analyse",
    "vl": 1,
-   "abschnitt": 12,
+   "abschnitt": 15,
    "ebene": 1,
    "code": false,
    "erklaerung": "Viele Daten, sperrige Formate, Wiederholung, Nachvollziehbarkeit: dann lohnt ein Programm.",
@@ -2423,8 +2457,8 @@
  "faeden": [
   {
    "id": "wiederverwenden",
-   "name": "Wiederverwenden",
-   "beschreibung": "Vom Muster über die Funktion zum Modul und zur fremden Bibliothek.",
+   "name": "Nicht alles neu schreiben",
+   "beschreibung": "Einmal gelösten Code wiederverwenden: erst als Muster, dann als eigene Funktion, als eigene Datei und schließlich als fertiges Paket von anderen.",
    "stationen": [
     "pseudo",
     "zaehlmuster",
@@ -2437,8 +2471,8 @@
   },
   {
    "id": "struktur",
-   "name": "Daten ordnen",
-   "beschreibung": "Vom einzelnen Wert über Listen und Dictionaries bis zum DataFrame.",
+   "name": "Viele Werte aufbewahren",
+   "beschreibung": "Vom einzelnen Wert über die Liste und das Nachschlagen per Schlüssel bis zur Tabelle mit benannten Spalten.",
    "stationen": [
     "variable",
     "liste",
@@ -2450,8 +2484,8 @@
   },
   {
    "id": "zaehlen",
-   "name": "Vom Zählen zur Aggregation",
-   "beschreibung": "Wie aus einer Schleife mit Zähler am Ende eine Zeile groupby wird.",
+   "name": "Vom Zählen zur Zusammenfassung",
+   "beschreibung": "Wie aus einer Schleife, die von Hand mitzählt, am Ende eine einzige Zeile wird, die Werte pro Jahr zusammenfasst.",
    "stationen": [
     "zaehlmuster",
     "summe",
@@ -2464,8 +2498,8 @@
   },
   {
    "id": "fehlwert",
-   "name": "Der Fehlwert",
-   "beschreibung": "Wie „nicht gemessen“ in jeder Phase anders aussieht — und jedes Mal behandelt werden muss.",
+   "name": "Wenn ein Wert fehlt",
+   "beschreibung": "„Nicht gemessen“ sieht jedes Mal anders aus: als -999, als fehlende Zeile, als NaN. Und jedes Mal muss man es behandeln.",
    "stationen": [
     "dwd",
     "fehlwert",
@@ -2480,7 +2514,7 @@
   {
    "id": "tabelle",
    "name": "Vom Text zur Tabelle",
-   "beschreibung": "Wie aus Textzeilen einer Datei eine Tabelle mit Spalten und Typen wird.",
+   "beschreibung": "Eine Datei ist zunächst nur Text. Wie daraus eine Tabelle mit Spalten und Zahlen wird.",
    "stationen": [
     "dwd",
     "text",
@@ -2493,8 +2527,8 @@
   },
   {
    "id": "messung",
-   "name": "Von der Messung zum Urteil",
-   "beschreibung": "Wie Messdaten entstehen — und warum man ihnen nicht blind trauen darf.",
+   "name": "Kann ich den Daten trauen?",
+   "beschreibung": "Wie Messdaten entstehen und warum man ihnen nicht blind trauen darf.",
    "stationen": [
     "zaehler",
     "sensorlog",

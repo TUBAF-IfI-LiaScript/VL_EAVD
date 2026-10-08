@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.0
+version:  2.1.0
 language: de
 narrator: Deutsch Female
 
@@ -11,6 +11,7 @@ comment:  Vom Problem zum Programm: Drei Auswertungen mit der Tabellenkalkulatio
 logo:     ./images/Readme/Wetterstation.png
 
 import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/config.md
+          https://raw.githubusercontent.com/LiaTemplates/mermaid_template/0.1.4/README.md
 
 @style
 .flex-container {
@@ -37,7 +38,7 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 | **Veranstaltung:**       | @config.lecture                                                                                                                                                |
 | **Semester**             | @config.semester                                                                                                                                               |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                              |
-| **Inhalte:**             | `Tabellenkalkulation an ihren Grenzen, Algorithmusbegriff, vom Algorithmus zum Programm`                                                                       |
+| **Inhalte:**             | `Tabellenkalkulation an ihren Grenzen, Algorithmusbegriff, Bausteine und Ablaufprotokoll, Tabelle und Skript im Vergleich`                                                                       |
 | **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/01_VomProblemZumProgramm.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/01_VomProblemZumProgramm.md) |
 | **Autoren**              | @author                                                                                                                                                        |
 
@@ -72,20 +73,27 @@ Der Deutsche Wetterdienst (DWD) betreibt auf dem **Fichtelberg** (1213 m, höchs
 
 ## Drei Aufgaben
 
-Wir lösen heute drei Aufgaben — ohne eine Zeile Code. Notieren Sie sich bei jeder Aufgabe:
+Wir lösen heute drei Aufgaben — ohne eine Zeile Code. Jede hat ein festes Zeitfenster. Niemand muss alle drei schaffen. Notieren Sie sich bei jeder Aufgabe:
 
-1. Wie lange haben Sie gebraucht?
+1. Wie weit sind Sie gekommen?
 2. Welche Schritte haben Sie **von Hand** ausgeführt?
 3. Wie sicher sind Sie, dass Ihr Ergebnis stimmt?
 
 > Die Antworten auf diese drei Fragen sind am Ende wichtiger als die Ergebnisse selbst.
+
+<!-- data-type="none" -->
+| Aufgabe | Zeit    | Arbeitsform | Ziel                                   |
+| :------ | ------: | :---------- | :------------------------------------- |
+| 1       |   5 min | allein      | lösen                                  |
+| 2       |   8 min | zu zweit    | so weit kommen wie möglich             |
+| 3       |   4 min | zu zweit    | nicht lösen — nur hinschauen           |
 
 ### Aufgabe 1: Ein Jahr auf dem Fichtelberg
 
                                      {{0-1}}
 *******************************************************************************
 
-Öffnen Sie `fichtelberg_2024.csv` in Ihrer Tabellenkalkulation.
+**⏱ 5 Minuten, allein.** Laden Sie [`fichtelberg_2024.csv`](https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/data/fichtelberg/fichtelberg_2024.csv) herunter und öffnen Sie die Datei in Ihrer Tabellenkalkulation.
 
 ```text fichtelberg_2024.csv
 Datum;Tagesmittel;Minimum;Maximum
@@ -138,11 +146,13 @@ Erinnern Sie sich an den Personenzähler aus der letzten Vorlesung? Der Sensor a
 
 Die Vorlesung beginnt um 16:15 Uhr.
 
+**⏱ 8 Minuten, zu zweit.** Laden Sie [`data.csv`](https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/examples/00_Einfuehrungsbeispiele/Python%20Code/data.csv) herunter.
+
 **a)** Wie viele Personen sind **nach** Vorlesungsbeginn gekommen?
 
-**b)** In welcher Minute kamen die meisten?
+**b)** _(zu Hause)_ In welcher Minute kamen die meisten?
 
-Die vollständige Datei finden Sie unter `examples/00_Einfuehrungsbeispiele/Python Code/data.csv`.
+Sie müssen nicht fertig werden. Merken Sie sich die Stelle, an der Sie hängen bleiben.
 
 *******************************************************************************
 
@@ -184,7 +194,11 @@ STATIONS_ID;MESS_DATUM;QN_3;  FX;  FM;QN_4; RSK;RSKF; SDK;SHK_TAG;  NM; VPM;  PM
 ...
 ```
 
-**Aufgabe:** Wie hat sich die Zahl der Frosttage pro Jahr seit 1890 entwickelt?
+**⏱ 4 Minuten, zu zweit.** Laden Sie die [Datei des DWD](https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt) herunter (6,5 MB) und öffnen Sie sie.
+
+Die Frage lautet: _Wie hat sich die Zahl der Frosttage pro Jahr seit 1890 entwickelt?_
+
+**Aufgabe:** Lösen Sie die Frage **nicht**. Sammeln Sie stattdessen: Was müssten Sie alles tun, um sie zu beantworten?
 
 *******************************************************************************
 
@@ -214,7 +228,7 @@ Vergleichen Sie Aufgabe 1b und Aufgabe 3. Die **Frage** ist dieselbe: _Wie viele
 <!-- data-type="none" -->
 | Was sich ändert                | Aufgabe 1          | Aufgabe 2         | Aufgabe 3               |
 | :----------------------------- | :----------------- | :---------------- | :---------------------- |
-| Datenmenge                     | 366 Zeilen         | 37 Zeilen         | 47.595 Zeilen           |
+| Datenmenge                     | 366 Zeilen         | 36 Zeilen         | 47.595 Zeilen           |
 | Format                         | sauber             | Freitext          | Rohformat mit Fehlwerten |
 | Wie oft dieselbe Rechnung      | einmal             | einmal pro Minute | einmal pro Jahr (135×)  |
 | Wiederholbar mit neuen Daten?  | ja                 | nein              | nein                    |
@@ -309,37 +323,122 @@ Gib frosttage aus.
 
 **Ablaufdiagramm**
 
-``` ascii
-        ( Start )
-            |
-            v
-   +-----------------+
-   | frosttage = 0   |
-   +-----------------+
-            |
-            v
-     .-------------.   nein
-+-->< noch ein Tag? >---------.
-|    '-------------'          |
-|           | ja              v
-|           v          +-------------+
-|    .-------------.   | Ausgabe:    |
-|   < Minimum < 0 ? >  | frosttage   |
-|    '-------------'   +-------------+
-|     | ja      | nein        |
-|     v         |             v
-| +-----------+ |         ( Ende )
-| | frosttage | |
-| |   + 1     | |
-| +-----------+ |
-|     |         |
-+-----+---------+
+```mermaid @mermaid
+%%{init: {"flowchart": {"nodeSpacing": 30, "rankSpacing": 25}}}%%
+flowchart TD
+    S([Start]) --> A[frosttage = 0]
+    A --> B{"noch ein<br>Tag?"}
+    B -- ja --> C{"Minimum<br>< 0 ?"}
+    C -- ja --> D[frosttage + 1]
+    D --> B
+    C -- nein --> B
+    B -- nein --> E[/Ausgabe: frosttage/]
+    E --> Z([Ende])
 ```
 
 </div>
 </div>
 
 > In zwei Wochen schreiben Sie genau diesen Algorithmus in Python. Er wird **fünf Zeilen** lang sein.
+
+### Drei Bausteine
+
+Jeder Algorithmus, auch der für 135 Jahre, setzt sich aus nur drei Bausteinen zusammen:
+
+<!-- data-type="none" -->
+| Baustein         | Bedeutung                                 | im Frosttage-Algorithmus         | in Python |
+| :--------------- | :---------------------------------------- | :------------------------------- | :-------- |
+| **Folge**        | Schritte nacheinander ausführen           | erst „Setze …“, am Ende „Gib …“  | VL 02     |
+| **Verzweigung**  | einen Schritt nur unter einer Bedingung   | „Wenn Minimum < 0“               | VL 03     |
+| **Wiederholung** | Schritte für jedes Element wiederholen    | „Für jedes Minimum“              | VL 03     |
+
+Im Ablaufdiagramm erkennt man sie an der Form: Pfeile von Kasten zu Kasten bilden eine Folge, eine Raute mit _ja_ und _nein_ eine Verzweigung, ein Pfeil, der zurückführt, eine Wiederholung.
+
+Wie viele Wiederholungen stecken im Algorithmus für 135 Jahre (Abschnitt „Was ist hier passiert?“)?
+
+[( )] eine
+[(X)] zwei
+[( )] drei
+[( )] 135
+***
+Zwei, und die eine steckt in der anderen: Die äußere läuft über die Jahre, die innere über die Tage eines Jahres. Für jedes Jahr läuft die innere Wiederholung einmal komplett durch.
+***
+
+### Einen Algorithmus von Hand ausführen
+
+Bevor ein Rechner einen Algorithmus ausführt, sollte man es einmal selbst tun — mit Stift, Papier und wenigen Werten. Hier die Tiefsttemperaturen der ersten sieben Tage 2024 in °C:
+
+`-1,9   -2,4   0,1   -1,7   -1,7   -4,2   -11,9`
+
+Gehen Sie den Pseudocode aus dem letzten Abschnitt Tag für Tag durch und notieren Sie nach jedem Tag den Wert von `frosttage`. Was wird ausgegeben?
+
+[[6]]
+***
+<!-- data-type="none" -->
+| Tag | Minimum | Minimum < 0? | frosttage |
+| --: | ------: | :----------: | --------: |
+|     |         |              |         0 |
+|   1 |    -1,9 | ja           |         1 |
+|   2 |    -2,4 | ja           |         2 |
+|   3 |     0,1 | nein         |         2 |
+|   4 |    -1,7 | ja           |         3 |
+|   5 |    -1,7 | ja           |         4 |
+|   6 |    -4,2 | ja           |         5 |
+|   7 |   -11,9 | ja           |         6 |
+
+Eine solche Tabelle heißt **Ablaufprotokoll**. Sie zeigt nicht nur das Ergebnis, sondern jeden Zwischenstand.
+***
+
+Jetzt ist beim Abschreiben eine Zeile verrutscht:
+
+``` text
+Für jedes Minimum in der Liste:
+    Setze frosttage auf 0.
+    Wenn Minimum < 0:
+        Erhöhe frosttage um 1.
+Gib frosttage aus.
+```
+
+Legen Sie sich fest, **bevor** Sie die Auflösung ansehen: Was wird für die sieben Tage ausgegeben?
+
+[( )] 6
+[(X)] 1
+[( )] 0
+[( )] nichts, der Algorithmus ist fehlerhaft
+***
+Der Zähler wird an **jedem** Tag auf 0 zurückgesetzt. Am Ende zählt nur der letzte Tag: -11,9 °C, also 1. Der Algorithmus ist eindeutig und ausführbar, er beantwortet nur eine andere Frage als gemeint.
+***
+
+### Typische Fehlvorstellung: Kein Fehler heißt richtiges Ergebnis
+
+> **Typische Fehlvorstellung:** _„Wenn der Rechner keine Fehlermeldung zeigt, stimmt das Ergebnis.“_
+
+Zurück zum Algorithmus für 135 Jahre:
+
+``` text
+Für jedes Jahr von 1890 bis 2025:
+    Setze den Zähler auf 0.
+    Für jeden Tag dieses Jahres:
+        Wenn das Minimum gemessen wurde und unter 0 °C liegt:
+            Erhöhe den Zähler um 1.
+    Notiere Jahr und Zähler.
+```
+
+Für die Jahre 1911 bis 1914 enthält die Datei des DWD keine einzige Zeile.
+
+Legen Sie sich fest, **bevor** Sie die Auflösung ansehen: Was notiert der Algorithmus für das Jahr 1912?
+
+[( )] eine Fehlermeldung, weil es keine Daten gibt
+[( )] nichts, das Jahr wird übersprungen
+[(X)] 1912 und 0
+[( )] ungefähr 180, wie in den Jahren davor
+***
+Die äußere Wiederholung läuft über **alle** Jahre von 1890 bis 2025, also auch über 1912. Die innere findet keinen Tag und läuft kein einziges Mal. Der Zähler bleibt bei 0, und genau das wird notiert — ohne Warnung.
+
+In einem Diagramm wäre 1912 das Jahr ohne Frost auf dem Fichtelberg. Das frostärmste Jahr, das tatsächlich vollständig gemessen wurde, ist 2025 mit 122 Frosttagen. Dasselbe Problem in kleinerem Maßstab: 1890 kommt auf nur 58 Frosttage, weil die Messungen erst am 1. August beginnen.
+***
+
+> Ein Rechner prüft nicht, ob ein Ergebnis Sinn ergibt. Das bleibt Ihre Aufgabe — hier zum Beispiel, indem der Algorithmus auch mitzählt, **wie viele Tage überhaupt gemessen wurden**.
 
 ### Kontrollfragen
 
@@ -383,6 +482,32 @@ Die Tabellenkalkulation ist ein hervorragendes Werkzeug. Ein Programm lohnt sich
 | **Nachvollziehbarkeit**      | Jemand anderes soll prüfen können, was genau Sie gerechnet haben |
 
 > Der letzte Punkt wird oft unterschätzt. Eine Tabelle mit 135 von Hand angepassten Formeln kann niemand prüfen — ein Programm von zehn Zeilen schon.
+
+### Tabelle und Skript im Vergleich
+
+Tabellenkalkulation und Skript sind nicht nur zwei Werkzeuge, sondern zwei Arten, über eine Auswertung zu denken:
+
+<!-- data-type="none" -->
+| Frage                          | Tabellenkalkulation                        | Skript                                        |
+| :----------------------------- | :----------------------------------------- | :-------------------------------------------- |
+| Wo stehen Daten und Rechnung?  | gemeinsam in den Zellen                    | getrennt: Daten in einer Datei, Rechnung im Skript |
+| Was sieht man?                 | die Ergebnisse, die Formeln stecken dahinter | die Rechenschritte, Ergebnisse entstehen beim Ausführen |
+| In welcher Reihenfolge?        | keine: jede Zelle rechnet nach, sobald sich ein Wert ändert | von oben nach unten, Schritt für Schritt |
+| Import, Filtern, Kopieren      | wird nirgends festgehalten                 | ist Teil des Skripts                          |
+| Neue Daten                     | alle Schritte noch einmal von Hand         | Skript erneut starten                         |
+| Prüfen                         | Zelle für Zelle anklicken                  | den Text von oben nach unten lesen            |
+| Stärke                         | sofort sichtbar, schnell ausprobiert       | wiederholbar, nachvollziehbar, beliebig groß  |
+
+> In der Tabellenkalkulation **ist** die Tabelle das Ergebnis. Beim Skript ist das Ergebnis ein Nebenprodukt — was bleibt, ist der Weg dorthin.
+
+Wie riskant Handarbeit ist, die nirgends festgehalten wird, zeigt die Genetik: Tabellenkalkulationen machen aus Gennamen wie `SEPT2` oder `MARCH1` beim Öffnen stillschweigend ein Datum. Eine Untersuchung fand 2016 solche Fehler in etwa jeder fünften Veröffentlichung, die Genlisten als Excel-Datei mitlieferte. 2020 wurden die betroffenen Gene deshalb umbenannt: `SEPT2` heißt heute `SEPTIN2`.
+
+In Zelle A1 steht `3`, in Zelle B1 die Formel `=A1*2`. Sie ändern A1 auf `5`. Was steht jetzt in B1?
+
+[[10]]
+***
+Die Tabellenkalkulation rechnet nach, sobald sich A1 ändert. Merken Sie sich diese Erwartung: Nächste Woche sehen Sie, dass sich ein Skript an dieser Stelle anders verhält.
+***
 
 ### Ein Blick voraus
 

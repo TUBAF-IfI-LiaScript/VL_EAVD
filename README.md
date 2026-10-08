@@ -22,7 +22,7 @@ logo: ./images/Readme/Wetterstation.png
 
 > **Dieser Kurs wird gerade überarbeitet.** Zum Wintersemester 2026/27 bauen wir die Veranstaltung grundlegend um — Inhalte, Reihenfolge und Beispiele können sich noch ändern.
 >
-> **Stand 01.10.2026:** Vorlesungen 00–07 und 09–14 sind ausgearbeitet, Vorlesung 08 (Demonstration Datenerhebung) liegt als Rumpf vor. Die Materialien des bisherigen Kurses (C++/Python) sind in der Git-Historie erreichbar (Commit `21d3061`).
+> **Stand 08.10.2026:** Vorlesungen 00–07 und 09–14 sind ausgearbeitet, Vorlesung 08 (Demonstration Datenerhebung) liegt als Rumpf vor. Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) zeigt Begriffe und Zusammenhänge aller Vorlesungen. Die Materialien des bisherigen Kurses (C++/Python) sind in der Git-Historie erreichbar (Commit `21d3061`).
 >
 > Hinweise und Fehler gern als [Issue](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/issues).
 

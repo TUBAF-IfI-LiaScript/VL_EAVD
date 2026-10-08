@@ -1,6 +1,6 @@
 # Kurslandkarte
 
-Interaktive Übersicht über Begriffe, Zusammenhänge und didaktische Fäden der Vorlesung — in zwei Varianten (Metrokarte und Zeitleiste). Entwurf zur Diskussion; veröffentlicht über GitHub Pages aus dem Ordner `docs/`.
+Interaktive Übersicht über Begriffe, Zusammenhänge und didaktische Fäden der Vorlesung für Studierende — in drei Ansichten: Vorlesungen (Liste, Standard auf dem Handy), Metrokarte und Zeitleiste. „Sie sind hier“ ergibt sich aus dem Datum. Veröffentlicht über GitHub Pages aus dem Ordner `docs/`.
 
 | Datei | Inhalt |
 | :---- | :----- |
@@ -21,6 +21,7 @@ Begriffe verweisen in `erzeuge.py` auf den **Titel** ihres Abschnitts (ohne Back
 
 ## Datenmodell
 
+* **Vorlesung:** `vl`, `datei`, `datum` (Termin, ISO), `kurz` (Kurztitel), `status`, `abschnitte`; Termine und Kurztitel stehen in `TERMINE` in `erzeuge.py`
 * **Begriff:** `id`, `name`, `linie` (Kategorie), `vl`, `abschnitt` (in `erzeuge.py` der Abschnittstitel, im JSON die Foliennummer), `ebene` (1 = Kernbegriff, 2 = Detailbegriff), `code`, `erklaerung`, `fehlvorstellung`
 * **Beziehung:** `von`, `nach`, `text` (Beschriftung der Kante, gelesen als „von … text … nach“)
 * **Faden:** `id`, `name`, `beschreibung`, `stationen` (chronologische Folge von Begriffs-ids)
