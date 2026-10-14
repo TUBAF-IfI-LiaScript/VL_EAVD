@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.0
+version:  2.0.1
 language: de
 narrator: Deutsch Female
 
@@ -205,9 +205,9 @@ Die drei Werte links vom `=` werden der Reihe nach mit den drei Rückgabewerten 
 Das Hauptprogramm am Ende der Datei ist jetzt fünf Zeilen lang und liest sich fast wie Pseudocode:
 
 ```python
-for station, datei in [("fichtelberg", DATEI_FICHTELBERG),
+for station, dateiname in [("fichtelberg", DATEI_FICHTELBERG),
                        ("freiberg", DATEI_FREIBERG)]:
-    hoechst, frost, gemessen = auswerten(datei)
+    hoechst, frost, gemessen = auswerten(dateiname)
     schreibe_ergebnis(station + "_jahre.csv", hoechst, frost, gemessen)
     print(station, len(hoechst), "Jahre ausgewertet")
 ```
@@ -217,10 +217,11 @@ import os
 import urllib.request
 
 basis = "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/"
-for datei in ["data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt",
-              "data/freiberg/produkt_klima_tag_19450701_19930430_01441.txt"]:
-    os.makedirs(os.path.dirname(datei), exist_ok=True)
-    urllib.request.urlretrieve(basis + datei, datei)
+dateien = ["data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt",
+           "data/freiberg/produkt_klima_tag_19450701_19930430_01441.txt"]
+for dateiname in dateien:
+    os.makedirs(os.path.dirname(dateiname), exist_ok=True)
+    urllib.request.urlretrieve(basis + dateiname, dateiname)
 ```
 ```python -main.py
 DATEI_FICHTELBERG = "data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt"
@@ -234,14 +235,14 @@ def zerlege_zeile(zeile):
     return teile[1][0:4], float(teile[15]), float(teile[16])
 
 
-def auswerten(datei):
+def auswerten(dateiname):
     """Höchstwert, Frosttage und gemessene Tage pro Jahr."""
     hoechst = {}
     frost = {}
     gemessen = {}
-    with open(datei) as f:
-        f.readline()
-        for zeile in f:
+    with open(dateiname) as datei:
+        datei.readline()
+        for zeile in datei:
             jahr, maximum, minimum = zerlege_zeile(zeile)
             if jahr not in frost:
                 frost[jahr] = 0
@@ -258,23 +259,24 @@ def auswerten(datei):
 
 def schreibe_ergebnis(name, hoechst, frost, gemessen):
     """Eine Zeile pro Jahr; ohne Frostwert, wenn zu wenig gemessen wurde."""
-    with open(name, "w") as f:
-        f.write("jahr;maximum;frosttage\n")
+    with open(name, "w") as datei:
+        datei.write("jahr;maximum;frosttage\n")
         for jahr in hoechst:
             if gemessen[jahr] >= MINDESTTAGE:
-                f.write(jahr + ";" + str(hoechst[jahr]) + ";" + str(frost[jahr]) + "\n")
+                datei.write(jahr + ";" + str(hoechst[jahr]) + ";"
+                            + str(frost[jahr]) + "\n")
             else:
-                f.write(jahr + ";" + str(hoechst[jahr]) + ";\n")
+                datei.write(jahr + ";" + str(hoechst[jahr]) + ";\n")
 
 
-for station, datei in [("fichtelberg", DATEI_FICHTELBERG),
+for station, dateiname in [("fichtelberg", DATEI_FICHTELBERG),
                        ("freiberg", DATEI_FREIBERG)]:
-    hoechst, frost, gemessen = auswerten(datei)
+    hoechst, frost, gemessen = auswerten(dateiname)
     schreibe_ergebnis(station + "_jahre.csv", hoechst, frost, gemessen)
     print(station, len(hoechst), "Jahre ausgewertet")
 
-with open("freiberg_jahre.csv") as f:
-    zeilen = f.readlines()
+with open("freiberg_jahre.csv") as datei:
+    zeilen = datei.readlines()
 print("Freiberg 1947-1949:", [z.strip() for z in zeilen[3:6]])
 ```
 @LIA.eval(`["hole_daten.py", "main.py"]`, `none`, `sh -c "python3 hole_daten.py && python3 main.py"`)

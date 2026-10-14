@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.0
+version:  2.0.1
 language: de
 narrator: Deutsch Female
 
@@ -49,9 +49,9 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 Willkommen zurück nach der Weihnachtspause. Vor der Demonstration in Vorlesung 08 haben wir das lange Skript in Funktionen zerlegt:
 
 ```python
-for station, datei in [("fichtelberg", DATEI_FICHTELBERG),
+for station, dateiname in [("fichtelberg", DATEI_FICHTELBERG),
                        ("freiberg", DATEI_FREIBERG)]:
-    hoechst, frost, gemessen = auswerten(datei)
+    hoechst, frost, gemessen = auswerten(dateiname)
     schreibe_ergebnis(station + "_jahre.csv", hoechst, frost, gemessen)
 ```
 
@@ -133,11 +133,12 @@ import os
 import urllib.request
 
 basis = "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/"
-for datei in ["data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt",
-              "data/freiberg/produkt_klima_tag_19450701_19930430_01441.txt",
-              "data/chemnitz/produkt_klima_tag_18820101_20251231_00853.txt"]:
-    os.makedirs(os.path.dirname(datei), exist_ok=True)
-    urllib.request.urlretrieve(basis + datei, datei)
+dateien = ["data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt",
+           "data/freiberg/produkt_klima_tag_19450701_19930430_01441.txt",
+           "data/chemnitz/produkt_klima_tag_18820101_20251231_00853.txt"]
+for dateiname in dateien:
+    os.makedirs(os.path.dirname(dateiname), exist_ok=True)
+    urllib.request.urlretrieve(basis + dateiname, dateiname)
 ```
 ```python -dwd.py
 """Hilfsfunktionen für Klima-Tageswerte des Deutschen Wetterdienstes."""
@@ -152,14 +153,14 @@ def zerlege_zeile(zeile):
     return teile[1][0:4], float(teile[15]), float(teile[16])
 
 
-def auswerten(datei):
+def auswerten(dateiname):
     """Höchstwert, Frosttage und gemessene Tage pro Jahr."""
     hoechst = {}
     frost = {}
     gemessen = {}
-    with open(datei) as f:
-        f.readline()
-        for zeile in f:
+    with open(dateiname) as datei:
+        datei.readline()
+        for zeile in datei:
             jahr, maximum, minimum = zerlege_zeile(zeile)
             if jahr not in frost:
                 frost[jahr] = 0
@@ -176,13 +177,14 @@ def auswerten(datei):
 
 def schreibe_ergebnis(name, hoechst, frost, gemessen):
     """Eine Zeile pro Jahr; ohne Frostwert, wenn zu wenig gemessen wurde."""
-    with open(name, "w") as f:
-        f.write("jahr;maximum;frosttage\n")
+    with open(name, "w") as datei:
+        datei.write("jahr;maximum;frosttage\n")
         for jahr in hoechst:
             if gemessen[jahr] >= MINDESTTAGE:
-                f.write(jahr + ";" + str(hoechst[jahr]) + ";" + str(frost[jahr]) + "\n")
+                datei.write(jahr + ";" + str(hoechst[jahr]) + ";"
+                            + str(frost[jahr]) + "\n")
             else:
-                f.write(jahr + ";" + str(hoechst[jahr]) + ";\n")
+                datei.write(jahr + ";" + str(hoechst[jahr]) + ";\n")
 
 
 if __name__ == "__main__":
@@ -281,13 +283,13 @@ Python rechnet mit der Zahl neunzehn Millionen hunderteinunddreißigtausend… �
 from datetime import datetime
 
 
-def finde_luecken(datei):
+def finde_luecken(dateiname):
     """Liefert (vorher, nachher, fehlende Tage) für jede Lücke."""
     luecken = []
     vorher = None
-    with open(datei) as f:
-        f.readline()
-        for zeile in f:
+    with open(dateiname) as datei:
+        datei.readline()
+        for zeile in datei:
             datum = datetime.strptime(zeile.split(";")[1], "%Y%m%d")
             if vorher is not None and (datum - vorher).days > 1:
                 luecken.append((vorher, datum, (datum - vorher).days - 1))
@@ -312,11 +314,12 @@ import os
 import urllib.request
 
 basis = "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/"
-for datei in ["data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt",
-              "data/freiberg/produkt_klima_tag_19450701_19930430_01441.txt",
-              "data/chemnitz/produkt_klima_tag_18820101_20251231_00853.txt"]:
-    os.makedirs(os.path.dirname(datei), exist_ok=True)
-    urllib.request.urlretrieve(basis + datei, datei)
+dateien = ["data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt",
+           "data/freiberg/produkt_klima_tag_19450701_19930430_01441.txt",
+           "data/chemnitz/produkt_klima_tag_18820101_20251231_00853.txt"]
+for dateiname in dateien:
+    os.makedirs(os.path.dirname(dateiname), exist_ok=True)
+    urllib.request.urlretrieve(basis + dateiname, dateiname)
 ```
 @LIA.eval(`["dwd.py", "auswertung.py", "hole_daten.py"]`, `none`, `sh -c "python3 hole_daten.py && python3 auswertung.py"`)
 

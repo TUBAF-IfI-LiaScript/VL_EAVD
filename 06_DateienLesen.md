@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.0
+version:  2.0.1
 language: de
 narrator: Deutsch Female
 
@@ -76,15 +76,15 @@ STATIONS_ID;MESS_DATUM;QN_3;  FX;  FM;QN_4; RSK;RSKF; SDK;SHK_TAG;  NM; VPM;  PM
        1358;19151002;-999;-999;-999;    1;   2.1;   8;-999;   0;   8.0;   6.5;  877.60;    1.0;  100.00;    2.5;    0.4;-999;eor
 ```
 ```python main.py
-with open("ausschnitt.txt") as f:
-    for zeile in f:
+with open("ausschnitt.txt") as datei:
+    for zeile in datei:
         print(zeile)
 ```
 @LIA.eval(`["ausschnitt.txt", "main.py"]`, `none`, `python3 main.py`)
 
 * `open("ausschnitt.txt")` öffnet die Datei zum **Lesen**.
-* `with ... as f:` sorgt dafür, dass die Datei nach dem eingerückten Block wieder geschlossen wird — auch wenn unterwegs ein Fehler auftritt.
-* `for zeile in f:` liefert die Datei **Zeile für Zeile**, jede als Text.
+* `with ... as datei:` sorgt dafür, dass die Datei nach dem eingerückten Block wieder geschlossen wird — auch wenn unterwegs ein Fehler auftritt.
+* `for zeile in datei:` liefert die Datei **Zeile für Zeile**, jede als Text.
 
 **Warum ist nach jeder Zeile eine Leerzeile?** Jede Zeile endet mit einem unsichtbaren Zeilenumbruch `\n`. `print` hängt einen zweiten an. Abhilfe: `print(zeile.strip())` — `strip()` entfernt Leerzeichen und Zeilenumbrüche am Anfang und Ende.
 
@@ -95,9 +95,9 @@ STATIONS_ID;MESS_DATUM;QN_3;  FX;  FM;QN_4; RSK;RSKF; SDK;SHK_TAG;  NM; VPM;  PM
        1358;18930310;-999;-999;-999;    1;   3.0;   7;-999;-999;   8.0;   5.1;  868.50;   -2.3;   99.00;   -0.4;   -3.8;-999;eor
 ```
 ```python main.py
-with open("ausschnitt.txt") as f:
-    kopf = f.readline()
-    zeile = f.readline()
+with open("ausschnitt.txt") as datei:
+    kopf = datei.readline()
+    zeile = datei.readline()
 
 teile = zeile.split(";")
 print(len(teile), "Teile")
@@ -106,7 +106,7 @@ print("Datum:", teile[1], "Maximum:", teile[15])
 ```
 @LIA.eval(`["ausschnitt.txt", "main.py"]`, `none`, `python3 main.py`)
 
-`f.readline()` liest genau **eine** Zeile. `split(";")` zerlegt sie an jedem Semikolon in eine Liste von Texten. Welche Spalte welchen Index hat, verrät die Kopfzeile:
+`datei.readline()` liest genau **eine** Zeile. `split(";")` zerlegt sie an jedem Semikolon in eine Liste von Texten. Welche Spalte welchen Index hat, verrät die Kopfzeile:
 
 <!-- data-type="none" -->
 | Index | Spalte       | Bedeutung                    |
@@ -143,9 +143,9 @@ STATIONS_ID;MESS_DATUM;QN_3;  FX;  FM;QN_4; RSK;RSKF; SDK;SHK_TAG;  NM; VPM;  PM
        1358;19151002;-999;-999;-999;    1;   2.1;   8;-999;   0;   8.0;   6.5;  877.60;    1.0;  100.00;    2.5;    0.4;-999;eor
 ```
 ```python main.py
-with open("ausschnitt.txt") as f:
-    f.readline()                      # Kopfzeile überspringen
-    for zeile in f:
+with open("ausschnitt.txt") as datei:
+    datei.readline()                  # Kopfzeile überspringen
+    for zeile in datei:
         teile = zeile.split(";")
         datum = teile[1]
         maximum = float(teile[15])
@@ -156,7 +156,7 @@ with open("ausschnitt.txt") as f:
 ```
 @LIA.eval(`["ausschnitt.txt", "main.py"]`, `none`, `python3 main.py`)
 
-Probieren Sie aus, was ohne die Zeile `f.readline()` passiert — und lesen Sie die Fehlermeldung.
+Probieren Sie aus, was ohne die Zeile `datei.readline()` passiert — und lesen Sie die Fehlermeldung.
 
 ### Typische Fehlvorstellung: Jeder Tag hat eine Zeile
 
@@ -221,18 +221,18 @@ import os
 import urllib.request
 
 basis = "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/"
-datei = "data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt"
-os.makedirs(os.path.dirname(datei), exist_ok=True)
-urllib.request.urlretrieve(basis + datei, datei)
+dateiname = "data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt"
+os.makedirs(os.path.dirname(dateiname), exist_ok=True)
+urllib.request.urlretrieve(basis + dateiname, dateiname)
 ```
 ```python main.py
-datei = ("data/fichtelberg/"
+dateiname = ("data/fichtelberg/"
          "produkt_klima_tag_18900801_20251231_01358.txt")
 hoechst = {}
 tag = {}
-with open(datei) as f:
-    f.readline()
-    for zeile in f:
+with open(dateiname) as datei:
+    datei.readline()
+    for zeile in datei:
         teile = zeile.split(";")
         jahr = teile[1][0:4]
         maximum = float(teile[15])
@@ -268,16 +268,16 @@ import os
 import urllib.request
 
 basis = "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/"
-datei = "data/freiberg/produkt_klima_tag_19450701_19930430_01441.txt"
-os.makedirs(os.path.dirname(datei), exist_ok=True)
-urllib.request.urlretrieve(basis + datei, datei)
+dateiname = "data/freiberg/produkt_klima_tag_19450701_19930430_01441.txt"
+os.makedirs(os.path.dirname(dateiname), exist_ok=True)
+urllib.request.urlretrieve(basis + dateiname, dateiname)
 ```
 ```python main.py
-datei = "data/freiberg/produkt_klima_tag_19450701_19930430_01441.txt"
+dateiname = "data/freiberg/produkt_klima_tag_19450701_19930430_01441.txt"
 frost = {}
-with open(datei) as f:
-    f.readline()
-    for zeile in f:
+with open(dateiname) as datei:
+    datei.readline()
+    for zeile in datei:
         teile = zeile.split(";")
         jahr = teile[1][0:4]
         minimum = float(teile[16])
@@ -309,18 +309,18 @@ Ein Ergebnis, das nur auf dem Bildschirm steht, ist nach dem nächsten Programml
 ```python main.py
 hoechst = {"1900": 24.9, "1950": 26.0, "2024": 26.9}
 
-with open("jahreshoechst.csv", "w") as f:
-    f.write("jahr;maximum\n")
+with open("jahreshoechst.csv", "w") as datei:
+    datei.write("jahr;maximum\n")
     for jahr in hoechst:
-        f.write(jahr + ";" + str(hoechst[jahr]) + "\n")
+        datei.write(jahr + ";" + str(hoechst[jahr]) + "\n")
 
-with open("jahreshoechst.csv") as f:
-    print(f.read())
+with open("jahreshoechst.csv") as datei:
+    print(datei.read())
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 * `open(..., "w")` öffnet zum **Schreiben**. Existiert die Datei schon, wird sie **überschrieben**.
-* `f.write` erwartet einen Text und hängt — anders als `print` — **keinen** Zeilenumbruch an. Das `"\n"` muss man selbst anfügen.
+* `datei.write` erwartet einen Text und hängt — anders als `print` — **keinen** Zeilenumbruch an. Das `"\n"` muss man selbst anfügen.
 * Die Datei `jahreshoechst.csv` können Sie mit der Tabellenkalkulation öffnen. Damit schließt sich der Kreis zu Vorlesung 01.
 
 ## Live Hacking: Das lange Skript
@@ -332,18 +332,20 @@ import os
 import urllib.request
 
 basis = "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/"
-for datei in ["data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt",
-              "data/freiberg/produkt_klima_tag_19450701_19930430_01441.txt"]:
-    os.makedirs(os.path.dirname(datei), exist_ok=True)
-    urllib.request.urlretrieve(basis + datei, datei)
+dateien = ["data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt",
+           "data/freiberg/produkt_klima_tag_19450701_19930430_01441.txt"]
+for dateiname in dateien:
+    os.makedirs(os.path.dirname(dateiname), exist_ok=True)
+    urllib.request.urlretrieve(basis + dateiname, dateiname)
 ```
 ```python -auswertung.py
 # ---- Fichtelberg ----------------------------------------------------------
 hoechst = {}
 frost = {}
-with open("data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt") as f:
-    f.readline()
-    for zeile in f:
+with open("data/fichtelberg/"
+          "produkt_klima_tag_18900801_20251231_01358.txt") as datei:
+    datei.readline()
+    for zeile in datei:
         teile = zeile.split(";")
         jahr = teile[1][0:4]
         maximum = float(teile[15])
@@ -356,17 +358,19 @@ with open("data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt") as f
         if minimum != -999 and minimum < 0:
             frost[jahr] = frost[jahr] + 1
 
-with open("fichtelberg_jahre.csv", "w") as f:
-    f.write("jahr;maximum;frosttage\n")
+with open("fichtelberg_jahre.csv", "w") as datei:
+    datei.write("jahr;maximum;frosttage\n")
     for jahr in hoechst:
-        f.write(jahr + ";" + str(hoechst[jahr]) + ";" + str(frost[jahr]) + "\n")
+        datei.write(jahr + ";" + str(hoechst[jahr]) + ";"
+                    + str(frost[jahr]) + "\n")
 
 # ---- Freiberg -------------------------------------------------------------
 hoechst = {}
 frost = {}
-with open("data/freiberg/produkt_klima_tag_19450701_19930430_01441.txt") as f:
-    f.readline()
-    for zeile in f:
+with open("data/freiberg/"
+          "produkt_klima_tag_19450701_19930430_01441.txt") as datei:
+    datei.readline()
+    for zeile in datei:
         teile = zeile.split(";")
         jahr = teile[1][0:4]
         maximum = float(teile[15])
@@ -379,15 +383,16 @@ with open("data/freiberg/produkt_klima_tag_19450701_19930430_01441.txt") as f:
         if minimum != -999 and minimum < 0:
             frost[jahr] = frost[jahr] + 1
 
-with open("freiberg_jahre.csv", "w") as f:
-    f.write("jahr;maximum;frosttage\n")
+with open("freiberg_jahre.csv", "w") as datei:
+    datei.write("jahr;maximum;frosttage\n")
     for jahr in hoechst:
-        f.write(jahr + ";" + str(hoechst[jahr]) + ";" + str(frost[jahr]) + "\n")
+        datei.write(jahr + ";" + str(hoechst[jahr]) + ";"
+                    + str(frost[jahr]) + "\n")
 
 # ---- Kontrolle ------------------------------------------------------------
 for name in ["fichtelberg_jahre.csv", "freiberg_jahre.csv"]:
-    with open(name) as f:
-        zeilen = f.readlines()
+    with open(name) as datei:
+        zeilen = datei.readlines()
     print(name, len(zeilen) - 1, "Jahre, erste Zeile:", zeilen[1].strip())
 ```
 @LIA.eval(`["hole_daten.py", "auswertung.py"]`, `none`, `sh -c "python3 hole_daten.py && python3 auswertung.py"`)
@@ -437,11 +442,11 @@ Drei Teile. `teile[1]` ist `"20240813"`, davon die Zeichen 4 und 5: `"08"`. `flo
 
 **Welche Aussagen stimmen?**
 
-[[X]] `with open(...) as f:` schließt die Datei automatisch am Ende des Blocks.
-[[ ]] `f.write("abc")` beginnt danach automatisch eine neue Zeile.
+[[X]] `with open(...) as datei:` schließt die Datei automatisch am Ende des Blocks.
+[[ ]] `datei.write("abc")` beginnt danach automatisch eine neue Zeile.
 [[X]] `open("x.csv", "w")` löscht den bisherigen Inhalt von `x.csv`.
 [[ ]] Fehlende Tage stehen in DWD-Dateien immer als `-999` in der Datei.
-[[X]] `f.readline()` vor der Schleife sorgt dafür, dass die Schleife mit der zweiten Zeile beginnt.
+[[X]] `datei.readline()` vor der Schleife sorgt dafür, dass die Schleife mit der zweiten Zeile beginnt.
 
 ## Nächste Woche
 

@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.0
+version:  2.0.1
 language: de
 narrator: Deutsch Female
 
@@ -76,7 +76,7 @@ Jedes Argument erledigt einen Schritt, den Sie in Vorlesung 06 selbst programmie
 | Argument                  | erledigt                                         | VL 06                      |
 | :------------------------ | :----------------------------------------------- | :------------------------- |
 | `sep=";"`                 | Zeilen an den Semikolons zerlegen                | `zeile.split(";")`         |
-| (automatisch)             | erste Zeile als Spaltennamen nutzen              | `f.readline()`             |
+| (automatisch)             | erste Zeile als Spaltennamen nutzen              | `datei.readline()`             |
 | `skipinitialspace=True`   | Leerzeichen nach dem Trennzeichen entfernen      | `strip()`                  |
 | (automatisch)             | Zahlen als Zahlen erkennen                       | `float(...)`               |
 | `na_values=-999`          | Fehlwerte als „kein Wert“ markieren              | `if wert != -999`          |

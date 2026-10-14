@@ -1,5 +1,5 @@
 {
- "stand": "08.10.2026",
+ "stand": "14.10.2026",
  "vorlesungen": [
   {
    "vl": 0,
@@ -1229,7 +1229,7 @@
    "abschnitt": 3,
    "ebene": 1,
    "code": false,
-   "erklaerung": "with open(datei) as f: — Zeile für Zeile, jede als Text.",
+   "erklaerung": "with open(dateiname) as datei: — Zeile für Zeile, jede als Text.",
    "fehlvorstellung": null
   },
   {
@@ -1262,7 +1262,7 @@
    "abschnitt": 6,
    "ebene": 2,
    "code": false,
-   "erklaerung": "Mit f.readline() überspringen — sonst scheitert float an \"TXK\".",
+   "erklaerung": "Mit datei.readline() überspringen — sonst scheitert float an \"TXK\".",
    "fehlvorstellung": null
   },
   {
@@ -1284,7 +1284,7 @@
    "abschnitt": 11,
    "ebene": 1,
    "code": false,
-   "erklaerung": "open(..., \"w\") und f.write — ohne automatischen Zeilenumbruch.",
+   "erklaerung": "open(..., \"w\") und datei.write — ohne automatischen Zeilenumbruch.",
    "fehlvorstellung": null
   },
   {
