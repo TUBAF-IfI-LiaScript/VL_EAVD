@@ -24,7 +24,7 @@ logo: ./images/Readme/Wetterstation.png
 >
 > **Stand 15.10.2026:** Vorlesungen 00–07 und 09–14 sind ausgearbeitet, Vorlesung 08 (Demonstration Datenerhebung) liegt als Rumpf vor. Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) zeigt Begriffe und Zusammenhänge aller Vorlesungen. Die Materialien des bisherigen Kurses (C++/Python) sind in der Git-Historie erreichbar (Commit `21d3061`).
 >
-> Hinweise und Fehler gern als [Issue](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/issues).
+> Hinweise und Fehler gern als [Issue](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/issues). Die Materialien stehen unter [CC BY 4.0](#lizenz).
 
 > Prof. Dr. Sebastian Zug · Prof. Dr. Bernhard Jung
 >
@@ -34,13 +34,13 @@ Die Veranstaltung führt Studierende aus Nicht-Informatikstudiengängen in die P
 
 **Für Studierende:** Der Einstieg ist die erste Vorlesung, [00 Motivation](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/00_Motivation.md). Dort finden Sie Lernziele, Arbeitsweise, Prüfung und Organisatorisches.
 
-**Kurslandkarte (Entwurf zur Diskussion):** [tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) — Begriffe, Zusammenhänge und didaktische Fäden über das Semester. Quelle und Anleitung: [`kurslandkarte/`](kurslandkarte/README.md).
+**Kurslandkarte:** [tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) — Begriffe, Zusammenhänge und didaktische Fäden über das Semester. Quelle und Anleitung: [`kurslandkarte/`](kurslandkarte/README.md).
 
 ## Intention
 
 Wissenschaftliche Daten durchlaufen einen Kreislauf aus Frage, Erhebung, Aufbereitung, Analyse, Visualisierung und Dokumentation — und meist mehrere Runden davon. Der Kurs folgt diesem Kreislauf; das Schema fasst CRISP-DM und den Forschungsdatenlebenszyklus in vereinfachter Form zusammen.
 
-Sechs Prinzipien tragen die Konzeption:
+Sieben Prinzipien tragen die Konzeption:
 
 <!-- data-type="none" -->
 | Prinzip                          | Umsetzung                                                                                          |
@@ -51,6 +51,7 @@ Sechs Prinzipien tragen die Konzeption:
 | **Live Hacking**                 | Ab VL 04 entsteht in jeder Sitzung ein Programm live, inklusive Irrwegen. Ein Skript wächst über VL 06 (lang), VL 07 (Funktionen) und VL 09 (Modul). |
 | **Typische Fehlvorstellungen**   | Eigene Abschnitte mit Vorhersage-Quiz, angelehnt an [PD4CS](https://www.pd4cs.org/mc-index/) und ergänzt um datenspezifische Fehlvorstellungen. |
 | **Klare Werkzeugwahl**           | Blöcke oder Text für Einführungsbeispiele (VL 02–07), Python im Browser (Pyodide) und auf dem Server (CodeRunner) — eins zu eins übertragbar auf den eigenen Rechner. Zum Arbeiten durchgehend Visual Studio Code mit `.py`-Dateien, ab VL 10 mit Zellen (`# %%`). Jupyter Notebooks werden bewusst nicht als Werkzeug eingeführt (zusätzliches Denkmodell, versteckter Zustand), sondern nur zum Lesen vorgestellt. |
+| **Nachvollziehbarkeit durch die Kurslandkarte** | Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) zeigt, welche Begriffe in welcher Vorlesung dazukommen, worauf sie aufbauen und wohin sie führen — als Liste je Vorlesung, als Metrokarte entlang roter Fäden und als Zeitleiste. Jeder Begriff führt direkt zur passenden Folie. |
 
 Die Prüfung ist schriftlich. Geübt wird deshalb vor allem das Lesen, Vorhersagen und Korrigieren von Code.
 
@@ -105,3 +106,11 @@ Die Veranstaltung wurde zum Wintersemester 2026/27 grundlegend überarbeitet.
 > Der Verzicht auf C++ ist die weitreichendste Änderung. Ursprünglich zielte die Veranstaltung darauf ab, den Bogen von der Datenerhebung mit Mikrocontrollern bis hin zur Analyse dieser Informationen zu spannen. Das Ziel bleibt erhalten, wir konzentrieren uns dafür aber auf eine Sprache — Python.
 
 Die Materialien des bisherigen Kurses sind in der Git-Historie erreichbar (Stand vor der Neukonzeption: Commit `21d3061`).
+
+## Lizenz
+
+Die Materialien dieses Kurses stehen, soweit nicht anders angegeben, unter der Lizenz [Creative Commons Namensnennung 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.de); der vollständige Lizenztext liegt in [`LICENSE`](LICENSE). Sie dürfen die Materialien teilen und bearbeiten, auch kommerziell, solange Sie die Urheber nennen und Änderungen kenntlich machen.
+
+Bitte nennen Sie bei einer Weiterverwendung: _„Erhebung, Analyse und Visualisierung digitaler Daten“, Sebastian Zug, Bernhard Jung und Mitwirkende, TU Bergakademie Freiberg, [github.com/TUBAF-IfI-LiaScript/VL_EAVD](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD), CC BY 4.0._
+
+Ausgenommen sind Inhalte Dritter, die mit eigener Quellenangabe gekennzeichnet sind. Die Messdaten des Deutschen Wetterdienstes unter `data/` stehen selbst unter CC BY 4.0 (Quelle und Bedingungen in [`data/README.md`](data/README.md)).
