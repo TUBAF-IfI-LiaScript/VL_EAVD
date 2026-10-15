@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.1
+version:  2.1.0
 language: de
 narrator: Deutsch Female
 
@@ -73,61 +73,19 @@ bernhard.jung@informatik.tu-freiberg.de
 
 --------------------------------------------------------------------------------
 
-**Leitfrage:** _Warum sollte ich programmieren lernen?_
+## Warum sind sie hier?
 
-## Wann erscheinen Sie?
-
-> **Wann erscheinen Studierende in der Vorlesung?** Gibt es Muster — der frühe Vogel, rechtzeitig aber knapp, in den ersten zehn Minuten passiert ohnehin nichts?
-
-Ein Ultraschallsensor an der Hörsaaltür zählt die Eintretenden. So sehen seine Aufzeichnungen aus:
-
-``` text data.csv
-16:14:28.164 -> Person counted. Total = 66
-16:14:28.421 -> Person entered monitoring zone
-16:14:29.869 -> Person counted. Total = 67
-16:14:29.933 -> Person entered monitoring zone
-16:14:32.770 -> Person counted. Total = 68
-```
-
-Eine einfache Frage, echte Messdaten — und schon stecken wir mitten in den Themen dieses Semesters:
-
-* Wie kommen die Daten zustande? Und zählt der Sensor richtig?
-* Wie macht man aus diesen Textzeilen etwas, womit man rechnen kann?
-* Wie beantwortet man die Frage — heute, und jede Woche aufs Neue?
-
-Am Ende dieser Vorlesung kommen wir darauf zurück.
-
-## Wo stehen Sie?
-
-Sie kommen aus unterschiedlichen Studiengängen und bringen unterschiedliche Erfahrungen mit. Helfen Sie uns, die Vorlesung darauf abzustimmen.
-
-**Welchen Studiengang studieren Sie?**
-
-[(geo)] Geowissenschaften / Geologie
-[(min)] Mineralogie
-[(umw)] Umweltingenieurwesen
-[(wiwi)] Wirtschaftswissenschaften
-[(and)] anderer Studiengang
-
-**Wie viel Erfahrung haben Sie mit Programmieren?**
-
-[(0)] keine
-[(1)] ein wenig — Schule, Tutorial, Formeln in der Tabellenkalkulation
-[(2)] ich habe schon eigene kleine Programme geschrieben
-[(3)] ich programmiere regelmäßig
-
-**Womit haben Sie schon Daten ausgewertet?**
-
-[[kalk]] Tabellenkalkulation (Excel, LibreOffice Calc, Google Sheets)
-[[py]] Python
-[[andere]] eine andere Programmiersprache (R, MATLAB, ...)
-[[nichts]] noch gar nicht
-
-**Welche Daten aus Ihrem Fach würden Sie gern auswerten können?**
+**Was motiviert Sie, an dieser Veranstaltung teilzunehmen?**
 
 [[___ ___ ___]]
 
-## Warum programmieren?
+
+**Was verbinden Sie mit dem Begriff "Programmieren"?**
+
+[[___ ___ ___]]
+
+
+## Warum ist die Veranstaltung zentral?
 
 Sie werden in Ihrer fachlichen Praxis Messreihen auswerten, Analysendaten sortieren und Ergebnisse darstellen müssen. Wissenschaftliche Daten durchlaufen dabei immer wieder dasselbe Muster:
 
@@ -151,7 +109,7 @@ Sie werden in Ihrer fachlichen Praxis Messreihen auswerten, Analysendaten sortie
 
 Der Name der Veranstaltung nennt drei dieser Schritte — **Erhebung**, **Analyse** und **Visualisierung**. Und bei jedem Durchlauf stellt sich dieselbe Frage: Mache ich das von Hand, in der Tabellenkalkulation — oder schreibe ich ein Programm, das es für mich tut, jedes Mal wieder, nachvollziehbar und ohne Tippfehler?
 
-## Lernziele
+### Lernziele
 
                                      {{0-1}}
 *******************************************************************************
@@ -182,6 +140,78 @@ Am Ende des Semesters können Sie eine wissenschaftliche Fragestellung auf eine 
 > **Was ausdrücklich nicht das Ziel ist:** Sie werden keine Software-Entwickler. Kleine Vorhaben können Sie aber selbst umsetzen, größere zumindest einordnen.
 
 *******************************************************************************
+
+### Praktische Inhalte
+
+> **Wann erscheinen Studierende in der Vorlesung?** Gibt es Muster — der frühe Vogel, rechtzeitig aber knapp, in den ersten zehn Minuten passiert ohnehin nichts?
+
+Ein Ultraschallsensor an der Hörsaaltür zählt die Eintretenden. So sehen seine Aufzeichnungen aus:
+
+``` text data.csv
+16:14:28.164 -> Person counted. Total = 66
+16:14:28.421 -> Person entered monitoring zone
+16:14:29.869 -> Person counted. Total = 67
+16:14:29.933 -> Person entered monitoring zone
+16:14:32.770 -> Person counted. Total = 68
+```
+
+Eine einfache Frage, echte Messdaten — und schon stecken wir mitten in den Themen dieses Semesters:
+
+* Wie kommen die Daten zustande? Und zählt der Sensor richtig?
+* Wie macht man aus diesen Textzeilen etwas, womit man rechnen kann?
+* Wie beantwortet man die Frage — heute, und jede Woche aufs Neue?
+
+Am Ende dieser Vorlesung kommen wir darauf zurück.
+
+### Ein Blick voraus: Körner im Dünnschliff
+
+> **Wie groß sind die Körner in diesem Gestein — und wie viel Fläche nehmen sie ein?**
+
+Ein **Dünnschliff** ist eine Gesteinsscheibe, die so dünn geschliffen ist (etwa 0,03 mm), dass Licht hindurchscheint. Unter dem Mikroskop liegt sie zwischen zwei gekreuzten Polarisationsfiltern. Die Mineralkörner erscheinen dann je nach Mineral und Lage hell, farbig oder dunkel.
+
+So sieht eine Auswertung in Python aus — das ist der Kern des Programms:
+
+``` python duennschliff.py
+SCHWELLE = 0.45     # Annahme: Ein Korn ist heller als die Schwelle
+hell = ndimage.binary_opening(grau > SCHWELLE, iterations=2)  # Krümel weg
+koerner, _ = ndimage.label(hell)            # zusammenhängende Flecken
+flaeche = np.bincount(koerner.ravel())[1:]  # Pixel je Fleck
+flaeche = flaeche[flaeche >= 150]           # sehr kleine Flecken weg
+durchmesser = 2 * np.sqrt(flaeche / np.pi) * UM_PRO_PIXEL
+```
+
+![Dünnschliff, erkannte helle Körner und ihre Größenverteilung](images/00_Motivation/duennschliff_auswertung.png)
+
+Ergebnis: **40 Körner**, mittlerer Durchmesser (Median) **657 µm**, zusammen rund **13 %** der Probenfläche. Bild: Fundus von Prof. Heide, TU Bergakademie Freiberg.
+
+Das Programm läuft in wenigen Sekunden — aber jede Zeile enthält eine Entscheidung:
+
+<!-- data-type="none" -->
+| Im Code steht ...          | Die Annahme dahinter                      | Was schiefgeht                                                         |
+| :------------------------- | :---------------------------------------- | :--------------------------------------------------------------------- |
+| `SCHWELLE = 0.45`          | Ab dieser Helligkeit beginnt ein Korn     | Bei 0,35 sind es 48 Körner auf 21 % der Probe, bei 0,55 nur 32 auf 11 % |
+| `grau > SCHWELLE`          | Körner sind hell                          | Körner, die gerade dunkel erscheinen, fehlen ganz                       |
+| `ndimage.label`            | Körner berühren sich nicht                | Zwei aneinanderliegende Körner zählen als eines                         |
+| `grau[900:, 640:] = 0`     | Der Maßstab ist kein Korn                 | Ohne diese Zeile wird der Maßstabsbalken als Korn mitgezählt            |
+| `UM_PRO_PIXEL = 2000 / 80` | 80 Pixel entsprechen 2000 µm              | Wer den Maßstab falsch abliest, verschiebt alle Durchmesser             |
+
+Die Bausteine dafür lernen Sie im Semester: Bilder als Tabellen aus Zahlen und Masken in Vorlesung 10, Histogramme in Vorlesung 13. Das vollständige Programm liegt im Repository unter `examples/00_Einfuehrungsbeispiele/Duennschliff/` und läuft in Visual Studio Code.
+
+### Und was ist mit Ihnen
+
+**Aus welchem Studiengang kommen Sie?**
+
+[[___ ___ ___]]
+
+**Welche Daten würden Sie gern analysieren?**
+
+[[___ ___ ___]]
+
+**Welche Programmiererfahrungen haben Sie?**
+
+- [( )]Keine, ich habe noch nie programmiert.
+- [( )]Ein bisschen, ich habe schon mal ein Programm geschrieben.
+- [( )]Viel, ich habe schon mehrere Programme geschrieben.
 
 ## Wie diese Vorlesung funktioniert
 
@@ -215,6 +245,9 @@ Fehlwerte als `-999`, kryptische Spaltennamen, Datumsangaben ohne Trennzeichen �
 Dazu kommen Beispiele aus Ihren Fächern — Analysendaten, Bohrprofile, Pegelstände, Rohstoffpreise. Ihre Antworten auf die Umfrage oben helfen uns bei der Auswahl.
 
 ### Blöcke oder Text
+
+> [!CAUTION]
+> Das Laden der Beispiele dauert im Browser ein paar Sekunden. Bitte warten Sie, bis der Editor erscheint.
 
 Die ersten Beispiele können Sie wahlweise als **Blöcke** zusammenschieben oder als **Text** tippen. Das sind nicht zwei Sprachen, sondern zwei Ansichten auf dasselbe Programm.
 

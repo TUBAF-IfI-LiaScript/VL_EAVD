@@ -1,5 +1,5 @@
 {
- "stand": "14.10.2026",
+ "stand": "15.10.2026",
  "vorlesungen": [
   {
    "vl": 0,
@@ -9,10 +9,12 @@
    "status": "ausgearbeitet",
    "abschnitte": [
     "Herzlich willkommen!",
-    "Wann erscheinen Sie?",
-    "Wo stehen Sie?",
-    "Warum programmieren?",
+    "Warum sind sie hier?",
+    "Warum ist die Veranstaltung zentral?",
     "Lernziele",
+    "Praktische Inhalte",
+    "Ein Blick voraus: Körner im Dünnschliff",
+    "Und was ist mit Ihnen",
     "Wie diese Vorlesung funktioniert",
     "Die Frage kommt zuerst",
     "Ein Datensatz durch das ganze Semester",
@@ -357,7 +359,7 @@
    "name": "Personenzähler",
    "linie": "erhebung",
    "vl": 0,
-   "abschnitt": 2,
+   "abschnitt": 5,
    "ebene": 1,
    "code": false,
    "erklaerung": "Ein Ultraschallsensor an der Hörsaaltür zählt Eintretende — das Einstiegsbeispiel mit echten Messdaten.",
@@ -368,7 +370,7 @@
    "name": "Annahmen im Messprogramm",
    "linie": "erhebung",
    "vl": 0,
-   "abschnitt": 16,
+   "abschnitt": 18,
    "ebene": 2,
    "code": false,
    "erklaerung": "Messbereich, Entprellzeit, fehlender Richtungssinn: Was im Code steht, bestimmt, was gezählt wird.",
@@ -456,7 +458,7 @@
    "name": "Blöcke oder Text",
    "linie": "denken",
    "vl": 0,
-   "abschnitt": 9,
+   "abschnitt": 11,
    "ebene": 2,
    "code": false,
    "erklaerung": "Zwei Ansichten auf dasselbe Programm: Blöcke zusammenschieben oder Python tippen.",
@@ -1424,11 +1426,22 @@
    "name": "Datenkreislauf",
    "linie": "analyse",
    "vl": 0,
-   "abschnitt": 4,
+   "abschnitt": 3,
    "ebene": 2,
    "code": false,
    "erklaerung": "Frage, Erhebung, Aufbereitung, Analyse, Visualisierung, Dokumentation — meist mehrere Runden.",
    "fehlvorstellung": null
+  },
+  {
+   "id": "schliff",
+   "name": "Körner im Dünnschliff",
+   "linie": "analyse",
+   "vl": 0,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Ausblick: Ein Bild ist eine Tabelle aus Helligkeiten. Schwelle setzen, Flecken zählen, Größen messen — jede Zeile eine Annahme.",
+   "fehlvorstellung": "„Das Programm zählt die Körner.“ Es zählt, was heller ist als die Schwelle."
   },
   {
    "id": "lohnt",
@@ -1682,6 +1695,16 @@
    "von": "kreislauf",
    "nach": "lohnt",
    "text": "je Runde die Frage"
+  },
+  {
+   "von": "schliff",
+   "nach": "array",
+   "text": "Bild ist ein"
+  },
+  {
+   "von": "schliff",
+   "nach": "maske",
+   "text": "Schwelle ergibt eine"
   },
   {
    "von": "tabkalk",

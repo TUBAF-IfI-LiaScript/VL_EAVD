@@ -455,7 +455,7 @@ footer p { margin: 0 0 6px; }
     <div class="titleblock">
       <span class="eyebrow">Erhebung, Analyse und Visualisierung digitaler Daten · WiSe 2026/27</span>
       <h1>Kurslandkarte</h1>
-      <span class="sample">Stand 14.10.2026 · <span id="count"></span></span>
+      <span class="sample">Stand 15.10.2026 · <span id="count"></span></span>
       <a class="feedback" href="https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/issues/new?title=Kurslandkarte%3A%20&amp;labels=kurslandkarte" target="_blank" rel="noopener">Fehler oder Wunsch melden (GitHub) ↗</a>
     </div>
     <div class="controls">
@@ -513,7 +513,7 @@ footer p { margin: 0 0 6px; }
 
 <script id="kartendaten" type="application/json">
 {
- "stand": "14.10.2026",
+ "stand": "15.10.2026",
  "vorlesungen": [
   {
    "vl": 0,
@@ -523,10 +523,12 @@ footer p { margin: 0 0 6px; }
    "status": "ausgearbeitet",
    "abschnitte": [
     "Herzlich willkommen!",
-    "Wann erscheinen Sie?",
-    "Wo stehen Sie?",
-    "Warum programmieren?",
+    "Warum sind sie hier?",
+    "Warum ist die Veranstaltung zentral?",
     "Lernziele",
+    "Praktische Inhalte",
+    "Ein Blick voraus: Körner im Dünnschliff",
+    "Und was ist mit Ihnen",
     "Wie diese Vorlesung funktioniert",
     "Die Frage kommt zuerst",
     "Ein Datensatz durch das ganze Semester",
@@ -871,7 +873,7 @@ footer p { margin: 0 0 6px; }
    "name": "Personenzähler",
    "linie": "erhebung",
    "vl": 0,
-   "abschnitt": 2,
+   "abschnitt": 5,
    "ebene": 1,
    "code": false,
    "erklaerung": "Ein Ultraschallsensor an der Hörsaaltür zählt Eintretende — das Einstiegsbeispiel mit echten Messdaten.",
@@ -882,7 +884,7 @@ footer p { margin: 0 0 6px; }
    "name": "Annahmen im Messprogramm",
    "linie": "erhebung",
    "vl": 0,
-   "abschnitt": 16,
+   "abschnitt": 18,
    "ebene": 2,
    "code": false,
    "erklaerung": "Messbereich, Entprellzeit, fehlender Richtungssinn: Was im Code steht, bestimmt, was gezählt wird.",
@@ -970,7 +972,7 @@ footer p { margin: 0 0 6px; }
    "name": "Blöcke oder Text",
    "linie": "denken",
    "vl": 0,
-   "abschnitt": 9,
+   "abschnitt": 11,
    "ebene": 2,
    "code": false,
    "erklaerung": "Zwei Ansichten auf dasselbe Programm: Blöcke zusammenschieben oder Python tippen.",
@@ -1938,11 +1940,22 @@ footer p { margin: 0 0 6px; }
    "name": "Datenkreislauf",
    "linie": "analyse",
    "vl": 0,
-   "abschnitt": 4,
+   "abschnitt": 3,
    "ebene": 2,
    "code": false,
    "erklaerung": "Frage, Erhebung, Aufbereitung, Analyse, Visualisierung, Dokumentation — meist mehrere Runden.",
    "fehlvorstellung": null
+  },
+  {
+   "id": "schliff",
+   "name": "Körner im Dünnschliff",
+   "linie": "analyse",
+   "vl": 0,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Ausblick: Ein Bild ist eine Tabelle aus Helligkeiten. Schwelle setzen, Flecken zählen, Größen messen — jede Zeile eine Annahme.",
+   "fehlvorstellung": "„Das Programm zählt die Körner.“ Es zählt, was heller ist als die Schwelle."
   },
   {
    "id": "lohnt",
@@ -2196,6 +2209,16 @@ footer p { margin: 0 0 6px; }
    "von": "kreislauf",
    "nach": "lohnt",
    "text": "je Runde die Frage"
+  },
+  {
+   "von": "schliff",
+   "nach": "array",
+   "text": "Bild ist ein"
+  },
+  {
+   "von": "schliff",
+   "nach": "maske",
+   "text": "Schwelle ergibt eine"
   },
   {
    "von": "tabkalk",

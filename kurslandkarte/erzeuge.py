@@ -45,7 +45,7 @@ assert len(TERMINE) == 15
 # ---- Begriffe: id, Name, Linie, VL, Abschnitt, Ebene, Code?, Erklärung, Fehlvorstellung
 B = [
     # --- Erhebung
-    ("zaehler", "Personenzähler", "erhebung", 0, 'Wann erscheinen Sie?', 1, 0, "Ein Ultraschallsensor an der Hörsaaltür zählt Eintretende — das Einstiegsbeispiel mit echten Messdaten.", None),
+    ("zaehler", "Personenzähler", "erhebung", 0, 'Praktische Inhalte', 1, 0, "Ein Ultraschallsensor an der Hörsaaltür zählt Eintretende — das Einstiegsbeispiel mit echten Messdaten.", None),
     ("annahmen", "Annahmen im Messprogramm", "erhebung", 0, 'Zurück zum Personenzähler', 2, 0, "Messbereich, Entprellzeit, fehlender Richtungssinn: Was im Code steht, bestimmt, was gezählt wird.", "„Es funktioniert, also zählt es richtig.“"),
     ("sensorlog", "Sensorprotokoll", "erhebung", 1, 'Aufgabe 2: Der Personenzähler', 2, 0, "Die Textzeilen des Personenzählers — mühsam in der Tabellenkalkulation auszuwerten (Aufgabe 2).", None),
     ("micropy", "MicroPython", "erhebung", 8, 'Der Aufbau', 1, 0, "Python auf dem Mikrocontroller — dieselbe Sprache, andere Hardware.", None),
@@ -150,7 +150,8 @@ B = [
     ("inhomogen", "Inhomogenität", "daten", 14, 'Typische Fehlvorstellung: Gleiche Station, gleiche Messung', 2, 0, "Ein Bruch in einer Messreihe durch Ortswechsel, Gerätewechsel oder geänderte Messvorschrift — in den Daten selbst unsichtbar.", "„Dieselbe Stationsnummer und dasselbe Dateiformat bedeuten dieselbe Messung.“"),
 
     # --- Analyse & Darstellung
-    ("kreislauf", "Datenkreislauf", "analyse", 0, 'Warum programmieren?', 2, 0, "Frage, Erhebung, Aufbereitung, Analyse, Visualisierung, Dokumentation — meist mehrere Runden.", None),
+    ("kreislauf", "Datenkreislauf", "analyse", 0, 'Warum ist die Veranstaltung zentral?', 2, 0, "Frage, Erhebung, Aufbereitung, Analyse, Visualisierung, Dokumentation — meist mehrere Runden.", None),
+    ("schliff", "Körner im Dünnschliff", "analyse", 0, 'Ein Blick voraus: Körner im Dünnschliff', 2, 0, "Ausblick: Ein Bild ist eine Tabelle aus Helligkeiten. Schwelle setzen, Flecken zählen, Größen messen — jede Zeile eine Annahme.", "„Das Programm zählt die Körner.“ Es zählt, was heller ist als die Schwelle."),
     ("lohnt", "Programm oder Tabelle?", "analyse", 1, 'Wann lohnt sich ein Programm?', 1, 0, "Viele Daten, sperrige Formate, Wiederholung, Nachvollziehbarkeit: dann lohnt ein Programm.", None),
     ("kenntage", "Frost-, Eis-, Sommertag", "analyse", 3, 'Mehrere Fälle: elif', 2, 0, "DWD-Kenntage: Frosttag = Minimum unter 0 °C, Eistag = Maximum unter 0 °C, Sommertag = Maximum ab 25 °C.", None),
     ("mittel", "Mittelwert", "analyse", 4, 'Mittelwert mit Fehlwerten', 1, 0, "Summe durch Anzahl — nur über gültige Werte, und die Anzahl gehört dazu.", "„Ein Mittelwert gilt, egal wie viele Werte fehlen.“"),
@@ -178,7 +179,7 @@ B = [
 R = [
     # Einstieg
     ("zaehler", "sensorlog", "erzeugt"), ("zaehler", "annahmen", "beruht auf"), ("sensorlog", "tabkalk", "ausgewertet mit"),
-    ("kreislauf", "lohnt", "je Runde die Frage"), ("tabkalk", "lohnt", "Grenzen zeigen"), ("dwd", "rohformat", "liegt vor im"),
+    ("kreislauf", "lohnt", "je Runde die Frage"), ("schliff", "array", "Bild ist ein"), ("schliff", "maske", "Schwelle ergibt eine"), ("tabkalk", "lohnt", "Grenzen zeigen"), ("dwd", "rohformat", "liegt vor im"),
     ("tabkalk", "algo", "motiviert"), ("algo", "terminierung", "erfordert"), ("algo", "pseudo", "notiert als"),
     ("pseudo", "ablauf", "oder als"), ("algo", "sprache", "formuliert in"), ("blockly", "print", "gleiches Programm wie"),
     # VL 02
