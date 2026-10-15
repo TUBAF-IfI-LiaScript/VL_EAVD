@@ -238,6 +238,8 @@ input[type=range] { width: 200px; accent-color: var(--here); }
 }
 .mapbox #side { flex: none; }
 .scroller { overflow-x: auto; overflow-y: hidden; min-width: 0; flex: 1; }
+.mapbox { position: relative; }
+.mapbox::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: 28px; pointer-events: none; background: linear-gradient(to right, transparent, var(--surface)); }
 svg { display: block; }
 .lane-title {
   font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
@@ -451,8 +453,10 @@ footer p { margin: 0 0 6px; }
 .chips button:focus-visible { outline: 2px solid var(--here); outline-offset: 2px; }
 .liste .panel { margin-top: 2px; }
 .vlhead + .frage, .frage { font-size: 14px; font-style: italic; color: var(--muted); margin-top: -4px; }
-.chips.vorschau { opacity: .7; }
-.chips.vorschau button { border-style: dashed; }
+.chips.vorschau { opacity: .5; align-items: center; }
+.chips.vorschau button { border-style: dashed; font-style: italic; }
+.station.vorschau { opacity: .4; }
+.station.vorschau text { font-style: italic; }
 .chips.apps { padding-top: 6px; border-top: 1px dashed var(--faint); align-items: center; }
 .apps-lbl { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 600; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
 .chips.apps button { border-radius: 4px; border-style: dashed; }
@@ -482,8 +486,8 @@ footer p { margin: 0 0 6px; }
       <div class="control">
         <span class="lbl" id="modeLbl">Variante</span>
         <div class="seg" role="group" aria-labelledby="modeLbl">
-          <button id="mListe" aria-pressed="false" title="Alle Vorlesungen untereinander, mit Leitfrage, Begriffen und Anwendungen">Vorlesungen</button>
-          <button id="mMetro" aria-pressed="true" title="Jede farbige Linie ist ein roter Faden: ein Thema, das sich durch mehrere Vorlesungen zieht">Metrokarte</button>
+          <button id="mListe" aria-pressed="true" title="Alle Vorlesungen untereinander, mit Leitfrage, Begriffen und Anwendungen">Vorlesungen</button>
+          <button id="mMetro" aria-pressed="false" title="Jede farbige Linie ist ein roter Faden: ein Thema, das sich durch mehrere Vorlesungen zieht">Metrokarte</button>
           <button id="mZeit" aria-pressed="false" title="Alle Begriffe nach Themengebiet über das Semester, mit Pfeilen für ihre Zusammenhänge">Zeitleiste</button>
         </div>
       </div>
@@ -3188,7 +3192,7 @@ footer p { margin: 0 0 6px; }
    "fach": "Geologie",
    "vl": 0,
    "abschnitt": 6,
-   "datensatz": "Dünnschliff unter gekreuzten Polarisatoren (Fundus Prof. Heide, TUBAF)",
+   "datensatz": "Mikroskopbild einer hauchdünn geschliffenen Gesteinsscheibe, durch zwei gekreuzte Lichtfilter (Polarisationsfilter) betrachtet, sodass die Mineralkörner hell oder farbig leuchten. Bild aus der Lehrsammlung von Prof. Heide, TU Bergakademie Freiberg",
    "schlagworte": [
     "schliff",
     "annahmen"
@@ -3261,7 +3265,7 @@ const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const narrow = () => matchMedia("(max-width: 980px)").matches;
 // Begriffe erscheinen erst nach ihrer Vorlesung (Freigabe); „Ausblick“ zeigt die vorbereiteten blass
 const sichtbar = (n) => n && (state.ausblick || LECTURES[n.vl].frei);
-const state = { mode: narrow() ? "liste" : "metro", here: HERE_TODAY, view: "nb", detail: false, ausblick: false, sel: null, thread: null, hidden: new Set() };
+const state = { mode: "liste", here: HERE_TODAY, view: "nb", detail: false, ausblick: false, sel: null, thread: null, hidden: new Set() };
 try {
   const saved = JSON.parse(localStorage.getItem("eavd-map") || "{}");
   if (typeof saved.detail === "boolean") state.detail = saved.detail;
@@ -3427,6 +3431,7 @@ function drawZeit() {
     if (n.code) cls.push("code");
     if (n.level === 2) cls.push("detail");
     if (n.vl > state.here) cls.push("future");
+    if (!LECTURES[n.vl].frei) cls.push("vorschau");
     if (n.id === state.sel) cls.push("sel");
     else if (nbSet.has(n.id)) cls.push("nb");
     else if (state.view === "nb" && state.sel) cls.push("dim");
@@ -3467,6 +3472,8 @@ function drawMetro() {
     const cls = ["station", "metro"];
     if (n.code) cls.push("code");
     if (n.vl > state.here) cls.push("future");
+    const vor = !LECTURES[n.vl].frei;
+    if (vor) cls.push("vorschau");
     if (n.id === state.sel) cls.push("sel");
     if (!onActive) cls.push("dim");
     const g = stationGroup(n, cls);
@@ -3475,7 +3482,8 @@ function drawMetro() {
     } else {
       el("circle", { cx: p.x, cy: p.y, r: 5.5, class: "mstop", stroke: css(threadById[threadsOf[n.id][0]].v) }, g);
     }
-    el("text", { x: p.x + 6, y: p.y - 12, transform: `rotate(-32 ${p.x + 6} ${p.y - 12})`, class: multi ? "xlabel" : "" }, g).textContent = n.name;
+    el("title", {}, g).textContent = n.name + (vor ? " (vorbereitet)" : "");
+    if (!vor || n.id === state.sel) el("text", { x: p.x + 6, y: p.y - 12, transform: `rotate(-32 ${p.x + 6} ${p.y - 12})`, class: multi ? "xlabel" : "" }, g).textContent = n.name;
   });
 }
 
@@ -3496,7 +3504,7 @@ function drawListe() {
     li.innerHTML = `<div class="vlhead"><b>VL ${lec.nr}</b><span class="d">${lec.date}</span><span class="s">${lec.short}</span>${tag}
       <a href="${BASE + lec.file}" target="_blank" rel="noopener">Folien ↗</a></div>
       ${lec.frage ? `<div class="frage">${lec.frage}</div>` : ""}
-      ${!lec.frei && !state.ausblick ? vorbereitetHinweis(v) : `<div class="chips${lec.frei ? "" : " vorschau"}">${items.map(n => `<button data-id="${n.id}" class="${n.level === 2 ? "detail" : ""}${n.code ? " code" : ""}" aria-pressed="${n.id === state.sel}"><i style="background:${css(lineById[n.line].v)}"></i><span class="n">${n.name}</span></button>`).join("") || '<span class="hint">keine Begriffe in den gewählten Gebieten</span>'}</div>`}
+      ${!lec.frei && !state.ausblick ? vorbereitetHinweis(v) : `<div class="chips${lec.frei ? "" : " vorschau"}">${lec.frei ? "" : '<span class="apps-lbl">Vorbereitet</span>'}${items.map(n => `<button data-id="${n.id}" class="${n.level === 2 ? "detail" : ""}${n.code ? " code" : ""}" aria-pressed="${n.id === state.sel}"><i style="background:${css(lineById[n.line].v)}"></i><span class="n">${n.name}</span></button>`).join("") || '<span class="hint">keine Begriffe in den gewählten Gebieten</span>'}</div>`}
       ${APPS.some(a => a.vl === v && sichtbar(a)) ? `<div class="chips apps"><span class="apps-lbl">Anwendungen</span>${APPS.filter(a => a.vl === v && sichtbar(a)).map(a => `<button data-id="${a.id}" aria-pressed="${a.id === state.sel}"><span class="n">${a.name}</span><span class="fach">${a.fach}</span></button>`).join("")}</div>` : ""}`;
     li.querySelectorAll("button[data-ausblick]").forEach(b => b.addEventListener("click", () => { state.ausblick = true; save(); render(); }));
     li.querySelectorAll(".chips button").forEach(b => b.addEventListener("click", () => {
@@ -3555,7 +3563,7 @@ function renderPanel() {
       <h2>${app.name}</h2>
       <div class="meta"><span class="chip">Anwendung · ${app.fach}</span><span>VL ${lec.nr} · ${lec.date}</span></div>
       <p><strong>Daten:</strong> ${app.data}</p>
-      <h3>Nutzt die Schlagworte</h3>
+      <h3>Nutzt die Begriffe</h3>
       <ul class="rels">${app.uses.map(k => `<li><button data-id="${k}"><span class="t">${byId[k].name}</span> <span class="v">VL ${LECTURES[byId[k].vl].nr}</span></button></li>`).join("")}</ul>
       <div class="goto">
         <span class="hint">Abschnitt ${app.sec}: ${lec.sections[app.sec - 1] || ""}</span>
@@ -3647,10 +3655,11 @@ function render() {
   $("#liste").hidden = state.mode !== "liste";
   const vis = ALL.filter(sichtbar);
   const nVisSt = [...new Set(THREADS.flatMap(t => t.st))].filter(id => sichtbar(byId[id])).length;
-  const nFrei = LECTURES.filter(l => l.frei).length, nFreiB = ALL.filter(n => LECTURES[n.vl].frei).length;
+  const nFrei = LECTURES.filter(l => l.frei).length, nFreiB = ALL.filter(n => LECTURES[n.vl].frei).length, nFreiK = ALL.filter(n => LECTURES[n.vl].frei && n.level === 1).length;
   $("#count").textContent = state.mode === "metro"
     ? `${plural(THREADS.length, "roter Faden", "rote Fäden")} · ${plural(nVisSt, "Station", "Stationen")} ${state.ausblick ? "mit Ausblick" : "freigeschaltet"}`
-    : `${plural(nFreiB, "Begriff", "Begriffe")} aus ${plural(nFrei, "Vorlesung", "Vorlesungen")}` + (ALL.length > nFreiB ? ` · ${ALL.length - nFreiB} weitere vorbereitet` : "");
+    : (state.detail ? `${plural(nFreiB, "Begriff", "Begriffe")}` : `${plural(nFreiK, "Kernbegriff", "Kernbegriffe")}` + (nFreiB > nFreiK ? ` (${nFreiB - nFreiK} weitere unter „Alle“)` : ""))
+      + ` aus ${plural(nFrei, "Vorlesung", "Vorlesungen")}` + (ALL.length > nFreiB ? ` · ${ALL.length - nFreiB} vorbereitet` : "");
   if (state.mode === "liste") drawListe();
   else {
     if (state.mode === "metro") layoutMetro(); else layoutZeit();

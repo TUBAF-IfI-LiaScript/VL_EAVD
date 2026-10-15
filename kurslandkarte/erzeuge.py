@@ -256,7 +256,7 @@ A = [
     ("a_tuer", "Personenzähler an der Hörsaaltür", "Messtechnik", 0, 'Praktische Inhalte',
      "Zählungen des Alvik-Roboters (zaehlungen_JJJJ-MM-TT.csv)", ["zaehler", "annahmen"], "lehrende"),
     ("a_schliff", "Körner im Dünnschliff", "Geologie", 0, 'Ein Blick voraus: Körner im Dünnschliff',
-     "Dünnschliff unter gekreuzten Polarisatoren (Fundus Prof. Heide, TUBAF)", ["schliff", "annahmen"], "lehrende"),
+     "Mikroskopbild einer hauchdünn geschliffenen Gesteinsscheibe, durch zwei gekreuzte Lichtfilter (Polarisationsfilter) betrachtet, sodass die Mineralkörner hell oder farbig leuchten. Bild aus der Lehrsammlung von Prof. Heide, TU Bergakademie Freiberg", ["schliff", "annahmen"], "lehrende"),
     ("a_frost_bloecke", "Frosttage einer Januarwoche, als Blöcke und als Python", "Klima", 0, 'Blöcke oder Text',
      "Tiefsttemperaturen Fichtelberg", ["blockly"], "lehrende"),
 ]
