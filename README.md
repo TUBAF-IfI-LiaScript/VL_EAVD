@@ -57,7 +57,7 @@ Die Prüfung ist schriftlich. Geübt wird deshalb vor allem das Lesen, Vorhersag
 
 ## Zeitplan
 
-Vorlesung montags; Vorlesungszeit 19.10.–18.12.2026 und 04.01.–12.02.2027.
+Vorlesung montags 16:15–17:45 Uhr im Raum FOR-0270; Vorlesungszeit 19.10.–18.12.2026 und 04.01.–12.02.2027.
 
 <!-- data-type="none" -->
 | Termin | VL | Thema                                         | Phase                        |

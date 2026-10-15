@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.1.2
+version:  2.1.3
 language: de
 narrator: Deutsch Female
 
@@ -323,16 +323,6 @@ Programmieren lernt man in Schichten: Jeder neue Begriff stützt sich auf frühe
 | nach der Vorlesung            | Kann ich jeden neuen Begriff in einem Satz erklären?           |
 | vor der Übung und der Klausur | Kenne ich die typische Fehlvorstellung — und warum sie falsch ist? |
 
-Probieren Sie es aus: Suchen Sie in der Kurslandkarte den Begriff „Fehlwert -999“. In welcher Vorlesung kommt er dazu?
-
-[( )] Vorlesung 01
-[(X)] Vorlesung 03
-[( )] Vorlesung 06
-[( )] Vorlesung 11
-***
-In Vorlesung 03 („Prüfen und Wiederholen“). Er baut auf dem DWD-Datensatz aus Vorlesung 01 auf und führt unter anderem zum Mittelwert in Vorlesung 04: Wer `-999` mitrechnet, verfälscht den Mittelwert.
-***
-
 ### Offene Materialien
 
 **Im Browser, ohne Installation.** Alle Vorlesungen sind mit [LiaScript](https://liascript.github.io) geschrieben: interaktive Dokumente, die direkt im Browser laufen. Die Beispiele lassen sich ausführen und verändern, die Quizfragen werten sofort aus. Über die Einstellungen oben rechts (Symbol mit Schiebereglern) wechseln Sie zwischen Präsentation, Folien und Lehrbuch.
@@ -349,7 +339,7 @@ In Vorlesung 03 („Prüfen und Wiederholen“). Er baut auf dem DWD-Datensatz a
 
 ## Semesterplan
 
-Die Vorlesung findet montags statt. Vor Weihnachten legen wir die Grundlagen, danach geht es um Datenanalyse.
+Die Vorlesung findet montags von 16:15 bis 17:45 Uhr im Raum FOR-0270 statt. Vor Weihnachten legen wir die Grundlagen, danach geht es um Datenanalyse.
 
 <!-- data-type="none" -->
 | Termin | VL | Thema                                         | Leitfrage                                               |
