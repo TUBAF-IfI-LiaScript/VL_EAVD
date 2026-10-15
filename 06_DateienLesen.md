@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.1
+version:  2.0.2
 language: de
 narrator: Deutsch Female
 
@@ -447,6 +447,18 @@ Drei Teile. `teile[1]` ist `"20240813"`, davon die Zeichen 4 und 5: `"08"`. `flo
 [[X]] `open("x.csv", "w")` löscht den bisherigen Inhalt von `x.csv`.
 [[ ]] Fehlende Tage stehen in DWD-Dateien immer als `-999` in der Datei.
 [[X]] `datei.readline()` vor der Schleife sorgt dafür, dass die Schleife mit der zweiten Zeile beginnt.
+
+## Ihre Begriffe für die Kurslandkarte
+
+Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam; nach der Vorlesung werden die Begriffe dieser Woche in der Karte freigeschaltet.
+
+**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
+
+[[___ ___ ___]]
+
+**Wo könnten Sie das, was heute dran war, in Ihrem Fach anwenden?**
+
+[[___ ___ ___]]
 
 ## Nächste Woche
 

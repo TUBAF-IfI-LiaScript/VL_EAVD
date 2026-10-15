@@ -6,10 +6,12 @@
    "datei": "00_Motivation.md",
    "datum": "2026-10-19",
    "kurz": "Motivation",
+   "leitfrage": "Warum sollte ich programmieren lernen?",
+   "freigegeben": true,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Herzlich willkommen!",
-    "Warum sind sie hier?",
+    "Warum sind Sie hier?",
     "Warum ist die Veranstaltung zentral?",
     "Lernziele",
     "Praktische Inhalte",
@@ -22,10 +24,13 @@
     "Live Hacking und typische Fehlvorstellungen",
     "Werkzeuge",
     "Erst mühsam, dann mit Werkzeug",
+    "Die Kurslandkarte",
+    "Offene Materialien",
     "Semesterplan",
     "Prüfung",
     "Organisatorisches",
     "Zurück zum Personenzähler",
+    "Ihre Begriffe für die Kurslandkarte",
     "Nächste Woche"
    ]
   },
@@ -34,6 +39,8 @@
    "datei": "01_VomProblemZumProgramm.md",
    "datum": "2026-10-26",
    "kurz": "Problem → Programm",
+   "leitfrage": "Wo hört die Tabellenkalkulation auf?",
+   "freigegeben": false,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Vom Problem zum Programm",
@@ -53,6 +60,7 @@
     "Wann lohnt sich ein Programm?",
     "Tabelle und Skript im Vergleich",
     "Ein Blick voraus",
+    "Ihre Begriffe für die Kurslandkarte",
     "Nächste Woche"
    ]
   },
@@ -61,6 +69,8 @@
    "datei": "02_ErsteSchritte.md",
    "datum": "2026-11-02",
    "kurz": "Erste Schritte",
+   "leitfrage": "Wie sage ich dem Rechner, was er tun soll?",
+   "freigegeben": false,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Erste Schritte in Python",
@@ -80,6 +90,7 @@
     "Kommentare",
     "Fehlermeldungen lesen",
     "Kontrollfragen",
+    "Ihre Begriffe für die Kurslandkarte",
     "Nächste Woche"
    ]
   },
@@ -88,6 +99,8 @@
    "datei": "03_PruefenUndWiederholen.md",
    "datum": "2026-11-09",
    "kurz": "Prüfen & Wiederholen",
+   "leitfrage": "An wie vielen Tagen gab es 2024 Frost?",
+   "freigegeben": false,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Prüfen und Wiederholen",
@@ -104,6 +117,7 @@
     "Typische Fehlvorstellung: Die Schleifenvariable",
     "Die Antwort auf die Leitfrage",
     "Kontrollfragen",
+    "Ihre Begriffe für die Kurslandkarte",
     "Nächste Woche"
    ]
   },
@@ -112,6 +126,8 @@
    "datei": "04_MusterInMessreihen.md",
    "datum": "2026-11-16",
    "kurz": "Muster",
+   "leitfrage": "Wie lang war die längste Frostperiode?",
+   "freigegeben": false,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Muster in Messreihen",
@@ -127,6 +143,7 @@
     "while: Wiederholen, solange ...",
     "Typische Fehlvorstellung: Kommazahlen sind exakt",
     "Kontrollfragen",
+    "Ihre Begriffe für die Kurslandkarte",
     "Nächste Woche"
    ]
   },
@@ -135,6 +152,8 @@
    "datei": "05_DatenSammeln.md",
    "datum": "2026-11-23",
    "kurz": "Daten sammeln",
+   "leitfrage": "Welches war der wärmste Tag jedes Jahres?",
+   "freigegeben": false,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Daten sammeln",
@@ -153,6 +172,7 @@
     "Mit dem Ergebnis weiterarbeiten",
     "Ausblick: Dictionary",
     "Kontrollfragen",
+    "Ihre Begriffe für die Kurslandkarte",
     "Nächste Woche"
    ]
   },
@@ -161,6 +181,8 @@
    "datei": "06_DateienLesen.md",
    "datum": "2026-11-30",
    "kurz": "Dateien lesen",
+   "leitfrage": "Wie kommen 48.000 Zeilen in mein Programm?",
+   "freigegeben": false,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Dateien lesen",
@@ -177,6 +199,7 @@
     "Live Hacking: Das lange Skript",
     "Zwischenbilanz: Datentypen",
     "Kontrollfragen",
+    "Ihre Begriffe für die Kurslandkarte",
     "Nächste Woche"
    ]
   },
@@ -185,6 +208,8 @@
    "datei": "07_Funktionen.md",
    "datum": "2026-12-07",
    "kurz": "Funktionen",
+   "leitfrage": "Wie vermeide ich, alles dreimal zu schreiben?",
+   "freigegeben": false,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Funktionen",
@@ -199,6 +224,7 @@
     "Live Hacking: Das lange Skript zerlegen",
     "Funktionen prüfen",
     "Kontrollfragen",
+    "Ihre Begriffe für die Kurslandkarte",
     "Nächste Woche"
    ]
   },
@@ -207,6 +233,8 @@
    "datei": "08_DemoMicroPython.md",
    "datum": "2026-12-14",
    "kurz": "Demo MicroPython",
+   "leitfrage": "Wo kommen die Daten eigentlich her?",
+   "freigegeben": false,
    "status": "Rumpf",
    "abschnitte": [
     "Demonstration: Datenerhebung mit MicroPython",
@@ -215,6 +243,7 @@
     "Live: Wir messen",
     "Was schiefgeht",
     "Die Daten kommen wieder",
+    "Ihre Begriffe für die Kurslandkarte",
     "Material"
    ]
   },
@@ -223,6 +252,8 @@
    "datei": "09_ProgrammeStrukturieren.md",
    "datum": "2027-01-04",
    "kurz": "Strukturieren",
+   "leitfrage": "Wie organisiere ich Code, der wächst?",
+   "freigegeben": false,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Programme strukturieren",
@@ -237,6 +268,7 @@
     "Externe Pakete",
     "Typische Fehlvorstellung: Pfade",
     "Kontrollfragen",
+    "Ihre Begriffe für die Kurslandkarte",
     "Nächste Woche"
    ]
   },
@@ -245,6 +277,8 @@
    "datei": "10_Bibliotheken.md",
    "datum": "2027-01-11",
    "kurz": "NumPy",
+   "leitfrage": "Warum muss ich das Rad nicht neu erfinden?",
+   "freigegeben": false,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Bibliotheken: NumPy",
@@ -261,6 +295,7 @@
     "Exkurs: Jupyter Notebooks lesen",
     "Typische Fehlvorstellung: Ein Notebook zeigt, was gerechnet wurde",
     "Kontrollfragen",
+    "Ihre Begriffe für die Kurslandkarte",
     "Nächste Woche"
    ]
   },
@@ -269,6 +304,8 @@
    "datei": "11_PandasEinlesen.md",
    "datum": "2027-01-18",
    "kurz": "pandas I",
+   "leitfrage": "48.000 Zeilen in einer Anweisung?",
+   "freigegeben": false,
    "status": "ausgearbeitet",
    "abschnitte": [
     "pandas I — Einlesen",
@@ -285,6 +322,7 @@
     "Versuch 3",
     "Versuch 4",
     "Kontrollfragen",
+    "Ihre Begriffe für die Kurslandkarte",
     "Nächste Woche"
    ]
   },
@@ -293,6 +331,8 @@
    "datei": "12_PandasAggregieren.md",
    "datum": "2027-01-25",
    "kurz": "pandas II",
+   "leitfrage": "Wie fasse ich Jahrzehnte zusammen?",
+   "freigegeben": false,
    "status": "ausgearbeitet",
    "abschnitte": [
     "pandas II — Aggregieren",
@@ -305,6 +345,7 @@
     "Versuch 3",
     "Zwei Stationen verbinden",
     "Kontrollfragen",
+    "Ihre Begriffe für die Kurslandkarte",
     "Nächste Woche"
    ]
   },
@@ -313,6 +354,8 @@
    "datei": "13_Visualisierung.md",
    "datum": "2027-02-01",
    "kurz": "Visualisierung",
+   "leitfrage": "Wie zeige ich, was ich gefunden habe?",
+   "freigegeben": false,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Visualisierung",
@@ -327,6 +370,7 @@
     "Versuch 2",
     "Versuch 3",
     "Kontrollfragen",
+    "Ihre Begriffe für die Kurslandkarte",
     "Nächste Woche"
    ]
   },
@@ -335,6 +379,8 @@
    "datei": "14_Datenqualitaet.md",
    "datum": "2027-02-08",
    "kurz": "Datenqualität",
+   "leitfrage": "Kann ich meinem Ergebnis trauen?",
+   "freigegeben": false,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Datenqualität, Ausblick, Prüfungsvorbereitung",
@@ -349,6 +395,7 @@
     "Kann ich meinem Ergebnis trauen?",
     "Reproduzierbarkeit",
     "Ausblick",
+    "Ihre Begriffe für die Kurslandkarte",
     "Prüfungsvorbereitung"
    ]
   }
@@ -356,25 +403,25 @@
  "begriffe": [
   {
    "id": "zaehler",
-   "name": "Personenzähler",
+   "name": "Datenerhebung",
    "linie": "erhebung",
    "vl": 0,
    "abschnitt": 5,
    "ebene": 1,
    "code": false,
-   "erklaerung": "Ein Ultraschallsensor an der Hörsaaltür zählt Eintretende — das Einstiegsbeispiel mit echten Messdaten.",
+   "erklaerung": "Messdaten entstehen nicht von selbst: Ein Sensor wandelt etwas Physikalisches in Zahlen um, ein Programm entscheidet, was davon festgehalten wird.",
    "fehlvorstellung": null
   },
   {
    "id": "annahmen",
-   "name": "Annahmen im Messprogramm",
+   "name": "Annahmen im Programm",
    "linie": "erhebung",
    "vl": 0,
-   "abschnitt": 18,
+   "abschnitt": 20,
    "ebene": 2,
    "code": false,
-   "erklaerung": "Messbereich, Entprellzeit, fehlender Richtungssinn: Was im Code steht, bestimmt, was gezählt wird.",
-   "fehlvorstellung": "„Es funktioniert, also zählt es richtig.“"
+   "erklaerung": "Grenzwerte, Schwellen und Zeitfenster im Code legen fest, was als Ergebnis herauskommt — ohne dass eine Fehlermeldung darauf hinweist.",
+   "fehlvorstellung": "„Es funktioniert, also stimmt das Ergebnis.“"
   },
   {
    "id": "sensorlog",
@@ -455,7 +502,7 @@
   },
   {
    "id": "blockly",
-   "name": "Blöcke oder Text",
+   "name": "Programmdarstellung: Blöcke oder Text",
    "linie": "denken",
    "vl": 0,
    "abschnitt": 11,
@@ -1434,14 +1481,14 @@
   },
   {
    "id": "schliff",
-   "name": "Körner im Dünnschliff",
+   "name": "Bildverarbeitung",
    "linie": "analyse",
    "vl": 0,
    "abschnitt": 6,
    "ebene": 2,
    "code": false,
-   "erklaerung": "Ausblick: Ein Bild ist eine Tabelle aus Helligkeiten. Schwelle setzen, Flecken zählen, Größen messen — jede Zeile eine Annahme.",
-   "fehlvorstellung": "„Das Programm zählt die Körner.“ Es zählt, was heller ist als die Schwelle."
+   "erklaerung": "Ausblick: Ein Bild ist eine Tabelle aus Helligkeitswerten. Schwelle setzen, zusammenhängende Flecken zählen, Größen messen.",
+   "fehlvorstellung": "„Das Programm erkennt, was im Bild ist.“ Es erkennt nur, was heller ist als die Schwelle."
   },
   {
    "id": "lohnt",
@@ -1668,7 +1715,7 @@
    "name": "Prüfungsvorbereitung",
    "linie": "analyse",
    "vl": 14,
-   "abschnitt": 13,
+   "abschnitt": 14,
    "ebene": 2,
    "code": false,
    "erklaerung": "Musteraufgaben zu allen Aufgabentypen aus VL 00.",
@@ -2119,7 +2166,7 @@
   {
    "von": "zaehler",
    "nach": "micropy",
-   "text": "läuft auf"
+   "text": "z. B. mit"
   },
   {
    "von": "micropy",
@@ -2562,6 +2609,46 @@
     "stationswechsel",
     "qualitaet"
    ]
+  }
+ ],
+ "anwendungen": [
+  {
+   "id": "a_tuer",
+   "titel": "Personenzähler an der Hörsaaltür",
+   "fach": "Messtechnik",
+   "vl": 0,
+   "abschnitt": 5,
+   "datensatz": "Sensorprotokoll data.csv",
+   "schlagworte": [
+    "zaehler",
+    "annahmen"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_schliff",
+   "titel": "Körner im Dünnschliff",
+   "fach": "Geologie",
+   "vl": 0,
+   "abschnitt": 6,
+   "datensatz": "Dünnschliff unter gekreuzten Polarisatoren (Fundus Prof. Heide, TUBAF)",
+   "schlagworte": [
+    "schliff",
+    "annahmen"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_frost_bloecke",
+   "titel": "Frosttage einer Januarwoche, als Blöcke und als Python",
+   "fach": "Klima",
+   "vl": 0,
+   "abschnitt": 11,
+   "datensatz": "Tiefsttemperaturen Fichtelberg",
+   "schlagworte": [
+    "blockly"
+   ],
+   "herkunft": "lehrende"
   }
  ]
 }

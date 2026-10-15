@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.1.0
+version:  2.1.2
 language: de
 narrator: Deutsch Female
 
@@ -80,6 +80,8 @@ Wir lösen heute drei Aufgaben — ohne eine Zeile Code. Jede hat ein festes Zei
 3. Wie sicher sind Sie, dass Ihr Ergebnis stimmt?
 
 > Die Antworten auf diese drei Fragen sind am Ende wichtiger als die Ergebnisse selbst.
+
+Zeigt der Browser eine Datei nur als Text an, statt sie herunterzuladen: Rechtsklick auf den Link und „Ziel speichern unter …“ bzw. „Link speichern unter …“ wählen.
 
 <!-- data-type="none" -->
 | Aufgabe | Zeit    | Arbeitsform | Ziel                                   |
@@ -162,7 +164,7 @@ Sie müssen nicht fertig werden. Merken Sie sich die Stelle, an der Sie hängen 
 **Was dabei zu tun ist**
 
 1. Datei importieren — aber mit welchem Trennzeichen? Es gibt keins.
-2. Die Zeilen mit `Person entered` herausfiltern, sie sind hier ohne Bedeutung.
+2. Die Zeilen mit `Person entered` herausfiltern — für die Zählung ignorieren wir sie vorerst.
 3. Uhrzeit und Zählerstand aus dem Text herausschneiden (`LINKS`, `TEIL`, `FINDEN`, ...).
 4. Den Text `16:15:07.925` in eine Uhrzeit umwandeln, mit der man vergleichen kann.
 5. Minuten bilden und zählen.
@@ -170,7 +172,7 @@ Sie müssen nicht fertig werden. Merken Sie sich die Stelle, an der Sie hängen 
 <details>
 <summary>**Lösung zu a)**</summary>
 
-Die Zählerstände 71 bis 79 liegen nach 16:15 Uhr — das sind **9 Personen**. Ob das stimmt, ist eine andere Frage: Achten Sie auf die vielen `entered`-Zeilen ohne anschließendes `counted`.
+Die Zählerstände 71 bis 79 liegen nach 16:15 Uhr — das sind **9 Personen**. Ob das stimmt, ist eine andere Frage: In der Datei steht 22-mal `entered`, aber nur 14-mal `counted`. Der Sensor zählt erst, wenn jemand den Bereich wieder verlässt, und nur, wenn seit der letzten Zählung mehr als eine Sekunde vergangen ist. Wer kurz nach einer anderen Person hereinkommt, wird nicht gezählt — eine der Annahmen aus Vorlesung 00.
 
 </details>
 
@@ -207,7 +209,7 @@ Die Frage lautet: _Wie hat sich die Zahl der Frosttage pro Jahr seit 1890 entwic
 
 **Worüber Sie dabei stolpern**
 
-* 47.595 Zeilen und 19 Spalten, von denen Sie zwei brauchen
+* 47.595 Zeilen und 19 Spalten, von denen Sie zwei brauchen: `MESS_DATUM` (das Datum) und `TNK` (die tiefste Temperatur des Tages in °C)
 * Dezimalpunkt statt Dezimalkomma — je nach Einstellung wird aus `-0.5` der 5. Januar
 * `-999` steht für "nicht gemessen" und ist sicher kein Frost
 * Das Datum `18900801` ist eine Zahl, kein Datum. Das Jahr steckt in den ersten vier Ziffern.
@@ -524,7 +526,7 @@ df["Jahr"] = df["MESS_DATUM"] // 10000
 print((df["TNK"] < 0).groupby(df["Jahr"]).sum())
 ```
 
-Vier Anweisungen. Sie müssen heute noch keine davon verstehen.
+Vier Anweisungen. Sie müssen heute noch keine davon verstehen. Sie zählen die Frosttage jedes Jahres; für das Diagramm unten kommen noch zwei Schritte dazu: unvollständig gemessene Jahre aussortieren und je Jahrzehnt mitteln.
 
 *******************************************************************************
 
@@ -551,9 +553,21 @@ Und das Ergebnis, gemittelt über die vollständig gemessenen Jahre jedes Jahrze
 | 2010er    |     154.2 |
 | 2020er    |     140.0 |
 
-> Rund 50 Frosttage weniger als vor hundert Jahren. Bevor wir so etwas behaupten, werden wir aber prüfen müssen, ob die Zahlen das tragen — was ist mit den Lücken, und stand das Thermometer immer an derselben Stelle? Dazu mehr in Vorlesung 14.
+> Rund 40 Frosttage weniger als in den 1920er-Jahren — wobei die 2020er erst sechs Jahre umfassen. Bevor wir so etwas behaupten, werden wir aber prüfen müssen, ob die Zahlen das tragen — was ist mit den Lücken, und stand das Thermometer immer an derselben Stelle? Dazu mehr in Vorlesung 14.
 
 *******************************************************************************
+
+## Ihre Begriffe für die Kurslandkarte
+
+Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam; nach der Vorlesung werden die Begriffe dieser Woche in der Karte freigeschaltet.
+
+**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
+
+[[___ ___ ___]]
+
+**Wo könnten Sie das, was heute dran war, in Ihrem Fach anwenden?**
+
+[[___ ___ ___]]
 
 ## Nächste Woche
 

@@ -438,6 +438,13 @@ footer p { margin: 0 0 6px; }
 .chips button[aria-pressed="true"] { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); font-weight: 700; }
 .chips button:focus-visible { outline: 2px solid var(--here); outline-offset: 2px; }
 .liste .panel { margin-top: 2px; }
+.vlhead + .frage, .frage { font-size: 14px; font-style: italic; color: var(--muted); margin-top: -4px; }
+.chips.vorschau { opacity: .55; }
+.chips.apps { padding-top: 6px; border-top: 1px dashed var(--faint); align-items: center; }
+.apps-lbl { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 600; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
+.chips.apps button { border-radius: 4px; border-style: dashed; }
+.chips.apps .fach { font-size: 11.5px; color: var(--muted); margin-left: 2px; }
+.chips.apps .fach::before { content: "· "; }
 @media (min-width: 981px) {
   aside.panel { position: sticky; top: 12px; max-height: calc(100vh - 24px); overflow-y: auto; }
 }
@@ -475,6 +482,13 @@ footer p { margin: 0 0 6px; }
           <button class="today" id="today" hidden>heute</button>
         </div>
       </div>
+      <div class="control" id="ctlAusblick">
+        <span class="lbl" id="ausLbl">Ausblick</span>
+        <div class="seg" role="group" aria-labelledby="ausLbl">
+          <button id="ausAus" aria-pressed="true">Aus</button>
+          <button id="ausAn" aria-pressed="false">An</button>
+        </div>
+      </div>
       <div class="control" id="ctlLevel">
         <span class="lbl" id="lvlLbl">Begriffe</span>
         <div class="seg" role="group" aria-labelledby="lvlLbl">
@@ -506,6 +520,7 @@ footer p { margin: 0 0 6px; }
   </div>
 
   <footer>
+    <p><strong>Die Karte wächst mit dem Semester.</strong> Nach jeder Vorlesung werden ihre Begriffe freigeschaltet, ergänzt um die Vorschläge der Studierenden aus der Abfrage am Ende der Vorlesung. Für kommende Vorlesungen stehen bis dahin nur Termin und Leitfrage; mit „Ausblick: An“ sehen Sie die vorbereiteten Begriffe blass.</p>
     <p><strong>Wozu die Karte?</strong> Sie zeigt, welche Begriffe in welcher Vorlesung neu dazukommen und worauf sie aufbauen. Ein Klick auf einen Begriff erklärt ihn in einem Satz, nennt die typische Stolperfalle und führt direkt zur passenden Folie. Begriffe aus kommenden Vorlesungen erscheinen blass. „Sie sind hier“ richtet sich nach dem heutigen Datum, mit dem Schieberegler können Sie vor- und zurückblättern.</p>
     <p><strong>Vorlesungen:</strong> alle Vorlesungen untereinander, mit ihren Begriffen. <strong>Metrokarte:</strong> Jede Linie ist ein roter Faden durch das Semester, jede Station baut auf der vorigen auf. Weiße Stationen mit dunklem Rand liegen auf mehreren Fäden. <strong>Zeitleiste:</strong> alle Begriffe nach Themengebiet, mit ihren Verbindungen. Große Punkte sind Kernbegriffe, kleine Detailbegriffe.</p>
   </footer>
@@ -519,7 +534,7 @@ const DATA = JSON.parse(document.getElementById("kartendaten").textContent);
 const BASE = "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/";
 const LECTURES = DATA.vorlesungen.map(v => {
   const [y, m, d] = v.datum.split("-");
-  return { nr: String(v.vl).padStart(2, "0"), iso: v.datum, date: `${d}.${m}.`, short: v.kurz, file: v.datei, status: v.status, sections: v.abschnitte };
+  return { nr: String(v.vl).padStart(2, "0"), iso: v.datum, date: `${d}.${m}.`, short: v.kurz, frage: v.leitfrage, frei: v.freigegeben !== false, file: v.datei, status: v.status, sections: v.abschnitte };
 });
 // Aktuelle Vorlesung: die letzte, deren Termin erreicht ist (vor Semesterbeginn: VL 00)
 const TODAY = new Date().toISOString().slice(0, 10);
@@ -544,6 +559,11 @@ const THREADS = DATA.faeden.map((f, i) => ({ id: f.id, name: f.name, text: f.bes
 const ALL = DATA.begriffe.map(b => ({ id: b.id, name: b.name, line: b.linie, vl: b.vl, sec: b.abschnitt, level: b.ebene, code: b.code, text: b.erklaerung, mis: b.fehlvorstellung }));
 const EDGES = DATA.beziehungen.map(r => [r.von, r.nach, r.text]);
 const byId = Object.fromEntries(ALL.map(n => [n.id, n]));
+// Anwendungen: konkrete Fragen an echte Daten, die mehrere Schlagworte nutzen
+const APPS = (DATA.anwendungen || []).map(a => ({ id: a.id, name: a.titel, fach: a.fach, vl: a.vl, sec: a.abschnitt, data: a.datensatz, uses: a.schlagworte, from: a.herkunft }));
+const byApp = Object.fromEntries(APPS.map(a => [a.id, a]));
+const appsOf = {};
+APPS.forEach(a => a.uses.forEach(k => (appsOf[k] = appsOf[k] || []).push(a)));
 const lineById = Object.fromEntries(LINES.map(l => [l.id, l]));
 const threadById = Object.fromEntries(THREADS.map(t => [t.id, t]));
 const threadsOf = {};
@@ -558,14 +578,17 @@ const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const narrow = () => matchMedia("(max-width: 980px)").matches;
-const state = { mode: narrow() ? "liste" : "metro", here: HERE_TODAY, view: "nb", detail: false, sel: null, thread: null, hidden: new Set() };
+// Begriffe erscheinen erst nach ihrer Vorlesung (Freigabe); „Ausblick“ zeigt die vorbereiteten blass
+const sichtbar = (n) => n && (state.ausblick || LECTURES[n.vl].frei);
+const state = { mode: narrow() ? "liste" : "metro", here: HERE_TODAY, view: "nb", detail: false, ausblick: false, sel: null, thread: null, hidden: new Set() };
 try {
   const saved = JSON.parse(localStorage.getItem("eavd-map") || "{}");
   if (typeof saved.detail === "boolean") state.detail = saved.detail;
+  if (typeof saved.ausblick === "boolean") state.ausblick = saved.ausblick;
   if (["liste", "metro", "zeit"].includes(saved.mode)) state.mode = saved.mode;
 } catch (e) {}
 // „Sie sind hier“ wird bewusst nicht gespeichert: Es folgt immer dem Datum.
-function save() { try { localStorage.setItem("eavd-map", JSON.stringify({ detail: state.detail, mode: state.mode })); } catch (e) {} }
+function save() { try { localStorage.setItem("eavd-map", JSON.stringify({ detail: state.detail, mode: state.mode, ausblick: state.ausblick })); } catch (e) {} }
 
 const TOP = 108;
 let SIDE = 150, COL = 118, W = 0, H = 0, pos = {}, shown = [], laneY = {}, trackY = {};
@@ -593,7 +616,7 @@ function setSize() {
 function layoutZeit() {
   COL = 118;
   const ROW = 30, PAD = 18;
-  shown = ALL.filter(n => !state.hidden.has(n.line) && (state.detail || n.level === 1 || n.id === state.sel));
+  shown = ALL.filter(n => sichtbar(n) && !state.hidden.has(n.line) && (state.detail || n.level === 1 || n.id === state.sel));
   const count = {};
   shown.forEach(n => { const k = n.line + "|" + n.vl; count[k] = (count[k] || 0) + 1; });
   let y = TOP;
@@ -620,7 +643,7 @@ function layoutMetro() {
   trackY = {};
   THREADS.forEach((t, i) => trackY[t.id] = TOP + 40 + i * TRACK);
   H = TOP + 40 + THREADS.length * TRACK + 10;
-  const ids = [...new Set(THREADS.flatMap(t => t.st))];
+  const ids = [...new Set(THREADS.flatMap(t => t.st))].filter(id => sichtbar(byId[id]));
   shown = ids.map(id => byId[id]);
   pos = {};
   for (let v = 0; v < LECTURES.length; v++) {
@@ -747,7 +770,8 @@ function drawMetro() {
   const selThreads = state.sel ? (threadsOf[state.sel] || []) : [];
   const active = state.thread ? [state.thread] : selThreads;
   THREADS.forEach(t => {
-    const pts = t.st.map(s => pos[s]);
+    const pts = t.st.filter(s => pos[s]).map(s => pos[s]);
+    if (!pts.length) return;
     let d = `M${pts[0].x - 18},${pts[0].y} L${pts[0].x},${pts[0].y}`;
     for (let i = 1; i < pts.length; i++) d += octi(pts[i - 1], pts[i]);
     const last = pts[pts.length - 1];
@@ -780,7 +804,7 @@ function drawListe() {
   const ol = $("#liste");
   ol.innerHTML = "";
   LECTURES.forEach((lec, v) => {
-    const items = ALL.filter(n => n.vl === v && !state.hidden.has(n.line) && (state.detail || n.level === 1 || n.id === state.sel))
+    const items = ALL.filter(n => n.vl === v && sichtbar(n) && !state.hidden.has(n.line) && (state.detail || n.level === 1 || n.id === state.sel))
       .sort((a, b) => a.level - b.level || a.sec - b.sec);
     const li = document.createElement("li");
     li.className = "vl" + (v === state.here ? " now" : v > state.here ? " future" : "");
@@ -790,7 +814,9 @@ function drawListe() {
       : lec.status !== "ausgearbeitet" ? `<span class="tag muted">in Vorbereitung</span>` : "";
     li.innerHTML = `<div class="vlhead"><b>VL ${lec.nr}</b><span class="d">${lec.date}</span><span class="s">${lec.short}</span>${tag}
       <a href="${BASE + lec.file}" target="_blank" rel="noopener">Folien ↗</a></div>
-      <div class="chips">${items.map(n => `<button data-id="${n.id}" class="${n.level === 2 ? "detail" : ""}${n.code ? " code" : ""}" aria-pressed="${n.id === state.sel}"><i style="background:${css(lineById[n.line].v)}"></i><span class="n">${n.name}</span></button>`).join("") || '<span class="hint">keine Begriffe in den gewählten Gebieten</span>'}</div>`;
+      ${lec.frage ? `<div class="frage">${lec.frage}</div>` : ""}
+      ${!lec.frei && !state.ausblick ? `<div class="hint">Die Begriffe dieser Vorlesung erscheinen nach der Vorlesung – mit Ihren Vorschlägen.</div>` : `<div class="chips${lec.frei ? "" : " vorschau"}">${items.map(n => `<button data-id="${n.id}" class="${n.level === 2 ? "detail" : ""}${n.code ? " code" : ""}" aria-pressed="${n.id === state.sel}"><i style="background:${css(lineById[n.line].v)}"></i><span class="n">${n.name}</span></button>`).join("") || '<span class="hint">keine Begriffe in den gewählten Gebieten</span>'}</div>`}
+      ${APPS.some(a => a.vl === v && sichtbar(a)) ? `<div class="chips apps"><span class="apps-lbl">Anwendungen</span>${APPS.filter(a => a.vl === v && sichtbar(a)).map(a => `<button data-id="${a.id}" aria-pressed="${a.id === state.sel}"><span class="n">${a.name}</span><span class="fach">${a.fach}</span></button>`).join("")}</div>` : ""}`;
     li.querySelectorAll(".chips button").forEach(b => b.addEventListener("click", () => {
       if (state.sel === b.dataset.id && narrow()) { state.sel = null; render(); return; }
       select(b.dataset.id);
@@ -809,7 +835,7 @@ function placePanel() {
   panel.hidden = state.mode === "liste" && narrow() && !state.sel;
 }
 function defaultSel() {
-  const cand = ALL.filter(n => n.level === 1 && n.vl === state.here && (state.mode !== "metro" || threadsOf[n.id]));
+  const cand = ALL.filter(n => sichtbar(n) && n.level === 1 && n.vl <= state.here && (state.mode !== "metro" || threadsOf[n.id])).sort((a, b) => b.vl - a.vl);
   return cand.length ? cand[0].id : null;
 }
 
@@ -831,18 +857,34 @@ function renderPanel() {
     p.querySelectorAll(".rels button").forEach(b => b.addEventListener("click", () => select(b.dataset.id, true)));
     return;
   }
+  const app = byApp[state.sel];
+  if (app) {
+    const lec = LECTURES[app.vl];
+    p.innerHTML = `
+      <h2>${app.name}</h2>
+      <div class="meta"><span class="chip">Anwendung · ${app.fach}</span><span>VL ${lec.nr} · ${lec.date}</span></div>
+      <p><strong>Daten:</strong> ${app.data}</p>
+      <h3>Nutzt die Schlagworte</h3>
+      <ul class="rels">${app.uses.map(k => `<li><button data-id="${k}"><span class="t">${byId[k].name}</span> <span class="v">VL ${LECTURES[byId[k].vl].nr}</span></button></li>`).join("")}</ul>
+      <div class="goto">
+        <span class="hint">Abschnitt ${app.sec}: ${lec.sections[app.sec - 1] || ""}</span>
+        <a class="golink" href="${BASE + lec.file}#${app.sec}" target="_blank" rel="noopener">Zur Vorlesung ${lec.nr}, Abschnitt ${app.sec} ↗</a>
+      </div>`;
+    p.querySelectorAll(".rels button").forEach(b => b.addEventListener("click", () => select(b.dataset.id, true)));
+    return;
+  }
   const n = byId[state.sel];
   if (!n) { p.innerHTML = '<p class="hint">Wählen Sie eine Station oder einen Faden.</p>'; return; }
   const l = lineById[n.line], lec = LECTURES[n.vl];
   const status = n.vl < state.here ? "bereits behandelt" : n.vl === state.here ? (BEFORE_START && state.here === HERE_TODAY ? "erste Vorlesung" : "diese Woche") : "kommt noch";
-  const back = nbs[n.id].filter(r => r.dir === "in").sort((a, b) => byId[a.id].vl - byId[b.id].vl);
-  const fwd = nbs[n.id].filter(r => r.dir === "out").sort((a, b) => byId[a.id].vl - byId[b.id].vl);
+  const back = nbs[n.id].filter(r => r.dir === "in" && sichtbar(byId[r.id])).sort((a, b) => byId[a.id].vl - byId[b.id].vl);
+  const fwd = nbs[n.id].filter(r => r.dir === "out" && sichtbar(byId[r.id])).sort((a, b) => byId[a.id].vl - byId[b.id].vl);
   const ths = threadsOf[n.id] || [];
   const threadHtml = ths.length ? `<h3>${ths.length > 1 ? "Umsteigestation" : "Auf dem Faden"}</h3><ul class="rels threads">${ths.map(tid => {
-    const t = threadById[tid], k = t.st.indexOf(n.id), pv = t.st[k - 1], nx = t.st[k + 1];
+    const t = threadById[tid], st = t.st.filter(x => sichtbar(byId[x])), k = st.indexOf(n.id), pv = st[k - 1], nx = st[k + 1];
     return `<li><span class="tname"><i style="background:${css(t.v)}"></i>${t.name}</span>
       <span class="hop">${pv ? `<button data-id="${pv}">← ${byId[pv].name}</button>` : `<span class="v">Anfang</span>`}
-      ${nx ? `<button data-id="${nx}">${byId[nx].name} →</button>` : `<span class="v">Endstation</span>`}</span></li>`;
+      ${nx ? `<button data-id="${nx}">${byId[nx].name} →</button>` : `<span class="v">${t.st.indexOf(n.id) < t.st.length - 1 ? "Fortsetzung folgt" : "Endstation"}</span>`}</span></li>`;
   }).join("")}</ul>` : "";
   p.innerHTML = `
     <h2 class="${n.code ? "code" : ""}">${n.name}</h2>
@@ -856,6 +898,7 @@ function renderPanel() {
     ${threadHtml}
     ${back.length ? `<h3>Baut auf</h3><ul class="rels">${back.map(r => relItem(r, "←")).join("")}</ul>` : ""}
     ${fwd.length ? `<h3>Führt weiter zu</h3><ul class="rels">${fwd.map(r => relItem(r, "→")).join("")}</ul>` : ""}
+    ${(appsOf[n.id] || []).filter(sichtbar).length ? `<h3>Kommt vor in</h3><ul class="rels">${appsOf[n.id].filter(sichtbar).map(a => `<li><button data-id="${a.id}"><span class="t">${a.name}</span> <span class="v">${a.fach} · VL ${LECTURES[a.vl].nr}</span></button></li>`).join("")}</ul>` : ""}
     <div class="goto">
       <span class="hint">Eingeführt in Abschnitt ${n.sec}: ${lec.sections[n.sec - 1] || ""}${lec.status !== "ausgearbeitet" ? " — Vorlesung in Vorbereitung" : ""}</span>
       <a class="golink" href="${BASE + lec.file}#${n.sec}" target="_blank" rel="noopener">Zur Vorlesung ${lec.nr}, Abschnitt ${n.sec} ↗</a>
@@ -866,6 +909,11 @@ function renderPanel() {
 function select(id, scroll) {
   state.sel = id;
   state.thread = null;
+  if (byApp[id]) {               // Anwendungen gibt es nur in der Ansicht „Vorlesungen“
+    if (state.mode !== "liste") { state.mode = "liste"; save(); }
+    render();
+    return;
+  }
   state.hidden.delete(byId[id].line);
   if (state.mode === "metro" && !threadsOf[id]) { state.mode = "zeit"; save(); }
   render();
@@ -899,16 +947,18 @@ function render() {
   $("#hereVal").textContent = `VL ${lec.nr} · ${lec.date}`;
   $("#here").value = state.here;
   $("#today").hidden = state.here === HERE_TODAY;
-  const pressed = [["mListe", state.mode === "liste"], ["mMetro", state.mode === "metro"], ["mZeit", state.mode === "zeit"], ["vNb", state.view === "nb"], ["vAll", state.view === "all"], ["eKern", !state.detail], ["eAlle", state.detail]];
+  const pressed = [["mListe", state.mode === "liste"], ["mMetro", state.mode === "metro"], ["mZeit", state.mode === "zeit"], ["vNb", state.view === "nb"], ["vAll", state.view === "all"], ["eKern", !state.detail], ["eAlle", state.detail], ["ausAus", !state.ausblick], ["ausAn", state.ausblick]];
   for (const [id, on] of pressed) $("#" + id).setAttribute("aria-pressed", String(on));
   $("#ctlLevel").hidden = state.mode === "metro";
   $("#ctlEdges").hidden = state.mode !== "zeit";
   $("#mapwrap").hidden = state.mode === "liste";
   $("#liste").hidden = state.mode !== "liste";
+  const vis = ALL.filter(sichtbar);
   const nStations = new Set(THREADS.flatMap(t => t.st)).size;
+  const nVisSt = [...new Set(THREADS.flatMap(t => t.st))].filter(id => sichtbar(byId[id])).length;
   $("#count").textContent = state.mode === "metro"
-    ? `${THREADS.length} Fäden · ${nStations} Stationen`
-    : state.detail ? `${ALL.length} Begriffe · ${EDGES.length} Beziehungen` : `${ALL.filter(n => n.level === 1).length} Kernbegriffe von ${ALL.length}`;
+    ? `${THREADS.length} Fäden · ${nVisSt} von ${nStations} Stationen`
+    : state.detail ? `${vis.length} von ${ALL.length} Begriffen` : `${vis.filter(n => n.level === 1).length} Kernbegriffe · ${vis.length} von ${ALL.length} Begriffen`;
   if (state.mode === "liste") drawListe();
   else {
     if (state.mode === "metro") layoutMetro(); else layoutZeit();
@@ -938,6 +988,8 @@ $("#vNb").addEventListener("click", () => { state.view = "nb"; render(); });
 $("#vAll").addEventListener("click", () => { state.view = "all"; render(); });
 $("#eKern").addEventListener("click", () => { state.detail = false; save(); render(); });
 $("#eAlle").addEventListener("click", () => { state.detail = true; save(); render(); });
+$("#ausAus").addEventListener("click", () => { state.ausblick = false; if (state.sel && !sichtbar(byId[state.sel] || byApp[state.sel])) state.sel = defaultSel(); save(); render(); });
+$("#ausAn").addEventListener("click", () => { state.ausblick = true; save(); render(); });
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
 new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 

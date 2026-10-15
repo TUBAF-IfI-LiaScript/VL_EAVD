@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  0.1.0
+version:  0.1.1
 language: de
 narrator: Deutsch Female
 
@@ -78,6 +78,18 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 ## Die Daten kommen wieder
 
 > **Geplant:** Die heute aufgezeichnete Datei wird im Januar ausgewertet (VL 10/11) — einschließlich der Messfehler, die wir heute erzeugt haben. Rückbezug auf VL 14: Auch der DWD hat Standorte und Geräte gewechselt.
+
+## Ihre Begriffe für die Kurslandkarte
+
+Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam; nach der Vorlesung werden die Begriffe dieser Woche in der Karte freigeschaltet.
+
+**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
+
+[[___ ___ ___]]
+
+**Wo könnten Sie das, was heute dran war, in Ihrem Fach anwenden?**
+
+[[___ ___ ___]]
 
 ## Material
 

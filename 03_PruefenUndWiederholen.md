@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.0
+version:  2.0.1
 language: de
 narrator: Deutsch Female
 
@@ -533,6 +533,18 @@ Beide Bedingungen müssen gelten: unter 0 **und** kein Fehlwert. Mit `or` wäre 
 [ ( )  (X)  ( )  ] `if minimum < 0:`
 [ ( )  (X)  ( )  ] `frosttage = frosttage + 1`
 [ ( )  ( )  (X)  ] `print("Frosttage:", frosttage)`
+
+## Ihre Begriffe für die Kurslandkarte
+
+Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam; nach der Vorlesung werden die Begriffe dieser Woche in der Karte freigeschaltet.
+
+**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
+
+[[___ ___ ___]]
+
+**Wo könnten Sie das, was heute dran war, in Ihrem Fach anwenden?**
+
+[[___ ___ ___]]
 
 ## Nächste Woche
 

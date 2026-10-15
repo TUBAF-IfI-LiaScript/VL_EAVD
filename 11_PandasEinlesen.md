@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.1
+version:  2.0.2
 language: de
 narrator: Deutsch Female
 
@@ -355,6 +355,18 @@ Die erste Form ist die übliche. Die zweite scheitert an `and` (Vorlesung 10). D
 ***
 Ohne `na_values` gehen die zehn `-999` als Zahlen in das Mittel ein und ziehen es nach unten. Ohne `sep` oder `skipinitialspace` gäbe es die Spalte `TMK` gar nicht — das Programm würde mit einem Fehler abbrechen statt ein falsches Ergebnis zu liefern.
 ***
+
+## Ihre Begriffe für die Kurslandkarte
+
+Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam; nach der Vorlesung werden die Begriffe dieser Woche in der Karte freigeschaltet.
+
+**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
+
+[[___ ___ ___]]
+
+**Wo könnten Sie das, was heute dran war, in Ihrem Fach anwenden?**
+
+[[___ ___ ___]]
 
 ## Nächste Woche
 

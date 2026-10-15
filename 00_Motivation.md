@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.1.0
+version:  2.1.2
 language: de
 narrator: Deutsch Female
 
@@ -73,7 +73,7 @@ bernhard.jung@informatik.tu-freiberg.de
 
 --------------------------------------------------------------------------------
 
-## Warum sind sie hier?
+## Warum sind Sie hier?
 
 **Was motiviert Sie, an dieser Veranstaltung teilzunehmen?**
 
@@ -169,9 +169,11 @@ Am Ende dieser Vorlesung kommen wir darauf zurück.
 
 Ein **Dünnschliff** ist eine Gesteinsscheibe, die so dünn geschliffen ist (etwa 0,03 mm), dass Licht hindurchscheint. Unter dem Mikroskop liegt sie zwischen zwei gekreuzten Polarisationsfiltern. Die Mineralkörner erscheinen dann je nach Mineral und Lage hell, farbig oder dunkel.
 
-So sieht eine Auswertung in Python aus — das ist der Kern des Programms:
+So sieht eine Auswertung in Python aus — das ist der Kern des Programms. Sie müssen heute keine Zeile davon verstehen; achten Sie auf die Kommentare rechts.
 
 ``` python duennschliff.py
+grau[900:, 640:] = 0           # Maßstab unten rechts ausblenden
+UM_PRO_PIXEL = 2000 / 80       # Maßstab: 2000 µm sind 80 Pixel
 SCHWELLE = 0.45     # Annahme: Ein Korn ist heller als die Schwelle
 hell = ndimage.binary_opening(grau > SCHWELLE, iterations=2)  # Krümel weg
 koerner, _ = ndimage.label(hell)            # zusammenhängende Flecken
@@ -209,9 +211,9 @@ Die Bausteine dafür lernen Sie im Semester: Bilder als Tabellen aus Zahlen und 
 
 **Welche Programmiererfahrungen haben Sie?**
 
-- [( )]Keine, ich habe noch nie programmiert.
-- [( )]Ein bisschen, ich habe schon mal ein Programm geschrieben.
-- [( )]Viel, ich habe schon mehrere Programme geschrieben.
+[(keine)] Keine, ich habe noch nie programmiert.
+[(wenig)] Ein bisschen, ich habe schon mal ein Programm geschrieben.
+[(viel)] Viel, ich habe schon mehrere Programme geschrieben.
 
 ## Wie diese Vorlesung funktioniert
 
@@ -299,6 +301,52 @@ Außerdem begegnen Ihnen immer wieder Abschnitte **"Typische Fehlvorstellung"**:
 
 In Vorlesung 06 lesen Sie die Rohdatei mit Bordmitteln ein — das kostet rund 50 Zeilen. In Vorlesung 11 tut dasselbe eine einzige Anweisung. Wer den mühsamen Weg gegangen ist, versteht, *was* diese Anweisung abnimmt. Wer ihn übersprungen hat, steht hilflos da, sobald sie einmal nicht funktioniert.
 
+### Die Kurslandkarte
+
+> **Wo stehen wir — und worauf baut auf, was heute dazukommt?**
+
+Programmieren lernt man in Schichten: Jeder neue Begriff stützt sich auf frühere. Damit Sie diesen Zusammenhang nicht aus dem Blick verlieren, gibt es die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/). Sie zeigt für jede Vorlesung die Begriffe, die neu dazukommen, und zu jedem Begriff
+
+* eine Erklärung in einem Satz,
+* die typische Fehlvorstellung, mit der viele am Anfang danebenliegen,
+* worauf er aufbaut und wohin er führt,
+* einen Link direkt zur passenden Folie.
+
+![Die Kurslandkarte in der Ansicht „Vorlesungen“, so wie sie nach Vorlesung 04 aussehen könnte, mit dem Begriff „Mittelwert“](images/00_Motivation/kurslandkarte.png)
+
+**Die Karte wächst mit dem Semester.** Nach jeder Vorlesung schalten wir ihre Begriffe frei, ergänzt um Ihre Vorschläge aus der Abfrage am Ende der Vorlesung. Für kommende Vorlesungen stehen bis dahin nur Termin und Leitfrage; wer neugierig ist, sieht mit „Ausblick: An“ die vorbereiteten Begriffe blass. „Sie sind hier“ richtet sich nach dem Datum. Neben dieser Liste gibt es eine **Metrokarte**, deren Linien rote Fäden durch das Semester sind — etwa „Wenn ein Wert fehlt“ —, und eine **Zeitleiste** mit allen Begriffen und ihren Verbindungen.
+
+<!-- data-type="none" -->
+| Wann                          | Wofür                                                          |
+| :---------------------------- | :------------------------------------------------------------- |
+| vor der Vorlesung             | Was kommt heute dazu, und worauf baut es auf?                  |
+| nach der Vorlesung            | Kann ich jeden neuen Begriff in einem Satz erklären?           |
+| vor der Übung und der Klausur | Kenne ich die typische Fehlvorstellung — und warum sie falsch ist? |
+
+Probieren Sie es aus: Suchen Sie in der Kurslandkarte den Begriff „Fehlwert -999“. In welcher Vorlesung kommt er dazu?
+
+[( )] Vorlesung 01
+[(X)] Vorlesung 03
+[( )] Vorlesung 06
+[( )] Vorlesung 11
+***
+In Vorlesung 03 („Prüfen und Wiederholen“). Er baut auf dem DWD-Datensatz aus Vorlesung 01 auf und führt unter anderem zum Mittelwert in Vorlesung 04: Wer `-999` mitrechnet, verfälscht den Mittelwert.
+***
+
+### Offene Materialien
+
+**Im Browser, ohne Installation.** Alle Vorlesungen sind mit [LiaScript](https://liascript.github.io) geschrieben: interaktive Dokumente, die direkt im Browser laufen. Die Beispiele lassen sich ausführen und verändern, die Quizfragen werten sofort aus. Über die Einstellungen oben rechts (Symbol mit Schiebereglern) wechseln Sie zwischen Präsentation, Folien und Lehrbuch.
+
+**Frei verfügbar.** Die Materialien stehen unter der Lizenz [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.de): Sie dürfen sie nutzen, teilen und bearbeiten, solange Sie die Urheber nennen. Alles liegt offen unter [github.com/TUBAF-IfI-LiaScript/VL_EAVD](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD).
+
+**Lebendig.** Die Materialien ändern sich im Lauf des Semesters, auch durch Ihre Hinweise. Die Versionsnummer im Kopf jeder Vorlesung zeigt, wann sich etwas geändert hat.
+
+**Machen Sie mit.**
+
+* Fehler und Unklarheiten melden Sie im OPAL-Forum, per E-Mail oder, wenn Sie GitHub nutzen, als [Issue](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/issues).
+* Verbesserungen können Sie auf GitHub auch direkt als Änderung vorschlagen.
+* Wer zu einer Vorlesung beiträgt, wird in dieser Vorlesung als **Mitautorin oder Mitautor** genannt.
+
 ## Semesterplan
 
 Die Vorlesung findet montags statt. Vor Weihnachten legen wir die Grundlagen, danach geht es um Datenanalyse.
@@ -355,11 +403,21 @@ Vorlesung 14 enthält eine Prüfungsvorbereitung mit Musteraufgaben.
 
 <!-- TODO WiSe 2026/27: Team (Übungsbetreuer, Tutoren) ergänzen -->
 
-**Übungen.** Die Übungen vertiefen jede Vorlesung an Programmieraufgaben zum Datensatz der Woche — ein Teil davon bewusst auf Papier, als Vorbereitung auf die Klausur.
+**Übungen.** Die Übungen vertiefen jede Vorlesung an Programmieraufgaben zum Datensatz der Woche — ein Teil davon bewusst auf Papier, als Vorbereitung auf die Klausur. Sie beginnen in der zweiten Vorlesungswoche, also ab Montag, 26.10. Wählen Sie einen der vier Termine:
 
-<!-- TODO WiSe 2026/27: Übungstermine, Einschreibung (OPAL), Abgabeform -->
+<!-- data-type="none" -->
+| Tag      | Uhrzeit       | Raum     |
+| :------- | :------------ | :------- |
+| Montag   | 14:30–16:00   | RAM-2119 |
+| Mittwoch | 8:00–9:30     | RAM-2119 |
+| Mittwoch | 8:00–9:30     | KKB-2097 |
+| Mittwoch | 18:00–19:30   | RAM-2119 |
 
-**Materialien.** Alle Vorlesungen sind interaktive Dokumente, die direkt im Browser laufen. Es sind "lebende" Materialien: Sie ändern sich auch anhand Ihrer Verbesserungsvorschläge. Den Einstieg finden Sie unter [github.com/TUBAF-IfI-LiaScript/VL_EAVD](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD).
+In der ersten Übung richten wir gemeinsam Python und Visual Studio Code ein. Danach gehört jedes Übungsblatt zur Vorlesung der Woche: Sie versuchen sich bis zur Übung der Folgewoche daran, dort besprechen wir es.
+
+<!-- TODO WiSe 2026/27: Einschreibung (OPAL), Abgabeform -->
+
+**Materialien.** Alle Vorlesungen, Daten und Beispiele finden Sie unter [github.com/TUBAF-IfI-LiaScript/VL_EAVD](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD); wie Sie mitmachen können, steht im Abschnitt „Offene Materialien“.
 
 **Zeitaufwand.** 180 h: 60 h Präsenzzeit und 120 h Selbststudium für Vor- und Nachbereitung, Übungsaufgaben und Prüfungsvorbereitung. Ohne Programmiererfahrung sollten Sie eher mehr Zeit einplanen — in einer Arbeitsgruppe macht das deutlich mehr Spaß als allein.
 
@@ -367,7 +425,7 @@ Vorlesung 14 enthält eine Prüfungsvorbereitung mit Musteraufgaben.
 
 + Stellen Sie Fragen — in der Vorlesung, in der Übung, im OPAL-Forum.
 + Bringen Sie Beispiele aus Ihrem Fach mit.
-+ Melden Sie Fehler und Verbesserungsvorschläge zu den Materialien, gern direkt als Issue auf GitHub.
++ Melden Sie Fehler und Verbesserungsvorschläge zu den Materialien — im OPAL-Forum, per E-Mail oder als Issue auf GitHub.
 
 ## Zurück zum Personenzähler
 
@@ -404,6 +462,18 @@ Sie müssen heute keine Zeile davon verstehen. Aber schon die Namen verraten, we
 | kein Richtungssinn       | Wer eintritt, bleibt drin                            | Wer noch einmal hinausgeht, wird doppelt gezählt  |
 
 **Es funktioniert. Und zählt trotzdem falsch.** Jede Zahl in einer Datentabelle hatte einmal ein Messgerät, eine Genauigkeit und ein Ausfallrisiko. In Vorlesung 08 sehen wir so eine Messung live.
+
+## Ihre Begriffe für die Kurslandkarte
+
+Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam; nach der Vorlesung werden die Begriffe dieser Woche in der Karte freigeschaltet.
+
+**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
+
+[[___ ___ ___]]
+
+**Wo könnten Sie das, was heute dran war, in Ihrem Fach anwenden?**
+
+[[___ ___ ___]]
 
 ## Nächste Woche
 

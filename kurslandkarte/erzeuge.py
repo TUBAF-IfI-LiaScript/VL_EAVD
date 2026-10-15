@@ -42,11 +42,25 @@ TERMINE = [
 ]
 assert len(TERMINE) == 15
 
+# ---- Freigabe: Begriffe einer Vorlesung erscheinen erst nach ihr in der Karte.
+# Nach jeder Vorlesung: Vorschläge der Studierenden einarbeiten, dann hier ergänzen.
+FREIGEGEBEN = {0}
+
+# ---- Leitfragen aus dem Semesterplan in VL 00 (einzige Quelle)
+_plan = open(os.path.join(REPO, "00_Motivation.md"), encoding="utf-8").read()
+_plan = _plan[_plan.index("## Semesterplan"):_plan.index("## Prüfung")]
+LEITFRAGE = {}
+for _z in _plan.splitlines():
+    _m = re.match(r"\| \d\d\.\d\d\. \| \[?(\d\d)", _z)
+    if _m:
+        LEITFRAGE[int(_m.group(1))] = _z.split("|")[-2].strip()
+assert sorted(LEITFRAGE) == list(range(15)), ("Leitfragen im Semesterplan unvollständig", sorted(LEITFRAGE))
+
 # ---- Begriffe: id, Name, Linie, VL, Abschnitt, Ebene, Code?, Erklärung, Fehlvorstellung
 B = [
     # --- Erhebung
-    ("zaehler", "Personenzähler", "erhebung", 0, 'Praktische Inhalte', 1, 0, "Ein Ultraschallsensor an der Hörsaaltür zählt Eintretende — das Einstiegsbeispiel mit echten Messdaten.", None),
-    ("annahmen", "Annahmen im Messprogramm", "erhebung", 0, 'Zurück zum Personenzähler', 2, 0, "Messbereich, Entprellzeit, fehlender Richtungssinn: Was im Code steht, bestimmt, was gezählt wird.", "„Es funktioniert, also zählt es richtig.“"),
+    ("zaehler", "Datenerhebung", "erhebung", 0, 'Praktische Inhalte', 1, 0, "Messdaten entstehen nicht von selbst: Ein Sensor wandelt etwas Physikalisches in Zahlen um, ein Programm entscheidet, was davon festgehalten wird.", None),
+    ("annahmen", "Annahmen im Programm", "erhebung", 0, 'Zurück zum Personenzähler', 2, 0, "Grenzwerte, Schwellen und Zeitfenster im Code legen fest, was als Ergebnis herauskommt — ohne dass eine Fehlermeldung darauf hinweist.", "„Es funktioniert, also stimmt das Ergebnis.“"),
     ("sensorlog", "Sensorprotokoll", "erhebung", 1, 'Aufgabe 2: Der Personenzähler', 2, 0, "Die Textzeilen des Personenzählers — mühsam in der Tabellenkalkulation auszuwerten (Aufgabe 2).", None),
     ("micropy", "MicroPython", "erhebung", 8, 'Der Aufbau', 1, 0, "Python auf dem Mikrocontroller — dieselbe Sprache, andere Hardware.", None),
     ("sensor", "Sensor", "erhebung", 8, 'Der Aufbau', 1, 0, "Wandelt eine physikalische Größe in eine Zahl um — mit Genauigkeit, Messort und Ausfallrisiko.", None),
@@ -56,7 +70,7 @@ B = [
     ("messdatei", "eigene Messdatei", "erhebung", 8, 'Die Daten kommen wieder', 2, 0, "Die in der Demonstration aufgezeichneten Daten kommen im Januar als Analysebeispiel zurück.", None),
 
     # --- Denken & Kontrollfluss
-    ("blockly", "Blöcke oder Text", "denken", 0, 'Blöcke oder Text', 2, 0, "Zwei Ansichten auf dasselbe Programm: Blöcke zusammenschieben oder Python tippen.", None),
+    ("blockly", "Programmdarstellung: Blöcke oder Text", "denken", 0, 'Blöcke oder Text', 2, 0, "Zwei Ansichten auf dasselbe Programm: Blöcke zusammenschieben oder Python tippen.", None),
     ("algo", "Algorithmus", "denken", 1, 'Algorithmen', 1, 0, "Eindeutige, ausführbare Handlungsvorschrift aus endlich vielen Schritten.", None),
     ("terminierung", "Eindeutigkeit & Terminierung", "denken", 1, 'Algorithmen', 2, 0, "Jeder Schritt hat genau eine Auslegung; die Ausführung endet nach endlich vielen Schritten.", None),
     ("sprache", "Programmiersprache", "denken", 1, 'Warum der Rechner keine Alltagssprache versteht', 2, 0, "Kompromiss zwischen menschlicher Lesbarkeit und maschineller Eindeutigkeit.", "„Der Rechner versteht, was ich meine.“"),
@@ -151,7 +165,7 @@ B = [
 
     # --- Analyse & Darstellung
     ("kreislauf", "Datenkreislauf", "analyse", 0, 'Warum ist die Veranstaltung zentral?', 2, 0, "Frage, Erhebung, Aufbereitung, Analyse, Visualisierung, Dokumentation — meist mehrere Runden.", None),
-    ("schliff", "Körner im Dünnschliff", "analyse", 0, 'Ein Blick voraus: Körner im Dünnschliff', 2, 0, "Ausblick: Ein Bild ist eine Tabelle aus Helligkeiten. Schwelle setzen, Flecken zählen, Größen messen — jede Zeile eine Annahme.", "„Das Programm zählt die Körner.“ Es zählt, was heller ist als die Schwelle."),
+    ("schliff", "Bildverarbeitung", "analyse", 0, 'Ein Blick voraus: Körner im Dünnschliff', 2, 0, "Ausblick: Ein Bild ist eine Tabelle aus Helligkeitswerten. Schwelle setzen, zusammenhängende Flecken zählen, Größen messen.", "„Das Programm erkennt, was im Bild ist.“ Es erkennt nur, was heller ist als die Schwelle."),
     ("lohnt", "Programm oder Tabelle?", "analyse", 1, 'Wann lohnt sich ein Programm?', 1, 0, "Viele Daten, sperrige Formate, Wiederholung, Nachvollziehbarkeit: dann lohnt ein Programm.", None),
     ("kenntage", "Frost-, Eis-, Sommertag", "analyse", 3, 'Mehrere Fälle: elif', 2, 0, "DWD-Kenntage: Frosttag = Minimum unter 0 °C, Eistag = Maximum unter 0 °C, Sommertag = Maximum ab 25 °C.", None),
     ("mittel", "Mittelwert", "analyse", 4, 'Mittelwert mit Fehlwerten', 1, 0, "Summe durch Anzahl — nur über gültige Werte, und die Anzahl gehört dazu.", "„Ein Mittelwert gilt, egal wie viele Werte fehlen.“"),
@@ -215,7 +229,7 @@ R = [
     ("return", "none", "ohne return:"), ("funktion", "lokal", "hat"), ("return", "mehrrueck", "auch"),
     ("funktion", "assert", "geprüft mit"), ("kenntage", "funktion", "z. B. ist_frosttag"),
     # VL 08
-    ("zaehler", "micropy", "läuft auf"), ("micropy", "while", "while True"), ("micropy", "sensor", "steuert"),
+    ("zaehler", "micropy", "z. B. mit"), ("micropy", "while", "while True"), ("micropy", "sensor", "steuert"),
     ("sensor", "seriell", "sendet über"), ("sensor", "messfehler", "Risiko"), ("annahmen", "messfehler", "verletzt ergibt"),
     ("seriell", "zeitstempel", "erhält"), ("seriell", "messdatei", "mitgeschrieben als"),
     # VL 09
@@ -234,6 +248,17 @@ R = [
     ("merge", "referenz", "Grundlage für"), ("stationswechsel", "metadaten", "belegt durch"), ("referenz", "stationswechsel", "entlarvt"), ("stationswechsel", "inhomogen", "erzeugt"), ("inhomogen", "referenz", "erkennbar mit"),
     ("stationswechsel", "qualitaet", "Beispiel für"), ("luecke", "qualitaet", "prüfen"), ("nan", "qualitaet", "zählen, nicht ignorieren"),
     ("messfehler", "qualitaet", "Ursache für"), ("messdatei", "readcsv", "eingelesen mit"), ("notebook", "reproduzierbar", "Gefahr für"), ("reproduzierbar", "qualitaet", "Teil von"), ("trace", "pruefung", "Aufgabentyp"),
+]
+
+# ---- Anwendungen: konkrete Fragen an echte Daten, die Schlagworte nutzen
+# id, Titel, Fach, VL, Abschnittstitel, Datensatz, [Schlagwort-ids], Herkunft
+A = [
+    ("a_tuer", "Personenzähler an der Hörsaaltür", "Messtechnik", 0, 'Praktische Inhalte',
+     "Sensorprotokoll data.csv", ["zaehler", "annahmen"], "lehrende"),
+    ("a_schliff", "Körner im Dünnschliff", "Geologie", 0, 'Ein Blick voraus: Körner im Dünnschliff',
+     "Dünnschliff unter gekreuzten Polarisatoren (Fundus Prof. Heide, TUBAF)", ["schliff", "annahmen"], "lehrende"),
+    ("a_frost_bloecke", "Frosttage einer Januarwoche, als Blöcke und als Python", "Klima", 0, 'Blöcke oder Text',
+     "Tiefsttemperaturen Fichtelberg", ["blockly"], "lehrende"),
 ]
 
 # ---- Didaktische Fäden (Metrolinien): jede Folge ist eine Kette von „baut auf“-Schritten
@@ -262,6 +287,10 @@ for fid, _, _, st in F:
         assert vl_of[u] <= vl_of[v], ("Faden nicht chronologisch", fid, u, v)
 for a, b, _ in R:
     assert a in ids and b in ids, (a, b)
+for x in A:
+    assert x[0] not in ids, ("Anwendung und Begriff mit gleicher id", x[0])
+    for k in x[6]:
+        assert k in ids, ("Anwendung nutzt unbekannten Begriff", x[0], k)
 def abschnitt_nr(vl, titel):
     heads = sections[vl]["abschnitte"]
     if titel not in heads:
@@ -274,6 +303,7 @@ out = {
     "stand": STAND,
     "vorlesungen": [
         {"vl": v, "datei": sections[v]["datei"], "datum": TERMINE[v][0], "kurz": TERMINE[v][1],
+         "leitfrage": LEITFRAGE[v], "freigegeben": v in FREIGEGEBEN,
          "status": STATUS[v], "abschnitte": sections[v]["abschnitte"]}
         for v in range(15)
     ],
@@ -284,6 +314,8 @@ out = {
     ],
     "beziehungen": [{"von": a, "nach": b, "text": t} for a, b, t in R],
     "faeden": [{"id": f, "name": n, "beschreibung": d, "stationen": st} for f, n, d, st in F],
+    "anwendungen": [{"id": i, "titel": t, "fach": fa, "vl": v, "abschnitt": abschnitt_nr(v, ab), "datensatz": ds,
+                     "schlagworte": sw, "herkunft": h} for i, t, fa, v, ab, ds, sw, h in A],
 }
 os.makedirs(ZIEL, exist_ok=True)
 text = json.dumps(out, ensure_ascii=False, indent=1)
@@ -292,6 +324,6 @@ seite = open(os.path.join(HIER, "vorlage.html"), encoding="utf-8").read()
 seite = seite.replace("%%DATEN%%", text.replace("</", "<\\/")).replace("%%STAND%%", STAND)
 open(os.path.join(ZIEL, "index.html"), "w", encoding="utf-8").write(seite)
 e1 = sum(1 for b in B if b[5] == 1)
-print(f"{len(B)} Begriffe ({e1} Kern, {len(B)-e1} Detail), {len(R)} Beziehungen")
+print(f"{len(B)} Begriffe ({e1} Kern, {len(B)-e1} Detail), {len(R)} Beziehungen, {len(A)} Anwendungen")
 for b in []:
     print(f"  VL{b[3]:02d} #{b[4]:<2} {sections[b[3]]['abschnitte'][b[4]-1][:34]:34s} <- {b[1]}")
