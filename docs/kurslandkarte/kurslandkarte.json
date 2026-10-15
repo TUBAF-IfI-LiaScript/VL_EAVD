@@ -16,6 +16,7 @@
     "Lernziele",
     "Praktische Inhalte",
     "Ein Blick voraus: Körner im Dünnschliff",
+    "Jede Zeile eine Entscheidung",
     "Und was ist mit Ihnen",
     "Wie diese Vorlesung funktioniert",
     "Die Frage kommt zuerst",
@@ -30,6 +31,7 @@
     "Prüfung",
     "Organisatorisches",
     "Zurück zum Personenzähler",
+    "Welche Annahmen im Zählprogramm stecken",
     "Ihre Begriffe für die Kurslandkarte",
     "Nächste Woche"
    ]
@@ -417,7 +419,7 @@
    "name": "Annahmen im Programm",
    "linie": "erhebung",
    "vl": 0,
-   "abschnitt": 20,
+   "abschnitt": 22,
    "ebene": 2,
    "code": false,
    "erklaerung": "Grenzwerte, Schwellen und Zeitfenster im Code legen fest, was als Ergebnis herauskommt — ohne dass eine Fehlermeldung darauf hinweist.",
@@ -505,7 +507,7 @@
    "name": "Programmdarstellung: Blöcke oder Text",
    "linie": "denken",
    "vl": 0,
-   "abschnitt": 11,
+   "abschnitt": 12,
    "ebene": 2,
    "code": false,
    "erklaerung": "Zwei Ansichten auf dasselbe Programm: Blöcke zusammenschieben oder Python tippen.",
@@ -2618,7 +2620,7 @@
    "fach": "Messtechnik",
    "vl": 0,
    "abschnitt": 5,
-   "datensatz": "Sensorprotokoll data.csv",
+   "datensatz": "Zählungen des Alvik-Roboters (zaehlungen_JJJJ-MM-TT.csv)",
    "schlagworte": [
     "zaehler",
     "annahmen"
@@ -2643,7 +2645,7 @@
    "titel": "Frosttage einer Januarwoche, als Blöcke und als Python",
    "fach": "Klima",
    "vl": 0,
-   "abschnitt": 11,
+   "abschnitt": 12,
    "datensatz": "Tiefsttemperaturen Fichtelberg",
    "schlagworte": [
     "blockly"

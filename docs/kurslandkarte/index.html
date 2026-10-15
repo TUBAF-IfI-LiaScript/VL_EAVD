@@ -282,7 +282,7 @@ svg { display: block; }
 }
 .station.code text { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11.5px; }
 .station .dot { stroke-width: 3; fill: var(--surface); }
-.station.future { opacity: .28; }
+.station.future { opacity: .55; }
 .station.dim { opacity: .18; }
 .station.nb .dot { fill: currentColor; }
 .station.sel .dot { fill: currentColor; stroke: var(--focus); stroke-width: 3.5; }
@@ -403,6 +403,18 @@ aside.panel {
   border-bottom: 2px solid currentColor;
 }
 .hint { font-size: 13px; color: var(--muted); }
+.vorbereitet { font: inherit; font-size: 13px; color: var(--muted); background: none; border: 0; padding: 0; text-align: left; cursor: pointer; }
+.vorbereitet u { color: var(--ink); text-decoration-color: var(--faint); text-underline-offset: 3px; }
+.vorbereitet:hover u { text-decoration-color: currentColor; }
+.intro { background: var(--surface); border: 1px solid var(--faint); border-radius: 6px; padding: 10px 14px; font-size: 14px; }
+.intro summary { cursor: pointer; font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 700; font-size: 17px; }
+.intro .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 4px 28px; margin-top: 8px; }
+.intro p { margin: 0 0 6px; }
+.intro table { border-collapse: collapse; margin: 0 0 6px; }
+.intro td { padding: 2px 12px 2px 0; vertical-align: top; }
+.intro td:first-child { color: var(--muted); white-space: nowrap; }
+.rels .s { color: var(--muted); }
+.rels button.satz { display: block; }
 footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
 footer p { margin: 0 0 6px; }
 /* ---------- Liste ---------- */
@@ -417,7 +429,7 @@ footer p { margin: 0 0 6px; }
   gap: 8px;
 }
 .liste > li.vl.now { border-color: var(--here); box-shadow: inset 4px 0 0 var(--here); }
-.liste > li.vl.future .chips { opacity: .6; }
+.liste > li.vl.future .chips { opacity: .8; }
 .vlhead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
 .vlhead b { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-size: 20px; }
 .vlhead .d { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: var(--muted); }
@@ -439,7 +451,8 @@ footer p { margin: 0 0 6px; }
 .chips button:focus-visible { outline: 2px solid var(--here); outline-offset: 2px; }
 .liste .panel { margin-top: 2px; }
 .vlhead + .frage, .frage { font-size: 14px; font-style: italic; color: var(--muted); margin-top: -4px; }
-.chips.vorschau { opacity: .55; }
+.chips.vorschau { opacity: .7; }
+.chips.vorschau button { border-style: dashed; }
 .chips.apps { padding-top: 6px; border-top: 1px dashed var(--faint); align-items: center; }
 .apps-lbl { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 600; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
 .chips.apps button { border-radius: 4px; border-style: dashed; }
@@ -462,20 +475,20 @@ footer p { margin: 0 0 6px; }
     <div class="titleblock">
       <span class="eyebrow">Erhebung, Analyse und Visualisierung digitaler Daten · WiSe 2026/27</span>
       <h1>Kurslandkarte</h1>
-      <span class="sample">Stand 15.10.2026 · <span id="count"></span></span>
-      <a class="feedback" href="https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/issues/new?title=Kurslandkarte%3A%20&amp;labels=kurslandkarte" target="_blank" rel="noopener">Fehler oder Wunsch melden (GitHub) ↗</a>
+      <span class="sample"><span id="count"></span> · aktualisiert am 15.10.2026</span>
+      <span class="feedback">Begriff fehlt oder ist unklar? Sagen Sie es in der Abfrage am Ende jeder Vorlesung oder im OPAL-Forum. <a href="https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/issues/new?title=Kurslandkarte%3A%20&amp;labels=kurslandkarte" target="_blank" rel="noopener">GitHub ↗</a></span>
     </div>
     <div class="controls">
       <div class="control">
         <span class="lbl" id="modeLbl">Variante</span>
         <div class="seg" role="group" aria-labelledby="modeLbl">
-          <button id="mListe" aria-pressed="false">Vorlesungen</button>
-          <button id="mMetro" aria-pressed="true">Metrokarte</button>
-          <button id="mZeit" aria-pressed="false">Zeitleiste</button>
+          <button id="mListe" aria-pressed="false" title="Alle Vorlesungen untereinander, mit Leitfrage, Begriffen und Anwendungen">Vorlesungen</button>
+          <button id="mMetro" aria-pressed="true" title="Jede farbige Linie ist ein roter Faden: ein Thema, das sich durch mehrere Vorlesungen zieht">Metrokarte</button>
+          <button id="mZeit" aria-pressed="false" title="Alle Begriffe nach Themengebiet über das Semester, mit Pfeilen für ihre Zusammenhänge">Zeitleiste</button>
         </div>
       </div>
       <div class="control">
-        <label for="here">Sie sind hier</label>
+        <label for="here" title="Folgt dem heutigen Datum; mit dem Regler blättern Sie vor und zurück">Sie sind hier</label>
         <div class="here-row">
           <input id="here" type="range" min="0" max="14" step="1" value="0">
           <span class="here-val" id="hereVal"></span>
@@ -483,7 +496,7 @@ footer p { margin: 0 0 6px; }
         </div>
       </div>
       <div class="control" id="ctlAusblick">
-        <span class="lbl" id="ausLbl">Ausblick</span>
+        <span class="lbl" id="ausLbl" title="Zeigt blass die vorbereiteten Begriffe kommender Vorlesungen">Ausblick</span>
         <div class="seg" role="group" aria-labelledby="ausLbl">
           <button id="ausAus" aria-pressed="true">Aus</button>
           <button id="ausAn" aria-pressed="false">An</button>
@@ -492,19 +505,37 @@ footer p { margin: 0 0 6px; }
       <div class="control" id="ctlLevel">
         <span class="lbl" id="lvlLbl">Begriffe</span>
         <div class="seg" role="group" aria-labelledby="lvlLbl">
-          <button id="eKern" aria-pressed="true">Kernbegriffe</button>
-          <button id="eAlle" aria-pressed="false">Alle</button>
+          <button id="eKern" aria-pressed="true" title="Begriffe, die Sie in einem Satz erklären können sollten">Kernbegriffe</button>
+          <button id="eAlle" aria-pressed="false" title="Kernbegriffe und ergänzende Detailbegriffe">Alle</button>
         </div>
       </div>
       <div class="control" id="ctlEdges">
         <span class="lbl" id="viewLbl">Verbindungen</span>
         <div class="seg" role="group" aria-labelledby="viewLbl">
-          <button id="vNb" aria-pressed="true">Nur Nachbarn</button>
-          <button id="vAll" aria-pressed="false">Ganzes Netz</button>
+          <button id="vNb" aria-pressed="true" title="Nur die Pfeile zum ausgewählten Begriff">Nur Nachbarn</button>
+          <button id="vAll" aria-pressed="false" title="Alle Pfeile zwischen den Begriffen">Ganzes Netz</button>
         </div>
       </div>
     </div>
   </header>
+
+  <details class="intro" id="intro" open>
+    <summary>So nutzen Sie die Karte</summary>
+    <div class="cols">
+      <div>
+        <p>Die Karte zeigt, welche Begriffe in welcher Vorlesung dazukommen und wie sie zusammenhängen. Ein Klick auf einen Begriff erklärt ihn in einem Satz, nennt die typische Fehlvorstellung und führt zur passenden Folie.</p>
+        <table>
+          <tr><td>vor der Vorlesung</td><td>Was kommt heute dazu, und worauf baut es auf?</td></tr>
+          <tr><td>nach der Vorlesung</td><td>Kann ich jeden neuen Begriff in einem Satz erklären?</td></tr>
+          <tr><td>vor Übung und Klausur</td><td>Kenne ich die typische Fehlvorstellung – und warum sie falsch ist?</td></tr>
+        </table>
+      </div>
+      <div>
+        <p><strong>Vorlesungen:</strong> alle Termine untereinander, mit Leitfrage, Begriffen und Anwendungen. <strong>Metrokarte:</strong> Jede farbige Linie ist ein <em>roter Faden</em>, ein Thema, das sich durch mehrere Vorlesungen zieht; weiße Stationen liegen auf mehreren Fäden. <strong>Zeitleiste:</strong> alle Begriffe nach Themengebiet, mit Pfeilen für ihre Zusammenhänge.</p>
+        <p><strong>Die Karte wächst mit dem Semester.</strong> Nach jeder Vorlesung kommen ihre Begriffe dazu, ergänzt um Ihre Vorschläge. <strong>Kernbegriffe</strong> sollten Sie in einem Satz erklären können, Detailbegriffe ergänzen sie. Mit <strong>Ausblick: An</strong> sehen Sie blass, was für kommende Vorlesungen vorbereitet ist.</p>
+      </div>
+    </div>
+  </details>
 
   <div class="legendrow"><span class="hint" id="legendHint"></span><div class="legend" id="legend"></div></div>
 
@@ -519,11 +550,6 @@ footer p { margin: 0 0 6px; }
     <aside class="panel" id="panel" aria-live="polite"></aside>
   </div>
 
-  <footer>
-    <p><strong>Die Karte wächst mit dem Semester.</strong> Nach jeder Vorlesung werden ihre Begriffe freigeschaltet, ergänzt um die Vorschläge der Studierenden aus der Abfrage am Ende der Vorlesung. Für kommende Vorlesungen stehen bis dahin nur Termin und Leitfrage; mit „Ausblick: An“ sehen Sie die vorbereiteten Begriffe blass.</p>
-    <p><strong>Wozu die Karte?</strong> Sie zeigt, welche Begriffe in welcher Vorlesung neu dazukommen und worauf sie aufbauen. Ein Klick auf einen Begriff erklärt ihn in einem Satz, nennt die typische Stolperfalle und führt direkt zur passenden Folie. Begriffe aus kommenden Vorlesungen erscheinen blass. „Sie sind hier“ richtet sich nach dem heutigen Datum, mit dem Schieberegler können Sie vor- und zurückblättern.</p>
-    <p><strong>Vorlesungen:</strong> alle Vorlesungen untereinander, mit ihren Begriffen. <strong>Metrokarte:</strong> Jede Linie ist ein roter Faden durch das Semester, jede Station baut auf der vorigen auf. Weiße Stationen mit dunklem Rand liegen auf mehreren Fäden. <strong>Zeitleiste:</strong> alle Begriffe nach Themengebiet, mit ihren Verbindungen. Große Punkte sind Kernbegriffe, kleine Detailbegriffe.</p>
-  </footer>
 </div>
 
 <script id="kartendaten" type="application/json">
@@ -545,6 +571,7 @@ footer p { margin: 0 0 6px; }
     "Lernziele",
     "Praktische Inhalte",
     "Ein Blick voraus: Körner im Dünnschliff",
+    "Jede Zeile eine Entscheidung",
     "Und was ist mit Ihnen",
     "Wie diese Vorlesung funktioniert",
     "Die Frage kommt zuerst",
@@ -559,6 +586,7 @@ footer p { margin: 0 0 6px; }
     "Prüfung",
     "Organisatorisches",
     "Zurück zum Personenzähler",
+    "Welche Annahmen im Zählprogramm stecken",
     "Ihre Begriffe für die Kurslandkarte",
     "Nächste Woche"
    ]
@@ -946,7 +974,7 @@ footer p { margin: 0 0 6px; }
    "name": "Annahmen im Programm",
    "linie": "erhebung",
    "vl": 0,
-   "abschnitt": 20,
+   "abschnitt": 22,
    "ebene": 2,
    "code": false,
    "erklaerung": "Grenzwerte, Schwellen und Zeitfenster im Code legen fest, was als Ergebnis herauskommt — ohne dass eine Fehlermeldung darauf hinweist.",
@@ -1034,7 +1062,7 @@ footer p { margin: 0 0 6px; }
    "name": "Programmdarstellung: Blöcke oder Text",
    "linie": "denken",
    "vl": 0,
-   "abschnitt": 11,
+   "abschnitt": 12,
    "ebene": 2,
    "code": false,
    "erklaerung": "Zwei Ansichten auf dasselbe Programm: Blöcke zusammenschieben oder Python tippen.",
@@ -3147,7 +3175,7 @@ footer p { margin: 0 0 6px; }
    "fach": "Messtechnik",
    "vl": 0,
    "abschnitt": 5,
-   "datensatz": "Sensorprotokoll data.csv",
+   "datensatz": "Zählungen des Alvik-Roboters (zaehlungen_JJJJ-MM-TT.csv)",
    "schlagworte": [
     "zaehler",
     "annahmen"
@@ -3172,7 +3200,7 @@ footer p { margin: 0 0 6px; }
    "titel": "Frosttage einer Januarwoche, als Blöcke und als Python",
    "fach": "Klima",
    "vl": 0,
-   "abschnitt": 11,
+   "abschnitt": 12,
    "datensatz": "Tiefsttemperaturen Fichtelberg",
    "schlagworte": [
     "blockly"
@@ -3347,7 +3375,7 @@ function drawBackground() {
   });
   const hx = COL * state.here;
   el("rect", { x: hx, y: 24, width: COL, height: H - 24, class: "here-band" }, gBack);
-  el("text", { x: hx + COL - 8, y: 16, "text-anchor": "end", class: "here-tag" }, gBack).textContent = "▼ Sie sind hier";
+  el("text", { x: hx + COL - 8, y: 32, "text-anchor": "end", class: "here-tag" }, gBack).textContent = "▼ Sie sind hier";
   side.innerHTML = "";
   el("rect", { x: 0, y: 0, width: SIDE, height: H, fill: css("--surface") }, side);
   el("line", { x1: SIDE - 0.5, y1: 0, x2: SIDE - 0.5, y2: H, stroke: css("--faint") }, side);
@@ -3468,8 +3496,9 @@ function drawListe() {
     li.innerHTML = `<div class="vlhead"><b>VL ${lec.nr}</b><span class="d">${lec.date}</span><span class="s">${lec.short}</span>${tag}
       <a href="${BASE + lec.file}" target="_blank" rel="noopener">Folien ↗</a></div>
       ${lec.frage ? `<div class="frage">${lec.frage}</div>` : ""}
-      ${!lec.frei && !state.ausblick ? `<div class="hint">Die Begriffe dieser Vorlesung erscheinen nach der Vorlesung – mit Ihren Vorschlägen.</div>` : `<div class="chips${lec.frei ? "" : " vorschau"}">${items.map(n => `<button data-id="${n.id}" class="${n.level === 2 ? "detail" : ""}${n.code ? " code" : ""}" aria-pressed="${n.id === state.sel}"><i style="background:${css(lineById[n.line].v)}"></i><span class="n">${n.name}</span></button>`).join("") || '<span class="hint">keine Begriffe in den gewählten Gebieten</span>'}</div>`}
+      ${!lec.frei && !state.ausblick ? vorbereitetHinweis(v) : `<div class="chips${lec.frei ? "" : " vorschau"}">${items.map(n => `<button data-id="${n.id}" class="${n.level === 2 ? "detail" : ""}${n.code ? " code" : ""}" aria-pressed="${n.id === state.sel}"><i style="background:${css(lineById[n.line].v)}"></i><span class="n">${n.name}</span></button>`).join("") || '<span class="hint">keine Begriffe in den gewählten Gebieten</span>'}</div>`}
       ${APPS.some(a => a.vl === v && sichtbar(a)) ? `<div class="chips apps"><span class="apps-lbl">Anwendungen</span>${APPS.filter(a => a.vl === v && sichtbar(a)).map(a => `<button data-id="${a.id}" aria-pressed="${a.id === state.sel}"><span class="n">${a.name}</span><span class="fach">${a.fach}</span></button>`).join("")}</div>` : ""}`;
+    li.querySelectorAll("button[data-ausblick]").forEach(b => b.addEventListener("click", () => { state.ausblick = true; save(); render(); }));
     li.querySelectorAll(".chips button").forEach(b => b.addEventListener("click", () => {
       if (state.sel === b.dataset.id && narrow()) { state.sel = null; render(); return; }
       select(b.dataset.id);
@@ -3477,6 +3506,12 @@ function drawListe() {
     }));
     ol.appendChild(li);
   });
+}
+function plural(n, eins, viele) { return `${n} ${n === 1 ? eins : viele}`; }
+function vorbereitetHinweis(v) {
+  const n = ALL.filter(b => b.vl === v).length;
+  return n ? `<button class="vorbereitet" data-ausblick="1">${plural(n, "Begriff", "Begriffe")} vorbereitet – erscheinen nach der Vorlesung, mit Ihren Vorschlägen. <u>Ausblick einschalten</u></button>`
+           : `<div class="hint">Begriffe folgen nach der Vorlesung – mit Ihren Vorschlägen.</div>`;
 }
 function placePanel() {
   const panel = $("#panel"), stage = $(".stage");
@@ -3493,9 +3528,12 @@ function defaultSel() {
 }
 
 /* ---------- Seitenfeld ---------- */
-function relItem(r, arrow) {
-  const m = byId[r.id];
-  return `<li><button data-id="${r.id}">${arrow} <span class="t">${m.name}</span> <span class="v">${r.t} · VL ${LECTURES[m.vl].nr}</span></button></li>`;
+// Beziehung als Satz: „A <Text> B“, der andere Begriff ist anklickbar
+function relItem(r, n) {
+  const m = byId[r.id], vl = `<span class="v"> · VL ${LECTURES[m.vl].nr}</span>`;
+  return r.dir === "out"
+    ? `<li><button class="satz" data-id="${r.id}"><span class="s">${n.name} ${r.t}</span> <span class="t">${m.name}</span>${vl}</button></li>`
+    : `<li><button class="satz" data-id="${r.id}"><span class="t">${m.name}</span> <span class="s">${r.t} ${n.name}</span>${vl}</button></li>`;
 }
 function renderPanel() {
   const p = $("#panel");
@@ -3530,10 +3568,10 @@ function renderPanel() {
   if (!n) { p.innerHTML = '<p class="hint">Wählen Sie eine Station oder einen Faden.</p>'; return; }
   const l = lineById[n.line], lec = LECTURES[n.vl];
   const status = n.vl < state.here ? "bereits behandelt" : n.vl === state.here ? (BEFORE_START && state.here === HERE_TODAY ? "erste Vorlesung" : "diese Woche") : "kommt noch";
-  const back = nbs[n.id].filter(r => r.dir === "in" && sichtbar(byId[r.id])).sort((a, b) => byId[a.id].vl - byId[b.id].vl);
-  const fwd = nbs[n.id].filter(r => r.dir === "out" && sichtbar(byId[r.id])).sort((a, b) => byId[a.id].vl - byId[b.id].vl);
+  const rels = nbs[n.id].filter(r => sichtbar(byId[r.id])).sort((a, b) => byId[a.id].vl - byId[b.id].vl);
+  const back = rels.filter(r => byId[r.id].vl < n.vl), same = rels.filter(r => byId[r.id].vl === n.vl), fwd = rels.filter(r => byId[r.id].vl > n.vl);
   const ths = threadsOf[n.id] || [];
-  const threadHtml = ths.length ? `<h3>${ths.length > 1 ? "Umsteigestation" : "Auf dem Faden"}</h3><ul class="rels threads">${ths.map(tid => {
+  const threadHtml = ths.length ? `<h3>${ths.length > 1 ? "Liegt auf mehreren roten Fäden" : "Liegt auf dem roten Faden"}</h3><ul class="rels threads">${ths.map(tid => {
     const t = threadById[tid], st = t.st.filter(x => sichtbar(byId[x])), k = st.indexOf(n.id), pv = st[k - 1], nx = st[k + 1];
     return `<li><span class="tname"><i style="background:${css(t.v)}"></i>${t.name}</span>
       <span class="hop">${pv ? `<button data-id="${pv}">← ${byId[pv].name}</button>` : `<span class="v">Anfang</span>`}
@@ -3543,14 +3581,15 @@ function renderPanel() {
     <h2 class="${n.code ? "code" : ""}">${n.name}</h2>
     <div class="meta">
       <span class="chip"><i style="background:${css(l.v)}"></i>${l.name}</span>
-      <span class="chip">${n.level === 1 ? "Kernbegriff" : "Detailbegriff"}</span>
+      <span class="chip" title="${n.level === 1 ? "Sollten Sie in einem Satz erklären können" : "Ergänzt einen Kernbegriff"}">${n.level === 1 ? "Kernbegriff" : "Detailbegriff"}</span>
       <span>VL ${lec.nr} · ${lec.date} · ${status}</span>
     </div>
     <p>${n.text}</p>
     ${n.mis ? `<div class="misc"><strong>Typische Fehlvorstellung</strong>${n.mis}</div>` : ""}
     ${threadHtml}
-    ${back.length ? `<h3>Baut auf</h3><ul class="rels">${back.map(r => relItem(r, "←")).join("")}</ul>` : ""}
-    ${fwd.length ? `<h3>Führt weiter zu</h3><ul class="rels">${fwd.map(r => relItem(r, "→")).join("")}</ul>` : ""}
+    ${back.length ? `<h3>Aus früheren Vorlesungen</h3><ul class="rels">${back.map(r => relItem(r, n)).join("")}</ul>` : ""}
+    ${same.length ? `<h3>In derselben Vorlesung</h3><ul class="rels">${same.map(r => relItem(r, n)).join("")}</ul>` : ""}
+    ${fwd.length ? `<h3>Später im Semester</h3><ul class="rels">${fwd.map(r => relItem(r, n)).join("")}</ul>` : ""}
     ${(appsOf[n.id] || []).filter(sichtbar).length ? `<h3>Kommt vor in</h3><ul class="rels">${appsOf[n.id].filter(sichtbar).map(a => `<li><button data-id="${a.id}"><span class="t">${a.name}</span> <span class="v">${a.fach} · VL ${LECTURES[a.vl].nr}</span></button></li>`).join("")}</ul>` : ""}
     <div class="goto">
       <span class="hint">Eingeführt in Abschnitt ${n.sec}: ${lec.sections[n.sec - 1] || ""}${lec.status !== "ausgearbeitet" ? " — Vorlesung in Vorbereitung" : ""}</span>
@@ -3592,7 +3631,7 @@ function renderLegend() {
     });
     lg.appendChild(b);
   });
-  $("#legendHint").textContent = state.mode === "metro" ? "Faden anklicken, um ihn hervorzuheben:" : "Themengebiete ein- und ausblenden:";
+  $("#legendHint").textContent = state.mode === "metro" ? "Roten Faden anklicken, um ihn hervorzuheben (spätere Vorlesungen: seitlich scrollen):" : state.mode === "zeit" ? "Themengebiete ein- und ausblenden (spätere Vorlesungen: seitlich scrollen):" : "Themengebiete ein- und ausblenden:";
 }
 
 function render() {
@@ -3607,11 +3646,11 @@ function render() {
   $("#mapwrap").hidden = state.mode === "liste";
   $("#liste").hidden = state.mode !== "liste";
   const vis = ALL.filter(sichtbar);
-  const nStations = new Set(THREADS.flatMap(t => t.st)).size;
   const nVisSt = [...new Set(THREADS.flatMap(t => t.st))].filter(id => sichtbar(byId[id])).length;
+  const nFrei = LECTURES.filter(l => l.frei).length, nFreiB = ALL.filter(n => LECTURES[n.vl].frei).length;
   $("#count").textContent = state.mode === "metro"
-    ? `${THREADS.length} Fäden · ${nVisSt} von ${nStations} Stationen`
-    : state.detail ? `${vis.length} von ${ALL.length} Begriffen` : `${vis.filter(n => n.level === 1).length} Kernbegriffe · ${vis.length} von ${ALL.length} Begriffen`;
+    ? `${plural(THREADS.length, "roter Faden", "rote Fäden")} · ${plural(nVisSt, "Station", "Stationen")} ${state.ausblick ? "mit Ausblick" : "freigeschaltet"}`
+    : `${plural(nFreiB, "Begriff", "Begriffe")} aus ${plural(nFrei, "Vorlesung", "Vorlesungen")}` + (ALL.length > nFreiB ? ` · ${ALL.length - nFreiB} weitere vorbereitet` : "");
   if (state.mode === "liste") drawListe();
   else {
     if (state.mode === "metro") layoutMetro(); else layoutZeit();
@@ -3646,6 +3685,11 @@ $("#ausAn").addEventListener("click", () => { state.ausblick = true; save(); ren
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
 new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
+try {
+  const z = localStorage.getItem("eavd-map-intro");
+  $("#intro").open = z ? z === "auf" : !narrow();
+} catch (e) { $("#intro").open = !narrow(); }
+$("#intro").addEventListener("toggle", () => { try { localStorage.setItem("eavd-map-intro", $("#intro").open ? "auf" : "zu"); } catch (e) {} });
 if (!(state.mode === "liste" && narrow())) state.sel = defaultSel();
 let lastW = innerWidth;  // nur auf Breitenänderung reagieren (mobile Adressleiste ändert die Höhe)
 addEventListener("resize", () => { if (innerWidth === lastW) return; lastW = innerWidth; clearTimeout(window._rs); window._rs = setTimeout(render, 150); });

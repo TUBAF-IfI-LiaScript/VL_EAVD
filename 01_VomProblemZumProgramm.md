@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.1.2
+version:  2.1.3
 language: de
 narrator: Deutsch Female
 
@@ -132,23 +132,24 @@ Die mittlere Temperatur im Jahr 2024 betrug [[ 1,2 °C | 4,1 °C | (6,3 °C) | 9
                                      {{0-1}}
 *******************************************************************************
 
-Erinnern Sie sich an den Personenzähler aus der letzten Vorlesung? Der Sensor an der Hörsaaltür hat folgendes Protokoll geschrieben:
+<!-- TODO nach dem 19.10.2026: Platzhalter durch die Aufzeichnung aus Vorlesung 00 ersetzen (Auszug, Link, Lösung nachrechnen). -->
 
-```text data.csv
-16:14:28.164 -> Person counted. Total = 66
-16:14:28.421 -> Person entered monitoring zone
-16:14:29.869 -> Person counted. Total = 67
-16:14:29.933 -> Person entered monitoring zone
-16:14:32.770 -> Person counted. Total = 68
-16:14:32.834 -> Person entered monitoring zone
-16:14:33.027 -> Person entered monitoring zone
+Erinnern Sie sich an den Personenzähler aus der letzten Vorlesung? Der Roboter an der Hörsaaltür hat aufgeschrieben, wer wann hereinkam und hinausging:
+
+```text zaehlungen_2026-10-15.csv
+zeit;richtung
+2026-10-15T16:42:31;raus
+2026-10-15T16:42:32;unklar
+2026-10-15T16:42:36;raus
+2026-10-15T16:42:40;rein
 ...
-16:40:57.771 -> Person counted. Total = 79
 ```
+
+> **Platzhalter:** Die Zeilen oben stammen aus einem Probelauf. Die Aufzeichnung aus Vorlesung 00 folgt nach dem 19.10.
 
 Die Vorlesung beginnt um 16:15 Uhr.
 
-**⏱ 8 Minuten, zu zweit.** Laden Sie [`data.csv`](https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/examples/00_Einfuehrungsbeispiele/Python%20Code/data.csv) herunter.
+**⏱ 8 Minuten, zu zweit.** Laden Sie die Datei herunter _(Link folgt)_.
 
 **a)** Wie viele Personen sind **nach** Vorlesungsbeginn gekommen?
 
@@ -163,22 +164,22 @@ Sie müssen nicht fertig werden. Merken Sie sich die Stelle, an der Sie hängen 
 
 **Was dabei zu tun ist**
 
-1. Datei importieren — aber mit welchem Trennzeichen? Es gibt keins.
-2. Die Zeilen mit `Person entered` herausfiltern — für die Zählung ignorieren wir sie vorerst.
-3. Uhrzeit und Zählerstand aus dem Text herausschneiden (`LINKS`, `TEIL`, `FINDEN`, ...).
-4. Den Text `16:15:07.925` in eine Uhrzeit umwandeln, mit der man vergleichen kann.
+1. Datei importieren, Trennzeichen ist das Semikolon.
+2. Den Text `2026-10-19T16:15:07` in Datum und Uhrzeit zerlegen, mit der man vergleichen kann.
+3. Entscheiden: Was zählt — nur `rein`? Und was ist mit `unklar`?
+4. Wer nach Beginn kurz hinaus- und wieder hereingeht, steht zweimal in der Datei.
 5. Minuten bilden und zählen.
 
 <details>
 <summary>**Lösung zu a)**</summary>
 
-Die Zählerstände 71 bis 79 liegen nach 16:15 Uhr — das sind **9 Personen**. Ob das stimmt, ist eine andere Frage: In der Datei steht 22-mal `entered`, aber nur 14-mal `counted`. Der Sensor zählt erst, wenn jemand den Bereich wieder verlässt, und nur, wenn seit der letzten Zählung mehr als eine Sekunde vergangen ist. Wer kurz nach einer anderen Person hereinkommt, wird nicht gezählt — eine der Annahmen aus Vorlesung 00.
+_Folgt mit der Aufzeichnung vom 19.10._
 
 </details>
 
 > **Mühsam.** Die eigentliche Frage ist einfach. Der Aufwand steckt darin, die Daten in eine Form zu bringen, mit der die Tabellenkalkulation umgehen kann.
 >
-> Und morgen liefert der Sensor die nächste Datei. Dann beginnt alles von vorn.
+> Und nächste Woche liefert der Roboter die nächste Datei. Dann beginnt alles von vorn.
 
 *******************************************************************************
 

@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  0.1.1
+version:  0.1.2
 language: de
 narrator: Deutsch Female
 
@@ -52,17 +52,17 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 
 > **Geplant:** Mikrocontroller, Sensor, Verbindung zum Rechner. MicroPython als "dieselbe Sprache, andere Hardware": `while True`, Variablen, `if` — alles bekannt.
 
-**Offen: Welche Hardware?**
+**Hardware: Arduino Alvik** (entschieden 15.10.2026). Derselbe Roboter zählt in VL 00 an der Hörsaaltür; in VL 08 öffnen wir ihn und sehen, was darin passiert.
 
 <!-- data-type="none" -->
-| Kriterium                   | ESP32 + Ultraschallsensor HC-SR04                            | Calliope mini                                                  |
-| :-------------------------- | :----------------------------------------------------------- | :------------------------------------------------------------- |
-| Szenario                    | Personenzähler an der Hörsaaltür (VL 00/01)          | z. B. Temperatur, Licht oder Bewegung im Hörsaal               |
-| Aufbau                      | Verkabelung nötig                                            | Sensoren auf der Platine, sofort einsatzbereit                 |
-| Code                        | liegt vor: `examples/00_Einfuehrungsbeispiele/Personenzaehler/personenzaehler.py`, auf Hardware noch **ungetestet** | neu zu schreiben; MicroPython-Unterstützung für das eingesetzte Modell prüfen |
-| Bezug zum Datensatz         | Zählen, Entprellen, Zeitstempel                              | Temperatur — direkter Bezug zur Fichtelberg-Reihe              |
-| Messfehler zum Vorführen    | Messbereich, Entprellzeit, fehlender Richtungssinn           | z. B. Sensor misst Chip- statt Raumtemperatur, Eigenerwärmung — **am Gerät prüfen** |
-| Wiederverwendung            | Studierende haben die Hardware in der Regel nicht            | Calliope ist an vielen Schulen verbreitet, ggf. ausleihbar     |
+| Was                  | Alvik                                                                                           |
+| :------------------- | :---------------------------------------------------------------------------------------------- |
+| Rechner              | Arduino Nano ESP32 mit MicroPython; Motoren und Sensoren hängen an einem zweiten Controller        |
+| Sensor für die Demo  | Abstandssensor nach vorn (Lichtlaufzeit, 4×4 Felder, davon fünf Frontzonen und oben/unten)        |
+| Code                 | liegt vor und ist getestet: `examples/00_Einfuehrungsbeispiele/Alvik/` (`alvik_messung.py`, `alvik_ampel.py`, `zaehler.py`) |
+| Verbindung           | USB-Kabel; `mpremote` startet das Programm, die Zeilen kommen als Text am Laptop an               |
+| Bezug zum Kurs       | Personenzähler aus VL 00/01: Zählen, Zeitstempel, Richtung                                        |
+| Messfehler, belegt   | Zone ohne Ziel behält ihren letzten Wert; Zeilen kommen gepuffert an; zu häufiges Abfragen senkt die Messrate von ~13 auf ~2 pro Sekunde (siehe `Alvik/README.md`) |
 
 ## Live: Wir messen
 
@@ -70,10 +70,10 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 
 ## Was schiefgeht
 
-> **Geplant:** Die Annahmen im Messprogramm live verletzen und im Datenstrom sichtbar machen. Für den Personenzähler steht die Tabelle in VL 00, Abschnitt _Zurück zum Personenzähler_ (Messbereich, Entprellzeit, Richtungssinn).
+> **Geplant:** Die Annahmen im Messprogramm live verletzen und im Datenstrom sichtbar machen. Für den Personenzähler steht die Tabelle in VL 00, Abschnitt _Zurück zum Personenzähler_ (`ANTEIL`, `NACHLAUF_MS`, `MAX_DAUER_MS`, Richtung).
 >
-> * **Typische Fehlvorstellung: „Ein Sensor misst, was draufsteht.“** — Beispiele je nach Hardware (Chiptemperatur statt Raumtemperatur; zwei Personen nebeneinander = eine Zählung).
-> * **Typische Fehlvorstellung: „Ein Zeitstempel ist die Zeit des Ereignisses.“** — Zeitstempel entsteht beim Empfang am Rechner bzw. beim Schreiben; Verzögerung, Uhr des Controllers ohne Echtzeituhr.
+> * **Typische Fehlvorstellung: „Ein Sensor misst, was draufsteht.“** — Beim Alvik: Eine Zone ohne Ziel meldet weiter ihren letzten Wert; zwei Personen dicht hintereinander sind eine Zählung.
+> * **Typische Fehlvorstellung: „Ein Zeitstempel ist die Zeit des Ereignisses.“** — Beim Alvik kommen die Zeilen gepuffert am Laptop an; die Empfangszeit ist nicht die Messzeit, die Uhr des Roboters zählt nur Millisekunden seit dem Start.
 
 ## Die Daten kommen wieder
 
@@ -96,12 +96,13 @@ Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/
 **Wiederverwendbar aus dem bisherigen Kurs** (Stand vor der Neukonzeption, Commit `21d3061`):
 
 * `Optional_MikrocontrollerEinfuehrung.md` (Arduino/C++): Konzept Mikrocontroller als Datensammler, serielle Schnittstelle
-* `examples/00_Einfuehrungsbeispiele/Personenzaehler/` (Arduino- und MicroPython-Fassung)
+* `examples/00_Einfuehrungsbeispiele/Alvik/` (Messprogramm, Aufstellhilfe, Zähler mit Live-Anzeige, Testbefunde)
 
 **Offene Punkte**
 
-- [ ] Hardware festlegen: ESP32 + HC-SR04 oder Calliope mini (oder Ähnliches).
-- [ ] Messprogramm auf der gewählten Hardware testen.
-- [ ] Übertragung in den Hörsaal klären: Wie kommen die Messwerte live auf den Beamer (serielle Konsole, Thonny, Web-Editor)?
+- [x] Hardware festlegen: Arduino Alvik.
+- [x] Messprogramm auf dem Alvik testen (15.10.2026, 6 von 6 Durchgängen mit richtiger Richtung).
+- [ ] Wie viele Alviks stehen zur Verfügung — reicht es für Gruppen im Hörsaal oder bleibt es bei einer Demo?
+- [x] Übertragung in den Hörsaal: USB und `mpremote`, Live-Anzeige mit `zaehler.py --live`.
 - [ ] Messfehler, die vorgeführt werden sollen, vorher am Gerät reproduzieren.
-- [ ] Format der aufgezeichneten Datei festlegen, damit sie in VL 10/11 ohne Umwege ausgewertet werden kann.
+- [x] Format der aufgezeichneten Datei: `rohdaten_JJJJ-MM-TT.csv` und `zaehlungen_JJJJ-MM-TT.csv`, Semikolon getrennt.

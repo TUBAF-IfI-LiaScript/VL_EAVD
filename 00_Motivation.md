@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.1.3
+version:  2.2.1
 language: de
 narrator: Deutsch Female
 
@@ -48,6 +48,8 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 | **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/00_Motivation.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/00_Motivation.md) |
 | **Autoren**              | @author                                                                                                                                    |
 
+> **Zum Nacharbeiten: die Ansicht „Lehrbuch“.** Im Hörsaal zeigen die Folien nur die Kernbotschaften. Die Erklärungen dazu stehen im Lehrbuch: oben rechts auf das Symbol mit den Schiebereglern klicken und „Lehrbuch“ wählen.
+
 --------------------------------------------------------------------------------
 
 <div class="flex-container">
@@ -87,7 +89,7 @@ bernhard.jung@informatik.tu-freiberg.de
 
 ## Warum ist die Veranstaltung zentral?
 
-Sie werden in Ihrer fachlichen Praxis Messreihen auswerten, Analysendaten sortieren und Ergebnisse darstellen müssen. Wissenschaftliche Daten durchlaufen dabei immer wieder dasselbe Muster:
+In Ihrem Fach werden Sie Messreihen auswerten, Analysendaten sortieren und Ergebnisse darstellen. Die Daten durchlaufen dabei immer wieder dasselbe Muster:
 
 ``` ascii
       ┌──────────────────────── neue Frage ──────────────────────────────┐
@@ -105,9 +107,12 @@ Sie werden in Ihrer fachlichen Praxis Messreihen auswerten, Analysendaten sortie
 ```
 <!-- style="font-size: 0.75em; line-height: 1.2;" -->
 
-> **Der Pfeil zurück ist der wichtigste.** Fast nie führt der erste Durchlauf zum Ziel: Die Daten reichen nicht, die Frage war zu unscharf, oder das Ergebnis wirft eine neue Frage auf. Auswerten heißt, diese Schleife mehrfach zu drehen.
+> **Der Pfeil zurück ist der wichtigste.** Fast nie führt der erste Durchlauf zum Ziel — auswerten heißt, diese Schleife mehrfach zu drehen.
 
-Der Name der Veranstaltung nennt drei dieser Schritte — **Erhebung**, **Analyse** und **Visualisierung**. Und bei jedem Durchlauf stellt sich dieselbe Frage: Mache ich das von Hand, in der Tabellenkalkulation — oder schreibe ich ein Programm, das es für mich tut, jedes Mal wieder, nachvollziehbar und ohne Tippfehler?
+**Von Hand oder mit einem Programm?** Diese Frage stellt sich bei jedem Durchlauf.
+
+                                    --{{0}}--
+Die Daten reichen nicht, die Frage war zu unscharf, oder das Ergebnis wirft eine neue Frage auf. Der Name der Veranstaltung nennt drei der Schritte — Erhebung, Analyse und Visualisierung. Ein Programm erledigt sie jedes Mal wieder, nachvollziehbar und ohne Tippfehler; die Tabellenkalkulation verlangt jedes Mal neue Handarbeit.
 
 ### Lernziele
 
@@ -145,31 +150,30 @@ Am Ende des Semesters können Sie eine wissenschaftliche Fragestellung auf eine 
 
 > **Wann erscheinen Studierende in der Vorlesung?** Gibt es Muster — der frühe Vogel, rechtzeitig aber knapp, in den ersten zehn Minuten passiert ohnehin nichts?
 
-Ein Ultraschallsensor an der Hörsaaltür zählt die Eintretenden. So sehen seine Aufzeichnungen aus:
+Ein kleiner Roboter an der Hörsaaltür zählt, wer hereinkommt und wer hinausgeht — auch heute, während Sie hereinkommen. Ein Auszug aus einem Probelauf:
 
-``` text data.csv
-16:14:28.164 -> Person counted. Total = 66
-16:14:28.421 -> Person entered monitoring zone
-16:14:29.869 -> Person counted. Total = 67
-16:14:29.933 -> Person entered monitoring zone
-16:14:32.770 -> Person counted. Total = 68
+``` text zaehlungen_2026-10-15.csv
+zeit;richtung
+2026-10-15T16:42:31;raus
+2026-10-15T16:42:32;unklar
+2026-10-15T16:42:36;raus
+2026-10-15T16:42:40;rein
+2026-10-15T16:43:04;unklar
+2026-10-15T16:43:08;rein
 ```
 
-Eine einfache Frage, echte Messdaten — und schon stecken wir mitten in den Themen dieses Semesters:
-
-* Wie kommen die Daten zustande? Und zählt der Sensor richtig?
+* Wie kommen die Daten zustande? Und zählt der Roboter richtig?
 * Wie macht man aus diesen Textzeilen etwas, womit man rechnen kann?
 * Wie beantwortet man die Frage — heute, und jede Woche aufs Neue?
 
-Am Ende dieser Vorlesung kommen wir darauf zurück.
+                                    --{{0}}--
+Eine einfache Frage, echte Messdaten — und schon stecken wir mitten in den Themen dieses Semesters. Am Ende dieser Vorlesung kommen wir darauf zurück.
 
 ### Ein Blick voraus: Körner im Dünnschliff
 
 > **Wie groß sind die Körner in diesem Gestein — und wie viel Fläche nehmen sie ein?**
 
-Ein **Dünnschliff** ist eine Gesteinsscheibe, die so dünn geschliffen ist (etwa 0,03 mm), dass Licht hindurchscheint. Unter dem Mikroskop liegt sie zwischen zwei gekreuzten Polarisationsfiltern. Die Mineralkörner erscheinen dann je nach Mineral und Lage hell, farbig oder dunkel.
-
-So sieht eine Auswertung in Python aus — das ist der Kern des Programms. Sie müssen heute keine Zeile davon verstehen; achten Sie auf die Kommentare rechts.
+Ein **Dünnschliff** ist eine Gesteinsscheibe, so dünn geschliffen, dass Licht hindurchscheint. Sie müssen heute keine Zeile des Programms verstehen — achten Sie nur auf die Kommentare rechts:
 
 ``` python duennschliff.py
 grau[900:, 640:] = 0           # Maßstab unten rechts ausblenden
@@ -182,9 +186,14 @@ flaeche = flaeche[flaeche >= 150]           # sehr kleine Flecken weg
 durchmesser = 2 * np.sqrt(flaeche / np.pi) * UM_PRO_PIXEL
 ```
 
-![Dünnschliff, erkannte helle Körner und ihre Größenverteilung](images/00_Motivation/duennschliff_auswertung.png)
-
 Ergebnis: **40 Körner**, mittlerer Durchmesser (Median) **657 µm**, zusammen rund **13 %** der Probenfläche. Bild: Fundus von Prof. Heide, TU Bergakademie Freiberg.
+
+![Dünnschliff, erkannte helle Körner und ihre Größenverteilung](images/00_Motivation/duennschliff_auswertung.png)<!-- style="max-height: 28vh;" -->
+
+                                    --{{0}}--
+Der Schliff ist etwa 0,03 mm dick. Unter dem Mikroskop liegt er zwischen zwei gekreuzten Polarisationsfiltern; die Mineralkörner erscheinen dann je nach Mineral und Lage hell, farbig oder dunkel. Das Programm sucht die hellen Flecken, zählt sie und rechnet ihre Fläche über den Maßstab in Mikrometer um.
+
+#### Jede Zeile eine Entscheidung
 
 Das Programm läuft in wenigen Sekunden — aber jede Zeile enthält eine Entscheidung:
 
@@ -197,7 +206,10 @@ Das Programm läuft in wenigen Sekunden — aber jede Zeile enthält eine Entsch
 | `grau[900:, 640:] = 0`     | Der Maßstab ist kein Korn                 | Ohne diese Zeile wird der Maßstabsbalken als Korn mitgezählt            |
 | `UM_PRO_PIXEL = 2000 / 80` | 80 Pixel entsprechen 2000 µm              | Wer den Maßstab falsch abliest, verschiebt alle Durchmesser             |
 
-Die Bausteine dafür lernen Sie im Semester: Bilder als Tabellen aus Zahlen und Masken in Vorlesung 10, Histogramme in Vorlesung 13. Das vollständige Programm liegt im Repository unter `examples/00_Einfuehrungsbeispiele/Duennschliff/` und läuft in Visual Studio Code.
+Zum Ausprobieren: Das vollständige Programm liegt unter [`examples/00_Einfuehrungsbeispiele/Duennschliff/`](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/tree/master/examples/00_Einfuehrungsbeispiele/Duennschliff) und läuft in Visual Studio Code.
+
+                                    --{{0}}--
+Die Bausteine dafür lernen Sie im Semester: Bilder als Tabellen aus Zahlen und Masken in Vorlesung 10, Histogramme in Vorlesung 13.
 
 ### Und was ist mit Ihnen
 
@@ -228,7 +240,10 @@ sondern:  "Wir müssen 48.000 Zeilen durchgehen. Wie machen wir das?"
                      Dafür gibt es Schleifen.
 ```
 
-> Wer weiß, *wozu* ein Konzept dient, behält es. Wer es als Vokabel lernt, vergisst es nach der Klausur. Um einige Grundlagen kommen wir trotzdem nicht herum — aber immer mit Blick darauf, wofür wir sie brauchen.
+> Wer weiß, *wozu* ein Konzept dient, behält es.
+
+                                    --{{0}}--
+Wer ein Konzept als Vokabel lernt, vergisst es nach der Klausur. Um einige Grundlagen kommen wir trotzdem nicht herum — aber immer mit Blick darauf, wofür wir sie brauchen.
 
 ### Ein Datensatz durch das ganze Semester
 
@@ -244,7 +259,10 @@ Fehlwerte als `-999`, kryptische Spaltennamen, Datumsangaben ohne Trennzeichen �
 
 > Dass dieser Datensatz "schmutzig" ist, ist kein Nachteil, sondern der Punkt. An sauberen Datensätzen lernt man nichts über Datenanalyse.
 
-Dazu kommen Beispiele aus Ihren Fächern — Analysendaten, Bohrprofile, Pegelstände, Rohstoffpreise. Ihre Antworten auf die Umfrage oben helfen uns bei der Auswahl.
+Dazu kommen Beispiele aus Ihren Fächern — Analysendaten, Bohrprofile, Pegelstände, Rohstoffpreise.
+
+                                    --{{0}}--
+Ihre Antworten auf die Umfrage „Und was ist mit Ihnen“ helfen uns bei der Auswahl.
 
 ### Blöcke oder Text
 
@@ -282,9 +300,11 @@ Nutzen Sie die Schaltflächen über dem Editor, um zwischen Blöcken und Text zu
 
 ### Live Hacking und typische Fehlvorstellungen
 
-Ab Vorlesung 04 entsteht in jeder Sitzung ein Programm vor Ihren Augen — **inklusive Irrwegen, Fehlermeldungen und Korrekturen**. Programmieren ist ein Prozess, kein Ergebnis; fertiger Code auf einer Folie verschweigt genau den Teil, den Sie lernen müssen.
+* **Live Hacking** (ab Vorlesung 04): Ein Programm entsteht vor Ihren Augen — inklusive Irrwegen, Fehlermeldungen und Korrekturen.
+* **Typische Fehlvorstellung**: Annahmen, die zu Programmen führen, die ohne Fehlermeldung falsch rechnen. Sie geben vorher eine Vorhersage ab — und merken, wenn Sie danebenliegen.
 
-Außerdem begegnen Ihnen immer wieder Abschnitte **"Typische Fehlvorstellung"**: Annahmen, die fast jede und jeder am Anfang hat — und die zu Programmen führen, die ohne Fehlermeldung falsch rechnen.
+                                    --{{0}}--
+Programmieren ist ein Prozess, kein Ergebnis; fertiger Code auf einer Folie verschweigt genau den Teil, den Sie lernen müssen. Die Fehlvorstellungen hat fast jede und jeder am Anfang.
 
 ### Werkzeuge
 
@@ -299,22 +319,27 @@ Außerdem begegnen Ihnen immer wieder Abschnitte **"Typische Fehlvorstellung"**:
 
 ### Erst mühsam, dann mit Werkzeug
 
-In Vorlesung 06 lesen Sie die Rohdatei mit Bordmitteln ein — das kostet rund 50 Zeilen. In Vorlesung 11 tut dasselbe eine einzige Anweisung. Wer den mühsamen Weg gegangen ist, versteht, *was* diese Anweisung abnimmt. Wer ihn übersprungen hat, steht hilflos da, sobald sie einmal nicht funktioniert.
+> **Die Wetterdatei einlesen: in Vorlesung 06 rund 50 Zeilen, in Vorlesung 11 eine Anweisung.**
+
+Wer den mühsamen Weg gegangen ist, versteht, *was* diese Anweisung abnimmt. Wer ihn übersprungen hat, steht hilflos da, sobald sie einmal nicht funktioniert.
 
 ### Die Kurslandkarte
 
 > **Wo stehen wir — und worauf baut auf, was heute dazukommt?**
 
-Programmieren lernt man in Schichten: Jeder neue Begriff stützt sich auf frühere. Damit Sie diesen Zusammenhang nicht aus dem Blick verlieren, gibt es die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/). Sie zeigt für jede Vorlesung die Begriffe, die neu dazukommen, und zu jedem Begriff
+Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) zeigt für jede Vorlesung die neuen Begriffe, und zu jedem Begriff
 
 * eine Erklärung in einem Satz,
 * die typische Fehlvorstellung, mit der viele am Anfang danebenliegen,
 * worauf er aufbaut und wohin er führt,
 * einen Link direkt zur passenden Folie.
 
-![Die Kurslandkarte in der Ansicht „Vorlesungen“, so wie sie nach Vorlesung 04 aussehen könnte, mit dem Begriff „Mittelwert“](images/00_Motivation/kurslandkarte.png)
+![Die Kurslandkarte in der Ansicht „Vorlesungen“, so wie sie nach Vorlesung 04 aussehen könnte, mit dem Begriff „Mittelwert“](images/00_Motivation/kurslandkarte.png)<!-- style="max-height: 35vh;" -->
 
-**Die Karte wächst mit dem Semester.** Nach jeder Vorlesung schalten wir ihre Begriffe frei, ergänzt um Ihre Vorschläge aus der Abfrage am Ende der Vorlesung. Für kommende Vorlesungen stehen bis dahin nur Termin und Leitfrage; wer neugierig ist, sieht mit „Ausblick: An“ die vorbereiteten Begriffe blass. „Sie sind hier“ richtet sich nach dem Datum. Neben dieser Liste gibt es eine **Metrokarte**, deren Linien rote Fäden durch das Semester sind — etwa „Wenn ein Wert fehlt“ —, und eine **Zeitleiste** mit allen Begriffen und ihren Verbindungen.
+**Die Karte wächst mit dem Semester** — nach jeder Vorlesung kommen ihre Begriffe dazu, auch Ihre Vorschläge.
+
+                                    --{{0}}--
+Programmieren lernt man in Schichten: Jeder neue Begriff stützt sich auf frühere. Die Karte hält diesen Zusammenhang fest. Für kommende Vorlesungen stehen zunächst nur Termin und Leitfrage; wer neugierig ist, sieht mit „Ausblick: An“ die vorbereiteten Begriffe blass. „Sie sind hier“ richtet sich nach dem Datum. Neben der Liste gibt es eine Metrokarte, deren Linien rote Fäden durch das Semester sind — etwa „Wenn ein Wert fehlt“ —, und eine Zeitleiste mit allen Begriffen und ihren Verbindungen.
 
 <!-- data-type="none" -->
 | Wann                          | Wofür                                                          |
@@ -325,17 +350,14 @@ Programmieren lernt man in Schichten: Jeder neue Begriff stützt sich auf frühe
 
 ### Offene Materialien
 
-**Im Browser, ohne Installation.** Alle Vorlesungen sind mit [LiaScript](https://liascript.github.io) geschrieben: interaktive Dokumente, die direkt im Browser laufen. Die Beispiele lassen sich ausführen und verändern, die Quizfragen werten sofort aus. Über die Einstellungen oben rechts (Symbol mit Schiebereglern) wechseln Sie zwischen Präsentation, Folien und Lehrbuch.
+* **Im Browser, ohne Installation:** geschrieben mit [LiaScript](https://liascript.github.io), Beispiele zum Ausführen und Verändern.
+* **Präsentation im Hörsaal, Lehrbuch zum Nacharbeiten:** Umschalten über das Symbol mit den Schiebereglern oben rechts.
+* **Frei verfügbar:** Lizenz [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.de), offen auf [GitHub](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD).
+* **Lebendig:** Die Versionsnummer im Kopf jeder Vorlesung zeigt, wann sich etwas geändert hat.
+* **Machen Sie mit:** Fehler melden Sie im OPAL-Forum oder per E-Mail. Wer zu einer Vorlesung beiträgt, wird dort als **Mitautorin oder Mitautor** genannt.
 
-**Frei verfügbar.** Die Materialien stehen unter der Lizenz [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.de): Sie dürfen sie nutzen, teilen und bearbeiten, solange Sie die Urheber nennen. Alles liegt offen unter [github.com/TUBAF-IfI-LiaScript/VL_EAVD](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD).
-
-**Lebendig.** Die Materialien ändern sich im Lauf des Semesters, auch durch Ihre Hinweise. Die Versionsnummer im Kopf jeder Vorlesung zeigt, wann sich etwas geändert hat.
-
-**Machen Sie mit.**
-
-* Fehler und Unklarheiten melden Sie im OPAL-Forum, per E-Mail oder, wenn Sie GitHub nutzen, als [Issue](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/issues).
-* Verbesserungen können Sie auf GitHub auch direkt als Änderung vorschlagen.
-* Wer zu einer Vorlesung beiträgt, wird in dieser Vorlesung als **Mitautorin oder Mitautor** genannt.
+                                    --{{0}}--
+Die dritte Ansicht, „Folien“, zeigt die Erklärungen als Notiz unter jeder Folie. Die Materialien dürfen Sie nutzen, teilen und bearbeiten, solange Sie die Urheber nennen. Wer GitHub nutzt, kann Fehler auch als Issue melden oder Verbesserungen direkt als Änderung vorschlagen.
 
 ## Semesterplan
 
@@ -419,39 +441,36 @@ In der ersten Übung richten wir gemeinsam Python und Visual Studio Code ein. Da
 
 ## Zurück zum Personenzähler
 
-So sieht der Kern des Messprogramms auf dem Mikrocontroller aus — in Python:
+Der Roboter, ein Arduino Alvik, misst mit Infrarotlicht die Entfernung in mehreren Zonen nebeneinander. Was deutlich näher ist als die Wand gegenüber, gilt als Person; wer zuerst links auftaucht, kommt herein. So sieht seine Live-Anzeige aus — hier aus einem Probelauf:
 
-``` python personenzaehler.py
-# Auszug: Initialisierung und Sensorzugriff sind ausgelassen
-RANGE_MIN = 60              # Überwachungsbereich in cm
-RANGE_MAX = 200
-DEBOUNCE_TIME = 1000        # ms zwischen zwei Zählungen
+![Live-Anzeige des Personenzählers aus einem Probelauf: oben die Personen je zwei Minuten (rein nach oben, raus nach unten), unten der gemessene Abstand der drei mittleren Sensorzonen](images/00_Motivation/personenzaehler_anzeige.png)<!-- style="max-height: 50vh;" -->
 
-while True:
-    distance = get_distance()
-    current_time = time.ticks_ms()
-    in_range = RANGE_MIN <= distance <= RANGE_MAX
+### Welche Annahmen im Zählprogramm stecken
 
-    if in_range and not person_detected:            # jemand betritt den Bereich
-        person_detected = True
+Die Einstellungen des Zählprogramms, in Python:
 
-    if not in_range and person_detected:            # jemand verlässt ihn
-        if time.ticks_diff(current_time, last_count_time) > DEBOUNCE_TIME:
-            people_count += 1
-            last_count_time = current_time
-        person_detected = False
+``` python zaehler.py
+# Auszug: die Einstellungen der Erkennung
+ANTEIL = 0.8          # belegt, wenn näher als 80 % des Hintergrunds
+NACHLAUF_MS = 400     # so lange müssen alle Zonen frei sein
+MAX_DAUER_MS = 6000   # länger belegt: keine Person, neuer Hintergrund
+REIN_VON = "links"    # wer zuerst links auftaucht, kommt herein
 ```
 
 Sie müssen heute keine Zeile davon verstehen. Aber schon die Namen verraten, welche Annahmen darin stecken:
 
 <!-- data-type="none" -->
-| Im Code steht ...        | Die Annahme dahinter                                | Was schiefgeht                                   |
-| :----------------------- | :-------------------------------------------------- | :----------------------------------------------- |
-| `RANGE_MIN`, `RANGE_MAX` | Personen gehen in 60–200 cm Abstand vorbei           | Wer dichter an der Wand läuft, wird nie gezählt   |
-| `DEBOUNCE_TIME = 1000`   | Zwischen zwei Personen liegt mehr als eine Sekunde   | Zwei nebeneinander sind eine Messung              |
-| kein Richtungssinn       | Wer eintritt, bleibt drin                            | Wer noch einmal hinausgeht, wird doppelt gezählt  |
+| Im Code steht ...     | Die Annahme dahinter                          | Was schiefgeht                                                  |
+| :-------------------- | :-------------------------------------------- | :-------------------------------------------------------------- |
+| `ANTEIL = 0.8`        | Eine Person ist deutlich näher als die Wand    | Wer dicht an der gegenüberliegenden Seite vorbeigeht, wird übersehen |
+| `NACHLAUF_MS = 400`   | Zwischen zwei Personen ist die Tür kurz frei   | Zwei dicht hintereinander zählen als eine                         |
+| `MAX_DAUER_MS = 6000` | Niemand braucht länger als 6 s für die Tür     | Wer in der Tür stehen bleibt, wird zur Wand — und nicht gezählt   |
+| `REIN_VON = "links"`  | Wer hereinkommt, taucht zuerst links auf       | Wer in der Tür umkehrt, zählt als „rein“ oder „unklar“            |
 
-**Es funktioniert. Und zählt trotzdem falsch.** Jede Zahl in einer Datentabelle hatte einmal ein Messgerät, eine Genauigkeit und ein Ausfallrisiko. In Vorlesung 08 sehen wir so eine Messung live.
+**Es funktioniert. Und zählt trotzdem falsch.** Jede Zahl in einer Datentabelle hatte einmal ein Messgerät, eine Genauigkeit und ein Ausfallrisiko.
+
+                                    --{{0}}--
+Zu Beginn lernt der Roboter, wie weit die Wand gegenüber entfernt ist. Im Probelauf hat er zwei Durchgänge nicht einordnen können und als „unklar“ notiert. In Vorlesung 08 sehen wir eine solche Messung live auf einem Mikrocontroller.
 
 ## Ihre Begriffe für die Kurslandkarte
 

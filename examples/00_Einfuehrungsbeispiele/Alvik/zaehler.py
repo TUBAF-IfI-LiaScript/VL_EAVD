@@ -36,13 +36,14 @@ ANTEIL = 0.8                 # belegt, wenn näher als 80 % des Hintergrunds
 NACHLAUF_MS = 400            # so lange müssen alle Zonen frei sein
 HINTERGRUND_N = 60           # Messungen für den gleitenden Hintergrund
 MAX_DAUER_MS = 6000          # länger belegt: keine Person, sondern neuer Hintergrund
+REIN_VON = "links"           # wer zuerst links auftaucht, kommt herein
 
 
 # ---------------------------------------------------------------- Erkennung
 class Erkennung:
     """Erkennt Durchgänge und ihre Richtung aus den drei inneren Zonen."""
 
-    def __init__(self, rein_von="links"):
+    def __init__(self, rein_von=REIN_VON):
         self.rein_von = rein_von
         self.verlauf = [[] for _ in INNEN]   # letzte freie Messungen je Zone
         self.ereignis = None                 # {Zone: erste Belegung in ms}
@@ -139,7 +140,7 @@ def main():
     quelle.add_argument("--abspielen", metavar="DATEI")
     p.add_argument("--tempo", type=float, default=1.0)
     p.add_argument("--beginn", default="16:15", help="Vorlesungsbeginn HH:MM")
-    p.add_argument("--rein-von", choices=["links", "rechts"], default="links",
+    p.add_argument("--rein-von", choices=["links", "rechts"], default=REIN_VON,
                    help="Von welcher Seite kommt, wer hereinkommt (Blick hinter dem Roboter)")
     p.add_argument("--port", default="/dev/ttyACM0")
     p.add_argument("--mpremote", default="mpremote")
@@ -193,6 +194,12 @@ def main():
                     zaehldatei.flush()
         if rohdatei:
             rohdatei.flush()     # bei einem Absturz bleiben die Rohdaten erhalten
+        if prozess and prozess.poll() is not None and not fig.get_suptitle():
+            # mpremote endet, wenn das Kabel abgezogen wird – sonst bliebe die
+            # Anzeige einfach stehen
+            fig.suptitle("Verbindung zum Roboter verloren – Kabel prüfen, "
+                         "Fenster schließen, neu starten", color="#c2462e",
+                         fontweight="bold")
         if uhr["start"]:
             zeichnen(oben, unten, a.beginn, uhr, zeiten, zaehler, letzte[0], erkennung)
 

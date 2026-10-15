@@ -60,7 +60,7 @@ assert sorted(LEITFRAGE) == list(range(15)), ("Leitfragen im Semesterplan unvoll
 B = [
     # --- Erhebung
     ("zaehler", "Datenerhebung", "erhebung", 0, 'Praktische Inhalte', 1, 0, "Messdaten entstehen nicht von selbst: Ein Sensor wandelt etwas Physikalisches in Zahlen um, ein Programm entscheidet, was davon festgehalten wird.", None),
-    ("annahmen", "Annahmen im Programm", "erhebung", 0, 'Zurück zum Personenzähler', 2, 0, "Grenzwerte, Schwellen und Zeitfenster im Code legen fest, was als Ergebnis herauskommt — ohne dass eine Fehlermeldung darauf hinweist.", "„Es funktioniert, also stimmt das Ergebnis.“"),
+    ("annahmen", "Annahmen im Programm", "erhebung", 0, 'Welche Annahmen im Zählprogramm stecken', 2, 0, "Grenzwerte, Schwellen und Zeitfenster im Code legen fest, was als Ergebnis herauskommt — ohne dass eine Fehlermeldung darauf hinweist.", "„Es funktioniert, also stimmt das Ergebnis.“"),
     ("sensorlog", "Sensorprotokoll", "erhebung", 1, 'Aufgabe 2: Der Personenzähler', 2, 0, "Die Textzeilen des Personenzählers — mühsam in der Tabellenkalkulation auszuwerten (Aufgabe 2).", None),
     ("micropy", "MicroPython", "erhebung", 8, 'Der Aufbau', 1, 0, "Python auf dem Mikrocontroller — dieselbe Sprache, andere Hardware.", None),
     ("sensor", "Sensor", "erhebung", 8, 'Der Aufbau', 1, 0, "Wandelt eine physikalische Größe in eine Zahl um — mit Genauigkeit, Messort und Ausfallrisiko.", None),
@@ -254,7 +254,7 @@ R = [
 # id, Titel, Fach, VL, Abschnittstitel, Datensatz, [Schlagwort-ids], Herkunft
 A = [
     ("a_tuer", "Personenzähler an der Hörsaaltür", "Messtechnik", 0, 'Praktische Inhalte',
-     "Sensorprotokoll data.csv", ["zaehler", "annahmen"], "lehrende"),
+     "Zählungen des Alvik-Roboters (zaehlungen_JJJJ-MM-TT.csv)", ["zaehler", "annahmen"], "lehrende"),
     ("a_schliff", "Körner im Dünnschliff", "Geologie", 0, 'Ein Blick voraus: Körner im Dünnschliff',
      "Dünnschliff unter gekreuzten Polarisatoren (Fundus Prof. Heide, TUBAF)", ["schliff", "annahmen"], "lehrende"),
     ("a_frost_bloecke", "Frosttage einer Januarwoche, als Blöcke und als Python", "Klima", 0, 'Blöcke oder Text',
