@@ -160,6 +160,7 @@ h1 {
   flex-wrap: wrap;
   align-items: center;
   gap: 12px 20px;
+  flex-basis: 100%;   /* immer eigene Zeile: springt nicht, wenn Ansichten Schalter aus- oder einblenden */
 }
 .control { display: grid; gap: 4px; }
 .control label, .control .lbl {
@@ -489,7 +490,7 @@ footer p { margin: 0 0 6px; }
         <div class="seg" role="group" aria-labelledby="modeLbl">
           <button id="mListe" aria-pressed="true" title="Alle Vorlesungen untereinander, mit Leitfrage, Begriffen und Anwendungen">Vorlesungen</button>
           <button id="mMetro" aria-pressed="false" title="Jede farbige Linie ist ein roter Faden: ein Thema, das sich durch mehrere Vorlesungen zieht">Metrokarte</button>
-          <button id="mZeit" aria-pressed="false" title="Alle Begriffe nach Themengebiet über das Semester, mit Pfeilen für ihre Zusammenhänge">Zeitleiste</button>
+          <button id="mZeit" aria-pressed="false" title="Alle Begriffe nach Themengebiet über das Semester">Zeitleiste</button>
         </div>
       </div>
       <div class="control">
@@ -514,13 +515,6 @@ footer p { margin: 0 0 6px; }
           <button id="eAlle" aria-pressed="false" title="Kernbegriffe und ergänzende Detailbegriffe">Alle</button>
         </div>
       </div>
-      <div class="control" id="ctlEdges">
-        <span class="lbl" id="viewLbl">Verbindungen</span>
-        <div class="seg" role="group" aria-labelledby="viewLbl">
-          <button id="vNb" aria-pressed="true" title="Nur die Pfeile zum ausgewählten Begriff">Nur Nachbarn</button>
-          <button id="vAll" aria-pressed="false" title="Alle Pfeile zwischen den Begriffen">Ganzes Netz</button>
-        </div>
-      </div>
     </div>
   </header>
 
@@ -536,7 +530,7 @@ footer p { margin: 0 0 6px; }
         </table>
       </div>
       <div>
-        <p><strong>Vorlesungen:</strong> alle Termine untereinander, mit Leitfrage, Begriffen und Anwendungen. <strong>Metrokarte:</strong> Jede farbige Linie ist ein <em>roter Faden</em>, ein Thema, das sich durch mehrere Vorlesungen zieht; weiße Stationen liegen auf mehreren Fäden. <strong>Zeitleiste:</strong> alle Begriffe nach Themengebiet, mit Pfeilen für ihre Zusammenhänge.</p>
+        <p><strong>Vorlesungen:</strong> alle Termine untereinander, mit Leitfrage, Begriffen und Anwendungen. <strong>Metrokarte:</strong> Jede farbige Linie ist ein <em>roter Faden</em>, ein Thema, das sich durch mehrere Vorlesungen zieht; weiße Stationen liegen auf mehreren Fäden. <strong>Zeitleiste:</strong> alle Begriffe nach Themengebiet über das Semester; wie sie zusammenhängen, steht beim Anklicken rechts.</p>
         <p><strong>Die Karte wächst mit dem Semester.</strong> Nach jeder Vorlesung kommen ihre Begriffe dazu, ergänzt um Ihre Vorschläge. <strong>Kernbegriffe</strong> sollten Sie in einem Satz erklären können, Detailbegriffe ergänzen sie. Mit <strong>Ausblick: An</strong> sehen Sie blass, was für kommende Vorlesungen vorbereitet ist.</p>
       </div>
     </div>
@@ -611,7 +605,7 @@ const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const narrow = () => matchMedia("(max-width: 980px)").matches;
 // Begriffe erscheinen erst nach ihrer Vorlesung (Freigabe); „Ausblick“ zeigt die vorbereiteten blass
 const sichtbar = (n) => n && (state.ausblick || LECTURES[n.vl].frei);
-const state = { mode: "liste", here: HERE_TODAY, view: "nb", detail: false, ausblick: false, sel: null, thread: null, hidden: new Set() };
+const state = { mode: "liste", here: HERE_TODAY, detail: false, ausblick: false, sel: null, thread: null, hidden: new Set() };
 try {
   const saved = JSON.parse(localStorage.getItem("eavd-map") || "{}");
   if (typeof saved.detail === "boolean") state.detail = saved.detail;
@@ -754,22 +748,6 @@ function drawZeit() {
     const y = laneY[l.id] + 28;
     el("line", { x1: 0, y1: y, x2: W, y2: y, class: "rail", stroke: css(l.v) }, gLines);
   });
-  const placed = [];
-  const free = (x, y, w) => !placed.some(r => Math.abs(r.x - x) < (r.w + w) / 2 + 4 && Math.abs(r.y - y) < 14);
-  const list = state.view === "all" ? EDGES : EDGES.filter(([a, b]) => a === state.sel || b === state.sel);
-  list.forEach(([a, b, t]) => {
-    if (!pos[a] || !pos[b]) return;
-    const hi = a === state.sel || b === state.sel;
-    const p = pos[a], q = pos[b], dx = (q.x - p.x) * 0.5, bend = p.x === q.x ? 60 : 0;
-    el("path", { d: `M${p.x},${p.y} C${p.x + dx + bend},${p.y} ${q.x - dx + bend},${q.y} ${q.x},${q.y}`, class: "edge" + (hi ? " hi" : ""), "marker-end": "url(#arrow)", opacity: hi || state.view === "nb" ? 1 : 0.3 }, gEdges);
-    if (hi) {
-      const lx = (p.x + q.x) / 2 + (p.x === q.x ? 46 : 0), w = t.length * 5.6, base = (p.y + q.y) / 2 - 4;
-      let ly = base;
-      for (const o of [0, 14, -14, 28, -28, 42, -42, 56, -56]) { if (free(lx, base + o, w)) { ly = base + o; break; } }
-      placed.push({ x: lx, y: ly, w });
-      el("text", { x: lx, y: ly, "text-anchor": "middle", class: "edge-label" }, gLabels).textContent = t;
-    }
-  });
   const nbSet = new Set((nbs[state.sel] || []).map(n => n.id));
   shown.forEach(n => {
     const p = pos[n.id];
@@ -780,7 +758,6 @@ function drawZeit() {
     if (!LECTURES[n.vl].frei) cls.push("vorschau");
     if (n.id === state.sel) cls.push("sel");
     else if (nbSet.has(n.id)) cls.push("nb");
-    else if (state.view === "nb" && state.sel) cls.push("dim");
     const g = stationGroup(n, cls);
     el("circle", { cx: p.x, cy: p.y, r: n.level === 1 ? 7 : 4.5, class: "dot", stroke: css(lineById[n.line].v) }, g);
     el("text", { x: p.x + 12, y: p.y + 4 }, g).textContent = n.name;
@@ -993,10 +970,9 @@ function render() {
   $("#hereVal").textContent = `VL ${lec.nr} · ${lec.date}`;
   $("#here").value = state.here;
   $("#today").hidden = state.here === HERE_TODAY;
-  const pressed = [["mListe", state.mode === "liste"], ["mMetro", state.mode === "metro"], ["mZeit", state.mode === "zeit"], ["vNb", state.view === "nb"], ["vAll", state.view === "all"], ["eKern", !state.detail], ["eAlle", state.detail], ["ausAus", !state.ausblick], ["ausAn", state.ausblick]];
+  const pressed = [["mListe", state.mode === "liste"], ["mMetro", state.mode === "metro"], ["mZeit", state.mode === "zeit"], ["eKern", !state.detail], ["eAlle", state.detail], ["ausAus", !state.ausblick], ["ausAn", state.ausblick]];
   for (const [id, on] of pressed) $("#" + id).setAttribute("aria-pressed", String(on));
   $("#ctlLevel").hidden = state.mode === "metro";
-  $("#ctlEdges").hidden = state.mode !== "zeit";
   $("#mapwrap").hidden = state.mode === "liste";
   $("#liste").hidden = state.mode !== "liste";
   const vis = ALL.filter(sichtbar);
@@ -1031,8 +1007,6 @@ $("#mListe").addEventListener("click", () => { state.mode = "liste"; state.threa
 $("#mMetro").addEventListener("click", () => { state.mode = "metro"; if (!state.sel || !threadsOf[state.sel]) state.sel = defaultSel(); save(); render(); scrollToHere(); });
 $("#mZeit").addEventListener("click", () => { state.mode = "zeit"; state.thread = null; if (!state.sel) state.sel = defaultSel(); save(); render(); scrollToHere(); });
 $("#today").addEventListener("click", () => { state.here = HERE_TODAY; render(); scrollToHere(); });
-$("#vNb").addEventListener("click", () => { state.view = "nb"; render(); });
-$("#vAll").addEventListener("click", () => { state.view = "all"; render(); });
 $("#eKern").addEventListener("click", () => { state.detail = false; save(); render(); });
 $("#eAlle").addEventListener("click", () => { state.detail = true; save(); render(); });
 $("#ausAus").addEventListener("click", () => { state.ausblick = false; if (state.sel && !sichtbar(byId[state.sel] || byApp[state.sel])) state.sel = defaultSel(); save(); render(); });

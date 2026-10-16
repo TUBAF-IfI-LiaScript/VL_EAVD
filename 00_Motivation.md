@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.3.0
+version:  2.3.1
 language: de
 narrator: Deutsch Female
 
@@ -378,7 +378,7 @@ Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/
 **Die Karte wächst mit dem Semester** — nach jeder Vorlesung kommen ihre Begriffe dazu, auch Ihre Vorschläge.
 
                                     --{{0}}--
-Programmieren lernt man in Schichten: Jeder neue Begriff stützt sich auf frühere. Die Karte hält diesen Zusammenhang fest. Für kommende Vorlesungen stehen zunächst nur Termin und Leitfrage; wer neugierig ist, sieht mit „Ausblick: An“ die vorbereiteten Begriffe blass. „Sie sind hier“ richtet sich nach dem Datum. Neben der Liste gibt es eine Metrokarte, deren Linien rote Fäden durch das Semester sind — etwa „Wenn ein Wert fehlt“ —, und eine Zeitleiste mit allen Begriffen und ihren Verbindungen.
+Programmieren lernt man in Schichten: Jeder neue Begriff stützt sich auf frühere. Die Karte hält diesen Zusammenhang fest. Für kommende Vorlesungen stehen zunächst nur Termin und Leitfrage; wer neugierig ist, sieht mit „Ausblick: An“ die vorbereiteten Begriffe blass. „Sie sind hier“ richtet sich nach dem Datum. Neben der Liste gibt es eine Metrokarte, deren Linien rote Fäden durch das Semester sind — etwa „Wenn ein Wert fehlt“ —, und eine Zeitleiste mit allen Begriffen nach Themengebiet.
 
 > [!NOTE]
 > Am Ende jeder Vorlesung fragen wir Sie nach den Stichworten des Tages und tragen sie in die Kurslandkarte ein.
