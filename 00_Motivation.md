@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.2.1
+version:  2.2.2
 language: de
 narrator: Deutsch Female
 
@@ -413,8 +413,6 @@ Vorlesung 14 enthält eine Prüfungsvorbereitung mit Musteraufgaben.
 
 ## Organisatorisches
 
-<!-- TODO WiSe 2026/27: Team (Übungsbetreuer, Tutoren) ergänzen -->
-
 **Übungen.** Die Übungen vertiefen jede Vorlesung an Programmieraufgaben zum Datensatz der Woche — ein Teil davon bewusst auf Papier, als Vorbereitung auf die Klausur. Sie beginnen in der zweiten Vorlesungswoche, also ab Montag, 26.10. Wählen Sie einen der vier Termine:
 
 <!-- data-type="none" -->
@@ -426,8 +424,6 @@ Vorlesung 14 enthält eine Prüfungsvorbereitung mit Musteraufgaben.
 | Mittwoch | 18:00–19:30   | RAM-2119 |
 
 In der ersten Übung richten wir gemeinsam Python und Visual Studio Code ein. Danach gehört jedes Übungsblatt zur Vorlesung der Woche: Sie versuchen sich bis zur Übung der Folgewoche daran, dort besprechen wir es.
-
-<!-- TODO WiSe 2026/27: Einschreibung (OPAL), Abgabeform -->
 
 **Materialien.** Alle Vorlesungen, Daten und Beispiele finden Sie unter [github.com/TUBAF-IfI-LiaScript/VL_EAVD](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD); wie Sie mitmachen können, steht im Abschnitt „Offene Materialien“.
 

@@ -9,7 +9,7 @@ Aufruf aus dem Repository-Wurzelverzeichnis:
 
 Schreibt docs/kurslandkarte/kurslandkarte.json und docs/kurslandkarte/index.html.
 """
-import datetime, json, re, glob, os
+import datetime, json, re, glob, os, sys
 
 HIER = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HIER)
@@ -45,6 +45,9 @@ assert len(TERMINE) == 15
 # ---- Freigabe: Begriffe einer Vorlesung erscheinen erst nach ihr in der Karte.
 # Nach jeder Vorlesung: Vorschläge der Studierenden einarbeiten, dann hier ergänzen.
 FREIGEGEBEN = {0}
+if "--freigegeben" in sys.argv:   # für das Makefile: Dateien der freigegebenen Vorlesungen
+    print(" ".join(sections[v]["datei"] for v in sorted(FREIGEGEBEN)))
+    sys.exit()
 
 # ---- Leitfragen aus dem Semesterplan in VL 00 (einzige Quelle)
 _plan = open(os.path.join(REPO, "00_Motivation.md"), encoding="utf-8").read()
@@ -299,11 +302,16 @@ def abschnitt_nr(vl, titel):
 
 B = [(b[0], b[1], b[2], b[3], abschnitt_nr(b[3], b[4])) + tuple(b[5:]) for b in B]
 
+def pdf_link(v):
+    """PDF aus `make pdf` (docs/pdf/), nur für freigegebene Vorlesungen."""
+    name = sections[v]["datei"][:-3] + ".pdf"
+    return "../pdf/" + name if v in FREIGEGEBEN and os.path.exists(os.path.join(REPO, "docs", "pdf", name)) else None
+
 out = {
     "stand": STAND,
     "vorlesungen": [
         {"vl": v, "datei": sections[v]["datei"], "datum": TERMINE[v][0], "kurz": TERMINE[v][1],
-         "leitfrage": LEITFRAGE[v], "freigegeben": v in FREIGEGEBEN,
+         "leitfrage": LEITFRAGE[v], "freigegeben": v in FREIGEGEBEN, "pdf": pdf_link(v),
          "status": STATUS[v], "abschnitte": sections[v]["abschnitte"]}
         for v in range(15)
     ],

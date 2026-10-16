@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.1.3
+version:  2.1.4
 language: de
 narrator: Deutsch Female
 
@@ -131,8 +131,6 @@ Die mittlere Temperatur im Jahr 2024 betrug [[ 1,2 °C | 4,1 °C | (6,3 °C) | 9
 
                                      {{0-1}}
 *******************************************************************************
-
-<!-- TODO nach dem 19.10.2026: Platzhalter durch die Aufzeichnung aus Vorlesung 00 ersetzen (Auszug, Link, Lösung nachrechnen). -->
 
 Erinnern Sie sich an den Personenzähler aus der letzten Vorlesung? Der Roboter an der Hörsaaltür hat aufgeschrieben, wer wann hereinkam und hinausging:
 

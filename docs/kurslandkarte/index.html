@@ -439,6 +439,7 @@ footer p { margin: 0 0 6px; }
 .vlhead .tag { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--here); }
 .vlhead .tag.muted { color: var(--muted); }
 .vlhead a { margin-left: auto; font-size: 13px; color: var(--muted); }
+.vlhead a + a { margin-left: 0; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chips button {
   font: inherit; font-size: 14px;
@@ -567,6 +568,7 @@ footer p { margin: 0 0 6px; }
    "kurz": "Motivation",
    "leitfrage": "Warum sollte ich programmieren lernen?",
    "freigegeben": true,
+   "pdf": "../pdf/00_Motivation.pdf",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Herzlich willkommen!",
@@ -602,6 +604,7 @@ footer p { margin: 0 0 6px; }
    "kurz": "Problem → Programm",
    "leitfrage": "Wo hört die Tabellenkalkulation auf?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Vom Problem zum Programm",
@@ -632,6 +635,7 @@ footer p { margin: 0 0 6px; }
    "kurz": "Erste Schritte",
    "leitfrage": "Wie sage ich dem Rechner, was er tun soll?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Erste Schritte in Python",
@@ -662,6 +666,7 @@ footer p { margin: 0 0 6px; }
    "kurz": "Prüfen & Wiederholen",
    "leitfrage": "An wie vielen Tagen gab es 2024 Frost?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Prüfen und Wiederholen",
@@ -689,6 +694,7 @@ footer p { margin: 0 0 6px; }
    "kurz": "Muster",
    "leitfrage": "Wie lang war die längste Frostperiode?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Muster in Messreihen",
@@ -715,6 +721,7 @@ footer p { margin: 0 0 6px; }
    "kurz": "Daten sammeln",
    "leitfrage": "Welches war der wärmste Tag jedes Jahres?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Daten sammeln",
@@ -744,6 +751,7 @@ footer p { margin: 0 0 6px; }
    "kurz": "Dateien lesen",
    "leitfrage": "Wie kommen 48.000 Zeilen in mein Programm?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Dateien lesen",
@@ -771,6 +779,7 @@ footer p { margin: 0 0 6px; }
    "kurz": "Funktionen",
    "leitfrage": "Wie vermeide ich, alles dreimal zu schreiben?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Funktionen",
@@ -796,6 +805,7 @@ footer p { margin: 0 0 6px; }
    "kurz": "Demo MicroPython",
    "leitfrage": "Wo kommen die Daten eigentlich her?",
    "freigegeben": false,
+   "pdf": null,
    "status": "Rumpf",
    "abschnitte": [
     "Demonstration: Datenerhebung mit MicroPython",
@@ -815,6 +825,7 @@ footer p { margin: 0 0 6px; }
    "kurz": "Strukturieren",
    "leitfrage": "Wie organisiere ich Code, der wächst?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Programme strukturieren",
@@ -840,6 +851,7 @@ footer p { margin: 0 0 6px; }
    "kurz": "NumPy",
    "leitfrage": "Warum muss ich das Rad nicht neu erfinden?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Bibliotheken: NumPy",
@@ -867,6 +879,7 @@ footer p { margin: 0 0 6px; }
    "kurz": "pandas I",
    "leitfrage": "48.000 Zeilen in einer Anweisung?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "pandas I — Einlesen",
@@ -894,6 +907,7 @@ footer p { margin: 0 0 6px; }
    "kurz": "pandas II",
    "leitfrage": "Wie fasse ich Jahrzehnte zusammen?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "pandas II — Aggregieren",
@@ -917,6 +931,7 @@ footer p { margin: 0 0 6px; }
    "kurz": "Visualisierung",
    "leitfrage": "Wie zeige ich, was ich gefunden habe?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Visualisierung",
@@ -942,6 +957,7 @@ footer p { margin: 0 0 6px; }
    "kurz": "Datenqualität",
    "leitfrage": "Kann ich meinem Ergebnis trauen?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Datenqualität, Ausblick, Prüfungsvorbereitung",
@@ -3219,7 +3235,7 @@ const DATA = JSON.parse(document.getElementById("kartendaten").textContent);
 const BASE = "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/";
 const LECTURES = DATA.vorlesungen.map(v => {
   const [y, m, d] = v.datum.split("-");
-  return { nr: String(v.vl).padStart(2, "0"), iso: v.datum, date: `${d}.${m}.`, short: v.kurz, frage: v.leitfrage, frei: v.freigegeben !== false, file: v.datei, status: v.status, sections: v.abschnitte };
+  return { nr: String(v.vl).padStart(2, "0"), iso: v.datum, date: `${d}.${m}.`, short: v.kurz, frage: v.leitfrage, frei: v.freigegeben !== false, pdf: v.pdf, file: v.datei, status: v.status, sections: v.abschnitte };
 });
 // Aktuelle Vorlesung: die letzte, deren Termin erreicht ist (vor Semesterbeginn: VL 00)
 const TODAY = new Date().toISOString().slice(0, 10);
@@ -3502,7 +3518,7 @@ function drawListe() {
       ? (BEFORE_START && v === HERE_TODAY ? `<span class="tag">Start am ${lec.date}</span>` : `<span class="tag">Sie sind hier</span>`)
       : lec.status !== "ausgearbeitet" ? `<span class="tag muted">in Vorbereitung</span>` : "";
     li.innerHTML = `<div class="vlhead"><b>VL ${lec.nr}</b><span class="d">${lec.date}</span><span class="s">${lec.short}</span>${tag}
-      <a href="${BASE + lec.file}" target="_blank" rel="noopener">Folien ↗</a></div>
+      <a href="${BASE + lec.file}" target="_blank" rel="noopener">Folien ↗</a>${lec.pdf ? `<a href="${lec.pdf}" target="_blank" rel="noopener" title="Lehrbuchfassung zum Ausdrucken; Quizze und Code laufen nur in den Folien">PDF ↗</a>` : ""}</div>
       ${lec.frage ? `<div class="frage">${lec.frage}</div>` : ""}
       ${!lec.frei && !state.ausblick ? vorbereitetHinweis(v) : `<div class="chips${lec.frei ? "" : " vorschau"}">${lec.frei ? "" : '<span class="apps-lbl">Vorbereitet</span>'}${items.map(n => `<button data-id="${n.id}" class="${n.level === 2 ? "detail" : ""}${n.code ? " code" : ""}" aria-pressed="${n.id === state.sel}"><i style="background:${css(lineById[n.line].v)}"></i><span class="n">${n.name}</span></button>`).join("") || '<span class="hint">keine Begriffe in den gewählten Gebieten</span>'}</div>`}
       ${APPS.some(a => a.vl === v && sichtbar(a)) ? `<div class="chips apps"><span class="apps-lbl">Anwendungen</span>${APPS.filter(a => a.vl === v && sichtbar(a)).map(a => `<button data-id="${a.id}" aria-pressed="${a.id === state.sel}"><span class="n">${a.name}</span><span class="fach">${a.fach}</span></button>`).join("")}</div>` : ""}`;

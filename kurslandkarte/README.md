@@ -25,11 +25,11 @@ Die Karte zeigt nur die Begriffe freigegebener Vorlesungen; für alle anderen Te
 
 1. Antworten der Abschlussfrage „Ihre Begriffe für die Kurslandkarte“ aus dem LiaScript-Klassenzimmer sichern.
 2. Mit der vorbereiteten Liste in `erzeuge.py` abgleichen: Begriffe umbenennen, ergänzen, studentische Anwendungen mit `herkunft="studierende"` aufnehmen. Regel: Schlagworte sind fachunabhängig, Konkretes ist eine Anwendung.
-3. Die Vorlesung in `FREIGEGEBEN` eintragen, `python3 kurslandkarte/erzeuge.py`, committen.
+3. Die Vorlesung in `FREIGEGEBEN` eintragen, `make` (erzeugt das PDF der Vorlesung mit `liaex` nach `docs/pdf/` und danach die Karte, die es verlinkt), PDF und Karte committen.
 
 ## Datenmodell
 
-* **Vorlesung:** `vl`, `datei`, `datum` (Termin, ISO), `kurz` (Kurztitel), `leitfrage` (aus dem Semesterplan in VL 00), `freigegeben`, `status`, `abschnitte`; Termine und Kurztitel stehen in `TERMINE` in `erzeuge.py`
+* **Vorlesung:** `vl`, `datei`, `datum` (Termin, ISO), `kurz` (Kurztitel), `leitfrage` (aus dem Semesterplan in VL 00), `freigegeben`, `pdf` (Link auf `docs/pdf/`, nur wenn freigegeben und vorhanden), `status`, `abschnitte`; Termine und Kurztitel stehen in `TERMINE` in `erzeuge.py`
 * **Begriff:** `id`, `name`, `linie` (Kategorie), `vl`, `abschnitt` (in `erzeuge.py` der Abschnittstitel, im JSON die Foliennummer), `ebene` (1 = Kernbegriff, 2 = Detailbegriff), `code`, `erklaerung`, `fehlvorstellung`
 * **Beziehung:** `von`, `nach`, `text` (Beschriftung der Kante, gelesen als „von … text … nach“)
 * **Anwendung:** `id` (beginnt mit `a_`), `titel`, `fach`, `vl`, `abschnitt` (in `erzeuge.py` der Abschnittstitel, im JSON die Foliennummer), `datensatz`, `schlagworte` (Liste von Begriffs-ids), `herkunft` (`lehrende` oder `studierende`). Anwendungen sind konkrete Fragen an echte Daten; sie erscheinen in der Ansicht „Vorlesungen“ unter den Begriffen, und jeder Begriff nennt im Seitenfeld, in welchen Anwendungen er vorkommt.

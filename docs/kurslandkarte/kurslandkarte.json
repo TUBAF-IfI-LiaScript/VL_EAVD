@@ -8,6 +8,7 @@
    "kurz": "Motivation",
    "leitfrage": "Warum sollte ich programmieren lernen?",
    "freigegeben": true,
+   "pdf": "../pdf/00_Motivation.pdf",
    "status": "ausgearbeitet",
    "abschnitte": [
     "Herzlich willkommen!",
@@ -43,6 +44,7 @@
    "kurz": "Problem → Programm",
    "leitfrage": "Wo hört die Tabellenkalkulation auf?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Vom Problem zum Programm",
@@ -73,6 +75,7 @@
    "kurz": "Erste Schritte",
    "leitfrage": "Wie sage ich dem Rechner, was er tun soll?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Erste Schritte in Python",
@@ -103,6 +106,7 @@
    "kurz": "Prüfen & Wiederholen",
    "leitfrage": "An wie vielen Tagen gab es 2024 Frost?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Prüfen und Wiederholen",
@@ -130,6 +134,7 @@
    "kurz": "Muster",
    "leitfrage": "Wie lang war die längste Frostperiode?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Muster in Messreihen",
@@ -156,6 +161,7 @@
    "kurz": "Daten sammeln",
    "leitfrage": "Welches war der wärmste Tag jedes Jahres?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Daten sammeln",
@@ -185,6 +191,7 @@
    "kurz": "Dateien lesen",
    "leitfrage": "Wie kommen 48.000 Zeilen in mein Programm?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Dateien lesen",
@@ -212,6 +219,7 @@
    "kurz": "Funktionen",
    "leitfrage": "Wie vermeide ich, alles dreimal zu schreiben?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Funktionen",
@@ -237,6 +245,7 @@
    "kurz": "Demo MicroPython",
    "leitfrage": "Wo kommen die Daten eigentlich her?",
    "freigegeben": false,
+   "pdf": null,
    "status": "Rumpf",
    "abschnitte": [
     "Demonstration: Datenerhebung mit MicroPython",
@@ -256,6 +265,7 @@
    "kurz": "Strukturieren",
    "leitfrage": "Wie organisiere ich Code, der wächst?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Programme strukturieren",
@@ -281,6 +291,7 @@
    "kurz": "NumPy",
    "leitfrage": "Warum muss ich das Rad nicht neu erfinden?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Bibliotheken: NumPy",
@@ -308,6 +319,7 @@
    "kurz": "pandas I",
    "leitfrage": "48.000 Zeilen in einer Anweisung?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "pandas I — Einlesen",
@@ -335,6 +347,7 @@
    "kurz": "pandas II",
    "leitfrage": "Wie fasse ich Jahrzehnte zusammen?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "pandas II — Aggregieren",
@@ -358,6 +371,7 @@
    "kurz": "Visualisierung",
    "leitfrage": "Wie zeige ich, was ich gefunden habe?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Visualisierung",
@@ -383,6 +397,7 @@
    "kurz": "Datenqualität",
    "leitfrage": "Kann ich meinem Ergebnis trauen?",
    "freigegeben": false,
+   "pdf": null,
    "status": "ausgearbeitet",
    "abschnitte": [
     "Datenqualität, Ausblick, Prüfungsvorbereitung",
