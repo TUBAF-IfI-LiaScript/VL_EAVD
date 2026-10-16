@@ -51,7 +51,7 @@ if "--freigegeben" in sys.argv:   # für das Makefile: Dateien der freigegebenen
 
 # ---- Leitfragen aus dem Semesterplan in VL 00 (einzige Quelle)
 _plan = open(os.path.join(REPO, "00_Motivation.md"), encoding="utf-8").read()
-_plan = _plan[_plan.index("## Semesterplan"):_plan.index("## Prüfung")]
+# (ganze Datei: die Termin-Zeilen „| TT.MM. | NN …“ kommen nur in der Semesterplan-Tabelle vor)
 LEITFRAGE = {}
 for _z in _plan.splitlines():
     _m = re.match(r"\| \d\d\.\d\d\. \| \[?(\d\d)", _z)
@@ -63,7 +63,7 @@ assert sorted(LEITFRAGE) == list(range(15)), ("Leitfragen im Semesterplan unvoll
 B = [
     # --- Erhebung
     ("zaehler", "Datenerhebung", "erhebung", 0, 'Praktische Inhalte', 1, 0, "Messdaten entstehen nicht von selbst: Ein Sensor wandelt etwas Physikalisches in Zahlen um, ein Programm entscheidet, was davon festgehalten wird.", None),
-    ("annahmen", "Annahmen im Programm", "erhebung", 0, 'Welche Annahmen im Zählprogramm stecken', 2, 0, "Grenzwerte, Schwellen und Zeitfenster im Code legen fest, was als Ergebnis herauskommt — ohne dass eine Fehlermeldung darauf hinweist.", "„Es funktioniert, also stimmt das Ergebnis.“"),
+    ("annahmen", "Annahmen im Programm", "erhebung", 0, 'Wo soll das hinführen?', 2, 0, "Grenzwerte, Schwellen und Zeitfenster im Code legen fest, was als Ergebnis herauskommt — ohne dass eine Fehlermeldung darauf hinweist.", "„Es funktioniert, also stimmt das Ergebnis.“"),
     ("sensorlog", "Sensorprotokoll", "erhebung", 1, 'Aufgabe 2: Der Personenzähler', 2, 0, "Die Textzeilen des Personenzählers — mühsam in der Tabellenkalkulation auszuwerten (Aufgabe 2).", None),
     ("micropy", "MicroPython", "erhebung", 8, 'Der Aufbau', 1, 0, "Python auf dem Mikrocontroller — dieselbe Sprache, andere Hardware.", None),
     ("sensor", "Sensor", "erhebung", 8, 'Der Aufbau', 1, 0, "Wandelt eine physikalische Größe in eine Zahl um — mit Genauigkeit, Messort und Ausfallrisiko.", None),
@@ -168,7 +168,7 @@ B = [
 
     # --- Analyse & Darstellung
     ("kreislauf", "Datenkreislauf", "analyse", 0, 'Warum ist die Veranstaltung zentral?', 2, 0, "Frage, Erhebung, Aufbereitung, Analyse, Visualisierung, Dokumentation — meist mehrere Runden.", None),
-    ("schliff", "Bildverarbeitung", "analyse", 0, 'Ein Blick voraus: Körner im Dünnschliff', 2, 0, "Ausblick: Ein Bild ist eine Tabelle aus Helligkeitswerten. Schwelle setzen, zusammenhängende Flecken zählen, Größen messen.", "„Das Programm erkennt, was im Bild ist.“ Es erkennt nur, was heller ist als die Schwelle."),
+    ("schliff", "Bildverarbeitung", "analyse", 0, 'Praktische Inhalte', 2, 0, "Ausblick: Ein Bild ist eine Tabelle aus Helligkeitswerten. Schwelle setzen, zusammenhängende Flecken zählen, Größen messen.", "„Das Programm erkennt, was im Bild ist.“ Es erkennt nur, was heller ist als die Schwelle."),
     ("lohnt", "Programm oder Tabelle?", "analyse", 1, 'Wann lohnt sich ein Programm?', 1, 0, "Viele Daten, sperrige Formate, Wiederholung, Nachvollziehbarkeit: dann lohnt ein Programm.", None),
     ("kenntage", "Frost-, Eis-, Sommertag", "analyse", 3, 'Mehrere Fälle: elif', 2, 0, "DWD-Kenntage: Frosttag = Minimum unter 0 °C, Eistag = Maximum unter 0 °C, Sommertag = Maximum ab 25 °C.", None),
     ("mittel", "Mittelwert", "analyse", 4, 'Mittelwert mit Fehlwerten', 1, 0, "Summe durch Anzahl — nur über gültige Werte, und die Anzahl gehört dazu.", "„Ein Mittelwert gilt, egal wie viele Werte fehlen.“"),
@@ -258,7 +258,7 @@ R = [
 A = [
     ("a_tuer", "Personenzähler an der Hörsaaltür", "Messtechnik", 0, 'Praktische Inhalte',
      "Zählungen des Alvik-Roboters (zaehlungen_JJJJ-MM-TT.csv)", ["zaehler", "annahmen"], "lehrende"),
-    ("a_schliff", "Körner im Dünnschliff", "Geologie", 0, 'Ein Blick voraus: Körner im Dünnschliff',
+    ("a_schliff", "Körner im Dünnschliff", "Geologie", 0, 'Praktische Inhalte',
      "Mikroskopbild einer hauchdünn geschliffenen Gesteinsscheibe, durch zwei gekreuzte Lichtfilter (Polarisationsfilter) betrachtet, sodass die Mineralkörner hell oder farbig leuchten. Bild aus der Lehrsammlung von Prof. Heide, TU Bergakademie Freiberg", ["schliff", "annahmen"], "lehrende"),
     ("a_frost_bloecke", "Frosttage einer Januarwoche, als Blöcke und als Python", "Klima", 0, 'Blöcke oder Text',
      "Tiefsttemperaturen Fichtelberg", ["blockly"], "lehrende"),

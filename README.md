@@ -22,7 +22,7 @@ logo: ./images/Readme/Wetterstation.png
 
 > **Dieser Kurs wird gerade überarbeitet.** Zum Wintersemester 2026/27 bauen wir die Veranstaltung grundlegend um — Inhalte, Reihenfolge und Beispiele können sich noch ändern.
 >
-> **Stand 15.10.2026:** Vorlesungen 00–07 und 09–14 sind ausgearbeitet, Vorlesung 08 (Demonstration Datenerhebung) liegt als Rumpf vor. Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) zeigt Begriffe und Zusammenhänge aller Vorlesungen. Die Materialien des bisherigen Kurses (C++/Python) sind in der Git-Historie erreichbar (Commit `21d3061`).
+> **Stand 16.10.2026:** Vorlesungen 00–07 und 09–14 sind ausgearbeitet, Vorlesung 08 (Demonstration Datenerhebung mit dem Arduino Alvik) liegt als Rumpf vor. Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester: Nach jeder Vorlesung kommen ihre Begriffe und ein PDF der Vorlesung dazu. Die Materialien des bisherigen Kurses (C++/Python) sind in der Git-Historie erreichbar (Commit `21d3061`).
 >
 > Hinweise und Fehler gern als [Issue](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/issues). Die Materialien stehen unter [CC BY 4.0](#lizenz).
 
@@ -50,7 +50,7 @@ Sieben Prinzipien tragen die Konzeption:
 | **Erst mühsam, dann mit Werkzeug** | Tabellenkalkulation (VL 01) → eigene Schleifen (VL 03–07) → pandas (VL 11–12) für dieselben Fragen. |
 | **Live Hacking**                 | Ab VL 04 entsteht in jeder Sitzung ein Programm live, inklusive Irrwegen. Ein Skript wächst über VL 06 (lang), VL 07 (Funktionen) und VL 09 (Modul). |
 | **Typische Fehlvorstellungen**   | Eigene Abschnitte mit Vorhersage-Quiz, angelehnt an [PD4CS](https://www.pd4cs.org/mc-index/) und ergänzt um datenspezifische Fehlvorstellungen. |
-| **Klare Werkzeugwahl**           | Blöcke oder Text für Einführungsbeispiele (VL 02–07), Python im Browser (Pyodide) und auf dem Server (CodeRunner) — eins zu eins übertragbar auf den eigenen Rechner. Zum Arbeiten durchgehend Visual Studio Code mit `.py`-Dateien, ab VL 10 mit Zellen (`# %%`). Jupyter Notebooks werden bewusst nicht als Werkzeug eingeführt (zusätzliches Denkmodell, versteckter Zustand), sondern nur zum Lesen vorgestellt. |
+| **Klare Werkzeugwahl**           | Blöcke oder Text für Einführungsbeispiele (VL 02–07), Python im Browser (Pyodide) und auf dem Server (CodeRunner) — eins zu eins übertragbar auf den eigenen Rechner. Zum Arbeiten durchgehend Visual Studio Code, bis VL 09 mit `.py`-Dateien, ab VL 10 mit Jupyter Notebooks in VS Code — den versteckten Zustand eines Notebooks behandeln wir als typische Fehlvorstellung. |
 | **Nachvollziehbarkeit durch die Kurslandkarte** | Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) zeigt, welche Begriffe in welcher Vorlesung dazukommen, worauf sie aufbauen und wohin sie führen — als Liste je Vorlesung, als Metrokarte entlang roter Fäden und als Zeitleiste. Jeder Begriff führt direkt zur passenden Folie. |
 
 Die Prüfung ist schriftlich. Geübt wird deshalb vor allem das Lesen, Vorhersagen und Korrigieren von Code.

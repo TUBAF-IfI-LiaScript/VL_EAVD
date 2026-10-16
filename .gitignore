@@ -10,3 +10,6 @@ main
 # auto-generated files on macOS
 .DS_Store
 *.dSYM/
+
+# Python
+__pycache__/

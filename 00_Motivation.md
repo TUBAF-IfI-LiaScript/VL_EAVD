@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.2.2
+version:  2.3.0
 language: de
 narrator: Deutsch Female
 
@@ -148,30 +148,10 @@ Am Ende des Semesters können Sie eine wissenschaftliche Fragestellung auf eine 
 
 ### Praktische Inhalte
 
-> **Wann erscheinen Studierende in der Vorlesung?** Gibt es Muster — der frühe Vogel, rechtzeitig aber knapp, in den ersten zehn Minuten passiert ohnehin nichts?
+                {{0-1}}
+*****************************************
 
-Ein kleiner Roboter an der Hörsaaltür zählt, wer hereinkommt und wer hinausgeht — auch heute, während Sie hereinkommen. Ein Auszug aus einem Probelauf:
-
-``` text zaehlungen_2026-10-15.csv
-zeit;richtung
-2026-10-15T16:42:31;raus
-2026-10-15T16:42:32;unklar
-2026-10-15T16:42:36;raus
-2026-10-15T16:42:40;rein
-2026-10-15T16:43:04;unklar
-2026-10-15T16:43:08;rein
-```
-
-* Wie kommen die Daten zustande? Und zählt der Roboter richtig?
-* Wie macht man aus diesen Textzeilen etwas, womit man rechnen kann?
-* Wie beantwortet man die Frage — heute, und jede Woche aufs Neue?
-
-                                    --{{0}}--
-Eine einfache Frage, echte Messdaten — und schon stecken wir mitten in den Themen dieses Semesters. Am Ende dieser Vorlesung kommen wir darauf zurück.
-
-### Ein Blick voraus: Körner im Dünnschliff
-
-> **Wie groß sind die Körner in diesem Gestein — und wie viel Fläche nehmen sie ein?**
+> **Forschungsfrage: Wie groß sind die Körner in diesem Gestein — und wie viel Fläche nehmen sie ein?**
 
 Ein **Dünnschliff** ist eine Gesteinsscheibe, so dünn geschliffen, dass Licht hindurchscheint. Sie müssen heute keine Zeile des Programms verstehen — achten Sie nur auf die Kommentare rechts:
 
@@ -190,28 +170,41 @@ Ergebnis: **40 Körner**, mittlerer Durchmesser (Median) **657 µm**, zusammen r
 
 ![Dünnschliff, erkannte helle Körner und ihre Größenverteilung](images/00_Motivation/duennschliff_auswertung.png)<!-- style="max-height: 28vh;" -->
 
-                                    --{{0}}--
-Der Schliff ist etwa 0,03 mm dick. Unter dem Mikroskop liegt er zwischen zwei gekreuzten Polarisationsfiltern; die Mineralkörner erscheinen dann je nach Mineral und Lage hell, farbig oder dunkel. Das Programm sucht die hellen Flecken, zählt sie und rechnet ihre Fläche über den Maßstab in Mikrometer um.
-
-#### Jede Zeile eine Entscheidung
-
-Das Programm läuft in wenigen Sekunden — aber jede Zeile enthält eine Entscheidung:
-
-<!-- data-type="none" -->
-| Im Code steht ...          | Die Annahme dahinter                      | Was schiefgeht                                                         |
-| :------------------------- | :---------------------------------------- | :--------------------------------------------------------------------- |
-| `SCHWELLE = 0.45`          | Ab dieser Helligkeit beginnt ein Korn     | Bei 0,35 sind es 48 Körner auf 21 % der Probe, bei 0,55 nur 32 auf 11 % |
-| `grau > SCHWELLE`          | Körner sind hell                          | Körner, die gerade dunkel erscheinen, fehlen ganz                       |
-| `ndimage.label`            | Körner berühren sich nicht                | Zwei aneinanderliegende Körner zählen als eines                         |
-| `grau[900:, 640:] = 0`     | Der Maßstab ist kein Korn                 | Ohne diese Zeile wird der Maßstabsbalken als Korn mitgezählt            |
-| `UM_PRO_PIXEL = 2000 / 80` | 80 Pixel entsprechen 2000 µm              | Wer den Maßstab falsch abliest, verschiebt alle Durchmesser             |
-
 Zum Ausprobieren: Das vollständige Programm liegt unter [`examples/00_Einfuehrungsbeispiele/Duennschliff/`](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/tree/master/examples/00_Einfuehrungsbeispiele/Duennschliff) und läuft in Visual Studio Code.
 
                                     --{{0}}--
-Die Bausteine dafür lernen Sie im Semester: Bilder als Tabellen aus Zahlen und Masken in Vorlesung 10, Histogramme in Vorlesung 13.
+Der Schliff ist etwa 0,03 mm dick. Unter dem Mikroskop liegt er zwischen zwei gekreuzten Polarisationsfiltern; die Mineralkörner erscheinen dann je nach Mineral und Lage hell, farbig oder dunkel. Das Programm sucht die hellen Flecken, zählt sie und rechnet ihre Fläche über den Maßstab in Mikrometer um.
 
-### Und was ist mit Ihnen
+*****************************************
+
+                {{1-2}}
+*****************************************
+
+> **Wann erscheinen Studierende in der Vorlesung?** Gibt es Muster — der frühe Vogel, rechtzeitig aber knapp, in den ersten zehn Minuten passiert ohnehin nichts?
+
+Ein kleiner Roboter an der Hörsaaltür zählt, wer hereinkommt und wer hinausgeht — auch heute, während Sie hereinkommen. Ein Auszug aus einem Probelauf:
+
+``` text zaehlungen_2026-10-15.csv
+zeit;richtung
+2026-10-15T16:42:31;raus
+2026-10-15T16:42:32;unklar
+2026-10-15T16:42:36;raus
+2026-10-15T16:42:40;rein
+2026-10-15T16:43:04;unklar
+2026-10-15T16:43:08;rein
+```
+
+![Live-Anzeige des Personenzählers aus einem Probelauf: oben die Personen je zwei Minuten (rein nach oben, raus nach unten), unten der gemessene Abstand der drei mittleren Sensorzonen](images/00_Motivation/personenzaehler_anzeige.png)<!-- style="max-height: 50vh;" -->
+
+                                    --{{1}}--
+Eine einfache Frage, echte Messdaten — und schon stecken wir mitten in den Themen dieses Semesters. Am Ende dieser Vorlesung kommen wir darauf zurück.
+
+*****************************************
+
+### Und was ist mit Ihnen?
+
+> [!TIP]
+> Welche Forschungsfragen sind für Sie interessant?
 
 **Aus welchem Studiengang kommen Sie?**
 
@@ -227,9 +220,7 @@ Die Bausteine dafür lernen Sie im Semester: Bilder als Tabellen aus Zahlen und 
 [(wenig)] Ein bisschen, ich habe schon mal ein Programm geschrieben.
 [(viel)] Viel, ich habe schon mehrere Programme geschrieben.
 
-## Wie diese Vorlesung funktioniert
-
-### Die Frage kommt zuerst
+## Kernkonzepte der Vorlesung
 
 Jede Vorlesung beginnt mit einer Frage an echte Daten. Die Sprachkonzepte kommen dann, wenn man sie zur Beantwortung braucht.
 
@@ -298,30 +289,78 @@ print("Frosttage in dieser Woche:", frosttage)
 
 Nutzen Sie die Schaltflächen über dem Editor, um zwischen Blöcken und Text zu wechseln. In Vorlesung 03 verstehen Sie jede dieser Zeilen.
 
-### Live Hacking und typische Fehlvorstellungen
+### Typische Fehlvorstellungen
 
-* **Live Hacking** (ab Vorlesung 04): Ein Programm entsteht vor Ihren Augen — inklusive Irrwegen, Fehlermeldungen und Korrekturen.
-* **Typische Fehlvorstellung**: Annahmen, die zu Programmen führen, die ohne Fehlermeldung falsch rechnen. Sie geben vorher eine Vorhersage ab — und merken, wenn Sie danebenliegen.
+In jeder Vorlesung begegnen Ihnen Annahmen, die zu Programmen führen, die ohne Fehlermeldung falsch rechnen. Sie geben vorher eine Vorhersage ab — und merken, wenn Sie danebenliegen. Ein Beispiel:
+
+> **Typische Fehlvorstellung:** _„Wenn das Programm ohne Fehlermeldung durchläuft, stimmt das Ergebnis.“_
+
+Vier Tagesmittel vom Fichtelberg, eines davon fehlt und steht als `-999` in der Datei. Legen Sie sich fest, **bevor** Sie das Programm ausführen: Was gibt es aus?
+
+```python mittel.py
+temperaturen = [-1.8, -3.5, -999, 0.7]
+mittel = sum(temperaturen) / len(temperaturen)
+print("Mittlere Temperatur:", round(mittel, 1))
+```
+@Pyodide.eval
+
+> [!TIP]
+> Fehlvorstellungen sind ein typisches Problem, das fast alle am Anfang haben. Wer sie kennt und versteht, läuft nicht in die Falle.
 
                                     --{{0}}--
-Programmieren ist ein Prozess, kein Ergebnis; fertiger Code auf einer Folie verschweigt genau den Teil, den Sie lernen müssen. Die Fehlvorstellungen hat fast jede und jeder am Anfang.
-
-### Werkzeuge
-
-<!-- data-type="none" -->
-| Wann            | Werkzeug                          | Wofür                                   |
-| :-------------- | :-------------------------------- | :-------------------------------------- |
-| ab heute        | Beispiele direkt im Browser       | ausprobieren ohne Installation          |
-| ab Vorlesung 03 | Python auf Ihrem Rechner, Visual Studio Code | eigene Programme, Übungsaufgaben |
-| ab Vorlesung 10 | Visual Studio Code mit Zellen (`# %%`) | schrittweise Datenanalyse mit Diagrammen |
-
-> Die Beispiele im Browser sind gewöhnliches Python. Sie lassen sich eins zu eins auf Ihren Rechner übertragen.
+Python rechnet `-999` klaglos mit: (-1,8 - 3,5 - 999 + 0,7) / 4 = -250,9. Keine Fehlermeldung, aber ein unsinniges Ergebnis. Ohne den Fehlwert wären es -1,5 °C. Wie man Fehlwerte erkennt und auslässt, lernen Sie in Vorlesung 03.
 
 ### Erst mühsam, dann mit Werkzeug
 
 > **Die Wetterdatei einlesen: in Vorlesung 06 rund 50 Zeilen, in Vorlesung 11 eine Anweisung.**
 
-Wer den mühsamen Weg gegangen ist, versteht, *was* diese Anweisung abnimmt. Wer ihn übersprungen hat, steht hilflos da, sobald sie einmal nicht funktioniert.
+Dieselbe Frage zweimal — wie warm ist es auf dem Fichtelberg im Mittel aller Tage seit 1890? Von Hand (Vorlesung 06, hier nur der Kern):
+
+```python von_hand.py
+werte = []
+dateiname = "data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt"
+with open(dateiname) as datei:
+    datei.readline()                  # Kopfzeile überspringen
+    for zeile in datei:
+        spalten = zeile.split(";")
+        tmk = float(spalten[13])      # Spalte 13: Tagesmittel TMK
+        if tmk != -999:               # Fehlwert auslassen
+            werte.append(tmk)
+print(round(sum(werte) / len(werte), 2))
+```
+
+Mit der Bibliothek pandas (Vorlesung 11):
+
+```python mit_pandas.py
+import pandas as pd
+dateiname = "data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt"
+df = pd.read_csv(dateiname, sep=";", skipinitialspace=True, na_values=-999)
+print(round(df["TMK"].mean(), 2))
+```
+
+Beide liefern `3.24` (°C). Wer den mühsamen Weg gegangen ist, versteht, *was* `read_csv` abnimmt — Trennzeichen, Kopfzeile, Fehlwerte. Wer ihn übersprungen hat, steht hilflos da, sobald es einmal nicht funktioniert.
+
+## Vorlesungsmaterialien
+
+<!-- data-type="none" -->
+| In der Vorlesung     | Werkzeug                                        | Wofür                                      |
+| :------------------- | :---------------------------------------------- | :----------------------------------------- |
+| in jeder Vorlesung   | Beispiele direkt im Browser                     | ausprobieren ohne Installation             |
+| ab Vorlesung 03      | dazu Python in Visual Studio Code               | Programme mit echten Dateien               |
+| ab Vorlesung 10      | dazu Jupyter Notebooks in Visual Studio Code   | schrittweise Datenanalyse mit Diagrammen   |
+
+**In den Übungen** arbeiten Sie mit Visual Studio Code auf Ihrem eigenen Rechner — eingerichtet wird es in der ersten Übung.
+
+> Die Beispiele im Browser sind gewöhnliches Python. Sie lassen sich eins zu eins auf Ihren Rechner übertragen.
+
+Dasselbe Mini-Programm hier im Browser und gleich in Visual Studio Code als Datei `welcome.py`:
+
+```python welcome.py
+print("Herzlich willkommen in der Vorlesung!")
+```
+@Pyodide.eval
+
+Beide Male lautet die Ausgabe `Herzlich willkommen in der Vorlesung!`. Nur der Ort, an dem Python läuft, ist ein anderer. Die Datei liegt auch im Repository: [`examples/00_Einfuehrungsbeispiele/welcome.py`](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/examples/00_Einfuehrungsbeispiele/welcome.py).
 
 ### Die Kurslandkarte
 
@@ -334,19 +373,15 @@ Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/
 * worauf er aufbaut und wohin er führt,
 * einen Link direkt zur passenden Folie.
 
-![Die Kurslandkarte in der Ansicht „Vorlesungen“, so wie sie nach Vorlesung 04 aussehen könnte, mit dem Begriff „Mittelwert“](images/00_Motivation/kurslandkarte.png)<!-- style="max-height: 35vh;" -->
+![Die Kurslandkarte in der Ansicht „Vorlesungen“, so wie sie nach Vorlesung 04 aussehen könnte, mit dem Begriff „Mittelwert“](images/00_Motivation/kurslandkarte.png)<!-- style="max-height: 28vh;" -->
 
 **Die Karte wächst mit dem Semester** — nach jeder Vorlesung kommen ihre Begriffe dazu, auch Ihre Vorschläge.
 
                                     --{{0}}--
 Programmieren lernt man in Schichten: Jeder neue Begriff stützt sich auf frühere. Die Karte hält diesen Zusammenhang fest. Für kommende Vorlesungen stehen zunächst nur Termin und Leitfrage; wer neugierig ist, sieht mit „Ausblick: An“ die vorbereiteten Begriffe blass. „Sie sind hier“ richtet sich nach dem Datum. Neben der Liste gibt es eine Metrokarte, deren Linien rote Fäden durch das Semester sind — etwa „Wenn ein Wert fehlt“ —, und eine Zeitleiste mit allen Begriffen und ihren Verbindungen.
 
-<!-- data-type="none" -->
-| Wann                          | Wofür                                                          |
-| :---------------------------- | :------------------------------------------------------------- |
-| vor der Vorlesung             | Was kommt heute dazu, und worauf baut es auf?                  |
-| nach der Vorlesung            | Kann ich jeden neuen Begriff in einem Satz erklären?           |
-| vor der Übung und der Klausur | Kenne ich die typische Fehlvorstellung — und warum sie falsch ist? |
+> [!NOTE]
+> Am Ende jeder Vorlesung fragen wir Sie nach den Stichworten des Tages und tragen sie in die Kurslandkarte ein.
 
 ### Offene Materialien
 
@@ -359,7 +394,7 @@ Programmieren lernt man in Schichten: Jeder neue Begriff stützt sich auf frühe
                                     --{{0}}--
 Die dritte Ansicht, „Folien“, zeigt die Erklärungen als Notiz unter jeder Folie. Die Materialien dürfen Sie nutzen, teilen und bearbeiten, solange Sie die Urheber nennen. Wer GitHub nutzt, kann Fehler auch als Issue melden oder Verbesserungen direkt als Änderung vorschlagen.
 
-## Semesterplan
+## Organisation der Veranstaltung
 
 Die Vorlesung findet montags von 16:15 bis 17:45 Uhr im Raum FOR-0270 statt. Vor Weihnachten legen wir die Grundlagen, danach geht es um Datenanalyse.
 
@@ -382,7 +417,7 @@ Die Vorlesung findet montags von 16:15 bis 17:45 Uhr im Raum FOR-0270 statt. Vor
 | 01.02. | [13](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/13_Visualisierung.md) | Visualisierung                                | Wie zeige ich, was ich gefunden habe?                   |
 | 08.02. | [14](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/14_Datenqualitaet.md) | Datenqualität, Ausblick, Prüfungsvorbereitung | Kann ich meinem Ergebnis trauen?                        |
 
-## Prüfung
+### Prüfung
 
 Die Veranstaltung schließt mit einer **schriftlichen Prüfung** ab.
 
@@ -411,7 +446,7 @@ Vorlesung 14 enthält eine Prüfungsvorbereitung mit Musteraufgaben.
 
 > Studierende der _Einführung in die Informatik_ (7 LP) bearbeiten neben der Klausur eine praktische Programmieraufgabe. Thema und Umfang stimmen Sie mit den Übungsbetreuern ab.
 
-## Organisatorisches
+### Übungen
 
 **Übungen.** Die Übungen vertiefen jede Vorlesung an Programmieraufgaben zum Datensatz der Woche — ein Teil davon bewusst auf Papier, als Vorbereitung auf die Klausur. Sie beginnen in der zweiten Vorlesungswoche, also ab Montag, 26.10. Wählen Sie einen der vier Termine:
 
@@ -435,37 +470,77 @@ In der ersten Übung richten wir gemeinsam Python und Visual Studio Code ein. Da
 + Bringen Sie Beispiele aus Ihrem Fach mit.
 + Melden Sie Fehler und Verbesserungsvorschläge zu den Materialien — im OPAL-Forum, per E-Mail oder als Issue auf GitHub.
 
-## Zurück zum Personenzähler
+## Wo soll das hinführen?
 
-Der Roboter, ein Arduino Alvik, misst mit Infrarotlicht die Entfernung in mehreren Zonen nebeneinander. Was deutlich näher ist als die Wand gegenüber, gilt als Person; wer zuerst links auftaucht, kommt herein. So sieht seine Live-Anzeige aus — hier aus einem Probelauf:
+                 {{0-1}}
+**************************************
 
-![Live-Anzeige des Personenzählers aus einem Probelauf: oben die Personen je zwei Minuten (rein nach oben, raus nach unten), unten der gemessene Abstand der drei mittleren Sensorzonen](images/00_Motivation/personenzaehler_anzeige.png)<!-- style="max-height: 50vh;" -->
+Schauen wir, um diese Motivation abzurunden, noch einmal auf unser Beispiel mit dem Personenzähler — es zeigt die als Einleitung aufgeführte Verarbeitungskette aus Datenerhebung, Analyse und Visualisierung.
 
-### Welche Annahmen im Zählprogramm stecken
+Auf dem Roboter läuft ein kleines Python-Programm (MicroPython, vereinfacht). Es misst immer wieder fünf Abstände nach vorn und gibt sie als Textzeile aus:
 
-Die Einstellungen des Zählprogramms, in Python:
+```python alvik_messung.py
+alvik = ArduinoAlvik()
+alvik.begin()
 
-``` python zaehler.py
-# Auszug: die Einstellungen der Erkennung
-ANTEIL = 0.8          # belegt, wenn näher als 80 % des Hintergrunds
-NACHLAUF_MS = 400     # so lange müssen alle Zonen frei sein
-MAX_DAUER_MS = 6000   # länger belegt: keine Person, neuer Hintergrund
-REIN_VON = "links"    # wer zuerst links auftaucht, kommt herein
+while True:
+    werte = alvik.get_distance("mm")
+    zahlen = [str(int(w)) for w in werte]
+    print(ticks_ms(), ";".join(zahlen), sep=";")
+    sleep_ms(50)
 ```
 
-Sie müssen heute keine Zeile davon verstehen. Aber schon die Namen verraten, welche Annahmen darin stecken:
+**************************************
 
-<!-- data-type="none" -->
-| Im Code steht ...     | Die Annahme dahinter                          | Was schiefgeht                                                  |
-| :-------------------- | :-------------------------------------------- | :-------------------------------------------------------------- |
-| `ANTEIL = 0.8`        | Eine Person ist deutlich näher als die Wand    | Wer dicht an der gegenüberliegenden Seite vorbeigeht, wird übersehen |
-| `NACHLAUF_MS = 400`   | Zwischen zwei Personen ist die Tür kurz frei   | Zwei dicht hintereinander zählen als eine                         |
-| `MAX_DAUER_MS = 6000` | Niemand braucht länger als 6 s für die Tür     | Wer in der Tür stehen bleibt, wird zur Wand — und nicht gezählt   |
-| `REIN_VON = "links"`  | Wer hereinkommt, taucht zuerst links auf       | Wer in der Tür umkehrt, zählt als „rein“ oder „unklar“            |
+                 {{1-2}}
+**************************************
 
-**Es funktioniert. Und zählt trotzdem falsch.** Jede Zahl in einer Datentabelle hatte einmal ein Messgerät, eine Genauigkeit und ein Ausfallrisiko.
+<div class="flex-container">
+<div class="flex-child">
 
-                                    --{{0}}--
+Über das USB-Kabel kommt am Laptop an — jemand geht von links nach rechts vorbei:
+
+```text Ausgabe des Roboters (Probelauf)
+ms;links;mitte_links;mitte;mitte_rechts;rechts
+53566;2393;2101;2106;2111;2239
+53670;797;2092;2101;2110;2219
+53876;766;778;1437;2097;2194
+54189;2407;987;994;1001;2193
+```
+
+</div>
+<div class="flex-child">
+
+Daraus macht das Programm auf dem Laptop Zählungen — die erste Zeile ist genau dieser Durchgang:
+
+```text zaehlungen_2026-10-15.csv
+zeit;richtung
+2026-10-15T16:29:15;rein
+2026-10-15T16:29:18;raus
+2026-10-15T16:29:21;rein
+```
+
+</div>
+</div>
+
+**************************************
+
+                 {{2-3}}
+**************************************
+
+Welche kritischen Fragen müssen wir uns stellen?
+
+* Wie kommen die Daten zustande? Was sind Annahmen, die möglicherweise an anderer Stelle nicht gelten (Übertragbarkeit der Lösung)?
+* Was passiert im Fehlerfall - wenn zum Beispiel das Kabel abgezogen wird?
+* Welche Daten speichern wir überhaupt? Was ist ein geeignetes Format?
+* Wie können wir die Daten visualisieren, um sie zu verstehen? Welche Darstellungsform ist geeignet?
+
+> [!TIP]
+> Wer von Ihnen gleich im Anschluss an die Vorlesung noch ein wenig mit dem Roboter spielen möchte, ist herzlich eingeladen. Das vollständige Projekt — Programm für den Roboter, Zähler mit Live-Anzeige und Anleitung — liegt unter [`examples/00_Einfuehrungsbeispiele/Alvik/`](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/tree/master/examples/00_Einfuehrungsbeispiele/Alvik).
+
+**************************************
+
+                                    --{{1}}--
 Zu Beginn lernt der Roboter, wie weit die Wand gegenüber entfernt ist. Im Probelauf hat er zwei Durchgänge nicht einordnen können und als „unklar“ notiert. In Vorlesung 08 sehen wir eine solche Messung live auf einem Mikrocontroller.
 
 ## Ihre Begriffe für die Kurslandkarte
@@ -476,9 +551,11 @@ Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/
 
 [[___ ___ ___]]
 
-**Wo könnten Sie das, was heute dran war, in Ihrem Fach anwenden?**
+**Wo könnten Sie das, was heute thematisiert wurde, in Ihrem Fach anwenden?**
 
 [[___ ___ ___]]
+
+Die letzte Frage zielt darauf, dass ich gezielt Beispiele aus Ihrem Fachgebiet in die Vorlesung einbauen möchte. Dazu spreche ich dann die Kollegen der Fachbereiche an. Wer möchte, kann mir auch selbst Beispiele zuschicken.
 
 ## Nächste Woche
 
