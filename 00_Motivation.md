@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.3.1
+version:  2.3.2
 language: de
 narrator: Deutsch Female
 
@@ -459,6 +459,8 @@ Vorlesung 14 enthält eine Prüfungsvorbereitung mit Musteraufgaben.
 | Mittwoch | 18:00–19:30   | RAM-2119 |
 
 In der ersten Übung richten wir gemeinsam Python und Visual Studio Code ein. Danach gehört jedes Übungsblatt zur Vorlesung der Woche: Sie versuchen sich bis zur Übung der Folgewoche daran, dort besprechen wir es.
+
+**Die Übungsblätter finden Sie jede Woche im OPAL-Kurs der Veranstaltung**, nach der Vorlesung. Melden Sie sich dafür im OPAL-Kurs an und tragen Sie sich dort in eine der Übungsgruppen ein. Wie ein Blatt aussieht, zeigt [Blatt 1](https://tubaf-ifi-liascript.github.io/VL_EAVD/uebung/Blatt01.pdf) — die Aufgaben zu Vorlesung 01 und die Einrichtung von Python für die erste Übung.
 
 **Materialien.** Alle Vorlesungen, Daten und Beispiele finden Sie unter [github.com/TUBAF-IfI-LiaScript/VL_EAVD](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD); wie Sie mitmachen können, steht im Abschnitt „Offene Materialien“.
 
