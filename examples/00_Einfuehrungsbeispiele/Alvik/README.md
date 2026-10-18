@@ -51,3 +51,4 @@ Getestet mit Firmware 1.1.1, Bibliothek 1.1.4, MicroPython 1.28.
 * Sieht eine Zone kein Ziel, behält sie ihren letzten Wert, teils über Minuten auf den Millimeter genau. Eine Hand, die weggezogen wird, „bleibt“ dann stehen. Mit einem Hintergrund in 1–1,5 m tritt das nicht auf.
 * Die Zeilen kommen am Laptop gepuffert an. Die Empfangszeit ist deshalb nicht die Messzeit; `zaehler.py` rechnet die Roboterzeit in die Uhrzeit um.
 * Test mit Stuhl in 1,2 m als Hintergrund: 6 von 6 Durchgängen mit richtiger Richtung erkannt.
+* Test im Hörsaal FOR-0270 (18.10.2026): Roboter an der Tischkante vor der Tür, Hintergrund gut 2 m entfernt; eine Person allein wurde zuverlässig in beiden Richtungen gezählt.

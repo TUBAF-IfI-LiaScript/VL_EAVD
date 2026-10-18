@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.3.2
+version:  2.3.3
 language: de
 narrator: Deutsch Female
 
@@ -460,7 +460,7 @@ Vorlesung 14 enthält eine Prüfungsvorbereitung mit Musteraufgaben.
 
 In der ersten Übung richten wir gemeinsam Python und Visual Studio Code ein. Danach gehört jedes Übungsblatt zur Vorlesung der Woche: Sie versuchen sich bis zur Übung der Folgewoche daran, dort besprechen wir es.
 
-**Die Übungsblätter finden Sie jede Woche im OPAL-Kurs der Veranstaltung**, nach der Vorlesung. Melden Sie sich dafür im OPAL-Kurs an und tragen Sie sich dort in eine der Übungsgruppen ein. Wie ein Blatt aussieht, zeigt [Blatt 1](https://tubaf-ifi-liascript.github.io/VL_EAVD/uebung/Blatt01.pdf) — die Aufgaben zu Vorlesung 01 und die Einrichtung von Python für die erste Übung.
+**Die Übungsblätter finden Sie jede Woche im [OPAL-Kurs der Veranstaltung](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/469368834)**, nach der Vorlesung. Melden Sie sich dafür im OPAL-Kurs an und tragen Sie sich dort in eine der Übungsgruppen ein. Wie ein Blatt aussieht, zeigt [Blatt 1](https://tubaf-ifi-liascript.github.io/VL_EAVD/uebung/Blatt01.pdf) — die Aufgaben zu Vorlesung 01 und die Einrichtung von Python für die erste Übung.
 
 **Materialien.** Alle Vorlesungen, Daten und Beispiele finden Sie unter [github.com/TUBAF-IfI-LiaScript/VL_EAVD](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD); wie Sie mitmachen können, steht im Abschnitt „Offene Materialien“.
 
@@ -468,7 +468,7 @@ In der ersten Übung richten wir gemeinsam Python und Visual Studio Code ein. Da
 
 **Wie Sie zum Gelingen beitragen können**
 
-+ Stellen Sie Fragen — in der Vorlesung, in der Übung, im OPAL-Forum.
++ Stellen Sie Fragen — in der Vorlesung, in der Übung, im [OPAL-Forum](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/469368834).
 + Bringen Sie Beispiele aus Ihrem Fach mit.
 + Melden Sie Fehler und Verbesserungsvorschläge zu den Materialien — im OPAL-Forum, per E-Mail oder als Issue auf GitHub.
 
@@ -478,6 +478,14 @@ In der ersten Übung richten wir gemeinsam Python und Visual Studio Code ein. Da
 **************************************
 
 Schauen wir, um diese Motivation abzurunden, noch einmal auf unser Beispiel mit dem Personenzähler — es zeigt die als Einleitung aufgeführte Verarbeitungskette aus Datenerhebung, Analyse und Visualisierung.
+
+<div class="flex-container">
+<div class="flex-child">
+
+![Aufbau im Hörsaal FOR-0270: der Roboter an der Tischkante vor der Tür, per USB am Laptop mit der Live-Anzeige](images/00_Motivation/Alvik_Experiment_I.jpeg)<!-- style="max-height: 40vh;" -->
+
+</div>
+<div class="flex-child">
 
 Auf dem Roboter läuft ein kleines Python-Programm (MicroPython, vereinfacht). Es misst immer wieder fünf Abstände nach vorn und gibt sie als Textzeile aus:
 
@@ -491,6 +499,9 @@ while True:
     print(ticks_ms(), ";".join(zahlen), sep=";")
     sleep_ms(50)
 ```
+
+</div>
+</div>
 
 **************************************
 
