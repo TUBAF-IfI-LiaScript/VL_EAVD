@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.3.3
+version:  2.4.0
 language: de
 narrator: Deutsch Female
 
@@ -339,6 +339,21 @@ print(round(df["TMK"].mean(), 2))
 ```
 
 Beide liefern `3.24` (°C). Wer den mühsamen Weg gegangen ist, versteht, *was* `read_csv` abnimmt — Trennzeichen, Kopfzeile, Fehlwerte. Wer ihn übersprungen hat, steht hilflos da, sobald es einmal nicht funktioniert.
+
+### Und was ist mit KI?
+
+> **Wer die Begriffe nicht kennt, kann auch die Hilfe einer KI nicht nutzen.**
+
+KI-Assistenten schreiben in Sekunden Python-Code. Aber Sie müssen sagen können, was Sie wollen — und prüfen können, ob das Ergebnis stimmt.
+
+<!-- data-type="none" -->
+|                     | Ohne Begriffe                              | Mit Begriffen                                                                                     |
+| :------------------ | :----------------------------------------- | :------------------------------------------------------------------------------------------------ |
+| **Frage an die KI** | „Wie warm ist es auf dem Fichtelberg?“      | „Lies die DWD-Datei mit `;` als Trennzeichen, lass in der Spalte TMK die Fehlwerte `-999` weg und bilde den Mittelwert.“ |
+| **Antwort prüfen**  | „Das Programm läuft, also stimmt es.“       | „Wird `-999` wirklich ausgelassen? Ist es die richtige Spalte?“                                     |
+
+                                    --{{0}}--
+Eine KI ist ein Werkzeug wie die Tabellenkalkulation oder pandas: Sie nimmt Arbeit ab, aber kein Verständnis. Erinnern Sie sich an die -250,9 °C: Ein Programm von einer KI, das den Fehlwert mitrechnet, läuft genauso ohne Fehlermeldung. Wer Code lesen kann und die Begriffe kennt, merkt das. Genau das üben wir in diesem Semester — und genau das prüft die Klausur.
 
 ## Vorlesungsmaterialien
 
