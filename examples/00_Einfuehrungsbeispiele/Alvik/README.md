@@ -18,9 +18,11 @@ Einstiegsbeispiel für Vorlesung 00 („Wann erscheinen Sie?“): Der Alvik steh
 ## Start
 
 ```bash
-pip install -r requirements.txt
-python zaehler.py --live --beginn 16:15
+pipenv install                   # einmalig: Umgebung aus Pipfile.lock
+pipenv run python zaehler.py --live --beginn 16:15
 ```
+
+Wer kein pipenv nutzt: `pip install matplotlib mpremote`.
 
 Das Fenster zeigt links die Personen je 2 Minuten (rein nach rechts, raus nach links, Uhrzeit nach unten), rechts die drei inneren Zonen mit gelerntem Hintergrund. Beim Schließen des Fensters wird das Programm auf dem Roboter beendet.
 
@@ -32,7 +34,7 @@ Im aktuellen Ordner entstehen
 Rückfallebene ohne Roboter, z. B. 20-fach schnell:
 
 ```bash
-python zaehler.py --abspielen rohdaten_2026-10-19.csv --tempo 20
+pipenv run python zaehler.py --abspielen rohdaten_2026-10-19.csv --tempo 20
 ```
 
 ## Wie gezählt wird
