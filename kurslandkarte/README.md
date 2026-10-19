@@ -21,7 +21,7 @@ Begriffe verweisen in `erzeuge.py` auf den **Titel** ihres Abschnitts (ohne Back
 
 ## Nach jeder Vorlesung: Begriffe freischalten
 
-Die Karte zeigt nur die Begriffe freigegebener Vorlesungen; für alle anderen Termin, Titel und Leitfrage (aus dem Semesterplan in `00_Motivation.md`). Mit „Ausblick: An“ sehen Neugierige die vorbereiteten Begriffe blass.
+Die Karte zeigt nur die Begriffe freigegebener Vorlesungen; für alle anderen Termin, Titel und Leitfrage (aus dem Semesterplan in `00_Motivation.md`). Vorbereitete Begriffe kommender Vorlesungen werden nicht veröffentlicht, auch nicht in den Daten der Seite: `erzeuge.py` schreibt nur Begriffe, Beziehungen, Fäden, Anwendungen und Abschnittstitel freigegebener Vorlesungen nach `docs/`.
 
 1. Antworten der Abschlussfrage „Ihre Begriffe für die Kurslandkarte“ aus dem LiaScript-Klassenzimmer sichern.
 2. Mit der vorbereiteten Liste in `erzeuge.py` abgleichen: Begriffe umbenennen, ergänzen, studentische Anwendungen mit `herkunft="studierende"` aufnehmen. Regel: Schlagworte sind fachunabhängig, Konkretes ist eine Anwendung.

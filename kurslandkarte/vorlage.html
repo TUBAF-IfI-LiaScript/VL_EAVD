@@ -501,13 +501,6 @@ footer p { margin: 0 0 6px; }
           <button class="today" id="today" hidden>heute</button>
         </div>
       </div>
-      <div class="control" id="ctlAusblick">
-        <span class="lbl" id="ausLbl" title="Zeigt blass die vorbereiteten Begriffe kommender Vorlesungen">Ausblick</span>
-        <div class="seg" role="group" aria-labelledby="ausLbl">
-          <button id="ausAus" aria-pressed="true">Aus</button>
-          <button id="ausAn" aria-pressed="false">An</button>
-        </div>
-      </div>
       <div class="control" id="ctlLevel">
         <span class="lbl" id="lvlLbl">Begriffe</span>
         <div class="seg" role="group" aria-labelledby="lvlLbl">
@@ -531,7 +524,7 @@ footer p { margin: 0 0 6px; }
       </div>
       <div>
         <p><strong>Vorlesungen:</strong> alle Termine untereinander, mit Leitfrage, Begriffen und Anwendungen. <strong>Metrokarte:</strong> Jede farbige Linie ist ein <em>roter Faden</em>, ein Thema, das sich durch mehrere Vorlesungen zieht; weiße Stationen liegen auf mehreren Fäden. <strong>Zeitleiste:</strong> alle Begriffe nach Themengebiet über das Semester; wie sie zusammenhängen, steht beim Anklicken rechts.</p>
-        <p><strong>Die Karte wächst mit dem Semester.</strong> Nach jeder Vorlesung kommen ihre Begriffe dazu, ergänzt um Ihre Vorschläge. <strong>Kernbegriffe</strong> sollten Sie in einem Satz erklären können, Detailbegriffe ergänzen sie. Mit <strong>Ausblick: An</strong> sehen Sie blass, was für kommende Vorlesungen vorbereitet ist.</p>
+        <p><strong>Die Karte wächst mit dem Semester.</strong> Nach jeder Vorlesung kommen ihre Begriffe dazu, ergänzt um Ihre Vorschläge. <strong>Kernbegriffe</strong> sollten Sie in einem Satz erklären können, Detailbegriffe ergänzen sie. Für kommende Vorlesungen stehen nur Termin und Leitfrage — ihre Begriffe entstehen erst mit Ihnen.</p>
       </div>
     </div>
   </details>
@@ -580,7 +573,7 @@ const LINES = [
   { id: "analyse", name: "Auswerten & Darstellen", v: "--l-analyse" }
 ];
 const THREADV = ["--t1", "--t2", "--t3", "--t4", "--t5", "--t6"];
-const THREADS = DATA.faeden.map((f, i) => ({ id: f.id, name: f.name, text: f.beschreibung, st: f.stationen, v: THREADV[i] }));
+const THREADS = DATA.faeden.map((f, i) => ({ id: f.id, name: f.name, text: f.beschreibung, st: f.stationen, weiter: f.weiter, v: THREADV[i] }));
 const ALL = DATA.begriffe.map(b => ({ id: b.id, name: b.name, line: b.linie, vl: b.vl, sec: b.abschnitt, level: b.ebene, code: b.code, text: b.erklaerung, mis: b.fehlvorstellung }));
 const EDGES = DATA.beziehungen.map(r => [r.von, r.nach, r.text]);
 const byId = Object.fromEntries(ALL.map(n => [n.id, n]));
@@ -603,17 +596,16 @@ const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const narrow = () => matchMedia("(max-width: 980px)").matches;
-// Begriffe erscheinen erst nach ihrer Vorlesung (Freigabe); „Ausblick“ zeigt die vorbereiteten blass
-const sichtbar = (n) => n && (state.ausblick || LECTURES[n.vl].frei);
-const state = { mode: "liste", here: HERE_TODAY, detail: false, ausblick: false, sel: null, thread: null, hidden: new Set() };
+// Begriffe erscheinen erst nach ihrer Vorlesung (Freigabe); erzeuge.py liefert ohnehin nur freigegebene
+const sichtbar = (n) => n && LECTURES[n.vl].frei;
+const state = { mode: "liste", here: HERE_TODAY, detail: false, sel: null, thread: null, hidden: new Set() };
 try {
   const saved = JSON.parse(localStorage.getItem("eavd-map") || "{}");
   if (typeof saved.detail === "boolean") state.detail = saved.detail;
-  if (typeof saved.ausblick === "boolean") state.ausblick = saved.ausblick;
   if (["liste", "metro", "zeit"].includes(saved.mode)) state.mode = saved.mode;
 } catch (e) {}
 // „Sie sind hier“ wird bewusst nicht gespeichert: Es folgt immer dem Datum.
-function save() { try { localStorage.setItem("eavd-map", JSON.stringify({ detail: state.detail, mode: state.mode, ausblick: state.ausblick })); } catch (e) {} }
+function save() { try { localStorage.setItem("eavd-map", JSON.stringify({ detail: state.detail, mode: state.mode })); } catch (e) {} }
 
 const TOP = 108;
 let SIDE = 150, COL = 118, W = 0, H = 0, pos = {}, shown = [], laneY = {}, trackY = {};
@@ -827,9 +819,8 @@ function drawListe() {
     li.innerHTML = `<div class="vlhead"><b>VL ${lec.nr}</b><span class="d">${lec.date}</span><span class="s">${lec.short}</span>${tag}
       <a href="${BASE + lec.file}" target="_blank" rel="noopener">Folien ↗</a>${lec.pdf ? `<a href="${lec.pdf}" target="_blank" rel="noopener" title="Lehrbuchfassung zum Ausdrucken; Quizze und Code laufen nur in den Folien">PDF ↗</a>` : ""}</div>
       ${lec.frage ? `<div class="frage">${lec.frage}</div>` : ""}
-      ${!lec.frei && !state.ausblick ? vorbereitetHinweis(v) : `<div class="chips${lec.frei ? "" : " vorschau"}">${lec.frei ? "" : '<span class="apps-lbl">Vorbereitet</span>'}${items.map(n => `<button data-id="${n.id}" class="${n.level === 2 ? "detail" : ""}${n.code ? " code" : ""}" aria-pressed="${n.id === state.sel}"><i style="background:${css(lineById[n.line].v)}"></i><span class="n">${n.name}</span></button>`).join("") || '<span class="hint">keine Begriffe in den gewählten Gebieten</span>'}</div>`}
+      ${!lec.frei ? vorbereitetHinweis(v) : `<div class="chips${lec.frei ? "" : " vorschau"}">${lec.frei ? "" : '<span class="apps-lbl">Vorbereitet</span>'}${items.map(n => `<button data-id="${n.id}" class="${n.level === 2 ? "detail" : ""}${n.code ? " code" : ""}" aria-pressed="${n.id === state.sel}"><i style="background:${css(lineById[n.line].v)}"></i><span class="n">${n.name}</span></button>`).join("") || '<span class="hint">keine Begriffe in den gewählten Gebieten</span>'}</div>`}
       ${APPS.some(a => a.vl === v && sichtbar(a)) ? `<div class="chips apps"><span class="apps-lbl">Anwendungen</span>${APPS.filter(a => a.vl === v && sichtbar(a)).map(a => `<button data-id="${a.id}" aria-pressed="${a.id === state.sel}"><span class="n">${a.name}</span><span class="fach">${a.fach}</span></button>`).join("")}</div>` : ""}`;
-    li.querySelectorAll("button[data-ausblick]").forEach(b => b.addEventListener("click", () => { state.ausblick = true; save(); render(); }));
     li.querySelectorAll(".chips button").forEach(b => b.addEventListener("click", () => {
       if (state.sel === b.dataset.id && narrow()) { state.sel = null; render(); return; }
       select(b.dataset.id);
@@ -840,9 +831,7 @@ function drawListe() {
 }
 function plural(n, eins, viele) { return `${n} ${n === 1 ? eins : viele}`; }
 function vorbereitetHinweis(v) {
-  const n = ALL.filter(b => b.vl === v).length;
-  return n ? `<button class="vorbereitet" data-ausblick="1">${plural(n, "Begriff", "Begriffe")} vorbereitet – erscheinen nach der Vorlesung, mit Ihren Vorschlägen. <u>Ausblick einschalten</u></button>`
-           : `<div class="hint">Begriffe folgen nach der Vorlesung – mit Ihren Vorschlägen.</div>`;
+  return `<div class="hint">Die Begriffe dieser Vorlesung entstehen nach der Vorlesung – mit Ihren Vorschlägen.</div>`;
 }
 function placePanel() {
   const panel = $("#panel"), stage = $(".stage");
@@ -906,7 +895,7 @@ function renderPanel() {
     const t = threadById[tid], st = t.st.filter(x => sichtbar(byId[x])), k = st.indexOf(n.id), pv = st[k - 1], nx = st[k + 1];
     return `<li><span class="tname"><i style="background:${css(t.v)}"></i>${t.name}</span>
       <span class="hop">${pv ? `<button data-id="${pv}">← ${byId[pv].name}</button>` : `<span class="v">Anfang</span>`}
-      ${nx ? `<button data-id="${nx}">${byId[nx].name} →</button>` : `<span class="v">${t.st.indexOf(n.id) < t.st.length - 1 ? "Fortsetzung folgt" : "Endstation"}</span>`}</span></li>`;
+      ${nx ? `<button data-id="${nx}">${byId[nx].name} →</button>` : `<span class="v">${t.weiter ? "Fortsetzung folgt" : "Endstation"}</span>`}</span></li>`;
   }).join("")}</ul>` : "";
   p.innerHTML = `
     <h2 class="${n.code ? "code" : ""}">${n.name}</h2>
@@ -970,7 +959,7 @@ function render() {
   $("#hereVal").textContent = `VL ${lec.nr} · ${lec.date}`;
   $("#here").value = state.here;
   $("#today").hidden = state.here === HERE_TODAY;
-  const pressed = [["mListe", state.mode === "liste"], ["mMetro", state.mode === "metro"], ["mZeit", state.mode === "zeit"], ["eKern", !state.detail], ["eAlle", state.detail], ["ausAus", !state.ausblick], ["ausAn", state.ausblick]];
+  const pressed = [["mListe", state.mode === "liste"], ["mMetro", state.mode === "metro"], ["mZeit", state.mode === "zeit"], ["eKern", !state.detail], ["eAlle", state.detail]];
   for (const [id, on] of pressed) $("#" + id).setAttribute("aria-pressed", String(on));
   $("#ctlLevel").hidden = state.mode === "metro";
   $("#mapwrap").hidden = state.mode === "liste";
@@ -979,9 +968,9 @@ function render() {
   const nVisSt = [...new Set(THREADS.flatMap(t => t.st))].filter(id => sichtbar(byId[id])).length;
   const nFrei = LECTURES.filter(l => l.frei).length, nFreiB = ALL.filter(n => LECTURES[n.vl].frei).length, nFreiK = ALL.filter(n => LECTURES[n.vl].frei && n.level === 1).length;
   $("#count").textContent = state.mode === "metro"
-    ? `${plural(THREADS.length, "roter Faden", "rote Fäden")} · ${plural(nVisSt, "Station", "Stationen")} ${state.ausblick ? "mit Ausblick" : "freigeschaltet"}`
+    ? `${plural(THREADS.length, "roter Faden", "rote Fäden")} · ${plural(nVisSt, "Station", "Stationen")}`
     : (state.detail ? `${plural(nFreiB, "Begriff", "Begriffe")}` : `${plural(nFreiK, "Kernbegriff", "Kernbegriffe")}` + (nFreiB > nFreiK ? ` (${nFreiB - nFreiK} weitere unter „Alle“)` : ""))
-      + ` aus ${plural(nFrei, "Vorlesung", "Vorlesungen")}` + (ALL.length > nFreiB ? ` · ${ALL.length - nFreiB} vorbereitet` : "");
+      + ` aus ${plural(nFrei, "Vorlesung", "Vorlesungen")}`;
   if (state.mode === "liste") drawListe();
   else {
     if (state.mode === "metro") layoutMetro(); else layoutZeit();
@@ -1009,8 +998,6 @@ $("#mZeit").addEventListener("click", () => { state.mode = "zeit"; state.thread 
 $("#today").addEventListener("click", () => { state.here = HERE_TODAY; render(); scrollToHere(); });
 $("#eKern").addEventListener("click", () => { state.detail = false; save(); render(); });
 $("#eAlle").addEventListener("click", () => { state.detail = true; save(); render(); });
-$("#ausAus").addEventListener("click", () => { state.ausblick = false; if (state.sel && !sichtbar(byId[state.sel] || byApp[state.sel])) state.sel = defaultSel(); save(); render(); });
-$("#ausAn").addEventListener("click", () => { state.ausblick = true; save(); render(); });
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
 new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 

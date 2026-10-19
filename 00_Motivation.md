@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.4.0
+version:  2.4.4
 language: de
 narrator: Deutsch Female
 
@@ -48,8 +48,6 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 | **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/00_Motivation.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/00_Motivation.md) |
 | **Autoren**              | @author                                                                                                                                    |
 
-> **Zum Nacharbeiten: die Ansicht „Lehrbuch“.** Im Hörsaal zeigen die Folien nur die Kernbotschaften. Die Erklärungen dazu stehen im Lehrbuch: oben rechts auf das Symbol mit den Schiebereglern klicken und „Lehrbuch“ wählen.
-
 --------------------------------------------------------------------------------
 
 <div class="flex-container">
@@ -75,6 +73,10 @@ bernhard.jung@informatik.tu-freiberg.de
 
 --------------------------------------------------------------------------------
 
+> **Zum Nacharbeiten: die Ansicht „Lehrbuch“.** Im Hörsaal zeigen die Folien nur die Kernbotschaften. Die Erklärungen dazu stehen im Lehrbuch: oben rechts auf das Symbol mit den Schiebereglern klicken und „Lehrbuch“ wählen.
+
+--------------------------------------------------------------------------------
+
 ## Warum sind Sie hier?
 
 **Was motiviert Sie, an dieser Veranstaltung teilzunehmen?**
@@ -89,7 +91,9 @@ bernhard.jung@informatik.tu-freiberg.de
 
 ## Warum ist die Veranstaltung zentral?
 
-In Ihrem Fach werden Sie Messreihen auswerten, Analysendaten sortieren und Ergebnisse darstellen. Die Daten durchlaufen dabei immer wieder dasselbe Muster:
+> [!TIP]
+> Die Veranstaltung ist zentral, weil sie die Grundlagen für die Arbeit mit Daten vermittelt. Sie lernen, wie man ausgehend von einer wissenschaftlichen Fragestellung Daten erhebt, aufbereitet, analysiert und visualisiert.
+
 
 ``` ascii
       ┌──────────────────────── neue Frage ──────────────────────────────┐
@@ -103,11 +107,11 @@ In Ihrem Fach werden Sie Messreihen auswerten, Analysendaten sortieren und Ergeb
   Hypothese   Messen      Fehlwerte   Rechnen     Diagramm    Nachvoll-
   Messgröße   Sammeln     Einheiten   Vergleichen Karte       ziehbar
   Methodik    Speichern   Ausreißer   Zusammen-   Tabelle     machen
-                                      fassen
+                                      fassen                                                 .
 ```
 <!-- style="font-size: 0.75em; line-height: 1.2;" -->
 
-> **Der Pfeil zurück ist der wichtigste.** Fast nie führt der erste Durchlauf zum Ziel — auswerten heißt, diese Schleife mehrfach zu drehen.
+> **Der Pfeil zurück ist der wichtigste.** Fast nie führt der erste Durchlauf zum Ziel — auswerten heißt, diese Schleife mehrfach zu drehen - das bedeutet, man wiederholt immer wieder gleiche Aufgaben.
 
 **Von Hand oder mit einem Programm?** Diese Frage stellt sich bei jedem Durchlauf.
 
@@ -122,7 +126,7 @@ Die Daten reichen nicht, die Frage war zu unscharf, oder das Ergebnis wirft eine
 Am Ende des Semesters können Sie eine wissenschaftliche Fragestellung auf eine Datenverarbeitung abbilden — von der Rohdatei bis zur belegten Aussage. Dafür brauchen Sie beides: das Handwerkszeug und seine Anwendung.
 
 <!-- data-type="none" -->
-| Sie können ...  | Handwerkszeug                                                                  | Anwendung auf Daten                                                                    |
+| Sie können ...  | Handwerkszeug (klassische Einführung in die Informatik)                                                                  | Anwendung auf Daten (eigentliches Ziel)                                                                    |
 | :-------------- | :----------------------------------------------------------------------------- | :------------------------------------------------------------------------------------- |
 | **entwickeln**  | ein eigenes Programm aus Schleifen, Bedingungen und Funktionen aufbauen          | eine vollständige Auswertung schreiben — einlesen, bereinigen, auswerten, darstellen     |
 | **beurteilen**  | einschätzen, ob ein Programm verständlich und wartbar geschrieben ist            | einschätzen, ob ein Ergebnis belastbar ist und wann eine Darstellung in die Irre führt   |
@@ -133,6 +137,9 @@ Am Ende des Semesters können Sie eine wissenschaftliche Fragestellung auf eine 
 
 *******************************************************************************
 
+                                    --{{0}}--
+Die Tabelle liest man am besten von unten nach oben: Erst kennen und verstehen Sie die Grundbausteine, dann wenden Sie sie an, analysieren fremden Code und unbekannte Daten, beurteilen Ergebnisse und entwickeln am Ende eigene Auswertungen. Jede Stufe hat zwei Seiten, das Programmieren selbst und seine Anwendung auf echte Daten. Die Klausur prüft vor allem die mittleren Stufen: Code lesen, verstehen und Fehler darin finden.
+
                                      {{1-2}}
 *******************************************************************************
 
@@ -142,9 +149,13 @@ Am Ende des Semesters können Sie eine wissenschaftliche Fragestellung auf eine 
 2. **Sie können Ergebnisse hinterfragen** — die eigenen und die anderer. Woher kommen die Daten, was fehlt darin, was trägt die Aussage wirklich?
 3. **Sie können sich selbst weiterhelfen** — Fehlermeldungen lesen, Dokumentation nutzen, Beispiele übertragen. Kein Kurs deckt ab, was Sie später brauchen werden.
 
+> [!CAUTION]
 > **Was ausdrücklich nicht das Ziel ist:** Sie werden keine Software-Entwickler. Kleine Vorhaben können Sie aber selbst umsetzen, größere zumindest einordnen.
 
 *******************************************************************************
+
+                                    --{{1}}--
+Diese drei Fähigkeiten tragen auch dann noch, wenn Sie Python längst gegen ein anderes Werkzeug getauscht haben oder eine KI den Code schreibt: entscheiden, ob sich ein Programm lohnt, einem Ergebnis nicht blind trauen und sich bei einer Fehlermeldung selbst helfen. Und in der Zusammenarbeit mit Fachleuten aus der Informatik können Sie mitreden, weil Sie die Begriffe kennen.
 
 ### Praktische Inhalte
 
@@ -158,8 +169,8 @@ Ein **Dünnschliff** ist eine Gesteinsscheibe, so dünn geschliffen, dass Licht 
 ``` python duennschliff.py
 grau[900:, 640:] = 0           # Maßstab unten rechts ausblenden
 UM_PRO_PIXEL = 2000 / 80       # Maßstab: 2000 µm sind 80 Pixel
-SCHWELLE = 0.45     # Annahme: Ein Korn ist heller als die Schwelle
-hell = ndimage.binary_opening(grau > SCHWELLE, iterations=2)  # Krümel weg
+SCHWELLE = 0.45                # Annahme: Ein Korn ist heller als die Schwelle
+hell = ndimage.binary_opening(grau > SCHWELLE, iterations=2)  # Krümel weg (Erosion, Dilatation)
 koerner, _ = ndimage.label(hell)            # zusammenhängende Flecken
 flaeche = np.bincount(koerner.ravel())[1:]  # Pixel je Fleck
 flaeche = flaeche[flaeche >= 150]           # sehr kleine Flecken weg
@@ -208,7 +219,15 @@ Eine einfache Frage, echte Messdaten — und schon stecken wir mitten in den The
 
 **Aus welchem Studiengang kommen Sie?**
 
-[[___ ___ ___]]
+[(ging)] GING
+[(sr)] SR
+[(us)] US
+[(wiw)] WIW
+[(gm)] GM
+[(nt)] NT
+[(baf)] BAF
+[(eng)] ENG
+[(weitere)] weitere
 
 **Welche Daten würden Sie gern analysieren?**
 
@@ -231,7 +250,11 @@ sondern:  "Wir müssen 48.000 Zeilen durchgehen. Wie machen wir das?"
                      Dafür gibt es Schleifen.
 ```
 
-> Wer weiß, *wozu* ein Konzept dient, behält es.
+> Wer weiß, *wozu* ein Konzept dient,
+>
+> + ... behält es.
+> + ... für denjenigen ist die Programmiersprache irrelevant.
+> + ... kann besser mit der KI zusammenarbeiten.
 
                                     --{{0}}--
 Wer ein Konzept als Vokabel lernt, vergisst es nach der Klausur. Um einige Grundlagen kommen wir trotzdem nicht herum — aber immer mit Blick darauf, wofür wir sie brauchen.
@@ -393,7 +416,7 @@ Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/
 **Die Karte wächst mit dem Semester** — nach jeder Vorlesung kommen ihre Begriffe dazu, auch Ihre Vorschläge.
 
                                     --{{0}}--
-Programmieren lernt man in Schichten: Jeder neue Begriff stützt sich auf frühere. Die Karte hält diesen Zusammenhang fest. Für kommende Vorlesungen stehen zunächst nur Termin und Leitfrage; wer neugierig ist, sieht mit „Ausblick: An“ die vorbereiteten Begriffe blass. „Sie sind hier“ richtet sich nach dem Datum. Neben der Liste gibt es eine Metrokarte, deren Linien rote Fäden durch das Semester sind — etwa „Wenn ein Wert fehlt“ —, und eine Zeitleiste mit allen Begriffen nach Themengebiet.
+Programmieren lernt man in Schichten: Jeder neue Begriff stützt sich auf frühere. Die Karte hält diesen Zusammenhang fest. Für kommende Vorlesungen stehen nur Termin und Leitfrage — ihre Begriffe entstehen erst nach der Vorlesung, mit Ihren Vorschlägen. „Sie sind hier“ richtet sich nach dem Datum. Neben der Liste gibt es eine Metrokarte, deren Linien rote Fäden durch das Semester sind — etwa „Wenn ein Wert fehlt“ —, und eine Zeitleiste mit allen Begriffen nach Themengebiet.
 
 > [!NOTE]
 > Am Ende jeder Vorlesung fragen wir Sie nach den Stichworten des Tages und tragen sie in die Kurslandkarte ein.
@@ -405,6 +428,8 @@ Programmieren lernt man in Schichten: Jeder neue Begriff stützt sich auf frühe
 * **Frei verfügbar:** Lizenz [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.de), offen auf [GitHub](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD).
 * **Lebendig:** Die Versionsnummer im Kopf jeder Vorlesung zeigt, wann sich etwas geändert hat.
 * **Machen Sie mit:** Fehler melden Sie im OPAL-Forum oder per E-Mail. Wer zu einer Vorlesung beiträgt, wird dort als **Mitautorin oder Mitautor** genannt.
+
+https://github.com/TUBAF-IfI-LiaScript/VL_EAVD
 
                                     --{{0}}--
 Die dritte Ansicht, „Folien“, zeigt die Erklärungen als Notiz unter jeder Folie. Die Materialien dürfen Sie nutzen, teilen und bearbeiten, solange Sie die Urheber nennen. Wer GitHub nutzt, kann Fehler auch als Issue melden oder Verbesserungen direkt als Änderung vorschlagen.
@@ -479,7 +504,7 @@ In der ersten Übung richten wir gemeinsam Python und Visual Studio Code ein. Da
 
 **Materialien.** Alle Vorlesungen, Daten und Beispiele finden Sie unter [github.com/TUBAF-IfI-LiaScript/VL_EAVD](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD); wie Sie mitmachen können, steht im Abschnitt „Offene Materialien“.
 
-**Zeitaufwand.** 180 h: 60 h Präsenzzeit und 120 h Selbststudium für Vor- und Nachbereitung, Übungsaufgaben und Prüfungsvorbereitung. Ohne Programmiererfahrung sollten Sie eher mehr Zeit einplanen — in einer Arbeitsgruppe macht das deutlich mehr Spaß als allein.
+**Zeitaufwand.** Für die Vorlesung erhalten Sie 6 / 7 CP. Das ist gleichbedeutend mit 180 h / 210 h: 60 h Präsenzzeit und 120 h Selbststudium für Vor- und Nachbereitung, Übungsaufgaben und Prüfungsvorbereitung. Ohne Programmiererfahrung sollten Sie eher mehr Zeit einplanen — in einer Arbeitsgruppe macht das deutlich mehr Spaß als allein.
 
 **Wie Sie zum Gelingen beitragen können**
 
@@ -489,7 +514,7 @@ In der ersten Übung richten wir gemeinsam Python und Visual Studio Code ein. Da
 
 ## Wo soll das hinführen?
 
-                 {{0-1}}
+                 {{0-2}}
 **************************************
 
 Schauen wir, um diese Motivation abzurunden, noch einmal auf unser Beispiel mit dem Personenzähler — es zeigt die als Einleitung aufgeführte Verarbeitungskette aus Datenerhebung, Analyse und Visualisierung.
@@ -515,6 +540,10 @@ while True:
     sleep_ms(50)
 ```
 
+https://docs.arduino.cc/tutorials/alvik/user-manual/#distance-sensor
+
+https://docs.arduino.cc/tutorials/alvik/api-overview/#get_distance
+
 </div>
 </div>
 
@@ -533,13 +562,12 @@ ms;links;mitte_links;mitte;mitte_rechts;rechts
 53566;2393;2101;2106;2111;2239
 53670;797;2092;2101;2110;2219
 53876;766;778;1437;2097;2194
-54189;2407;987;994;1001;2193
 ```
 
 </div>
 <div class="flex-child">
 
-Daraus macht das Programm auf dem Laptop Zählungen — die erste Zeile ist genau dieser Durchgang:
+Daraus macht das Programm auf dem Laptop Zählungen 
 
 ```text zaehlungen_2026-10-15.csv
 zeit;richtung
@@ -579,7 +607,11 @@ Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/
 
 [[___ ___ ___]]
 
-**Wo könnten Sie das, was heute thematisiert wurde, in Ihrem Fach anwenden?**
+**Was blieb unklar?**
+
+[[___ ___ ___]]
+
+**Welche Anwendungsfälle sind denkbar?**
 
 [[___ ___ ___]]
 

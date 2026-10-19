@@ -307,23 +307,29 @@ def pdf_link(v):
     name = sections[v]["datei"][:-3] + ".pdf"
     return "../pdf/" + name if v in FREIGEGEBEN and os.path.exists(os.path.join(REPO, "docs", "pdf", name)) else None
 
+VL_VON = {b[0]: b[3] for b in B}
+
 out = {
     "stand": STAND,
     "vorlesungen": [
         {"vl": v, "datei": sections[v]["datei"], "datum": TERMINE[v][0], "kurz": TERMINE[v][1],
          "leitfrage": LEITFRAGE[v], "freigegeben": v in FREIGEGEBEN, "pdf": pdf_link(v),
-         "status": STATUS[v], "abschnitte": sections[v]["abschnitte"]}
+         "status": STATUS[v], "abschnitte": sections[v]["abschnitte"] if v in FREIGEGEBEN else []}
         for v in range(15)
     ],
+    # Nur Freigegebenes: Begriffe kommender Vorlesungen stehen nicht in der Seite (auch nicht im Quelltext)
     "begriffe": [
         {"id": b[0], "name": b[1], "linie": b[2], "vl": b[3], "abschnitt": b[4], "ebene": b[5],
          "code": bool(b[6]), "erklaerung": b[7], "fehlvorstellung": b[8]}
-        for b in B
+        for b in B if b[3] in FREIGEGEBEN
     ],
-    "beziehungen": [{"von": a, "nach": b, "text": t} for a, b, t in R],
-    "faeden": [{"id": f, "name": n, "beschreibung": d, "stationen": st} for f, n, d, st in F],
+    "beziehungen": [{"von": a, "nach": b, "text": t} for a, b, t in R if VL_VON[a] in FREIGEGEBEN and VL_VON[b] in FREIGEGEBEN],
+    "faeden": [{"id": f, "name": n, "beschreibung": d, "stationen": [x for x in st if VL_VON[x] in FREIGEGEBEN],
+                "weiter": any(VL_VON[x] not in FREIGEGEBEN for x in st)}
+               for f, n, d, st in F if any(VL_VON[x] in FREIGEGEBEN for x in st)],
     "anwendungen": [{"id": i, "titel": t, "fach": fa, "vl": v, "abschnitt": abschnitt_nr(v, ab), "datensatz": ds,
-                     "schlagworte": sw, "herkunft": h} for i, t, fa, v, ab, ds, sw, h in A],
+                     "schlagworte": [k for k in sw if VL_VON[k] in FREIGEGEBEN], "herkunft": h}
+                    for i, t, fa, v, ab, ds, sw, h in A if v in FREIGEGEBEN],
 }
 os.makedirs(ZIEL, exist_ok=True)
 text = json.dumps(out, ensure_ascii=False, indent=1)
@@ -332,6 +338,7 @@ seite = open(os.path.join(HIER, "vorlage.html"), encoding="utf-8").read()
 seite = seite.replace("%%DATEN%%", text.replace("</", "<\\/")).replace("%%STAND%%", STAND)
 open(os.path.join(ZIEL, "index.html"), "w", encoding="utf-8").write(seite)
 e1 = sum(1 for b in B if b[5] == 1)
-print(f"{len(B)} Begriffe ({e1} Kern, {len(B)-e1} Detail), {len(R)} Beziehungen, {len(A)} Anwendungen")
+print(f"{len(B)} Begriffe ({e1} Kern, {len(B)-e1} Detail), {len(R)} Beziehungen, {len(A)} Anwendungen vorbereitet; "
+      f"veröffentlicht: {len(out['begriffe'])} Begriffe, {len(out['faeden'])} Fäden, {len(out['anwendungen'])} Anwendungen")
 for b in []:
     print(f"  VL{b[3]:02d} #{b[4]:<2} {sections[b[3]]['abschnitte'][b[4]-1][:34]:34s} <- {b[1]}")
