@@ -1,5 +1,5 @@
 {
- "stand": "19.10.2026",
+ "stand": "20.10.2026",
  "vorlesungen": [
   {
    "vl": 0,
@@ -224,6 +224,39 @@
    "fehlvorstellung": null
   },
   {
+   "id": "vorhersage",
+   "name": "Vorhersage vor dem Ausführen",
+   "linie": "denken",
+   "vl": 0,
+   "abschnitt": 10,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Erst festlegen, was das Programm ausgeben wird, dann ausführen. Wer danebenliegt, sieht, wo das eigene Bild vom Programm nicht stimmt.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "ki",
+   "name": "KI-Assistent",
+   "linie": "denken",
+   "vl": 0,
+   "abschnitt": 12,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Schreibt Code in Sekunden. Man muss aber sagen können, was man will, und prüfen können, ob das Ergebnis stimmt.",
+   "fehlvorstellung": "„Die KI hat das Programm geschrieben, also stimmt es.“"
+  },
+  {
+   "id": "werkzeug",
+   "name": "Erst von Hand, dann mit Werkzeug",
+   "linie": "daten",
+   "vl": 0,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Dieselbe Frage zweimal: mit rund 50 eigenen Zeilen und mit einer Anweisung aus einer Bibliothek. Wer den mühsamen Weg kennt, weiß, was das Werkzeug abnimmt.",
+   "fehlvorstellung": null
+  },
+  {
    "id": "kreislauf",
    "name": "Datenkreislauf",
    "linie": "analyse",
@@ -247,6 +280,21 @@
   }
  ],
  "beziehungen": [
+  {
+   "von": "vorhersage",
+   "nach": "annahmen",
+   "text": "deckt auf"
+  },
+  {
+   "von": "ki",
+   "nach": "vorhersage",
+   "text": "Antwort prüfen durch"
+  },
+  {
+   "von": "ki",
+   "nach": "annahmen",
+   "text": "trifft eigene"
+  },
   {
    "von": "zaehler",
    "nach": "annahmen",

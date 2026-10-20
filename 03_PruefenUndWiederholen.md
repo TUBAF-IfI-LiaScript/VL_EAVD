@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.1
+version:  2.0.2
 language: de
 narrator: Deutsch Female
 
@@ -447,6 +447,46 @@ Legen Sie sich fest, **bevor** Sie das Programm ausführen: Was gibt die letzte 
 ***
 `minimum` ist eine ganz gewöhnliche Variable. Die Schleife weist ihr nacheinander jeden Wert der Liste zu — nach dem letzten Durchlauf bleibt der **letzte** Wert stehen. Wer nach der Schleife mit `minimum` weiterrechnet, rechnet also nur mit dem letzten Tag.
 ***
+
+### Fehlermeldungen bei `if` und `for`
+
+Mit `if` und `for` kommen drei neue Meldungen dazu. Alle drei zeigen auf die richtige Stelle, und Python schlägt die Korrektur meist gleich mit vor.
+
+<!-- data-type="none" -->
+| Im Code                     | Meldung (letzte Zeile)                                                 | Korrektur                    |
+| :-------------------------- | :--------------------------------------------------------------------- | :--------------------------- |
+| `if minimum < 0`            | `SyntaxError: expected ':'`                                            | Doppelpunkt ans Zeilenende   |
+| `if minimum = 0:`           | `SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?` | vergleichen mit `==`         |
+| Block nicht eingerückt      | `IndentationError: expected an indented block after 'if' statement`    | vier Leerzeichen einrücken   |
+
+### Ein Fehler nach dem anderen
+
+> **Python meldet immer nur den ersten Fehler.** Nach jeder Korrektur erneut ausführen, bis das Programm durchläuft.
+
+Das Programm soll die Frosttage zählen. Führen Sie es aus, korrigieren Sie die gemeldete Stelle, führen Sie es erneut aus — bis `Frosttage: 2` erscheint. Wie viele Fehler waren es?
+
+```python
+minima = [-1.9, -2.4, 0.1]
+frosttage = 0
+for minimum in minima
+    if minimum < 0:
+    frosttage = frosttage + 1
+print("Frosttage:", frosttage)
+```
+@Pyodide.eval
+
+<details>
+<summary>**Lösung**</summary>
+
+Zwei Fehler, gemeldet nacheinander:
+
+1. Zeile 3: `SyntaxError: expected ':'`. Nach `for minimum in minima` fehlt der Doppelpunkt.
+2. Erst nach dieser Korrektur meldet Python Zeile 5: `IndentationError: expected an indented block after 'if' statement on line 4`. `frosttage = frosttage + 1` muss eine Ebene tiefer eingerückt werden, unter das `if`.
+
+</details>
+
+                                    --{{0}}--
+Dass nach der ersten Korrektur ein neuer Fehler erscheint, wirkt am Anfang entmutigend. Es ist aber ein Fortschritt: Python ist eine Zeile weiter gekommen. Bei längeren Programmen hilft es, nach jeder kleinen Änderung auszuführen, statt zwanzig Zeilen zu schreiben und dann alle Fehler auf einmal zu suchen.
 
 ## Die Antwort auf die Leitfrage
 

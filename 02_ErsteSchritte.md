@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.1
+version:  2.0.2
 language: de
 narrator: Deutsch Female
 
@@ -435,6 +435,34 @@ Die häufigsten Fehler am Anfang:
 | `ValueError`   | Der Typ stimmt, der Wert aber nicht              | `float("6,26")`                           |
 
 > **Und dann?** Lesen, Zeile anschauen, Hypothese bilden, ändern, erneut ausführen. Hilft das nicht: die letzte Zeile der Meldung in eine Suchmaschine kopieren. Sie sind garantiert nicht die erste Person mit diesem Fehler.
+
+### Typische Fehlvorstellung: Der Fehler steht in der gemeldeten Zeile
+
+> Aus Ihren Antworten in Vorlesung 00: _„… praktisch leider oft mini Schreibfehler, die niemand findet“_
+
+> **Typische Fehlvorstellung:** _„Der Fehler steht in der Zeile, die Python meldet.“_
+
+```python
+minimun = -3.5
+maximum = 0.7
+spanne = maximum - minimum
+print("Spanne:", spanne)
+```
+@Pyodide.eval
+
+Legen Sie sich fest, **bevor** Sie das Programm ausführen: In welcher Zeile müssen Sie etwas ändern?
+
+[( )] in Zeile 3, denn dort meldet Python den Fehler
+[(X)] in Zeile 1
+[( )] in Zeile 4
+***
+Python meldet Zeile 3: `NameError: name 'minimum' is not defined. Did you mean: 'minimun'?` Dort wird `minimum` zum ersten Mal **benutzt**. Der Tippfehler steckt aber in Zeile 1, wo `minimun` angelegt wurde.
+
+Python zeigt, wo es nicht weiterkommt, nicht, wo der Fehler entstanden ist. Der Zusatz `Did you mean: 'minimun'?` führt direkt zur Ursache. Lesen Sie die Meldung deshalb bis zum Ende.
+***
+
+                                    --{{0}}--
+Bei einem `NameError` lohnt immer der Blick nach oben: Wo wurde der Name angelegt, und ist er dort genauso geschrieben? Ähnlich bei Klammern: Fehlt eine schließende Klammer, meldet Python `'(' was never closed` und zeigt auf die öffnende. Die Suche beginnt also an der gemeldeten Stelle, endet aber oft weiter oben.
 
 ## Kontrollfragen
 

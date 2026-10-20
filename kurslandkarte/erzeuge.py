@@ -74,6 +74,8 @@ B = [
 
     # --- Denken & Kontrollfluss
     ("blockly", "Programmdarstellung: Blöcke oder Text", "denken", 0, 'Blöcke oder Text', 2, 0, "Zwei Ansichten auf dasselbe Programm: Blöcke zusammenschieben oder Python tippen.", None),
+    ("vorhersage", "Vorhersage vor dem Ausführen", "denken", 0, 'Typische Fehlvorstellungen', 1, 0, "Erst festlegen, was das Programm ausgeben wird, dann ausführen. Wer danebenliegt, sieht, wo das eigene Bild vom Programm nicht stimmt.", None),
+    ("ki", "KI-Assistent", "denken", 0, 'Und was ist mit KI?', 1, 0, "Schreibt Code in Sekunden. Man muss aber sagen können, was man will, und prüfen können, ob das Ergebnis stimmt.", "„Die KI hat das Programm geschrieben, also stimmt es.“"),
     ("algo", "Algorithmus", "denken", 1, 'Algorithmen', 1, 0, "Eindeutige, ausführbare Handlungsvorschrift aus endlich vielen Schritten.", None),
     ("terminierung", "Eindeutigkeit & Terminierung", "denken", 1, 'Algorithmen', 2, 0, "Jeder Schritt hat genau eine Auslegung; die Ausführung endet nach endlich vielen Schritten.", None),
     ("sprache", "Programmiersprache", "denken", 1, 'Warum der Rechner keine Alltagssprache versteht', 2, 0, "Kompromiss zwischen menschlicher Lesbarkeit und maschineller Eindeutigkeit.", "„Der Rechner versteht, was ich meine.“"),
@@ -142,6 +144,7 @@ B = [
     ("datumstyp", "Datumsspalte", "typen", 11, 'Datum', 2, 0, "MESS_DATUM mit pd.to_datetime in ein Datum umwandeln.", None),
 
     # --- Daten & Dateien
+    ("werkzeug", "Erst von Hand, dann mit Werkzeug", "daten", 0, 'Erst mühsam, dann mit Werkzeug', 2, 0, "Dieselbe Frage zweimal: mit rund 50 eigenen Zeilen und mit einer Anweisung aus einer Bibliothek. Wer den mühsamen Weg kennt, weiß, was das Werkzeug abnimmt.", None),
     ("dwd", "DWD-Datensatz", "daten", 1, 'Unser Datensatz', 1, 0, "Klimareihe Fichtelberg seit 1890, rund 48.000 Zeilen — der rote Faden.", None),
     ("tabkalk", "Tabellenkalkulation", "daten", 1, 'Drei Aufgaben', 1, 0, "Drei Aufgaben: leicht, mühsam, praktisch aussichtslos.", None),
     ("rohformat", "Rohformat", "daten", 1, 'Aufgabe 3: 135 Jahre Frost', 2, 0, "Semikolons, Leerzeichen, Datum ohne Trennzeichen, Dezimalpunkt, eor-Spalte.", None),
@@ -195,6 +198,8 @@ B = [
 # ---- Beziehungen: von, nach, Beschriftung
 R = [
     # Einstieg
+    ("vorhersage", "annahmen", "deckt auf"), ("ki", "vorhersage", "Antwort prüfen durch"), ("ki", "annahmen", "trifft eigene"),
+    ("vorhersage", "trace", "geübt mit"), ("werkzeug", "open", "von Hand:"), ("werkzeug", "readcsv", "mit Werkzeug:"),
     ("zaehler", "sensorlog", "erzeugt"), ("zaehler", "annahmen", "beruht auf"), ("sensorlog", "tabkalk", "ausgewertet mit"),
     ("kreislauf", "lohnt", "je Runde die Frage"), ("schliff", "array", "Bild ist ein"), ("schliff", "maske", "Schwelle ergibt eine"), ("tabkalk", "lohnt", "Grenzen zeigen"), ("dwd", "rohformat", "liegt vor im"),
     ("tabkalk", "algo", "motiviert"), ("algo", "terminierung", "erfordert"), ("algo", "pseudo", "notiert als"),
