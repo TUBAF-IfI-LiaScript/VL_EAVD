@@ -1,11 +1,12 @@
 # Kurslandkarte
 
-Interaktive Übersicht über Begriffe, Zusammenhänge und didaktische Fäden der Vorlesung für Studierende — in drei Ansichten: Vorlesungen (Liste, Standard auf dem Handy), Metrokarte und Zeitleiste. „Sie sind hier“ ergibt sich aus dem Datum. Veröffentlicht über GitHub Pages aus dem Ordner `docs/`.
+Interaktive Übersicht über Begriffe, Zusammenhänge und didaktische Fäden der Vorlesung für Studierende — in drei Ansichten: Vorlesungen (Wochenraster nach Blöcken, Standard auf dem Handy), Metrokarte und Zeitleiste. „Sie sind hier“ ergibt sich aus dem Datum. Veröffentlicht über GitHub Pages aus dem Ordner `docs/`.
 
 | Datei | Inhalt |
 | :---- | :----- |
-| `erzeuge.py` | Kuratierte Daten (Begriffe, Beziehungen, Fäden) und Erzeugung von Daten und Seite |
-| `vorlage.html` | Ansicht; `%%DATEN%%` und `%%STAND%%` werden beim Erzeugen ersetzt |
+| `erzeuge.py` | Kuratierte Kursdaten (Termine, Begriffe, Beziehungen, Fäden) und Aufruf des Kerns |
+| `invivis/` | Kopie des gemeinsamen Kerns [invivis Kurslandkarte](https://github.com/TUBAF-IfI-LiaScript/invivis-kurslandkarte) (`kern.py`, `vorlage.html`, `startseite.html`) – **nicht hier ändern**, Verbesserungen im Kern-Repository machen und mit `uebernehmen.py` verteilen |
+| `../docs/index.html` | erzeugt: Startseite des Kurses („Diese Woche“, Kurslandkarte, Lernziele, Organisation, Kontakt) |
 | `../docs/kurslandkarte/kurslandkarte.json` | erzeugt: alle Daten, u. a. für das Projekt invivis |
 | `../docs/kurslandkarte/index.html` | erzeugt: die veröffentlichte Seite |
 

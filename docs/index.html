@@ -3,29 +3,83 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EAVD · Erhebung, Analyse und Visualisierung digitaler Daten</title>
+<meta name="description" content="Daten erheben, mit Python auswerten und anschaulich darstellen – vom ersten Programm über Dateien und Funktionen bis zur Analyse mit NumPy und pandas.">
+<meta name="author" content="Sebastian Zug &amp; Claude Code (Opus 5.5)">
+<meta name="generator" content="invivis-kurslandkarte 0.1.0">
+<title>Erhebung, Analyse und Visualisierung digitaler Daten</title>
 <style>
-:root { --bg: #f3f5f2; --ink: #1d2a2c; --muted: #5d6c6f; --accent: #1f7a8c; color-scheme: light; }
-@media (prefers-color-scheme: dark) { :root { --bg: #141a1b; --ink: #e4ebe9; --muted: #9aa9ab; --accent: #4fb3c6; color-scheme: dark; } }
+:root { --bg: #f3f5f2; --surface: #ffffff; --ink: #1d2a2c; --muted: #5d6c6f; --faint: #c9d1cf; --accent: #1f7a8c; --here: #c2462e; color-scheme: light; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #141a1b; --surface: #1c2426; --ink: #e4ebe9; --muted: #9aa9ab; --faint: #3a4648; --accent: #4fb3c6; --here: #ee7a60; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--ink); font-family: system-ui, "Segoe UI", sans-serif; line-height: 1.55; }
-main { max-width: 62ch; margin: 0 auto; padding: 48px 16px; display: grid; gap: 14px; }
-h1 { margin: 0; font-size: 1.7rem; line-height: 1.2; }
+main { max-width: 68ch; margin: 0 auto; padding: 40px 16px 48px; display: grid; gap: 14px; }
+h1 { margin: 0; font-size: 1.8rem; line-height: 1.2; }
+h2 { margin: 20px 0 0; font-size: 1.15rem; }
 p { margin: 0; }
-.muted { color: var(--muted); }
 a { color: var(--accent); }
-ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; }
+.karte { display: inline-block; width: fit-content; padding: 10px 16px; border: 1px solid var(--accent); border-radius: 8px; text-decoration: none; font-weight: 600; }
+.karte:hover, .karte:focus-visible { background: var(--surface); }
+.woche { background: var(--surface); border: 1px solid var(--faint); border-left: 4px solid var(--here); border-radius: 6px; padding: 12px 16px; display: grid; gap: 6px; }
+.woche h2 { margin: 0; font-size: 1rem; color: var(--here); }
+.woche ul { list-style: none; padding: 0; }
+.woche .frage { color: var(--muted); font-size: .92rem; }
+.woche .naechst { color: var(--muted); font-size: .92rem; }
+dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; }
+dt { color: var(--muted); }
+dd { margin: 0; }
+@media (max-width: 560px) { dl { grid-template-columns: 1fr; } dd { margin-bottom: 6px; } }
+footer { margin-top: 24px; font-size: .85rem; color: var(--muted); display: grid; gap: 4px; }
 </style>
 </head>
 <body>
 <main>
   <p class="muted">TU Bergakademie Freiberg · Wintersemester 2026/27</p>
   <h1>Erhebung, Analyse und Visualisierung digitaler Daten</h1>
-  <p>Der Kurs wird zum Wintersemester 2026/27 überarbeitet. Diese Seiten begleiten die Überarbeitung.</p>
-  <ul>
-    <li><a href="kurslandkarte/">Kurslandkarte</a> — Entwurf zur Diskussion: Begriffe, Zusammenhänge und didaktische Fäden über das Semester</li>
-    <li><a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/00_Motivation.md">Vorlesungsmaterialien</a> (LiaScript, Einstieg mit Vorlesung 00)</li>
-    <li><a href="https://github.com/TUBAF-IfI-LiaScript/VL_EAVD">Repository auf GitHub</a></li>
-  </ul>
+  <p>Daten erheben, mit Python auswerten und anschaulich darstellen – vom ersten Programm über Dateien und Funktionen bis zur Analyse mit NumPy und pandas.</p>
+
+  <section class="woche" id="woche" hidden aria-live="polite"></section>
+
+  <a class="karte" href="kurslandkarte/">🗺️ Kurslandkarte: alle Termine, Begriffe und Zusammenhänge</a>
+
+  
+
+  
+
+  <h2>Kontakt</h2>
+<p>Prof. Dr.-Ing. Sebastian Zug<br>Lehrstuhl für Softwaretechnologie und Robotik, TU Bergakademie Freiberg<br><a href="mailto:sebastian.zug@informatik.tu-freiberg.de">sebastian.zug@informatik.tu-freiberg.de</a></p>
+
+  <footer>
+    <span></span>
+    <span>Quelle: <a href="https://github.com/TUBAF-IfI-LiaScript/VL_EAVD">https://github.com/TUBAF-IfI-LiaScript/VL_EAVD</a> · Stand 21.10.2026</span>
+    <span>Autoren: Sebastian Zug &amp; Claude Code (Opus 5.5) · erzeugt mit invivis Kurslandkarte 0.1.0</span>
+  </footer>
 </main>
+<script id="termine" type="application/json">[{"key": "0", "label": "VL 00", "kurz": "Motivation", "datum": "2026-10-19", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/00_Motivation.md", "frage": "Warum sollte ich programmieren lernen?"}, {"key": "1", "label": "VL 01", "kurz": "Problem → Programm", "datum": "2026-10-26", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/01_VomProblemZumProgramm.md", "frage": "Wo hört die Tabellenkalkulation auf?"}, {"key": "2", "label": "VL 02", "kurz": "Erste Schritte", "datum": "2026-11-02", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/02_ErsteSchritte.md", "frage": "Wie sage ich dem Rechner, was er tun soll?"}, {"key": "3", "label": "VL 03", "kurz": "Prüfen & Wiederholen", "datum": "2026-11-09", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/03_PruefenUndWiederholen.md", "frage": "An wie vielen Tagen gab es 2024 Frost?"}, {"key": "4", "label": "VL 04", "kurz": "Muster", "datum": "2026-11-16", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/04_MusterInMessreihen.md", "frage": "Wie lang war die längste Frostperiode?"}, {"key": "5", "label": "VL 05", "kurz": "Daten sammeln", "datum": "2026-11-23", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/05_DatenSammeln.md", "frage": "Welches war der wärmste Tag jedes Jahres?"}, {"key": "6", "label": "VL 06", "kurz": "Dateien lesen", "datum": "2026-11-30", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/06_DateienLesen.md", "frage": "Wie kommen 48.000 Zeilen in mein Programm?"}, {"key": "7", "label": "VL 07", "kurz": "Funktionen", "datum": "2026-12-07", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/07_Funktionen.md", "frage": "Wie vermeide ich, alles dreimal zu schreiben?"}, {"key": "8", "label": "VL 08", "kurz": "Demo MicroPython", "datum": "2026-12-14", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/08_DemoMicroPython.md", "frage": "Wo kommen die Daten eigentlich her?"}, {"key": "9", "label": "VL 09", "kurz": "Strukturieren", "datum": "2027-01-04", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/09_ProgrammeStrukturieren.md", "frage": "Wie organisiere ich Code, der wächst?"}, {"key": "10", "label": "VL 10", "kurz": "NumPy", "datum": "2027-01-11", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/10_Bibliotheken.md", "frage": "Warum muss ich das Rad nicht neu erfinden?"}, {"key": "11", "label": "VL 11", "kurz": "pandas I", "datum": "2027-01-18", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/11_PandasEinlesen.md", "frage": "48.000 Zeilen in einer Anweisung?"}, {"key": "12", "label": "VL 12", "kurz": "pandas II", "datum": "2027-01-25", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/12_PandasAggregieren.md", "frage": "Wie fasse ich Jahrzehnte zusammen?"}, {"key": "13", "label": "VL 13", "kurz": "Visualisierung", "datum": "2027-02-01", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/13_Visualisierung.md", "frage": "Wie zeige ich, was ich gefunden habe?"}, {"key": "14", "label": "VL 14", "kurz": "Datenqualität", "datum": "2027-02-08", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/14_Datenqualitaet.md", "frage": "Kann ich meinem Ergebnis trauen?"}]</script>
+<script>
+// „Diese Woche“: alle Termine der laufenden Woche, sonst der nächste Termin
+const T = JSON.parse(document.getElementById("termine").textContent);
+const heute = new Date();
+const iso = (d) => d.toISOString().slice(0, 10);
+const montag = new Date(heute); montag.setDate(heute.getDate() - ((heute.getDay() + 6) % 7));
+const sonntag = new Date(montag); sonntag.setDate(montag.getDate() + 6);
+const datum = (s) => { const [y, m, d] = s.split("-"); return `${+d}.${+m}.`; };
+const eintrag = (t) => `<li>${t.url ? `<a href="${t.url}">${t.label} · ${t.kurz}</a>` : `${t.label} · ${t.kurz} <span class="muted">(Material folgt)</span>`}
+  <span class="muted">${datum(t.datum)}</span>${t.frage ? `<div class="frage">Leitfrage: ${t.frage}</div>` : ""}</li>`;
+const diese = T.filter(t => t.datum >= iso(montag) && t.datum <= iso(sonntag));
+const naechster = T.find(t => t.datum > iso(sonntag));
+const box = document.getElementById("woche");
+if (diese.length) {
+  box.innerHTML = `<h2>Diese Woche</h2><ul>${diese.map(eintrag).join("")}</ul>` +
+    (naechster ? `<p class="naechst">Danach: ${naechster.label} · ${naechster.kurz} (${datum(naechster.datum)})</p>` : "");
+  box.hidden = false;
+} else if (naechster) {
+  box.innerHTML = `<h2>${T[0].datum > iso(heute) ? "Los geht es mit" : "Als Nächstes"}</h2><ul>${eintrag(naechster)}</ul>`;
+  box.hidden = false;
+}
+</script>
 </body>
 </html>

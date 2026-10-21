@@ -1,15 +1,112 @@
 {
- "stand": "20.10.2026",
+ "stand": "21.10.2026",
+ "version": "0.1.0",
+ "kurs": {
+  "basis": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/",
+  "speicher": "eavd-map",
+  "einheit": "Vorlesung",
+  "einheiten": "Vorlesungen",
+  "einheiten_dat": "Vorlesungen",
+  "gleich": "In derselben Vorlesung",
+  "freigabe": "erscheinen nach der Vorlesung, mit Ihren Vorschlägen",
+  "folgen": "Die Begriffe dieser Vorlesung entstehen nach der Vorlesung – mit Ihren Vorschlägen.",
+  "spalten": [
+   [
+    "VL",
+    "Vorlesung"
+   ],
+   [
+    "Ü",
+    "Übung"
+   ],
+   [
+    "P",
+    "Praktikum"
+   ]
+  ],
+  "woche": "Woche ab",
+  "status": {
+   "ausgearbeitet": "",
+   "Rumpf": "Rumpf"
+  },
+  "anwendung_daten": "Daten",
+  "start_ansicht": "liste",
+  "vorschau": "keine"
+ },
+ "linien": [
+  {
+   "id": "denken",
+   "name": "Programme & Abläufe",
+   "farbe": "c1"
+  },
+  {
+   "id": "typen",
+   "name": "Werte & Sammlungen",
+   "farbe": "c2"
+  },
+  {
+   "id": "daten",
+   "name": "Daten & Dateien",
+   "farbe": "c3"
+  },
+  {
+   "id": "erhebung",
+   "name": "Daten erheben",
+   "farbe": "c4"
+  },
+  {
+   "id": "analyse",
+   "name": "Auswerten & Darstellen",
+   "farbe": "c5"
+  }
+ ],
+ "phasen": [
+  {
+   "von": 0,
+   "bis": 2,
+   "name": "Einstieg",
+   "farbe": "ph1"
+  },
+  {
+   "von": 3,
+   "bis": 7,
+   "name": "Grundlagen am Datensatz",
+   "farbe": "ph2"
+  },
+  {
+   "von": 8,
+   "bis": 8,
+   "name": "Zäsur",
+   "farbe": "ph3"
+  },
+  {
+   "von": 9,
+   "bis": 9,
+   "name": "Grundlagen",
+   "farbe": "ph2"
+  },
+  {
+   "von": 10,
+   "bis": 14,
+   "name": "Datenanalyse",
+   "farbe": "ph4"
+  }
+ ],
  "vorlesungen": [
   {
    "vl": 0,
+   "key": "0",
+   "label": "VL 00",
+   "typ": "VL",
    "datei": "00_Motivation.md",
    "datum": "2026-10-19",
    "kurz": "Motivation",
    "leitfrage": "Warum sollte ich programmieren lernen?",
    "freigegeben": true,
-   "pdf": "../pdf/00_Motivation.pdf",
    "status": "ausgearbeitet",
+   "block": 1,
+   "pdf": "../pdf/00_Motivation.pdf",
+   "anwendet": [],
    "abschnitte": [
     "Herzlich willkommen!",
     "Warum sind Sie hier?",
@@ -36,156 +133,226 @@
   },
   {
    "vl": 1,
+   "key": "1",
+   "label": "VL 01",
+   "typ": "VL",
    "datei": "01_VomProblemZumProgramm.md",
    "datum": "2026-10-26",
    "kurz": "Problem → Programm",
    "leitfrage": "Wo hört die Tabellenkalkulation auf?",
    "freigegeben": false,
-   "pdf": null,
    "status": "ausgearbeitet",
+   "block": 1,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": []
   },
   {
    "vl": 2,
+   "key": "2",
+   "label": "VL 02",
+   "typ": "VL",
    "datei": "02_ErsteSchritte.md",
    "datum": "2026-11-02",
    "kurz": "Erste Schritte",
    "leitfrage": "Wie sage ich dem Rechner, was er tun soll?",
    "freigegeben": false,
-   "pdf": null,
    "status": "ausgearbeitet",
+   "block": 1,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": []
   },
   {
    "vl": 3,
+   "key": "3",
+   "label": "VL 03",
+   "typ": "VL",
    "datei": "03_PruefenUndWiederholen.md",
    "datum": "2026-11-09",
    "kurz": "Prüfen & Wiederholen",
    "leitfrage": "An wie vielen Tagen gab es 2024 Frost?",
    "freigegeben": false,
-   "pdf": null,
    "status": "ausgearbeitet",
+   "block": 2,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": []
   },
   {
    "vl": 4,
+   "key": "4",
+   "label": "VL 04",
+   "typ": "VL",
    "datei": "04_MusterInMessreihen.md",
    "datum": "2026-11-16",
    "kurz": "Muster",
    "leitfrage": "Wie lang war die längste Frostperiode?",
    "freigegeben": false,
-   "pdf": null,
    "status": "ausgearbeitet",
+   "block": 2,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": []
   },
   {
    "vl": 5,
+   "key": "5",
+   "label": "VL 05",
+   "typ": "VL",
    "datei": "05_DatenSammeln.md",
    "datum": "2026-11-23",
    "kurz": "Daten sammeln",
    "leitfrage": "Welches war der wärmste Tag jedes Jahres?",
    "freigegeben": false,
-   "pdf": null,
    "status": "ausgearbeitet",
+   "block": 2,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": []
   },
   {
    "vl": 6,
+   "key": "6",
+   "label": "VL 06",
+   "typ": "VL",
    "datei": "06_DateienLesen.md",
    "datum": "2026-11-30",
    "kurz": "Dateien lesen",
    "leitfrage": "Wie kommen 48.000 Zeilen in mein Programm?",
    "freigegeben": false,
-   "pdf": null,
    "status": "ausgearbeitet",
+   "block": 2,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": []
   },
   {
    "vl": 7,
+   "key": "7",
+   "label": "VL 07",
+   "typ": "VL",
    "datei": "07_Funktionen.md",
    "datum": "2026-12-07",
    "kurz": "Funktionen",
    "leitfrage": "Wie vermeide ich, alles dreimal zu schreiben?",
    "freigegeben": false,
-   "pdf": null,
    "status": "ausgearbeitet",
+   "block": 2,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": []
   },
   {
    "vl": 8,
+   "key": "8",
+   "label": "VL 08",
+   "typ": "VL",
    "datei": "08_DemoMicroPython.md",
    "datum": "2026-12-14",
    "kurz": "Demo MicroPython",
    "leitfrage": "Wo kommen die Daten eigentlich her?",
    "freigegeben": false,
-   "pdf": null,
    "status": "Rumpf",
+   "block": 3,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": []
   },
   {
    "vl": 9,
+   "key": "9",
+   "label": "VL 09",
+   "typ": "VL",
    "datei": "09_ProgrammeStrukturieren.md",
    "datum": "2027-01-04",
    "kurz": "Strukturieren",
    "leitfrage": "Wie organisiere ich Code, der wächst?",
    "freigegeben": false,
-   "pdf": null,
    "status": "ausgearbeitet",
+   "block": 4,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": []
   },
   {
    "vl": 10,
+   "key": "10",
+   "label": "VL 10",
+   "typ": "VL",
    "datei": "10_Bibliotheken.md",
    "datum": "2027-01-11",
    "kurz": "NumPy",
    "leitfrage": "Warum muss ich das Rad nicht neu erfinden?",
    "freigegeben": false,
-   "pdf": null,
    "status": "ausgearbeitet",
+   "block": 5,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": []
   },
   {
    "vl": 11,
+   "key": "11",
+   "label": "VL 11",
+   "typ": "VL",
    "datei": "11_PandasEinlesen.md",
    "datum": "2027-01-18",
    "kurz": "pandas I",
    "leitfrage": "48.000 Zeilen in einer Anweisung?",
    "freigegeben": false,
-   "pdf": null,
    "status": "ausgearbeitet",
+   "block": 5,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": []
   },
   {
    "vl": 12,
+   "key": "12",
+   "label": "VL 12",
+   "typ": "VL",
    "datei": "12_PandasAggregieren.md",
    "datum": "2027-01-25",
    "kurz": "pandas II",
    "leitfrage": "Wie fasse ich Jahrzehnte zusammen?",
    "freigegeben": false,
-   "pdf": null,
    "status": "ausgearbeitet",
+   "block": 5,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": []
   },
   {
    "vl": 13,
+   "key": "13",
+   "label": "VL 13",
+   "typ": "VL",
    "datei": "13_Visualisierung.md",
    "datum": "2027-02-01",
    "kurz": "Visualisierung",
    "leitfrage": "Wie zeige ich, was ich gefunden habe?",
    "freigegeben": false,
-   "pdf": null,
    "status": "ausgearbeitet",
+   "block": 5,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": []
   },
   {
    "vl": 14,
+   "key": "14",
+   "label": "VL 14",
+   "typ": "VL",
    "datei": "14_Datenqualitaet.md",
    "datum": "2027-02-08",
    "kurz": "Datenqualität",
    "leitfrage": "Kann ich meinem Ergebnis trauen?",
    "freigegeben": false,
-   "pdf": null,
    "status": "ausgearbeitet",
+   "block": 5,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": []
   }
  ],

@@ -1,30 +1,28 @@
-"""Kurslandkarte: Daten und Seite erzeugen.
+"""Kurslandkarte EAVD: Kursdaten.
 
-Abschnitte (Foliennummern) werden automatisch aus den Vorlesungen gelesen,
-Begriffe, Beziehungen und didaktische Fäden sind unten kuratiert.
+Begriffe, Beziehungen, Anwendungen und didaktische Fäden sind hier kuratiert;
+Prüfung, Karte und Startseite erzeugt der gemeinsame Kern invivis Kurslandkarte
+(kurslandkarte/invivis/, nicht hier ändern). Abschnitte (Foliennummern) liest
+der Kern automatisch aus den Vorlesungen.
 
 Aufruf aus dem Repository-Wurzelverzeichnis:
 
-    python3 kurslandkarte/erzeuge.py
+    python3 kurslandkarte/erzeuge.py                 # Karte und Startseite
+    python3 kurslandkarte/erzeuge.py --freigegeben   # für das Makefile: Dateien der freigegebenen Vorlesungen
 
-Schreibt docs/kurslandkarte/kurslandkarte.json und docs/kurslandkarte/index.html.
+Schreibt docs/kurslandkarte/kurslandkarte.json, docs/kurslandkarte/index.html und docs/index.html.
+Nur Freigegebenes steht in der Seite: Begriffe kommender Vorlesungen verlassen das Repository nicht.
 """
-import datetime, json, re, glob, os, sys
+import glob, os, re, sys
 
 HIER = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HIER)
-ZIEL = os.path.join(REPO, "docs", "kurslandkarte")
-STAND = datetime.date.today().strftime("%d.%m.%Y")
+sys.path.insert(0, os.path.join(HIER, "invivis"))
+import kern
 
-# ---- Abschnitte automatisch (LiaScript-Foliennummer = Position der Überschrift)
-sections = {}
-for f in sorted(glob.glob(os.path.join(REPO, "[01][0-9]_*.md"))):
-    vl = int(os.path.basename(f)[:2])
-    s = open(f, encoding="utf-8").read()
-    s = s[s.find("-->") + 3:]
-    s = re.sub(r"^(`{3,4}).*?\n.*?\n\1", "", s, flags=re.S | re.M)
-    heads = [m.group(2).strip().replace("`", "") for m in re.finditer(r"^(#{1,6}) +(.+)$", s, re.M)]
-    sections[vl] = {"datei": os.path.basename(f), "abschnitte": heads}
+ANZAHL = 15
+DATEIEN = {int(os.path.basename(f)[:2]): os.path.basename(f) for f in glob.glob(os.path.join(REPO, "[01][0-9]_*.md"))}
+assert sorted(DATEIEN) == list(range(ANZAHL)), sorted(DATEIEN)
 
 STATUS = {v: "ausgearbeitet" for v in range(15)}
 STATUS[8] = "Rumpf"
@@ -46,7 +44,7 @@ assert len(TERMINE) == 15
 # Nach jeder Vorlesung: Vorschläge der Studierenden einarbeiten, dann hier ergänzen.
 FREIGEGEBEN = {0}
 if "--freigegeben" in sys.argv:   # für das Makefile: Dateien der freigegebenen Vorlesungen
-    print(" ".join(sections[v]["datei"] for v in sorted(FREIGEGEBEN)))
+    print(" ".join(DATEIEN[v] for v in sorted(FREIGEGEBEN)))
     sys.exit()
 
 # ---- Leitfragen aus dem Semesterplan in VL 00 (einzige Quelle)
@@ -285,65 +283,44 @@ F = [
      ["zaehler", "sensorlog", "sensor", "messfehler", "messdatei", "readcsv", "stationswechsel", "qualitaet"]),
 ]
 
-ids = {b[0] for b in B}
-assert len(ids) == len(B), "doppelte id"
-vl_of = {x[0]: x[3] for x in B}
-for fid, _, _, st in F:
-    for x in st:
-        assert x in {y[0] for y in B}, (fid, x)
-    for u, v in zip(st, st[1:]):
-        assert vl_of[u] <= vl_of[v], ("Faden nicht chronologisch", fid, u, v)
-for a, b, _ in R:
-    assert a in ids and b in ids, (a, b)
-for x in A:
-    assert x[0] not in ids, ("Anwendung und Begriff mit gleicher id", x[0])
-    for k in x[6]:
-        assert k in ids, ("Anwendung nutzt unbekannten Begriff", x[0], k)
-def abschnitt_nr(vl, titel):
-    heads = sections[vl]["abschnitte"]
-    if titel not in heads:
-        raise SystemExit(f"Abschnitt nicht gefunden: VL {vl:02d} »{titel}« — vorhanden: {heads}")
-    return heads.index(titel) + 1
-
-B = [(b[0], b[1], b[2], b[3], abschnitt_nr(b[3], b[4])) + tuple(b[5:]) for b in B]
-
-def pdf_link(v):
-    """PDF aus `make pdf` (docs/pdf/), nur für freigegebene Vorlesungen."""
-    name = sections[v]["datei"][:-3] + ".pdf"
-    return "../pdf/" + name if v in FREIGEGEBEN and os.path.exists(os.path.join(REPO, "docs", "pdf", name)) else None
-
-VL_VON = {b[0]: b[3] for b in B}
-
-out = {
-    "stand": STAND,
-    "vorlesungen": [
-        {"vl": v, "datei": sections[v]["datei"], "datum": TERMINE[v][0], "kurz": TERMINE[v][1],
-         "leitfrage": LEITFRAGE[v], "freigegeben": v in FREIGEGEBEN, "pdf": pdf_link(v),
-         "status": STATUS[v], "abschnitte": sections[v]["abschnitte"] if v in FREIGEGEBEN else []}
-        for v in range(15)
-    ],
-    # Nur Freigegebenes: Begriffe kommender Vorlesungen stehen nicht in der Seite (auch nicht im Quelltext)
-    "begriffe": [
-        {"id": b[0], "name": b[1], "linie": b[2], "vl": b[3], "abschnitt": b[4], "ebene": b[5],
-         "code": bool(b[6]), "erklaerung": b[7], "fehlvorstellung": b[8]}
-        for b in B if b[3] in FREIGEGEBEN
-    ],
-    "beziehungen": [{"von": a, "nach": b, "text": t} for a, b, t in R if VL_VON[a] in FREIGEGEBEN and VL_VON[b] in FREIGEGEBEN],
-    "faeden": [{"id": f, "name": n, "beschreibung": d, "stationen": [x for x in st if VL_VON[x] in FREIGEGEBEN],
-                "weiter": any(VL_VON[x] not in FREIGEGEBEN for x in st)}
-               for f, n, d, st in F if any(VL_VON[x] in FREIGEGEBEN for x in st)],
-    "anwendungen": [{"id": i, "titel": t, "fach": fa, "vl": v, "abschnitt": abschnitt_nr(v, ab), "datensatz": ds,
-                     "schlagworte": [k for k in sw if VL_VON[k] in FREIGEGEBEN], "herkunft": h}
-                    for i, t, fa, v, ab, ds, sw, h in A if v in FREIGEGEBEN],
+KURS = {
+    "titel": "Erhebung, Analyse und Visualisierung digitaler Daten",
+    "name": "TU Bergakademie Freiberg · Wintersemester 2026/27",
+    "hochschule": "TU Bergakademie Freiberg",
+    # Entwurf – vom Dozenten durchzusehen
+    "beschreibung": "Daten erheben, mit Python auswerten und anschaulich darstellen – vom ersten Programm über Dateien und Funktionen bis zur Analyse mit NumPy und pandas.",
+    "basis": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/",
+    "pages": "https://tubaf-ifi-liascript.github.io/VL_EAVD/",
+    "repo": "https://github.com/TUBAF-IfI-LiaScript/VL_EAVD",
+    "speicher": "eavd-map",
+    "autoren": "Sebastian Zug & Claude Code (Opus 5.5)",
+    "feedback": 'Begriff fehlt oder ist unklar? Sagen Sie es in der Abfrage am Ende jeder Vorlesung oder im OPAL-Forum. <a href="https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/issues/new?title=Kurslandkarte%3A%20&amp;labels=kurslandkarte" target="_blank" rel="noopener">GitHub ↗</a>',
+    "status": {"ausgearbeitet": "", "Rumpf": "Rumpf"},
+    "anwendung_daten": "Daten", "start_ansicht": "liste",
+    "kontakt": 'Prof. Dr.-Ing. Sebastian Zug<br>Lehrstuhl für Softwaretechnologie und Robotik, TU Bergakademie Freiberg<br><a href="mailto:sebastian.zug@informatik.tu-freiberg.de">sebastian.zug@informatik.tu-freiberg.de</a>',
 }
-os.makedirs(ZIEL, exist_ok=True)
-text = json.dumps(out, ensure_ascii=False, indent=1)
-open(os.path.join(ZIEL, "kurslandkarte.json"), "w", encoding="utf-8").write(text + "\n")
-seite = open(os.path.join(HIER, "vorlage.html"), encoding="utf-8").read()
-seite = seite.replace("%%DATEN%%", text.replace("</", "<\\/")).replace("%%STAND%%", STAND)
-open(os.path.join(ZIEL, "index.html"), "w", encoding="utf-8").write(seite)
-e1 = sum(1 for b in B if b[5] == 1)
-print(f"{len(B)} Begriffe ({e1} Kern, {len(B)-e1} Detail), {len(R)} Beziehungen, {len(A)} Anwendungen vorbereitet; "
-      f"veröffentlicht: {len(out['begriffe'])} Begriffe, {len(out['faeden'])} Fäden, {len(out['anwendungen'])} Anwendungen")
-for b in []:
-    print(f"  VL{b[3]:02d} #{b[4]:<2} {sections[b[3]]['abschnitte'][b[4]-1][:34]:34s} <- {b[1]}")
+
+# ---- Blöcke (Hintergrund der Karte, Überschriften im Raster) und Themengebiete
+BLOECKE = {1: ("Einstieg", "ph1"), 2: ("Grundlagen am Datensatz", "ph2"), 3: ("Zäsur", "ph3"),
+           4: ("Grundlagen", "ph2"), 5: ("Datenanalyse", "ph4")}
+BLOCK_VON = {0: 1, 3: 2, 8: 3, 9: 4, 10: 5}   # erste Vorlesung eines Blocks
+LINIEN = [
+    ("denken", "Programme & Abläufe", "c1"), ("typen", "Werte & Sammlungen", "c2"),
+    ("daten", "Daten & Dateien", "c3"), ("erhebung", "Daten erheben", "c4"),
+    ("analyse", "Auswerten & Darstellen", "c5"),
+]
+
+T, blk = [], 1
+for v in range(ANZAHL):
+    blk = BLOCK_VON.get(v, blk)
+    T.append((v, f"VL {v:02d}", TERMINE[v][0], TERMINE[v][1], DATEIEN[v], STATUS[v], blk))
+
+# PDF aus `make pdf` (docs/pdf/), nur für freigegebene Vorlesungen
+PDF = {v: "../pdf/" + DATEIEN[v][:-3] + ".pdf" for v in FREIGEGEBEN
+       if os.path.exists(os.path.join(REPO, "docs", "pdf", DATEIEN[v][:-3] + ".pdf"))}
+
+kern.erzeuge(
+    repo=REPO, kurs=KURS, termine=T, bloecke=BLOECKE, linien=LINIEN,
+    begriffe=B, beziehungen=R, faeden=F, anwendungen=A, leitfragen=LEITFRAGE, freigegeben=FREIGEGEBEN,
+    karte="docs/kurslandkarte", startseite="docs/index.html", vorschau="keine", pdf=PDF,
+)
