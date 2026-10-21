@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Daten erheben, mit Python auswerten und anschaulich darstellen – vom ersten Programm über Dateien und Funktionen bis zur Analyse mit NumPy und pandas.">
 <meta name="author" content="Sebastian Zug &amp; Claude Code (Opus 5.5)">
-<meta name="generator" content="invivis-kurslandkarte 0.1.0">
+<meta name="generator" content="invivis-kurslandkarte 0.2.0">
 <title>Erhebung, Analyse und Visualisierung digitaler Daten</title>
 <style>
 :root { --bg: #f3f5f2; --surface: #ffffff; --ink: #1d2a2c; --muted: #5d6c6f; --faint: #c9d1cf; --accent: #1f7a8c; --here: #c2462e; color-scheme: light; }
@@ -27,7 +27,7 @@ ol, ul { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; }
 .woche h2 { margin: 0; font-size: 1rem; color: var(--here); }
 .woche ul { list-style: none; padding: 0; }
 .woche .frage { color: var(--muted); font-size: .92rem; }
-.woche .naechst { color: var(--muted); font-size: .92rem; }
+.woche h2 + ul + h2 { margin-top: 8px; padding-top: 10px; border-top: 1px solid var(--faint); color: var(--ink); }
 dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; }
 dt { color: var(--muted); }
 dd { margin: 0; }
@@ -55,31 +55,35 @@ footer { margin-top: 24px; font-size: .85rem; color: var(--muted); display: grid
   <footer>
     <span></span>
     <span>Quelle: <a href="https://github.com/TUBAF-IfI-LiaScript/VL_EAVD">https://github.com/TUBAF-IfI-LiaScript/VL_EAVD</a> · Stand 21.10.2026</span>
-    <span>Autoren: Sebastian Zug &amp; Claude Code (Opus 5.5) · erzeugt mit invivis Kurslandkarte 0.1.0</span>
+    <span>Autoren: Sebastian Zug &amp; Claude Code (Opus 5.5) · erzeugt mit invivis Kurslandkarte 0.2.0</span>
   </footer>
 </main>
-<script id="termine" type="application/json">[{"key": "0", "label": "VL 00", "kurz": "Motivation", "datum": "2026-10-19", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/00_Motivation.md", "frage": "Warum sollte ich programmieren lernen?"}, {"key": "1", "label": "VL 01", "kurz": "Problem → Programm", "datum": "2026-10-26", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/01_VomProblemZumProgramm.md", "frage": "Wo hört die Tabellenkalkulation auf?"}, {"key": "2", "label": "VL 02", "kurz": "Erste Schritte", "datum": "2026-11-02", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/02_ErsteSchritte.md", "frage": "Wie sage ich dem Rechner, was er tun soll?"}, {"key": "3", "label": "VL 03", "kurz": "Prüfen & Wiederholen", "datum": "2026-11-09", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/03_PruefenUndWiederholen.md", "frage": "An wie vielen Tagen gab es 2024 Frost?"}, {"key": "4", "label": "VL 04", "kurz": "Muster", "datum": "2026-11-16", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/04_MusterInMessreihen.md", "frage": "Wie lang war die längste Frostperiode?"}, {"key": "5", "label": "VL 05", "kurz": "Daten sammeln", "datum": "2026-11-23", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/05_DatenSammeln.md", "frage": "Welches war der wärmste Tag jedes Jahres?"}, {"key": "6", "label": "VL 06", "kurz": "Dateien lesen", "datum": "2026-11-30", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/06_DateienLesen.md", "frage": "Wie kommen 48.000 Zeilen in mein Programm?"}, {"key": "7", "label": "VL 07", "kurz": "Funktionen", "datum": "2026-12-07", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/07_Funktionen.md", "frage": "Wie vermeide ich, alles dreimal zu schreiben?"}, {"key": "8", "label": "VL 08", "kurz": "Demo MicroPython", "datum": "2026-12-14", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/08_DemoMicroPython.md", "frage": "Wo kommen die Daten eigentlich her?"}, {"key": "9", "label": "VL 09", "kurz": "Strukturieren", "datum": "2027-01-04", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/09_ProgrammeStrukturieren.md", "frage": "Wie organisiere ich Code, der wächst?"}, {"key": "10", "label": "VL 10", "kurz": "NumPy", "datum": "2027-01-11", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/10_Bibliotheken.md", "frage": "Warum muss ich das Rad nicht neu erfinden?"}, {"key": "11", "label": "VL 11", "kurz": "pandas I", "datum": "2027-01-18", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/11_PandasEinlesen.md", "frage": "48.000 Zeilen in einer Anweisung?"}, {"key": "12", "label": "VL 12", "kurz": "pandas II", "datum": "2027-01-25", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/12_PandasAggregieren.md", "frage": "Wie fasse ich Jahrzehnte zusammen?"}, {"key": "13", "label": "VL 13", "kurz": "Visualisierung", "datum": "2027-02-01", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/13_Visualisierung.md", "frage": "Wie zeige ich, was ich gefunden habe?"}, {"key": "14", "label": "VL 14", "kurz": "Datenqualität", "datum": "2027-02-08", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/14_Datenqualitaet.md", "frage": "Kann ich meinem Ergebnis trauen?"}]</script>
+<script id="termine" type="application/json">[{"key": "0", "label": "VL 00", "kurz": "Motivation", "datum": "2026-10-19", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/00_Motivation.md", "frage": "Warum sollte ich programmieren lernen?", "pdf": "pdf/00_Motivation.pdf"}, {"key": "1", "label": "VL 01", "kurz": "Problem → Programm", "datum": "2026-10-26", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/01_VomProblemZumProgramm.md", "frage": "Wo hört die Tabellenkalkulation auf?", "pdf": null}, {"key": "2", "label": "VL 02", "kurz": "Erste Schritte", "datum": "2026-11-02", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/02_ErsteSchritte.md", "frage": "Wie sage ich dem Rechner, was er tun soll?", "pdf": null}, {"key": "3", "label": "VL 03", "kurz": "Prüfen & Wiederholen", "datum": "2026-11-09", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/03_PruefenUndWiederholen.md", "frage": "An wie vielen Tagen gab es 2024 Frost?", "pdf": null}, {"key": "4", "label": "VL 04", "kurz": "Muster", "datum": "2026-11-16", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/04_MusterInMessreihen.md", "frage": "Wie lang war die längste Frostperiode?", "pdf": null}, {"key": "5", "label": "VL 05", "kurz": "Daten sammeln", "datum": "2026-11-23", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/05_DatenSammeln.md", "frage": "Welches war der wärmste Tag jedes Jahres?", "pdf": null}, {"key": "6", "label": "VL 06", "kurz": "Dateien lesen", "datum": "2026-11-30", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/06_DateienLesen.md", "frage": "Wie kommen 48.000 Zeilen in mein Programm?", "pdf": null}, {"key": "7", "label": "VL 07", "kurz": "Funktionen", "datum": "2026-12-07", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/07_Funktionen.md", "frage": "Wie vermeide ich, alles dreimal zu schreiben?", "pdf": null}, {"key": "8", "label": "VL 08", "kurz": "Demo MicroPython", "datum": "2026-12-14", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/08_DemoMicroPython.md", "frage": "Wo kommen die Daten eigentlich her?", "pdf": null}, {"key": "9", "label": "VL 09", "kurz": "Strukturieren", "datum": "2027-01-04", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/09_ProgrammeStrukturieren.md", "frage": "Wie organisiere ich Code, der wächst?", "pdf": null}, {"key": "10", "label": "VL 10", "kurz": "NumPy", "datum": "2027-01-11", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/10_Bibliotheken.md", "frage": "Warum muss ich das Rad nicht neu erfinden?", "pdf": null}, {"key": "11", "label": "VL 11", "kurz": "pandas I", "datum": "2027-01-18", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/11_PandasEinlesen.md", "frage": "48.000 Zeilen in einer Anweisung?", "pdf": null}, {"key": "12", "label": "VL 12", "kurz": "pandas II", "datum": "2027-01-25", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/12_PandasAggregieren.md", "frage": "Wie fasse ich Jahrzehnte zusammen?", "pdf": null}, {"key": "13", "label": "VL 13", "kurz": "Visualisierung", "datum": "2027-02-01", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/13_Visualisierung.md", "frage": "Wie zeige ich, was ich gefunden habe?", "pdf": null}, {"key": "14", "label": "VL 14", "kurz": "Datenqualität", "datum": "2027-02-08", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/14_Datenqualitaet.md", "frage": "Kann ich meinem Ergebnis trauen?", "pdf": null}]</script>
 <script>
 // „Diese Woche“: alle Termine der laufenden Woche, sonst der nächste Termin
 const T = JSON.parse(document.getElementById("termine").textContent);
-const heute = new Date();
+const heute = new Date(); heute.setHours(12, 0, 0, 0);   // Mittag: Datumsvergleich in UTC verrutscht nicht
 const iso = (d) => d.toISOString().slice(0, 10);
 const montag = new Date(heute); montag.setDate(heute.getDate() - ((heute.getDay() + 6) % 7));
 const sonntag = new Date(montag); sonntag.setDate(montag.getDate() + 6);
 const datum = (s) => { const [y, m, d] = s.split("-"); return `${+d}.${+m}.`; };
 const eintrag = (t) => `<li>${t.url ? `<a href="${t.url}">${t.label} · ${t.kurz}</a>` : `${t.label} · ${t.kurz} <span class="muted">(Material folgt)</span>`}
-  <span class="muted">${datum(t.datum)}</span>${t.frage ? `<div class="frage">Leitfrage: ${t.frage}</div>` : ""}</li>`;
+  <span class="muted">${datum(t.datum)}</span>${t.pdf ? ` · <a href="${t.pdf}" title="Druckfassung; Quizze und Code laufen nur in den Folien">PDF</a>` : ""}${t.frage ? `<div class="frage">Leitfrage: ${t.frage}</div>` : ""}</li>`;
 const diese = T.filter(t => t.datum >= iso(montag) && t.datum <= iso(sonntag));
-const naechster = T.find(t => t.datum > iso(sonntag));
-const box = document.getElementById("woche");
-if (diese.length) {
-  box.innerHTML = `<h2>Diese Woche</h2><ul>${diese.map(eintrag).join("")}</ul>` +
-    (naechster ? `<p class="naechst">Danach: ${naechster.label} · ${naechster.kurz} (${datum(naechster.datum)})</p>` : "");
-  box.hidden = false;
-} else if (naechster) {
-  box.innerHTML = `<h2>${T[0].datum > iso(heute) ? "Los geht es mit" : "Als Nächstes"}</h2><ul>${eintrag(naechster)}</ul>`;
-  box.hidden = false;
+// „Als Nächstes“: alle Termine der nächsten Woche, in der überhaupt etwas stattfindet
+const erster = T.find(t => t.datum > iso(sonntag));
+let naechste = [];
+if (erster) {
+  const [y, m, d] = erster.datum.split("-").map(Number);
+  const mo = new Date(Date.UTC(y, m - 1, d)); mo.setUTCDate(mo.getUTCDate() - ((mo.getUTCDay() + 6) % 7));
+  const so = new Date(mo); so.setUTCDate(mo.getUTCDate() + 6);
+  naechste = T.filter(t => t.datum >= iso(mo) && t.datum <= iso(so));
 }
+const box = document.getElementById("woche");
+const teile = [];
+if (diese.length) teile.push(`<h2>Diese Woche</h2><ul>${diese.map(eintrag).join("")}</ul>`);
+if (naechste.length) teile.push(`<h2>${T[0].datum > iso(heute) ? "Los geht es mit" : "Als Nächstes"}</h2><ul>${naechste.map(eintrag).join("")}</ul>`);
+if (teile.length) { box.innerHTML = teile.join(""); box.hidden = false; }
 </script>
 </body>
 </html>

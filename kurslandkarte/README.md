@@ -15,8 +15,11 @@ Interaktive Übersicht über Begriffe, Zusammenhänge und didaktische Fäden der
 Nach Änderungen an Vorlesungen oder Begriffen im Wurzelverzeichnis des Repositorys:
 
 ```bash
-python3 kurslandkarte/erzeuge.py
+python3 kurslandkarte/erzeuge.py          # Karte und Startseite
+python3 kurslandkarte/erzeuge.py --pdf    # vorher fehlende/veraltete PDFs nach `docs/pdf/` (liaex)
 ```
+
+Kacheln und Startseite verlinken die PDFs aus `docs/pdf/`; sie werden mit eingecheckt.
 
 Begriffe verweisen in `erzeuge.py` auf den **Titel** ihres Abschnitts (ohne Backticks); das Skript liest die Abschnitte automatisch aus den Vorlesungsdateien und ermittelt daraus die LiaScript-Foliennummer. Verschieben sich Abschnitte, bleiben die Links deshalb richtig. Das Skript bricht ab, wenn ein Abschnittstitel nicht mehr existiert, eine Beziehung auf einen unbekannten Begriff verweist oder ein Faden nicht chronologisch verläuft. Die erzeugten Dateien in `docs/` werden mit eingecheckt.
 
@@ -26,7 +29,7 @@ Die Karte zeigt nur die Begriffe freigegebener Vorlesungen; für alle anderen Te
 
 1. Antworten der Abschlussfrage „Ihre Begriffe für die Kurslandkarte“ aus dem LiaScript-Klassenzimmer sichern.
 2. Mit der vorbereiteten Liste in `erzeuge.py` abgleichen: Begriffe umbenennen, ergänzen, studentische Anwendungen mit `herkunft="studierende"` aufnehmen. Regel: Schlagworte sind fachunabhängig, Konkretes ist eine Anwendung.
-3. Die Vorlesung in `FREIGEGEBEN` eintragen, `make` (erzeugt das PDF der Vorlesung mit `liaex` nach `docs/pdf/` und danach die Karte, die es verlinkt), PDF und Karte committen.
+3. Die Vorlesung in `FREIGEGEBEN` eintragen, `make` (= `python3 kurslandkarte/erzeuge.py --pdf`: erzeugt das PDF der Vorlesung mit `liaex` nach `docs/pdf/` und danach die Karte, die es verlinkt), PDF und Karte committen.
 
 ## Datenmodell
 

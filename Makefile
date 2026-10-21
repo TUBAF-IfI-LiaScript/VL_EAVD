@@ -1,21 +1,12 @@
 # Kurslandkarte und PDFs der freigegebenen Vorlesungen (FREIGEGEBEN in kurslandkarte/erzeuge.py)
-#   make         PDFs, dann Karte (die Karte verlinkt vorhandene PDFs)
-#   make pdf     PDFs mit dem LiaScript-Exporter (liaex) nach docs/pdf/
-#   make karte   Kurslandkarte nach docs/kurslandkarte/
-# Ein PDF wird neu erzeugt, wenn seine Vorlesung neuer ist.
+#   make         fehlende/veraltete PDFs mit liaex nach docs/pdf/, dann Karte und Startseite
+#   make karte   nur Karte und Startseite
+# Ein PDF wird neu erzeugt, wenn seine Vorlesung neuer ist (gemeinsamer Kern invivis Kurslandkarte).
 
-FREI := $(shell python3 kurslandkarte/erzeuge.py --freigegeben)
-PDFS := $(patsubst %.md,docs/pdf/%.pdf,$(FREI))
-
-all: pdf karte
-
-pdf: $(PDFS)
-
-docs/pdf/%.pdf: %.md
-	@mkdir -p docs/pdf
-	liaex -i $< -f pdf -o docs/pdf/$* --pdf-timeout 30000
+all:
+	python3 kurslandkarte/erzeuge.py --pdf
 
 karte:
 	python3 kurslandkarte/erzeuge.py
 
-.PHONY: all pdf karte
+.PHONY: all karte

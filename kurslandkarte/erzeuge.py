@@ -8,6 +8,7 @@ der Kern automatisch aus den Vorlesungen.
 Aufruf aus dem Repository-Wurzelverzeichnis:
 
     python3 kurslandkarte/erzeuge.py                 # Karte und Startseite
+    python3 kurslandkarte/erzeuge.py --pdf           # vorher fehlende/veraltete PDFs freigegebener Vorlesungen mit liaex erzeugen
     python3 kurslandkarte/erzeuge.py --freigegeben   # für das Makefile: Dateien der freigegebenen Vorlesungen
 
 Schreibt docs/kurslandkarte/kurslandkarte.json, docs/kurslandkarte/index.html und docs/index.html.
@@ -315,12 +316,8 @@ for v in range(ANZAHL):
     blk = BLOCK_VON.get(v, blk)
     T.append((v, f"VL {v:02d}", TERMINE[v][0], TERMINE[v][1], DATEIEN[v], STATUS[v], blk))
 
-# PDF aus `make pdf` (docs/pdf/), nur für freigegebene Vorlesungen
-PDF = {v: "../pdf/" + DATEIEN[v][:-3] + ".pdf" for v in FREIGEGEBEN
-       if os.path.exists(os.path.join(REPO, "docs", "pdf", DATEIEN[v][:-3] + ".pdf"))}
-
 kern.erzeuge(
     repo=REPO, kurs=KURS, termine=T, bloecke=BLOECKE, linien=LINIEN,
     begriffe=B, beziehungen=R, faeden=F, anwendungen=A, leitfragen=LEITFRAGE, freigegeben=FREIGEGEBEN,
-    karte="docs/kurslandkarte", startseite="docs/index.html", vorschau="keine", pdf=PDF,
+    karte="docs/kurslandkarte", startseite="docs/index.html", vorschau="keine", pdf_ordner="docs/pdf",
 )
