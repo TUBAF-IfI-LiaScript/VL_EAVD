@@ -294,7 +294,7 @@ KURS = {
     "pages": "https://tubaf-ifi-liascript.github.io/VL_EAVD/",
     "repo": "https://github.com/TUBAF-IfI-LiaScript/VL_EAVD",
     "speicher": "eavd-map",
-    "autoren": "Sebastian Zug & Claude Code (Opus 5.5)",
+    "autoren": "Sebastian Zug, Ines Aubeln & Claude Code (Opus 5.5)",
     "feedback": 'Begriff fehlt oder ist unklar? Sagen Sie es in der Abfrage am Ende jeder Vorlesung oder im OPAL-Forum. <a href="https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/issues/new?title=Kurslandkarte%3A%20&amp;labels=kurslandkarte" target="_blank" rel="noopener">GitHub ↗</a>',
     "status": {"ausgearbeitet": "", "Rumpf": "Rumpf"},
     "anwendung_daten": "Daten", "start_ansicht": "liste",
