@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.2.0
+version:  2.3.0
 language: de
 narrator: Deutsch Female
 
@@ -53,26 +53,38 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 * Was ist ein Algorithmus, und welche Eigenschaften muss er haben?
 * Warum brauchen wir für Algorithmen eine eigene Sprache?
 
+--{{0}}--
+Heute schreiben wir noch keine Zeile Code. Wir arbeiten mit einem Werkzeug, das die meisten von Ihnen aus der Schule kennen, und treiben es bewusst an seine Grenzen. Achten Sie dabei weniger auf die Ergebnisse als darauf, an welcher Stelle es mühsam wird. Genau dort beginnt das Programmieren.
+
+
 > **Bringen Sie heute einen Laptop mit einer Tabellenkalkulation mit** — LibreOffice Calc, Excel oder Google Sheets, egal welche.
+
+> **Zum Nacharbeiten: die Ansicht „Lehrbuch“.** Im Hörsaal zeigen die Folien nur die Kernbotschaften. Die Erklärungen dazu stehen im Lehrbuch: oben rechts auf das Symbol mit den Schiebereglern klicken und „Lehrbuch“ wählen.
 
 --------------------------------------------------------------------------------
 
 ## Unsere Datensätze
 
-Wir wollen uns heute einige Datensätze genauer anschauen, diese stammen zum Teil vom Deutschen Wetterdienst (DWD) und unserer Zutrittzählung aus der vergangenen Vorlesung.
+Wir wollen uns heute einige Datensätze genauer anschauen, diese stammen zum Teil vom Deutschen Wetterdienst (DWD) und unserer Zutrittszählung aus der vergangenen Vorlesung.
 
-Der Deutsche Wetterdienst (DWD) betreibt auf dem **Fichtelberg** (1213 m, höchster Berg Sachsens) eine Wetterstation. Seit dem **1. August 1890** wird dort jeden Tag gemessen. Die Daten sind frei verfügbar.
+Der DWD betreibt auf dem **Fichtelberg** (1213 m, höchster Berg Sachsens) eine Wetterstation. Seit dem **1. August 1890** wird dort jeden Tag gemessen. Die Daten sind frei verfügbar.
 
 In der letzten Vorlesung haben wir den **Personenzähler** an der Hörsaaltür kennengelernt. Er hat aufgeschrieben, wer wann hereinkam und hinausging. Die Daten sind ebenfalls frei verfügbar.
 
 <!-- data-type="none" -->
 | Datei                                             | Inhalt                                              | Zeilen  |
 | :------------------------------------------------ | :-------------------------------------------------- | ------: |
-| [`fichtelberg_2024.csv`](https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/data/fichtelberg/fichtelberg_2024.csv) | ein Jahr, aufbereitet: Datum, Mittel, Minimum, Maximum | 366     |
-| [`zaehlungen_2026-10-19.csv`](https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/examples/00_Einfuehrungsbeispiele/Alvik/zaehlungen_2026-10-19.csv) | 31 Durchgänge an einem Vorlesungstag | 31 |
-| [`produkt_klima_tag_…_01358.txt`](https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt) (6,5 MB) | alle Tage seit 1890, so wie der DWD sie liefert     | 47.595  |
+| `fichtelberg_2024.csv` | ein Jahr, aufbereitet: Datum, Mittel, Minimum, Maximum, abgeschlossener Datensatz | 366     |
+| `zaehlungen_2026-10-19.csv` | 31 Durchgänge an einem Vorlesungstag, tagesaktuell | 31 |
+| `produkt_klima_tag_…_01358.txt` | alle Tage seit 1890, so wie der DWD sie liefert     | 47.595  |
+
+Alle drei Dateien zum Herunterladen: [`VL01_Daten.zip`](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/raw/master/examples/01_Tabellenkalkulation/VL01_Daten.zip) (1,1 MB, enthält auch Quellen und Lizenz).
 
 > Quelle: Deutscher Wetterdienst, [Climate Data Center](https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/kl/historical/), Station 01358, Lizenz [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+--{{0}}--
+Die Datei für 2024 ist ein Auszug aus der großen DWD-Datei: drei ihrer 19 Spalten, nämlich Tagesmittel, Minimum und Maximum, dazu ein lesbares Datum und Dezimalkommas. So öffnet sie jede Tabellenkalkulation ohne Umwege. Die Zählerdatei haben Sie selbst erzeugt, als Sie letzte Woche durch die Tür gegangen sind. Bei ihr wissen wir also genau, wie die Daten entstanden sind, und auch, was dabei schiefgehen kann.
+
 
 ### Tabellenkalkulation in fünf Begriffen
 
@@ -89,6 +101,10 @@ Mehrere Angaben in der Klammer trennt das deutsche Programm mit Semikolon: `ZÄH
 
 > Die Funktionsnamen hängen von der Sprache Ihres Programms ab. Ist es auf Englisch eingestellt, heißt `MITTELWERT` dort `AVERAGE` und `ZÄHLENWENN` heißt `COUNTIF`.
 
+--{{0}}--
+Die Schreibweise B2 kommt daher, dass Spalten Buchstaben und Zeilen Nummern tragen. Der Doppelpunkt in B2:B367 bedeutet „von … bis“. Die Bedingung steht in Anführungszeichen, weil das Programm sie als Text entgegennimmt und erst beim Zählen auswertet. Merken Sie sich die fünf Begriffe: Am Ende der Vorlesung finden Sie jeden von ihnen in Python wieder.
+
+
 ### Ähnlich, aber nicht gleich
 
 Drei verbreitete Tabellenkalkulationen, dieselbe Datei — aber nicht dasselbe Verhalten:
@@ -104,6 +120,10 @@ Drei verbreitete Tabellenkalkulationen, dieselbe Datei — aber nicht dasselbe V
 
 > Eine Formel, die in einem Programm funktioniert, kann im anderen einen Fehler liefern — oder, schlimmer, ein falsches Ergebnis. Wer eine Auswertung weitergibt, muss deshalb auch sagen, **womit** gerechnet wurde.
 
+--{{0}}--
+Die Unterschiede entstehen beim Öffnen: Jedes Programm rät, ob ein Eintrag eine Zahl, ein Datum oder Text ist, und jedes rät anders. Dazu kommt die Ländereinstellung. In Deutschland ist das Komma das Dezimalzeichen, deshalb trennen deutsche CSV-Dateien ihre Spalten meist mit einem Semikolon. Das Format `.ods` ist ein offener, international genormter Standard: Jedes Programm darf es lesen und schreiben, ohne von einem einzelnen Hersteller abzuhängen.
+
+
 ## Drei Aufgaben
 
 Wir lösen heute drei Aufgaben — ohne eine Zeile Code. Jede hat ein festes Zeitfenster. Niemand muss alle drei schaffen. Notieren Sie sich bei jeder Aufgabe:
@@ -114,7 +134,7 @@ Wir lösen heute drei Aufgaben — ohne eine Zeile Code. Jede hat ein festes Zei
 
 > Die Antworten auf diese drei Fragen sind am Ende wichtiger als die Ergebnisse selbst.
 
-Zeigt der Browser eine Datei nur als Text an, statt sie herunterzuladen: Rechtsklick auf den Link und „Ziel speichern unter …“ bzw. „Link speichern unter …“ wählen.
+Alle Dateien für heute stecken in [`VL01_Daten.zip`](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/raw/master/examples/01_Tabellenkalkulation/VL01_Daten.zip) (1,1 MB). Laden Sie die Datei herunter und **entpacken** Sie sie: unter Windows Rechtsklick → „Alle extrahieren …“, unter macOS Doppelklick.
 
 <!-- data-type="none" -->
 | Aufgabe | Zeit        | Arbeitsform                 | Ziel                         |
@@ -125,13 +145,17 @@ Zeigt der Browser eine Datei nur als Text an, statt sie herunterzuladen: Rechtsk
 
 > Noch nie mit einer Tabellenkalkulation gearbeitet? Kein Problem: Aufgabe 1 a) machen wir gemeinsam, und unter jeder Aufgabe gibt es Hilfen zum Aufklappen.
 
+--{{0}}--
+Die Zeitfenster sind bewusst knapp. Es geht nicht darum, alle Aufgaben zu lösen, sondern zu bemerken, wie sich der Aufwand von Aufgabe zu Aufgabe verändert. Ihre Notizen zu den drei Fragen brauchen wir im Abschnitt „Was ist hier passiert?“. Dort vergleichen wir die Aufgaben.
+
+
 
 ### Aufgabe 1: Ein Jahr auf dem Fichtelberg
 
                                      {{0-1}}
 *******************************************************************************
 
-Laden Sie [`fichtelberg_2024.csv`](https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/data/fichtelberg/fichtelberg_2024.csv) herunter und öffnen Sie die Datei in Ihrer Tabellenkalkulation.
+Öffnen Sie `fichtelberg_2024.csv` aus [`VL01_Daten.zip`](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/raw/master/examples/01_Tabellenkalkulation/VL01_Daten.zip) in Ihrer Tabellenkalkulation.
 
 ```text fichtelberg_2024.csv
 Datum;Tagesmittel;Minimum;Maximum
@@ -141,14 +165,16 @@ Datum;Tagesmittel;Minimum;Maximum
 ...
 ```
 
-**a)** _(gemeinsam)_ Wie hoch war die mittlere Temperatur im Jahr 2024?
-
-**b)** **⏱ 4 Minuten, allein.** An wie vielen Tagen gab es Frost? Ein **Frosttag** ist ein Tag, an dem das _Minimum_ unter 0 °C lag.
+> [!NOTE] ❓ Aufgabe
+>
+> **a)** Wie hoch war die mittlere Temperatur im Jahr 2024?
+>
+> **b)** **⏱ 4 Minuten, allein.** An wie vielen Tagen gab es Frost? Ein **Frosttag** ist ein Tag, an dem das _Minimum_ unter 0 °C lag.
 
 <details>
 <summary>**Hilfe: Die Datei öffnen**</summary>
 
-* **LibreOffice Calc:** Datei öffnen, im Dialog „Textimport“ das Trennzeichen **Semikolon** anhaken, OK.
+* **LibreOffice Calc:** Datei öffnen, im Dialog „Textimport“ **nur** das Trennzeichen **Semikolon** anhaken, **Komma** nicht — sonst wird `-1,2` in zwei Spalten `-1` und `2` zerlegt. OK.
 * **Excel:** Doppelklick auf die Datei genügt meist. Steht alles in Spalte A: _Daten → Text in Spalten_, Trennzeichen Semikolon.
 * **Google Sheets:** _Datei → Importieren → Hochladen_, Trennzeichen „Semikolon“ wählen.
 
@@ -162,6 +188,10 @@ Richtig geöffnet stehen Datum, Tagesmittel, Minimum und Maximum in den Spalten 
 Die Funktion heißt `ZÄHLENWENN`. Sie braucht zwei Angaben: den Bereich mit den Minima (Spalte C) und die Bedingung „kleiner als 0“.
 
 </details>
+
+--{{0}}--
+Aufgabe a) mache ich vor: Datei öffnen, prüfen, ob die Zahlen rechtsbündig stehen, dann eine Formel in eine freie Zelle schreiben. Für b) brauchen Sie dieselben Schritte mit einer anderen Funktion.
+
 
 *******************************************************************************
 
@@ -181,11 +211,15 @@ Die mittlere Temperatur im Jahr 2024 betrug [[ 1,2 °C | 4,1 °C | (6,3 °C) | 9
 
 Lösung zum Nachschauen: [`Aufgabe1_Fichtelberg_Loesung.ods`](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/raw/master/examples/01_Tabellenkalkulation/Aufgabe1_Fichtelberg_Loesung.ods)
 
+--{{1}}--
+2024 war ein Schaltjahr, deshalb reichen die Daten bis Zeile 367: eine Kopfzeile und 366 Tage. An 127 Tagen, also etwa an jedem dritten, lag das Minimum unter 0 °C. Für den Fichtelberg ist das sogar wenig: Im Mittel der 2010er-Jahre waren es rund 154 Frosttage.
+
+
 *******************************************************************************
 
 ### Aufgabe 2: Der Personenzähler
 
-                                     {{0-1}}
+                                     {{0-2}}
 *******************************************************************************
 
 Erinnern Sie sich an den Personenzähler aus der letzten Vorlesung? Der Roboter an der Hörsaaltür hat aufgeschrieben, wer wann hereinkam und hinausging:
@@ -202,11 +236,13 @@ zeit;richtung
 
 Die Vorlesung begann um 16:15 Uhr.
 
-**⏱ 8 Minuten, mit Ihrem Nachbarn.** Laden Sie [`zaehlungen_2026-10-19.csv`](https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/examples/00_Einfuehrungsbeispiele/Alvik/zaehlungen_2026-10-19.csv) herunter.
+**⏱ 8 Minuten, mit Ihrem Nachbarn.** Öffnen Sie `zaehlungen_2026-10-19.csv` aus [`VL01_Daten.zip`](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/raw/master/examples/01_Tabellenkalkulation/VL01_Daten.zip).
 
-**a)** Wie viele Personen sind **nach** Vorlesungsbeginn gekommen?
-
-**b)** _(zu Hause)_ In welcher Minute kamen die meisten?
+> [!NOTE] ❓ Aufgabe
+> 
+> **a)** Wie viele Personen sind **nach** Vorlesungsbeginn gekommen?
+> 
+> **b)** _(zu Hause)_ In welcher Minute kamen die meisten?
 
 Sie müssen nicht fertig werden. Merken Sie sich die Stelle, an der Sie hängen bleiben.
 
@@ -226,6 +262,10 @@ Je nach Programm steht in Spalte A danach ein **Datum mit Uhrzeit** (rechtsbünd
 `ZÄHLENWENNS` zählt Zeilen, die **alle** Bedingungen erfüllen, z. B. „Richtung ist `rein`“ **und** „Uhrzeit ab 16:15“. Eine Uhrzeit als Bedingung: `">="&ZEIT(16;15;0)`.
 
 </details>
+
+--{{0}}--
+Der Roboter misst mit einem Abstandssensor, ob jemand vor ihm steht. Aus der Reihenfolge, in der seine Messzonen ansprechen, schließt er auf die Richtung. Gelingt das nicht eindeutig, notiert er „unklar“. Jede Zeile der Datei ist also schon eine Entscheidung seines Programms, nicht die Messung selbst.
+
 
 *******************************************************************************
 
@@ -255,6 +295,10 @@ Zum Nachschauen: [`Aufgabe2_Personenzaehler_Loesung.ods`](https://github.com/TUB
 >
 > Und nächste Woche liefert der Roboter die nächste Datei. Dann beginnt alles von vorn.
 
+--{{1}}--
+Keiner der fünf Schritte ist schwer. Aufwendig wird es, weil jeder eine Entscheidung verlangt, die nirgends festgehalten wird: Welche Regel gilt für „unklar“? Zählt die Person doppelt, die kurz hinausging? Wer die Auswertung nächste Woche wiederholt, muss sich an all das erinnern.
+
+
 *******************************************************************************
 
                                      {{2}}
@@ -263,6 +307,10 @@ Zum Nachschauen: [`Aufgabe2_Personenzaehler_Loesung.ods`](https://github.com/TUB
 **Und wie viele waren nun da?** Der Zähler kommt auf 20 × `rein` und 3 × `raus`, also 17 Personen im Raum. Laut Umfrage in der letzten Vorlesung waren es 41.
 
 > Die Aufzeichnung begann um 16:08. Wer früher kam — und das waren viele von Ihnen —, steht nicht in der Datei. **Das Programm hat richtig gezählt. Es konnte nur nicht zählen, was es nicht gesehen hat.**
+
+--{{2}}--
+Einen Teil der Lücke erklärt der Start der Aufzeichnung um 16:08. Ein anderer kann am Sensor selbst liegen: Gehen zwei Personen dicht hintereinander durch die Tür, sieht er womöglich nur eine. Solche Annahmen stecken in jeder Messung, auch in denen des DWD.
+
 
 *******************************************************************************
 
@@ -280,13 +328,19 @@ STATIONS_ID;MESS_DATUM;QN_3;  FX;  FM;QN_4; RSK;RSKF; SDK;SHK_TAG;  NM; VPM;  PM
 ...
 ```
 
-**⏱ 4 Minuten, zu zweit.** Laden Sie die [Datei des DWD](https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt) herunter (6,5 MB) und öffnen Sie sie.
+**⏱ 4 Minuten, zu zweit.** Öffnen Sie die Datei des DWD, `produkt_klima_tag_…_01358.txt` aus [`VL01_Daten.zip`](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/raw/master/examples/01_Tabellenkalkulation/VL01_Daten.zip).
 
 [Datensatzbeschreibung des DWD](https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/kl/BESCHREIBUNG_obsgermany-climate-daily-kl_de.pdf)
 
-Die Frage lautet: _Wie hat sich die Zahl der Frosttage pro Jahr seit 1890 entwickelt?_
+> [!NOTE] ❓ Aufgabe
+>
+> _Wie hat sich die Zahl der Frosttage pro Jahr seit 1890 entwickelt?_
+>
+> Lösen Sie die Frage **nicht**. Sammeln Sie stattdessen: Was müssten Sie alles tun, um sie zu beantworten?
 
-**Aufgabe:** Lösen Sie die Frage **nicht**. Sammeln Sie stattdessen: Was müssten Sie alles tun, um sie zu beantworten?
+--{{0}}--
+Die Spaltennamen sind Abkürzungen des DWD. TMK ist das Tagesmittel der Lufttemperatur in 2 m Höhe, TNK das Tagesminimum, TXK das Tagesmaximum. TGK ist ebenfalls ein Minimum, aber 5 cm über dem Erdboden gemessen, und damit eine Falle für alle, die nur nach „Minimum“ suchen. Was jede Spalte bedeutet, steht in der Datensatzbeschreibung.
+
 
 *******************************************************************************
 
@@ -304,6 +358,10 @@ Die Frage lautet: _Wie hat sich die Zahl der Frosttage pro Jahr seit 1890 entwic
 
 > **Praktisch aussichtslos** — zumindest, wenn das Ergebnis stimmen soll. Und wenn Ihre Betreuerin danach fragt, wie es auf der Zugspitze aussieht, fangen Sie wieder von vorn an.
 
+--{{1}}--
+Aus -0.5 wird ein Datum, weil eine deutsch eingestellte Tabellenkalkulation den Punkt nicht als Dezimalzeichen kennt und die Eingabe stattdessen als Tag und Monat deutet. Das geschieht ohne Warnung; man bemerkt es erst, wenn ein Ergebnis seltsam aussieht. Bei dieser Datei muss man also erst die Daten in Form bringen, bevor die eigentliche Frage überhaupt beginnt.
+
+
 *******************************************************************************
 
 ## Was ist hier passiert?
@@ -311,49 +369,65 @@ Die Frage lautet: _Wie hat sich die Zahl der Frosttage pro Jahr seit 1890 entwic
                                      {{0-1}}
 *******************************************************************************
 
-Vergleichen Sie Aufgabe 1b und Aufgabe 3. Die **Frage** ist dieselbe: _Wie viele Tage lag das Minimum unter 0 °C?_ Geändert haben sich nur die Umstände:
+Vergleichen Sie die drei Aufgaben. Aufgabe 1b und Aufgabe 3 stellen sogar dieselbe **Frage**: _Wie viele Tage lag das Minimum unter 0 °C?_ Geändert haben sich nur die Umstände:
 
 <!-- data-type="none" -->
 | Was sich ändert                | Aufgabe 1          | Aufgabe 2         | Aufgabe 3               |
 | :----------------------------- | :----------------- | :---------------- | :---------------------- |
 | Datenmenge                     | 366 Zeilen         | 31 Zeilen         | 47.595 Zeilen           |
-| Format                         | sauber             | Freitext          | Rohformat mit Fehlwerten |
+| Spalten                        | 4                  | 2                 | 19, davon zwei gebraucht |
+| Format                         | sauber             | Zeitstempel als Text | Rohformat mit Fehlwerten |
 | Wie oft dieselbe Rechnung      | einmal             | einmal pro Minute | einmal pro Jahr (135×)  |
 | Wiederholbar mit neuen Daten?  | ja                 | nein              | nein                    |
+
+> [!TIP]
+> Spannendere Möglichkeiten wie Pivot-Tabellen, Diagramme, Filter, Sortieren, Suchen, Ersetzen, Text in Spalten, bedingte Formatierung, Makros und Skripte lassen wir heute außen vor. Sie sind nicht nötig, um die Frage zu beantworten.
+
+--{{0}}--
+Die Fähigkeiten der Tabellenkalkulation sind nicht das Problem. Das Problem ist, dass jeder Schritt von Hand ausgeführt und für jede neue Datei wiederholt werden muss. Aufgabe 1 wäre mit einem Programm kaum schneller gelöst, Aufgabe 3 dagegen sehr wohl.
+
 
 *******************************************************************************
 
                                      {{1}}
 *******************************************************************************
 
-Was in Aufgabe 2 und 3 fehlte, war jemand, der **dieselben Schritte beliebig oft, fehlerfrei und ohne Murren** ausführt:
+Was in Aufgabe 3 fehlte, war jemand, der **dieselben Schritte beliebig oft, fehlerfrei und ohne Murren** ausführt:
 
 ``` text
 Für jedes Jahr von 1890 bis 2025:
     Setze den Zähler auf 0.
-    Für jeden Tag dieses Jahres:
-        Wenn das Minimum gemessen wurde und unter 0 °C liegt:
+    Für jede Zeile, deren MESS_DATUM mit diesem Jahr beginnt:
+        Wenn TNK nicht -999 ist und unter 0 liegt:
             Erhöhe den Zähler um 1.
     Notiere Jahr und Zähler.
 ```
 
 Diese Handlungsvorschrift ist unabhängig davon, ob es um 7 oder 47.595 Tage geht. Genau so etwas nennt man einen **Algorithmus**.
 
+--{{1}}--
+Der Pseudocode enthält keine einzige Zahl aus der Datei. Er beschreibt nur, was mit jeder Zeile geschehen soll. Deshalb funktioniert er für den Fichtelberg genauso wie für die Zugspitze, für 135 Jahre genauso wie für eine Woche.
+
+
 *******************************************************************************
 
 ## Algorithmen
 
-> Ein **Algorithmus** ist eine eindeutige Handlungsvorschrift zur Lösung eines Problems, die aus endlich vielen, wohldefinierten Einzelschritten besteht.
+> Ein **Algorithmus** ist eine eindeutige Handlungsvorschrift, die aus endlich vielen, ausführbaren Einzelschritten besteht und für **jede passende Eingabe** nach endlich vielen Schritten ein **Ergebnis** liefert.
 
 Algorithmen begegnen Ihnen ständig: ein Kochrezept, eine Aufbauanleitung, eine Versuchsvorschrift im Labor. Damit ein **Rechner** sie ausführen kann, müssen sie aber strenge Anforderungen erfüllen:
 
 <!-- data-type="none" -->
-| Eigenschaft        | Bedeutung                                               | Verletzt durch ...                          |
-| :----------------- | :------------------------------------------------------ | :------------------------------------------ |
-| **Eindeutigkeit**  | Jeder Schritt lässt genau eine Auslegung zu             | "Gib etwas Salz dazu"                        |
-| **Ausführbarkeit** | Jeder Schritt kann tatsächlich ausgeführt werden         | "Nimm den wärmsten Tag der Zukunft"          |
-| **Endlichkeit**    | Die Beschreibung hat endlich viele Schritte             | "Und so weiter ..."                         |
-| **Terminierung**   | Die Ausführung endet nach endlich vielen Schritten       | "Wiederhole, bis es nicht mehr friert"       |
+| Eigenschaft        | Bedeutung                                          | Verletzt durch ...                           |
+| :----------------- | :------------------------------------------------- | :------------------------------------------- |
+| **Eindeutigkeit**  | Jeder Schritt lässt genau eine Auslegung zu        | "Erhöhe den Zähler, wenn es kalt war"        |
+| **Ausführbarkeit** | Jeder Schritt kann tatsächlich ausgeführt werden   | "Teile die Zahl der Frosttage durch 0"       |
+| **Endlichkeit**    | Die Beschreibung hat endlich viele Schritte        | "Und so weiter ..."                          |
+| **Terminierung**   | Die Ausführung endet nach endlich vielen Schritten | "Erhöhe den Zähler um 1, bis er negativ ist" |
+
+--{{0}}--
+Das Wort geht auf den persischen Mathematiker al-Chwarizmi zurück, der im 9. Jahrhundert ein Lehrbuch über das Rechnen mit indischen Ziffern schrieb. In der lateinischen Übersetzung wurde aus seinem Namen „Algorismi“. Ein Kochrezept erfüllt die vier Eigenschaften übrigens selten: „eine Prise Salz“ ist für einen Menschen eindeutig genug, für einen Rechner nicht.
+
 
 ### Warum der Rechner keine Alltagssprache versteht
 
@@ -369,6 +443,10 @@ Ein Mensch fragt nach oder entscheidet nach Gefühl. Ein Rechner kann beides nic
 * Er hat **kein Weltwissen** und keine Erfahrung.
 * Er **rät nicht** und liest nicht zwischen den Zeilen.
 * Er führt **exakt** das aus, was dasteht — auch wenn es Unsinn ist.
+
+--{{0}}--
+Das ist kein Mangel, sondern eine Stärke: Weil der Rechner nichts dazudenkt, liefert er bei gleicher Eingabe immer dasselbe Ergebnis. Und jede Entscheidung, die im Programm steht, kann jemand anderes nachlesen und prüfen.
+
 
 *******************************************************************************
 
@@ -386,6 +464,10 @@ Programmiersprachen sind deshalb ein Kompromiss:
 | für Rechner unbrauchbar    | für Rechner übersetzbar | für Rechner direkt ausführbar |
 
 > Eine Programmiersprache ist **die Sprache, in der man einen Algorithmus so aufschreibt, dass sowohl Menschen als auch Rechner ihn verstehen.**
+
+--{{1}}--
+Den Schritt von der Programmiersprache zur Maschinensprache übernimmt ein eigenes Programm. Bei Python heißt es Interpreter: Er liest Ihr Programm Zeile für Zeile und führt es aus. Ihn lernen Sie nächste Woche kennen.
+
 
 *******************************************************************************
 
@@ -429,6 +511,10 @@ flowchart TD
 
 > In zwei Wochen schreiben Sie genau diesen Algorithmus in Python. Er wird **fünf Zeilen** lang sein.
 
+--{{0}}--
+Für Pseudocode gibt es keine festen Regeln. Wichtig ist nur, dass jeder Schritt eindeutig ist und die Einrückung zeigt, was wozu gehört. Für Ablaufdiagramme gibt es dagegen eine Norm, die DIN 66001; sie legt zum Beispiel fest, dass eine Raute für eine Entscheidung steht. Beide Darstellungen beschreiben denselben Algorithmus. Wählen Sie die, mit der Sie besser denken können.
+
+
 ### Drei Bausteine
 
 Jeder Algorithmus, auch der für 135 Jahre, setzt sich aus nur drei Bausteinen zusammen:
@@ -442,15 +528,9 @@ Jeder Algorithmus, auch der für 135 Jahre, setzt sich aus nur drei Bausteinen z
 
 Im Ablaufdiagramm erkennt man sie an der Form: Pfeile von Kasten zu Kasten bilden eine Folge, eine Raute mit _ja_ und _nein_ eine Verzweigung, ein Pfeil, der zurückführt, eine Wiederholung.
 
-Wie viele Wiederholungen stecken im Algorithmus für 135 Jahre (Abschnitt „Was ist hier passiert?“)?
+--{{0}}--
+Dass diese drei Bausteine genügen, ist bewiesen: Corrado Böhm und Giuseppe Jacopini haben 1966 gezeigt, dass sich jeder Algorithmus aus Folge, Verzweigung und Wiederholung zusammensetzen lässt. Python bietet mehr, und das erleichtert das Schreiben. Nötig ist es nicht.
 
-[( )] eine
-[(X)] zwei
-[( )] drei
-[( )] 135
-***
-Zwei, und die eine steckt in der anderen: Die äußere läuft über die Jahre, die innere über die Tage eines Jahres. Für jedes Jahr läuft die innere Wiederholung einmal komplett durch.
-***
 
 ### Einen Algorithmus von Hand ausführen
 
@@ -497,6 +577,10 @@ Legen Sie sich fest, **bevor** Sie die Auflösung ansehen: Was wird für die sie
 Der Zähler wird an **jedem** Tag auf 0 zurückgesetzt. Am Ende zählt nur der letzte Tag: -11,9 °C, also 1. Der Algorithmus ist eindeutig und ausführbar, er beantwortet nur eine andere Frage als gemeint.
 ***
 
+--{{0}}--
+Ein Ablaufprotokoll ist das wichtigste Werkzeug, um einen Algorithmus zu verstehen, bevor er läuft. Sie werden es das ganze Semester brauchen, auch in der Klausur. Der verrutschte Zähler ist dabei kein konstruierter Fehler: Den Startwert innerhalb der Wiederholung zu setzen, gehört zu den häufigsten Fehlern in ersten Programmen.
+
+
 ### Typische Fehlvorstellung: Kein Fehler heißt richtiges Ergebnis
 
 > **Typische Fehlvorstellung:** _„Wenn der Rechner keine Fehlermeldung zeigt, stimmt das Ergebnis.“_
@@ -506,8 +590,8 @@ Zurück zum Algorithmus für 135 Jahre:
 ``` text
 Für jedes Jahr von 1890 bis 2025:
     Setze den Zähler auf 0.
-    Für jeden Tag dieses Jahres:
-        Wenn das Minimum gemessen wurde und unter 0 °C liegt:
+    Für jede Zeile, deren MESS_DATUM mit diesem Jahr beginnt:
+        Wenn TNK nicht -999 ist und unter 0 liegt:
             Erhöhe den Zähler um 1.
     Notiere Jahr und Zähler.
 ```
@@ -521,12 +605,16 @@ Legen Sie sich fest, **bevor** Sie die Auflösung ansehen: Was notiert der Algor
 [(X)] 1912 und 0
 [( )] ungefähr 180, wie in den Jahren davor
 ***
-Die äußere Wiederholung läuft über **alle** Jahre von 1890 bis 2025, also auch über 1912. Die innere findet keinen Tag und läuft kein einziges Mal. Der Zähler bleibt bei 0, und genau das wird notiert — ohne Warnung.
+Die äußere Wiederholung läuft über **alle** Jahre von 1890 bis 2025, also auch über 1912. Die innere findet keine Zeile, deren `MESS_DATUM` mit 1912 beginnt, und läuft kein einziges Mal. Der Zähler bleibt bei 0, und genau das wird notiert — ohne Warnung.
 
 In einem Diagramm wäre 1912 das Jahr ohne Frost auf dem Fichtelberg. Das frostärmste Jahr, das tatsächlich vollständig gemessen wurde, ist 2025 mit 122 Frosttagen. Dasselbe Problem in kleinerem Maßstab: 1890 kommt auf nur 58 Frosttage, weil die Messungen erst am 1. August beginnen.
 ***
 
 > Ein Rechner prüft nicht, ob ein Ergebnis Sinn ergibt. Das bleibt Ihre Aufgabe — hier zum Beispiel, indem der Algorithmus auch mitzählt, **wie viele Tage überhaupt gemessen wurden**.
+
+--{{0}}--
+Dasselbe haben Sie in Aufgabe 2 erlebt: Der Personenzähler hat richtig gezählt und trotzdem 17 statt 41 Personen gemeldet. Ob ein Ergebnis stimmt, entscheidet nicht der Rechner, sondern der Abgleich mit dem, was man über die Daten weiß. In Vorlesung 09 suchen wir solche Lücken systematisch, in Vorlesung 14 fragen wir, wann man einem Ergebnis trauen kann.
+
 
 ## Wann lohnt sich ein Programm?
 
@@ -542,7 +630,11 @@ Die Tabellenkalkulation ist ein hervorragendes Werkzeug. Ein Programm lohnt sich
 
 > Der letzte Punkt wird oft unterschätzt. Eine Tabelle mit 135 von Hand angepassten Formeln kann niemand prüfen — ein Programm von zehn Zeilen schon.
 
-### Tabelle und Skript im Vergleich
+--{{0}}--
+Die Liste ist eine Entscheidungshilfe, keine Pflicht. Für eine einmalige Auswertung einer sauberen Datei bleibt die Tabellenkalkulation oft die schnellere Wahl. Trifft aber eines der Merkmale zu, wächst der Aufwand von Hand mit jeder neuen Datei, der eines Programms dagegen kaum.
+
+
+### Tabellenkalkulation und Skript im Vergleich
 
 Tabellenkalkulation und Skript sind nicht nur zwei Werkzeuge, sondern zwei Arten, über eine Auswertung zu denken:
 
@@ -588,7 +680,11 @@ for zahl in zahlen:            # Formel nach unten ziehen
 print(anzahl)                  # =SUMME(B2:B13)
 ```
 
-> Die Python-Spalte müssen Sie heute nicht verstehen; sie begegnet Ihnen in den nächsten Wochen. Einer der drei Bausteine fehlt in der Tabelle allerdings: die **Reihenfolge**.
+--{{0}}--
+Beim Herunterziehen passt die Tabellenkalkulation den Bezug in jeder Zeile an: Aus A2 wird A3, dann A4 und so weiter. Am Ende stehen zwölf Kopien derselben Formel in der Tabelle. Die Schleife schreibt die Regel dagegen nur einmal hin, und `zahl` nimmt nacheinander jeden Wert der Liste an. Ob es zwölf oder 47.595 Zahlen sind, ändert am Programm nichts.
+
+
+> Die Python-Spalte müssen Sie heute nicht verstehen; sie begegnet Ihnen in den nächsten Wochen. Einer der drei Bausteine fehlt in der Tabelle allerdings: die **Folge**, also eine feste Reihenfolge der Schritte.
 
 ### Eingabengetrieben oder der Reihe nach
 
@@ -647,6 +743,10 @@ Vier Anweisungen. Sie müssen heute noch keine davon verstehen. Sie zählen die 
 | 2020er    |     140.0 |
 
 > Rund 40 Frosttage weniger als in den 1920er-Jahren — wobei die 2020er erst sechs Jahre umfassen. Bevor wir so etwas behaupten, werden wir aber prüfen müssen, ob die Zahlen das tragen — was ist mit den Lücken, und stand das Thermometer immer an derselben Stelle? Dazu mehr in Vorlesung 14.
+
+--{{0}}--
+Für das Diagramm zählen nur Jahre mit mindestens 360 gemessenen Tagen. Damit fallen 1890 und 1891 heraus, ebenso die Jahre rund um die Lücke von 1910 bis 1915. Jede Säule ist ein Mittelwert, keine Summe; sonst sähen die 2020er mit ihren sechs Jahren nach einem Absturz aus, den es nicht gibt. Solche Regeln gehören zum Ergebnis dazu: Wer sie weglässt, erzählt eine andere Geschichte.
+
 
 ## Kontrollfragen
 

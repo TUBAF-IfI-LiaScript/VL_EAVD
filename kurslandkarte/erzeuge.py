@@ -44,6 +44,8 @@ assert len(TERMINE) == 15
 # ---- Freigabe: Begriffe einer Vorlesung erscheinen erst nach ihr in der Karte.
 # Nach jeder Vorlesung: Vorschläge der Studierenden einarbeiten, dann hier ergänzen.
 FREIGEGEBEN = {0}
+# PDFs schon vor der Vorlesung, damit Studierende darin mitschreiben können (Begriffe weiterhin erst nach Freigabe).
+PDF_VORAB = {1}
 if "--freigegeben" in sys.argv:   # für das Makefile: Dateien der freigegebenen Vorlesungen
     print(" ".join(DATEIEN[v] for v in sorted(FREIGEGEBEN)))
     sys.exit()
@@ -63,7 +65,7 @@ B = [
     # --- Erhebung
     ("zaehler", "Datenerhebung", "erhebung", 0, 'Praktische Inhalte', 1, 0, "Messdaten entstehen nicht von selbst: Ein Sensor wandelt etwas Physikalisches in Zahlen um, ein Programm entscheidet, was davon festgehalten wird.", None),
     ("annahmen", "Annahmen im Programm", "erhebung", 0, 'Wo soll das hinführen?', 2, 0, "Grenzwerte, Schwellen und Zeitfenster im Code legen fest, was als Ergebnis herauskommt — ohne dass eine Fehlermeldung darauf hinweist.", "„Es funktioniert, also stimmt das Ergebnis.“"),
-    ("sensorlog", "Sensorprotokoll", "erhebung", 1, 'Aufgabe 2: Der Personenzähler', 2, 0, "Die Textzeilen des Personenzählers — mühsam in der Tabellenkalkulation auszuwerten (Aufgabe 2).", None),
+    ("sensorlog", "Sensorprotokoll", "erhebung", 1, 'Aufgabe 2: Der Personenzähler', 2, 0, "Die Zeitstempel des Personenzählers — mühsam in der Tabellenkalkulation auszuwerten (Aufgabe 2).", None),
     ("micropy", "MicroPython", "erhebung", 8, 'Der Aufbau', 1, 0, "Python auf dem Mikrocontroller — dieselbe Sprache, andere Hardware.", None),
     ("sensor", "Sensor", "erhebung", 8, 'Der Aufbau', 1, 0, "Wandelt eine physikalische Größe in eine Zahl um — mit Genauigkeit, Messort und Ausfallrisiko.", None),
     ("seriell", "serielle Ausgabe", "erhebung", 8, 'Live: Wir messen', 2, 0, "Der Mikrocontroller schickt Messwerte als Textzeilen an den Rechner, dort werden sie mitgeschrieben.", None),
@@ -75,11 +77,14 @@ B = [
     ("blockly", "Programmdarstellung: Blöcke oder Text", "denken", 0, 'Blöcke oder Text', 2, 0, "Zwei Ansichten auf dasselbe Programm: Blöcke zusammenschieben oder Python tippen.", None),
     ("vorhersage", "Vorhersage vor dem Ausführen", "denken", 0, 'Typische Fehlvorstellungen', 1, 0, "Erst festlegen, was das Programm ausgeben wird, dann ausführen. Wer danebenliegt, sieht, wo das eigene Bild vom Programm nicht stimmt.", None),
     ("ki", "KI-Assistent", "denken", 0, 'Und was ist mit KI?', 1, 0, "Schreibt Code in Sekunden. Man muss aber sagen können, was man will, und prüfen können, ob das Ergebnis stimmt.", "„Die KI hat das Programm geschrieben, also stimmt es.“"),
-    ("algo", "Algorithmus", "denken", 1, 'Algorithmen', 1, 0, "Eindeutige, ausführbare Handlungsvorschrift aus endlich vielen Schritten.", None),
+    ("algo", "Algorithmus", "denken", 1, 'Algorithmen', 1, 0, "Eindeutige Handlungsvorschrift aus endlich vielen ausführbaren Schritten, die für jede passende Eingabe nach endlich vielen Schritten ein Ergebnis liefert.", None),
     ("terminierung", "Eindeutigkeit & Terminierung", "denken", 1, 'Algorithmen', 2, 0, "Jeder Schritt hat genau eine Auslegung; die Ausführung endet nach endlich vielen Schritten.", None),
     ("sprache", "Programmiersprache", "denken", 1, 'Warum der Rechner keine Alltagssprache versteht', 2, 0, "Kompromiss zwischen menschlicher Lesbarkeit und maschineller Eindeutigkeit.", "„Der Rechner versteht, was ich meine.“"),
     ("pseudo", "Pseudocode", "denken", 1, 'Algorithmen darstellen', 1, 0, "Algorithmus in strukturierter Alltagssprache, bevor man ihn programmiert.", None),
     ("ablauf", "Ablaufdiagramm", "denken", 1, 'Algorithmen darstellen', 2, 0, "Grafische Form eines Algorithmus mit Entscheidungen und Rücksprüngen.", None),
+    ("bausteine", "Folge, Verzweigung, Wiederholung", "denken", 1, 'Drei Bausteine', 1, 0, "Aus diesen drei Bausteinen setzt sich jeder Algorithmus zusammen.", None),
+    ("protokoll", "Ablaufprotokoll", "denken", 1, 'Einen Algorithmus von Hand ausführen', 2, 0, "Einen Algorithmus mit wenigen Werten von Hand ausführen und nach jedem Schritt den Zwischenstand notieren.", None),
+    ("eingabe", "Eingabengetrieben oder der Reihe nach", "denken", 1, 'Eingabengetrieben oder der Reihe nach', 2, 0, "Die Tabelle rechnet neu, sobald sich ein Wert ändert; ein Skript läuft Zeile für Zeile in festgelegter Reihenfolge.", None),
     ("interpreter", "Interpreter", "denken", 2, 'Vom Text zur Ausführung', 2, 0, "Liest das Programm Zeile für Zeile, führt aus — oder bricht mit einer Fehlermeldung ab.", None),
     ("print", "print", "denken", 2, 'Die erste Anweisung', 1, 1, "Gibt Werte auf dem Bildschirm aus.", None),
     ("operatoren", "Rechenoperatoren", "denken", 2, 'Rechnen', 2, 0, "+ - * / sowie // (ganzzahlig), % (Rest), ** (Potenz). 18900801 // 10000 ergibt das Jahr.", None),
@@ -146,6 +151,7 @@ B = [
     ("werkzeug", "Erst von Hand, dann mit Werkzeug", "daten", 0, 'Erst mühsam, dann mit Werkzeug', 2, 0, "Dieselbe Frage zweimal: mit rund 50 eigenen Zeilen und mit einer Anweisung aus einer Bibliothek. Wer den mühsamen Weg kennt, weiß, was das Werkzeug abnimmt.", None),
     ("dwd", "DWD-Datensatz", "daten", 1, 'Unsere Datensätze', 1, 0, "Klimareihe Fichtelberg seit 1890, rund 48.000 Zeilen — der rote Faden.", None),
     ("tabkalk", "Tabellenkalkulation", "daten", 1, 'Drei Aufgaben', 1, 0, "Drei Aufgaben: leicht, mühsam, praktisch aussichtslos.", None),
+    ("versionen", "Versionsverwaltung", "daten", 1, 'Tabellenkalkulation und Skript im Vergleich', 2, 0, "Hebt jeden Stand einer Datei auf, mit Datum und Grund der Änderung. Bei Skripten sieht man genau, welche Zeile sich geändert hat.", None),
     ("rohformat", "Rohformat", "daten", 1, 'Aufgabe 3: 135 Jahre Frost', 2, 0, "Semikolons, Leerzeichen, Datum ohne Trennzeichen, Dezimalpunkt, eor-Spalte.", None),
     ("fehlwert", "Fehlwert -999", "daten", 3, 'Bedingungen verknüpfen', 1, 1, "So kennzeichnet der DWD „nicht gemessen“. -999 < 0 ist wahr — und trotzdem kein Frosttag.", None),
     ("openurl", "open_url", "daten", 3, 'Die Antwort auf die Leitfrage', 2, 1, "Holt eine Datei aus dem Repository in den Browser — funktioniert nur dort.", None),
@@ -202,7 +208,10 @@ R = [
     ("zaehler", "sensorlog", "erzeugt"), ("zaehler", "annahmen", "beruht auf"), ("sensorlog", "tabkalk", "ausgewertet mit"),
     ("kreislauf", "lohnt", "je Runde die Frage"), ("schliff", "array", "Bild ist ein"), ("schliff", "maske", "Schwelle ergibt eine"), ("tabkalk", "lohnt", "Grenzen zeigen"), ("dwd", "rohformat", "liegt vor im"),
     ("tabkalk", "algo", "motiviert"), ("algo", "terminierung", "erfordert"), ("algo", "pseudo", "notiert als"),
-    ("pseudo", "ablauf", "oder als"), ("algo", "sprache", "formuliert in"), ("blockly", "print", "gleiches Programm wie"),
+    ("pseudo", "ablauf", "oder als"), ("algo", "sprache", "formuliert in"),
+    ("algo", "bausteine", "besteht aus"), ("bausteine", "if", "Verzweigung wird zu"), ("bausteine", "for", "Wiederholung wird zu"),
+    ("pseudo", "protokoll", "geprüft mit"), ("protokoll", "trace", "in Python:"), ("tabkalk", "eingabe", "rechnet"),
+    ("eingabe", "variable", "anders als eine Formel:"), ("tabkalk", "versionen", "fehlt der"), ("versionen", "reproduzierbar", "unterstützt"), ("blockly", "print", "gleiches Programm wie"),
     # VL 02
     ("sprache", "interpreter", "ausgeführt vom"), ("interpreter", "fehlermeldung", "meldet"), ("variable", "zuweisung", "entsteht durch"),
     ("variable", "namen", "braucht"), ("variable", "print", "ausgegeben mit"), ("zuweisung", "trace", "nachvollziehen mit"),
@@ -319,5 +328,5 @@ for v in range(ANZAHL):
 kern.erzeuge(
     repo=REPO, kurs=KURS, termine=T, bloecke=BLOECKE, linien=LINIEN,
     begriffe=B, beziehungen=R, faeden=F, anwendungen=A, leitfragen=LEITFRAGE, freigegeben=FREIGEGEBEN,
-    karte="docs/kurslandkarte", startseite="docs/index.html", vorschau="keine", pdf_ordner="docs/pdf",
+    karte="docs/kurslandkarte", startseite="docs/index.html", vorschau="keine", pdf_ordner="docs/pdf", pdf_termine=FREIGEGEBEN | PDF_VORAB,
 )
