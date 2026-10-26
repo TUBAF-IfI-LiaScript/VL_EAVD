@@ -144,7 +144,7 @@ B = [
 
     # --- Daten & Dateien
     ("werkzeug", "Erst von Hand, dann mit Werkzeug", "daten", 0, 'Erst mühsam, dann mit Werkzeug', 2, 0, "Dieselbe Frage zweimal: mit rund 50 eigenen Zeilen und mit einer Anweisung aus einer Bibliothek. Wer den mühsamen Weg kennt, weiß, was das Werkzeug abnimmt.", None),
-    ("dwd", "DWD-Datensatz", "daten", 1, 'Unser Datensatz', 1, 0, "Klimareihe Fichtelberg seit 1890, rund 48.000 Zeilen — der rote Faden.", None),
+    ("dwd", "DWD-Datensatz", "daten", 1, 'Unsere Datensätze', 1, 0, "Klimareihe Fichtelberg seit 1890, rund 48.000 Zeilen — der rote Faden.", None),
     ("tabkalk", "Tabellenkalkulation", "daten", 1, 'Drei Aufgaben', 1, 0, "Drei Aufgaben: leicht, mühsam, praktisch aussichtslos.", None),
     ("rohformat", "Rohformat", "daten", 1, 'Aufgabe 3: 135 Jahre Frost', 2, 0, "Semikolons, Leerzeichen, Datum ohne Trennzeichen, Dezimalpunkt, eor-Spalte.", None),
     ("fehlwert", "Fehlwert -999", "daten", 3, 'Bedingungen verknüpfen', 1, 1, "So kennzeichnet der DWD „nicht gemessen“. -999 < 0 ist wahr — und trotzdem kein Frosttag.", None),

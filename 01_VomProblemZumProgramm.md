@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.1.4
+version:  2.2.0
 language: de
 narrator: Deutsch Female
 
@@ -57,19 +57,52 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 
 --------------------------------------------------------------------------------
 
-## Unser Datensatz
+## Unsere Datensätze
 
-![Wetterstation](./images/Readme/Wetterstation.png "Eine Wetterstation misst Temperatur, Niederschlag, Wind und vieles mehr.")<!-- style="width: 60%;" -->
+Wir wollen uns heute einige Datensätze genauer anschauen, diese stammen zum Teil vom Deutschen Wetterdienst (DWD) und unserer Zutrittzählung aus der vergangenen Vorlesung.
 
-Der Deutsche Wetterdienst (DWD) betreibt auf dem **Fichtelberg** (1213 m, höchster Berg Sachsens) eine Wetterstation. Seit dem 1. August 1890 wird dort jeden Tag gemessen. Die Daten sind frei verfügbar.
+Der Deutsche Wetterdienst (DWD) betreibt auf dem **Fichtelberg** (1213 m, höchster Berg Sachsens) eine Wetterstation. Seit dem **1. August 1890** wird dort jeden Tag gemessen. Die Daten sind frei verfügbar.
+
+In der letzten Vorlesung haben wir den **Personenzähler** an der Hörsaaltür kennengelernt. Er hat aufgeschrieben, wer wann hereinkam und hinausging. Die Daten sind ebenfalls frei verfügbar.
 
 <!-- data-type="none" -->
 | Datei                                             | Inhalt                                              | Zeilen  |
 | :------------------------------------------------ | :-------------------------------------------------- | ------: |
-| `data/fichtelberg/fichtelberg_2024.csv`           | ein Jahr, aufbereitet: Datum, Mittel, Minimum, Maximum | 366     |
-| `data/fichtelberg/produkt_klima_tag_…_01358.txt`  | alle Tage seit 1890, so wie der DWD sie liefert     | 47.595  |
+| [`fichtelberg_2024.csv`](https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/data/fichtelberg/fichtelberg_2024.csv) | ein Jahr, aufbereitet: Datum, Mittel, Minimum, Maximum | 366     |
+| [`zaehlungen_2026-10-19.csv`](https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/examples/00_Einfuehrungsbeispiele/Alvik/zaehlungen_2026-10-19.csv) | 31 Durchgänge an einem Vorlesungstag | 31 |
+| [`produkt_klima_tag_…_01358.txt`](https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt) (6,5 MB) | alle Tage seit 1890, so wie der DWD sie liefert     | 47.595  |
 
 > Quelle: Deutscher Wetterdienst, [Climate Data Center](https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/kl/historical/), Station 01358, Lizenz [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+### Tabellenkalkulation in fünf Begriffen
+
+<!-- data-type="none" -->
+| Begriff      | Beispiel                | Bedeutung                                                         |
+| :----------- | :---------------------- | :---------------------------------------------------------------- |
+| **Zelle**    | `B2`                    | Spalte B, Zeile 2                                                 |
+| **Bereich**  | `B2:B367`               | alle Zellen von B2 bis B367                                       |
+| **Formel**   | `=B2+B3`                | beginnt mit `=`, das Programm zeigt das Ergebnis an               |
+| **Funktion** | `MITTELWERT(B2:B367)`   | fertige Rechenvorschrift mit Namen, die Werte stehen in Klammern  |
+| **Bedingung**| `"<0"`                  | in Anführungszeichen: nur Zellen, die sie erfüllen, zählen        |
+
+Mehrere Angaben in der Klammer trennt das deutsche Programm mit Semikolon: `ZÄHLENWENN(C2:C367;"<0")`.
+
+> Die Funktionsnamen hängen von der Sprache Ihres Programms ab. Ist es auf Englisch eingestellt, heißt `MITTELWERT` dort `AVERAGE` und `ZÄHLENWENN` heißt `COUNTIF`.
+
+### Ähnlich, aber nicht gleich
+
+Drei verbreitete Tabellenkalkulationen, dieselbe Datei — aber nicht dasselbe Verhalten:
+
+<!-- data-type="none" -->
+| | LibreOffice Calc | Microsoft Excel | Google Sheets |
+| :-- | :-- | :-- | :-- |
+| Kosten, Ort | frei, auf dem Rechner | kostenpflichtig (Microsoft 365), auf dem Rechner | frei mit Google-Konto, im Browser |
+| CSV mit `;` öffnen | Importdialog, Semikolon anhaken | Doppelklick genügt meist | _Datei → Importieren_ |
+| `2026-10-19T16:15:27` wird zu | Datum mit Uhrzeit | Text | Probieren Sie es aus! |
+| Uhrzeit herausholen | `=STUNDE(A2)` | `=TEIL(A2;12;8)` | |
+| eigenes Dateiformat | `.ods` (offener Standard) | `.xlsx` | online, Export möglich |
+
+> Eine Formel, die in einem Programm funktioniert, kann im anderen einen Fehler liefern — oder, schlimmer, ein falsches Ergebnis. Wer eine Auswertung weitergibt, muss deshalb auch sagen, **womit** gerechnet wurde.
 
 ## Drei Aufgaben
 
@@ -84,18 +117,21 @@ Wir lösen heute drei Aufgaben — ohne eine Zeile Code. Jede hat ein festes Zei
 Zeigt der Browser eine Datei nur als Text an, statt sie herunterzuladen: Rechtsklick auf den Link und „Ziel speichern unter …“ bzw. „Link speichern unter …“ wählen.
 
 <!-- data-type="none" -->
-| Aufgabe | Zeit    | Arbeitsform | Ziel                                   |
-| :------ | ------: | :---------- | :------------------------------------- |
-| 1       |   5 min | allein      | lösen                                  |
-| 2       |   8 min | zu zweit    | so weit kommen wie möglich             |
-| 3       |   4 min | zu zweit    | nicht lösen — nur hinschauen           |
+| Aufgabe | Zeit        | Arbeitsform                 | Ziel                         |
+| :------ | ----------: | :-------------------------- | :--------------------------- |
+| 1       | 2 + 4 min   | a) vorgemacht, b) allein    | lösen                        |
+| 2       |   8 min     | mit Ihrem Nachbarn          | so weit kommen wie möglich   |
+| 3       |   4 min     | mit Ihrem Nachbarn          | nicht lösen — nur hinschauen |
+
+> Noch nie mit einer Tabellenkalkulation gearbeitet? Kein Problem: Aufgabe 1 a) machen wir gemeinsam, und unter jeder Aufgabe gibt es Hilfen zum Aufklappen.
+
 
 ### Aufgabe 1: Ein Jahr auf dem Fichtelberg
 
                                      {{0-1}}
 *******************************************************************************
 
-**⏱ 5 Minuten, allein.** Laden Sie [`fichtelberg_2024.csv`](https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/data/fichtelberg/fichtelberg_2024.csv) herunter und öffnen Sie die Datei in Ihrer Tabellenkalkulation.
+Laden Sie [`fichtelberg_2024.csv`](https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/data/fichtelberg/fichtelberg_2024.csv) herunter und öffnen Sie die Datei in Ihrer Tabellenkalkulation.
 
 ```text fichtelberg_2024.csv
 Datum;Tagesmittel;Minimum;Maximum
@@ -105,9 +141,27 @@ Datum;Tagesmittel;Minimum;Maximum
 ...
 ```
 
-**a)** Wie hoch war die mittlere Temperatur im Jahr 2024?
+**a)** _(gemeinsam)_ Wie hoch war die mittlere Temperatur im Jahr 2024?
 
-**b)** An wie vielen Tagen gab es Frost? Ein **Frosttag** ist ein Tag, an dem das _Minimum_ unter 0 °C lag.
+**b)** **⏱ 4 Minuten, allein.** An wie vielen Tagen gab es Frost? Ein **Frosttag** ist ein Tag, an dem das _Minimum_ unter 0 °C lag.
+
+<details>
+<summary>**Hilfe: Die Datei öffnen**</summary>
+
+* **LibreOffice Calc:** Datei öffnen, im Dialog „Textimport“ das Trennzeichen **Semikolon** anhaken, OK.
+* **Excel:** Doppelklick auf die Datei genügt meist. Steht alles in Spalte A: _Daten → Text in Spalten_, Trennzeichen Semikolon.
+* **Google Sheets:** _Datei → Importieren → Hochladen_, Trennzeichen „Semikolon“ wählen.
+
+Richtig geöffnet stehen Datum, Tagesmittel, Minimum und Maximum in den Spalten A bis D, und die Zahlen sind **rechtsbündig**. Linksbündige Zahlen hält das Programm für Text.
+
+</details>
+
+<details>
+<summary>**Hilfe: Die Formel**</summary>
+
+Die Funktion heißt `ZÄHLENWENN`. Sie braucht zwei Angaben: den Bereich mit den Minima (Spalte C) und die Bedingung „kleiner als 0“.
+
+</details>
 
 *******************************************************************************
 
@@ -125,6 +179,8 @@ Die mittlere Temperatur im Jahr 2024 betrug [[ 1,2 °C | 4,1 °C | (6,3 °C) | 9
 
 > **Leicht.** Eine Datei, saubere Spalten, eine Formel pro Frage. Genau dafür wurden Tabellenkalkulationen gebaut.
 
+Lösung zum Nachschauen: [`Aufgabe1_Fichtelberg_Loesung.ods`](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/raw/master/examples/01_Tabellenkalkulation/Aufgabe1_Fichtelberg_Loesung.ods)
+
 *******************************************************************************
 
 ### Aufgabe 2: Der Personenzähler
@@ -134,26 +190,42 @@ Die mittlere Temperatur im Jahr 2024 betrug [[ 1,2 °C | 4,1 °C | (6,3 °C) | 9
 
 Erinnern Sie sich an den Personenzähler aus der letzten Vorlesung? Der Roboter an der Hörsaaltür hat aufgeschrieben, wer wann hereinkam und hinausging:
 
-```text zaehlungen_2026-10-15.csv
+```text zaehlungen_2026-10-19.csv
 zeit;richtung
-2026-10-15T16:42:31;raus
-2026-10-15T16:42:32;unklar
-2026-10-15T16:42:36;raus
-2026-10-15T16:42:40;rein
+2026-10-19T16:14:06;rein
+2026-10-19T16:14:22;unklar
+2026-10-19T16:15:27;rein
+2026-10-19T16:15:30;raus
+2026-10-19T16:16:43;rein
 ...
 ```
 
-> **Platzhalter:** Die Zeilen oben stammen aus einem Probelauf. Die Aufzeichnung aus Vorlesung 00 folgt nach dem 19.10.
+Die Vorlesung begann um 16:15 Uhr.
 
-Die Vorlesung beginnt um 16:15 Uhr.
-
-**⏱ 8 Minuten, zu zweit.** Laden Sie die Datei herunter _(Link folgt)_.
+**⏱ 8 Minuten, mit Ihrem Nachbarn.** Laden Sie [`zaehlungen_2026-10-19.csv`](https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/examples/00_Einfuehrungsbeispiele/Alvik/zaehlungen_2026-10-19.csv) herunter.
 
 **a)** Wie viele Personen sind **nach** Vorlesungsbeginn gekommen?
 
 **b)** _(zu Hause)_ In welcher Minute kamen die meisten?
 
 Sie müssen nicht fertig werden. Merken Sie sich die Stelle, an der Sie hängen bleiben.
+
+<details>
+<summary>**Hilfe: Die Uhrzeit aus dem Zeitstempel holen**</summary>
+
+Je nach Programm steht in Spalte A danach ein **Datum mit Uhrzeit** (rechtsbündig) oder **Text** (linksbündig):
+
+* Datum mit Uhrzeit: `=STUNDE(A2)` und `=MINUTE(A2)` liefern die Teile.
+* Text: `=TEIL(A2;12;8)` schneidet ab dem 12. Zeichen acht Zeichen heraus, also `16:14:06`. `ZEITWERT(…)` macht daraus eine Uhrzeit, mit der man vergleichen kann.
+
+</details>
+
+<details>
+<summary>**Hilfe: Mit zwei Bedingungen zählen**</summary>
+
+`ZÄHLENWENNS` zählt Zeilen, die **alle** Bedingungen erfüllen, z. B. „Richtung ist `rein`“ **und** „Uhrzeit ab 16:15“. Eine Uhrzeit als Bedingung: `">="&ZEIT(16;15;0)`.
+
+</details>
 
 *******************************************************************************
 
@@ -163,15 +235,19 @@ Sie müssen nicht fertig werden. Merken Sie sich die Stelle, an der Sie hängen 
 **Was dabei zu tun ist**
 
 1. Datei importieren, Trennzeichen ist das Semikolon.
-2. Den Text `2026-10-19T16:15:07` in Datum und Uhrzeit zerlegen, mit der man vergleichen kann.
+2. Aus `2026-10-19T16:15:27` eine Uhrzeit machen, mit der man vergleichen kann.
 3. Entscheiden: Was zählt — nur `rein`? Und was ist mit `unklar`?
-4. Wer nach Beginn kurz hinaus- und wieder hereingeht, steht zweimal in der Datei.
+4. Wer kurz hinaus- und wieder hereingeht, steht zweimal in der Datei.
 5. Minuten bilden und zählen.
 
 <details>
-<summary>**Lösung zu a)**</summary>
+<summary>**Lösung**</summary>
 
-_Folgt mit der Aufzeichnung vom 19.10._
+**a)** Ab 16:15 stehen 8 × `rein`, 2 × `raus` und 2 × `unklar` in der Datei. Je nach Regel kamen also 6 bis 10 Personen zu spät. Um 16:15:27 hinein und 16:15:30 wieder hinaus — das war vermutlich dieselbe Person.
+
+**b)** Um 16:10 mit 6 × `rein`. Wer `unklar` mitzählt, findet um 16:12 ebenfalls 6 Durchgänge.
+
+Zum Nachschauen: [`Aufgabe2_Personenzaehler_Loesung.ods`](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/raw/master/examples/01_Tabellenkalkulation/Aufgabe2_Personenzaehler_Loesung.ods)
 
 </details>
 
@@ -181,9 +257,18 @@ _Folgt mit der Aufzeichnung vom 19.10._
 
 *******************************************************************************
 
+                                     {{2}}
+*******************************************************************************
+
+**Und wie viele waren nun da?** Der Zähler kommt auf 20 × `rein` und 3 × `raus`, also 17 Personen im Raum. Laut Umfrage in der letzten Vorlesung waren es 41.
+
+> Die Aufzeichnung begann um 16:08. Wer früher kam — und das waren viele von Ihnen —, steht nicht in der Datei. **Das Programm hat richtig gezählt. Es konnte nur nicht zählen, was es nicht gesehen hat.**
+
+*******************************************************************************
+
 ### Aufgabe 3: 135 Jahre Frost
 
-                                     {{0-1}}
+                                     {{0-2}}
 *******************************************************************************
 
 Jetzt die Datei, wie der DWD sie tatsächlich liefert:
@@ -196,6 +281,8 @@ STATIONS_ID;MESS_DATUM;QN_3;  FX;  FM;QN_4; RSK;RSKF; SDK;SHK_TAG;  NM; VPM;  PM
 ```
 
 **⏱ 4 Minuten, zu zweit.** Laden Sie die [Datei des DWD](https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt) herunter (6,5 MB) und öffnen Sie sie.
+
+[Datensatzbeschreibung des DWD](https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/kl/BESCHREIBUNG_obsgermany-climate-daily-kl_de.pdf)
 
 Die Frage lautet: _Wie hat sich die Zahl der Frosttage pro Jahr seit 1890 entwickelt?_
 
@@ -229,7 +316,7 @@ Vergleichen Sie Aufgabe 1b und Aufgabe 3. Die **Frage** ist dieselbe: _Wie viele
 <!-- data-type="none" -->
 | Was sich ändert                | Aufgabe 1          | Aufgabe 2         | Aufgabe 3               |
 | :----------------------------- | :----------------- | :---------------- | :---------------------- |
-| Datenmenge                     | 366 Zeilen         | 36 Zeilen         | 47.595 Zeilen           |
+| Datenmenge                     | 366 Zeilen         | 31 Zeilen         | 47.595 Zeilen           |
 | Format                         | sauber             | Freitext          | Rohformat mit Fehlwerten |
 | Wie oft dieselbe Rechnung      | einmal             | einmal pro Minute | einmal pro Jahr (135×)  |
 | Wiederholbar mit neuen Daten?  | ja                 | nein              | nein                    |
@@ -441,7 +528,129 @@ In einem Diagramm wäre 1912 das Jahr ohne Frost auf dem Fichtelberg. Das frost�
 
 > Ein Rechner prüft nicht, ob ein Ergebnis Sinn ergibt. Das bleibt Ihre Aufgabe — hier zum Beispiel, indem der Algorithmus auch mitzählt, **wie viele Tage überhaupt gemessen wurden**.
 
-### Kontrollfragen
+## Wann lohnt sich ein Programm?
+
+Die Tabellenkalkulation ist ein hervorragendes Werkzeug. Ein Programm lohnt sich, wenn mindestens eines davon zutrifft:
+
+<!-- data-type="none" -->
+| Merkmal                      | Beispiel                                                       |
+| :--------------------------- | :------------------------------------------------------------- |
+| **Viele Daten**              | 47.595 Zeilen, oder 500 Dateien                                |
+| **Sperrige Formate**         | Sensorprotokolle, Rohdaten mit Fehlwerten, gemischte Einheiten |
+| **Wiederholung**             | jede Woche neue Messdaten, dieselbe Auswertung                 |
+| **Nachvollziehbarkeit**      | Jemand anderes soll prüfen können, was genau Sie gerechnet haben |
+
+> Der letzte Punkt wird oft unterschätzt. Eine Tabelle mit 135 von Hand angepassten Formeln kann niemand prüfen — ein Programm von zehn Zeilen schon.
+
+### Tabelle und Skript im Vergleich
+
+Tabellenkalkulation und Skript sind nicht nur zwei Werkzeuge, sondern zwei Arten, über eine Auswertung zu denken:
+
+<!-- data-type="none" -->
+| Frage                          | Tabellenkalkulation                        | Skript                                        |
+| :----------------------------- | :----------------------------------------- | :-------------------------------------------- |
+| Wo stehen Daten und Rechnung?  | gemeinsam in den Zellen                    | getrennt: Daten in einer Datei, Rechnung im Skript |
+| Was sieht man?                 | die Ergebnisse, die Formeln stecken dahinter | die Rechenschritte, Ergebnisse entstehen beim Ausführen |
+| Import, Filtern, Kopieren      | wird nirgends festgehalten                 | ist Teil des Skripts                          |
+| Neue Daten                     | alle Schritte noch einmal von Hand         | Skript erneut starten                         |
+| Prüfen                         | Zelle für Zelle anklicken                  | den Text von oben nach unten lesen            |
+| Änderungen nachverfolgen       | Kopien wie `Auswertung_final_v3.xlsx`      | Versionsverwaltung: jede Änderung Zeile für Zeile, mit Datum und Grund |
+| Stärke                         | sofort sichtbar, schnell ausprobiert       | wiederholbar, nachvollziehbar, beliebig groß  |
+
+> In der Tabellenkalkulation **ist** die Tabelle das Ergebnis. Beim Skript ist das Ergebnis ein Nebenprodukt — was bleibt, ist der Weg dorthin.
+
+--{{0}}--
+Eine Versionsverwaltung ist ein Programm, das jeden gespeicherten Stand einer Datei aufhebt, wie ein Notizbuch, in das man bei jeder Änderung schreibt, was man geändert hat und warum. Bei einem Skript funktioniert das besonders gut, weil es reiner Text ist: Man sieht genau, welche Zeile sich geändert hat. Die Vorlesungsfolien entstehen übrigens genauso, mit der Versionsverwaltung Git auf GitHub. Excel und Google Sheets heben zwar ebenfalls ältere Stände auf, welche Formel sich zwischen zwei Ständen geändert hat, muss man dort aber Zelle für Zelle suchen.
+
+Wie riskant Handarbeit ist, die nirgends festgehalten wird, zeigt die Genetik: Tabellenkalkulationen machen aus Gennamen wie `SEPT2` oder `MARCH1` beim Öffnen stillschweigend ein Datum. Eine Untersuchung fand 2016 solche Fehler in etwa jeder fünften Veröffentlichung, die Genlisten als Excel-Datei mitlieferte. 2020 wurden die betroffenen Gene deshalb umbenannt: `SEPT2` heißt heute `SEPTIN2`.
+
+### Ist das schon programmieren?
+
+Ein Stück weit, ja: Jede Formel ist ein kleines Programm. Was Sie heute in die Zellen geschrieben haben, gibt es in Python wieder, nur unter anderem Namen.
+
+<!-- data-type="none" -->
+| Tabellenkalkulation      | Python                       | heißt dort                   |
+| :----------------------- | :--------------------------- | :--------------------------- |
+| Zelle `C2`               | `minimum = -1.9`             | Variable (VL 02)             |
+| Bereich `C2:C367`        | `minima = [-1.9, -2.4, 0.1]` | Liste (VL 03, 05)            |
+| `MITTELWERT(C2:C367)`    | `sum(minima) / len(minima)`  | Funktion (VL 02, 04)         |
+| `WENN(C2<0; 1; 0)`       | `if minimum < 0:`            | Verzweigung (VL 03)          |
+| Formel nach unten ziehen | `for minimum in minima:`     | Wiederholung (VL 03)         |
+
+Wie viele der zwölf Zahlen in [`Loop.ods`](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/raw/master/examples/01_Tabellenkalkulation/Loop.ods) sind kleiner als 0? In der Tabelle: Bedingung in B2, nach unten ziehen, zusammenzählen. In Python:
+
+```python
+zahlen = [-3, -3, 4, 8, -8, -5, 6, -8, 7, -4, 4, -2]
+anzahl = 0
+for zahl in zahlen:            # Formel nach unten ziehen
+    if zahl < 0:               # =WENN(A2<0; 1; 0)
+        anzahl = anzahl + 1
+print(anzahl)                  # =SUMME(B2:B13)
+```
+
+> Die Python-Spalte müssen Sie heute nicht verstehen; sie begegnet Ihnen in den nächsten Wochen. Einer der drei Bausteine fehlt in der Tabelle allerdings: die **Reihenfolge**.
+
+### Eingabengetrieben oder der Reihe nach
+
+<!-- data-type="none" -->
+| Frage                   | Tabellenkalkulation                    | Skript                                    |
+| :---------------------- | :------------------------------------- | :---------------------------------------- |
+| Wann wird gerechnet?    | sobald sich eine Eingabe ändert        | wenn Sie das Skript starten               |
+| In welcher Reihenfolge? | legt das Programm anhand der Bezüge fest | Zeile für Zeile, wie Sie sie geschrieben haben |
+| Welcher Wert gilt?      | immer der neueste Stand                | der, den die Zeilen davor festgelegt haben |
+
+> Im Skript wissen Sie bei jeder Zeile, **was schon geschehen ist und was noch nicht**. Die Tabellenkalkulation ist **eingabengetrieben**: Sie hat keinen Ablauf, nur Abhängigkeiten.
+
+--{{0}}--
+B1 hängt von A1 ab. Ändern Sie A1, verfolgt das Programm alle Bezüge und rechnet die betroffenen Zellen neu, in einer Reihenfolge, die Sie nicht sehen und nicht bestimmen. Zum Ausprobieren ist das bequem. Für eine Auswertung heißt es aber: Es gibt keinen Zeitpunkt, an dem man sagen kann „dieser Schritt ist erledigt, jetzt kommt der nächste“. Im Skript gibt es ihn. Deshalb konnten Sie den Frosttage-Algorithmus vorhin von Hand ausführen und nach jedem Schritt notieren, welcher Wert gerade gilt.
+
+In Zelle A1 steht `3`, in Zelle B1 die Formel `=A1*2`. Sie ändern A1 auf `5`. Was steht jetzt in B1?
+
+[[10]]
+***
+Die Tabellenkalkulation rechnet nach, sobald sich A1 ändert. Merken Sie sich diese Erwartung: Nächste Woche sehen Sie, dass sich ein Skript an dieser Stelle anders verhält.
+***
+
+### Ein Blick voraus
+
+So sieht die Lösung von Aufgabe 3 in Vorlesung 12 aus:
+
+```python
+import pandas as pd
+# Einlesen, Spalten trennen, fehlende Werte als NaN markieren
+df = pd.read_csv("produkt_klima_tag_18900801_20251231_01358.txt",
+                 sep=";", skipinitialspace=True, na_values=-999)
+# Jahr aus dem Datum extrahieren
+df["Jahr"] = df["MESS_DATUM"] // 10000
+# Zählen der Frosttage pro Jahr
+print((df["TNK"] < 0).groupby(df["Jahr"]).sum())
+```
+
+Vier Anweisungen. Sie müssen heute noch keine davon verstehen. Sie zählen die Frosttage jedes Jahres; für das Diagramm unten kommen noch zwei Schritte dazu: unvollständig gemessene Jahre aussortieren und je Jahrzehnt mitteln.
+
+<!-- data-type="barchart" data-show data-title="Mittlere Zahl der Frosttage pro Jahr, Fichtelberg" data-xlabel="Jahrzehnt" data-ylabel="Frosttage" -->
+| Jahrzehnt | Frosttage |
+| :-------- | --------: |
+| 1890er    |     177.6 |
+| 1900er    |     189.8 |
+| 1910er    |     186.5 |
+| 1920er    |     182.6 |
+| 1930er    |     178.4 |
+| 1940er    |     174.4 |
+| 1950er    |     179.1 |
+| 1960er    |     169.4 |
+| 1970er    |     175.3 |
+| 1980er    |     169.4 |
+| 1990er    |     165.9 |
+| 2000er    |     156.6 |
+| 2010er    |     154.2 |
+| 2020er    |     140.0 |
+
+> Rund 40 Frosttage weniger als in den 1920er-Jahren — wobei die 2020er erst sechs Jahre umfassen. Bevor wir so etwas behaupten, werden wir aber prüfen müssen, ob die Zahlen das tragen — was ist mit den Lücken, und stand das Thermometer immer an derselben Stelle? Dazu mehr in Vorlesung 14.
+
+## Kontrollfragen
+
+> Zum Nacharbeiten nach der Vorlesung.
 
 Welche Eigenschaft eines Algorithmus verletzt die Anweisung _"Addiere alle Temperaturen, die ungefähr gleich sind"_?
 
@@ -469,92 +678,6 @@ Ordnen Sie die drei Aufgaben von heute zu:
 [        (X)            ( )      ] Aufgabe 1: Jahresmittel aus einer sauberen Datei, einmalig
 [        ( )            (X)      ] Aufgabe 2: Sensorprotokoll, jeden Tag eine neue Datei
 [        ( )            (X)      ] Aufgabe 3: 135 Jahre im Rohformat, später weitere Stationen
-
-## Wann lohnt sich ein Programm?
-
-Die Tabellenkalkulation ist ein hervorragendes Werkzeug. Ein Programm lohnt sich, wenn mindestens eines davon zutrifft:
-
-<!-- data-type="none" -->
-| Merkmal                      | Beispiel                                                       |
-| :--------------------------- | :------------------------------------------------------------- |
-| **Viele Daten**              | 47.595 Zeilen, oder 500 Dateien                                |
-| **Sperrige Formate**         | Sensorprotokolle, Rohdaten mit Fehlwerten, gemischte Einheiten |
-| **Wiederholung**             | jede Woche neue Messdaten, dieselbe Auswertung                 |
-| **Nachvollziehbarkeit**      | Jemand anderes soll prüfen können, was genau Sie gerechnet haben |
-
-> Der letzte Punkt wird oft unterschätzt. Eine Tabelle mit 135 von Hand angepassten Formeln kann niemand prüfen — ein Programm von zehn Zeilen schon.
-
-### Tabelle und Skript im Vergleich
-
-Tabellenkalkulation und Skript sind nicht nur zwei Werkzeuge, sondern zwei Arten, über eine Auswertung zu denken:
-
-<!-- data-type="none" -->
-| Frage                          | Tabellenkalkulation                        | Skript                                        |
-| :----------------------------- | :----------------------------------------- | :-------------------------------------------- |
-| Wo stehen Daten und Rechnung?  | gemeinsam in den Zellen                    | getrennt: Daten in einer Datei, Rechnung im Skript |
-| Was sieht man?                 | die Ergebnisse, die Formeln stecken dahinter | die Rechenschritte, Ergebnisse entstehen beim Ausführen |
-| In welcher Reihenfolge?        | keine: jede Zelle rechnet nach, sobald sich ein Wert ändert | von oben nach unten, Schritt für Schritt |
-| Import, Filtern, Kopieren      | wird nirgends festgehalten                 | ist Teil des Skripts                          |
-| Neue Daten                     | alle Schritte noch einmal von Hand         | Skript erneut starten                         |
-| Prüfen                         | Zelle für Zelle anklicken                  | den Text von oben nach unten lesen            |
-| Stärke                         | sofort sichtbar, schnell ausprobiert       | wiederholbar, nachvollziehbar, beliebig groß  |
-
-> In der Tabellenkalkulation **ist** die Tabelle das Ergebnis. Beim Skript ist das Ergebnis ein Nebenprodukt — was bleibt, ist der Weg dorthin.
-
-Wie riskant Handarbeit ist, die nirgends festgehalten wird, zeigt die Genetik: Tabellenkalkulationen machen aus Gennamen wie `SEPT2` oder `MARCH1` beim Öffnen stillschweigend ein Datum. Eine Untersuchung fand 2016 solche Fehler in etwa jeder fünften Veröffentlichung, die Genlisten als Excel-Datei mitlieferte. 2020 wurden die betroffenen Gene deshalb umbenannt: `SEPT2` heißt heute `SEPTIN2`.
-
-In Zelle A1 steht `3`, in Zelle B1 die Formel `=A1*2`. Sie ändern A1 auf `5`. Was steht jetzt in B1?
-
-[[10]]
-***
-Die Tabellenkalkulation rechnet nach, sobald sich A1 ändert. Merken Sie sich diese Erwartung: Nächste Woche sehen Sie, dass sich ein Skript an dieser Stelle anders verhält.
-***
-
-### Ein Blick voraus
-
-                                     {{0-1}}
-*******************************************************************************
-
-So sieht die Lösung von Aufgabe 3 in Vorlesung 12 aus:
-
-```python
-import pandas as pd
-df = pd.read_csv("produkt_klima_tag_18900801_20251231_01358.txt",
-                 sep=";", skipinitialspace=True, na_values=-999)
-df["Jahr"] = df["MESS_DATUM"] // 10000
-print((df["TNK"] < 0).groupby(df["Jahr"]).sum())
-```
-
-Vier Anweisungen. Sie müssen heute noch keine davon verstehen. Sie zählen die Frosttage jedes Jahres; für das Diagramm unten kommen noch zwei Schritte dazu: unvollständig gemessene Jahre aussortieren und je Jahrzehnt mitteln.
-
-*******************************************************************************
-
-                                     {{1}}
-*******************************************************************************
-
-Und das Ergebnis, gemittelt über die vollständig gemessenen Jahre jedes Jahrzehnts:
-
-<!-- data-type="barchart" data-show data-title="Mittlere Zahl der Frosttage pro Jahr, Fichtelberg" data-xlabel="Jahrzehnt" data-ylabel="Frosttage" -->
-| Jahrzehnt | Frosttage |
-| :-------- | --------: |
-| 1890er    |     177.6 |
-| 1900er    |     189.8 |
-| 1910er    |     186.5 |
-| 1920er    |     182.6 |
-| 1930er    |     178.4 |
-| 1940er    |     174.4 |
-| 1950er    |     179.1 |
-| 1960er    |     169.4 |
-| 1970er    |     175.3 |
-| 1980er    |     169.4 |
-| 1990er    |     165.9 |
-| 2000er    |     156.6 |
-| 2010er    |     154.2 |
-| 2020er    |     140.0 |
-
-> Rund 40 Frosttage weniger als in den 1920er-Jahren — wobei die 2020er erst sechs Jahre umfassen. Bevor wir so etwas behaupten, werden wir aber prüfen müssen, ob die Zahlen das tragen — was ist mit den Lücken, und stand das Thermometer immer an derselben Stelle? Dazu mehr in Vorlesung 14.
-
-*******************************************************************************
 
 ## Ihre Begriffe für die Kurslandkarte
 
