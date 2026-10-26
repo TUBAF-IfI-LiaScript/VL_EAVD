@@ -45,7 +45,7 @@ assert len(TERMINE) == 15
 # Nach jeder Vorlesung: Vorschläge der Studierenden einarbeiten, dann hier ergänzen.
 FREIGEGEBEN = {0, 1}
 # PDFs schon vor der Vorlesung, damit Studierende darin mitschreiben können (Begriffe weiterhin erst nach Freigabe).
-PDF_VORAB = {1}
+PDF_VORAB = {1, 2}
 if "--freigegeben" in sys.argv:   # für das Makefile: Dateien der freigegebenen Vorlesungen
     print(" ".join(DATEIEN[v] for v in sorted(FREIGEGEBEN)))
     sys.exit()

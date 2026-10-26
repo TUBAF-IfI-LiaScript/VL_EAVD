@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.2
+version:  2.1.0
 language: de
 narrator: Deutsch Female
 
@@ -25,7 +25,7 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 | **Veranstaltung:**       | @config.lecture                                                                                                                                    |
 | **Semester**             | @config.semester                                                                                                                                   |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                  |
-| **Inhalte:**             | `Interpreter, Ausgabe, Rechnen, Variablen, Datentypen, Typumwandlung, Fehlermeldungen`                                                             |
+| **Inhalte:**             | `Uhrzeiten in der Tabellenkalkulation, Von der Frage zum Pseudocode, Interpreter, Ausgabe, Rechnen, Variablen, Datentypen, Typumwandlung, Fehlermeldungen`                                                             |
 | **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/02_ErsteSchritte.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/02_ErsteSchritte.md) |
 | **Autoren**              | @author                                                                                                                                            |
 
@@ -57,6 +57,201 @@ Gib den bisher wärmsten Tag aus.
 ```
 
 > Darin stecken schon fast alle Zutaten eines Programms: Man muss sich etwas **merken** (heute), etwas **vergleichen** und etwas **wiederholen** (nächste Woche). Heute kümmern wir uns um das Merken und Rechnen.
+
+### Rückblick: Uhrzeiten in der Tabellenkalkulation
+
+In Aufgabe 2 war der Zeitstempel die größte Hürde. Für die Tabellenkalkulation ist eine Uhrzeit eine **Zahl**, nämlich der Bruchteil eines Tages: 12:00 Uhr ist 0,5. Erst als Zahl lässt sie sich vergleichen.
+
+<!-- data-type="none" -->
+| Schritt                     | Formel (in A2 steht der Text `2026-10-19T16:15:27`) | Ergebnis                           |
+| :-------------------------- | :-------------------------------------------------- | :--------------------------------- |
+| 1. Uhrzeit abspalten        | `=TEIL(A2;12;8)` in C2                              | `16:15:27`, aber noch Text         |
+| 2. in eine Uhrzeit umwandeln | `=ZEITWERT(C2)` in D2                              | `0,6774`, als Uhrzeit formatiert `16:15:27` |
+| 3. vergleichen              | `=D2>=ZEIT(16;15;0)`                                | `WAHR`                             |
+
+Alle Durchgänge `rein` ab 16:15 auf einmal: `=ZÄHLENWENNS(B2:B32;"rein";D2:D32;">="&ZEIT(16;15;0))` ergibt **8**.
+
+> Hat LibreOffice den Zeitstempel beim Öffnen schon als Datum mit Uhrzeit erkannt (rechtsbündig), entfallen Schritt 1 und 2. Die Uhrzeit allein liefert dann `=REST(A2;1)`.
+
+--{{0}}--
+Intern zählt die Tabellenkalkulation die Tage seit Ende 1899. Der 19. Oktober 2026 ist Tag 46.314, und 16:15:27 Uhr ist der Bruchteil 0,6774 dieses Tages; zusammen ergibt das 46.314,6774. REST(A2;1) teilt durch 1 und behält nur den Rest, also den Tagesanteil. TEIL(A2;12;8) zählt dagegen Zeichen: ab dem zwölften Zeichen acht Stück. Das funktioniert nur, solange alle Zeitstempel genau gleich aufgebaut sind.
+
+### Typische Fehlvorstellung: Sieht aus wie eine Uhrzeit, ist eine Uhrzeit
+
+> **Typische Fehlvorstellung:** _„Was wie eine Uhrzeit aussieht, kann ich auch wie eine Uhrzeit vergleichen.“_
+
+Schritt 2 lässt sich doch sparen? In Spalte C steht schon `16:15:27`:
+
+``` text
+=C2>=ZEIT(16;15;0)
+```
+
+Legen Sie sich fest, **bevor** Sie die Auflösung ansehen: Für wie viele der 31 Zeilen liefert diese Formel `WAHR`?
+
+[( )] 12, alle Durchgänge ab 16:15
+[( )] 8, nur die mit `rein`
+[(X)] 31, alle
+[( )] keine, sondern eine Fehlermeldung
+***
+Für alle 31. `16:15:27` in Spalte C ist **Text**, und beim Vergleich stuft die Tabellenkalkulation Text immer höher ein als jede Zahl. Das Ergebnis ist durchgehend `WAHR`, ohne Warnung. Richtig wären 12.
+
+Dasselbe passiert, wenn man ein Datum mit Uhrzeit direkt mit `ZEIT(16;15;0)` vergleicht: 46.314,67 ist immer größer als 0,68.
+***
+
+> Text ist nicht Zahl, auch wenn er genauso aussieht. Genau darum geht es heute auch in Python.
+
+--{{0}}--
+LibreOffice und Excel verhalten sich hier gleich: Text gilt beim Vergleich als größer als jede Zahl. Eine Fehlermeldung wäre hilfreicher, kommt aber nicht. Ein Hinweis darauf ist die Ausrichtung in der Zelle: Text steht links, Zahlen und Uhrzeiten stehen rechts. Im Abschnitt „Datentypen“ sehen Sie, dass Python strenger ist: Text plus Zahl bricht dort sofort mit einer Fehlermeldung ab.
+
+## Von der Frage zum Pseudocode
+
+Jede Auswertung beginnt mit einer Frage an einen Datensatz. Vier Fragen an sich selbst führen von dort zum Pseudocode:
+
+<!-- data-type="none" -->
+| Fragen Sie sich ...                    | im Beispiel                                        |
+| :------------------------------------- | :------------------------------------------------- |
+| 1. Was steht in **einer** Zeile?       | eine Person: Nachname, Vorname, Studiengang        |
+| 2. Was muss ich mir **merken**?        | eine Anzahl, zu Beginn 0                           |
+| 3. Was tue ich mit **jeder** Zeile?    | Beginnt der Nachname mit „A“, die Anzahl erhöhen   |
+| 4. Was gebe ich am **Ende** aus?       | die Anzahl                                         |
+
+**Beispiel:** _Wie viele Personen auf der Teilnehmerliste haben einen Nachnamen, der mit A beginnt?_
+
+``` text
+Setze anzahl auf 0.
+Für jede Zeile der Teilnehmerliste:
+    Wenn der Nachname mit "A" beginnt:
+        Erhöhe anzahl um 1.
+Gib anzahl aus.
+```
+
+> Frage 2 ist die wichtigste: Was man sich merken muss, wird heute zur **Variablen**.
+
+--{{0}}--
+Die vier Fragen sind ein Rezept für den Anfang, kein Gesetz. Frage 1 klingt banal, entscheidet aber, worüber die Wiederholung läuft: über Personen, Tage, Messpunkte oder Buchungen. Frage 3 enthält fast immer eine Bedingung, und die muss man ganz genau formulieren. Wie genau, zeigt die nächste Folie.
+
+### Was heißt „beginnt mit A“?
+
+Auf der Teilnehmerliste stehen unter anderem diese vier Nachnamen. Legen Sie sich fest, **bevor** Sie die Auflösung ansehen: Welche zählt der Algorithmus, wenn er **genau** das tut, was dasteht?
+
+[[X]] Ahrens
+[[ ]] Åberg
+[[ ]] von Arnim
+[[ ]] auf der Heide
+***
+Nur „Ahrens“. Der Rechner vergleicht Zeichen, keine Absichten: Å ist ein anderes Zeichen als A, „auf der Heide“ beginnt mit einem kleinen a und „von Arnim“ mit einem v.
+
+Ob das so gemeint war, entscheiden Sie, und zwar in der Bedingung. Sollen alle vier zählen, muss dort etwa stehen: „Wenn der Nachname ohne Namenszusatz wie *von* oder *auf der* mit A, a oder Å beginnt“.
+***
+
+> Eindeutig heißt nicht: so gemeint. Der Algorithmus beantwortet genau die Frage, die in ihm steht.
+
+--{{0}}--
+Dasselbe Problem kennen Sie aus Vorlesung 01: Der Algorithmus mit der verrutschten Zeile war eindeutig und ausführbar, er beantwortete nur eine andere Frage als gemeint. Bei echten Daten stecken solche Fälle überall, etwa Groß- und Kleinschreibung, Leerzeichen am Anfang oder Sonderzeichen. Deshalb lohnt es sich, vor dem Programmieren ein paar echte Zeilen anzusehen.
+
+### Üben: Fragen aus Ihrem Fach
+
+**⏱ 5 Minuten, zu zweit.** Wählen Sie eine Frage, am besten aus Ihrem Fach. Gehen Sie die vier Fragen durch und schreiben Sie Pseudocode.
+
+<!-- data-type="none" -->
+| Fach                      | Eine Zeile des Datensatzes                                  | Frage                                                         |
+| :------------------------ | :---------------------------------------------------------- | :------------------------------------------------------------ |
+| Umwelt                    | Datum; Feinstaub im Tagesmittel in µg/m³                    | Hielt die Messstation den Grenzwert ein? Über 50 µg/m³ ist an höchstens 35 Tagen im Jahr erlaubt. |
+| Werkstoffe                | Messpunkt eines Zugversuchs: Dehnung in %; Kraft in kN      | Bei welcher Dehnung trug die Probe die größte Kraft?          |
+| Wirtschaft                | Datum; Filiale; Betrag in €                                 | Welchen Umsatz machte die Filiale Freiberg im März?           |
+| Energie                   | Uhrzeit; Leistung in kW, alle 15 Minuten gemessen           | Wie viel Energie in kWh hat die Werkhalle an diesem Tag verbraucht? |
+| _Schon Erfahrung?_        | Uhrzeit; Ereignis `start` oder `stopp` einer Maschine       | Wie lange lief die Maschine insgesamt?                        |
+
+> Beim **Zugversuch** wird eine Materialprobe langsam auseinandergezogen, bis sie reißt. Die **Dehnung** sagt, um wie viel Prozent sie dabei länger geworden ist.
+
+--{{0}}--
+Jede Frage braucht ein anderes Muster: zählen und danach entscheiden, den größten Wert suchen, mit zwei Bedingungen aufsummieren, gewichtet aufsummieren und sich einen Zustand merken. In Vorlesung 04 bekommen diese Muster eigene Namen. Feinstaub sind winzige Staubteilchen in der Luft, die man einatmet. Für sie gilt in der EU tatsächlich: Das Tagesmittel darf höchstens an 35 Tagen im Jahr über 50 Mikrogramm pro Kubikmeter liegen.
+
+### Lösungsvorschläge
+
+Es gibt nicht die eine richtige Lösung. Prüfen Sie Ihre, indem Sie sie mit drei, vier erfundenen Zeilen von Hand ausführen.
+
+<details>
+<summary>**Umwelt: Grenzwert für Feinstaub**</summary>
+
+``` text
+Setze tage_darueber auf 0.
+Für jede Zeile:
+    Wenn der Feinstaub größer als 50 ist:
+        Erhöhe tage_darueber um 1.
+Wenn tage_darueber größer als 35 ist:
+    Gib "Grenzwert überschritten" aus.
+Sonst:
+    Gib "Grenzwert eingehalten" aus.
+```
+
+Die Antwort ist keine Zahl, sondern ja oder nein: Nach der Wiederholung kommt noch eine Verzweigung.
+
+</details>
+
+<details>
+<summary>**Werkstoffe: größte Kraft im Zugversuch**</summary>
+
+``` text
+Merke dir die erste Zeile als "bisher stärkste".
+Für jede weitere Zeile:
+    Wenn ihre Kraft größer ist als die der bisher stärksten:
+        Merke dir diese Zeile als "bisher stärkste".
+Gib die Dehnung der bisher stärksten Zeile aus.
+```
+
+Dasselbe Muster wie der wärmste Tag aus dem Rückblick, nur mit anderen Spalten.
+
+</details>
+
+<details>
+<summary>**Wirtschaft: Umsatz einer Filiale**</summary>
+
+``` text
+Setze summe auf 0.
+Für jede Zeile:
+    Wenn die Filiale "Freiberg" ist und das Datum im März liegt:
+        Addiere den Betrag zu summe.
+Gib summe aus.
+```
+
+Gemerkt wird diesmal eine Summe statt einer Anzahl.
+
+</details>
+
+<details>
+<summary>**Energie: Verbrauch an einem Tag**</summary>
+
+``` text
+Setze energie auf 0.
+Für jede Zeile:
+    Addiere die Leistung mal 0,25 zu energie.
+Gib energie aus.
+```
+
+Jeder Messwert gilt für 15 Minuten, also 0,25 Stunden. Leistung in kW mal Zeit in Stunden ergibt Energie in kWh.
+
+</details>
+
+<details>
+<summary>**Schon Erfahrung? Laufzeit einer Maschine**</summary>
+
+``` text
+Setze laufzeit auf 0.
+Für jede Zeile:
+    Wenn das Ereignis "start" ist:
+        Merke dir die Uhrzeit als startzeit.
+    Wenn das Ereignis "stopp" ist:
+        Addiere (Uhrzeit minus startzeit) zu laufzeit.
+Gib laufzeit aus.
+```
+
+Und wenn das Protokoll mit `stopp` beginnt oder zweimal hintereinander `start` steht? Solche Fälle muss Ihr Algorithmus entscheiden, wie die Zeilen mit `unklar` beim Personenzähler.
+
+</details>
+
+--{{0}}--
+Achten Sie beim Vergleichen weniger auf die Formulierung als auf zwei Dinge: Haben Sie sich das Richtige gemerkt, also eine Anzahl, eine Summe oder eine ganze Zeile? Und steht jeder Schritt an der richtigen Stelle, innerhalb oder außerhalb der Wiederholung? Genau daran scheiterte letzte Woche die verrutschte Zeile.
 
 ## Vom Text zur Ausführung
 
