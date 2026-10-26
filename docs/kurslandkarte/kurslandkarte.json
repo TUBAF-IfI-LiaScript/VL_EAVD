@@ -152,12 +152,36 @@
    "wann": "KW 44 · 26.–30.10.",
    "wann_kurz": "KW 44",
    "leitfrage": "Wo hört die Tabellenkalkulation auf?",
-   "freigegeben": false,
+   "freigegeben": true,
    "status": "ausgearbeitet",
    "block": 1,
    "pdf": "../pdf/01_VomProblemZumProgramm.pdf",
    "anwendet": [],
-   "abschnitte": []
+   "abschnitte": [
+    "Vom Problem zum Programm",
+    "Unsere Datensätze",
+    "Tabellenkalkulation in fünf Begriffen",
+    "Ähnlich, aber nicht gleich",
+    "Drei Aufgaben",
+    "Aufgabe 1: Ein Jahr auf dem Fichtelberg",
+    "Aufgabe 2: Der Personenzähler",
+    "Aufgabe 3: 135 Jahre Frost",
+    "Was ist hier passiert?",
+    "Algorithmen",
+    "Warum der Rechner keine Alltagssprache versteht",
+    "Algorithmen darstellen",
+    "Drei Bausteine",
+    "Einen Algorithmus von Hand ausführen",
+    "Typische Fehlvorstellung: Kein Fehler heißt richtiges Ergebnis",
+    "Wann lohnt sich ein Programm?",
+    "Tabellenkalkulation und Skript im Vergleich",
+    "Ist das schon programmieren?",
+    "Eingabengetrieben oder der Reihe nach",
+    "Ein Blick voraus",
+    "Kontrollfragen",
+    "Ihre Begriffe für die Kurslandkarte",
+    "Nächste Woche"
+   ]
   },
   {
    "vl": 2,
@@ -470,6 +494,17 @@
    "fehlvorstellung": "„Es funktioniert, also stimmt das Ergebnis.“"
   },
   {
+   "id": "sensorlog",
+   "name": "Sensorprotokoll",
+   "linie": "erhebung",
+   "vl": 1,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Die Zeitstempel des Personenzählers — mühsam in der Tabellenkalkulation auszuwerten (Aufgabe 2).",
+   "fehlvorstellung": null
+  },
+  {
    "id": "blockly",
    "name": "Programmdarstellung: Blöcke oder Text",
    "linie": "denken",
@@ -503,6 +538,94 @@
    "fehlvorstellung": "„Die KI hat das Programm geschrieben, also stimmt es.“"
   },
   {
+   "id": "algo",
+   "name": "Algorithmus",
+   "linie": "denken",
+   "vl": 1,
+   "abschnitt": 10,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Eindeutige Handlungsvorschrift aus endlich vielen ausführbaren Schritten, die für jede passende Eingabe nach endlich vielen Schritten ein Ergebnis liefert.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "terminierung",
+   "name": "Eindeutigkeit & Terminierung",
+   "linie": "denken",
+   "vl": 1,
+   "abschnitt": 10,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Jeder Schritt hat genau eine Auslegung; die Ausführung endet nach endlich vielen Schritten.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "sprache",
+   "name": "Programmiersprache",
+   "linie": "denken",
+   "vl": 1,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Kompromiss zwischen menschlicher Lesbarkeit und maschineller Eindeutigkeit.",
+   "fehlvorstellung": "„Der Rechner versteht, was ich meine.“"
+  },
+  {
+   "id": "pseudo",
+   "name": "Pseudocode",
+   "linie": "denken",
+   "vl": 1,
+   "abschnitt": 12,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Algorithmus in strukturierter Alltagssprache, bevor man ihn programmiert.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "ablauf",
+   "name": "Ablaufdiagramm",
+   "linie": "denken",
+   "vl": 1,
+   "abschnitt": 12,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Grafische Form eines Algorithmus mit Entscheidungen und Rücksprüngen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "bausteine",
+   "name": "Folge, Verzweigung, Wiederholung",
+   "linie": "denken",
+   "vl": 1,
+   "abschnitt": 13,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Aus diesen drei Bausteinen setzt sich jeder Algorithmus zusammen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "protokoll",
+   "name": "Ablaufprotokoll",
+   "linie": "denken",
+   "vl": 1,
+   "abschnitt": 14,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Einen Algorithmus mit wenigen Werten von Hand ausführen und nach jedem Schritt den Zwischenstand notieren.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "eingabe",
+   "name": "Eingabengetrieben oder der Reihe nach",
+   "linie": "denken",
+   "vl": 1,
+   "abschnitt": 19,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Die Tabelle rechnet neu, sobald sich ein Wert ändert; ein Skript läuft Zeile für Zeile in festgelegter Reihenfolge.",
+   "fehlvorstellung": null
+  },
+  {
    "id": "werkzeug",
    "name": "Erst von Hand, dann mit Werkzeug",
    "linie": "daten",
@@ -511,6 +634,50 @@
    "ebene": 2,
    "code": false,
    "erklaerung": "Dieselbe Frage zweimal: mit rund 50 eigenen Zeilen und mit einer Anweisung aus einer Bibliothek. Wer den mühsamen Weg kennt, weiß, was das Werkzeug abnimmt.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "dwd",
+   "name": "DWD-Datensatz",
+   "linie": "daten",
+   "vl": 1,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Klimareihe Fichtelberg seit 1890, rund 48.000 Zeilen — der rote Faden.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "tabkalk",
+   "name": "Tabellenkalkulation",
+   "linie": "daten",
+   "vl": 1,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Drei Aufgaben: leicht, mühsam, praktisch aussichtslos.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "versionen",
+   "name": "Versionsverwaltung",
+   "linie": "daten",
+   "vl": 1,
+   "abschnitt": 17,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Hebt jeden Stand einer Datei auf, mit Datum und Grund der Änderung. Bei Skripten sieht man genau, welche Zeile sich geändert hat.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "rohformat",
+   "name": "Rohformat",
+   "linie": "daten",
+   "vl": 1,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Semikolons, Leerzeichen, Datum ohne Trennzeichen, Dezimalpunkt, eor-Spalte.",
    "fehlvorstellung": null
   },
   {
@@ -534,6 +701,17 @@
    "code": false,
    "erklaerung": "Ausblick: Ein Bild ist eine Tabelle aus Helligkeitswerten. Schwelle setzen, zusammenhängende Flecken zählen, Größen messen.",
    "fehlvorstellung": "„Das Programm erkennt, was im Bild ist.“ Es erkennt nur, was heller ist als die Schwelle."
+  },
+  {
+   "id": "lohnt",
+   "name": "Programm oder Tabelle?",
+   "linie": "analyse",
+   "vl": 1,
+   "abschnitt": 16,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Viele Daten, sperrige Formate, Wiederholung, Nachvollziehbarkeit: dann lohnt ein Programm.",
+   "fehlvorstellung": null
   }
  ],
  "beziehungen": [
@@ -554,17 +732,115 @@
   },
   {
    "von": "zaehler",
+   "nach": "sensorlog",
+   "text": "erzeugt"
+  },
+  {
+   "von": "zaehler",
    "nach": "annahmen",
    "text": "beruht auf"
+  },
+  {
+   "von": "sensorlog",
+   "nach": "tabkalk",
+   "text": "ausgewertet mit"
+  },
+  {
+   "von": "kreislauf",
+   "nach": "lohnt",
+   "text": "je Runde die Frage"
+  },
+  {
+   "von": "tabkalk",
+   "nach": "lohnt",
+   "text": "Grenzen zeigen"
+  },
+  {
+   "von": "dwd",
+   "nach": "rohformat",
+   "text": "liegt vor im"
+  },
+  {
+   "von": "tabkalk",
+   "nach": "algo",
+   "text": "motiviert"
+  },
+  {
+   "von": "algo",
+   "nach": "terminierung",
+   "text": "erfordert"
+  },
+  {
+   "von": "algo",
+   "nach": "pseudo",
+   "text": "notiert als"
+  },
+  {
+   "von": "pseudo",
+   "nach": "ablauf",
+   "text": "oder als"
+  },
+  {
+   "von": "algo",
+   "nach": "sprache",
+   "text": "formuliert in"
+  },
+  {
+   "von": "algo",
+   "nach": "bausteine",
+   "text": "besteht aus"
+  },
+  {
+   "von": "pseudo",
+   "nach": "protokoll",
+   "text": "geprüft mit"
+  },
+  {
+   "von": "tabkalk",
+   "nach": "eingabe",
+   "text": "rechnet"
+  },
+  {
+   "von": "tabkalk",
+   "nach": "versionen",
+   "text": "fehlt der"
   }
  ],
  "faeden": [
+  {
+   "id": "wiederverwenden",
+   "name": "Nicht alles neu schreiben",
+   "beschreibung": "Einmal gelösten Code wiederverwenden: erst als Muster, dann als eigene Funktion, als eigene Datei und schließlich als fertiges Paket von anderen.",
+   "stationen": [
+    "pseudo"
+   ],
+   "weiter": true
+  },
+  {
+   "id": "fehlwert",
+   "name": "Wenn ein Wert fehlt",
+   "beschreibung": "„Nicht gemessen“ sieht jedes Mal anders aus: als -999, als fehlende Zeile, als NaN. Und jedes Mal muss man es behandeln.",
+   "stationen": [
+    "dwd"
+   ],
+   "weiter": true
+  },
+  {
+   "id": "tabelle",
+   "name": "Vom Text zur Tabelle",
+   "beschreibung": "Eine Datei ist zunächst nur Text. Wie daraus eine Tabelle mit Spalten und Zahlen wird.",
+   "stationen": [
+    "dwd"
+   ],
+   "weiter": true
+  },
   {
    "id": "messung",
    "name": "Kann ich den Daten trauen?",
    "beschreibung": "Wie Messdaten entstehen und warum man ihnen nicht blind trauen darf.",
    "stationen": [
-    "zaehler"
+    "zaehler",
+    "sensorlog"
    ],
    "weiter": true
   }

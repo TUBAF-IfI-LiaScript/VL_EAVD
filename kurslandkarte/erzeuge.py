@@ -43,7 +43,7 @@ assert len(TERMINE) == 15
 
 # ---- Freigabe: Begriffe einer Vorlesung erscheinen erst nach ihr in der Karte.
 # Nach jeder Vorlesung: Vorschläge der Studierenden einarbeiten, dann hier ergänzen.
-FREIGEGEBEN = {0}
+FREIGEGEBEN = {0, 1}
 # PDFs schon vor der Vorlesung, damit Studierende darin mitschreiben können (Begriffe weiterhin erst nach Freigabe).
 PDF_VORAB = {1}
 if "--freigegeben" in sys.argv:   # für das Makefile: Dateien der freigegebenen Vorlesungen
@@ -90,6 +90,8 @@ B = [
     ("operatoren", "Rechenoperatoren", "denken", 2, 'Rechnen', 2, 0, "+ - * / sowie // (ganzzahlig), % (Rest), ** (Potenz). 18900801 // 10000 ergibt das Jahr.", None),
     ("variable", "Variable", "denken", 2, 'Variablen', 1, 0, "Ein Name, unter dem sich ein Programm einen Wert merkt.", "„Eine Variable merkt sich die Rechnung — wie eine Formel in der Tabellenkalkulation.“"),
     ("zuweisung", "Zuweisung =", "denken", 2, 'Das Gleichheitszeichen ist keine Gleichung', 1, 0, "Rechts wird gerechnet, links wird das Ergebnis abgelegt. Lies = als „wird zu“.", "„= ist eine Gleichung.“"),
+    ("zeitwert", "Uhrzeit als Zahl", "typen", 2, 'Rückblick: Uhrzeiten in der Tabellenkalkulation', 2, 0, "Für die Tabellenkalkulation ist eine Uhrzeit der Bruchteil eines Tages (12:00 = 0,5). Erst als Zahl lässt sie sich vergleichen.", "„Was wie eine Uhrzeit aussieht, kann ich auch wie eine Uhrzeit vergleichen.“ Text gilt beim Vergleich als größer als jede Zahl."),
+    ("vierfragen", "Von der Frage zum Pseudocode", "denken", 2, 'Von der Frage zum Pseudocode', 1, 0, "Vier Fragen: Was steht in einer Zeile? Was merke ich mir? Was tue ich mit jeder Zeile? Was gebe ich am Ende aus?", "„Eindeutig heißt so gemeint.“ — „beginnt mit A“ zählt weder „Åberg“ noch „auf der Heide“."),
     ("trace", "Programm im Kopf ausführen", "denken", 2, 'Das Gleichheitszeichen ist keine Gleichung', 2, 0, "Tabelle mit einer Spalte pro Variable, eine Zeile pro Schritt — die zentrale Klausurfähigkeit.", None),
     ("namen", "Variablennamen", "denken", 2, 'Namen wählen', 2, 0, "Buchstaben, Ziffern, Unterstrich; nicht mit Ziffer beginnen; sprechend wählen.", "„Der Rechner versteht, was ein Name bedeutet.“"),
     ("vergleich", "Vergleich / bool", "denken", 2, 'Vergleiche', 1, 0, "Vergleiche wie minimum < 0 liefern True oder False.", "= weist zu, == vergleicht."),
@@ -213,6 +215,7 @@ R = [
     ("pseudo", "protokoll", "geprüft mit"), ("protokoll", "trace", "in Python:"), ("tabkalk", "eingabe", "rechnet"),
     ("eingabe", "variable", "anders als eine Formel:"), ("tabkalk", "versionen", "fehlt der"), ("versionen", "reproduzierbar", "unterstützt"), ("blockly", "print", "gleiches Programm wie"),
     # VL 02
+    ("pseudo", "vierfragen", "entsteht mit"), ("tabkalk", "zeitwert", "Hürde in Aufgabe 2:"), ("zeitwert", "typ", "Beispiel für"), ("zeitwert", "datetime", "in Python:"), ("vierfragen", "variable", "was ich mir merke, wird zur"),
     ("sprache", "interpreter", "ausgeführt vom"), ("interpreter", "fehlermeldung", "meldet"), ("variable", "zuweisung", "entsteht durch"),
     ("variable", "namen", "braucht"), ("variable", "print", "ausgegeben mit"), ("zuweisung", "trace", "nachvollziehen mit"),
     ("operatoren", "zuweisung", "rechts vom ="), ("dezimalpunkt", "operatoren", "Voraussetzung für"), ("variable", "typ", "hat einen"),
