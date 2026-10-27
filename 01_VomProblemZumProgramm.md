@@ -716,7 +716,7 @@ import pandas as pd
 # Einlesen, Spalten trennen, fehlende Werte als NaN markieren
 df = pd.read_csv("produkt_klima_tag_18900801_20251231_01358.txt",
                  sep=";", skipinitialspace=True, na_values=-999)
-# Jahr aus dem Datum extrahieren
+# Jahr aus dem Datum extrahieren: 18900801 // 10000 = 1890
 df["Jahr"] = df["MESS_DATUM"] // 10000
 # Zählen der Frosttage pro Jahr
 print((df["TNK"] < 0).groupby(df["Jahr"]).sum())

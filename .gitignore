@@ -13,3 +13,6 @@ main
 
 # Python
 __pycache__/
+
+# Zugangsdaten, nie veröffentlichen
+ETHERPAD_Schlüssel
