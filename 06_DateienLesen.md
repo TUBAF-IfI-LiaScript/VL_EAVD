@@ -1,6 +1,6 @@
 <!--
 
-author:   Sebastian Zug & Bernhard Jung
+author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
 version:  2.0.2
 language: de
@@ -38,6 +38,12 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 * Wie zerlegt man eine Zeile in ihre Spalten?
 * Was tut man mit Kopfzeile, Fehlwerten und Lücken?
 * Wie schreibt man ein Ergebnis in eine neue Datei?
+
+<!-- kurslandkarte:knopf-start -->
+
+<a href="https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=6" style="display: inline-block; padding: 0.5em 1.1em; background-color: #00718A; color: #ffffff; text-decoration: none; font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; font-weight: 600;">🗺️ Diese Vorlesung in der Kurslandkarte →</a>
+
+<!-- kurslandkarte:knopf-ende -->
 
 > Die Beispiele heute laufen auf einem Server, genau wie Python auf Ihrem Rechner — einschließlich echter Dateien. Der erste Klick auf "Ausführen" kann einige Sekunden dauern, bis der Server bereit ist.
 

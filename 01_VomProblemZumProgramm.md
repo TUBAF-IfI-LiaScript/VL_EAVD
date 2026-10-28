@@ -1,6 +1,6 @@
 <!--
 
-author:   Sebastian Zug & Bernhard Jung
+author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
 version:  2.3.0
 language: de
@@ -52,6 +52,12 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 * Was genau macht eine Auswertung "mühsam"?
 * Was ist ein Algorithmus, und welche Eigenschaften muss er haben?
 * Warum brauchen wir für Algorithmen eine eigene Sprache?
+
+<!-- kurslandkarte:knopf-start -->
+
+<a href="https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=1" style="display: inline-block; padding: 0.5em 1.1em; background-color: #00718A; color: #ffffff; text-decoration: none; font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; font-weight: 600;">🗺️ Diese Vorlesung in der Kurslandkarte →</a>
+
+<!-- kurslandkarte:knopf-ende -->
 
 --{{0}}--
 Heute schreiben wir noch keine Zeile Code. Wir arbeiten mit einem Werkzeug, das die meisten von Ihnen aus der Schule kennen, und treiben es bewusst an seine Grenzen. Achten Sie dabei weniger auf die Ergebnisse als darauf, an welcher Stelle es mühsam wird. Genau dort beginnt das Programmieren.

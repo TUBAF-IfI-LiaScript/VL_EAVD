@@ -1,6 +1,6 @@
 <!--
 
-author:   Sebastian Zug & Bernhard Jung
+author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
 version:  2.0.1
 language: de
@@ -52,6 +52,12 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 * Wie zählt, filtert und mittelt man ohne Schleife?
 * Wie arbeitet man Schritt für Schritt mit Daten, ohne das Werkzeug zu wechseln?
 * Was ist ein Jupyter Notebook — und worauf muss man beim Lesen achten?
+
+<!-- kurslandkarte:knopf-start -->
+
+<a href="https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=10" style="display: inline-block; padding: 0.5em 1.1em; background-color: #00718A; color: #ffffff; text-decoration: none; font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; font-weight: 600;">🗺️ Diese Vorlesung in der Kurslandkarte →</a>
+
+<!-- kurslandkarte:knopf-ende -->
 
 > Beim ersten Ausführen lädt der Browser die Bibliothek NumPy nach. Das dauert einige Sekunden.
 

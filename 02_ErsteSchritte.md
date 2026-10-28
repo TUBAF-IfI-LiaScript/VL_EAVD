@@ -1,6 +1,6 @@
 <!--
 
-author:   Sebastian Zug & Bernhard Jung
+author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
 version:  2.1.0
 language: de
@@ -39,6 +39,12 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 * Wie speichert ein Programm Werte, und wie rechnet es damit?
 * Warum ist `"6,26"` etwas anderes als `6.26`?
 * Was sagt mir eine Fehlermeldung — und wie gehe ich damit um?
+
+<!-- kurslandkarte:knopf-start -->
+
+<a href="https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=2" style="display: inline-block; padding: 0.5em 1.1em; background-color: #00718A; color: #ffffff; text-decoration: none; font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; font-weight: 600;">🗺️ Diese Vorlesung in der Kurslandkarte →</a>
+
+<!-- kurslandkarte:knopf-ende -->
 
 > Alle Beispiele laufen heute direkt im Browser. Sie müssen nichts installieren.
 

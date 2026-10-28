@@ -1,6 +1,6 @@
 <!--
 
-author:   Sebastian Zug & Bernhard Jung
+author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
 version:  2.0.1
 language: de
@@ -38,6 +38,12 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 * Was gehört an jedes Diagramm?
 * Wie berechnet man einen Trend — und für welchen Zeitraum?
 * Wie kann eine korrekte Grafik trotzdem täuschen?
+
+<!-- kurslandkarte:knopf-start -->
+
+<a href="https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=13" style="display: inline-block; padding: 0.5em 1.1em; background-color: #00718A; color: #ffffff; text-decoration: none; font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; font-weight: 600;">🗺️ Diese Vorlesung in der Kurslandkarte →</a>
+
+<!-- kurslandkarte:knopf-ende -->
 
 > Beim ersten Ausführen lädt der Browser pandas und matplotlib nach. Das dauert einige Sekunden. Beim ersten Diagramm meldet matplotlib in roter Schrift „Matplotlib is building the font cache“ — das ist keine Fehlermeldung, sondern ein Hinweis.
 

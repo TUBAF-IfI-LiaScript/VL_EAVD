@@ -1,6 +1,6 @@
 <!--
 
-author:   Sebastian Zug & Bernhard Jung
+author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
 version:  0.1.2
 language: de
@@ -39,6 +39,12 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 * Wie wird aus einer physikalischen Größe eine Zahl in einer Datei?
 * Welche Annahmen stecken in einem Messprogramm — und wann gehen sie schief?
 * Warum hat jede Zahl im Datensatz eine Genauigkeit, einen Messort und ein Ausfallrisiko?
+
+<!-- kurslandkarte:knopf-start -->
+
+<a href="https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=8" style="display: inline-block; padding: 0.5em 1.1em; background-color: #00718A; color: #ffffff; text-decoration: none; font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; font-weight: 600;">🗺️ Diese Vorlesung in der Kurslandkarte →</a>
+
+<!-- kurslandkarte:knopf-ende -->
 
 **Einordnung:** Vorlesung 08, Woche 9, letzter Termin vor der Weihnachtspause · Werkzeug: Demonstration mit MicroPython · nicht prüfungsrelevant
 
