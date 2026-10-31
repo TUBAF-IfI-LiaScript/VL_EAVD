@@ -1,6 +1,6 @@
 {
  "stand": "31.10.2026",
- "version": "0.5.0",
+ "version": "0.5.2",
  "kurs": {
   "basis": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/",
   "speicher": "eavd-map",
@@ -8,8 +8,8 @@
   "einheiten": "Vorlesungen",
   "einheiten_dat": "Vorlesungen",
   "gleich": "In derselben Vorlesung",
-  "freigabe": "erscheinen nach der Vorlesung, Sie ergänzen, was fehlt",
-  "folgen": "Die Begriffe dieser Vorlesung erscheinen nach der Vorlesung. Wir schlagen sie vor, Sie ergänzen, was fehlt.",
+  "freigabe": "erscheinen zu Beginn der Vorlesung, Sie ergänzen, was fehlt",
+  "folgen": "Die Begriffe dieser Vorlesung erscheinen zu Beginn der Vorlesung. Wir schlagen sie vor, Sie ergänzen, was fehlt.",
   "spalten": [
    [
     "VL",
