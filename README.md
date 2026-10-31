@@ -22,7 +22,7 @@ logo: ./images/Readme/Wetterstation.png
 
 > **Dieser Kurs wird gerade überarbeitet.** Zum Wintersemester 2026/27 bauen wir die Veranstaltung grundlegend um — Inhalte, Reihenfolge und Beispiele können sich noch ändern.
 >
-> **Stand 16.10.2026:** Vorlesungen 00–07 und 09–14 sind ausgearbeitet, Vorlesung 08 (Demonstration Datenerhebung mit dem Arduino Alvik) liegt als Rumpf vor. Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester: Nach jeder Vorlesung kommen ihre Begriffe und ein PDF der Vorlesung dazu. Die Materialien des bisherigen Kurses (C++/Python) sind in der Git-Historie erreichbar (Commit `21d3061`).
+> **Stand 31.10.2026:** Vorlesungen 00–07 und 09–14 sind ausgearbeitet, Vorlesung 08 (Demonstration Datenerhebung mit dem Arduino Alvik) liegt als Rumpf vor. Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester: Nach jeder Vorlesung kommen ihre Begriffe dazu, das PDF einer Vorlesung erscheint schon vorher. Die Materialien des bisherigen Kurses (C++/Python) sind in der Git-Historie erreichbar (Commit `21d3061`).
 >
 > Hinweise und Fehler gern als [Issue](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/issues). Die Materialien stehen unter [CC BY 4.0](#lizenz).
 

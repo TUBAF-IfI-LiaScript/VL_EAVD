@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.1.0
+version:  2.3.0
 language: de
 narrator: Deutsch Female
 
@@ -31,7 +31,7 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 
 --------------------------------------------------------------------------------
 
-**Leitfrage:** _Wie sage ich dem Rechner, was er tun soll?_
+**Leitfrage:** _Was macht der Rechner mit „-1,9“ aus unserer Datei?_
 
 **Fragen an die heutige Veranstaltung ...**
 
@@ -40,11 +40,16 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 * Warum ist `"6,26"` etwas anderes als `6.26`?
 * Was sagt mir eine Fehlermeldung — und wie gehe ich damit um?
 
+> **Zum Nacharbeiten: die Ansicht „Lehrbuch“.** Im Hörsaal zeigen die Folien nur die Kernbotschaften. Die Erklärungen dazu stehen im Lehrbuch: oben rechts auf das Symbol mit den Schiebereglern klicken und „Lehrbuch“ wählen.
+
 <!-- kurslandkarte:knopf-start -->
 
 <a href="https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=2" style="display: inline-block; padding: 0.5em 1.1em; background-color: #00718A; color: #ffffff; text-decoration: none; font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; font-weight: 600;">🗺️ Diese Vorlesung in der Kurslandkarte →</a>
 
 <!-- kurslandkarte:knopf-ende -->
+
+--{{0}}--
+Heute schreiben Sie Ihre ersten Zeilen Python. Wir beginnen mit der Tabellenkalkulation und dem Pseudocode, damit der Übergang kein Sprung wird. Am Ende nehmen wir eine echte Zeile aus unserer Datei auseinander. Sie werden dabei Fehlermeldungen sehen, manche mit Absicht. Das ist kein Zeichen dafür, dass etwas schiefläuft, sondern Teil der Arbeit.
 
 > Alle Beispiele laufen heute direkt im Browser. Sie müssen nichts installieren.
 
@@ -63,6 +68,9 @@ Gib den bisher wärmsten Tag aus.
 ```
 
 > Darin stecken schon fast alle Zutaten eines Programms: Man muss sich etwas **merken** (heute), etwas **vergleichen** und etwas **wiederholen** (nächste Woche). Heute kümmern wir uns um das Merken und Rechnen.
+
+--{{0}}--
+Ihre Formulierung darf anders aussehen, wichtig ist der Ablauf. `MAX` macht es im Grunde genauso: Es geht alle Werte durch und merkt sich den bisher größten. Sie haben also von Hand aufgeschrieben, was die Funktion Ihnen sonst abnimmt.
 
 ### Rückblick: Uhrzeiten in der Tabellenkalkulation
 
@@ -261,7 +269,7 @@ Achten Sie beim Vergleichen weniger auf die Formulierung als auf zwei Dinge: Hab
 
 ## Vom Text zur Ausführung
 
-Ein Prozessor versteht nur **Maschinenbefehle** — sehr einfache Anweisungen wie "lade Wert", "addiere", "springe", codiert als Bitmuster. Zwischen Ihrem Programmtext und dem Prozessor steht deshalb ein Übersetzer. Bei Python ist das der **Interpreter**:
+Ein Prozessor versteht nur **Maschinenbefehle**. Zwischen Ihrem Programmtext und dem Prozessor steht deshalb ein Übersetzer, bei Python der **Interpreter**:
 
 ``` ascii
   +-----------------+        +------------------+        +--------------+
@@ -281,17 +289,15 @@ Zwei Dinge sollten Sie sich merken:
 1. Der Interpreter arbeitet **von oben nach unten**, eine Anweisung nach der anderen.
 2. Stößt er auf etwas, das er nicht versteht, **bricht er ab** und sagt Ihnen, wo und warum.
 
+--{{0}}--
+Maschinenbefehle sind sehr einfache Anweisungen wie „lade Wert“, „addiere“ oder „springe“, gespeichert als Bitmuster. Von Hand schreibt das heute kaum noch jemand. Der Interpreter ist selbst ein Programm. Auf Ihrem Rechner haben Sie ihn in der ersten Übung installiert, hier im Browser läuft eine eigene Fassung davon, sie heißt Pyodide.
+
 ### Warum Python?
 
-<!-- data-type="none" -->
-| Grund                                 | Was das für Sie bedeutet                                          |
-| :------------------------------------ | :---------------------------------------------------------------- |
-| gut lesbar                            | Programme sehen fast aus wie der Pseudocode von letzter Woche      |
-| in der Wissenschaft verbreitet        | Für fast jede Fachfrage gibt es eine fertige Bibliothek            |
-| eine Sprache für die ganze Kette      | Vom Mikrocontroller (Vorlesung 08) bis zur Datenanalyse mit pandas |
-| frei verfügbar                        | Keine Lizenzkosten, läuft auf jedem Rechner                        |
-
 > Python ist nicht die schnellste Sprache und nicht die einzige. Für unsere Zwecke — Daten einlesen, aufbereiten, auswerten, darstellen — ist sie aber die naheliegendste.
+
+--{{0}}--
+Python ist gut lesbar: Programme sehen fast aus wie der Pseudocode von letzter Woche. In der Wissenschaft ist es so verbreitet, dass es für fast jede Fachfrage eine fertige Bibliothek gibt. Es reicht vom Mikrocontroller in Vorlesung 08 bis zur Datenanalyse mit pandas, und es kostet nichts und läuft auf jedem Rechner.
 
 ## Die erste Anweisung
 
@@ -315,6 +321,9 @@ print(1213)
 * Ergänzen Sie eine Zeile, die das Jahr des Messbeginns (1890) ausgibt.
 * Was passiert, wenn Sie bei `"Hallo Fichtelberg!"` ein Anführungszeichen weglassen?
 * `print` kann mehrere Dinge auf einmal ausgeben, getrennt durch Kommas: `print("Höhe:", 1213, "m")`
+
+--{{0}}--
+`print` bringt Python schon mit. Die Anführungszeichen sagen Python, dass Text folgt, den es nicht deuten soll; die Zahl `1213` steht deshalb ohne. Blöcke nutzen wir nur am Anfang: Sie verhindern Schreibfehler, sodass Sie sich auf den Ablauf konzentrieren können. Nach Vorlesung 07 arbeiten wir nur noch im Text.
 
 ## Rechnen
 
@@ -358,6 +367,12 @@ Die zweite Zeile gibt `6 27` aus. Python hat zwei Werte gesehen — `6` und `26 
 
 *******************************************************************************
 
+--{{0}}--
+`/` liefert immer eine Kommazahl, auch bei `8 / 2`. `%` liefert den Rest einer Division. Damit prüft man zum Beispiel, ob eine Zahl gerade ist: `n % 2` ergibt dann 0.
+
+--{{1}}--
+Python liest das Komma als Trennzeichen zwischen zwei Werten, genau wie in `print("Höhe:", 1213)`. Deutsche Zahlen in Dateien sind deshalb eine ständige Falle. Am Ende der Vorlesung begegnet sie uns wieder.
+
 ## Variablen
 
 Eine **Variable** ist ein Name, unter dem sich ein Programm einen Wert merkt.
@@ -375,6 +390,9 @@ print("Temperaturspanne 2024:", spanne)
 # runner: variablen
 ```
 @Pyodide.eval
+
+--{{0}}--
+Die Werte stammen aus dem Jahr 2024: Jahresmittel, tiefstes Minimum und höchstes Maximum. Eine Variable ähnelt einer benannten Zelle in der Tabellenkalkulation, mit einem wichtigen Unterschied, den Sie gleich sehen werden. Eine Variable entsteht in dem Moment, in dem ihr zum ersten Mal ein Wert zugewiesen wird.
 
 ### Das Gleichheitszeichen ist keine Gleichung
 
@@ -422,6 +440,12 @@ Die Ausgabe lautet also `15 9`.
 
 *******************************************************************************
 
+--{{0}}--
+`zaehler = zaehler + 1` wird Ihnen ab nächster Woche ständig begegnen: So zählt ein Programm mit. Rechts steht der alte Wert, links landet der neue.
+
+--{{1}}--
+Das ist das Ablaufprotokoll aus Vorlesung 01, jetzt für Python. Eine Zeile pro Anweisung, eine Spalte pro Variable. Die Zeile mit `print` ändert keine Variable, deshalb fehlt sie in der Tabelle.
+
 ### Typische Fehlvorstellung: Variablen rechnen nach
 
 > **Typische Fehlvorstellung:** _„Eine Variable merkt sich die Rechnung — wie eine Formel in der Tabellenkalkulation.“_
@@ -446,6 +470,9 @@ In der Tabellenkalkulation würde `=B2-B1` sofort neu rechnen, wenn sich `B2` ä
 Soll `spanne` den neuen Wert berücksichtigen, muss man die Zeile `spanne = maximum - minimum` erneut ausführen.
 ***
 
+--{{0}}--
+Hier zeigt sich der Unterschied aus Vorlesung 01: Die Tabellenkalkulation ist eingabengetrieben, ein Skript läuft der Reihe nach. Python merkt sich das Ergebnis einer Rechnung, nicht ihren Weg.
+
 ### Namen wählen
 
 Ein Variablenname
@@ -453,7 +480,7 @@ Ein Variablenname
 * besteht aus Buchstaben, Ziffern und dem Unterstrich `_`,
 * beginnt **nicht** mit einer Ziffer,
 * unterscheidet Groß- und Kleinschreibung: `Minimum` und `minimum` sind zwei verschiedene Variablen,
-* darf kein reserviertes Wort wie `if`, `for`, `print` oder `True` sein.
+* darf kein reserviertes Wort wie `if`, `for`, `while` oder `True` sein.
 
 <!-- data-type="none" -->
 | Name            | erlaubt? | gut?                                                     |
@@ -469,6 +496,9 @@ Ein Variablenname
 > **Typische Fehlvorstellung:** _„Der Rechner versteht, was ein Name bedeutet.“_
 >
 > `frosttage = 0` zählt keine Frosttage. `mittelwert = 0` berechnet keinen Mittelwert. Namen sind nur Etiketten für Sie und andere Menschen. Was in einer Variable steht, bestimmen ausschließlich die Anweisungen, die Sie schreiben.
+
+--{{0}}--
+Python kennt rund 35 reservierte Wörter, einige davon lernen Sie nächste Woche kennen. Visual Studio Code färbt sie ein, Sie können sie also nicht übersehen. Umlaute sind erlaubt, machen aber Ärger, sobald Dateien zwischen Rechnern wandern.
 
 ## Datentypen
 
@@ -492,6 +522,9 @@ print(type(-14.1 < 0))
 print(type("18900801"))
 ```
 @Pyodide.eval
+
+--{{0}}--
+Der DWD schreibt die Stations-ID mit führender Null: `01358`. Als `int` geht die Null verloren, und ohne Anführungszeichen meldet Python sogar einen `SyntaxError`. Kennziffern wie Postleitzahlen sind deshalb Text, auch wenn sie aus Ziffern bestehen. `float` steht für Gleitkommazahl, `bool` ist nach dem Mathematiker George Boole benannt.
 
 ### Text ist nicht Zahl
 
@@ -550,6 +583,12 @@ Solche Reparaturen gehören zum Alltag der Datenaufbereitung. Sie werden uns noc
 
 *******************************************************************************
 
+--{{0}}--
+Für Python ist eine Datei zunächst nur eine lange Folge von Zeichen. Von Spalten und Zahlen weiß es nichts, das ist Ihre Aufgabe.
+
+--{{1}}--
+`int(6.9)` schneidet ab, `int("6.9")` scheitert dagegen mit einem `ValueError`, weil in einem Text für `int` kein Punkt stehen darf. Runden können Sie mit `round(6.9)`.
+
 ### Mit Text arbeiten
 
 Texte kann man zusammensetzen, nach ihrer Länge fragen und Teile herausschneiden:
@@ -567,6 +606,9 @@ print(jahr, monat)
 @Pyodide.eval
 
 > `datum[0:4]` bedeutet: die Zeichen ab Position 0 bis **vor** Position 4. Python beginnt beim Zählen immer bei **0**.
+
+--{{0}}--
+Stellen Sie sich die Positionen als Striche zwischen den Zeichen vor: `[0:4]` schneidet von Strich 0 bis Strich 4. So lässt sich die Länge direkt ablesen, 4 minus 0 sind vier Zeichen. Eine negative Position zählt von hinten, `station[-1]` ist das letzte Zeichen.
 
 ### Vergleiche
 
@@ -592,6 +634,9 @@ print("Frosttag?", frosttag)
 >
 > Mit diesen Wahrheitswerten trifft ein Programm **Entscheidungen** — darum geht es in der nächsten Vorlesung.
 
+--{{0}}--
+Vorsicht bei zwei Vergleichen: `"10" < "9"` ist `True`, weil Text Zeichen für Zeichen verglichen wird. Wandeln Sie deshalb vor dem Vergleichen um. Und `0.1 + 0.2 == 0.3` ist `False`, weil Kommazahlen im Rechner nicht exakt gespeichert werden. Kommazahlen sollte man deshalb nicht mit `==` auf exakte Gleichheit prüfen.
+
 ## Kommentare
 
 Alles hinter einem `#` ignoriert der Interpreter. Kommentare sind für Menschen:
@@ -606,6 +651,9 @@ print(minimum < 0)
 @Pyodide.eval
 
 > Gute Kommentare erklären, **warum** etwas so ist — nicht **was** dasteht. `zaehler = zaehler + 1  # erhöhe zaehler um 1` hilft niemandem.
+
+--{{0}}--
+Das Programm zeigt das Problem, löst es aber noch nicht: `-999` ist kleiner als 0 und zählt damit als Frost. Wie man das verhindert, lernen Sie nächste Woche. In Visual Studio Code macht `Strg+/`, auf deutscher Tastatur oft `Strg+#`, aus markierten Zeilen Kommentare. So schaltet man Zeilen vorübergehend ab.
 
 ## Fehlermeldungen lesen
 
@@ -637,6 +685,9 @@ Die häufigsten Fehler am Anfang:
 
 > **Und dann?** Lesen, Zeile anschauen, Hypothese bilden, ändern, erneut ausführen. Hilft das nicht: die letzte Zeile der Meldung in eine Suchmaschine kopieren. Sie sind garantiert nicht die erste Person mit diesem Fehler.
 
+--{{0}}--
+Traceback heißt Rückverfolgung. In Visual Studio Code steht statt `<exec>` der Pfad Ihrer Datei. Auch ein KI-Assistent kann eine Meldung erklären. Prüfen Sie seinen Vorschlag aber wie jedes andere Ergebnis: Können Sie sagen, warum er das Problem löst?
+
 ### Typische Fehlvorstellung: Der Fehler steht in der gemeldeten Zeile
 
 > Aus Ihren Antworten in Vorlesung 00: _„… praktisch leider oft mini Schreibfehler, die niemand findet“_
@@ -665,6 +716,55 @@ Python zeigt, wo es nicht weiterkommt, nicht, wo der Fehler entstanden ist. Der 
                                     --{{0}}--
 Bei einem `NameError` lohnt immer der Blick nach oben: Wo wurde der Name angelegt, und ist er dort genauso geschrieben? Ähnlich bei Klammern: Fehlt eine schließende Klammer, meldet Python `'(' was never closed` und zeigt auf die öffnende. Die Suche beginnt also an der gemeldeten Stelle, endet aber oft weiter oben.
 
+## Die Antwort auf die Leitfrage
+
+So steht der 1. Januar 2024 in `fichtelberg_2024.csv`, die Spalten sind Datum, Tagesmittel, Minimum und Maximum:
+
+```python
+zeile = "2024-01-01;-1,2;-1,9;-0,7"
+
+stueck = zeile[16:20]
+print(stueck, type(stueck))
+
+minimum = float(stueck.replace(",", "."))
+print(minimum, minimum < 0)
+```
+@Pyodide.eval
+
+> Für den Rechner ist `-1,9` zunächst nur Text. Erst wenn wir das richtige Stück **herausschneiden**, das Komma **ersetzen** und **umwandeln**, wird daraus eine Zahl, mit der man rechnen und vergleichen kann. In diesen Zeilen steckt die ganze heutige Vorlesung.
+
+--{{0}}--
+Warum Position 16? Das Datum belegt zehn Zeichen, dann folgen ein Semikolon, vier Zeichen Tagesmittel und noch ein Semikolon. Sehen Sie die Parallele zum Anfang der Vorlesung? Abspalten, umwandeln, vergleichen: Das waren dieselben drei Schritte wie bei den Uhrzeiten in der Tabellenkalkulation. Nur schreiben Sie sie jetzt selbst auf.
+
+### Typische Fehlvorstellung: Was für eine Zeile stimmt, stimmt für alle
+
+> **Typische Fehlvorstellung:** _„Läuft das Programm für eine Zeile richtig, läuft es für jede richtig.“_
+
+Dasselbe Programm, sechs Tage später:
+
+```python
+zeile = "2024-01-07;-8,9;-11,9;-4,2"
+
+stueck = zeile[16:20]
+minimum = float(stueck.replace(",", "."))
+print(minimum)
+```
+@Pyodide.eval
+
+Legen Sie sich fest, **bevor** Sie das Programm ausführen: Was wird ausgegeben?
+
+[( )] `-11.9`
+[(X)] `-11.0`
+[( )] eine Fehlermeldung
+***
+Das Minimum beträgt `-11,9`, ist aber ein Zeichen länger als `-1,9`. An den Positionen 16 bis 19 steht deshalb nur `-11,`, und daraus macht Python ohne Beschwerde `-11.0`.
+
+Über das ganze Jahr 2024 trifft `[16:20]` in 134 von 366 Zeilen den richtigen Wert. In 227 Zeilen bricht das Programm mit einem Fehler ab. In 5 Zeilen läuft es durch und liefert einen falschen Wert.
+***
+
+--{{0}}--
+Das ist derselbe Fehlertyp wie das Komma in `print(6,26 + 1)`: keine Meldung, aber ein falsches Ergebnis. Deshalb reicht es nicht, ein Programm an einer einzigen Zeile zu prüfen. Die saubere Lösung lernen Sie in Vorlesung 06 kennen: `split(";")` zerlegt eine Zeile an den Semikolons, egal wie lang die Zahlen sind.
+
 ## Kontrollfragen
 
 **Was gibt dieses Programm aus?**
@@ -689,6 +789,24 @@ print(x, y)
 
 In Zeile 4 wird `y` zu `14 - 7 = 7` — der Wert bleibt also zufällig gleich.
 ***
+
+**Finden Sie alle Fehler.**
+
+```python
+Tagesmittel = 6.26
+spanne = 26,9 - -14.1
+print("Mittel:" tagesmittel)
+```
+
+[[X]] Zeile 2: `26,9` muss `26.9` heißen
+[[X]] Zeile 3: Zwischen `"Mittel:"` und dem Namen fehlt ein Komma
+[[X]] Zeile 3: `tagesmittel` ist klein geschrieben, angelegt wurde `Tagesmittel`
+[[ ]] Zeile 2: `- -14.1` ist nicht erlaubt
+***
+`- -14.1` ist korrekt und bedeutet "minus minus 14,1", also plus 14,1. Der Fehler in Zeile 2 erzeugt übrigens **keine** Fehlermeldung — `spanne` wird einfach ein Paar aus zwei Werten.
+***
+
+### Weitere Kontrollfragen zum Nacharbeiten
 
 **Welchen Typ haben die folgenden Werte?**
 
@@ -721,31 +839,15 @@ Text und Zahl lassen sich nicht mit `+` verbinden. Richtig wäre `print("Frostta
 Links vom `=` steht immer **genau ein Name** — dort wird das Ergebnis abgelegt. Rechts steht der Ausdruck, der zuerst ausgerechnet wird. Anders als in der Mathematik lässt sich eine Zuweisung nicht "umdrehen".
 ***
 
-**Finden Sie alle Fehler.**
-
-```python
-Tagesmittel = 6.26
-spanne = 26,9 - -14.1
-print("Mittel:" tagesmittel)
-```
-
-[[X]] Zeile 2: `26,9` muss `26.9` heißen
-[[X]] Zeile 3: Zwischen `"Mittel:"` und dem Namen fehlt ein Komma
-[[X]] Zeile 3: `tagesmittel` ist klein geschrieben, angelegt wurde `Tagesmittel`
-[[ ]] Zeile 2: `- -14.1` ist nicht erlaubt
-***
-`- -14.1` ist korrekt und bedeutet "minus minus 14,1", also plus 14,1. Der Fehler in Zeile 2 erzeugt übrigens **keine** Fehlermeldung — `spanne` wird einfach ein Paar aus zwei Werten.
-***
-
 ## Ihre Begriffe für die Kurslandkarte
 
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam; nach der Vorlesung werden die Begriffe dieser Woche in der Karte freigeschaltet.
+Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester. Wir schlagen die Begriffe vor, Sie ergänzen, was fehlt: Aus Ihren Datenwünschen in Vorlesung 00 sind so schon die ersten Anwendungen geworden. Nehmen Sie sich dafür jetzt fünf Minuten.
 
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
+**Welches Wort von heute müssten Sie jemandem aus Ihrem Semester erklären können?**
 
 [[___ ___ ___]]
 
-**Wo könnten Sie das, was heute dran war, in Ihrem Fach anwenden?**
+**Welche Daten aus Ihrem Fach würden Sie gern so auswerten?**
 
 [[___ ___ ___]]
 
@@ -755,9 +857,12 @@ Ab der nächsten Vorlesung arbeiten wir zusätzlich mit Python auf Ihrem eigenen
 
 **Zur Vorbereitung**
 
-- [ ] Installieren Sie Python (mindestens Version 3.12) von [python.org](https://www.python.org/downloads/).
-- [ ] Installieren Sie den Editor [Visual Studio Code](https://code.visualstudio.com/) mit der Erweiterung _Python_.
+- [ ] Falls in der ersten Übung noch nicht geschehen: Installieren Sie Python (mindestens Version 3.12) von [python.org](https://www.python.org/downloads/) und [Visual Studio Code](https://code.visualstudio.com/) mit der Erweiterung _Python_. Die Anleitung steht auf Blatt 1, Teil B.
 - [ ] Schreiben Sie eine Datei `hallo.py` mit einer `print`-Anweisung und führen Sie sie aus.
 - [ ] Probieren Sie: Wie rechnet man in Python eine Temperatur von °C in °F um? ($F = C \cdot 1{,}8 + 32$)
 
 > Wenn die Installation nicht klappt: Bringen Sie Ihren Laptop in die Übung mit. Dort helfen wir.
+
+**Zur Übung**
+
+Blatt 2 (Bohrkerne vermessen) steht nach der Vorlesung in [OPAL](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/469368834). Versuchen Sie sich **vor** der Übung an den Aufgaben, gern auch zu zweit. Besprochen wird es in der Übung ab dem 09.11.

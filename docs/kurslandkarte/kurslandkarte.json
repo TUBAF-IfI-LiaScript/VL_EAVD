@@ -1,5 +1,5 @@
 {
- "stand": "28.10.2026",
+ "stand": "31.10.2026",
  "version": "0.5.0",
  "kurs": {
   "basis": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/",
@@ -8,8 +8,8 @@
   "einheiten": "Vorlesungen",
   "einheiten_dat": "Vorlesungen",
   "gleich": "In derselben Vorlesung",
-  "freigabe": "erscheinen nach der Vorlesung, mit Ihren Vorschlägen",
-  "folgen": "Die Begriffe dieser Vorlesung entstehen nach der Vorlesung – mit Ihren Vorschlägen.",
+  "freigabe": "erscheinen nach der Vorlesung, Sie ergänzen, was fehlt",
+  "folgen": "Die Begriffe dieser Vorlesung erscheinen nach der Vorlesung. Wir schlagen sie vor, Sie ergänzen, was fehlt.",
   "spalten": [
    [
     "VL",
@@ -197,7 +197,7 @@
    "woche_tage": "2.–6.11.",
    "wann": "KW 45 · 2.–6.11.",
    "wann_kurz": "KW 45",
-   "leitfrage": "Wie sage ich dem Rechner, was er tun soll?",
+   "leitfrage": "Was macht der Rechner mit „-1,9“ aus unserer Datei?",
    "freigegeben": false,
    "status": "ausgearbeitet",
    "block": 1,
@@ -488,7 +488,7 @@
    "linie": "erhebung",
    "vl": 0,
    "abschnitt": 19,
-   "ebene": 2,
+   "ebene": 1,
    "code": false,
    "erklaerung": "Grenzwerte, Schwellen und Zeitfenster im Code legen fest, was als Ergebnis herauskommt — ohne dass eine Fehlermeldung darauf hinweist.",
    "fehlvorstellung": "„Es funktioniert, also stimmt das Ergebnis.“"
@@ -609,7 +609,7 @@
    "linie": "denken",
    "vl": 1,
    "abschnitt": 14,
-   "ebene": 2,
+   "ebene": 1,
    "code": false,
    "erklaerung": "Einen Algorithmus mit wenigen Werten von Hand ausführen und nach jedem Schritt den Zwischenstand notieren.",
    "fehlvorstellung": null
@@ -631,7 +631,7 @@
    "linie": "daten",
    "vl": 0,
    "abschnitt": 11,
-   "ebene": 2,
+   "ebene": 1,
    "code": false,
    "erklaerung": "Dieselbe Frage zweimal: mit rund 50 eigenen Zeilen und mit einer Anweisung aus einer Bibliothek. Wer den mühsamen Weg kennt, weiß, was das Werkzeug abnimmt.",
    "fehlvorstellung": null
@@ -686,7 +686,7 @@
    "linie": "analyse",
    "vl": 0,
    "abschnitt": 3,
-   "ebene": 2,
+   "ebene": 1,
    "code": false,
    "erklaerung": "Frage, Erhebung, Aufbereitung, Analyse, Visualisierung, Dokumentation — meist mehrere Runden.",
    "fehlvorstellung": null
@@ -883,6 +883,102 @@
     "blockly"
    ],
    "herkunft": "lehrende"
+  },
+  {
+   "id": "a_w_bohrloch",
+   "titel": "Bohrlochdrücke",
+   "fach": "Bohrtechnik",
+   "vl": 0,
+   "abschnitt": 6,
+   "datensatz": "Noch gesucht. Ihr Wunsch aus der Umfrage in Vorlesung 00.",
+   "schlagworte": [
+    "kreislauf"
+   ],
+   "herkunft": "studierende"
+  },
+  {
+   "id": "a_w_wirtschaft",
+   "titel": "Inflation und Preise",
+   "fach": "Wirtschaft",
+   "vl": 0,
+   "abschnitt": 6,
+   "datensatz": "Noch gesucht. Ihr Wunsch aus der Umfrage in Vorlesung 00.",
+   "schlagworte": [
+    "kreislauf"
+   ],
+   "herkunft": "studierende"
+  },
+  {
+   "id": "a_w_tragfaehigkeit",
+   "titel": "Tragfähigkeit von Böden",
+   "fach": "Geotechnik",
+   "vl": 0,
+   "abschnitt": 6,
+   "datensatz": "Noch gesucht. Ihr Wunsch aus der Umfrage in Vorlesung 00.",
+   "schlagworte": [
+    "kreislauf"
+   ],
+   "herkunft": "studierende"
+  },
+  {
+   "id": "a_w_boden",
+   "titel": "Zusammensetzung des Bodens",
+   "fach": "Bodenkunde",
+   "vl": 0,
+   "abschnitt": 6,
+   "datensatz": "Noch gesucht. Ihr Wunsch aus der Umfrage in Vorlesung 00.",
+   "schlagworte": [
+    "kreislauf"
+   ],
+   "herkunft": "studierende"
+  },
+  {
+   "id": "a_w_korn",
+   "titel": "Korngrößenverteilungen",
+   "fach": "Bodenkunde",
+   "vl": 0,
+   "abschnitt": 6,
+   "datensatz": "Noch gesucht. Ihr Wunsch aus der Umfrage in Vorlesung 00.",
+   "schlagworte": [
+    "kreislauf"
+   ],
+   "herkunft": "studierende"
+  },
+  {
+   "id": "a_w_element",
+   "titel": "Elementanalyse",
+   "fach": "Analytik",
+   "vl": 0,
+   "abschnitt": 6,
+   "datensatz": "Noch gesucht. Ihr Wunsch aus der Umfrage in Vorlesung 00.",
+   "schlagworte": [
+    "kreislauf"
+   ],
+   "herkunft": "studierende"
+  },
+  {
+   "id": "a_w_bergbau",
+   "titel": "Bergbau und Mineralien",
+   "fach": "Bergbau",
+   "vl": 0,
+   "abschnitt": 6,
+   "datensatz": "Noch gesucht. Ihr Wunsch aus der Umfrage in Vorlesung 00.",
+   "schlagworte": [
+    "kreislauf"
+   ],
+   "herkunft": "studierende"
+  },
+  {
+   "id": "a_w_orbit",
+   "titel": "Bahndaten von Himmelskörpern",
+   "fach": "Astronomie",
+   "vl": 0,
+   "abschnitt": 6,
+   "datensatz": "Noch gesucht. Ihr Wunsch aus der Umfrage in Vorlesung 00.",
+   "schlagworte": [
+    "kreislauf"
+   ],
+   "herkunft": "studierende"
   }
  ]
 }

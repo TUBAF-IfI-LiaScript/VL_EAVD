@@ -64,7 +64,7 @@ assert sorted(LEITFRAGE) == list(range(15)), ("Leitfragen im Semesterplan unvoll
 B = [
     # --- Erhebung
     ("zaehler", "Datenerhebung", "erhebung", 0, 'Praktische Inhalte', 1, 0, "Messdaten entstehen nicht von selbst: Ein Sensor wandelt etwas Physikalisches in Zahlen um, ein Programm entscheidet, was davon festgehalten wird.", None),
-    ("annahmen", "Annahmen im Programm", "erhebung", 0, 'Wo soll das hinführen?', 2, 0, "Grenzwerte, Schwellen und Zeitfenster im Code legen fest, was als Ergebnis herauskommt — ohne dass eine Fehlermeldung darauf hinweist.", "„Es funktioniert, also stimmt das Ergebnis.“"),
+    ("annahmen", "Annahmen im Programm", "erhebung", 0, 'Wo soll das hinführen?', 1, 0, "Grenzwerte, Schwellen und Zeitfenster im Code legen fest, was als Ergebnis herauskommt — ohne dass eine Fehlermeldung darauf hinweist.", "„Es funktioniert, also stimmt das Ergebnis.“"),
     ("sensorlog", "Sensorprotokoll", "erhebung", 1, 'Aufgabe 2: Der Personenzähler', 2, 0, "Die Zeitstempel des Personenzählers — mühsam in der Tabellenkalkulation auszuwerten (Aufgabe 2).", None),
     ("micropy", "MicroPython", "erhebung", 8, 'Der Aufbau', 1, 0, "Python auf dem Mikrocontroller — dieselbe Sprache, andere Hardware.", None),
     ("sensor", "Sensor", "erhebung", 8, 'Der Aufbau', 1, 0, "Wandelt eine physikalische Größe in eine Zahl um — mit Genauigkeit, Messort und Ausfallrisiko.", None),
@@ -83,7 +83,7 @@ B = [
     ("pseudo", "Pseudocode", "denken", 1, 'Algorithmen darstellen', 1, 0, "Algorithmus in strukturierter Alltagssprache, bevor man ihn programmiert.", None),
     ("ablauf", "Ablaufdiagramm", "denken", 1, 'Algorithmen darstellen', 2, 0, "Grafische Form eines Algorithmus mit Entscheidungen und Rücksprüngen.", None),
     ("bausteine", "Folge, Verzweigung, Wiederholung", "denken", 1, 'Drei Bausteine', 1, 0, "Aus diesen drei Bausteinen setzt sich jeder Algorithmus zusammen.", None),
-    ("protokoll", "Ablaufprotokoll", "denken", 1, 'Einen Algorithmus von Hand ausführen', 2, 0, "Einen Algorithmus mit wenigen Werten von Hand ausführen und nach jedem Schritt den Zwischenstand notieren.", None),
+    ("protokoll", "Ablaufprotokoll", "denken", 1, 'Einen Algorithmus von Hand ausführen', 1, 0, "Einen Algorithmus mit wenigen Werten von Hand ausführen und nach jedem Schritt den Zwischenstand notieren.", None),
     ("eingabe", "Eingabengetrieben oder der Reihe nach", "denken", 1, 'Eingabengetrieben oder der Reihe nach', 2, 0, "Die Tabelle rechnet neu, sobald sich ein Wert ändert; ein Skript läuft Zeile für Zeile in festgelegter Reihenfolge.", None),
     ("interpreter", "Interpreter", "denken", 2, 'Vom Text zur Ausführung', 2, 0, "Liest das Programm Zeile für Zeile, führt aus — oder bricht mit einer Fehlermeldung ab.", None),
     ("print", "print", "denken", 2, 'Die erste Anweisung', 1, 1, "Gibt Werte auf dem Bildschirm aus.", None),
@@ -150,7 +150,7 @@ B = [
     ("datumstyp", "Datumsspalte", "typen", 11, 'Datum', 2, 0, "MESS_DATUM mit pd.to_datetime in ein Datum umwandeln.", None),
 
     # --- Daten & Dateien
-    ("werkzeug", "Erst von Hand, dann mit Werkzeug", "daten", 0, 'Erst mühsam, dann mit Werkzeug', 2, 0, "Dieselbe Frage zweimal: mit rund 50 eigenen Zeilen und mit einer Anweisung aus einer Bibliothek. Wer den mühsamen Weg kennt, weiß, was das Werkzeug abnimmt.", None),
+    ("werkzeug", "Erst von Hand, dann mit Werkzeug", "daten", 0, 'Erst mühsam, dann mit Werkzeug', 1, 0, "Dieselbe Frage zweimal: mit rund 50 eigenen Zeilen und mit einer Anweisung aus einer Bibliothek. Wer den mühsamen Weg kennt, weiß, was das Werkzeug abnimmt.", None),
     ("dwd", "DWD-Datensatz", "daten", 1, 'Unsere Datensätze', 1, 0, "Klimareihe Fichtelberg seit 1890, rund 48.000 Zeilen — der rote Faden.", None),
     ("tabkalk", "Tabellenkalkulation", "daten", 1, 'Drei Aufgaben', 1, 0, "Drei Aufgaben: leicht, mühsam, praktisch aussichtslos.", None),
     ("versionen", "Versionsverwaltung", "daten", 1, 'Tabellenkalkulation und Skript im Vergleich', 2, 0, "Hebt jeden Stand einer Datei auf, mit Datum und Grund der Änderung. Bei Skripten sieht man genau, welche Zeile sich geändert hat.", None),
@@ -177,7 +177,7 @@ B = [
     ("inhomogen", "Inhomogenität", "daten", 14, 'Typische Fehlvorstellung: Gleiche Station, gleiche Messung', 2, 0, "Ein Bruch in einer Messreihe durch Ortswechsel, Gerätewechsel oder geänderte Messvorschrift — in den Daten selbst unsichtbar.", "„Dieselbe Stationsnummer und dasselbe Dateiformat bedeuten dieselbe Messung.“"),
 
     # --- Analyse & Darstellung
-    ("kreislauf", "Datenkreislauf", "analyse", 0, 'Warum ist die Veranstaltung zentral?', 2, 0, "Frage, Erhebung, Aufbereitung, Analyse, Visualisierung, Dokumentation — meist mehrere Runden.", None),
+    ("kreislauf", "Datenkreislauf", "analyse", 0, 'Warum ist die Veranstaltung zentral?', 1, 0, "Frage, Erhebung, Aufbereitung, Analyse, Visualisierung, Dokumentation — meist mehrere Runden.", None),
     ("schliff", "Bildverarbeitung", "analyse", 0, 'Praktische Inhalte', 2, 0, "Ausblick: Ein Bild ist eine Tabelle aus Helligkeitswerten. Schwelle setzen, zusammenhängende Flecken zählen, Größen messen.", "„Das Programm erkennt, was im Bild ist.“ Es erkennt nur, was heller ist als die Schwelle."),
     ("lohnt", "Programm oder Tabelle?", "analyse", 1, 'Wann lohnt sich ein Programm?', 1, 0, "Viele Daten, sperrige Formate, Wiederholung, Nachvollziehbarkeit: dann lohnt ein Programm.", None),
     ("kenntage", "Frost-, Eis-, Sommertag", "analyse", 3, 'Mehrere Fälle: elif', 2, 0, "DWD-Kenntage: Frosttag = Minimum unter 0 °C, Eistag = Maximum unter 0 °C, Sommertag = Maximum ab 25 °C.", None),
@@ -271,6 +271,7 @@ R = [
 
 # ---- Anwendungen: konkrete Fragen an echte Daten, die Schlagworte nutzen
 # id, Titel, Fach, VL, Abschnittstitel, Datensatz, [Schlagwort-ids], Herkunft
+WUNSCH = "Noch gesucht. Ihr Wunsch aus der Umfrage in Vorlesung 00."
 A = [
     ("a_tuer", "Personenzähler an der Hörsaaltür", "Messtechnik", 0, 'Praktische Inhalte',
      "Zählungen des Alvik-Roboters (zaehlungen_JJJJ-MM-TT.csv)", ["zaehler", "annahmen"], "lehrende"),
@@ -278,6 +279,15 @@ A = [
      "Mikroskopbild einer hauchdünn geschliffenen Gesteinsscheibe, durch zwei gekreuzte Lichtfilter (Polarisationsfilter) betrachtet, sodass die Mineralkörner hell oder farbig leuchten. Bild aus der Lehrsammlung von Prof. Heide, TU Bergakademie Freiberg", ["schliff", "annahmen"], "lehrende"),
     ("a_frost_bloecke", "Frosttage einer Januarwoche, als Blöcke und als Python", "Klima", 0, 'Blöcke oder Text',
      "Tiefsttemperaturen Fichtelberg", ["blockly"], "lehrende"),
+    # Datenwünsche aus der Umfrage in VL 00 (research_notes/00_results.md): 11 Antworten, ähnliche zusammengefasst
+    ("a_w_bohrloch", "Bohrlochdrücke", "Bohrtechnik", 0, 'Und was ist mit Ihnen?', WUNSCH, ["kreislauf"], "studierende"),
+    ("a_w_wirtschaft", "Inflation und Preise", "Wirtschaft", 0, 'Und was ist mit Ihnen?', WUNSCH, ["kreislauf"], "studierende"),
+    ("a_w_tragfaehigkeit", "Tragfähigkeit von Böden", "Geotechnik", 0, 'Und was ist mit Ihnen?', WUNSCH, ["kreislauf"], "studierende"),
+    ("a_w_boden", "Zusammensetzung des Bodens", "Bodenkunde", 0, 'Und was ist mit Ihnen?', WUNSCH, ["kreislauf"], "studierende"),
+    ("a_w_korn", "Korngrößenverteilungen", "Bodenkunde", 0, 'Und was ist mit Ihnen?', WUNSCH, ["kreislauf"], "studierende"),
+    ("a_w_element", "Elementanalyse", "Analytik", 0, 'Und was ist mit Ihnen?', WUNSCH, ["kreislauf"], "studierende"),
+    ("a_w_bergbau", "Bergbau und Mineralien", "Bergbau", 0, 'Und was ist mit Ihnen?', WUNSCH, ["kreislauf"], "studierende"),
+    ("a_w_orbit", "Bahndaten von Himmelskörpern", "Astronomie", 0, 'Und was ist mit Ihnen?', WUNSCH, ["kreislauf"], "studierende"),
 ]
 
 # ---- Didaktische Fäden (Metrolinien): jede Folge ist eine Kette von „baut auf“-Schritten
@@ -300,8 +310,10 @@ KURS = {
     "titel": "Erhebung, Analyse und Visualisierung digitaler Daten",
     "name": "TU Bergakademie Freiberg · Wintersemester 2026/27",
     "hochschule": "TU Bergakademie Freiberg",
-    # Entwurf – vom Dozenten durchzusehen
-    "beschreibung": "Daten erheben, mit Python auswerten und anschaulich darstellen – vom ersten Programm über Dateien und Funktionen bis zur Analyse mit NumPy und pandas.",
+    "beschreibung": "Wann lohnt sich ein Programm, und wann stimmt sein Ergebnis? An echten Messdaten lernen Sie, Fragen als Algorithmus zu formulieren, Daten mit Python auszuwerten und Ergebnisse zu prüfen, auch wenn keine Fehlermeldung kommt.",
+    "freigabe": "erscheinen nach der Vorlesung, Sie ergänzen, was fehlt",
+    "folgen": "Die Begriffe dieser Vorlesung erscheinen nach der Vorlesung. Wir schlagen sie vor, Sie ergänzen, was fehlt.",
+    "freigabe_satz": "Nach jeder Vorlesung kommen ihre Begriffe dazu. Wir schlagen sie vor, Sie ergänzen, was fehlt.",
     "basis": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/",
     "pages": "https://tubaf-ifi-liascript.github.io/VL_EAVD/",
     "repo": "https://github.com/TUBAF-IfI-LiaScript/VL_EAVD",
