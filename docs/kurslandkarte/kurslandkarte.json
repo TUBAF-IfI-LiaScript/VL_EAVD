@@ -198,12 +198,42 @@
    "wann": "KW 45 · 2.–6.11.",
    "wann_kurz": "KW 45",
    "leitfrage": "Was macht der Rechner mit „-1,9“ aus unserer Datei?",
-   "freigegeben": false,
+   "freigegeben": true,
    "status": "ausgearbeitet",
    "block": 1,
    "pdf": "../pdf/02_ErsteSchritte.pdf",
    "anwendet": [],
-   "abschnitte": []
+   "abschnitte": [
+    "Erste Schritte in Python",
+    "Rückblick 1: Pseudocode Grundkonzepte",
+    "Rückblick 2: Unterschiedliche Datentypen",
+    "Von der Frage zum Pseudocode",
+    "Was heißt „beginnt mit A“?",
+    "Üben: Fragen aus Ihrem Fach",
+    "Lösungsvorschläge",
+    "Vom Text zur Ausführung",
+    "Warum Python?",
+    "Die erste Anweisung",
+    "Rechnen",
+    "Variablen",
+    "Das Gleichheitszeichen ist keine Gleichung",
+    "Typische Fehlvorstellung: Variablen rechnen nach",
+    "Namen wählen",
+    "Datentypen",
+    "Text ist nicht Zahl",
+    "Mit Text arbeiten",
+    "Vergleiche",
+    "Kommentare",
+    "Fehlermeldungen lesen",
+    "Typische Fehlvorstellung: Der Fehler steht in der gemeldeten Zeile",
+    "Üben: Fehler finden",
+    "Die Antwort auf die Leitfrage",
+    "Typische Fehlvorstellung: Was für eine Zeile stimmt, stimmt für alle",
+    "Kontrollfragen",
+    "Weitere Kontrollfragen zum Nacharbeiten",
+    "Ihre Begriffe für die Kurslandkarte",
+    "Nächste Woche"
+   ]
   },
   {
    "vl": 3,
@@ -626,6 +656,182 @@
    "fehlvorstellung": null
   },
   {
+   "id": "interpreter",
+   "name": "Interpreter",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Liest das Programm Zeile für Zeile, führt aus — oder bricht mit einer Fehlermeldung ab.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "print",
+   "name": "print",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 10,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Gibt Werte auf dem Bildschirm aus.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "operatoren",
+   "name": "Rechenoperatoren",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "+ - * / sowie // (ganzzahlig), % (Rest), ** (Potenz). 18900801 // 10000 ergibt das Jahr.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "variable",
+   "name": "Variable",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 12,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Ein Name, unter dem sich ein Programm einen Wert merkt.",
+   "fehlvorstellung": "„Eine Variable merkt sich die Rechnung — wie eine Formel in der Tabellenkalkulation.“"
+  },
+  {
+   "id": "zuweisung",
+   "name": "Zuweisung =",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 13,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Rechts wird gerechnet, links wird das Ergebnis abgelegt. Lies = als „wird zu“.",
+   "fehlvorstellung": "„= ist eine Gleichung.“"
+  },
+  {
+   "id": "zeitwert",
+   "name": "Uhrzeit als Zahl",
+   "linie": "typen",
+   "vl": 2,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Für die Tabellenkalkulation ist eine Uhrzeit der Bruchteil eines Tages (12:00 = 0,5). Erst als Zahl lässt sie sich vergleichen.",
+   "fehlvorstellung": "„Was wie eine Uhrzeit aussieht, kann ich auch wie eine Uhrzeit vergleichen.“ Text gilt beim Vergleich als größer als jede Zahl."
+  },
+  {
+   "id": "vierfragen",
+   "name": "Von der Frage zum Pseudocode",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Vier Fragen: Was steht in einer Zeile? Was merke ich mir? Was tue ich mit jeder Zeile? Was gebe ich am Ende aus?",
+   "fehlvorstellung": "„Eindeutig heißt so gemeint.“ — „beginnt mit A“ zählt weder „Åberg“ noch „auf der Heide“."
+  },
+  {
+   "id": "trace",
+   "name": "Programm im Kopf ausführen",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 13,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Tabelle mit einer Spalte pro Variable, eine Zeile pro Schritt — die zentrale Klausurfähigkeit.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "namen",
+   "name": "Variablennamen",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 15,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Buchstaben, Ziffern, Unterstrich; nicht mit Ziffer beginnen; sprechend wählen.",
+   "fehlvorstellung": "„Der Rechner versteht, was ein Name bedeutet.“"
+  },
+  {
+   "id": "vergleich",
+   "name": "Vergleich / bool",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 19,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Vergleiche wie minimum < 0 liefern True oder False.",
+   "fehlvorstellung": "= weist zu, == vergleicht."
+  },
+  {
+   "id": "kommentar",
+   "name": "Kommentar",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 20,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Alles hinter # ist für Menschen. Gute Kommentare erklären das Warum.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "fehlermeldung",
+   "name": "Fehlermeldung",
+   "linie": "denken",
+   "vl": 2,
+   "abschnitt": 21,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Von unten nach oben lesen: was (NameError, TypeError, ValueError, SyntaxError) und wo.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "dezimalpunkt",
+   "name": "Dezimalpunkt",
+   "linie": "typen",
+   "vl": 2,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Python schreibt 6.26. print(6,26 + 1) gibt ohne Fehlermeldung 6 27 aus.",
+   "fehlvorstellung": "„6,26 ist eine Zahl.“"
+  },
+  {
+   "id": "typ",
+   "name": "Datentyp",
+   "linie": "typen",
+   "vl": 2,
+   "abschnitt": 16,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "int, float, str, bool — der Typ bestimmt, was man mit einem Wert tun kann.",
+   "fehlvorstellung": "„Was wie eine Zahl aussieht, ist eine Zahl.“"
+  },
+  {
+   "id": "umwandlung",
+   "name": "Typumwandlung",
+   "linie": "typen",
+   "vl": 2,
+   "abschnitt": 17,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "float(\"-14.1\"), int(\"1890\"), str(1213) — nötig, weil aus Dateien immer Text kommt.",
+   "fehlvorstellung": "float(\"6,26\") scheitert."
+  },
+  {
+   "id": "text",
+   "name": "Text (str)",
+   "linie": "typen",
+   "vl": 2,
+   "abschnitt": 18,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Zusammensetzen, len, Zeichen herausschneiden: datum[0:4] ist das Jahr.",
+   "fehlvorstellung": null
+  },
+  {
    "id": "werkzeug",
    "name": "Erst von Hand, dann mit Werkzeug",
    "linie": "daten",
@@ -731,6 +937,11 @@
    "text": "trifft eigene"
   },
   {
+   "von": "vorhersage",
+   "nach": "trace",
+   "text": "geübt mit"
+  },
+  {
    "von": "zaehler",
    "nach": "sensorlog",
    "text": "erzeugt"
@@ -796,14 +1007,119 @@
    "text": "geprüft mit"
   },
   {
+   "von": "protokoll",
+   "nach": "trace",
+   "text": "in Python:"
+  },
+  {
    "von": "tabkalk",
    "nach": "eingabe",
    "text": "rechnet"
   },
   {
+   "von": "eingabe",
+   "nach": "variable",
+   "text": "anders als eine Formel:"
+  },
+  {
    "von": "tabkalk",
    "nach": "versionen",
    "text": "fehlt der"
+  },
+  {
+   "von": "blockly",
+   "nach": "print",
+   "text": "gleiches Programm wie"
+  },
+  {
+   "von": "pseudo",
+   "nach": "vierfragen",
+   "text": "entsteht mit"
+  },
+  {
+   "von": "tabkalk",
+   "nach": "zeitwert",
+   "text": "Hürde in Aufgabe 2:"
+  },
+  {
+   "von": "zeitwert",
+   "nach": "typ",
+   "text": "Beispiel für"
+  },
+  {
+   "von": "vierfragen",
+   "nach": "variable",
+   "text": "was ich mir merke, wird zur"
+  },
+  {
+   "von": "sprache",
+   "nach": "interpreter",
+   "text": "ausgeführt vom"
+  },
+  {
+   "von": "interpreter",
+   "nach": "fehlermeldung",
+   "text": "meldet"
+  },
+  {
+   "von": "variable",
+   "nach": "zuweisung",
+   "text": "entsteht durch"
+  },
+  {
+   "von": "variable",
+   "nach": "namen",
+   "text": "braucht"
+  },
+  {
+   "von": "variable",
+   "nach": "print",
+   "text": "ausgegeben mit"
+  },
+  {
+   "von": "zuweisung",
+   "nach": "trace",
+   "text": "nachvollziehen mit"
+  },
+  {
+   "von": "operatoren",
+   "nach": "zuweisung",
+   "text": "rechts vom ="
+  },
+  {
+   "von": "dezimalpunkt",
+   "nach": "operatoren",
+   "text": "Voraussetzung für"
+  },
+  {
+   "von": "variable",
+   "nach": "typ",
+   "text": "hat einen"
+  },
+  {
+   "von": "typ",
+   "nach": "umwandlung",
+   "text": "ändern durch"
+  },
+  {
+   "von": "typ",
+   "nach": "text",
+   "text": "z. B."
+  },
+  {
+   "von": "umwandlung",
+   "nach": "fehlermeldung",
+   "text": "ValueError bei"
+  },
+  {
+   "von": "typ",
+   "nach": "vergleich",
+   "text": "bool ist ein"
+  },
+  {
+   "von": "kommentar",
+   "nach": "variable",
+   "text": "erklärt"
   }
  ],
  "faeden": [
@@ -813,6 +1129,15 @@
    "beschreibung": "Einmal gelösten Code wiederverwenden: erst als Muster, dann als eigene Funktion, als eigene Datei und schließlich als fertiges Paket von anderen.",
    "stationen": [
     "pseudo"
+   ],
+   "weiter": true
+  },
+  {
+   "id": "struktur",
+   "name": "Viele Werte aufbewahren",
+   "beschreibung": "Vom einzelnen Wert über die Liste und das Nachschlagen per Schlüssel bis zur Tabelle mit benannten Spalten.",
+   "stationen": [
+    "variable"
    ],
    "weiter": true
   },
@@ -830,7 +1155,9 @@
    "name": "Vom Text zur Tabelle",
    "beschreibung": "Eine Datei ist zunächst nur Text. Wie daraus eine Tabelle mit Spalten und Zahlen wird.",
    "stationen": [
-    "dwd"
+    "dwd",
+    "text",
+    "umwandlung"
    ],
    "weiter": true
   },
