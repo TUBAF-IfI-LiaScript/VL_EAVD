@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.3.0
+version:  2.3.1
 language: de
 narrator: Deutsch Female
 
@@ -13,6 +13,31 @@ logo:     ./images/Readme/Wetterstation.png
 import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/config.md
           https://raw.githubusercontent.com/jh-488/lia-blockly/main/README.md
           https://raw.githubusercontent.com/LiaTemplates/Pyodide/master/README.md
+          https://raw.githubusercontent.com/LiaTemplates/mermaid_template/0.1.4/README.md
+
+@style
+.lia-code-terminal, .lia-code-terminal__output {
+    background: #eef5f6 !important;
+}
+
+.lia-code-terminal {
+    border: 1px solid #00718A;
+}
+
+.lia-code-terminal, .lia-code-terminal__output, .lia-code-terminal .text-info,
+.lia-code-terminal input {
+    color: #1a1a1a !important;
+}
+
+.lia-code-terminal .text-error {
+    color: #b00020 !important;
+    font-weight: 600;
+}
+
+.lia-code-terminal .text-warning {
+    color: #8a5a00 !important;
+}
+@end
 
 -->
 
@@ -51,28 +76,40 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 --{{0}}--
 Heute schreiben Sie Ihre ersten Zeilen Python. Wir beginnen mit der Tabellenkalkulation und dem Pseudocode, damit der Übergang kein Sprung wird. Am Ende nehmen wir eine echte Zeile aus unserer Datei auseinander. Sie werden dabei Fehlermeldungen sehen, manche mit Absicht. Das ist kein Zeichen dafür, dass etwas schiefläuft, sondern Teil der Arbeit.
 
-> Alle Beispiele laufen heute direkt im Browser. Sie müssen nichts installieren.
-
 --------------------------------------------------------------------------------
 
-## Rückblick
+## Rückblick 1: Pseudocode Grundkonzepte
 
-Ihre Hausaufgabe: _Den wärmsten Tag in `fichtelberg_2024.csv` finden, ohne `MAX` zu benutzen._ Eine mögliche Lösung:
+Ihre Hausaufgabe: _Den wärmsten Tag in `fichtelberg_2024.csv` finden, ohne `MAX` zu benutzen._ Zur Erinnerung: Die Datei hat 366 Zeilen, eine pro Tag.
+
+```text fichtelberg_2024.csv
+Datum;Tagesmittel;Minimum;Maximum
+2024-01-01;-1,2;-1,9;-0,7
+2024-01-02;-0,5;-2,4;2,6
+2024-01-03;1,6;0,1;2,5
+...
+2024-08-13;21,3;16,9;26,9
+...
+```
+
+Eine mögliche Lösung:
 
 ``` text
-Merke dir den ersten Tag als "bisher wärmster".
+Merke dir den ersten Tag aus der Spalte "Maximum" als "bisher wärmster".
 Für jeden weiteren Tag:
     Wenn sein Maximum höher ist als das des bisher wärmsten:
         Merke dir diesen Tag als "bisher wärmster".
 Gib den bisher wärmsten Tag aus.
 ```
 
+Das Ergebnis: Am 13. August 2024 war es mit 26,9 °C am wärmsten.
+
 > Darin stecken schon fast alle Zutaten eines Programms: Man muss sich etwas **merken** (heute), etwas **vergleichen** und etwas **wiederholen** (nächste Woche). Heute kümmern wir uns um das Merken und Rechnen.
 
 --{{0}}--
 Ihre Formulierung darf anders aussehen, wichtig ist der Ablauf. `MAX` macht es im Grunde genauso: Es geht alle Werte durch und merkt sich den bisher größten. Sie haben also von Hand aufgeschrieben, was die Funktion Ihnen sonst abnimmt.
 
-### Rückblick: Uhrzeiten in der Tabellenkalkulation
+## Rückblick 2: Unterschiedliche Datentypen
 
 In Aufgabe 2 war der Zeitstempel die größte Hürde. Für die Tabellenkalkulation ist eine Uhrzeit eine **Zahl**, nämlich der Bruchteil eines Tages: 12:00 Uhr ist 0,5. Erst als Zahl lässt sie sich vergleichen.
 
@@ -90,33 +127,6 @@ Alle Durchgänge `rein` ab 16:15 auf einmal: `=ZÄHLENWENNS(B2:B32;"rein";D2:D32
 --{{0}}--
 Intern zählt die Tabellenkalkulation die Tage seit Ende 1899. Der 19. Oktober 2026 ist Tag 46.314, und 16:15:27 Uhr ist der Bruchteil 0,6774 dieses Tages; zusammen ergibt das 46.314,6774. REST(A2;1) teilt durch 1 und behält nur den Rest, also den Tagesanteil. TEIL(A2;12;8) zählt dagegen Zeichen: ab dem zwölften Zeichen acht Stück. Das funktioniert nur, solange alle Zeitstempel genau gleich aufgebaut sind.
 
-### Typische Fehlvorstellung: Sieht aus wie eine Uhrzeit, ist eine Uhrzeit
-
-> **Typische Fehlvorstellung:** _„Was wie eine Uhrzeit aussieht, kann ich auch wie eine Uhrzeit vergleichen.“_
-
-Schritt 2 lässt sich doch sparen? In Spalte C steht schon `16:15:27`:
-
-``` text
-=C2>=ZEIT(16;15;0)
-```
-
-Legen Sie sich fest, **bevor** Sie die Auflösung ansehen: Für wie viele der 31 Zeilen liefert diese Formel `WAHR`?
-
-[( )] 12, alle Durchgänge ab 16:15
-[( )] 8, nur die mit `rein`
-[(X)] 31, alle
-[( )] keine, sondern eine Fehlermeldung
-***
-Für alle 31. `16:15:27` in Spalte C ist **Text**, und beim Vergleich stuft die Tabellenkalkulation Text immer höher ein als jede Zahl. Das Ergebnis ist durchgehend `WAHR`, ohne Warnung. Richtig wären 12.
-
-Dasselbe passiert, wenn man ein Datum mit Uhrzeit direkt mit `ZEIT(16;15;0)` vergleicht: 46.314,67 ist immer größer als 0,68.
-***
-
-> Text ist nicht Zahl, auch wenn er genauso aussieht. Genau darum geht es heute auch in Python.
-
---{{0}}--
-LibreOffice und Excel verhalten sich hier gleich: Text gilt beim Vergleich als größer als jede Zahl. Eine Fehlermeldung wäre hilfreicher, kommt aber nicht. Ein Hinweis darauf ist die Ausrichtung in der Zelle: Text steht links, Zahlen und Uhrzeiten stehen rechts. Im Abschnitt „Datentypen“ sehen Sie, dass Python strenger ist: Text plus Zahl bricht dort sofort mit einer Fehlermeldung ab.
-
 ## Von der Frage zum Pseudocode
 
 Jede Auswertung beginnt mit einer Frage an einen Datensatz. Vier Fragen an sich selbst führen von dort zum Pseudocode:
@@ -129,7 +139,7 @@ Jede Auswertung beginnt mit einer Frage an einen Datensatz. Vier Fragen an sich 
 | 3. Was tue ich mit **jeder** Zeile?    | Beginnt der Nachname mit „A“, die Anzahl erhöhen   |
 | 4. Was gebe ich am **Ende** aus?       | die Anzahl                                         |
 
-**Beispiel:** _Wie viele Personen auf der Teilnehmerliste haben einen Nachnamen, der mit A beginnt?_
+**Beispiel:** In der Klausur sitzt jeder Anfangsbuchstabe in einem eigenen Block. Wie viele Plätze müssen wir für Block A freihalten? Das heißt: _Wie viele Personen auf der Teilnehmerliste haben einen Nachnamen, der mit A beginnt?_
 
 ``` text
 Setze anzahl auf 0.
@@ -161,7 +171,7 @@ Ob das so gemeint war, entscheiden Sie, und zwar in der Bedingung. Sollen alle v
 > Eindeutig heißt nicht: so gemeint. Der Algorithmus beantwortet genau die Frage, die in ihm steht.
 
 --{{0}}--
-Dasselbe Problem kennen Sie aus Vorlesung 01: Der Algorithmus mit der verrutschten Zeile war eindeutig und ausführbar, er beantwortete nur eine andere Frage als gemeint. Bei echten Daten stecken solche Fälle überall, etwa Groß- und Kleinschreibung, Leerzeichen am Anfang oder Sonderzeichen. Deshalb lohnt es sich, vor dem Programmieren ein paar echte Zeilen anzusehen.
+Für die Klausur hätte das Folgen: Wer „von Arnim“ heißt und in Block A sucht, findet dort keinen freigehaltenen Platz. Dasselbe Problem kennen Sie aus Vorlesung 01: Der Algorithmus mit der verrutschten Zeile war eindeutig und ausführbar, er beantwortete nur eine andere Frage als gemeint. Bei echten Daten stecken solche Fälle überall, etwa Groß- und Kleinschreibung, Leerzeichen am Anfang oder Sonderzeichen. Deshalb lohnt es sich, vor dem Programmieren ein paar echte Zeilen anzusehen.
 
 ### Üben: Fragen aus Ihrem Fach
 
@@ -171,15 +181,15 @@ Dasselbe Problem kennen Sie aus Vorlesung 01: Der Algorithmus mit der verrutscht
 | Fach                      | Eine Zeile des Datensatzes                                  | Frage                                                         |
 | :------------------------ | :---------------------------------------------------------- | :------------------------------------------------------------ |
 | Umwelt                    | Datum; Feinstaub im Tagesmittel in µg/m³                    | Hielt die Messstation den Grenzwert ein? Über 50 µg/m³ ist an höchstens 35 Tagen im Jahr erlaubt. |
-| Werkstoffe                | Messpunkt eines Zugversuchs: Dehnung in %; Kraft in kN      | Bei welcher Dehnung trug die Probe die größte Kraft?          |
-| Wirtschaft                | Datum; Filiale; Betrag in €                                 | Welchen Umsatz machte die Filiale Freiberg im März?           |
-| Energie                   | Uhrzeit; Leistung in kW, alle 15 Minuten gemessen           | Wie viel Energie in kWh hat die Werkhalle an diesem Tag verbraucht? |
+| Werkstoffe                | Messpunkt eines Zugversuchs: Dehnung in %; Kraft in kN      | Die Probe gilt als gerissen, sobald die Kraft nach dem Höchstwert unter die Hälfte davon fällt. Bei welcher Dehnung war das? |
+| Wirtschaft                | Datum; Filiale; Betrag in €                                 | Welche Filiale machte im März den höchsten Umsatz?            |
+| Energie                   | Uhrzeit; Leistung in kW, alle 15 Minuten gemessen           | Wie oft stieg die Leistung der Werkhalle von einer Messung zur nächsten um mehr als 20 kW? |
 | _Schon Erfahrung?_        | Uhrzeit; Ereignis `start` oder `stopp` einer Maschine       | Wie lange lief die Maschine insgesamt?                        |
 
 > Beim **Zugversuch** wird eine Materialprobe langsam auseinandergezogen, bis sie reißt. Die **Dehnung** sagt, um wie viel Prozent sie dabei länger geworden ist.
 
 --{{0}}--
-Jede Frage braucht ein anderes Muster: zählen und danach entscheiden, den größten Wert suchen, mit zwei Bedingungen aufsummieren, gewichtet aufsummieren und sich einen Zustand merken. In Vorlesung 04 bekommen diese Muster eigene Namen. Feinstaub sind winzige Staubteilchen in der Luft, die man einatmet. Für sie gilt in der EU tatsächlich: Das Tagesmittel darf höchstens an 35 Tagen im Jahr über 50 Mikrogramm pro Kubikmeter liegen.
+Jede Frage verlangt eine andere Idee: zählen und danach entscheiden, die Daten zweimal durchgehen, pro Gruppe zusammenfassen, die vorherige Zeile im Gedächtnis behalten und sich einen Zustand merken. Einige dieser Muster bekommen in Vorlesung 04 eigene Namen. Feinstaub sind winzige Staubteilchen in der Luft, die man einatmet. Für sie gilt in der EU tatsächlich: Das Tagesmittel darf höchstens an 35 Tagen im Jahr über 50 Mikrogramm pro Kubikmeter liegen.
 
 ### Lösungsvorschläge
 
@@ -204,46 +214,59 @@ Die Antwort ist keine Zahl, sondern ja oder nein: Nach der Wiederholung kommt no
 </details>
 
 <details>
-<summary>**Werkstoffe: größte Kraft im Zugversuch**</summary>
+<summary>**Werkstoffe: Riss im Zugversuch**</summary>
 
 ``` text
-Merke dir die erste Zeile als "bisher stärkste".
+Setze groesste auf die Kraft der ersten Zeile.
 Für jede weitere Zeile:
-    Wenn ihre Kraft größer ist als die der bisher stärksten:
-        Merke dir diese Zeile als "bisher stärkste".
-Gib die Dehnung der bisher stärksten Zeile aus.
+    Wenn ihre Kraft größer ist als groesste:
+        Setze groesste auf ihre Kraft.
+Setze erreicht auf nein.
+Für jede Zeile:
+    Wenn ihre Kraft gleich groesste ist:
+        Setze erreicht auf ja.
+    Wenn erreicht ja ist und ihre Kraft kleiner als groesste / 2 ist:
+        Gib ihre Dehnung aus.
+        Beende die Wiederholung.
 ```
 
-Dasselbe Muster wie der wärmste Tag aus dem Rückblick, nur mit anderen Spalten.
+Hier gibt es zwei Wiederholungen: Die erste findet den Höchstwert, erst die zweite kann ihn benutzen. `erreicht` sorgt dafür, dass kleine Kräfte **vor** dem Höchstwert nicht zählen.
 
 </details>
 
 <details>
-<summary>**Wirtschaft: Umsatz einer Filiale**</summary>
+<summary>**Wirtschaft: beste Filiale im März**</summary>
 
 ``` text
-Setze summe auf 0.
+Lege für jede Filiale eine Summe an, zu Beginn 0.
 Für jede Zeile:
-    Wenn die Filiale "Freiberg" ist und das Datum im März liegt:
-        Addiere den Betrag zu summe.
-Gib summe aus.
+    Wenn das Datum im März liegt:
+        Addiere den Betrag zur Summe der Filiale dieser Zeile.
+Merke dir die erste Filiale als "bisher beste".
+Für jede weitere Filiale:
+    Wenn ihre Summe größer ist als die der bisher besten:
+        Merke dir diese Filiale als "bisher beste".
+Gib die bisher beste Filiale aus.
 ```
 
-Gemerkt wird diesmal eine Summe statt einer Anzahl.
+Erst zusammenfassen, dann vergleichen. Gemerkt wird nicht mehr ein Wert, sondern einer pro Filiale. Genau das macht später `groupby` in Vorlesung 12.
 
 </details>
 
 <details>
-<summary>**Energie: Verbrauch an einem Tag**</summary>
+<summary>**Energie: Sprünge in der Leistung**</summary>
 
 ``` text
-Setze energie auf 0.
-Für jede Zeile:
-    Addiere die Leistung mal 0,25 zu energie.
-Gib energie aus.
+Setze spruenge auf 0.
+Merke dir die Leistung der ersten Zeile als vorherige.
+Für jede weitere Zeile:
+    Wenn ihre Leistung minus vorherige größer als 20 ist:
+        Erhöhe spruenge um 1.
+    Merke dir ihre Leistung als vorherige.
+Gib spruenge aus.
 ```
 
-Jeder Messwert gilt für 15 Minuten, also 0,25 Stunden. Leistung in kW mal Zeit in Stunden ergibt Energie in kWh.
+Der Kniff ist die Reihenfolge in der Wiederholung: Steht „Merke dir …“ vor dem Vergleich, ist die Differenz immer 0.
 
 </details>
 
@@ -269,19 +292,30 @@ Achten Sie beim Vergleichen weniger auf die Formulierung als auf zwei Dinge: Hab
 
 ## Vom Text zur Ausführung
 
-Ein Prozessor versteht nur **Maschinenbefehle**. Zwischen Ihrem Programmtext und dem Prozessor steht deshalb ein Übersetzer, bei Python der **Interpreter**:
+Ein Prozessor versteht nur **Maschinenbefehle**, Pseudocode ist für ihn unverständlich. Zwischen Ihrem Programmtext und dem Prozessor steht deshalb ein _Übersetzer_, bei Python der **Interpreter**:
 
-``` ascii
-  +-----------------+        +------------------+        +--------------+
-  | Programmtext    |        | Python-          |        |              |
-  | frost.py        |------->| Interpreter      |------->|  Prozessor   |
-  |                 |        | liest Zeile für  |        |              |
-  | minimum = -3.5  |        | Zeile, prüft,    |        |              |
-  | print(minimum)  |        | führt aus        |        |              |
-  +-----------------+        +------------------+        +--------------+
-                                      |
-                                      v
-                             Ausgabe oder Fehlermeldung
+```mermaid @mermaid
+%%{init: {"flowchart": {"nodeSpacing": 35, "rankSpacing": 50}}}%%
+flowchart LR
+    A["<b>Programmtext</b><br>frost.py<br><br>minimum = -3.5<br>print(minimum)"]
+    B["<b>Python-Interpreter</b><br>liest Zeile für Zeile,<br>prüft, führt aus"]
+    C["<b>Prozessor</b><br>führt Maschinen-<br>befehle aus"]
+    D(["Ausgabe"])
+    E(["Fehlermeldung"])
+    A --> B
+    B -- "verstanden" --> C
+    C --> D
+    B -- "nicht verstanden" --> E
+    classDef text fill:#f4f4f4,stroke:#555,color:#222
+    classDef python fill:#00718A,stroke:#00718A,color:#fff
+    classDef cpu fill:#dcebee,stroke:#00718A,color:#222
+    classDef gut fill:#e4f2e4,stroke:#3f8f3f,color:#222
+    classDef fehler fill:#f9e3e0,stroke:#c0392b,color:#222
+    class A text
+    class B python
+    class C cpu
+    class D gut
+    class E fehler
 ```
 
 Zwei Dinge sollten Sie sich merken:
@@ -427,6 +461,8 @@ a = a + b
 b = b - 1
 print(a, b)
 ```
+
+> Was gibt das Programm aus? Legen Sie sich fest, **bevor** Sie die Lösung ansehen.
 
 <!-- data-type="none" -->
 | nach Zeile | `a`  | `b`  |
@@ -716,17 +752,75 @@ Python zeigt, wo es nicht weiterkommt, nicht, wo der Fehler entstanden ist. Der 
                                     --{{0}}--
 Bei einem `NameError` lohnt immer der Blick nach oben: Wo wurde der Name angelegt, und ist er dort genauso geschrieben? Ähnlich bei Klammern: Fehlt eine schließende Klammer, meldet Python `'(' was never closed` und zeigt auf die öffnende. Die Suche beginnt also an der gemeldeten Stelle, endet aber oft weiter oben.
 
+### Üben: Fehler finden
+
+**⏱ 5 Minuten, zu zweit.** Führen Sie jedes Programm aus, lesen Sie die letzte Zeile der Meldung und reparieren Sie das Programm direkt im Editor. Ziel ist jeweils die angegebene Ausgabe.
+
+**1.** Soll `Fichtelberg` ausgeben:
+
+```python
+station = "Fichtelberg
+print(station)
+```
+@Pyodide.eval
+
+**2.** Soll `Messbeginn: 1890` ausgeben:
+
+```python
+Print("Messbeginn:", 1890)
+```
+@Pyodide.eval
+
+**3.** Soll `Höhe: 1213 m` ausgeben:
+
+```python
+hoehe = 1213
+print("Höhe: " + hoehe + " m")
+```
+@Pyodide.eval
+
+**4.** Soll `27.9` ausgeben:
+
+```python
+maximum = float("26,9")
+print(maximum + 1)
+```
+@Pyodide.eval
+
+**5.** Soll `41.0` ausgeben. Hier hilft Ihnen keine Meldung:
+
+```python
+spanne = 26,9 - -14.1
+print(spanne)
+```
+@Pyodide.eval
+
+<details>
+<summary>**Lösung**</summary>
+
+1. `SyntaxError`: Das schließende Anführungszeichen fehlt: `station = "Fichtelberg"`.
+2. `NameError`: Python unterscheidet Groß- und Kleinschreibung, es heißt `print`.
+3. `TypeError`: Text und Zahl lassen sich nicht mit `+` verbinden. Besser: `print("Höhe:", hoehe, "m")`.
+4. `ValueError`: `float` versteht kein Komma: `float("26.9")`.
+5. Keine Meldung, aber die Ausgabe `(26, 23.1)` statt einer Zahl: Das Komma trennt zwei Werte. Richtig ist `26.9`.
+
+</details>
+
+--{{0}}--
+Die fünf Programme enthalten absichtlich je einen Fehler, je einen der vier Typen aus der Tabelle und einen ohne Meldung. Gehen Sie immer gleich vor: letzte Zeile lesen, Zeilennummer anschauen, eine Vermutung bilden, ändern, erneut ausführen. Das letzte Beispiel zeigt, warum man die Ausgabe auch dann prüfen muss, wenn keine Meldung kommt.
+
 ## Die Antwort auf die Leitfrage
 
 So steht der 1. Januar 2024 in `fichtelberg_2024.csv`, die Spalten sind Datum, Tagesmittel, Minimum und Maximum:
 
 ```python
+#        012345678901234567890123456
 zeile = "2024-01-01;-1,2;-1,9;-0,7"
 
-stueck = zeile[16:20]
-print(stueck, type(stueck))
+minimum_str = zeile[16:20]    # von 16 bis 19, also "-1,9"
+print(minimum_str, type(minimum_str))
 
-minimum = float(stueck.replace(",", "."))
+minimum = float(minimum_str.replace(",", "."))
 print(minimum, minimum < 0)
 ```
 @Pyodide.eval
@@ -743,10 +837,11 @@ Warum Position 16? Das Datum belegt zehn Zeichen, dann folgen ein Semikolon, vie
 Dasselbe Programm, sechs Tage später:
 
 ```python
+#        012345678901234567890123456
 zeile = "2024-01-07;-8,9;-11,9;-4,2"
 
-stueck = zeile[16:20]
-minimum = float(stueck.replace(",", "."))
+minimum_str = zeile[16:20]
+minimum = float(minimum_str.replace(",", "."))
 print(minimum)
 ```
 @Pyodide.eval
