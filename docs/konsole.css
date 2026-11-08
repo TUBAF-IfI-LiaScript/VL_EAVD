@@ -1,0 +1,23 @@
+/* Helle Konsole für ausführbare Codeblöcke (Beamer). Eingebunden per link: in config.md,
+   gilt damit für alle Vorlesungen, die config.md importieren. */
+.lia-code-terminal, .lia-code-terminal__output {
+    background: #eef5f6 !important;
+}
+
+.lia-code-terminal {
+    border: 1px solid #00718A;
+}
+
+.lia-code-terminal, .lia-code-terminal__output, .lia-code-terminal .text-info,
+.lia-code-terminal input {
+    color: #1a1a1a !important;
+}
+
+.lia-code-terminal .text-error {
+    color: #b00020 !important;
+    font-weight: 600;
+}
+
+.lia-code-terminal .text-warning {
+    color: #8a5a00 !important;
+}

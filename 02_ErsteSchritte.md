@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.3.1
+version:  2.3.2
 language: de
 narrator: Deutsch Female
 
@@ -14,30 +14,6 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
           https://raw.githubusercontent.com/jh-488/lia-blockly/main/README.md
           https://raw.githubusercontent.com/LiaTemplates/Pyodide/master/README.md
           https://raw.githubusercontent.com/LiaTemplates/mermaid_template/0.1.4/README.md
-
-@style
-.lia-code-terminal, .lia-code-terminal__output {
-    background: #eef5f6 !important;
-}
-
-.lia-code-terminal {
-    border: 1px solid #00718A;
-}
-
-.lia-code-terminal, .lia-code-terminal__output, .lia-code-terminal .text-info,
-.lia-code-terminal input {
-    color: #1a1a1a !important;
-}
-
-.lia-code-terminal .text-error {
-    color: #b00020 !important;
-    font-weight: 600;
-}
-
-.lia-code-terminal .text-warning {
-    color: #8a5a00 !important;
-}
-@end
 
 -->
 

@@ -43,9 +43,9 @@ assert len(TERMINE) == 15
 
 # ---- Freigabe: Begriffe einer Vorlesung erscheinen erst nach ihr in der Karte.
 # Nach jeder Vorlesung: Vorschläge der Studierenden einarbeiten, dann hier ergänzen.
-FREIGEGEBEN = {0, 1, 2}
+FREIGEGEBEN = {0, 1, 2, 3}
 # PDFs schon vor der Vorlesung, damit Studierende darin mitschreiben können (Begriffe weiterhin erst nach Freigabe).
-PDF_VORAB = {1, 2}
+PDF_VORAB = {1, 2, 3}
 if "--freigegeben" in sys.argv:   # für das Makefile: Dateien der freigegebenen Vorlesungen
     print(" ".join(DATEIEN[v] for v in sorted(FREIGEGEBEN)))
     sys.exit()

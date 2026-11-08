@@ -1,5 +1,5 @@
 {
- "stand": "02.11.2026",
+ "stand": "08.11.2026",
  "version": "0.5.2",
  "kurs": {
   "basis": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/",
@@ -250,12 +250,32 @@
    "wann": "KW 46 · 9.–13.11.",
    "wann_kurz": "KW 46",
    "leitfrage": "An wie vielen Tagen gab es 2024 Frost?",
-   "freigegeben": false,
+   "freigegeben": true,
    "status": "ausgearbeitet",
    "block": 2,
-   "pdf": null,
+   "pdf": "../pdf/03_PruefenUndWiederholen.pdf",
    "anwendet": [],
-   "abschnitte": []
+   "abschnitte": [
+    "Prüfen und Wiederholen",
+    "Rückblick",
+    "Dieselben Beispiele auf Ihrem Rechner",
+    "Entscheidungen: if",
+    "Einrückung ist Syntax",
+    "Entweder – oder: else",
+    "Mehrere Fälle: elif",
+    "Bedingungen verknüpfen",
+    "Wiederholen: for",
+    "Das Zählmuster",
+    "Der Algorithmus aus Vorlesung 01",
+    "Schleifen im Kopf ausführen",
+    "Typische Fehlvorstellung: Die Schleifenvariable",
+    "Fehlermeldungen bei if und for",
+    "Ein Fehler nach dem anderen",
+    "Die Antwort auf die Leitfrage",
+    "Kontrollfragen",
+    "Ihre Begriffe für die Kurslandkarte",
+    "Nächste Woche"
+   ]
   },
   {
    "vl": 4,
@@ -788,6 +808,105 @@
    "fehlvorstellung": null
   },
   {
+   "id": "uebertragbar",
+   "name": "Browser = eigener Rechner",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Die Beispiele laufen eins zu eins in Visual Studio Code — einzige Ausnahme ist open_url.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "if",
+   "name": "if",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Führt Anweisungen nur aus, wenn eine Bedingung gilt.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "einrueckung",
+   "name": "Einrückung",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "In Python ist die Einrückung die Struktur: Sie bestimmt, was zu if oder for gehört.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "else",
+   "name": "else",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Genau einer von zwei Blöcken wird ausgeführt.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "elif",
+   "name": "elif",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Mehrere Fälle nacheinander prüfen; der erste zutreffende gewinnt.",
+   "fehlvorstellung": "Die Reihenfolge der Fälle zählt: ein spezieller Fall hinter einem allgemeinen wird nie erreicht."
+  },
+  {
+   "id": "logik",
+   "name": "and / or / not",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Bedingungen verknüpfen, z. B. minimum != -999 and minimum < 0.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "for",
+   "name": "for-Schleife",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 9,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Wiederholt einen Block für jeden Wert einer Folge.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "zaehlmuster",
+   "name": "Zählmuster",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 10,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Zähler vor der Schleife anlegen, in der Schleife bedingt erhöhen, danach ausgeben.",
+   "fehlvorstellung": "Zähler in der Schleife anlegen: Er wird in jedem Durchlauf zurückgesetzt."
+  },
+  {
+   "id": "schleifenvar",
+   "name": "Schleifenvariable",
+   "linie": "denken",
+   "vl": 3,
+   "abschnitt": 13,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Bekommt in jedem Durchlauf den nächsten Wert — und behält nach der Schleife den letzten.",
+   "fehlvorstellung": "„Nach der Schleife ist die Schleifenvariable weg.“"
+  },
+  {
    "id": "dezimalpunkt",
    "name": "Dezimalpunkt",
    "linie": "typen",
@@ -887,6 +1006,28 @@
    "fehlvorstellung": null
   },
   {
+   "id": "fehlwert",
+   "name": "Fehlwert -999",
+   "linie": "daten",
+   "vl": 3,
+   "abschnitt": 8,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "So kennzeichnet der DWD „nicht gemessen“. -999 < 0 ist wahr — und trotzdem kein Frosttag.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "openurl",
+   "name": "open_url",
+   "linie": "daten",
+   "vl": 3,
+   "abschnitt": 16,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Holt eine Datei aus dem Repository in den Browser — funktioniert nur dort.",
+   "fehlvorstellung": null
+  },
+  {
    "id": "kreislauf",
    "name": "Datenkreislauf",
    "linie": "analyse",
@@ -917,6 +1058,17 @@
    "ebene": 1,
    "code": false,
    "erklaerung": "Viele Daten, sperrige Formate, Wiederholung, Nachvollziehbarkeit: dann lohnt ein Programm.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "kenntage",
+   "name": "Frost-, Eis-, Sommertag",
+   "linie": "analyse",
+   "vl": 3,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "DWD-Kenntage: Frosttag = Minimum unter 0 °C, Eistag = Maximum unter 0 °C, Sommertag = Maximum ab 25 °C.",
    "fehlvorstellung": null
   }
  ],
@@ -1000,6 +1152,16 @@
    "von": "algo",
    "nach": "bausteine",
    "text": "besteht aus"
+  },
+  {
+   "von": "bausteine",
+   "nach": "if",
+   "text": "Verzweigung wird zu"
+  },
+  {
+   "von": "bausteine",
+   "nach": "for",
+   "text": "Wiederholung wird zu"
   },
   {
    "von": "pseudo",
@@ -1120,6 +1282,86 @@
    "von": "kommentar",
    "nach": "variable",
    "text": "erklärt"
+  },
+  {
+   "von": "pseudo",
+   "nach": "if",
+   "text": "wird zu"
+  },
+  {
+   "von": "pseudo",
+   "nach": "for",
+   "text": "wird zu"
+  },
+  {
+   "von": "vergleich",
+   "nach": "if",
+   "text": "steuert"
+  },
+  {
+   "von": "if",
+   "nach": "einrueckung",
+   "text": "Block per"
+  },
+  {
+   "von": "if",
+   "nach": "else",
+   "text": "ergänzt durch"
+  },
+  {
+   "von": "else",
+   "nach": "elif",
+   "text": "erweitert zu"
+  },
+  {
+   "von": "vergleich",
+   "nach": "logik",
+   "text": "verknüpft mit"
+  },
+  {
+   "von": "elif",
+   "nach": "kenntage",
+   "text": "unterscheidet"
+  },
+  {
+   "von": "for",
+   "nach": "einrueckung",
+   "text": "Block per"
+  },
+  {
+   "von": "if",
+   "nach": "zaehlmuster",
+   "text": "Teil von"
+  },
+  {
+   "von": "for",
+   "nach": "zaehlmuster",
+   "text": "Teil von"
+  },
+  {
+   "von": "for",
+   "nach": "schleifenvar",
+   "text": "belegt"
+  },
+  {
+   "von": "zaehlmuster",
+   "nach": "trace",
+   "text": "nachvollziehen mit"
+  },
+  {
+   "von": "dwd",
+   "nach": "fehlwert",
+   "text": "enthält"
+  },
+  {
+   "von": "fehlwert",
+   "nach": "logik",
+   "text": "ausschließen mit"
+  },
+  {
+   "von": "openurl",
+   "nach": "uebertragbar",
+   "text": "Ausnahme von"
   }
  ],
  "faeden": [
@@ -1128,7 +1370,8 @@
    "name": "Nicht alles neu schreiben",
    "beschreibung": "Einmal gelösten Code wiederverwenden: erst als Muster, dann als eigene Funktion, als eigene Datei und schließlich als fertiges Paket von anderen.",
    "stationen": [
-    "pseudo"
+    "pseudo",
+    "zaehlmuster"
    ],
    "weiter": true
   },
@@ -1142,11 +1385,22 @@
    "weiter": true
   },
   {
+   "id": "zaehlen",
+   "name": "Vom Zählen zur Zusammenfassung",
+   "beschreibung": "Wie aus einer Schleife, die von Hand mitzählt, am Ende eine einzige Zeile wird, die Werte pro Jahr zusammenfasst.",
+   "stationen": [
+    "zaehlmuster"
+   ],
+   "weiter": true
+  },
+  {
    "id": "fehlwert",
    "name": "Wenn ein Wert fehlt",
    "beschreibung": "„Nicht gemessen“ sieht jedes Mal anders aus: als -999, als fehlende Zeile, als NaN. Und jedes Mal muss man es behandeln.",
    "stationen": [
-    "dwd"
+    "dwd",
+    "fehlwert",
+    "logik"
    ],
    "weiter": true
   },
