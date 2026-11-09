@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.1
+version:  2.1.0
 language: de
 narrator: Deutsch Female
 
@@ -54,11 +54,16 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 * Wie hält man zusammengehörige Werte — Datum und Temperatur — beisammen?
 * Wie sammelt man ein Ergebnis pro Jahr?
 
+> **Zum Nacharbeiten: die Ansicht „Lehrbuch“.** Im Hörsaal zeigen die Folien nur die Kernbotschaften. Die Erklärungen dazu stehen im Lehrbuch: oben rechts auf das Symbol mit den Schiebereglern klicken und „Lehrbuch“ wählen.
+
 <!-- kurslandkarte:knopf-start -->
 
 <a href="https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=5" style="display: inline-block; padding: 0.5em 1.1em; background-color: #00718A; color: #ffffff; text-decoration: none; font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; font-weight: 600;">🗺️ Diese Vorlesung in der Kurslandkarte →</a>
 
 <!-- kurslandkarte:knopf-ende -->
+
+--{{0}}--
+Bisher hat sich ein Programm immer genau einen Wert gemerkt. Heute lernt es, beliebig viele Werte aufzubewahren: in einer Liste. Damit beantworten wir am Ende eine Frage mit zehn Antworten, eine pro Jahr. Der wärmste Tag 2024 ist übrigens ein alter Bekannter: Es ist der 13. August aus Ihrer Hausaufgabe zu Vorlesung 02.
 
 --------------------------------------------------------------------------------
 
@@ -68,11 +73,14 @@ Bisher haben wir Listen nur **benutzt**: als fertige Werte im Programm oder als 
 
 Die Leitfrage verlangt mehr: **ein Ergebnis pro Jahr**. Dafür müssen wir Ergebnisse **sammeln**.
 
+--{{0}}--
+`text.split()` aus Vorlesung 03 hat uns schon eine Liste geliefert, wir haben sie nur nicht so genannt. Neu ist heute, dass wir Listen selbst füllen.
+
 ## Listen anlegen und füllen
 
 Eine Liste beginnt oft leer und wächst mit `append`:
 
-```` @BlocklyId(sammeln, runner=sammeln hideRunner height=340)
+```` @BlocklyId(sammeln, runner=sammeln hideRunner height=520)
 minima = [-1.9, -2.4, 0.1, -1.7, -1.7, -4.2, -11.9]
 
 frostwerte = []
@@ -100,11 +108,14 @@ Das ist das **Sammelmuster** — dieselbe Struktur wie das Zählmuster aus Vorle
 
 > `len(frostwerte)` liefert die Anzahl — das Zählmuster ist im Sammelmuster also schon enthalten.
 
+--{{0}}--
+`append` heißt „anhängen“: Der neue Wert kommt ans Ende der Liste. Die leere Liste `[]` vor der Schleife ist der Startwert, so wie die 0 beim Zählen. Und `len` zählt am Ende, was hineingekommen ist.
+
 ## Zugriff über den Index
 
 Jeder Wert einer Liste hat eine Position, den **Index**. Gezählt wird ab 0:
 
-``` ascii
+``` text
 minima  =  [ -1.9,  -2.4,   0.1,  -1.7,  -1.7,  -4.2, -11.9 ]
 Index         0      1      2      3      4      5      6
 von hinten   -7     -6     -5     -4     -3     -2     -1
@@ -121,8 +132,6 @@ print(minima[:3])     # die ersten drei
 @Pyodide.eval
 
 > Das kennen Sie schon: `datum[0:4]` aus Vorlesung 02 funktioniert bei Texten genauso. Auch dort ist der Endindex **nicht** enthalten.
-
-> In vielen anderen Programmiersprachen und in der Bibliothek NumPy heißt eine solche Folge von Werten mit Index ein **Array**. Arrays sehen aus wie Listen, verhalten sich beim Rechnen aber anders — mehr dazu in Vorlesung 10.
 
                                      {{1}}
 *******************************************************************************
@@ -142,6 +151,12 @@ print(minima[4])
 Die letzte Zeile scheitert mit `IndexError`: Eine Liste mit vier Werten hat die Indizes 0 bis 3. Das ist der häufigste Fehler im Umgang mit Listen.
 
 *******************************************************************************
+
+--{{0}}--
+Negative Indizes zählen von hinten, `minima[-1]` ist immer der letzte Wert, egal wie lang die Liste ist. In vielen anderen Programmiersprachen und in der Bibliothek NumPy heißt eine solche Folge von Werten ein Array. Arrays sehen aus wie Listen, verhalten sich beim Rechnen aber anders, mehr dazu in Vorlesung 10.
+
+--{{1}}--
+Ersetzen sollte man einen Fehlwert nur, wenn man den richtigen Wert aus einer anderen Quelle kennt, etwa aus einem Protokoll. Hier ist `-2.4` nur ein Beispiel. Sonst lässt man ihn aus, wie beim Mittelwert in Vorlesung 04.
 
 ## Zahlenfolgen mit `range`
 
@@ -166,6 +181,9 @@ for i in range(len(minima)):
 
 > Wozu der Umweg über den Index, wenn `for minimum in minima` einfacher ist? Weil man manchmal **zwei Listen gleichzeitig** durchlaufen muss.
 
+--{{0}}--
+`range(len(minima))` ist die übliche Art, über die Positionen einer Liste zu laufen. Mit dem Index `i` kommt man an den Wert `minima[i]` und an jeden anderen Wert derselben Position, auch in einer zweiten Liste.
+
 ### Typische Fehlvorstellung: `range` ist eine Liste
 
 > **Typische Fehlvorstellung:** _„`range(2015, 2025)` erzeugt die Liste aller Jahre von 2015 bis 2025.“_
@@ -178,23 +196,26 @@ print(len(jahre), 2025 in jahre)
 ```
 @Pyodide.eval
 
-Legen Sie sich fest, **bevor** Sie das Programm ausführen: Was gibt die zweite Zeile aus?
+Legen Sie sich fest, **bevor** Sie das Programm ausführen: Was gibt `print(jahre)` aus?
 
-[( )] `range(2015, 2025)`
-[(X)] `[2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]`
+[(X)] `range(2015, 2025)`
+[( )] `[2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]`
 [( )] `[2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]`
 ***
 Zwei Fehlvorstellungen auf einmal:
 
-* `range` ist **keine Liste**, sondern ein eigener Datentyp. Er erzeugt die Zahlen erst, wenn man sie braucht — deshalb gibt die erste Zeile nur `range(2015, 2025)` aus. Eine echte Liste entsteht mit `list(...)`.
+* `range` ist **keine Liste**, sondern ein eigener Datentyp. Er erzeugt die Zahlen erst, wenn man sie braucht — deshalb gibt `print(jahre)` nur `range(2015, 2025)` aus. Eine echte Liste entsteht mit `list(...)`.
 * Der Endwert **2025 ist nicht enthalten**. Wer die Jahre 2015 bis 2025 will, schreibt `range(2015, 2026)`.
 ***
+
+--{{0}}--
+`2025 in jahre` fragt, ob ein Wert enthalten ist, und liefert `True` oder `False`. Dasselbe `in` kennen Sie aus der `for`-Schleife, dort bedeutet es „für jeden Wert in“.
 
 ## Zusammengehörige Werte
 
 Für die Leitfrage brauchen wir zu jeder Temperatur das **Datum**. Wir halten beides in zwei Listen gleicher Länge — Index `i` gehört in beiden Listen zum selben Tag:
 
-``` ascii
+``` text
 daten   =  [ "2024-08-11", "2024-08-12", "2024-08-13", "2024-08-14" ]
 maxima  =  [   22.5,         25.0,         26.9,         23.9       ]
                i = 0         i = 1         i = 2         i = 3
@@ -215,6 +236,9 @@ print("Wärmster Tag:", daten[bester], "mit", maxima[bester], "°C")
 
 > Statt Wert **und** Datum merken wir uns nur den **Index** des bisher wärmsten Tages. Über ihn kommen wir an beides.
 
+--{{0}}--
+Die vier Werte sind echt: das Tagesmaximum vom 11. bis 14. August 2024. Der 13. August ist der wärmste Tag des Jahres, den Sie in Vorlesung 02 gesucht haben.
+
 ### Typische Fehlvorstellung: Index oder Wert?
 
 > **Typische Fehlvorstellung:** _„`bester` enthält die höchste Temperatur.“_
@@ -228,13 +252,16 @@ Was gibt `print(bester)` nach der Schleife im Beispiel oben aus?
 `bester` ist ein **Index**, keine Temperatur: die Position des wärmsten Tages in beiden Listen. Die Temperatur steht in `maxima[bester]`, das Datum in `daten[bester]`. Wer Index und Inhalt verwechselt, vergleicht Positionen mit Temperaturen — und Python meldet keinen Fehler, weil beides Zahlen sind.
 ***
 
+--{{0}}--
+Eine gute Gewohnheit: Benennen Sie Variablen so, dass man ihnen ansieht, was drinsteht, etwa `index_waermster` statt `bester`. Dann passiert diese Verwechslung seltener.
+
 ## Ein Ergebnis pro Jahr
 
-Für die Jahre 2015 bis 2024 liegen Datum und Tagesmaximum als zwei Dateien im Repository — 3.653 Tage, ein Wert pro Zeile, wie in Vorlesung 03.
+Für die Jahre 2015 bis 2024 liegen Datum und Tagesmaximum als zwei Dateien im Repository — 3.653 Tage, ein Wert pro Zeile, wie in Vorlesung 03. Quelle: Deutscher Wetterdienst, Station 01358, Lizenz [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 > **Live Hacking.** Diesen Abschnitt entwickeln wir in der Vorlesung gemeinsam. Die Versuche unten zeigen die typischen Irrwege.
 
-> [!NOTE]
+> [!NOTE] Nur im Browser
 > Wie in Vorlesung 03: `open_url` funktioniert nur hier im Browser. Auf Ihrem Rechner lesen Sie Dateien ab Vorlesung 06 mit `open()`.
 
 ### Versuch 1
@@ -273,6 +300,12 @@ Die Lösung: `daten[i][0:4] == str(jahr)`. Genau der Unterschied zwischen `"-14.
 
 *******************************************************************************
 
+--{{0}}--
+Hier steht eine Schleife in einer Schleife, eine **verschachtelte Schleife**. Die äußere läuft über die zehn Jahre, die innere für jedes Jahr über alle 3.653 Tage, zusammen 36.530 Durchläufe. Der Startwert `-100.0` ist eine Temperatur, die jeder echte Messwert übertrifft. Den ersten Wert des Jahres wie in Vorlesung 04 haben wir hier nicht zur Hand, weil die Tage eines Jahres irgendwo in der langen Liste liegen.
+
+--{{1}}--
+`daten[i][0:4]` liest sich in zwei Schritten: `daten[i]` ist das Datum des Tages `i`, zum Beispiel `"2015-08-07"`, und `[0:4]` schneidet davon die ersten vier Zeichen ab, das Jahr.
+
 ### Typische Fehlvorstellung: Zahlen als Text vergleichen
 
 > **Typische Fehlvorstellung:** _„Was wie eine Zahl aussieht, wird wie eine Zahl verglichen.“_
@@ -295,8 +328,11 @@ Legen Sie sich fest, **bevor** Sie das Programm ausführen: Welchen Wert liefert
 ***
 Texte werden **Zeichen für Zeichen** verglichen, wie Wörter im Wörterbuch. Das erste Zeichen von `"9.5"` ist `9`, das von `"28.1"` ist `2` — und `9` kommt nach `2`. Also gilt `"9.5" > "28.1"`.
 
-Das Programm läuft ohne Fehlermeldung und liefert ein plausibel aussehendes, aber falsches Ergebnis. In Versuch 1 wäre dieser Fehler aufgefallen, weil `float(maxima[i])` die Umwandlung erzwingt.
+Das Programm läuft ohne Fehlermeldung und liefert ein plausibel aussehendes, aber falsches Ergebnis. In Versuch 1 kann er nicht passieren, weil `float(maxima[i])` jeden Wert vor dem Vergleich umwandelt.
 ***
+
+--{{0}}--
+Vergleicht man Text und Zahl mit `>`, bricht Python mit einem `TypeError` ab. Nur `==` liefert stillschweigend `False`. Beim Vergleich zweier Texte gibt es dagegen nie eine Meldung, deshalb ist dieser Fehler so tückisch.
 
 ### Versuch 2
 
@@ -332,6 +368,9 @@ Ab 2016 stimmt etwas nicht. **Was?**
 `hoechst = -100.0` steht jetzt **vor** der äußeren Schleife. Der Höchstwert von 2015 (28,1 °C) gilt deshalb weiter; 2016 muss ihn übertreffen, um überhaupt gezählt zu werden. Der Startwert gehört **in** die Jahresschleife: Jedes Jahr beginnt die Suche von vorn.
 
 *******************************************************************************
+
+--{{0}}--
+Achten Sie auf die Spalte mit dem Datum: 2016 bis 2018 steht dort der 7. August 2015, ab 2020 der 30. Juni 2019. Nur 2015 und 2019 stimmen, weil nur sie den mitgeschleppten Wert übertreffen. Alle anderen Jahre erben Wert und Tag eines früheren Jahres.
 
 ### Versuch 3
 
@@ -375,6 +414,9 @@ Drei Muster stecken ineinander:
 
 *******************************************************************************
 
+--{{0}}--
+Die Tabelle ist der Bauplan aus Vorlesung 04, nur dreifach ineinander. Neu ist das Filtern: Die Bedingung wählt aus allen Tagen die eines Jahres aus. Fragen Sie bei jeder Variablen: Gilt sie für alle Jahre oder für eines? Daraus ergibt sich, wo ihr Startwert steht.
+
 ### Mit dem Ergebnis weiterarbeiten
 
 Jetzt liegen die zehn Jahreshöchstwerte in einer Liste — und lassen sich weiterverarbeiten. Ergänzen Sie Versuch 3 um folgende Zeilen:
@@ -387,6 +429,9 @@ print("Jahre über 28 °C:", len([h for h in jahreshoechst if h > 28]))
 Die zweite Zeile verwendet eine Kurzschreibweise, die Sie noch nicht kennen. Schreiben Sie sie als Schleife mit dem Zählmuster.
 
 Der wärmste Tag im ganzen Zeitraum war der 30. Juni [[2019]] mit 29,5 °C.
+
+--{{0}}--
+Die Antwort auf die Leitfrage: Die Jahreshöchstwerte 2015 bis 2024 liegen zwischen 24,5 °C am 19. Juni 2021 und 29,5 °C am 30. Juni 2019. 2024 war es der 13. August mit 26,9 °C.
 
 ## Ausblick: Dictionary
 
@@ -405,6 +450,9 @@ print("2017" in hoechst)
 @Pyodide.eval
 
 > Mit einem Dictionary genügt **ein** Durchlauf durch alle Tage: Für jeden Tag schaut man nach, ob sein Jahr schon einen Eintrag hat und ob der neue Wert größer ist. Genau so arbeitet `groupby` in pandas (Vorlesung 12).
+
+--{{0}}--
+Das Dictionary ist heute nur ein Ausblick, Sie müssen es noch nicht können. In Vorlesung 06 lernen Sie es genauer kennen.
 
 ## Kontrollfragen
 
@@ -455,13 +503,13 @@ Stünde `frostwerte = []` in der Schleife, würde die Liste bei jedem Durchlauf 
 
 ## Ihre Begriffe für die Kurslandkarte
 
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie.
+Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester. Wir schlagen die Begriffe vor, Sie ergänzen, was fehlt: Aus Ihren Datenwünschen in Vorlesung 00 sind so schon die ersten Anwendungen geworden. Nehmen Sie sich dafür jetzt fünf Minuten.
 
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
+**Welches Wort von heute müssten Sie jemandem aus Ihrem Semester erklären können?**
 
 [[___ ___ ___]]
 
-**Wo könnten Sie das, was heute dran war, in Ihrem Fach anwenden?**
+**Welche Daten aus Ihrem Fach würden Sie gern so auswerten?**
 
 [[___ ___ ___]]
 
@@ -474,3 +522,7 @@ Heute kamen die Daten vorbereitet aus zwei einspaltigen Dateien. Nächste Woche 
 - [ ] Schreiben Sie die Kurzschreibweise `len([h for h in jahreshoechst if h > 28])` als Schleife.
 - [ ] Erweitern Sie Versuch 3 um eine zweite Liste `jahrestage`, in der Sie die Daten der wärmsten Tage sammeln.
 - [ ] Öffnen Sie die Rohdatei `data/fichtelberg/produkt_klima_tag_18900801_20251231_01358.txt` in einem Texteditor. Welche Schritte sind nötig, um aus einer Zeile das Datum und das Tagesmaximum `TXK` zu gewinnen?
+
+**Zur Übung**
+
+Blatt 5 (Warum wurde Schokolade so teuer?) steht nach der Vorlesung in [OPAL](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/469368834). Versuchen Sie sich **vor** der Übung an den Aufgaben, gern auch zu zweit. Besprochen wird es in der Übung ab dem 30.11.

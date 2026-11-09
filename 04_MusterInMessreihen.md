@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.1
+version:  2.1.0
 language: de
 narrator: Deutsch Female
 
@@ -39,7 +39,7 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 | **Veranstaltung:**       | @config.lecture                                                                                                                                                |
 | **Semester**             | @config.semester                                                                                                                                               |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                              |
-| **Inhalte:**             | `Aufsummieren, Mittelwert, Extremwertsuche, Zustand über Durchläufe, while`                                                                      |
+| **Inhalte:**             | `Aufsummieren, Mittelwert, Extremwertsuche, Zustand über Durchläufe, while, break`                                                                      |
 | **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/04_MusterInMessreihen.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/04_MusterInMessreihen.md) |
 | **Autoren**              | @author                                                                                                                                                        |
 
@@ -53,12 +53,18 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 * Wie findet man den kältesten Tag — und nicht nur die tiefste Temperatur?
 * Wie merkt sich ein Programm etwas über mehrere Schleifendurchläufe hinweg?
 * Wann braucht man eine `while`-Schleife, und was kann dabei schiefgehen?
+* Wie beendet man eine Schleife, sobald das Gesuchte gefunden ist?
+
+> **Zum Nacharbeiten: die Ansicht „Lehrbuch“.** Im Hörsaal zeigen die Folien nur die Kernbotschaften. Die Erklärungen dazu stehen im Lehrbuch: oben rechts auf das Symbol mit den Schiebereglern klicken und „Lehrbuch“ wählen.
 
 <!-- kurslandkarte:knopf-start -->
 
 <a href="https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=4" style="display: inline-block; padding: 0.5em 1.1em; background-color: #00718A; color: #ffffff; text-decoration: none; font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; font-weight: 600;">🗺️ Diese Vorlesung in der Kurslandkarte →</a>
 
 <!-- kurslandkarte:knopf-ende -->
+
+--{{0}}--
+Heute geht es um die Frage, was sich ein Programm merken muss. Letzte Woche war es eine Zahl, die mitzählt. Heute kommen eine Summe, ein Bestwert und schließlich ein Zustand dazu, der vom bisherigen Verlauf abhängt. Damit beantworten wir eine Frage, die mit einer einzigen Formel nicht zu lösen ist: Wie lange hielt der Frost am Stück an? Im Live Hacking sehen Sie dabei bewusst auch die Irrwege, denn genau so entsteht ein Programm.
 
 --------------------------------------------------------------------------------
 
@@ -84,11 +90,14 @@ Heute kommen drei weitere Muster hinzu. Alle folgen demselben Bauplan: **Etwas v
 | Extremwert suchen        | den bisher besten Wert                         | kältester Tag                    |
 | Zustand verfolgen        | eine laufende Serie und die bisher längste     | längste Frostperiode             |
 
+--{{0}}--
+Die Tabelle ist der Fahrplan für heute. Alle Muster haben dieselben drei Stellen: vor der Schleife, in der Schleife und danach. Wenn Sie später ein eigenes Programm schreiben, fragen Sie sich zuerst, welches Muster passt. Dann wissen Sie auch, was vor die Schleife gehört.
+
 ## Muster 1: Aufsummieren
 
 Der Mittelwert ist die Summe aller Werte, geteilt durch ihre Anzahl. Die Summe bauen wir Schritt für Schritt auf:
 
-```` @BlocklyId(summe, runner=summe hideRunner height=360)
+```` @BlocklyId(summe, runner=summe hideRunner height=520)
 # Tagesmittel vom 1. bis 7. Januar 2024
 tagesmittel = [-1.2, -0.5, 1.6, -0.1, -0.5, -2.0, -8.9]
 
@@ -108,6 +117,9 @@ print("Mittelwert:", summe / anzahl)
 @Pyodide.eval
 
 > Python kennt dafür auch fertige Funktionen: `sum(tagesmittel)` und `len(tagesmittel)`. Warum dann selbst schreiben? Weil die fertigen Funktionen nicht wissen, was ein **Fehlwert** ist.
+
+--{{0}}--
+`summe` und `anzahl` wachsen bei jedem Durchlauf, erst nach der Schleife wird geteilt. Teilt man schon in der Schleife, bekommt man nach jedem Tag ein Zwischenergebnis, aber nicht das Mittel der Woche. `sum` und `len` rechnen genau dasselbe, nur ohne die Möglichkeit, einzelne Werte auszulassen.
 
 ### Mittelwert mit Fehlwerten
 
@@ -162,6 +174,12 @@ Das Ergebnis ist -2,2 °C, gemittelt über **sechs** Tage. Das sollte man dazusc
 
 *******************************************************************************
 
+--{{0}}--
+Ein einziger Fehlwert unter Tausenden verschiebt das Mittel nur um einen Bruchteil eines Grades. Genau das macht ihn gefährlich: Das Ergebnis sieht plausibel aus.
+
+--{{1}}--
+Die Bedingung `wert != -999` steht vor beiden Zeilen, also wird ein Fehlwert weder addiert noch gezählt. Vergisst man sie bei `anzahl`, teilt man durch sieben statt durch sechs, und das Mittel wird zu warm.
+
 ## Muster 2: Extremwert suchen
 
 Erinnern Sie sich an den Pseudocode aus Vorlesung 02? _"Merke dir den ersten Tag als bisher wärmsten ..."_ In Python, für den kältesten Tag:
@@ -181,7 +199,7 @@ for minimum in minima:
         kaeltester_wert = minimum
         kaeltester_tag = tag
 
-print("Kältester Tag: Tag", kaeltester_tag, "im Januar mit", kaeltester_wert, "°C")
+print("Kältester Tag:", kaeltester_tag, "mit", kaeltester_wert, "°C")
 ```
 @Pyodide.eval
 
@@ -194,6 +212,9 @@ Zwei Dinge sind neu:
 
 **Ausprobieren:** Warum startet man mit dem ersten Wert der Liste und nicht mit `kaeltester_wert = 0`? Probieren Sie es aus — und denken Sie dabei an den Juli.
 
+--{{0}}--
+Warum nicht mit 0 starten? Im Juli liegt das Minimum auf dem Fichtelberg nie unter 0 °C, 2024 war der tiefste Wert 4,5 °C. Mit dem Startwert 0 fände das Programm keinen kälteren Tag und meldete 0 °C an Tag 1, einen Wert, den es nie gab. Mit dem ersten Wert der Liste kann das nicht passieren.
+
 ## Muster 3: Zustand verfolgen
 
 Jetzt die Leitfrage: **Wie lang war die längste ununterbrochene Frostperiode?**
@@ -201,6 +222,9 @@ Jetzt die Leitfrage: **Wie lang war die längste ununterbrochene Frostperiode?**
 Das ist schwieriger als alles bisher. Ob ein Tag die Serie verlängert, hängt davon ab, **was vorher war**. Man muss sich einen **Zustand** merken.
 
 > **Live Hacking.** Diesen Abschnitt entwickeln wir in der Vorlesung gemeinsam — inklusive der Irrwege. Die drei Versuche unten dokumentieren, was dabei typischerweise passiert.
+
+--{{0}}--
+Ein Zustand ist das, was sich ein Programm vom bisherigen Verlauf merkt. Vergleichen Sie es mit einer Treppe: Wer mitzählt, wie viele Stufen er schon am Stück gestiegen ist, muss nach jedem Absatz wieder bei null anfangen. Für den Baugrund ist die Frostperiode mehr als eine Zahl: Je länger der Frost am Stück anhält, desto tiefer dringt er in den Boden ein.
 
 ### Versuch 1
 
@@ -264,6 +288,9 @@ Ergebnis: 1. **Was ist jetzt passiert?**
 
 *******************************************************************************
 
+--{{0}}--
+`serie` ist ein Gedächtnis für den Augenblick, kein Gedächtnis für das Beste. Diesen Unterschied macht Versuch 3 sichtbar.
+
 ### Versuch 3
 
                                      {{0-1}}
@@ -313,9 +340,12 @@ print("Längste Frostperiode:", laengste, "Tage")
 
 *******************************************************************************
 
+--{{0}}--
+Die Tabelle ist ein Ablaufprotokoll wie in Vorlesung 03. Achten Sie auf Tag 3 und Tag 7: `serie` fällt auf 0 zurück, `laengste` bleibt stehen. Testen Sie solche Programme immer auch mit einer Serie ganz am Ende der Liste, dort verstecken sich gern Fehler.
+
 ### Die Antwort
 
-Dasselbe Programm, alle 366 Tage — die Werte holen wir wie in Vorlesung 03 aus dem Repository:
+Dasselbe Programm, alle 366 Tage — die Werte holen wir wie in Vorlesung 03 aus dem Repository, dem Ablageort der Kursdateien. Quelle: Deutscher Wetterdienst, Station 01358, Lizenz [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 ```python
 from pyodide.http import open_url
@@ -338,7 +368,7 @@ print("Längste Frostperiode 2024:", laengste, "Tage")
 ```
 @Pyodide.eval
 
-> [!NOTE]
+> [!NOTE] Nur im Browser
 > Wie in Vorlesung 03: `open_url` funktioniert nur hier im Browser. Auf Ihrem Rechner lesen Sie Dateien ab Vorlesung 06 mit `open()`.
 
 Lesen Sie das Ergebnis ab und tragen Sie es ein:
@@ -348,7 +378,10 @@ Die längste Frostperiode 2024 dauerte [[25]] Tage.
 Vom 4. bis zum 28. Januar 2024 lag das Minimum auf dem Fichtelberg durchgehend unter 0 °C. Wann die Periode lag, verrät das Programm noch nicht — das ist Ihre Vorbereitungsaufgabe.
 ***
 
-> **Und in der Tabellenkalkulation?** Möglich ist es — mit einer Hilfsspalte `=WENN(C2<0; D1+1; 0)` und einem `MAX` darüber. Das ist genau unser Algorithmus, nur in Zellen verteilt. Wer darauf kommt, hat algorithmisch gedacht.
+> **Und in der Tabellenkalkulation?** Möglich ist es — mit einer Hilfsspalte: in E2 `=WENN(C2<0; 1; 0)`, ab E3 `=WENN(C3<0; E2+1; 0)` nach unten gezogen, darüber `=MAX(E:E)`. Das ist genau unser Algorithmus, nur in Zellen verteilt. Wer darauf kommt, hat algorithmisch gedacht.
+
+--{{0}}--
+Die Antwort: 25 Tage, vom 4. bis zum 28. Januar 2024. Die Liste mit sieben oder acht Werten war zum Verstehen da, die Datei mit 366 Werten zum Antworten. Am Programm hat sich dabei nichts geändert.
 
 ## `while`: Wiederholen, solange ...
 
@@ -376,20 +409,29 @@ print("Im Jahr", jahr, "läge das Mittel bei", round(mittel, 2), "°C")
                                      {{1}}
 *******************************************************************************
 
-> [!WARNING]
+> [!WARNING] Achtung
 > **Die Schleife muss enden.** Setzen Sie `trend = 0` oder `trend = -0.05` und überlegen Sie **vorher**, was passiert. (Führen Sie es besser nicht aus — oder seien Sie bereit, die Seite neu zu laden.)
 >
-> Das ist die Eigenschaft **Terminierung** aus Vorlesung 01. Bei `for` ist sie garantiert, weil die Liste endlich ist. Bei `while` müssen Sie selbst sicherstellen, dass die Bedingung irgendwann falsch wird.
+> Das ist die Eigenschaft **Terminierung** aus Vorlesung 01. Bei `for` über eine feste Liste ist sie garantiert, solange man die Liste in der Schleife nicht verlängert. Bei `while` müssen Sie selbst sicherstellen, dass die Bedingung irgendwann falsch wird.
 
 *******************************************************************************
 
                                      {{2}}
 *******************************************************************************
 
-> [!CAUTION]
+> [!CAUTION] Vorsicht
 > Rechnerisch korrekt heißt nicht inhaltlich richtig. Ob ein Trend der letzten 50 Jahre für die nächsten 35 gilt, sagt dieses Programm nicht. Es sagt nur, was **unter dieser Annahme** folgt. Wer Ergebnisse weitergibt, muss die Annahme mitliefern.
 
 *******************************************************************************
+
+--{{0}}--
+Die 0,05 °C pro Jahr stammen aus einer Ausgleichsgeraden durch die Jahresmittel von 1975 bis 2024, genau sind es 0,049 °C. `while` prüft die Bedingung vor jedem Durchlauf. Ist sie schon zu Beginn falsch, läuft die Schleife kein einziges Mal.
+
+--{{1}}--
+Eine Endlosschleife erkennen Sie daran, dass nichts passiert und der Knopf nicht wieder frei wird. Im Browser hilft dann nur, die Seite neu zu laden, in Visual Studio Code beendet `Strg+C` das Programm.
+
+--{{2}}--
+Diese Warnung gilt für jede Hochrechnung, nicht nur für Temperaturen. Schreiben Sie zu einem solchen Ergebnis immer dazu, welche Annahme darin steckt.
 
 ### Typische Fehlvorstellung: Kommazahlen sind exakt
 
@@ -415,6 +457,83 @@ Zwei Konsequenzen für die Praxis:
 * **Zur Ausgabe runden:** `round(wert, 2)`.
 * **Kommazahlen nicht mit `==` vergleichen.** Stattdessen prüfen, ob der Abstand klein genug ist: `abs(a - b) < 0.001`.
 ***
+
+--{{0}}--
+`abs` liefert den Betrag einer Zahl, also den Wert ohne Vorzeichen. Wann darf man `==` trotzdem benutzen? Bei Werten, die so aus der Datei kommen, wie in Vorlesung 03 beim Vergleich mit 0,0. Problematisch sind Werte, die erst durch Rechnen entstanden sind.
+
+## Vorzeitig abbrechen: `break`
+
+Manche Fragen suchen nicht den besten, sondern den **ersten** Wert. Sobald er gefunden ist, muss die Schleife nicht weiterlaufen: `break` beendet sie sofort.
+
+```python
+minima = [3.2, 1.5, -0.4, 2.1, -1.8]
+
+tag = 0
+for minimum in minima:
+    tag = tag + 1
+    if minimum < 0:
+        print("Erster Frost an Tag", tag)
+        break
+
+print("Fertig.")
+```
+@Pyodide.eval
+
+Legen Sie sich fest, **bevor** Sie das Programm ausführen: Wie oft wird `tag = tag + 1` ausgeführt?
+
+[( )] 2-mal
+[(X)] 3-mal
+[( )] 5-mal
+***
+Dreimal. An Tag 3 liegt das Minimum zum ersten Mal unter 0: Python gibt den Tag aus und verlässt mit `break` die Schleife. Tag 4 und 5 werden gar nicht mehr angesehen, `-1.8` löst also keine zweite Ausgabe aus. Weiter geht es **nach** der Schleife, mit `print("Fertig.")`.
+***
+
+--{{0}}--
+`break` steht fast immer in einem `if`: Erst wenn die Bedingung erfüllt ist, soll die Schleife enden. Es verlässt nur die Schleife, in der es steht, nicht das ganze Programm. Was nach der Schleife kommt, läuft ganz normal weiter.
+
+### Der erste Herbstfrost
+
+                                     {{0-1}}
+*******************************************************************************
+
+_An welchem Tag gab es 2024 nach dem 30. Juni (Tag 182) den ersten Frost?_ Ein erster Versuch ohne `break`:
+
+```python
+from pyodide.http import open_url
+
+url = ("https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/"
+       "VL_EAVD/master/data/fichtelberg/2024_minimum.txt")
+text = open_url(url).read()
+
+tag = 0
+herbstfrost = 0
+for wert in text.split():
+    tag = tag + 1
+    if tag > 182 and float(wert) < 0:
+        herbstfrost = tag
+
+print("Erster Herbstfrost: Tag", herbstfrost)
+```
+@Pyodide.eval
+
+Ergebnis: Tag 366, der 31. Dezember. **Was fehlt?**
+
+*******************************************************************************
+
+                                     {{1}}
+*******************************************************************************
+
+Ohne `break` überschreibt jeder weitere Frosttag den gemerkten Wert. Am Ende steht der **letzte** darin, nicht der erste.
+
+Ergänzen Sie unter `herbstfrost = tag` die Zeile `break` und führen Sie das Programm erneut aus. Dann hört die Suche beim ersten Treffer auf: Tag **285**, der 11. Oktober 2024.
+
+*******************************************************************************
+
+--{{0}}--
+Auch dieser Fehler läuft ohne Meldung durch, das Ergebnis sieht sogar plausibel aus: Ende Dezember ist Frost ganz normal. Erst die Frage, ob das wirklich der erste Frost sein kann, deckt ihn auf.
+
+--{{1}}--
+`herbstfrost = 0` vor der Schleife bedeutet „noch nichts gefunden“. Steht nach der Schleife immer noch 0, gab es keinen Treffer. Prüfen Sie das, bevor Sie das Ergebnis weiterverwenden. Mit `break` läuft die Schleife außerdem nur 285 statt 366 Mal, bei großen Dateien spart das Zeit.
 
 ## Kontrollfragen
 
@@ -457,13 +576,13 @@ Die 7 an Position 1 wird übernommen. Die zweite 7 an Position 3 ist nicht **gr�
 
 ## Ihre Begriffe für die Kurslandkarte
 
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie.
+Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester. Wir schlagen die Begriffe vor, Sie ergänzen, was fehlt: Aus Ihren Datenwünschen in Vorlesung 00 sind so schon die ersten Anwendungen geworden. Nehmen Sie sich dafür jetzt fünf Minuten.
 
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
+**Welches Wort von heute müssten Sie jemandem aus Ihrem Semester erklären können?**
 
 [[___ ___ ___]]
 
-**Wo könnten Sie das, was heute dran war, in Ihrem Fach anwenden?**
+**Welche Daten aus Ihrem Fach würden Sie gern so auswerten?**
 
 [[___ ___ ___]]
 
@@ -476,5 +595,9 @@ Bisher stand jede Messreihe von Hand im Programm. In der nächsten Vorlesung **s
 **Zur Vorbereitung**
 
 - [ ] Erweitern Sie Versuch 3 so, dass auch der **erste** Tag der längsten Frostperiode ausgegeben wird.
-- [ ] **Vorzeitig abbrechen:** Mit `break` verlässt man eine Schleife sofort. Finden Sie damit den **ersten Herbstfrost** 2024: den ersten Tag nach Tag 182 (30. Juni) mit einem Minimum unter 0 °C. Zur Kontrolle: Es ist Tag 285.
+- [ ] **Mit `break`:** An welchem Tag lag das Minimum 2024 zum ersten Mal über 10 °C? Zur Kontrolle: Es ist Tag 98, der 7. April.
 - [ ] Zählen Sie die **Frost-Tau-Wechsel** 2024 (Minimum unter 0 °C, Maximum über 0 °C). Welche zweite Liste brauchen Sie dafür?
+
+**Zur Übung**
+
+Blatt 4 (Niedrigwasser der Elbe) steht nach der Vorlesung in [OPAL](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/469368834). Versuchen Sie sich **vor** der Übung an den Aufgaben, gern auch zu zweit. Besprochen wird es in der Übung ab dem 23.11.

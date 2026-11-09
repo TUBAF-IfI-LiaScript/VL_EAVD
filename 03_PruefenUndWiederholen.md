@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.3.1
+version:  2.3.2
 language: de
 narrator: Deutsch Female
 
@@ -39,7 +39,7 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 | **Veranstaltung:**       | @config.lecture                                                                                                                                                      |
 | **Semester**             | @config.semester                                                                                                                                                     |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                    |
-| **Inhalte:**             | `if, elif, else, Einrückung, and/or/not, for-Schleife, Zählmuster`                                                                                                   |
+| **Inhalte:**             | `if, elif, else, Einrückung, and/or/not, verschachtelte Bedingungen, for-Schleife, Zählmuster`                                                                                                   |
 | **Link auf Repository:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/03_PruefenUndWiederholen.md](https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/03_PruefenUndWiederholen.md) |
 | **Autoren**              | @author                                                                                                                                                              |
 
@@ -51,7 +51,7 @@ import:   https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/c
 
 * Wie trifft ein Programm Entscheidungen?
 * Warum ist Einrückung in Python keine Formsache?
-* Wie verknüpft man mehrere Bedingungen?
+* Wie verknüpft man mehrere Bedingungen, und wann schachtelt man sie ineinander?
 * Wie wiederholt man dieselbe Anweisung für jeden Wert einer Messreihe?
 
 > **Zum Nacharbeiten: die Ansicht „Lehrbuch“.** Im Hörsaal zeigen die Folien nur die Kernbotschaften. Die Erklärungen dazu stehen im Lehrbuch: oben rechts auf das Symbol mit den Schiebereglern klicken und „Lehrbuch“ wählen.
@@ -124,6 +124,11 @@ Es gibt eine einzige Ausnahme: Zeilen mit `open_url`, mit denen wir Daten aus un
 Das Dollarzeichen steht für die Eingabeaufforderung im Terminal und wird nicht mitgetippt. Unter macOS und Linux heißt der Befehl oft `python3`. Eine Datei können Sie speichern, verändern, erneut ausführen und weitergeben. Genau das unterscheidet ein Programm von einer Formel, die man einmal in eine Zelle tippt.
 
 ## Entscheidungen: `if`
+
+Bisher **meldet** das Programm nur, ob eine Bedingung zutrifft (`Frost? False`), und führt trotzdem **jede** Zeile aus. Zum Zählen darf das Programm aber nur an Frosttagen eins dazuzählen. Dafür brauchen wir eine **Verzweigung**: Der Wahrheitswert entscheidet, welche Zeilen laufen.
+
+--{{0}}--
+Ein Vergleich allein ist eine Feststellung, keine Handlung. Für einen einzelnen Wert reicht das: Wir lesen `True` oder `False` und entscheiden selbst. Bei 366 Werten soll das Programm entscheiden, und zwar bei jedem Wert neu: Frosttag, also mitzählen, sonst nichts tun. In der Tabellenkalkulation hat `ZÄHLENWENN` aus Vorlesung 01 diese Entscheidung versteckt erledigt. In Python schreiben wir sie selbst hin, und dieses Werkzeug heißt `if`.
 
 ```` @BlocklyId(ifeinfach, runner=ifeinfach hideRunner height=260)
 minimum = -3.5
@@ -335,6 +340,127 @@ Kein Programm erkennt einen Fehlwert von selbst. Sie müssen wissen, wie er im D
 --{{1}}--
 Für Python ist `-999` eine ganz gewöhnliche Zahl, nur Sie wissen, dass sie „nicht gemessen“ bedeutet. Erinnern Sie sich an die -250,9 °C aus Vorlesung 00: Auch dort gab es keine Fehlermeldung.
 
+### Bedingung in der Bedingung
+
+Ein `if` darf selbst wieder ein `if` enthalten. Das innere wird **nur geprüft, wenn das äußere zutrifft**. So rahmt die Fehlwert-Prüfung die Frostprüfung ein:
+
+```` @BlocklyId(verschachtelt, runner=verschachtelt hideRunner height=420)
+minimum = -999
+
+if minimum != -999:
+    if minimum < 0:
+        print("Frosttag")
+    else:
+        print("frostfrei")
+else:
+    print("kein Messwert")
+````
+
+```python
+# runner: verschachtelt
+```
+@Pyodide.eval
+
+Setzen Sie `minimum` auf `-2.4` (2. Januar 2024) und auf `2.6` (1. März 2024): drei Werte, drei verschiedene Ausgaben.
+
+**Geht das nicht auch mit `and`?** Ja, mit derselben Ausgabe für alle drei Werte:
+
+```python
+minimum = -999
+
+if minimum != -999 and minimum < 0:
+    print("Frosttag")
+elif minimum != -999:
+    print("frostfrei")
+else:
+    print("kein Messwert")
+```
+@Pyodide.eval
+
+Die Prüfung auf `-999` steht jetzt **zweimal** da. Wer sie ändern muss, etwa weil ein anderer Datensatz Fehlwerte als `-99` kennzeichnet, muss an zwei Stellen denken.
+
+> **Faustregel:** `and`, wenn **ein** Fall beide Bedingungen braucht. **Verschachteln**, wenn eine Bedingung **mehrere** Fälle einrahmt, etwa „nur gemessene Werte auswerten“.
+
+Sie wollen nur die Frosttage zählen, Fehlwerte sollen einfach übergangen werden. Was passt besser?
+
+[(X)] `if minimum != -999 and minimum < 0:`
+[( )] ein `if` für den Fehlwert mit einem zweiten `if` darin
+***
+Es gibt nur **einen** Fall, in dem etwas passiert: gemessen **und** unter null. Dafür reicht `and` in einer Zeile. Die verschachtelte Fassung liefert dasselbe, kostet aber eine Einrückungsebene mehr.
+***
+
+--{{0}}--
+In den Blöcken sieht man die Verschachtelung sofort: Der innere `if`-Block steckt im äußeren wie eine Schachtel in der Schachtel. Im Text zeigt das allein die Einrückung, deshalb ist sie hier besonders wichtig. Das `else` in der vorletzten Zeile gehört zum äußeren `if`, weil es ganz links steht. Mehr als zwei, drei Ebenen werden schnell unübersichtlich. Dann lohnt es sich, die Bedingungen mit `and` zusammenzufassen oder, ab Vorlesung 07, Teile in Funktionen auszulagern.
+
+### Üben: Fehler finden bei `if`
+
+**⏱ 5 Minuten, zu zweit.** Jedes Programm enthält genau einen Fehler. Führen Sie es aus, reparieren Sie es direkt im Editor, bis die angegebene Ausgabe erscheint. Bei 4 und 5 hilft Ihnen keine Meldung.
+
+**1.** Soll `Frosttag` ausgeben (2. Januar 2024):
+
+```python
+minimum = -2.4
+if minimum < 0
+    print("Frosttag")
+```
+@Pyodide.eval
+
+**2.** Soll `kein Messwert` ausgeben:
+
+```python
+minimum = -999
+if minimum = -999:
+    print("kein Messwert")
+```
+@Pyodide.eval
+
+**3.** Soll `frostfrei` ausgeben (1. März 2024):
+
+```python
+minimum = 2.6
+if minimum < 0:
+    print("Frosttag")
+else:
+print("frostfrei")
+```
+@Pyodide.eval
+
+**4.** Soll `Eistag` ausgeben (1. Januar 2024, das Maximum blieb unter null):
+
+```python
+minimum = -1.9
+maximum = -0.7
+if minimum < 0:
+    print("Frosttag")
+elif maximum < 0:
+    print("Eistag")
+```
+@Pyodide.eval
+
+**5.** Soll **nichts** ausgeben, denn am 1. März 2024 gab es keinen Frost:
+
+```python
+minimum = 2.6
+maximum = 7.3
+if minimum < 0 or maximum > 0:
+    print("Frost-Tau-Wechsel")
+```
+@Pyodide.eval
+
+<details>
+<summary>**Lösung**</summary>
+
+1. `SyntaxError: expected ':'`: Nach der Bedingung fehlt der Doppelpunkt.
+2. `SyntaxError: … Maybe you meant '==' …`: `=` weist zu, verglichen wird mit `==`.
+3. `IndentationError`: Der Block unter `else:` muss eingerückt werden.
+4. Keine Meldung, aber `Frosttag`: Jeder Eistag ist auch ein Frosttag, der erste Fall trifft also immer zuerst zu. Den spezielleren Fall `maximum < 0` zuerst prüfen.
+5. Keine Meldung, aber `Frost-Tau-Wechsel`: Mit `or` reicht schon `maximum > 0`. Beide Bedingungen müssen zutreffen, also `and`.
+
+</details>
+
+--{{0}}--
+Die ersten drei Fehler meldet Python, bevor auch nur eine Zeile läuft. Die beiden letzten laufen fehlerfrei und liefern trotzdem das Falsche. Solche **logischen Fehler** findet man nur, wenn man vorher weiß, was herauskommen soll. Deshalb steht bei jeder Aufgabe die erwartete Ausgabe, und deshalb prüfen wir Programme mit Tagen, deren Antwort wir kennen.
+
 ## Wiederholen: `for`
 
 Eine Prüfung für einen Wert können wir jetzt. Für 366 Werte brauchen wir eine **Schleife**.
@@ -393,30 +519,7 @@ Dieses **Zählmuster** hat immer drei Teile:
 --{{0}}--
 In der Tabellenkalkulation übernimmt `ZÄHLENWENN` das Zählen, hier machen Sie es selbst. Die Variable `frosttage` ist das Gedächtnis des Programms: Sie ist die Antwort auf die Frage aus Vorlesung 02, was man sich merken muss. In Vorlesung 04 kommen weitere solche Muster dazu.
 
-### Der Algorithmus aus Vorlesung 01
-
-In Vorlesung 01 haben wir das Zählen als Pseudocode aufgeschrieben. Hier steht er Zeile für Zeile in Python, wie versprochen in **fünf Zeilen**:
-
-<!-- data-type="none" -->
-| Pseudocode                       | Python                          |
-| :------------------------------- | :------------------------------ |
-| Setze frosttage auf 0.           | `frosttage = 0`                 |
-| Für jedes Minimum in der Liste:  | `for minimum in minima:`        |
-| Wenn Minimum < 0:                | `if minimum < 0:`               |
-| Erhöhe frosttage um 1.           | `frosttage = frosttage + 1`     |
-| Gib frosttage aus.               | `print("Frosttage:", frosttage)` |
-
-> Wer den Pseudocode aufgeschrieben hat, hat die eigentliche Arbeit schon getan. Python verlangt nur noch die genaue Schreibweise.
-
---{{0}}--
-Die Liste selbst kommt als sechste Zeile dazu, sie gehört aber zu den Daten, nicht zum Algorithmus. Ändert sich die Liste, bleiben die fünf Zeilen gleich. Genau deshalb lohnt sich das Aufschreiben: Der Algorithmus zählt ebenso sieben wie 366 Tage.
-
-### Schleifen im Kopf ausführen
-
-                                     {{0-1}}
-*******************************************************************************
-
-Wie in den letzten Vorlesungen legen wir ein **Ablaufprotokoll** an — diesmal eine Zeile pro Schleifendurchlauf:
+**Spielen wir die Logik auch noch mal durch!**
 
 <!-- data-type="none" -->
 | Durchlauf | `minimum` | `minimum < 0` | `frosttage` danach |
@@ -430,12 +533,47 @@ Wie in den letzten Vorlesungen legen wir ein **Ablaufprotokoll** an — diesmal 
 | 6         | -4.2      | True          | 5                  |
 | 7         | -11.9     | True          | 6                  |
 
-*******************************************************************************
+--{{0}}--
+Die Tabelle ist ein Ablaufprotokoll wie in den letzten Vorlesungen, diesmal mit einer Zeile pro Durchlauf. Achten Sie auf Durchlauf 3: Die Bedingung ist falsch, der Zähler bleibt stehen, die Schleife läuft trotzdem weiter. Die erste Zeile ohne Durchlauf ist `frosttage = 0`. Sie wird genau einmal ausgeführt, vor der Schleife.
 
-                                     {{1}}
-*******************************************************************************
+### Der Algorithmus aus Vorlesung 01
 
-**Drei typische Fehler.** Was geben diese Varianten aus — und warum?
+In Vorlesung 01 haben wir das Zählen als Pseudocode aufgeschrieben. Hier steht er Zeile für Zeile in Python, wie versprochen in **fünf Zeilen**:
+
+<div class="flex-container">
+<div class="flex-child">
+
+**Pseudocode (Vorlesung 01)**
+
+``` text
+Setze frosttage auf 0.
+Für jedes Minimum in der Liste:
+    Wenn Minimum < 0:
+        Erhöhe frosttage um 1.
+Gib frosttage aus.
+```
+
+</div>
+<div class="flex-child">
+
+**Python**
+
+```python
+frosttage = 0
+for minimum in minima:
+    if minimum < 0:
+        frosttage = frosttage + 1
+print("Frosttage:", frosttage)
+```
+
+</div>
+</div>
+
+> Wer den Pseudocode aufgeschrieben hat, hat die eigentliche Arbeit schon getan. Python verlangt nur noch die genaue Schreibweise.
+
+### Typische Fehler
+
+Was geben diese Varianten aus — und warum?
 
 <div class="flex-container">
 <div class="flex-child">
@@ -464,19 +602,6 @@ for minimum in minima:
 @Pyodide.eval
 
 </div>
-<div class="flex-child">
-
-```python
-minima = [-1.9, -2.4, 0.1]
-frosttage = 0
-for minimum in minima:
-    if minimum < 0:
-    frosttage = frosttage + 1
-print(frosttage)
-```
-@Pyodide.eval
-
-</div>
 </div>
 
 <details>
@@ -484,17 +609,11 @@ print(frosttage)
 
 1. Der Zähler wird in **jedem Durchlauf** auf 0 zurückgesetzt, die verrutschte Zeile aus Vorlesung 01, jetzt in Python. Übrig bleibt nur das Ergebnis des letzten Tages: `0`.
 2. `print` ist eine Ebene zu tief eingerückt und steht in der Schleife — es gibt einen Zwischenstand pro Tag aus: `1`, `2`, `2`, je in einer eigenen Zeile.
-3. Nach dem Doppelpunkt fehlt die Einrückung: `IndentationError`.
 
 </details>
 
-*******************************************************************************
-
 --{{0}}--
-Jede Zeile der Tabelle ist ein Durchlauf. Achten Sie auf Durchlauf 3: Die Bedingung ist falsch, der Zähler bleibt stehen, die Schleife läuft trotzdem weiter. Die erste Zeile ohne Durchlauf ist `frosttage = 0`. Sie wird genau einmal ausgeführt, vor der Schleife.
-
---{{1}}--
-Die drei Varianten sehen fast gleich aus, jeweils steht nur eine Zeile an einer anderen Stelle. Führen Sie sie im Kopf aus, bevor Sie sie starten. Dass ein Programm durchläuft, heißt auch hier nicht, dass es die gesuchte Zahl liefert.
+Die beiden Varianten sehen fast gleich aus, jeweils steht nur eine Zeile an einer anderen Stelle. Führen Sie sie im Kopf aus, bevor Sie sie starten. Dass ein Programm durchläuft, heißt auch hier nicht, dass es die gesuchte Zahl liefert.
 
 ### Typische Fehlvorstellung: Die Schleifenvariable
 
@@ -566,6 +685,71 @@ Zwei Fehler, gemeldet nacheinander:
 
                                     --{{0}}--
 Dass nach der ersten Korrektur ein neuer Fehler erscheint, wirkt am Anfang entmutigend. Es ist aber ein Fortschritt: Python ist eine Zeile weiter gekommen. Bei längeren Programmen hilft es, nach jeder kleinen Änderung auszuführen, statt zwanzig Zeilen zu schreiben und dann alle Fehler auf einmal zu suchen.
+
+### Üben: Fehler finden bei `for`
+
+**⏱ 5 Minuten, zu zweit.** Alle vier Programme sollen `Frosttage: 3` ausgeben. Nur eines meldet einen Fehler. Bei den anderen hilft ein Ablaufprotokoll: Was steht nach jedem Durchlauf in `frosttage`?
+
+**1.** Am dritten Tag fehlt die Messung:
+
+```python
+minima = [-1.9, -2.4, -999, -1.7]
+frosttage = 0
+for minimum in minima:
+    if minimum < 0:
+        frosttage = frosttage + 1
+print("Frosttage:", frosttage)
+```
+@Pyodide.eval
+
+**2.**
+
+```python
+minima = [-1.9, -2.4, 0.1, -1.7]
+frosttage = 0
+for minimum in minima:
+    if minimum < 0:
+        frosttage = frosttage + minimum
+print("Frosttage:", frosttage)
+```
+@Pyodide.eval
+
+**3.**
+
+```python
+minima = [-1.9, -2.4, 0.1, -1.7]
+frosttage = 0
+for minimum in minima:
+    if minima < 0:
+        frosttage = frosttage + 1
+print("Frosttage:", frosttage)
+```
+@Pyodide.eval
+
+**4.**
+
+```python
+minima = [-1.9, -2.4, 0.1, -1.7]
+frosttage = 0
+for minimum in minima:
+    if minimum < 0:
+        frosttage + 1
+print("Frosttage:", frosttage)
+```
+@Pyodide.eval
+
+<details>
+<summary>**Lösung**</summary>
+
+1. Ausgabe `Frosttage: 4`: Auch `-999` ist kleiner als 0. Richtig ist `if minimum != -999 and minimum < 0:`.
+2. Ausgabe `Frosttage: -6.0`: Hier wird summiert statt gezählt. Beim Zählen kommt immer `1` dazu, nicht der Wert selbst.
+3. `TypeError: '<' not supported between instances of 'list' and 'int'`: Verglichen wird die ganze Liste `minima` statt des einzelnen Werts `minimum`.
+4. Ausgabe `Frosttage: 0`: `frosttage + 1` rechnet, speichert aber nichts. Richtig ist `frosttage = frosttage + 1`.
+
+</details>
+
+--{{0}}--
+Drei der vier Programme laufen ohne Meldung und liefern trotzdem eine falsche Zahl. Ein Ablaufprotokoll mit vier Zeilen genügt, um sie zu finden. Programm 2 zeigt den Unterschied zwischen Zählen und Summieren: In Vorlesung 04 brauchen wir genau dieses Summieren, um einen Mittelwert zu berechnen. Der dritte Fehler ist ein Klassiker, weil `minimum` und `minima` fast gleich aussehen. Wählen Sie Namen, die sich deutlich unterscheiden, oder lesen Sie die Meldung genau: `list` verrät, dass hier eine ganze Liste verglichen wird.
 
 ## Die Antwort auf die Leitfrage
 

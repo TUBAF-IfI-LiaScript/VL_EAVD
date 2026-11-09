@@ -41,10 +41,11 @@ TERMINE = [
 ]
 assert len(TERMINE) == 15
 
-# ---- Freigabe: Begriffe einer Vorlesung erscheinen erst nach ihr in der Karte.
+# ---- Freigabe: Begriffe gehaltener Vorlesungen erscheinen voll, die kommenden blass als „Ausblick“
+# (Entscheidung 08.11.2026: Studierende schlagen keine Begriffe vor, also nichts mehr zurückhalten).
 # Nach jeder Vorlesung: Vorschläge der Studierenden einarbeiten, dann hier ergänzen.
 FREIGEGEBEN = {0, 1, 2, 3}
-# PDFs schon vor der Vorlesung, damit Studierende darin mitschreiben können (Begriffe weiterhin erst nach Freigabe).
+# PDFs schon vor der Vorlesung, damit Studierende darin mitschreiben können (Begriffe bis zur Freigabe blass als Ausblick).
 PDF_VORAB = {1, 2, 3}
 if "--freigegeben" in sys.argv:   # für das Makefile: Dateien der freigegebenen Vorlesungen
     print(" ".join(DATEIEN[v] for v in sorted(FREIGEGEBEN)))
@@ -103,6 +104,7 @@ B = [
     ("else", "else", "denken", 3, 'Entweder – oder: else', 2, 1, "Genau einer von zwei Blöcken wird ausgeführt.", None),
     ("elif", "elif", "denken", 3, 'Mehrere Fälle: elif', 2, 1, "Mehrere Fälle nacheinander prüfen; der erste zutreffende gewinnt.", "Die Reihenfolge der Fälle zählt: ein spezieller Fall hinter einem allgemeinen wird nie erreicht."),
     ("logik", "and / or / not", "denken", 3, 'Bedingungen verknüpfen', 2, 1, "Bedingungen verknüpfen, z. B. minimum != -999 and minimum < 0.", None),
+    ("verschachtelt", "Bedingung in der Bedingung", "denken", 3, 'Bedingung in der Bedingung', 2, 1, "Ein if im if: Das innere wird nur geprüft, wenn das äußere zutrifft. Gut, wenn eine Bedingung mehrere Fälle einrahmt.", "„Verschachteln und and sind immer austauschbar.“ – and genügt nur, wenn es einen einzigen Fall gibt."),
     ("for", "for-Schleife", "denken", 3, 'Wiederholen: for', 1, 1, "Wiederholt einen Block für jeden Wert einer Folge.", None),
     ("zaehlmuster", "Zählmuster", "denken", 3, 'Das Zählmuster', 1, 0, "Zähler vor der Schleife anlegen, in der Schleife bedingt erhöhen, danach ausgeben.", "Zähler in der Schleife anlegen: Er wird in jedem Durchlauf zurückgesetzt."),
     ("schleifenvar", "Schleifenvariable", "denken", 3, 'Typische Fehlvorstellung: Die Schleifenvariable', 2, 0, "Bekommt in jedem Durchlauf den nächsten Wert — und behält nach der Schleife den letzten.", "„Nach der Schleife ist die Schleifenvariable weg.“"),
@@ -110,6 +112,7 @@ B = [
     ("extrem", "Extremwert suchen", "denken", 4, 'Muster 2: Extremwert suchen', 1, 0, "Den bisher besten Wert (und seine Position) merken und bei Bedarf ersetzen.", "Startwert 0 statt erstem Wert — im Juli findet man so keinen kältesten Tag."),
     ("zustand", "Zustand verfolgen", "denken", 4, 'Muster 3: Zustand verfolgen', 1, 0, "Laufende Serie und längste Serie getrennt merken. Längste Frostperiode 2024: 25 Tage.", None),
     ("while", "while", "denken", 4, 'while: Wiederholen, solange ...', 1, 1, "Wiederholt, solange eine Bedingung gilt.", None),
+    ("break", "break", "denken", 4, 'Vorzeitig abbrechen: break', 2, 1, "Beendet eine Schleife sofort, sobald das Gesuchte gefunden ist. Weiter geht es nach der Schleife.", "„Ohne break findet die Schleife den ersten Treffer.“ – sie findet den letzten."),
     ("endlos", "Endlosschleife", "denken", 4, 'while: Wiederholen, solange ...', 2, 0, "Wird die Bedingung nie falsch, endet while nie — die Terminierung aus VL 01.", None),
     ("funktion", "Funktion", "denken", 7, 'Eine Funktion definieren', 1, 0, "Benannter, wiederverwendbarer Block: def ist_frosttag(minimum).", "„def führt die Funktion aus.“"),
     ("parameter", "Parameter & Argument", "denken", 7, 'Parameter und Rückgabewert', 2, 0, "Beim Aufruf wird der Wert übergeben, nicht der Name.", "„Der übergebene Wert muss so heißen wie der Parameter.“"),
@@ -230,7 +233,7 @@ R = [
     # VL 04
     ("zaehlmuster", "summe", "verallgemeinert zu"), ("zaehlmuster", "extrem", "verallgemeinert zu"), ("summe", "mittel", "liefert"),
     ("fehlwert", "mittel", "verfälscht"), ("extrem", "zustand", "steckt in"), ("for", "while", "Alternative"),
-    ("while", "endlos", "Gefahr"), ("terminierung", "endlos", "verletzt durch"), ("while", "hochrechnung", "berechnet"),
+    ("while", "endlos", "Gefahr"), ("terminierung", "endlos", "verletzt durch"), ("while", "hochrechnung", "berechnet"), ("terminierung", "break", "vorzeitig mit"), ("logik", "verschachtelt", "Alternative"),
     ("float", "round", "ausgeben mit"), ("float", "vergleich", "kein == bei"),
     # VL 05
     ("liste", "for", "durchlaufen von"), ("liste", "append", "wächst mit"), ("zaehlmuster", "append", "Sammelmuster statt Zähler"),
@@ -343,5 +346,5 @@ for v in range(ANZAHL):
 kern.erzeuge(
     repo=REPO, kurs=KURS, termine=T, bloecke=BLOECKE, linien=LINIEN,
     begriffe=B, beziehungen=R, faeden=F, anwendungen=A, leitfragen=LEITFRAGE, freigegeben=FREIGEGEBEN,
-    karte="docs/kurslandkarte", startseite="docs/index.html", vorschau="keine", pdf_ordner="docs/pdf", pdf_termine=FREIGEGEBEN | PDF_VORAB,
+    karte="docs/kurslandkarte", startseite="docs/index.html", vorschau="ausblick", pdf_ordner="docs/pdf", pdf_termine=FREIGEGEBEN | PDF_VORAB,
 )
