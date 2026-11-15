@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.3
+version:  2.0.4
 language: de
 narrator: Deutsch Female
 
@@ -427,18 +427,6 @@ print(stationen.get("chemnitz"), stationen.get("freiberg"))
 [   ( )          ( )                     (X)     ] `import numpy`
 [   (X)          ( )                     ( )     ] `from datetime import datetime`
 
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie.
-
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
-
-[[___ ___ ___]]
-
-**Wo könnten Sie das, was heute dran war, in Ihrem Fach anwenden?**
-
-[[___ ___ ___]]
-
 ## Nächste Woche
 
 Mit dieser Vorlesung endet Phase 1. Ab nächster Woche arbeiten wir mit Paketen, die andere für genau unsere Art von Aufgaben geschrieben haben — weiter in Visual Studio Code, ergänzt um Zellen für die schrittweise Datenanalyse.
@@ -448,3 +436,5 @@ Mit dieser Vorlesung endet Phase 1. Ab nächster Woche arbeiten wir mit Paketen,
 - [ ] Legen Sie `dwd.py` und `auswertung.py` im Repository-Ordner an und bringen Sie das Programm auf Ihrem Rechner zum Laufen.
 - [ ] Ändern Sie `finde_luecken` so, dass nur Lücken von mehr als 30 Tagen gemeldet werden. Wie viele Tage fehlen bei Chemnitz insgesamt?
 - [ ] Installieren Sie mit `pip install numpy pandas matplotlib` die Pakete für Phase 2.
+
+**Zum Wiederholen:** Die Begriffe dieser Vorlesung finden Sie in der [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=9).

@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.2
+version:  2.0.3
 language: de
 narrator: Deutsch Female
 
@@ -250,18 +250,6 @@ Sie haben in diesem Semester den ganzen Datenkreislauf aus Vorlesung 00 durchlau
 * **Ein Überblick über das Semester:** Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) zeigt alle Begriffe und wie sie zusammenhängen — gut geeignet, um vor der Prüfung die Fäden noch einmal abzufahren.
 
 > Was Sie mitnehmen sollten, sind weniger die Befehle als die Fragen: Wie sind die Daten entstanden? Was fehlt? Lohnt sich ein Programm? Und kann ich dem Ergebnis trauen?
-
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie.
-
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
-
-[[___ ___ ___]]
-
-**Wo könnten Sie das, was heute dran war, in Ihrem Fach anwenden?**
-
-[[___ ___ ___]]
 
 ## Prüfungsvorbereitung
 

@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.3.1
+version:  2.3.2
 language: de
 narrator: Deutsch Female
 
@@ -785,18 +785,6 @@ Ordnen Sie die drei Aufgaben von heute zu:
 [        ( )            (X)      ] Aufgabe 2: Sensorprotokoll, jeden Tag eine neue Datei
 [        ( )            (X)      ] Aufgabe 3: 135 Jahre im Rohformat, später weitere Stationen
 
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie.
-
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
-
-[[___ ___ ___]]
-
-**Wo könnten Sie das, was heute dran war, in Ihrem Fach anwenden?**
-
-[[___ ___ ___]]
-
 ## Nächste Woche
 
 In der nächsten Vorlesung schreiben Sie Ihre ersten Python-Anweisungen — im Browser, ohne Installation. Wahlweise als **Blöcke** zum Zusammenschieben oder als **Text** zum Tippen.
@@ -806,3 +794,5 @@ In der nächsten Vorlesung schreiben Sie Ihre ersten Python-Anweisungen — im B
 - [ ] Versuchen Sie, Aufgabe 2 vollständig zu lösen. Notieren Sie, wo Sie hängen geblieben sind.
 - [ ] Beschreiben Sie in Pseudocode, wie man den **wärmsten Tag** in `fichtelberg_2024.csv` findet — ohne die Funktion `MAX` zu benutzen.
 - [ ] Überlegen Sie: Welche Auswertung aus Ihrem Fach würden Sie gern automatisieren?
+
+**Zum Wiederholen:** Die Begriffe dieser Vorlesung finden Sie in der [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=1).

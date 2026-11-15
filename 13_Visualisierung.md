@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.2
+version:  2.0.3
 language: de
 narrator: Deutsch Female
 
@@ -340,18 +340,6 @@ Zwei Gründe:
 [[X]] Zu einem Trend gehört die Angabe des Zeitraums.
 [[X]] Ein gleitendes Mittel macht langfristige Entwicklungen sichtbar und dämpft Ausreißer.
 
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie.
-
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
-
-[[___ ___ ___]]
-
-**Wo könnten Sie das, was heute dran war, in Ihrem Fach anwenden?**
-
-[[___ ___ ___]]
-
 ## Nächste Woche
 
 In der letzten Vorlesung fragen wir: **Kann ich meinem Ergebnis trauen?** Freiberg zieht um — und die Daten sehen danach genauso aus wie vorher. Dazu: Ausblick und Prüfungsvorbereitung.
@@ -361,3 +349,5 @@ In der letzten Vorlesung fragen wir: **Kann ich meinem Ergebnis trauen?** Freibe
 - [ ] Erstellen Sie in VS Code (mit Zellen `# %%`) ein Diagramm der **Sommertage** pro Jahr mit gleitendem Mittel. Speichern Sie es mit `plt.savefig("sommertage.png")`.
 - [ ] Zeichnen Sie das Jahresmittel von Fichtelberg und Chemnitz in ein gemeinsames Diagramm. Wo fehlen Chemnitzer Daten?
 - [ ] Suchen Sie in einer Zeitung oder einem Bericht ein Diagramm, das Sie für irreführend halten. Woran liegt es?
+
+**Zum Wiederholen:** Die Begriffe dieser Vorlesung finden Sie in der [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=13).

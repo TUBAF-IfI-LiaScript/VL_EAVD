@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.4.6
+version:  2.4.7
 language: de
 narrator: Deutsch Female
 
@@ -419,13 +419,13 @@ Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/
 
 ![Die Kurslandkarte in der Ansicht „Vorlesungen“, so wie sie nach Vorlesung 04 aussehen könnte, mit dem Begriff „Mittelwert“](images/00_Motivation/kurslandkarte.png)<!-- style="max-height: 28vh;" -->
 
-**Die Karte wächst mit dem Semester** — nach jeder Vorlesung kommen ihre Begriffe dazu, auch Ihre Vorschläge.
+**Die Karte zeigt das ganze Semester:** die Begriffe gehaltener Vorlesungen voll, die kommenden blass als Ausblick.
 
                                     --{{0}}--
-Programmieren lernt man in Schichten: Jeder neue Begriff stützt sich auf frühere. Die Karte hält diesen Zusammenhang fest. Für kommende Vorlesungen stehen nur Termin und Leitfrage — ihre Begriffe entstehen erst nach der Vorlesung, mit Ihren Vorschlägen. „Sie sind hier“ richtet sich nach dem Datum. Neben der Liste gibt es eine Metrokarte, deren Linien rote Fäden durch das Semester sind — etwa „Wenn ein Wert fehlt“ —, und eine Zeitleiste mit allen Begriffen nach Themengebiet.
+Programmieren lernt man in Schichten: Jeder neue Begriff stützt sich auf frühere. Die Karte hält diesen Zusammenhang fest. Den Ausblick auf kommende Vorlesungen schalten Sie oben in der Karte ein. Nach jeder Vorlesung werden ihre Begriffe voll angezeigt. „Sie sind hier“ richtet sich nach dem Datum. Neben der Liste gibt es eine Metrokarte, deren Linien rote Fäden durch das Semester sind — etwa „Wenn ein Wert fehlt“ —, und eine Zeitleiste mit allen Begriffen nach Themengebiet.
 
 > [!NOTE]
-> Am Ende jeder Vorlesung fragen wir Sie nach den Stichworten des Tages und tragen sie in die Kurslandkarte ein.
+> Am Ende jeder Vorlesung führt ein Link zu ihren Begriffen in der Karte, zum Wiederholen und Nachschlagen.
 
 ### Offene Materialien
 
@@ -605,26 +605,10 @@ Welche kritischen Fragen müssen wir uns stellen?
                                     --{{1}}--
 Zu Beginn lernt der Roboter, wie weit die Wand gegenüber entfernt ist. Im Probelauf hat er zwei Durchgänge nicht einordnen können und als „unklar“ notiert. In Vorlesung 08 sehen wir eine solche Messung live auf einem Mikrocontroller.
 
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie.
-
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
-
-[[___ ___ ___]]
-
-**Was blieb unklar?**
-
-[[___ ___ ___]]
-
-**Welche Anwendungsfälle sind denkbar?**
-
-[[___ ___ ___]]
-
-Die letzte Frage zielt darauf, dass ich gezielt Beispiele aus Ihrem Fachgebiet in die Vorlesung einbauen möchte. Dazu spreche ich dann die Kollegen der Fachbereiche an. Wer möchte, kann mir auch selbst Beispiele zuschicken.
-
 ## Nächste Woche
 
 Sie bekommen die Datei des Personenzählers und die Fichtelberg-Daten — und versuchen, drei Fragen mit einer Tabellenkalkulation zu beantworten. Ohne eine Zeile Code.
 
 **Bringen Sie einen Laptop mit einer Tabellenkalkulation mit** — LibreOffice Calc, Excel oder Google Sheets.
+
+**Zum Wiederholen:** Die Begriffe dieser Vorlesung finden Sie in der [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=0). Beispiele aus Ihrem Fach, die wir in der Vorlesung aufgreifen könnten, schicken Sie mir gern.

@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.1.0
+version:  2.1.1
 language: de
 narrator: Deutsch Female
 
@@ -501,18 +501,6 @@ Stünde `frostwerte = []` in der Schleife, würde die Liste bei jedem Durchlauf 
 [[ ]] `liste[-366]`
 [[X]] `liste[-367]`
 
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester. Wir schlagen die Begriffe vor, Sie ergänzen, was fehlt: Aus Ihren Datenwünschen in Vorlesung 00 sind so schon die ersten Anwendungen geworden. Nehmen Sie sich dafür jetzt fünf Minuten.
-
-**Welches Wort von heute müssten Sie jemandem aus Ihrem Semester erklären können?**
-
-[[___ ___ ___]]
-
-**Welche Daten aus Ihrem Fach würden Sie gern so auswerten?**
-
-[[___ ___ ___]]
-
 ## Nächste Woche
 
 Heute kamen die Daten vorbereitet aus zwei einspaltigen Dateien. Nächste Woche lesen wir die **Rohdatei** des DWD selbst — mit Semikolons, Leerzeichen, Kopfzeile und `-999` — und beantworten die Leitfrage für alle 135 Jahre.
@@ -526,3 +514,5 @@ Heute kamen die Daten vorbereitet aus zwei einspaltigen Dateien. Nächste Woche 
 **Zur Übung**
 
 Blatt 5 (Warum wurde Schokolade so teuer?) steht nach der Vorlesung in [OPAL](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/469368834). Versuchen Sie sich **vor** der Übung an den Aufgaben, gern auch zu zweit. Besprochen wird es in der Übung ab dem 30.11.
+
+**Zum Wiederholen:** Die Begriffe dieser Vorlesung finden Sie in der [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=5).

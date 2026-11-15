@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.3
+version:  2.0.4
 language: de
 narrator: Deutsch Female
 
@@ -376,18 +376,6 @@ Ohne die Prüfung gäbe es bei einem Jahr ohne Messwerte eine Division durch nul
 
 </details>
 
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie.
-
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
-
-[[___ ___ ___]]
-
-**Wo könnten Sie das, was heute dran war, in Ihrem Fach anwenden?**
-
-[[___ ___ ___]]
-
 ## Nächste Woche
 
 Nächste Woche ist **Demonstration**: Ein Mikrocontroller misst, MicroPython steuert ihn. Bis hierher kamen alle Daten fertig aus einer Datei — dann sehen Sie, wie sie entstehen.
@@ -399,3 +387,5 @@ Im Januar geht es mit Vorlesung 09 weiter: Die Funktionen von heute wandern in e
 - [ ] Fügen Sie dem Programm aus dem Live Hacking eine dritte Station hinzu: Chemnitz (`data/chemnitz/produkt_klima_tag_18820101_20251231_00853.txt`). Wie viele Zeilen ändern Sie?
 - [ ] Schreiben Sie eine Funktion `laengste_frostperiode(minima)` mit dem Muster aus Vorlesung 04 und prüfen Sie sie mit `assert`.
 - [ ] Schreiben Sie für `zaehle_unter` drei `assert`-Prüfungen, darunter eine mit einer leeren Liste.
+
+**Zum Wiederholen:** Die Begriffe dieser Vorlesung finden Sie in der [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=7).

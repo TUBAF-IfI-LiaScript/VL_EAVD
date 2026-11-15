@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.3
+version:  2.0.4
 language: de
 narrator: Deutsch Female
 
@@ -454,18 +454,6 @@ Drei Teile. `teile[1]` ist `"20240813"`, davon die Zeichen 4 und 5: `"08"`. `flo
 [[ ]] Fehlende Tage stehen in DWD-Dateien immer als `-999` in der Datei.
 [[X]] `datei.readline()` vor der Schleife sorgt dafür, dass die Schleife mit der zweiten Zeile beginnt.
 
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie.
-
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
-
-[[___ ___ ___]]
-
-**Wo könnten Sie das, was heute dran war, in Ihrem Fach anwenden?**
-
-[[___ ___ ___]]
-
 ## Nächste Woche
 
 Das lange Skript funktioniert, ist aber schwer zu lesen, zu ändern und zu erweitern. Nächste Woche lernen Sie **Funktionen** — und zerlegen es live in handliche, benannte Teile.
@@ -475,3 +463,5 @@ Das lange Skript funktioniert, ist aber schwer zu lesen, zu ändern und zu erwei
 - [ ] Klonen oder laden Sie das Repository herunter und führen Sie das Programm aus _Die ganze Datei_ auf Ihrem Rechner aus (ohne `hole_daten.py`).
 - [ ] Beheben Sie im langen Skript den 1948-Fehler: Jahre mit weniger als 300 gemessenen Tagen sollen in der Ergebnisdatei keinen Frostwert bekommen. An wie vielen Stellen müssen Sie ändern?
 - [ ] Markieren Sie im langen Skript alle Zeilen, die in beiden Blöcken gleich sind.
+
+**Zum Wiederholen:** Die Begriffe dieser Vorlesung finden Sie in der [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=6).

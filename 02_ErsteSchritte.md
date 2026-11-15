@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.3.2
+version:  2.3.3
 language: de
 narrator: Deutsch Female
 
@@ -910,18 +910,6 @@ Text und Zahl lassen sich nicht mit `+` verbinden. Richtig wäre `print("Frostta
 Links vom `=` steht immer **genau ein Name** — dort wird das Ergebnis abgelegt. Rechts steht der Ausdruck, der zuerst ausgerechnet wird. Anders als in der Mathematik lässt sich eine Zuweisung nicht "umdrehen".
 ***
 
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester. Wir schlagen die Begriffe vor, Sie ergänzen, was fehlt: Aus Ihren Datenwünschen in Vorlesung 00 sind so schon die ersten Anwendungen geworden. Nehmen Sie sich dafür jetzt fünf Minuten.
-
-**Welches Wort von heute müssten Sie jemandem aus Ihrem Semester erklären können?**
-
-[[___ ___ ___]]
-
-**Welche Daten aus Ihrem Fach würden Sie gern so auswerten?**
-
-[[___ ___ ___]]
-
 ## Nächste Woche
 
 Ab der nächsten Vorlesung arbeiten wir zusätzlich mit Python auf Ihrem eigenen Rechner.
@@ -937,3 +925,5 @@ Ab der nächsten Vorlesung arbeiten wir zusätzlich mit Python auf Ihrem eigenen
 **Zur Übung**
 
 Blatt 2 (Bohrkerne vermessen) steht nach der Vorlesung in [OPAL](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/469368834). Versuchen Sie sich **vor** der Übung an den Aufgaben, gern auch zu zweit. Besprochen wird es in der Übung ab dem 09.11.
+
+**Zum Wiederholen:** Die Begriffe dieser Vorlesung finden Sie in der [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=2).

@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.2
+version:  2.0.3
 language: de
 narrator: Deutsch Female
 
@@ -295,18 +295,6 @@ Eine Zeile pro Gruppe, eine Spalte pro Funktion. A: (2 + 4 + 3) / 3 = 3,0 aus dr
 [[X]] Das laufende Jahrzehnt ist noch nicht abgeschlossen.
 [[ ]] Summen sind bei Temperaturen grundsätzlich verboten.
 
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie.
-
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
-
-[[___ ___ ___]]
-
-**Wo könnten Sie das, was heute dran war, in Ihrem Fach anwenden?**
-
-[[___ ___ ___]]
-
 ## Nächste Woche
 
 Heute sind Zahlenkolonnen entstanden — 14 Jahrzehnte, 132 Jahre. Nächste Woche machen wir sie sichtbar: mit **Diagrammen**, die zeigen, was in den Zahlen steckt — und lernen, wann ein Diagramm in die Irre führt.
@@ -316,3 +304,5 @@ Heute sind Zahlenkolonnen entstanden — 14 Jahrzehnte, 132 Jahre. Nächste Woch
 - [ ] Berechnen Sie auf Ihrem Rechner die mittlere Zahl der **Sommertage** (Maximum ab 25 °C) pro Jahrzehnt. Welches Jahrzehnt hatte die meisten?
 - [ ] Wiederholen Sie die Frosttage pro Jahrzehnt für Chemnitz. Welche Jahrzehnte fehlen — und warum (Vorlesung 09)?
 - [ ] Wie viele Tage im Jahr ist es auf dem Fichtelberg im Mittel kälter als 0 °C (Tagesmittel), wie viele in Chemnitz?
+
+**Zum Wiederholen:** Die Begriffe dieser Vorlesung finden Sie in der [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=12).

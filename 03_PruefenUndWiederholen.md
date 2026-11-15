@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.3.2
+version:  2.3.3
 language: de
 narrator: Deutsch Female
 
@@ -848,18 +848,6 @@ Beide Bedingungen müssen gelten: unter 0 **und** kein Fehlwert. Mit `or` wäre 
 [ ( )  (X)  ( )  ] `frosttage = frosttage + 1`
 [ ( )  ( )  (X)  ] `print("Frosttage:", frosttage)`
 
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester. Wir schlagen die Begriffe vor, Sie ergänzen, was fehlt: Aus Ihren Datenwünschen in Vorlesung 00 sind so schon die ersten Anwendungen geworden. Nehmen Sie sich dafür jetzt fünf Minuten.
-
-**Welches Wort von heute müssten Sie jemandem aus Ihrem Semester erklären können?**
-
-[[___ ___ ___]]
-
-**Welche Daten aus Ihrem Fach würden Sie gern so auswerten?**
-
-[[___ ___ ___]]
-
 ## Nächste Woche
 
 Das Zählmuster merkt sich eine Zahl über alle Durchläufe hinweg. In der nächsten Vorlesung merken wir uns mehr — und beantworten eine Frage, an der die Tabellenkalkulation verzweifelt:
@@ -875,3 +863,5 @@ Das Zählmuster merkt sich eine Zahl über alle Durchläufe hinweg. In der näch
 **Zur Übung**
 
 Blatt 3 (Erdbeben einordnen) steht nach der Vorlesung in [OPAL](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/469368834). Versuchen Sie sich **vor** der Übung an den Aufgaben, gern auch zu zweit. Besprochen wird es in der Übung ab dem 16.11.
+
+**Zum Wiederholen:** Die Begriffe dieser Vorlesung finden Sie in der [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=3).

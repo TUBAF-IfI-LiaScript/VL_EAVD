@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & Bernhard Jung & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & bernhard.jung@informatik.tu-freiberg.de
-version:  2.0.2
+version:  2.0.3
 language: de
 narrator: Deutsch Female
 
@@ -374,18 +374,6 @@ Die Spalte enthält Fehlwerte `-999`, die NumPy wie normale Zahlen mitrechnet. R
 
 </details>
 
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie.
-
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
-
-[[___ ___ ___]]
-
-**Wo könnten Sie das, was heute dran war, in Ihrem Fach anwenden?**
-
-[[___ ___ ___]]
-
 ## Nächste Woche
 
 NumPy kennt nur Zahlen ohne Namen: Spalte 13 ist `TMK` — aber das steht nirgends. Nächste Woche lernen Sie **pandas**: Tabellen mit beschrifteten Spalten, in denen `-999` gleich beim Einlesen zu „kein Wert“ wird.
@@ -395,3 +383,5 @@ NumPy kennt nur Zahlen ohne Namen: Spalte 13 ist `TMK` — aber das steht nirgen
 - [ ] Legen Sie die Datei `auswertung.py` aus dem Abschnitt _Zellen in Visual Studio Code_ im Repository-Ordner an und führen Sie die Zellen einzeln aus.
 - [ ] Ergänzen Sie eine Zelle, die den Vergleich für das Tagesminimum `TNK` (Spalte 16) wiederholt. Ist die Erwärmung bei den Minima größer oder kleiner?
 - [ ] Wie viele Frosttage hatte der Fichtelberg im Durchschnitt pro Jahr 1901–1930 und 1991–2020? Hinweis: Frosttage zählen, durch die Zahl der Jahre teilen — und an die Lücke denken.
+
+**Zum Wiederholen:** Die Begriffe dieser Vorlesung finden Sie in der [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EAVD/kurslandkarte/#termin=10).
