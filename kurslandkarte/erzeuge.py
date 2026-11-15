@@ -46,7 +46,7 @@ assert len(TERMINE) == 15
 # Nach jeder Vorlesung: Vorschläge der Studierenden einarbeiten, dann hier ergänzen.
 FREIGEGEBEN = {0, 1, 2, 3}
 # PDFs schon vor der Vorlesung, damit Studierende darin mitschreiben können (Begriffe bis zur Freigabe blass als Ausblick).
-PDF_VORAB = {1, 2, 3}
+PDF_VORAB = {1, 2, 3, 4}
 if "--freigegeben" in sys.argv:   # für das Makefile: Dateien der freigegebenen Vorlesungen
     print(" ".join(DATEIEN[v] for v in sorted(FREIGEGEBEN)))
     sys.exit()
@@ -108,9 +108,9 @@ B = [
     ("for", "for-Schleife", "denken", 3, 'Wiederholen: for', 1, 1, "Wiederholt einen Block für jeden Wert einer Folge.", None),
     ("zaehlmuster", "Zählmuster", "denken", 3, 'Das Zählmuster', 1, 0, "Zähler vor der Schleife anlegen, in der Schleife bedingt erhöhen, danach ausgeben.", "Zähler in der Schleife anlegen: Er wird in jedem Durchlauf zurückgesetzt."),
     ("schleifenvar", "Schleifenvariable", "denken", 3, 'Typische Fehlvorstellung: Die Schleifenvariable', 2, 0, "Bekommt in jedem Durchlauf den nächsten Wert — und behält nach der Schleife den letzten.", "„Nach der Schleife ist die Schleifenvariable weg.“"),
-    ("summe", "Aufsummieren", "denken", 4, 'Muster 1: Aufsummieren', 1, 0, "Summe und Anzahl in der Schleife fortschreiben.", None),
-    ("extrem", "Extremwert suchen", "denken", 4, 'Muster 2: Extremwert suchen', 1, 0, "Den bisher besten Wert (und seine Position) merken und bei Bedarf ersetzen.", "Startwert 0 statt erstem Wert — im Juli findet man so keinen kältesten Tag."),
-    ("zustand", "Zustand verfolgen", "denken", 4, 'Muster 3: Zustand verfolgen', 1, 0, "Laufende Serie und längste Serie getrennt merken. Längste Frostperiode 2024: 25 Tage.", None),
+    ("summe", "Aufsummieren", "denken", 4, 'Ganze Spalte erfassen', 1, 0, "Summe und Anzahl in der Schleife fortschreiben.", None),
+    ("extrem", "Extremwert suchen", "denken", 4, 'Extremwerte', 1, 0, "Den bisher besten Wert (und seine Position) merken und bei Bedarf ersetzen.", "Startwert 0 statt erstem Wert — im Juli findet man so keinen kältesten Tag."),
+    ("zustand", "Zustand verfolgen", "denken", 4, 'Blöcke und Zustände', 1, 0, "Laufende Serie und längste Serie getrennt merken. Längste Frostperiode 2024: 25 Tage.", None),
     ("while", "while", "denken", 4, 'while: Wiederholen, solange ...', 1, 1, "Wiederholt, solange eine Bedingung gilt.", None),
     ("break", "break", "denken", 4, 'Vorzeitig abbrechen: break', 2, 1, "Beendet eine Schleife sofort, sobald das Gesuchte gefunden ist. Weiter geht es nach der Schleife.", "„Ohne break findet die Schleife den ersten Treffer.“ – sie findet den letzten."),
     ("endlos", "Endlosschleife", "denken", 4, 'while: Wiederholen, solange ...', 2, 0, "Wird die Bedingung nie falsch, endet while nie — die Terminierung aus VL 01.", None),
@@ -184,7 +184,7 @@ B = [
     ("schliff", "Bildverarbeitung", "analyse", 0, 'Praktische Inhalte', 2, 0, "Ausblick: Ein Bild ist eine Tabelle aus Helligkeitswerten. Schwelle setzen, zusammenhängende Flecken zählen, Größen messen.", "„Das Programm erkennt, was im Bild ist.“ Es erkennt nur, was heller ist als die Schwelle."),
     ("lohnt", "Programm oder Tabelle?", "analyse", 1, 'Wann lohnt sich ein Programm?', 1, 0, "Viele Daten, sperrige Formate, Wiederholung, Nachvollziehbarkeit: dann lohnt ein Programm.", None),
     ("kenntage", "Frost-, Eis-, Sommertag", "analyse", 3, 'Mehrere Fälle: elif', 2, 0, "DWD-Kenntage: Frosttag = Minimum unter 0 °C, Eistag = Maximum unter 0 °C, Sommertag = Maximum ab 25 °C.", None),
-    ("mittel", "Mittelwert", "analyse", 4, 'Mittelwert mit Fehlwerten', 1, 0, "Summe durch Anzahl — nur über gültige Werte, und die Anzahl gehört dazu.", "„Ein Mittelwert gilt, egal wie viele Werte fehlen.“"),
+    ("mittel", "Mittelwert", "analyse", 4, 'Spalte mit Bedingung', 1, 0, "Summe durch Anzahl — nur über gültige Werte, und die Anzahl gehört dazu.", "„Ein Mittelwert gilt, egal wie viele Werte fehlen.“"),
     ("hochrechnung", "Hochrechnung", "analyse", 4, 'while: Wiederholen, solange ...', 2, 0, "Bei +0,05 °C pro Jahr läge das Mittel 2059 bei 8 °C — nur unter dieser Annahme.", "„Rechnerisch korrekt heißt inhaltlich richtig.“"),
     ("statistik", "statistics", "analyse", 9, 'Die Standardbibliothek', 2, 1, "mean, median, stdev für Listen von Messwerten.", None),
     ("notebook", "Jupyter Notebook lesen", "analyse", 10, 'Exkurs: Jupyter Notebooks lesen', 2, 0, "Verbreitetes Format in Wissenschaft und Projekten; in der Vorlesung nur zum Lesen vorgestellt, nicht als Werkzeug.", "„Was im Notebook steht, ist das, was gerechnet wurde.“"),
