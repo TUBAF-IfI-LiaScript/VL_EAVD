@@ -44,9 +44,9 @@ assert len(TERMINE) == 15
 # ---- Freigabe: Begriffe gehaltener Vorlesungen erscheinen voll, die kommenden blass als „Ausblick“
 # (Entscheidung 08.11.2026: Studierende schlagen keine Begriffe vor, also nichts mehr zurückhalten).
 # Nach jeder Vorlesung: Vorschläge der Studierenden einarbeiten, dann hier ergänzen.
-FREIGEGEBEN = {0, 1, 2, 3}
+FREIGEGEBEN = {0, 1, 2, 3, 4}
 # PDFs schon vor der Vorlesung, damit Studierende darin mitschreiben können (Begriffe bis zur Freigabe blass als Ausblick).
-PDF_VORAB = {1, 2, 3, 4}
+PDF_VORAB = {1, 2, 3, 4, 5}
 if "--freigegeben" in sys.argv:   # für das Makefile: Dateien der freigegebenen Vorlesungen
     print(" ".join(DATEIEN[v] for v in sorted(FREIGEGEBEN)))
     sys.exit()
@@ -139,7 +139,7 @@ B = [
     ("index", "Index & Slice", "typen", 5, 'Zugriff über den Index', 1, 0, "liste[0] erster, liste[-1] letzter Wert, liste[2:5] die Indizes 2 bis 4.", None),
     ("indexerror", "IndexError", "typen", 5, 'Zugriff über den Index', 2, 1, "Zugriff außerhalb der Liste — der häufigste Listenfehler.", None),
     ("range", "range", "typen", 5, 'Zahlenfolgen mit range', 1, 1, "Folge ganzer Zahlen, z. B. range(2015, 2025). Der Endwert ist nicht enthalten.", "„range ist eine Liste.“"),
-    ("parallel", "zusammengehörige Listen", "typen", 5, 'Zusammengehörige Werte', 2, 0, "daten[i] und maxima[i] gehören zum selben Tag.", "„bester enthält die höchste Temperatur“ — es ist ein Index."),
+    ("parallel", "zusammengehörige Listen", "typen", 5, 'Zusammengehörige Werte', 2, 0, "datumswerte[i] und maxima[i] gehören zum selben Tag.", "„bester enthält die höchste Temperatur“ — es ist ein Index."),
     ("textvergleich", "Text vergleichen", "typen", 5, 'Typische Fehlvorstellung: Zahlen als Text vergleichen', 2, 0, "Texte werden Zeichen für Zeichen verglichen.", "„\"9.5\" > \"28.1\" ist falsch.“ Es ist wahr."),
     ("dict", "Dictionary", "typen", 6, 'Das Dictionary', 1, 0, "Ordnet Schlüsseln Werte zu: {\"1947\": 119}. Ein Durchlauf, ein Eintrag pro Jahr.", None),
     ("keyerror", "KeyError, in, get", "typen", 6, 'Das Dictionary', 2, 0, "Nach einem fehlenden Schlüssel kann man nicht fragen; vorher mit in prüfen oder get verwenden.", None),
@@ -346,5 +346,5 @@ for v in range(ANZAHL):
 kern.erzeuge(
     repo=REPO, kurs=KURS, termine=T, bloecke=BLOECKE, linien=LINIEN,
     begriffe=B, beziehungen=R, faeden=F, anwendungen=A, leitfragen=LEITFRAGE, freigegeben=FREIGEGEBEN,
-    karte="docs/kurslandkarte", startseite="docs/index.html", vorschau="ausblick", pdf_ordner="docs/pdf", pdf_termine=FREIGEGEBEN | PDF_VORAB,
+    karte="docs/kurslandkarte", startseite="docs/index.html", vorschau="ausblick", pdf_ordner="docs/pdf", pdf_termine=FREIGEGEBEN | PDF_VORAB, pdf_css="kurslandkarte/pdf.css",
 )

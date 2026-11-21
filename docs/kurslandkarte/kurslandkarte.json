@@ -1,5 +1,5 @@
 {
- "stand": "15.11.2026",
+ "stand": "21.11.2026",
  "version": "0.5.2",
  "kurs": {
   "basis": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/",
@@ -291,7 +291,7 @@
    "wann": "KW 47 · 16.–20.11.",
    "wann_kurz": "KW 47",
    "leitfrage": "Wie lang war die längste Frostperiode?",
-   "freigegeben": false,
+   "freigegeben": true,
    "status": "ausgearbeitet",
    "block": 2,
    "pdf": "../pdf/04_MusterInMessreihen.pdf",
@@ -338,7 +338,7 @@
    "freigegeben": false,
    "status": "ausgearbeitet",
    "block": 2,
-   "pdf": null,
+   "pdf": "../pdf/05_DatenSammeln.pdf",
    "anwendet": [],
    "abschnitte": [
     "Daten sammeln",
@@ -349,7 +349,9 @@
     "Typische Fehlvorstellung: range ist eine Liste",
     "Zusammengehörige Werte",
     "Typische Fehlvorstellung: Index oder Wert?",
+    "Üben: Fehler finden bei Listen",
     "Ein Ergebnis pro Jahr",
+    "Erst im Kleinen: Schleife in der Schleife",
     "Versuch 1",
     "Typische Fehlvorstellung: Zahlen als Text vergleichen",
     "Versuch 2",
@@ -1473,7 +1475,7 @@
    "abschnitt": 7,
    "ebene": 2,
    "code": false,
-   "erklaerung": "daten[i] und maxima[i] gehören zum selben Tag.",
+   "erklaerung": "datumswerte[i] und maxima[i] gehören zum selben Tag.",
    "fehlvorstellung": "„bester enthält die höchste Temperatur“ — es ist ein Index."
   },
   {
@@ -1481,7 +1483,7 @@
    "name": "Text vergleichen",
    "linie": "typen",
    "vl": 5,
-   "abschnitt": 11,
+   "abschnitt": 13,
    "ebene": 2,
    "code": false,
    "erklaerung": "Texte werden Zeichen für Zeichen verglichen.",

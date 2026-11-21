@@ -101,20 +101,22 @@ def typ(label):
 def erzeuge(repo, kurs, termine, bloecke, linien, begriffe, beziehungen, faeden,
             anwendungen=(), leitfragen=None, freigegeben=(), anwendet=None, brauchen=None,
             karte="docs/kurslandkarte", startseite="docs/index.html", folien=False, vorschau="ausblick", pdf=None,
-            pdf_ordner=None, pdf_termine=None):
+            pdf_ordner=None, pdf_termine=None, pdf_css=None):
     """vorschau: "ausblick" – kommende Begriffe stehen in den Daten und erscheinen mit „Ausblick“ blass;
                  "keine"    – nur Freigegebenes steht in der Seite (auch nicht im Quelltext).
        pdf:      {termin: url} – Link auf eine Druckfassung je Termin (überschreibt pdf_ordner).
        pdf_ordner: Ordner (relativ zum Repository) mit den Druckfassungen, z. B. "docs/pdf". Mit `--pdf` auf der
                  Kommandozeile werden fehlende oder veraltete PDFs vorher mit liaex erzeugt.
-       pdf_termine: Termine, deren PDF gebaut und verlinkt wird (Standard: die freigegebenen)."""
+       pdf_termine: Termine, deren PDF gebaut und verlinkt wird (Standard: die freigegebenen).
+       pdf_css:  CSS-Datei (relativ zum Repository), die liaex beim PDF-Export einbindet, z. B. um
+                 <details>-Lösungen aufzuklappen. Ist sie neuer als ein PDF, wird es neu erzeugt."""
     assert vorschau in ("ausblick", "keine"), vorschau
     pdf = dict(pdf or {})
     if pdf_ordner:
         pdf_termine = set(freigegeben if pdf_termine is None else pdf_termine)
         darf = [t for t in termine if t[4] and t[0] in pdf_termine]
         if "--pdf" in sys.argv:
-            baue_pdfs(repo, [t[4] for t in darf], pdf_ordner)
+            baue_pdfs(repo, [t[4] for t in darf], pdf_ordner, pdf_css)
         for t in darf:
             pfad = os.path.join(pdf_ordner, pdf_name(t[4]))
             if t[0] not in pdf and os.path.exists(os.path.join(repo, pfad)):
@@ -259,15 +261,18 @@ def pdf_name(datei):
     return (os.path.basename(os.path.dirname(datei)) if stamm.lower() == "readme" else stamm) + ".pdf"
 
 
-def baue_pdfs(repo, dateien, ordner):
+def baue_pdfs(repo, dateien, ordner, css=None):
     """Erzeugt mit dem LiaScript-Exporter (liaex) jedes PDF, das fehlt oder älter als sein Material ist."""
     os.makedirs(os.path.join(repo, ordner), exist_ok=True)
+    css = os.path.abspath(os.path.join(repo, css)) if css else None
     for datei in dateien:
         quelle, ziel = os.path.abspath(os.path.join(repo, datei)), os.path.abspath(os.path.join(repo, ordner, pdf_name(datei)))
-        if os.path.exists(ziel) and os.path.getmtime(ziel) >= os.path.getmtime(quelle):
+        if os.path.exists(ziel) and os.path.getmtime(ziel) >= max(
+                os.path.getmtime(quelle), os.path.getmtime(css) if css else 0):
             continue
         print("PDF:", datei, "->", os.path.relpath(ziel, repo), flush=True)
-        r = subprocess.run(["liaex", "-i", quelle, "-f", "pdf", "-o", ziel[:-4], "--pdf-timeout", "30000"],
+        r = subprocess.run(["liaex", "-i", quelle, "-f", "pdf", "-o", ziel[:-4], "--pdf-timeout", "30000"]
+                           + (["--pdf-stylesheet", css] if css else []),
                            cwd=os.path.dirname(quelle), capture_output=True, text=True)
         if r.returncode or not os.path.exists(ziel):
             print("  FEHLER beim Export:", (r.stderr or r.stdout).strip()[-300:], flush=True)

@@ -1,0 +1,3 @@
+/* Wird von liaex beim PDF-Export eingebunden (make → erzeuge.py --pdf).
+   Klappt <details>-Lösungen auf: Im Browser bleiben sie zu, im PDF sind sie lesbar. */
+details::details-content { content-visibility: visible !important; display: block !important; }
