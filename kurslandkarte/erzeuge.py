@@ -44,7 +44,7 @@ assert len(TERMINE) == 15
 # ---- Freigabe: Begriffe gehaltener Vorlesungen erscheinen voll, die kommenden blass als „Ausblick“
 # (Entscheidung 08.11.2026: Studierende schlagen keine Begriffe vor, also nichts mehr zurückhalten).
 # Nach jeder Vorlesung: Vorschläge der Studierenden einarbeiten, dann hier ergänzen.
-FREIGEGEBEN = {0, 1, 2, 3, 4}
+FREIGEGEBEN = {0, 1, 2, 3, 4, 5}
 # PDFs schon vor der Vorlesung, damit Studierende darin mitschreiben können (Begriffe bis zur Freigabe blass als Ausblick).
 PDF_VORAB = {1, 2, 3, 4, 5}
 if "--freigegeben" in sys.argv:   # für das Makefile: Dateien der freigegebenen Vorlesungen
