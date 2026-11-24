@@ -46,7 +46,7 @@ assert len(TERMINE) == 15
 # Nach jeder Vorlesung: Vorschläge der Studierenden einarbeiten, dann hier ergänzen.
 FREIGEGEBEN = {0, 1, 2, 3, 4, 5}
 # PDFs schon vor der Vorlesung, damit Studierende darin mitschreiben können (Begriffe bis zur Freigabe blass als Ausblick).
-PDF_VORAB = {1, 2, 3, 4, 5}
+PDF_VORAB = {1, 2, 3, 4, 5, 6}
 if "--freigegeben" in sys.argv:   # für das Makefile: Dateien der freigegebenen Vorlesungen
     print(" ".join(DATEIEN[v] for v in sorted(FREIGEGEBEN)))
     sys.exit()
@@ -143,7 +143,7 @@ B = [
     ("parallel", "zusammengehörige Listen", "typen", 5, 'Zusammengehörige Werte', 2, 0, "datumswerte[i] und maxima[i] gehören zum selben Tag.", "„In der Schleife ist minimum die Position, also minima[minimum].“ — for liefert Werte, keine Positionen."),
     ("textvergleich", "Text vergleichen", "typen", 5, 'Typische Fehlvorstellung: Zahlen als Text vergleichen', 2, 0, "Texte werden Zeichen für Zeichen verglichen.", "„\"9.5\" > \"28.1\" ist falsch.“ Es ist wahr."),
     ("dict", "Dictionary", "typen", 6, 'Das Dictionary', 1, 0, "Ordnet Schlüsseln Werte zu: {\"1947\": 119}. Ein Durchlauf, ein Eintrag pro Jahr.", None),
-    ("keyerror", "KeyError, in, get", "typen", 6, 'Das Dictionary', 2, 0, "Nach einem fehlenden Schlüssel kann man nicht fragen; vorher mit in prüfen oder get verwenden.", None),
+    ("keyerror", "KeyError, in", "typen", 6, 'Das Dictionary', 2, 0, "Nach einem fehlenden Schlüssel kann man nicht fragen; vorher mit in prüfen.", None),
     ("typbilanz", "Zwischenbilanz Datentypen", "typen", 6, 'Zwischenbilanz: Datentypen', 2, 0, "int, float, str, bool, list, range, dict — mit Herkunft im Datensatz und typischer Falle.", None),
     ("none", "None", "typen", 7, 'Typische Fehlvorstellung: print gibt etwas zurück', 2, 1, "Der Wert „nichts“ — Rückgabe einer Funktion ohne return.", None),
     ("array", "NumPy-Array", "typen", 10, 'NumPy-Arrays', 1, 0, "Rechnet elementweise: (minima < 0).sum() ersetzt das Zählmuster.", "„Ein Array ist dasselbe wie eine Liste.“"),
@@ -164,12 +164,13 @@ B = [
     ("open", "Datei öffnen", "daten", 6, 'Eine Datei öffnen', 1, 0, "with open(dateiname) as datei: — Zeile für Zeile, jede als Text.", None),
     ("strip", "readline & strip", "daten", 6, 'Eine Datei öffnen', 2, 1, "Eine Zeile lesen; Leerzeichen und Zeilenumbruch am Rand entfernen.", None),
     ("split", "split", "daten", 6, 'Eine Zeile zerlegen', 1, 1, "Zerlegt eine Zeile am Trennzeichen in eine Liste von Texten.", "„Die Zeile ist schon eine Tabelle.“"),
-    ("kopfzeile", "Kopfzeile", "daten", 6, 'Kopfzeile und Fehlwerte', 2, 0, "Mit datei.readline() überspringen — sonst scheitert float an \"TXK\".", None),
+    ("kopfzeile", "Kopfzeile", "daten", 6, 'Kopfzeile und Fehlwerte', 2, 0, "Mit datei.readline() überspringen — sonst scheitert float an \" TNK\".", None),
     ("luecke", "Lücke", "daten", 6, 'Typische Fehlvorstellung: Jeder Tag hat eine Zeile', 1, 0, "Fehlende Tage fehlen ganz, statt als -999 zu erscheinen. Fichtelberg: 1910 bis 1915.", "„Jeder Tag hat eine Zeile.“"),
+    ("messtage", "Messtage zählen", "daten", 6, 'Schritt 4 - Messtage zählen', 2, 0, "Ein zweites Dictionary zählt die Tage mit Messwert. Verglichen werden nur Jahre mit genug Messtagen: Freiberg 1948 hat null.", "„Kein Wert heißt null.“"),
     ("schreiben", "Datei schreiben", "daten", 6, 'Ergebnisse schreiben', 1, 0, "open(..., \"w\") und datei.write — ohne automatischen Zeilenumbruch.", None),
-    ("langesskript", "das lange Skript", "daten", 6, 'Live Hacking: Das lange Skript', 2, 0, "Fichtelberg und Freiberg als kopierte Blöcke — funktioniert, ist aber schwer zu ändern.", None),
+    ("langesskript", "das lange Skript", "daten", 6, 'Das lange Skript', 2, 0, "Fichtelberg und Freiberg als kopierte Blöcke — funktioniert, ist aber schwer zu ändern.", None),
     ("lueckensuche", "Lücken finden", "daten", 9, 'Die Funktion finde_luecken', 2, 0, "Mit datetime alle Stellen melden, an denen mehr als ein Tag fehlt — Chemnitz: 33 Jahre, Freiberg: ein einzelner Tag 1977.", None),
-    ("pfad", "Pfad", "daten", 9, 'Typische Fehlvorstellung: Pfade', 1, 0, "Relative Pfade gelten ab dem aktuellen Arbeitsverzeichnis.", "„Ein Dateiname bezieht sich auf den Ordner des Programms.“"),
+    ("pfad", "Pfad", "daten", 6, 'Typische Fehlvorstellung: Die Datei liegt doch daneben', 1, 0, "Ein Dateiname ohne Ordner gilt ab dem Arbeitsordner, in dem das Terminal steht — nicht ab dem Ordner des Programms.", "„Ein Dateiname bezieht sich auf den Ordner des Programms.“"),
     ("loadtxt", "loadtxt", "daten", 10, 'Live Hacking: Wie viel wärmer ist es geworden?', 2, 1, "NumPy liest die Rohdatei direkt: Trennzeichen, Kopfzeile überspringen, Spalten auswählen — aber ohne Spaltennamen.", None),
     ("readcsv", "read_csv", "daten", 11, 'Von der Mühsal zum Werkzeug', 1, 1, "Liest die Rohdatei in einer Anweisung — was in VL 06 rund 50 Zeilen gekostet hat.", None),
     ("spaltenname", "Spaltennamen", "daten", 11, 'Versuch 2', 2, 0, "Jedes Zeichen zählt, auch Leerzeichen: \" TNK\" ist nicht \"TNK\". skipinitialspace=True entfernt sie.", "„Eine Spalte heißt so, wie ich sie lese.“"),
@@ -244,7 +245,7 @@ R = [
     # VL 06
     ("openurl", "open", "ersetzt durch"), ("open", "strip", "mit"), ("open", "split", "Zeile zerlegen mit"),
     ("split", "liste", "liefert eine"), ("split", "umwandlung", "liefert Text für"), ("open", "kopfzeile", "überspringt"),
-    ("dwd", "luecke", "enthält"), ("dict", "keyerror", "Falle"), ("dict", "luecke", "fehlender Eintrag bei"),
+    ("dwd", "luecke", "enthält"), ("fehlwert", "messtage", "erkennen mit"), ("messtage", "vollstaendig", "Grundlage für"), ("dict", "keyerror", "Falle"), ("dict", "luecke", "fehlender Eintrag bei"),
     ("open", "schreiben", "Gegenstück"), ("schreiben", "tabkalk", "öffnen in"), ("open", "langesskript", "Teil von"),
     ("dict", "typbilanz", "vervollständigt"),
     # VL 07
