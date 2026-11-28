@@ -46,7 +46,7 @@ assert len(TERMINE) == 15
 # Nach jeder Vorlesung: Vorschläge der Studierenden einarbeiten, dann hier ergänzen.
 FREIGEGEBEN = {0, 1, 2, 3, 4, 5}
 # PDFs schon vor der Vorlesung, damit Studierende darin mitschreiben können (Begriffe bis zur Freigabe blass als Ausblick).
-PDF_VORAB = {1, 2, 3, 4, 5, 6}
+PDF_VORAB = {1, 2, 3, 4, 5, 6, 7}
 if "--freigegeben" in sys.argv:   # für das Makefile: Dateien der freigegebenen Vorlesungen
     print(" ".join(DATEIEN[v] for v in sorted(FREIGEGEBEN)))
     sys.exit()
@@ -118,7 +118,8 @@ B = [
     ("parameter", "Parameter & Argument", "denken", 7, 'Parameter und Rückgabewert', 2, 0, "Beim Aufruf wird der Wert übergeben, nicht der Name.", "„Der übergebene Wert muss so heißen wie der Parameter.“"),
     ("return", "return", "denken", 7, 'Parameter und Rückgabewert', 1, 1, "Gibt ein Ergebnis an den Aufrufer zurück; danach endet die Funktion.", "„print gibt etwas zurück.“"),
     ("lokal", "lokale Variable", "denken", 7, 'Lokale Variablen', 2, 0, "Variablen in einer Funktion existieren nur während des Aufrufs.", "„Lokale Variablen gibt es auch nach dem Aufruf.“"),
-    ("mehrrueck", "mehrere Rückgabewerte", "denken", 7, 'Mehrere Rückgabewerte', 2, 0, "jahr, maximum, minimum = zerlege_zeile(zeile) — die Reihenfolge muss stimmen.", None),
+    ("mehrrueck", "mehrere Rückgabewerte", "denken", 7, 'Schritt 3 - Ergebnisse mit return', 2, 0, "frost, messtage = auswerten(dateiname) — die Reihenfolge muss stimmen.", None),
+    ("tryexcept", "try / except", "denken", 7, 'Fehler abfangen: try und except', 2, 1, "Fängt einen benannten Fehler ab, statt abzubrechen: except ValueError.", "„Mit try und except gibt es keine Fehler mehr.“ – except fängt Abbrüche ab, keine falschen Werte."),
     ("assert", "assert", "denken", 7, 'Funktionen prüfen', 2, 1, "Prüft eine Funktion an den Grenzen: genau 0,0 °C, knapp darunter, Fehlwert.", None),
     ("modul", "Modul / import", "denken", 9, 'Ein eigenes Modul', 1, 0, "Eine Python-Datei, deren Funktionen andere Programme nutzen: import dwd.", "„import holt nur die Funktionen.“"),
     ("namemain", "__name__", "denken", 9, 'Typische Fehlvorstellung: import kopiert nur Funktionen', 2, 1, "if __name__ == \"__main__\": — Testcode, der beim Import nicht läuft.", None),
@@ -252,6 +253,7 @@ R = [
     ("langesskript", "funktion", "zerlegt in"), ("funktion", "parameter", "hat"), ("funktion", "return", "liefert mit"),
     ("return", "none", "ohne return:"), ("funktion", "lokal", "hat"), ("return", "mehrrueck", "auch"),
     ("funktion", "assert", "geprüft mit"), ("kenntage", "funktion", "z. B. ist_frosttag"),
+    ("fehlermeldung", "tryexcept", "gezielt abfangen mit"), ("umwandlung", "tryexcept", "ValueError abfangen mit"), ("none", "messtage", "statt erfundener Zahl, wenn zu wenige"),
     # VL 08
     ("zaehler", "micropy", "z. B. mit"), ("micropy", "while", "while True"), ("micropy", "sensor", "steuert"),
     ("sensor", "seriell", "sendet über"), ("sensor", "messfehler", "Risiko"), ("annahmen", "messfehler", "verletzt ergibt"),

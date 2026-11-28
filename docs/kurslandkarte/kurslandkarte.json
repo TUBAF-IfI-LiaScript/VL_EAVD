@@ -1,5 +1,5 @@
 {
- "stand": "24.11.2026",
+ "stand": "28.11.2026",
  "version": "0.5.2",
  "kurs": {
   "basis": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EAVD/master/",
@@ -426,7 +426,7 @@
    "freigegeben": false,
    "status": "ausgearbeitet",
    "block": 2,
-   "pdf": null,
+   "pdf": "../pdf/07_Funktionen.pdf",
    "anwendet": [],
    "abschnitte": [
     "Funktionen",
@@ -437,8 +437,16 @@
     "Typische Fehlvorstellung: print gibt etwas zurück",
     "Typische Fehlvorstellung: Namen müssen passen",
     "Lokale Variablen",
-    "Mehrere Rückgabewerte",
+    "Fehler abfangen: try und except",
+    "Typische Fehlvorstellung: except macht das Programm richtig",
     "Live Hacking: Das lange Skript zerlegen",
+    "Pseudocode - Was wiederholt sich?",
+    "Schritt 1 - Die Auswertung wird eine Funktion",
+    "Schritt 2 - Die Dictionaries nach draußen",
+    "Schritt 3 - Ergebnisse mit return",
+    "Schritt 4 - Mittelwerte als zweite Funktion",
+    "Schritt 5 - Eine dritte Station",
+    "Ergebnis",
     "Funktionen prüfen",
     "Kontrollfragen",
     "Nächste Woche"
@@ -1271,18 +1279,29 @@
    "name": "mehrere Rückgabewerte",
    "linie": "denken",
    "vl": 7,
-   "abschnitt": 9,
+   "abschnitt": 15,
    "ebene": 2,
    "code": false,
-   "erklaerung": "jahr, maximum, minimum = zerlege_zeile(zeile) — die Reihenfolge muss stimmen.",
+   "erklaerung": "frost, messtage = auswerten(dateiname) — die Reihenfolge muss stimmen.",
    "fehlvorstellung": null
+  },
+  {
+   "id": "tryexcept",
+   "name": "try / except",
+   "linie": "denken",
+   "vl": 7,
+   "abschnitt": 9,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Fängt einen benannten Fehler ab, statt abzubrechen: except ValueError.",
+   "fehlvorstellung": "„Mit try und except gibt es keine Fehler mehr.“ – except fängt Abbrüche ab, keine falschen Werte."
   },
   {
    "id": "assert",
    "name": "assert",
    "linie": "denken",
    "vl": 7,
-   "abschnitt": 11,
+   "abschnitt": 19,
    "ebene": 2,
    "code": true,
    "erklaerung": "Prüft eine Funktion an den Grenzen: genau 0,0 °C, knapp darunter, Fehlwert.",
@@ -2723,6 +2742,21 @@
    "von": "kenntage",
    "nach": "funktion",
    "text": "z. B. ist_frosttag"
+  },
+  {
+   "von": "fehlermeldung",
+   "nach": "tryexcept",
+   "text": "gezielt abfangen mit"
+  },
+  {
+   "von": "umwandlung",
+   "nach": "tryexcept",
+   "text": "ValueError abfangen mit"
+  },
+  {
+   "von": "none",
+   "nach": "messtage",
+   "text": "statt erfundener Zahl, wenn zu wenige"
   },
   {
    "von": "zaehler",
